@@ -1,10 +1,7 @@
-﻿生成启动时间为 2016/2/16 22:04:36。
+﻿生成启动时间为 2016/2/20 21:59:36。
      1>项目“D:\c++\Space~v1.0\Space~v1.0\Space~v1.0.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt space.cpp "源.cpp"
-         space.cpp
-         正在生成代码...
-         正在跳过...(未检测到相关更改)
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt "源.cpp"
          源.cpp
        Link:
          D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\c++\Space~v1.0\Debug\Space~v1.0.exe" /INCREMENTAL /NOLOGO winmm.lib dxerr.lib dxguid.lib d3dx9d.lib d3dx10d.lib d3d9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\c++\Space~v1.0\Debug\Space~v1.0.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\c++\Space~v1.0\Debug\Space~v1.0.lib" /MACHINE:X86 Debug\space.obj
@@ -14,4 +11,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.10
+已用时间 00:00:01.36

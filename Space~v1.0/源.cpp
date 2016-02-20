@@ -21,6 +21,18 @@
 #define WINDOW_TITLE	L"【致我们永不熄灭的游戏开发梦想】Direct3D初始化四步曲 示例程序"	//为窗口标题定义的宏
 #define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }   //定义一个安全释放宏，便于后面COM接口指针的释放
 
+//-----------------------------------【FVF顶点格式】---------------------------------------------
+
+struct CUSTOMVERTEX
+{
+	float x, y, z;	//三维坐标
+	DWORD color;	//顶点颜色
+};
+
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)	//FVF灵活顶点格式
+
+//----------------------------------------------------------------------------------------------
+
 //-----------------------------------【全局变量声明部分】-------------------------------------
 //	描述：全局变量的声明
 //------------------------------------------------------------------------------------------------
@@ -67,11 +79,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//Direct3D资源的初始化，成功或者失败都用messagebox予以显示
 	if (S_OK == Direct3D_Init(hwnd))
 	{
-		MessageBox(hwnd, L"Direct3D初始化完成~！", L"浅墨的消息窗口", 0); //使用MessageBox函数，创建一个消息窗口  
+		MessageBox(hwnd, L"Direct3D初始化完成~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口  
 	}
 	else
 	{
-		MessageBox(hwnd, L"Direct3D初始化失败~！", L"浅墨的消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
+		MessageBox(hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
@@ -80,7 +92,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UpdateWindow(hwnd);						//对窗口进行更新，就像我们买了新房子要装修一样
 
 
-	PlaySound(L"NightElf3.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP); //循环播放背景音乐 
 
 																			//【5】消息循环过程
 	MSG msg = { 0 };  //初始化msg
@@ -205,7 +216,24 @@ HRESULT Objects_Init(HWND hwnd)
 //--------------------------------------------------------------------------------------------------
 void Direct3D_Render(HWND hwnd)
 {
-	//暂时为空，且听下回分解
+	g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);//一：清屏操作
+
+	g_pd3dDevice->BeginScene();			//开始绘制
+
+//----------------------------------【下次再填】-------------------------------------------
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------
+	g_pd3dDevice->EndScene();	//结束绘制
+
+	g_pd3dDevice->Present(NULL, NULL, NULL, NULL);	//翻转显示
+
 }
 
 
@@ -214,5 +242,5 @@ void Direct3D_Render(HWND hwnd)
 //---------------------------------------------------------------------------------------------------
 void Direct3D_CleanUp()
 {
-	//暂时为空，且听下回分解
+	SAFE_RELEASE(g_pd3dDevice);
 }
