@@ -21,3 +21,22 @@ int pao::gjout()
 }
 
 
+pusher::pusher(std::string inname)
+{
+	name = inname;
+}
+
+pusher::~pusher()
+{
+}
+
+int pusher::hpc(int & inint)
+{
+	hp = hp + inint;
+	return 0;
+}
+
+int pusher::nout()
+{
+	return n;
+}

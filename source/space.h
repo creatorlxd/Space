@@ -34,3 +34,24 @@ private:
 
 };
 
+enum pusherskind	//推进器类型
+{
+	p1=1,			//型号P-1
+	p2=2			//型号P-2
+};
+
+class pusher		//推进器类
+{
+public:
+	pusher(std::string inname);
+	~pusher();
+	int hpc(int &inint);//改变HP值,即加上改变值inint。
+	int nout();			//暂时输出牵引力的值
+private:
+	pusherskind prk;	//推进器的型号
+	int hp;				//血量
+	int n;				//推进器的牵引力
+	std::string name;	//推进器的名字
+
+};
+
