@@ -1,7 +1,7 @@
 #include"space.h"
 #include<d3d9.h>
 #include<string>
-
+#include"tools.h"
 
 
 pao::pao(std::string inname)

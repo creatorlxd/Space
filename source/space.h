@@ -1,6 +1,7 @@
 #pragma once
 #include<d3d9.h>
 #include<string>
+#include"tools.h"
 
 enum thingskind //物品种类
 {
