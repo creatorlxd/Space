@@ -28,6 +28,9 @@
 LPDIRECT3DDEVICE9       g_pd3dDevice = NULL; //Direct3DÉè±¸¶ÔÏó
 
 
+
+
+
 //-----------------------------------¡¾È«¾Öº¯ÊýÉùÃ÷²¿·Ö¡¿-------------------------------------
 //	ÃèÊö£ºÈ«¾Öº¯ÊýÉùÃ÷£¬·ÀÖ¹¡°Î´ÉùÃ÷µÄ±êÊ¶¡±ÏµÁÐ´íÎó
 //------------------------------------------------------------------------------------------------
@@ -37,9 +40,9 @@ HRESULT					Objects_Init(HWND hwnd); 		//ÔÚÕâ¸öº¯ÊýÖÐ½øÐÐÒª»æÖÆµÄÎïÌåµÄ×ÊÔ´³õÊ¼»
 VOID							Direct3D_Render(HWND hwnd); 	//ÔÚÕâ¸öº¯ÊýÖÐ½øÐÐDirect3DäÖÈ¾´úÂëµÄÊéÐ´
 VOID							Direct3D_CleanUp();				//ÔÚÕâ¸öº¯ÊýÖÐÇåÀíCOM×ÊÔ´ÒÔ¼°ÆäËû×ÊÔ´
 
-																//-----------------------------------¡¾WinMain( )º¯Êý¡¿--------------------------------------
-																//	ÃèÊö£ºWindowsÓ¦ÓÃ³ÌÐòµÄÈë¿Úº¯Êý£¬ÎÒÃÇµÄ³ÌÐò´ÓÕâÀï¿ªÊ¼
-																//------------------------------------------------------------------------------------------------
+//-----------------------------------¡¾WinMain( )º¯Êý¡¿--------------------------------------
+//	ÃèÊö£ºWindowsÓ¦ÓÃ³ÌÐòµÄÈë¿Úº¯Êý£¬ÎÒÃÇµÄ³ÌÐò´ÓÕâÀï¿ªÊ¼
+//------------------------------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	//¡¾1¡¿´°¿Ú´´½¨ËÄ²½ÇúÖ®Ò»£º¿ªÊ¼Éè¼ÆÒ»¸öÍêÕûµÄ´°¿ÚÀà
@@ -66,14 +69,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		WINDOW_HEIGHT, NULL, NULL, hInstance, NULL);
 
 	//Direct3D×ÊÔ´µÄ³õÊ¼»¯£¬³É¹¦»òÕßÊ§°Ü¶¼ÓÃmessageboxÓèÒÔÏÔÊ¾
-	if (S_OK == Direct3D_Init(hwnd))
-	{
-		MessageBox(hwnd, L"Direct3D³õÊ¼»¯Íê³É~£¡", L"ÏûÏ¢´°¿Ú", 0); //Ê¹ÓÃMessageBoxº¯Êý£¬´´½¨Ò»¸öÏûÏ¢´°¿Ú  
-	}
-	else
+	if (E_FAIL == Direct3D_Init(hwnd))
 	{
 		MessageBox(hwnd, L"Direct3D³õÊ¼»¯Ê§°Ü~£¡", L"ÏûÏ¢´°¿Ú", 0); //Ê¹ÓÃMessageBoxº¯Êý£¬´´½¨Ò»¸öÏûÏ¢´°¿Ú 
 	}
+	
 
 	//¡¾4¡¿´°¿Ú´´½¨ËÄ²½ÇúÖ®ËÄ£º´°¿ÚµÄÒÆ¶¯¡¢ÏÔÊ¾Óë¸üÐÂ
 	MoveWindow(hwnd, 250, 80, WINDOW_WIDTH, WINDOW_HEIGHT, true);		//µ÷Õû´°¿ÚÏÔÊ¾Ê±µÄÎ»ÖÃ£¬Ê¹´°¿Ú×óÉÏ½ÇÎ»ÓÚ£¨250,80£©´¦
