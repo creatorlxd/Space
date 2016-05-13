@@ -28,11 +28,11 @@ public:
 	void WriteInIndexBuffer(WORD Indices[]);							//写入索引缓存内容
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
 private:
-	LPDIRECT3DVERTEXBUFFER9 g_pVertexBuffer;	//顶点缓存
-	LPDIRECT3DINDEXBUFFER9 g_pIndexBuffer;		//索引缓存
-	int g_VertexSize;							//顶点数
-	int g_IndexSize;							//索引数
-	VOID* pVertices;							//指向顶点缓存内部数据数组的指针
-	WORD* pIndices;								//指向索引缓存内部数据数组的指针
-	int g_PrimitiveCount;						//图元的数量
+	LPDIRECT3DVERTEXBUFFER9 m_pVertexBuffer;	//顶点缓存
+	LPDIRECT3DINDEXBUFFER9 m_pIndexBuffer;		//索引缓存
+	int m_VertexSize;							//顶点数
+	int m_IndexSize;							//索引数
+	VOID* mVertices;							//指向顶点缓存内部数据数组的指针
+	WORD* mIndices;								//指向索引缓存内部数据数组的指针
+	int m_PrimitiveCount;						//图元的数量
 };

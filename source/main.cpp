@@ -1,11 +1,11 @@
 //
 //
 //
-#include"space.h"
+
 #include<d3d9.h>
 #include<Windows.h>
 #include<string>
-#include"tools.h"
+#include"object.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
