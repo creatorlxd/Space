@@ -35,7 +35,7 @@ void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
 {
 	m_pVertexBuffer->Lock(0, 0, (void**)&mVertices, 0);
 	memcpy(mVertices, Vertices, m_VertexSize*sizeof(CUSTOMVERTEX));
-	m_pIndexBuffer->Unlock();
+	m_pVertexBuffer->Unlock();
 }
 
 void object::WriteInIndexBuffer(WORD Indices[])
