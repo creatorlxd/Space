@@ -3,8 +3,15 @@
   <Class Name="object">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AFAAAAAAACAAAgAAAAAACAAgAAABABIgAAABAEAAAgA=</HashCode>
+      <HashCode>AFAAAAAAACAAAAAAAAAACAAgAAABABIAAACBAEAIAgA=</HashCode>
       <FileName>object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Light">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAgAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>LightRender.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="CUSTOMVERTEX">
