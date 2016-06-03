@@ -15,10 +15,30 @@ void SetSpecularLight(LPDIRECT3DDEVICE9 g_pd3dDevice)						//设置镜面反射光
 
 Light::Light()
 {
-
+	ZeroMemory(&m_LightContent, sizeof(m_LightContent));
 }
 
 Light::~Light()
 {
 
+}
+
+void Light::SetPointLights()
+{
+}
+
+void Light::SetDirectionaLights()
+{
+}
+
+void Light::SetSpotLight()
+{
+}
+
+void Light::BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive)
+{
+}
+
+void Light::EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive)
+{
 }
