@@ -8,10 +8,20 @@ void SetAmbientLight(LPDIRECT3DDEVICE9 g_pd3dDevice, int r,int g, int b)	//ÉèÖÃ»
 	g_pd3dDevice->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(r, g, b));
 }
 
-void SetSpecularLight(LPDIRECT3DDEVICE9 g_pd3dDevice)						//ÉèÖÃ¾µÃæ·´Éä¹â
+void SetSpecularLightOn(LPDIRECT3DDEVICE9 g_pd3dDevice)						//ÉèÖÃ¾µÃæ·´Éä¹â¿ªÆô
 {
 	g_pd3dDevice->SetRenderState(D3DRS_SPECULARENABLE, true);
 }
+
+void SetSpecularLightOff(LPDIRECT3DDEVICE9 g_pd3dDevice)						//ÉèÖÃ¾µÃæ·´Éä¹â¹Ø±Õ
+{
+	g_pd3dDevice->SetRenderState(D3DRS_SPECULARENABLE, false);
+}
+
+
+
+
+
 
 Light::Light()
 {
