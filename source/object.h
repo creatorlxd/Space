@@ -6,7 +6,6 @@
 //
 #include<d3d9.h>
 
-#define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }   //定义一个安全释放宏，便于后面COM接口指针的释放
 
 
 

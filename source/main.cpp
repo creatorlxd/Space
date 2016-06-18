@@ -6,6 +6,7 @@
 #include<Windows.h>
 #include<string>
 #include"object.h"
+#include"space.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
@@ -73,7 +74,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		MessageBox(hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
-	
+	Objects_Init(hwnd);
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
 	MoveWindow(hwnd, 250, 80, WINDOW_WIDTH, WINDOW_HEIGHT, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
@@ -185,7 +186,6 @@ HRESULT Direct3D_Init(HWND hwnd)
 	SAFE_RELEASE(pD3D) //LPDIRECT3D9接口对象的使命完成，我们将其释放掉
 
 
-		if (!(S_OK == Objects_Init(hwnd))) return E_FAIL;     //调用一次Objects_Init，进行渲染资源的初始化
 	return S_OK;
 }
 
