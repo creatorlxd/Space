@@ -35,6 +35,8 @@ Light::~Light()
 
 void Light::SetPointLights()
 {
+	m_LightContent.Type = D3DLIGHT_POINT;
+	
 }
 
 void Light::SetDirectionaLights()

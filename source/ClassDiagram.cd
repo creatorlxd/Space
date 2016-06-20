@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Light">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAgAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>ACIAgAAAAAAAAACEAAoAAgAAAAABAAAABREIgAIIASA=</HashCode>
       <FileName>LightRender.h</FileName>
     </TypeIdentifier>
   </Class>
