@@ -1,4 +1,3 @@
-#include<d3d9.h>
 #include"space.h"
 
 

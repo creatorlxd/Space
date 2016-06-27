@@ -1,5 +1,6 @@
 #include"LightRender.h"
-#include<d3d9.h>
+
+
 
 
 
@@ -41,10 +42,14 @@ void Light::SetPointLights()
 
 void Light::SetDirectionaLights()
 {
+	m_LightContent.Type = D3DLIGHT_DIRECTIONAL;
+
 }
 
 void Light::SetSpotLight()
 {
+	m_LightContent.Type = D3DLIGHT_SPOT;
+
 }
 
 void Light::BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive)
