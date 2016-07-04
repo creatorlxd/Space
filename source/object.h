@@ -20,6 +20,12 @@ public:
 	void WriteInVertexBuffer(CUSTOMVERTEX Vertices[]);					//写入顶点缓存内容
 	void WriteInIndexBuffer(WORD Indices[]);							//写入索引缓存内容
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
+	//---------------------------------------------------------------------------------------------------------------
+	void GetTime();
+	//---------------------------------------------------------------------------------------------------------------
+	void InitPhysics();													//初始化物理信息
+	void GetG();														//获得物体的重力，并将其加到总合力中
+	void RunMovingGraphics();											//运行关于移动的物理引擎
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVertexBuffer;	//顶点缓存
 	LPDIRECT3DINDEXBUFFER9 m_pIndexBuffer;		//索引缓存
@@ -29,6 +35,12 @@ private:
 	WORD* mpIndices;							//指向索引缓存内部数据数组的指针
 	int m_PrimitiveCount;						//图元的数量
 	//----------------------------------------------------------------------------------------------------------------
-	int x, y, z;								//物体质心的坐标
-
+	time_t m_TimeNow;							//现在的时间
+	time_t TimeChange;							//时间差，即时间变化量
+	//----------------------------------------------------------------------------------------------------------------
+	D3DVECTOR m_Position;						//物体质心的坐标
+	float m_m;									//物体的质量
+	D3DVECTOR m_F;								//物体所受的总的合力
+	D3DVECTOR m_a;								//物体的总的加速度
+	D3DVECTOR m_v;								//物体的总的速度
 };

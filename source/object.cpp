@@ -28,6 +28,10 @@ object::object()
 	m_pIndexBuffer = NULL;
 	mpVertices = NULL;
 	mpIndices = NULL;
+	m_TimeNow = 0;
+	m_a = { 0,0,0 };
+	m_F = { 0,0,0 };
+	m_m = 0;
 }
 
 void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -50,4 +54,25 @@ void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
 	g_pd3dDevice->SetIndices(m_pIndexBuffer);
 	g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexSize, 0,(UINT)m_PrimitiveCount);
+}
+
+void object::GetTime()
+{
+	time_t TimeBuffer;
+	if (m_TimeNow != 0)
+	{
+
+	}
+}
+
+void object::InitPhysics()
+{
+}
+
+void object::GetG()
+{
+}
+
+void object::RunMovingGraphics()
+{
 }
