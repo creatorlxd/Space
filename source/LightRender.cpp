@@ -29,10 +29,11 @@ Light::Light()
 	ZeroMemory(&m_LightContent, sizeof(m_LightContent));
 }
 
-Light::Light(int num)
+Light::Light(int &num)
 {
 	ZeroMemory(&m_LightContent, sizeof(m_LightContent));
 	m_LightNumber = num;
+	num += 1;
 }
 
 Light::~Light()

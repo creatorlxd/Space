@@ -18,7 +18,7 @@ class Light																	//光源
 {
 public:
 	Light();
-	Light(int num);
+	Light(int &num);
 	~Light();
 	D3DLIGHT9 m_LightContent;												//光源的具体内容
 	void SetPointLightsFromFile(std::string filename);													//设置点光源
