@@ -29,24 +29,30 @@ Light::Light()
 	ZeroMemory(&m_LightContent, sizeof(m_LightContent));
 }
 
+Light::Light(int num)
+{
+	ZeroMemory(&m_LightContent, sizeof(m_LightContent));
+	m_LightNumber = num;
+}
+
 Light::~Light()
 {
 
 }
 
-void Light::SetPointLights()
+void Light::SetPointLightsFromFile(std::string filename)
 {
 	m_LightContent.Type = D3DLIGHT_POINT;
 	
 }
 
-void Light::SetDirectionaLights()
+void Light::SetDirectionaLightsFromFile(std::string filename)
 {
 	m_LightContent.Type = D3DLIGHT_DIRECTIONAL;
 
 }
 
-void Light::SetSpotLight()
+void Light::SetSpotLightFromFile(std::string filename)
 {
 	m_LightContent.Type = D3DLIGHT_SPOT;
 

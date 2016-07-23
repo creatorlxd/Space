@@ -29,6 +29,7 @@ object::object()
 	mpVertices = NULL;
 	mpIndices = NULL;
 	m_TimeNow = 0;
+	m_TimeChange = 0;
 	m_a = { 0,0,0 };
 	m_F = { 0,0,0 };
 	m_m = 0;
@@ -58,10 +59,16 @@ void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 
 void object::GetTime()
 {
-	time_t TimeBuffer;
+	time_t TimeBuffer=0;
 	if (m_TimeNow != 0)
 	{
-
+		m_TimeNow = time(NULL);
+	}
+	else
+	{
+		TimeBuffer = time(NULL);
+		m_TimeChange = TimeBuffer - m_TimeNow;
+		m_TimeNow = time(NULL);
 	}
 }
 

@@ -2,6 +2,7 @@
 #include<d3d9.h>
 #include<d3dx9.h>
 #include"space.h"
+#include<string>
 //
 //
 //
@@ -17,15 +18,17 @@ class Light																	//光源
 {
 public:
 	Light();
+	Light(int num);
 	~Light();
-	void SetPointLights();													//设置点光源
-	void SetDirectionaLights();												//设置方向光源
-	void SetSpotLight();													//设置聚光灯
+	D3DLIGHT9 m_LightContent;												//光源的具体内容
+	void SetPointLightsFromFile(std::string filename);													//设置点光源
+	void SetDirectionaLightsFromFile(std::string filename);												//设置方向光源
+	void SetSpotLightFromFile(std::string filename);													//设置聚光灯
 	void BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive);					//开始渲染光源
 	void EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive);						//结束渲染光源
 private:
 	int m_LightNumber;														//光源的ID
-	D3DLIGHT9 m_LightContent;												//光源的具体内容
+													
 	//D3DCOLORVALUE m_LightContentDiffuse;									//光源的漫反射颜色值
 	//D3DCOLORVALUE m_LightContentSpecular;									//光源的镜面反射颜色值
 	//D3DCOLORVALUE m_LightContentAmbient;									//光源的环境光颜色值
