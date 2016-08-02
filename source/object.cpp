@@ -13,25 +13,25 @@ void object::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize,
 	WriteInIndexBuffer(Indices);
 }
 
-void object::InitFromFile(LPDIRECT3DDEVICE9 p_pd3dDevice,std::string filename)
+void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
-	file >> m_VertexSize;
-	file >> m_IndexSize;
-	CUSTOMVERTEX* Vertices = new CUSTOMVERTEX;
-	WORD* Indices = new WORD;
-	for (int i = 0;i < m_VertexSize;i++)
+	int VertexSize, IndexSize;
+	file >> VertexSize;
+	file >> IndexSize;
+	CUSTOMVERTEX* Vertices = new CUSTOMVERTEX[VertexSize];
+	WORD* Indices = new WORD[IndexSize];
+	for (int i = 0;i < VertexSize;i++)
 	{
-		file >> Vertices[i].x>> Vertices[i].y>> Vertices[i].z>> Vertices[i].nx>> Vertices[i].ny>> Vertices[i].nz>> Vertices[i].u>> Vertices[i].v;
+		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >> Vertices[i].u >> Vertices[i].v;
 	}
-	for (int j = 0;j < m_IndexSize;j++)
+	for (int j = 0;j < IndexSize;j++)
 	{
 		file >> Indices[j];
 	}
-	init(p_pd3dDevice, m_VertexSize, m_IndexSize, Vertices, Indices);
-	delete[] Vertices;
-	delete[] Indices;
+	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	file.close();
 }
 
 object::~object()

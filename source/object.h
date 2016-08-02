@@ -16,7 +16,7 @@ class object    //DX3D物体对象
 {
 public:
 	void init(LPDIRECT3DDEVICE9 g_pd3dDevice,int VertexSize,int IndexSize,CUSTOMVERTEX Vertices[],WORD Indices[]);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
-	void InitFromFile(LPDIRECT3DDEVICE9 p_pd3dDevice,std::string filename);								//从文件中读取数据，进行初始化
+	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);								//从文件中读取数据，进行初始化
 	~object();																//释放顶点缓存和索引缓存
 	object();																//初始化
 	void WriteInVertexBuffer(CUSTOMVERTEX Vertices[]);					//写入顶点缓存内容
