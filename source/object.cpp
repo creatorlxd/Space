@@ -24,7 +24,7 @@ void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename)
 	WORD* Indices = new WORD[IndexSize];
 	for (int i = 0;i < VertexSize;i++)
 	{
-		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >> Vertices[i].u >> Vertices[i].v;
+		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >>Vertices[i].nx>> Vertices[i].ny>> Vertices[i] .nz>> Vertices[i].u >> Vertices[i].v;
 	}
 	for (int j = 0;j < IndexSize;j++)
 	{
