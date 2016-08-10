@@ -21,19 +21,22 @@ public:
 	Light(int &num);
 	~Light();
 	D3DLIGHT9 m_LightContent;												//光源的具体内容
+	void SetLightPosition(float x,float y,float z);							//设置光源位置
+	void SetLightDirection(float x, float y, float z);						//设置光源的光照方向
 	void SetPointLightsFromFile(std::string filename);													//设置点光源
 	void SetDirectionaLightsFromFile(std::string filename);												//设置方向光源
 	void SetSpotLightFromFile(std::string filename);													//设置聚光灯
-	void BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive);					//开始渲染光源
-	void EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDecive);						//结束渲染光源
+	void RegisterLight(LPDIRECT3DDEVICE9 g_pd3dDevice);
+	void BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//开始渲染光源
+	void EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);						//结束渲染光源
 private:
 	int m_LightNumber;														//光源的ID
 													
 	//D3DCOLORVALUE m_LightContentDiffuse;									//光源的漫反射颜色值
 	//D3DCOLORVALUE m_LightContentSpecular;									//光源的镜面反射颜色值
 	//D3DCOLORVALUE m_LightContentAmbient;									//光源的环境光颜色值
-	//D3DVECTOR m_LightContentPosition;										//光源的位置
-	//D3DVECTOR m_LightContentDirection;										//光源的光照方向
+	//D3DVECTOR m_LightContentPosition;										//光源的位置（不包含在文件中）
+	//D3DVECTOR m_LightContentDirection;										//光源的光照方向（不包含在文件中）
 	//float m_LightContentRange;												//光源的光照范围
 	//float m_LightContentAttenuation0;										//光源的光亮强度的衰减系数0
 	//float m_LightContentAttenuation1;										//光源的光亮强度的衰减系数1
