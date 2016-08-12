@@ -6,7 +6,7 @@ space Game Engine User Help:
 		Finally,you can write "InitFromFile(g_pd3dDevice,"XXX.model");
 		to loaf the model in your Game.
 	(2):If you want to print a light which is not in a model,you can use you editor to write a file ,include (Diffuse...)
-		Then if you know what kind of light that you want to load.you can use "Light::InitXXXLightFromFile(filename)"
+		Then if you know what kind of light that you want to load.you can use "Light::SetXXXLightFromFile(filename)"
 		to load it.
 	(3):If you want to print a model with light.you should flow the (1) and (2) to create a "XXX.model"and a "XXX.light"
 		then you need to write a lightflowtext to help you.This kind of file include{Light file 's name,Light's kind(0:Point,1:Direction,2:Spot),the x,y,z which the light 's position in the model}

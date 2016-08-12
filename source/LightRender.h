@@ -26,7 +26,7 @@ public:
 	void SetLightDirection(float x, float y, float z);						//设置光源的光照方向
 	void SetPointLightsFromFile(std::string filename);													//设置点光源
 	void SetDirectionalLightsFromFile(std::string filename);												//设置方向光源
-	void SetSpotLightFromFile(std::string filename);													//设置聚光灯
+	void SetSpotLightsFromFile(std::string filename);													//设置聚光灯
 	void RegisterLight(LPDIRECT3DDEVICE9 g_pd3dDevice);						//注册光源
 	void BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//开始渲染光源
 	void EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);						//结束渲染光源

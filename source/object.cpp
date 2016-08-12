@@ -171,7 +171,7 @@ void object::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::s
 
 void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename)
 {
-	m_Light.SetSpotLightFromFile(filename);
+	m_Light.SetSpotLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 

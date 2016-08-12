@@ -135,7 +135,7 @@ void Light::SetDirectionalLightsFromFile(std::string filename)
 	file.close();
 }
 
-void Light::SetSpotLightFromFile(std::string filename)
+void Light::SetSpotLightsFromFile(std::string filename)
 {
 	m_LightContent.Type = D3DLIGHT_SPOT;
 	std::fstream file;
