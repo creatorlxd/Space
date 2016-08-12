@@ -2,6 +2,8 @@
 #include<d3d9.h>
 #include<d3dx9.h>
 #include<time.h>
+#include<string>
+#include<fstream>
 #ifndef SPACE
 #define SPACE
 #define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }   //定义一个安全释放宏，便于后面COM接口指针的释放
@@ -21,5 +23,6 @@ struct CUSTOMVERTEX //顶点结构体
 
 
 
-HRESULT Direct3D_Init(HWND hwnd, LPDIRECT3DDEVICE9       g_pd3dDevice, int WINDOW_HEIGHT, int WINDOW_WIDTH);
+HRESULT Direct3D_Init(HWND hwnd, LPDIRECT3DDEVICE9       g_pd3dDevice, int WINDOW_HEIGHT, int WINDOW_WIDTH);//D3DX9初始化
+void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);									//从文件中初始化材质
 #endif
