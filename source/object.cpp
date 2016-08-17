@@ -13,7 +13,7 @@ void object::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize,
 	WriteInIndexBuffer(Indices);
 }
 
-void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename)
+void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, LPCTSTR photoname)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -31,10 +31,11 @@ void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename)
 		file >> Indices[j];
 	}
 	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 	file.close();
 }
 
-void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename,std::string lightfilename)
+void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, LPCTSTR photoname, std::string TextureFile)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -52,7 +53,29 @@ void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string f
 		file >> Indices[j];
 	}
 	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	SetTextureFromFileEx(g_pd3dDevice, photoname, TextureFile, m_pTexture);
+	file.close();
+}
 
+void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename,std::string lightfilename, LPCTSTR photoname)
+{
+	std::fstream file;
+	file.open(filename, std::ios::in);
+	int VertexSize, IndexSize;
+	file >> VertexSize;
+	file >> IndexSize;
+	CUSTOMVERTEX* Vertices = new CUSTOMVERTEX[VertexSize];
+	WORD* Indices = new WORD[IndexSize];
+	for (int i = 0;i < VertexSize;i++)
+	{
+		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >> Vertices[i].nx >> Vertices[i].ny >> Vertices[i].nz >> Vertices[i].u >> Vertices[i].v;
+	}
+	for (int j = 0;j < IndexSize;j++)
+	{
+		file >> Indices[j];
+	}
+	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 	std::fstream lightfile;
 	lightfile.open(lightfilename, std::ios::in);
 	std::string true_lightfilename;
@@ -110,6 +133,7 @@ object::object()
 	m_ryv = 0;
 	m_rza = 0;
 	m_rzv = 0;
+	m_pTexture = NULL;
 }
 
 object::object(int & i)
@@ -133,6 +157,7 @@ object::object(int & i)
 	m_rza = 0;
 	m_rzv = 0;
 	m_Light.SetLightNumber(i);
+	m_pTexture = NULL;
 }
 
 void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -151,6 +176,7 @@ void object::WriteInIndexBuffer(WORD Indices[])
 
 void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
+	g_pd3dDevice->SetTexture(0,m_pTexture);
 	g_pd3dDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(CUSTOMVERTEX));
 	g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
 	g_pd3dDevice->SetIndices(m_pIndexBuffer);

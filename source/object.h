@@ -9,15 +9,16 @@
 #include<string>
 #include<fstream>
 #include"LightRender.h"
-
+#include"Texture.h"
 
 
 class object    //DX3D物体对象
 {
 public:
 	void init(LPDIRECT3DDEVICE9 g_pd3dDevice,int VertexSize,int IndexSize,CUSTOMVERTEX Vertices[],WORD Indices[]);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
-	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);								//从文件中读取数据，进行初始化
-	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, std::string lightfilename);					//从文件中读取数据，包括光源，进行初始化
+	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename, LPCTSTR photoname);								//从文件中读取数据，进行初始化
+	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename,LPCTSTR photoname,std::string TextureFile);	//从文件中读取数据，进行初始化
+	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, std::string lightfilename, LPCTSTR photoname);					//从文件中读取数据，包括光源，进行初始化
 	~object();																//释放顶点缓存和索引缓存
 	object();																//初始化
 	object(int &i);															//初始化，顺带初始化m_Light
@@ -49,6 +50,8 @@ private:
 	int m_PrimitiveCount;						//图元的数量
 	//----------------------------------------------------------------------------------------------------------------
 	float m_lx, m_ly, m_lz;						//光源在物体中相对于物体质心的相对坐标
+	//----------------------------------------------------------------------------------------------------------------
+	LPDIRECT3DTEXTURE9 m_pTexture;				//纹理
 	//----------------------------------------------------------------------------------------------------------------
 	time_t m_TimeNow;							//现在的时间
 	time_t m_TimeChange;						//时间差，即时间变化量
