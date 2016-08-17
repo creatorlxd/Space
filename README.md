@@ -1,1 +1,1 @@
-A Game Engine by lxd and will by lxd and kjq
+A Game Engine by lxd 
