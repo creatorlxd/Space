@@ -80,3 +80,16 @@ void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename)
 	file.close();
 }
 
+void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	g_pd3dDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	g_pd3dDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+}
+
+void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+}

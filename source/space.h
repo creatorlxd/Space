@@ -25,4 +25,7 @@ struct CUSTOMVERTEX //顶点结构体
 
 HRESULT Direct3D_Init(HWND hwnd, LPDIRECT3DDEVICE9       g_pd3dDevice, int WINDOW_HEIGHT, int WINDOW_WIDTH);//D3DX9初始化
 void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);									//从文件中初始化材质
+
+void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);																//开启并设置Alpha融合
+void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);
 #endif

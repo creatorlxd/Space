@@ -20,10 +20,9 @@ void TexturePrintInit(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 }
 
-void TexturePrintInitEx(LPDIRECT3DDEVICE9 g_pd3dDevice,int num)
+void TexturePrintInitEx(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	g_pd3dDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 	g_pd3dDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
-	g_pd3dDevice->SetSamplerState(0, D3DSAMP_MAXMIPLEVEL, num);
 }
