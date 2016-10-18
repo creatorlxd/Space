@@ -26,18 +26,18 @@ public:
 	void WriteInIndexBuffer(WORD Indices[]);							//写入索引缓存内容
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
 	//---------------------------------------------------------------------------------------------------------------
-	Light m_Light;
-	void InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);
-	void InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename);
-	void InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename);
-	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);
+	Light m_Light;																			//光源
+	void InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);		//从文件中初始化点光源
+	void InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename);//从文件中初始化方向光源
+	void InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename);		//从文件中初始化聚光灯
+	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);										//绘制光源，即开启光源
 	//---------------------------------------------------------------------------------------------------------------
 	void GetTime();
 	//---------------------------------------------------------------------------------------------------------------
 	void SetXYZ(float x, float y, float z);								//临时的设置物体质心坐标的函数
 	//---------------------------------------------------------------------------------------------------------------
-	void InitPhysicsFromFile(std::string filename);													//初始化物理信息
-	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice);													//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
+	void InitPhysicsFromFile(std::string filename);						//从文件中初始化物理信息
+	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice);						//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
 	void GetG();														//获得物体的重力，并将其加到总合力中
 	void RunMovingGraphics();											//运行关于移动的物理引擎
 private:
