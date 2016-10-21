@@ -219,16 +219,16 @@ void object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 
 void object::GetTime()
 {
-	time_t TimeBuffer=0;
-	if (m_TimeNow != 0)
+	float TimeBuffer=0;
+	if (m_TimeNow == 0)
 	{
-		m_TimeNow = time(NULL);
+		m_TimeNow = timeGetTime()*0.001f;
 	}
 	else
 	{
-		TimeBuffer = time(NULL);
+		TimeBuffer = timeGetTime()*0.001f;
 		m_TimeChange = TimeBuffer - m_TimeNow;
-		m_TimeNow = time(NULL);
+		m_TimeNow = timeGetTime()*0.001f;
 	}
 }
 
