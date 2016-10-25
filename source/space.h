@@ -27,5 +27,5 @@ HRESULT Direct3D_Init(HWND hwnd, LPDIRECT3DDEVICE9       g_pd3dDevice, int WINDO
 void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);									//从文件中初始化材质
 
 void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);																//开启并设置Alpha融合
-void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);
+void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);															//关闭Alpha融合
 #endif

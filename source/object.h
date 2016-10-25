@@ -26,6 +26,9 @@ public:
 	void WriteInIndexBuffer(WORD Indices[]);							//写入索引缓存内容
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
 	//---------------------------------------------------------------------------------------------------------------
+	//对X-File的支持
+	void InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename);					//从X-File中读取模型
+	//---------------------------------------------------------------------------------------------------------------
 	Light m_Light;																			//光源
 	void InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);		//从文件中初始化点光源
 	void InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename);//从文件中初始化方向光源
@@ -48,6 +51,15 @@ private:
 	VOID* mpVertices;							//指向顶点缓存内部数据数组的指针
 	WORD* mpIndices;							//指向索引缓存内部数据数组的指针
 	int m_PrimitiveCount;						//图元的数量
+	//----------------------------------------------------------------------------------------------------------------
+	//X-File
+	bool m_IfXFile;								//是否使用X-File
+	LPD3DXBUFFER m_pAdjBuffer;					//用于保存加载网格的邻接信息，也就是包含每个多边形周围的多边形信息的缓冲区的内存地址
+	LPD3DXBUFFER m_pMtrlBuffer;					//用于保存网格的所有子集的材质和纹理，指向用于存储模型材质和纹理文件名的缓冲区的地址，而材质的数目存在之后第七个参数pNumMaterials中了
+	DWORD m_NumMaterials;						//网格里材质的数量
+	LPD3DXMESH m_pMesh;							//网格
+	D3DMATERIAL9* m_pMaterials;					//网格的材质
+	LPDIRECT3DTEXTURE9* m_pTextures;			//网格的纹理
 	//----------------------------------------------------------------------------------------------------------------
 	float m_lx, m_ly, m_lz;						//光源在物体中相对于物体质心的相对坐标
 	//----------------------------------------------------------------------------------------------------------------

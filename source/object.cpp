@@ -109,8 +109,18 @@ void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string f
 
 object::~object()
 {
-	SAFE_RELEASE(m_pVertexBuffer);
-	SAFE_RELEASE(m_pIndexBuffer);
+	SAFE_RELEASE(m_pVertexBuffer)
+	SAFE_RELEASE(m_pIndexBuffer)
+	SAFE_RELEASE(m_pAdjBuffer)
+	SAFE_RELEASE(m_pMtrlBuffer)
+	if (m_pMaterials != NULL)
+	{
+		delete[] m_pMaterials;
+	}
+	if (m_pTextures != NULL)
+	{
+		delete[] m_pTextures;
+	}
 }
 
 object::object()
@@ -134,6 +144,13 @@ object::object()
 	m_rza = 0;
 	m_rzv = 0;
 	m_pTexture = NULL;
+	m_IfXFile = false;
+	m_pAdjBuffer = NULL;
+	m_pMtrlBuffer = NULL;
+	m_NumMaterials = 0;
+	m_pMesh = NULL;
+	m_pMaterials = NULL;
+	m_pTextures = NULL;
 }
 
 object::object(int & i)
@@ -158,6 +175,13 @@ object::object(int & i)
 	m_rzv = 0;
 	m_Light.SetLightNumber(i);
 	m_pTexture = NULL;
+	m_IfXFile = false;
+	m_pAdjBuffer = NULL;
+	m_pMtrlBuffer = NULL;
+	m_NumMaterials = 0;
+	m_pMesh = NULL;
+	m_pMaterials = NULL;
+	m_pTextures = NULL;
 }
 
 void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -176,11 +200,41 @@ void object::WriteInIndexBuffer(WORD Indices[])
 
 void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
-	g_pd3dDevice->SetTexture(0,m_pTexture);
-	g_pd3dDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(CUSTOMVERTEX));
-	g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
-	g_pd3dDevice->SetIndices(m_pIndexBuffer);
-	g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexSize, 0,(UINT)m_PrimitiveCount);
+	if (m_IfXFile == false)
+	{
+		g_pd3dDevice->SetTexture(0, m_pTexture);
+		g_pd3dDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(CUSTOMVERTEX));
+		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+		g_pd3dDevice->SetIndices(m_pIndexBuffer);
+		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexSize, 0, (UINT)m_PrimitiveCount);
+	}
+	else
+	{
+		for (DWORD i = 0; i < m_NumMaterials; i++)
+		{
+			g_pd3dDevice->SetMaterial(&m_pMaterials[i]);
+			g_pd3dDevice->SetTexture(0, m_pTextures[i]);
+			m_pMesh->DrawSubset(i);
+		}
+	}
+}
+
+void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)
+{
+	m_IfXFile = true;
+	D3DXLoadMeshFromX(filename, D3DXMESH_MANAGED, g_pd3dDevice, &m_pAdjBuffer, &m_pMtrlBuffer, NULL, &m_NumMaterials, &m_pMesh);
+	D3DXMATERIAL *pMtrls = (D3DXMATERIAL*)m_pMtrlBuffer->GetBufferPointer();	//创建一个D3DXMATERIAL结构体用于读取材质和纹理信息
+	m_pMaterials = new D3DMATERIAL9[m_NumMaterials];
+	m_pTextures = new LPDIRECT3DTEXTURE9[m_NumMaterials];
+	for (DWORD i = 0;i < m_NumMaterials;i++)
+	{
+		//获取材质
+		m_pMaterials[i] = pMtrls[i].MatD3D;
+
+		//创建一下纹理对象  
+		m_pTextures[i] = NULL;
+		D3DXCreateTextureFromFileA(g_pd3dDevice, pMtrls[i].pTextureFilename, &m_pTextures[i]);
+	}
 }
 
 void object::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename)
