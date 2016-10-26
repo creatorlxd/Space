@@ -113,12 +113,18 @@ object::~object()
 	SAFE_RELEASE(m_pIndexBuffer)
 	SAFE_RELEASE(m_pAdjBuffer)
 	SAFE_RELEASE(m_pMtrlBuffer)
+	SAFE_RELEASE(m_pMesh);
+	SAFE_RELEASE(m_pTexture)
 	if (m_pMaterials != NULL)
 	{
 		delete[] m_pMaterials;
 	}
 	if (m_pTextures != NULL)
 	{
+		for (DWORD i = 0;i < m_NumMaterials;i++)
+		{
+			SAFE_RELEASE(m_pTextures[i])
+		}
 		delete[] m_pTextures;
 	}
 }
