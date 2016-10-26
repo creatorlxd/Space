@@ -225,7 +225,7 @@ void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	}
 }
 
-void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)
+void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//不要用，不稳定。未完成！
 {
 	m_IfXFile = true;
 	D3DXLoadMeshFromX(filename, D3DXMESH_MANAGED, g_pd3dDevice, &m_pAdjBuffer, &m_pMtrlBuffer, NULL, &m_NumMaterials, &m_pMesh);
