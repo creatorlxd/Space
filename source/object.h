@@ -27,7 +27,7 @@ public:
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
 	//---------------------------------------------------------------------------------------------------------------
 	//对X-File的支持
-	void InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename);					//从X-File中读取模型
+	void InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename);					//从X-File中读取模型:不要用，不稳定。未完成！
 	//---------------------------------------------------------------------------------------------------------------
 	Light m_Light;																			//光源
 	void InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,std::string filename);		//从文件中初始化点光源

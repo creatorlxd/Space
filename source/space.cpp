@@ -93,3 +93,19 @@ void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
+
+void OpenDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, true);
+}
+
+void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	g_pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESS);
+	g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
+}
+
+void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);
+}
