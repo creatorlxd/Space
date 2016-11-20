@@ -13,7 +13,7 @@ void object::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize,
 	WriteInIndexBuffer(Indices);
 }
 
-void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, LPCTSTR photoname)
+void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -35,7 +35,7 @@ void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, 
 	file.close();
 }
 
-void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename, LPCTSTR photoname, std::string TextureFile)
+void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -57,8 +57,9 @@ void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename
 	file.close();
 }
 
-void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename,std::string lightfilename, LPCTSTR photoname)
+void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename,const std::string& lightfilename, LPCTSTR photoname)
 {
+	m_IfLight = true;
 	std::fstream file;
 	file.open(filename, std::ios::in);
 	int VertexSize, IndexSize;
@@ -157,6 +158,8 @@ object::object()
 	m_pMesh = NULL;
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
+	m_IfLight = false;
+	m_IfPhysics = false;
 }
 
 object::object(int & i)
@@ -188,6 +191,8 @@ object::object(int & i)
 	m_pMesh = NULL;
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
+	m_IfLight = false;
+	m_IfPhysics = false;
 }
 
 void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -243,19 +248,19 @@ void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//²
 	}
 }
 
-void object::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename)
+void object::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
 	m_Light.SetPointLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
-void object::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename)
+void object::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
 	m_Light.SetDirectionalLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
-void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, std::string filename)
+void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
 	m_Light.SetSpotLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
@@ -275,6 +280,16 @@ void object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	D3DXVec3TransformCoord(&buf, &buf, &matrz);
 	m_Light.SetLightDirection(buf.x, buf.y, buf.z);
 	m_Light.BeginLightPrint(g_pd3dDevice);
+}
+
+void object::LightBeginPrint()
+{
+	m_IfLight = true;
+}
+
+void object::LightEndPrint()
+{
+	m_IfLight = false;
 }
 
 void object::GetTime()
@@ -297,8 +312,9 @@ void object::SetXYZ(float x, float y, float z)
 	m_Position = D3DXVECTOR3(x, y, z);
 }
 
-void object::InitPhysicsFromFile(std::string filename)
+void object::InitPhysicsFromFile(const std::string& filename)
 {
+	m_IfPhysics = true;
 }
 
 void object::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice)

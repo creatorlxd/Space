@@ -5,7 +5,7 @@ void SetTextureFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname,LPDIRE
 	D3DXCreateTextureFromFile(g_pd3dDevice, photoname, &g_pTexture);
 }
 
-void SetTextureFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, std::string filename, LPDIRECT3DTEXTURE9 & g_pTexture)
+void SetTextureFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname,const std::string& filename, LPDIRECT3DTEXTURE9 & g_pTexture)
 {
 	std::fstream file(filename, std::ios::in);
 	int r, g, b;
