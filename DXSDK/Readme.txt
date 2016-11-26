@@ -1,1 +1,1 @@
-Microsoft DirectX SDK (June 2010)
+Microsoft DirectX SDK (June 2010) 
