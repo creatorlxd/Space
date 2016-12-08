@@ -10,6 +10,7 @@
 #include<fstream>
 #include"LightRender.h"
 #include"Texture.h"
+#include"physics.h"
 
 
 class object    //DX3D物体对象
