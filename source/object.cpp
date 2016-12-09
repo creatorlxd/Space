@@ -315,6 +315,9 @@ void object::SetXYZ(float x, float y, float z)
 void object::InitPhysicsFromFile(const std::string& filename)
 {
 	m_IfPhysics = true;
+	std::fstream file(filename.c_str(),std::ios::in);
+
+	file.close();
 }
 
 void object::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice)
@@ -342,8 +345,17 @@ void object::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice)
 
 void object::GetG()
 {
+	D3DVECTOR G;
+	G.y = -1*g*m_m;
+	m_F =m_F + G;
 }
 
 void object::RunMovingGraphics()
 {
+	GetTime();
+	m_F = { 0.00f,0.00f,0.00f };
+	GetG();
+	m_a = m_F / m_m;
+	m_v = m_v + m_a*m_TimeChange;
+	m_Position = m_Position + m_v*m_TimeChange;
 }

@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="include\LightRender.h" />
     <ClInclude Include="include\object.h" />
+    <ClInclude Include="include\physics.h" />
     <ClInclude Include="include\space.h" />
     <ClInclude Include="include\Texture.h" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClCompile Include="source\LightRender.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\object.cpp" />
+    <ClCompile Include="source\physics.cpp" />
     <ClCompile Include="source\space.cpp" />
     <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
