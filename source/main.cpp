@@ -1,12 +1,6 @@
-//
-//
-//
-
-#include<d3d9.h>
-#include<Windows.h>
-#include<string>
-#include"object.h"
-#include"space.h"
+#include "stdafx.h"
+#include "object.h"
+#include "space.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件

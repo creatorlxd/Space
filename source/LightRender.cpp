@@ -1,5 +1,5 @@
-#include"LightRender.h"
-#include<fstream>
+#include "stdafx.h"
+#include "LightRender.h"
 
 
 

@@ -1,4 +1,5 @@
-#include"Texture.h"
+#include "stdafx.h"
+#include "Texture.h"
 
 void SetTextureFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname,LPDIRECT3DTEXTURE9 & g_pTexture)
 {
