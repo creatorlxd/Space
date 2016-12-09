@@ -161,6 +161,7 @@ object::object()
 	m_pTextures = NULL;
 	m_IfLight = false;
 	m_IfPhysics = false;
+	m_I = { 0.00f, 0.00f, 0.00f };
 }
 
 object::object(int & i)
@@ -194,6 +195,7 @@ object::object(int & i)
 	m_pTextures = NULL;
 	m_IfLight = false;
 	m_IfPhysics = false;
+	m_I = { 0.00f,0.00f,0.00f };
 }
 
 void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -353,10 +355,12 @@ void object::GetG()
 
 void object::RunMovingGraphics()
 {
-	GetTime();
 	m_F = { 0.00f,0.00f,0.00f };
-	GetG();
 	m_a = m_F / m_m;
 	m_v = m_v + m_a*m_TimeChange;
 	m_Position = m_Position + m_v*m_TimeChange;
+}
+
+void object::RunRoundingGraphics()
+{
 }

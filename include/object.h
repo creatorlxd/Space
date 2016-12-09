@@ -39,6 +39,7 @@ public:
 	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice);						//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
 	void GetG();														//获得物体的重力，并将其加到总合力中
 	void RunMovingGraphics();											//运行关于移动的物理引擎
+	void RunRoundingGraphics();											//运行关于旋转的物理引擎
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVertexBuffer;	//顶点缓存
 	LPDIRECT3DINDEXBUFFER9 m_pIndexBuffer;		//索引缓存
@@ -71,6 +72,7 @@ private:
 	D3DVECTOR m_F;								//物体所受的总的合力
 	D3DVECTOR m_a;								//物体的总的加速度
 	D3DVECTOR m_v;								//物体的总的速度
+	D3DVECTOR m_I;								//物体的转动惯量
 	float m_rxv, m_ryv, m_rzv;					//物体的XYZ三轴上的旋转的角度
 	float m_rxa, m_rya, m_rza;					//物体的XYZ三轴上的旋转的角度的每秒的变化量
 };
