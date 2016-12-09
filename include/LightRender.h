@@ -1,8 +1,6 @@
 #pragma once
-#include<d3d9.h>
-#include<d3dx9.h>
-#include"space.h"
-#include<string>
+#include "stdafx.h"
+#include "space.h"
 //
 //
 //

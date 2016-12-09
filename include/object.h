@@ -1,16 +1,9 @@
 #pragma once
-//
-//
-//
-//
-//
-#include<d3d9.h>
-#include"space.h"
-#include<string>
-#include<fstream>
-#include"LightRender.h"
-#include"Texture.h"
-#include"physics.h"
+#include "stdafx.h"
+#include "space.h"
+#include "LightRender.h"
+#include "Texture.h"
+#include "physics.h"
 
 
 class object    //DX3D物体对象

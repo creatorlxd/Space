@@ -1,4 +1,6 @@
-#include"physics.h"
+#include "stdafx.h"
+#include "physics.h"
+
 D3DVECTOR operator + (D3DVECTOR v1, D3DVECTOR v2)
 {
 	D3DVECTOR r;
