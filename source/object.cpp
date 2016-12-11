@@ -355,10 +355,10 @@ void object::GetG()
 
 void object::RunMovingGraphics()
 {
-	m_F = { 0.00f,0.00f,0.00f };
 	m_a = m_F / m_m;
 	m_v = m_v + m_a*m_TimeChange;
 	m_Position = m_Position + m_v*m_TimeChange;
+	m_F = { 0.00f,0.00f,0.00f };
 }
 
 void object::RunRoundingGraphics()
