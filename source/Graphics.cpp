@@ -1,20 +1,18 @@
-#include "stdafx.h"
-#include "object.h"
+#include"stdafx.h"
+#include"Graphics.h"
 
-
-void object::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[])
+void GraphicsComponent::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[])
 {
-	
 	m_VertexSize = VertexSize;
 	m_IndexSize = IndexSize;
-	m_PrimitiveCount = m_IndexSize/3;
+	m_PrimitiveCount = m_IndexSize / 3;
 	g_pd3dDevice->CreateVertexBuffer(m_VertexSize*sizeof(CUSTOMVERTEX), 0, D3DFVF_CUSTOMVERTEX, D3DPOOL_DEFAULT, &m_pVertexBuffer, NULL);
 	g_pd3dDevice->CreateIndexBuffer(m_IndexSize*sizeof(WORD), 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_pIndexBuffer, NULL);
 	WriteInVertexBuffer(Vertices);
 	WriteInIndexBuffer(Indices);
 }
 
-void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname)
+void GraphicsComponent::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -25,7 +23,7 @@ void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& fil
 	WORD* Indices = new WORD[IndexSize];
 	for (int i = 0;i < VertexSize;i++)
 	{
-		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >>Vertices[i].nx>> Vertices[i].ny>> Vertices[i] .nz>> Vertices[i].u >> Vertices[i].v;
+		file >> Vertices[i].x >> Vertices[i].y >> Vertices[i].z >> Vertices[i].nx >> Vertices[i].ny >> Vertices[i].nz >> Vertices[i].u >> Vertices[i].v;
 	}
 	for (int j = 0;j < IndexSize;j++)
 	{
@@ -36,7 +34,7 @@ void object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& fil
 	file.close();
 }
 
-void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile)
+void GraphicsComponent::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string & TextureFile)
 {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -58,7 +56,7 @@ void object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& f
 	file.close();
 }
 
-void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename,const std::string& lightfilename, LPCTSTR photoname)
+void GraphicsComponent::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, const std::string & lightfilename, LPCTSTR photoname)
 {
 	m_IfLight = true;
 	std::fstream file;
@@ -109,7 +107,7 @@ void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::st
 	file.close();
 }
 
-object::~object()
+GraphicsComponent::~GraphicsComponent()
 {
 	SAFE_RELEASE(m_pVertexBuffer)
 	SAFE_RELEASE(m_pIndexBuffer)
@@ -131,7 +129,7 @@ object::~object()
 	}
 }
 
-object::object()
+GraphicsComponent::GraphicsComponent()
 {
 	m_VertexSize = 0;
 	m_IndexSize = 0;
@@ -140,17 +138,6 @@ object::object()
 	m_pIndexBuffer = NULL;
 	mpVertices = NULL;
 	mpIndices = NULL;
-	m_TimeNow = 0;
-	m_TimeChange = 0;
-	m_a = { 0,0,0 };
-	m_F = { 0,0,0 };
-	m_m = 0;
-	m_rxa = 0;
-	m_rxv = 0;
-	m_rya = 0;
-	m_ryv = 0;
-	m_rza = 0;
-	m_rzv = 0;
 	m_pTexture = NULL;
 	m_IfXFile = false;
 	m_pAdjBuffer = NULL;
@@ -160,13 +147,9 @@ object::object()
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
 	m_IfLight = false;
-	m_IfPhysics = false;
-	m_I = { 0.00f, 0.00f, 0.00f };
-	m_Position = { 0.00f,0.00f,0.00f };
-	m_v = { 0.00f,0.00f,0.00f };
 }
 
-object::object(int& i)
+GraphicsComponent::GraphicsComponent(int & i)
 {
 	m_VertexSize = 0;
 	m_IndexSize = 0;
@@ -175,17 +158,6 @@ object::object(int& i)
 	m_pIndexBuffer = NULL;
 	mpVertices = NULL;
 	mpIndices = NULL;
-	m_TimeNow = 0;
-	m_TimeChange = 0;
-	m_a = { 0,0,0 };
-	m_F = { 0,0,0 };
-	m_m = 0;
-	m_rxa = 0;
-	m_rxv = 0;
-	m_rya = 0;
-	m_ryv = 0;
-	m_rza = 0;
-	m_rzv = 0;
 	m_Light.SetLightNumber(i);
 	m_pTexture = NULL;
 	m_IfXFile = false;
@@ -196,27 +168,23 @@ object::object(int& i)
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
 	m_IfLight = false;
-	m_IfPhysics = false;
-	m_I = { 0.00f,0.00f,0.00f };
-	m_Position = { 0.00f,0.00f,0.00f };
-	m_v = { 0.00f,0.00f,0.00f };
 }
 
-void object::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
+void GraphicsComponent::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
 {
 	m_pVertexBuffer->Lock(0, 0, (void**)&mpVertices, 0);
 	memcpy(mpVertices, Vertices, m_VertexSize*sizeof(CUSTOMVERTEX));
 	m_pVertexBuffer->Unlock();
 }
 
-void object::WriteInIndexBuffer(WORD Indices[])
+void GraphicsComponent::WriteInIndexBuffer(WORD Indices[])
 {
 	m_pIndexBuffer->Lock(0, 0, (void**)&mpIndices, 0);
 	memcpy(mpIndices, Indices, m_IndexSize*sizeof(WORD));
 	m_pIndexBuffer->Unlock();
 }
 
-void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
+void GraphicsComponent::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	if (m_IfXFile == false)
 	{
@@ -237,7 +205,7 @@ void object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	}
 }
 
-void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//²»ÒªÓÃ£¬²»ÎÈ¶¨¡£Î´Íê³É£¡
+void GraphicsComponent::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//²»ÒªÓÃ£¬²»ÎÈ¶¨¡£Î´Íê³É£¡
 {
 	m_IfXFile = true;
 	D3DXLoadMeshFromX(filename, D3DXMESH_MANAGED, g_pd3dDevice, &m_pAdjBuffer, &m_pMtrlBuffer, NULL, &m_NumMaterials, &m_pMesh);
@@ -255,35 +223,35 @@ void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//²
 	}
 }
 
-void object::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
+void GraphicsComponent::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename)
 {
 	m_Light.SetPointLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
-void object::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
+void GraphicsComponent::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename)
 {
 	m_Light.SetDirectionalLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
-void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
+void GraphicsComponent::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename)
 {
 	m_Light.SetSpotLightsFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
-void object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
+void GraphicsComponent::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsComponent& physics)
 {
 	if (m_IfLight == true)
 	{
-		m_Light.SetLightPosition(m_lx + m_Position.x, m_ly + m_Position.y, m_lz + m_Position.z);
+		m_Light.SetLightPosition(m_lx + physics.m_Position.x, m_ly + physics.m_Position.y, m_lz + physics.m_Position.z);
 		D3DXVECTOR3 buf;
 		buf = m_Light.m_LightContent.Direction;
 		D3DXMATRIX matrx, matry, matrz;
-		D3DXMatrixRotationX(&matrx, m_rxv);
-		D3DXMatrixRotationY(&matry, m_ryv);
-		D3DXMatrixRotationZ(&matrz, m_rzv);
+		D3DXMatrixRotationX(&matrx, physics.m_rxv);
+		D3DXMatrixRotationY(&matry, physics.m_ryv);
+		D3DXMatrixRotationZ(&matrz, physics.m_rzv);
 		D3DXVec3TransformCoord(&buf, &buf, &matrx);
 		D3DXVec3TransformCoord(&buf, &buf, &matry);
 		D3DXVec3TransformCoord(&buf, &buf, &matrz);
@@ -296,82 +264,35 @@ void object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	}
 }
 
-void object::LightBeginPrint()
+void GraphicsComponent::LightBeginPrint()
 {
 	m_IfLight = true;
 }
 
-void object::LightEndPrint()
+void GraphicsComponent::LightEndPrint()
 {
 	m_IfLight = false;
 }
 
-void object::GetTime()
-{
-	float TimeBuffer=0;
-	if (m_TimeNow == 0)
-	{
-		m_TimeNow = timeGetTime()*0.001f;
-	}
-	else
-	{
-		TimeBuffer = timeGetTime()*0.001f;
-		m_TimeChange = TimeBuffer - m_TimeNow;
-		m_TimeNow = timeGetTime()*0.001f;
-	}
-}
-
-void object::SetXYZ(float x, float y, float z)
-{
-	m_Position = D3DXVECTOR3(x, y, z);
-}
-
-void object::InitPhysicsFromFile(const std::string& filename)
-{
-	m_IfPhysics = true;
-	std::fstream file(filename.c_str(),std::ios::in);
-
-	file.close();
-}
-
-void object::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice)
+void GraphicsComponent::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsComponent& physics)
 {
 	D3DXMATRIX matWorld;
 	D3DXMATRIX matBuf;
-	D3DXMatrixTranslation(&matWorld, m_Position.x, m_Position.y, m_Position.z);
-	if (m_rxv != 0)
+	D3DXMatrixTranslation(&matWorld, physics.m_Position.x, physics.m_Position.y, physics.m_Position.z);
+	if (physics.m_rxv != 0)
 	{
-		D3DXMatrixRotationX(&matBuf, m_rxv);
+		D3DXMatrixRotationX(&matBuf, physics.m_rxv);
 		matWorld = matBuf*matWorld;
 	}
-	if (m_ryv != 0)
+	if (physics.m_ryv != 0)
 	{
-		D3DXMatrixRotationY(&matBuf, m_ryv);
+		D3DXMatrixRotationY(&matBuf, physics.m_ryv);
 		matWorld = matBuf*matWorld;
 	}
-	if (m_rzv != 0)
+	if (physics.m_rzv != 0)
 	{
-		D3DXMatrixRotationZ(&matBuf, m_rzv);
+		D3DXMatrixRotationZ(&matBuf, physics.m_rzv);
 		matWorld = matBuf*matWorld;
 	}
 	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-}
-
-void object::GetG()
-{
-	D3DVECTOR G;
-	G.y = -1*g*m_m;
-	m_F =m_F + G;
-}
-
-void object::RunMovingEngine()
-{
-	m_a = m_F / m_m;
-	m_v = m_v + m_a*m_TimeChange;
-	m_Position = m_Position + m_v*m_TimeChange;
-	m_F = { 0.00f,0.00f,0.00f };
-}
-
-void object::RunRoundingEngine()
-{
 }

@@ -26,16 +26,19 @@
     <ClInclude Include="include\object.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\space.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\physics.h">
+    <ClInclude Include="include\stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\stdafx.h">
+    <ClInclude Include="include\Graphics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Physics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Space.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -49,16 +52,19 @@
     <ClCompile Include="source\object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="source\space.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="source\Texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="source\physics.cpp">
+    <ClCompile Include="source\stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="source\stdafx.cpp">
+    <ClCompile Include="source\Graphics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Physics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Space.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

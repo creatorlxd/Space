@@ -1,9 +1,9 @@
 #pragma once
 #include "stdafx.h"
-#include "space.h"
+#include "Space.h"
 #include "LightRender.h"
 #include "Texture.h"
-#include "physics.h"
+#include "Physics.h"
 
 
 class object    //DX3D物体对象
@@ -38,8 +38,8 @@ public:
 	void InitPhysicsFromFile(const std::string& filename);						//从文件中初始化物理信息
 	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice);						//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
 	void GetG();														//获得物体的重力，并将其加到总合力中
-	void RunMovingGraphics();											//运行关于移动的物理引擎
-	void RunRoundingGraphics();											//运行关于旋转的物理引擎
+	void RunMovingEngine();											//运行关于移动的物理引擎
+	void RunRoundingEngine();											//运行关于旋转的物理引擎
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVertexBuffer;	//顶点缓存
 	LPDIRECT3DINDEXBUFFER9 m_pIndexBuffer;		//索引缓存

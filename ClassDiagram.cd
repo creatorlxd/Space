@@ -3,22 +3,22 @@
   <Class Name="object">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AFAAAAAAACAAAAAAAAAACAAgAAABABIAAACBAEAIAgA=</HashCode>
-      <FileName>object.h</FileName>
+      <HashCode>Q1EAiAAAAKkABB4AQgAACACgxBcBcDoSAACZCVQIAgA=</HashCode>
+      <FileName>include\object.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Light">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACIAgAAAAAAAAACEAAoAAgAAAAABAAAABREIgAIIASA=</HashCode>
-      <FileName>LightRender.h</FileName>
+      <HashCode>ACAAEAAAAEABgBCAAAgAAkAAAAAABAAAAAAAgAAAACA=</HashCode>
+      <FileName>include\LightRender.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="CUSTOMVERTEX">
     <Position X="1" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAABgAQAAAAA=</HashCode>
-      <FileName>object.h</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQBJgAQAAABA=</HashCode>
+      <FileName>include\Space.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Font Name="Microsoft YaHei UI" Size="9" />

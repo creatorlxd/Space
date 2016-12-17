@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "space.h"
+#include "Space.h"
 
 
 //-----------------------------------¡¾Direct3D_Init( )º¯Êý¡¿--------------------------------------

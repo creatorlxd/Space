@@ -153,19 +153,21 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\LightRender.h" />
     <ClInclude Include="include\object.h" />
-    <ClInclude Include="include\physics.h" />
-    <ClInclude Include="include\space.h" />
+    <ClInclude Include="include\Physics.h" />
+    <ClInclude Include="include\Space.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Graphics.cpp" />
     <ClCompile Include="source\LightRender.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\object.cpp" />
-    <ClCompile Include="source\physics.cpp" />
-    <ClCompile Include="source\space.cpp" />
+    <ClCompile Include="source\Physics.cpp" />
+    <ClCompile Include="source\Space.cpp" />
     <ClCompile Include="source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
