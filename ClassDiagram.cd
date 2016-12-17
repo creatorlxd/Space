@@ -14,6 +14,20 @@
       <FileName>include\LightRender.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="PhysicsComponent">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAGAAAACAAABwAAAAAAAAAwBMAACASAAAQCAAAAAA=</HashCode>
+      <FileName>include\Physics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsComponent">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QlEAgAAAAIkBBAIEQgAACACgBAQBcBoAAACIAVQIAgA=</HashCode>
+      <FileName>include\Graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="CUSTOMVERTEX">
     <Position X="1" Y="0.75" Width="1.5" />
     <TypeIdentifier>

@@ -153,6 +153,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ClassDef.h" />
     <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\LightRender.h" />
     <ClInclude Include="include\object.h" />

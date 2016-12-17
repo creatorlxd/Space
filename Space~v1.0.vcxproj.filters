@@ -41,6 +41,9 @@
     <ClInclude Include="include\Space.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\ClassDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\LightRender.cpp">
