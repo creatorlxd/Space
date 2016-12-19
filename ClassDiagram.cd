@@ -28,6 +28,13 @@
       <FileName>include\Graphics.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Window">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAAAAAAIAACAAgAAAAEgIAQAAAAAAAFAACAgAAAA=</HashCode>
+      <FileName>include\Window.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="CUSTOMVERTEX">
     <Position X="1" Y="0.75" Width="1.5" />
     <TypeIdentifier>
