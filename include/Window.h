@@ -23,3 +23,4 @@ protected:
 	LPCWSTR m_WindowTitle;							//窗口标题
 	void (*m_pWindowLoop)(HWND hwnd);						//游戏循环内容函数指针
 };
+void SetMainWindow(Window* window);					//设置主窗口

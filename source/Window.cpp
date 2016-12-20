@@ -7,15 +7,19 @@ void DefaultWindowLoop(HWND hwnd)
 }
 
 
-Window SpaceEngineWindow;								//唯一示例
+
+Window* SpaceEngineWindow=NULL;								//唯一指针
+
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if(SpaceEngineWindow==NULL)
+		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
 	switch (message)						//switch语句开始
 	{
 	case WM_PAINT:						// 若是客户区重绘消息
-		SpaceEngineWindow.m_pWindowLoop(hwnd);                 //调用Direct3D渲染函数
+		SpaceEngineWindow->m_pWindowLoop(hwnd);                 //调用Direct3D渲染函数
 		ValidateRect(hwnd, NULL);		// 更新客户区的显示
 		break;									//跳出该switch语句
 
@@ -25,9 +29,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;									//跳出该switch语句
 
 	case WM_DESTROY:					//若是窗口销毁消息
-		if (SpaceEngineWindow.m_pd3dDevice != NULL)
-			SAFE_RELEASE(SpaceEngineWindow.m_pd3dDevice)
-			SpaceEngineWindow.m_pd3dDevice = NULL;
+		if (SpaceEngineWindow->m_pd3dDevice != NULL)
+			SAFE_RELEASE(SpaceEngineWindow->m_pd3dDevice)
+			SpaceEngineWindow->m_pd3dDevice = NULL;
 			PostQuitMessage(0);			//向系统表明有个线程有终止请求。用来响应WM_DESTROY消息
 		break;									//跳出该switch语句
 
@@ -42,10 +46,13 @@ Window::Window()
 {
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
+	SpaceEngineWindow = this;
 }
 
 Window::~Window()
 {
+	if (SpaceEngineWindow == this)
+		SpaceEngineWindow = NULL;
 	if(m_pd3dDevice!=NULL)
 		SAFE_RELEASE(m_pd3dDevice);
 }
@@ -192,4 +199,9 @@ void Window::EndPrint()
 	m_pd3dDevice->EndScene();	//结束绘制
 
 	m_pd3dDevice->Present(NULL, NULL, NULL, NULL);	//翻转显示
+}
+
+void SetMainWindow(Window* window)
+{
+	SpaceEngineWindow = window;
 }
