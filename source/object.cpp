@@ -275,19 +275,19 @@ void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::st
 
 void object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
+	m_Light.SetLightPosition(m_lx + m_Position.x, m_ly + m_Position.y, m_lz + m_Position.z);
+	D3DXVECTOR3 buf;
+	buf = m_Light.m_LightContent.Direction;
+	D3DXMATRIX matrx, matry, matrz;
+	D3DXMatrixRotationX(&matrx, m_rxv);
+	D3DXMatrixRotationY(&matry, m_ryv);
+	D3DXMatrixRotationZ(&matrz, m_rzv);
+	D3DXVec3TransformCoord(&buf, &buf, &matrx);
+	D3DXVec3TransformCoord(&buf, &buf, &matry);
+	D3DXVec3TransformCoord(&buf, &buf, &matrz);
+	m_Light.SetLightDirection(buf.x, buf.y, buf.z);
 	if (m_IfLight == true)
 	{
-		m_Light.SetLightPosition(m_lx + m_Position.x, m_ly + m_Position.y, m_lz + m_Position.z);
-		D3DXVECTOR3 buf;
-		buf = m_Light.m_LightContent.Direction;
-		D3DXMATRIX matrx, matry, matrz;
-		D3DXMatrixRotationX(&matrx, m_rxv);
-		D3DXMatrixRotationY(&matry, m_ryv);
-		D3DXMatrixRotationZ(&matrz, m_rzv);
-		D3DXVec3TransformCoord(&buf, &buf, &matrx);
-		D3DXVec3TransformCoord(&buf, &buf, &matry);
-		D3DXVec3TransformCoord(&buf, &buf, &matrz);
-		m_Light.SetLightDirection(buf.x, buf.y, buf.z);
 		m_Light.BeginLightPrint(g_pd3dDevice);
 	}
 	else

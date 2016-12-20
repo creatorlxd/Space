@@ -27,6 +27,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:					//若是窗口销毁消息
 		if (SpaceEngineWindow.m_pd3dDevice != NULL)
 			SAFE_RELEASE(SpaceEngineWindow.m_pd3dDevice)
+			SpaceEngineWindow.m_pd3dDevice = NULL;
 			PostQuitMessage(0);			//向系统表明有个线程有终止请求。用来响应WM_DESTROY消息
 		break;									//跳出该switch语句
 
@@ -174,6 +175,8 @@ HRESULT Window::Objects_Init(HWND hwnd)
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, true);
 	TexturePrintInitEx(m_pd3dDevice);
 	m_pd3dDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+	OpenDepthBuffer(m_pd3dDevice);
+	SetDepthBuffer(m_pd3dDevice);
 	return S_OK;
 }
 
