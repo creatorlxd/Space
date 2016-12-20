@@ -10,4 +10,16 @@ space Game Engine User Help:
 		to load it.
 	(3):If you want to print a model with light.you should flow the (1) and (2) to create a "XXX.model"and a "XXX.light"
 		then you need to write a lightflowtext to help you.This kind of file include{Light file 's name,Light's kind(0:Point,1:Direction,2:Spot),the x,y,z which the light 's position in the model}
+
+2.Window (a farmework class)
+	If you want to use it to create a simple window,you should do like this:
+				
+				window w;
+				w.SetWindow(...);
+				w.InitWindow(...);
+
+...
+
+If you want to use your game loop.You should write a function like : void Run(HWND hwnd){...}
+then add it at the InitWindow!!!
 		
