@@ -4,3 +4,4 @@
 */
 class GraphicsComponent;
 class PhysicsComponent;
+class Window;

@@ -6,6 +6,10 @@ void DefaultWindowLoop(HWND hwnd)
 	//do nothing
 }
 
+void DefaultInitAction(Window* window)
+{
+	//do nothing
+}
 
 
 Window* SpaceEngineWindow=NULL;								//唯一指针
@@ -44,6 +48,7 @@ Window::Window()
 {
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
+	m_pInitAction = DefaultInitAction;
 	SpaceEngineWindow = this;
 }
 
@@ -62,9 +67,10 @@ void Window::SetWindow(LPCWSTR title, int width, int height)
 	m_WindowHeight = height;
 }
 
-HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(HWND hwnd))
+HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(HWND hwnd), void(*InitAction)(Window* window))
 {
 	m_pWindowLoop = WindowLoop;
+	m_pInitAction = InitAction;
 	//【1】窗口创建四步曲之一：开始设计一个完整的窗口类
 	WNDCLASSEX wndClass = { 0 };							//用WINDCLASSEX定义了一个窗口类
 	wndClass.cbSize = sizeof(WNDCLASSEX);			//设置结构体的字节数大小
@@ -191,6 +197,7 @@ HRESULT Window::Objects_Init(HWND hwnd)
 	m_pd3dDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
 	OpenDepthBuffer(m_pd3dDevice);
 	SetDepthBuffer(m_pd3dDevice);
+	m_pInitAction(this);
 	return S_OK;
 }
 
@@ -211,6 +218,16 @@ void Window::EndPrint()
 LPDIRECT3DDEVICE9 Window::GetD3DDevice()
 {
 	return m_pd3dDevice;
+}
+
+int Window::GetWindowWidth()
+{
+	return m_WindowWidth;
+}
+
+int Window::GetWindowHeight()
+{
+	return m_WindowHeight;
 }
 
 void SetMainWindow(Window* window)
