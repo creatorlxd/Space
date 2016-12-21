@@ -52,7 +52,7 @@ Window::~Window()
 	if (SpaceEngineWindow == this)
 		SpaceEngineWindow = NULL;
 	if(m_pd3dDevice!=NULL)
-		SAFE_RELEASE(m_pd3dDevice);
+		SAFE_RELEASE(m_pd3dDevice)
 }
 
 void Window::SetWindow(LPCWSTR title, int width, int height)
