@@ -29,9 +29,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;									//跳出该switch语句
 
 	case WM_DESTROY:					//若是窗口销毁消息
-		if (SpaceEngineWindow->m_pd3dDevice != NULL)
-			SAFE_RELEASE(SpaceEngineWindow->m_pd3dDevice)
-			SpaceEngineWindow->m_pd3dDevice = NULL;
+		SpaceEngineWindow->Release();
 			PostQuitMessage(0);			//向系统表明有个线程有终止请求。用来响应WM_DESTROY消息
 		break;									//跳出该switch语句
 
@@ -123,6 +121,15 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	return 0;
 }
 
+void Window::Release()
+{
+	if (SpaceEngineWindow == this)
+		SpaceEngineWindow = NULL;
+	if (m_pd3dDevice != NULL)
+		SAFE_RELEASE(m_pd3dDevice)
+	m_pd3dDevice = NULL;
+}
+
 HRESULT Window::Direct3D_Init(HWND hwnd)
 {
 	//--------------------------------------------------------------------------------------
@@ -199,6 +206,11 @@ void Window::EndPrint()
 	m_pd3dDevice->EndScene();	//结束绘制
 
 	m_pd3dDevice->Present(NULL, NULL, NULL, NULL);	//翻转显示
+}
+
+LPDIRECT3DDEVICE9 Window::GetD3DDevice()
+{
+	return m_pd3dDevice;
 }
 
 void SetMainWindow(Window* window)
