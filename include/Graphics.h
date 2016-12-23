@@ -9,9 +9,9 @@ class GraphicsComponent													//图形组件
 {
 public:
 	void init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[]);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
-	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname);								//从文件中读取数据，进行初始化
-	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile);	//从文件中读取数据，进行初始化
-	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, const std::string& lightfilename, LPCTSTR photoname);					//从文件中读取数据，包括光源，进行初始化
+	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname,const std::string& materialname="NULL");								//从文件中读取数据，进行初始化
+	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile, const std::string& materialname = "NULL");	//从文件中读取数据，进行初始化
+	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, const std::string& lightfilename, LPCTSTR photoname, const std::string& materialname = "NULL");					//从文件中读取数据，包括光源，进行初始化
 	~GraphicsComponent();																//释放顶点缓存和索引缓存
 	GraphicsComponent();																//初始化
 	GraphicsComponent(int &i);															//初始化，顺带初始化m_Light
@@ -29,6 +29,10 @@ public:
 	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice,PhysicsComponent& physics);										//绘制光源，即开启光源
 	void LightBeginPrint();																	//开启光源
 	void LightEndPrint();																	//关闭光源
+	//----------------------------------------------------------------------------------------------------------------
+	D3DMATERIAL9 m_Material;																//材质
+	//----------------------------------------------------------------------------------------------------------------
+	void ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice,LPCTSTR photoname);										//更换纹理
 	//----------------------------------------------------------------------------------------------------------------
 	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice,PhysicsComponent& physics);						//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
 private:

@@ -60,7 +60,7 @@ Window::~Window()
 		SAFE_RELEASE(m_pd3dDevice)
 }
 
-void Window::SetWindow(LPCWSTR title, int width, int height)
+void Window::SetWindow(LPCTSTR title, int width, int height)
 {
 	m_WindowTitle = title;
 	m_WindowWidth = width;

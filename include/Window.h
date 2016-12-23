@@ -12,7 +12,7 @@ public:
 	friend LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 	Window();
 	~Window();
-	void SetWindow(LPCWSTR title=L"SpaceEngineWindow", int width=800, int height=600);			//设置窗口信息
+	void SetWindow(LPCTSTR title=L"SpaceEngineWindow", int width=800, int height=600);			//设置窗口信息
 	virtual HRESULT InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(HWND hwnd) = DefaultWindowLoop,void (*InitAction)(Window* window) = DefaultInitAction);	//初始化，需先SetWindow
 	virtual void Release();							//释放窗口
 	void BeginPrint();								//开始D3D绘制
@@ -24,7 +24,7 @@ protected:
 	LPDIRECT3DDEVICE9 m_pd3dDevice;					//D3D9接口
 	int m_WindowWidth;								//窗口宽度
 	int m_WindowHeight;								//窗口高度
-	LPCWSTR m_WindowTitle;							//窗口标题
+	LPCTSTR m_WindowTitle;							//窗口标题
 
 	virtual HRESULT	Direct3D_Init(HWND hwnd);		 //在这个函数中进行Direct3D的初始化
 	virtual HRESULT Objects_Init(HWND hwnd); 		//在这个函数中进行要绘制的物体的资源初始化

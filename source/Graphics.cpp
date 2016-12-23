@@ -12,8 +12,10 @@ void GraphicsComponent::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int
 	WriteInIndexBuffer(Indices);
 }
 
-void GraphicsComponent::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname)
+void GraphicsComponent::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string& materialname)
 {
+	if(materialname!="NULL")
+		InitMaterialFromFile(m_Material, materialname);
 	std::fstream file;
 	file.open(filename, std::ios::in);
 	int VertexSize, IndexSize;
@@ -34,8 +36,10 @@ void GraphicsComponent::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::
 	file.close();
 }
 
-void GraphicsComponent::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string & TextureFile)
+void GraphicsComponent::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string & TextureFile, const std::string& materialname)
 {
+	if (materialname != "NULL")
+		InitMaterialFromFile(m_Material, materialname);
 	std::fstream file;
 	file.open(filename, std::ios::in);
 	int VertexSize, IndexSize;
@@ -56,8 +60,10 @@ void GraphicsComponent::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std
 	file.close();
 }
 
-void GraphicsComponent::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, const std::string & lightfilename, LPCTSTR photoname)
+void GraphicsComponent::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, const std::string & lightfilename, LPCTSTR photoname, const std::string& materialname)
 {
+	if (materialname != "NULL")
+		InitMaterialFromFile(m_Material, materialname);
 	m_IfLight = true;
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -147,6 +153,13 @@ GraphicsComponent::GraphicsComponent()
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
 	m_IfLight = false;
+
+	m_Material.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Emissive = D3DXCOLOR(0.00f, 0.0f, 0.0f, 1.0f);
+	m_Material.Power = 1.0f;
+
 }
 
 GraphicsComponent::GraphicsComponent(int & i)
@@ -168,6 +181,13 @@ GraphicsComponent::GraphicsComponent(int & i)
 	m_pMaterials = NULL;
 	m_pTextures = NULL;
 	m_IfLight = false;
+
+	m_Material.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_Material.Emissive = D3DXCOLOR(0.00f, 0.0f, 0.0f, 1.0f);
+	m_Material.Power = 1.0f;
+
 }
 
 void GraphicsComponent::WriteInVertexBuffer(CUSTOMVERTEX Vertices[])
@@ -188,6 +208,7 @@ void GraphicsComponent::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	if (m_IfXFile == false)
 	{
+		g_pd3dDevice->SetMaterial(&m_Material);
 		g_pd3dDevice->SetTexture(0, m_pTexture);
 		g_pd3dDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(CUSTOMVERTEX));
 		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
@@ -272,6 +293,15 @@ void GraphicsComponent::LightBeginPrint()
 void GraphicsComponent::LightEndPrint()
 {
 	m_IfLight = false;
+}
+
+void GraphicsComponent::ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice,LPCTSTR photoname)
+{
+	if (m_pTexture != NULL)
+	{
+		SAFE_RELEASE(m_pTexture)
+	}
+	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 }
 
 void GraphicsComponent::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsComponent& physics)
