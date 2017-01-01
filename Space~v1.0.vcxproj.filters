@@ -23,9 +23,6 @@
     <ClInclude Include="include\LightRender.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -47,15 +44,15 @@
     <ClInclude Include="include\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\LightRender.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\Texture.cpp">
@@ -74,6 +71,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

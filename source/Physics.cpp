@@ -66,6 +66,11 @@ void PhysicsComponent::SetXYZ(float x, float y, float z)
 	m_Position = D3DXVECTOR3(x, y, z);
 }
 
+void PhysicsComponent::SetTimeChange(float second)
+{
+	m_TimeChange = second;
+}
+
 void PhysicsComponent::InitPhysicsFromFile(const std::string & filename)
 {
 	std::fstream file(filename.c_str(), std::ios::in);
@@ -90,4 +95,52 @@ void PhysicsComponent::RunMovingEngine()
 
 void PhysicsComponent::RunRoundingEngine()
 {
+}
+
+bool PhysicsManager::AddPhysicsComponent(PhysicsComponent * physicscomponent)
+{
+	m_Content.push_back(physicscomponent);
+	return true;
+}
+
+bool PhysicsManager::RemovePhysicsComponent(PhysicsComponent * physicscomponent)
+{
+	std::vector<PhysicsComponent*>::iterator result = m_Content.end();
+	for (std::vector<PhysicsComponent*>::iterator i = m_Content.begin();i != m_Content.end();i += 1)
+	{
+		if (*i == physicscomponent)
+		{
+			result = i;
+			break;
+		}
+	}
+	if (result != m_Content.end())
+	{
+		m_Content.erase(result);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool PhysicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	for (size_t i = 0;i < m_Content.size();i++)
+	{
+		m_Content[i]->GetTime();
+		m_Content[i]->RunMovingEngine();
+		m_Content[i]->RunRoundingEngine();
+	}
+	return true;
+}
+
+bool PhysicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice, float time)
+{
+	for (size_t i = 0;i < m_Content.size();i++)
+	{
+		m_Content[i]->SetTimeChange(time);
+		m_Content[i]->RunMovingEngine();
+		m_Content[i]->RunRoundingEngine();
+	}
+	return true;
 }

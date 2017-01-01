@@ -58,3 +58,12 @@ private:
 	//----------------------------------------------------------------------------------------------------------------
 	LPDIRECT3DTEXTURE9 m_pTexture;				//纹理
 };
+class GraphicsManager							//图形管理器
+{
+public:
+	bool AddGraphicsComponent(GraphicsComponent* graphicscomponent);	//加入图形组件
+	bool RemoveGraphicsComponent(GraphicsComponent* graphicscomponent);	//删除图形组件
+	virtual bool RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice);			//运行管理器
+private:
+	std::vector<GraphicsComponent*> m_Content;		//图形内容
+};

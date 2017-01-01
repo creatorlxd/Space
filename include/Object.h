@@ -4,7 +4,7 @@
 #include "LightRender.h"
 #include "Texture.h"
 #include "Physics.h"
-
+#include "Graphics.h"
 
 class object    //DX3D物体对象
 {
@@ -75,4 +75,17 @@ private:
 	D3DVECTOR m_I;								//物体的转动惯量
 	float m_rxv, m_ryv, m_rzv;					//物体的XYZ三轴上的旋转的角度
 	float m_rxa, m_rya, m_rza;					//物体的XYZ三轴上的旋转的角度的每秒的变化量
+};
+class Object									//物体对象
+{
+public:
+	Object(bool ifphysics=true);
+	Object(int &i,bool ifphysics = true);
+	GraphicsComponent* GetGraphicsComponent();	//获取图形组件的指针
+	PhysicsComponent* GetPhysicsComponent();	//获取物理组件的指针
+	bool IfPhysics();							//是否有物理
+private:
+	GraphicsComponent m_Graphics;				//图形
+	bool m_IfPhysics;							//是否有物理
+	PhysicsComponent m_Physics;					//物理
 };

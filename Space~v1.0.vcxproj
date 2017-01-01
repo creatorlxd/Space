@@ -156,7 +156,7 @@
     <ClInclude Include="include\ClassDef.h" />
     <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\LightRender.h" />
-    <ClInclude Include="include\object.h" />
+    <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\Physics.h" />
     <ClInclude Include="include\Space.h" />
     <ClInclude Include="include\stdafx.h" />
@@ -167,7 +167,7 @@
     <ClCompile Include="source\Graphics.cpp" />
     <ClCompile Include="source\LightRender.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\object.cpp" />
+    <ClCompile Include="source\Object.cpp" />
     <ClCompile Include="source\Physics.cpp" />
     <ClCompile Include="source\Space.cpp" />
     <ClCompile Include="source\stdafx.cpp">

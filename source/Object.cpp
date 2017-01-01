@@ -375,3 +375,29 @@ void object::RunMovingEngine()
 void object::RunRoundingEngine()
 {
 }
+
+Object::Object(bool ifphysics)
+{
+	m_IfPhysics = ifphysics;
+}
+
+Object::Object(int & i, bool ifphysics)
+{
+	m_IfPhysics = ifphysics;
+	m_Graphics.m_Light.SetLightNumber(i);
+}
+
+GraphicsComponent * Object::GetGraphicsComponent()
+{
+	return &m_Graphics;
+}
+
+PhysicsComponent * Object::GetPhysicsComponent()
+{
+	return &m_Physics;
+}
+
+bool Object::IfPhysics()
+{
+	return m_IfPhysics;
+}

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "object.h"
+#include "Object.h"
 #include "Space.h"
 #include "Window.h"
 

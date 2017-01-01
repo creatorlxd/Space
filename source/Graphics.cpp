@@ -326,3 +326,38 @@ void GraphicsComponent::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsCompone
 	}
 	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 }
+
+bool GraphicsManager::AddGraphicsComponent(GraphicsComponent * graphicscomponent)
+{
+	m_Content.push_back(graphicscomponent);
+	return true;
+}
+
+bool GraphicsManager::RemoveGraphicsComponent(GraphicsComponent * graphicscomponent)
+{
+	std::vector<GraphicsComponent*>::iterator result = m_Content.end();
+	for (std::vector<GraphicsComponent*>::iterator i = m_Content.begin();i != m_Content.end();i += 1)
+	{
+		if (*i == graphicscomponent)
+		{
+			result = i;
+			break;
+		}
+	}
+	if (result != m_Content.end())
+	{
+		m_Content.erase(result);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool GraphicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	for (size_t i = 0;i < m_Content.size();i++)
+	{
+		m_Content[i]->ObjectPrint(g_pd3dDevice);
+	}
+	return true;
+}
