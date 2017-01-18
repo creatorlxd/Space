@@ -87,9 +87,10 @@ void PhysicsComponent::GetG()
 
 void PhysicsComponent::RunMovingEngine()
 {
+	D3DVECTOR buff_v = m_v;
 	m_a = m_F / m_m;
 	m_v = m_v + m_a*m_TimeChange;
-	m_Position = m_Position + m_v*m_TimeChange;
+	m_Position = m_Position + ((m_v + buff_v) / 2)*m_TimeChange;
 	m_F = { 0.00f,0.00f,0.00f };
 }
 

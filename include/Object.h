@@ -89,3 +89,14 @@ private:
 	bool m_IfPhysics;							//是否有物理
 	PhysicsComponent m_Physics;					//物理
 };
+class ObjectManager								//物体对象管理器
+{
+public:
+	bool AddObject(Object* obj);				//添加对象
+	bool RemoveObject(Object* obj);			//移除对象
+	virtual bool RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice);	//运行管理器
+private:
+	GraphicsManager m_GraphicsManager;			//图形
+	PhysicsManager m_PhysicsManager;			//物理
+	std::vector<Object*> m_Content;				//Object内容
+};

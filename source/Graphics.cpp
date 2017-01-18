@@ -144,6 +144,7 @@ GraphicsComponent::GraphicsComponent()
 	m_pIndexBuffer = NULL;
 	mpVertices = NULL;
 	mpIndices = NULL;
+	m_Light.SetLightNumber(-1);
 	m_pTexture = NULL;
 	m_IfXFile = false;
 	m_pAdjBuffer = NULL;
@@ -162,7 +163,7 @@ GraphicsComponent::GraphicsComponent()
 
 }
 
-GraphicsComponent::GraphicsComponent(int & i)
+GraphicsComponent::GraphicsComponent(int& i)
 {
 	m_VertexSize = 0;
 	m_IndexSize = 0;

@@ -47,6 +47,10 @@ void Light::SetLightNumber(int & i)
 	i += 1;
 }
 
+void Light::SetLightNumber(int&& i)
+{
+	m_LightNumber = i;
+}
 void Light::SetLightPosition(float x, float y, float z)
 {
 	m_LightContent.Position = D3DXVECTOR3(x, y, z);
@@ -187,4 +191,9 @@ void Light::BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 void Light::EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	g_pd3dDevice->LightEnable(m_LightNumber, false);
+}
+
+int Light::GetLightNumber()
+{
+	return m_LightNumber;
 }

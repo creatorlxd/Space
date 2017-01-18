@@ -366,9 +366,10 @@ void object::GetG()
 
 void object::RunMovingEngine()
 {
+	D3DVECTOR buff_v = m_v;
 	m_a = m_F / m_m;
 	m_v = m_v + m_a*m_TimeChange;
-	m_Position = m_Position + m_v*m_TimeChange;
+	m_Position = m_Position + ((m_v+buff_v)/2)*m_TimeChange;
 	m_F = { 0.00f,0.00f,0.00f };
 }
 
@@ -400,4 +401,64 @@ PhysicsComponent * Object::GetPhysicsComponent()
 bool Object::IfPhysics()
 {
 	return m_IfPhysics;
+}
+
+bool ObjectManager::AddObject(Object * obj)
+{
+	m_Content.push_back(obj);
+	if(!m_GraphicsManager.AddGraphicsComponent(obj->GetGraphicsComponent()))
+		return false;
+	if (obj->IfPhysics())
+	{
+		if(!m_PhysicsManager.AddPhysicsComponent(obj->GetPhysicsComponent()))
+			return false;
+	}
+
+	return true;
+}
+
+bool ObjectManager::RemoveObject(Object * obj)
+{
+	std::vector<Object*>::iterator result = m_Content.end();
+	for (std::vector<Object*>::iterator i = m_Content.begin();i != m_Content.end();i += 1)
+	{
+		if (*i == obj)
+		{
+			result = i;
+			break;
+		}
+	}
+	if (result != m_Content.end())
+	{
+		m_Content.erase(result);
+	}
+	else
+		return false;
+
+	if (obj->IfPhysics())
+	{
+		if (!m_PhysicsManager.RemovePhysicsComponent(obj->GetPhysicsComponent()))
+			return false;
+	}
+	if (!m_GraphicsManager.RemoveGraphicsComponent(obj->GetGraphicsComponent()))
+		return false;
+
+	return true;
+}
+
+bool ObjectManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	if (!m_PhysicsManager.RunManager(g_pd3dDevice))
+		return false;
+	for (auto i : m_Content)
+	{
+		if ((i->GetGraphicsComponent()->m_Light.GetLightNumber() != -1) && i->IfPhysics())
+		{
+			i->GetGraphicsComponent()->LightPrint(g_pd3dDevice,*(i->GetPhysicsComponent()));
+		}
+	}
+	if (!m_GraphicsManager.RunManager(g_pd3dDevice))
+		return false;
+
+	return true;
 }

@@ -20,6 +20,7 @@ public:
 	~Light();
 	D3DLIGHT9 m_LightContent;												//光源的具体内容
 	void SetLightNumber(int &i);											//设置光源序号
+	void Light::SetLightNumber(int&& i);								//设置光源序号
 	void SetLightPosition(float x,float y,float z);							//设置光源位置
 	void SetLightDirection(float x, float y, float z);						//设置光源的光照方向
 	void SetPointLightsFromFile(const std::string& filename);													//设置点光源
@@ -28,6 +29,7 @@ public:
 	void RegisterLight(LPDIRECT3DDEVICE9 g_pd3dDevice);						//注册光源
 	void BeginLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//开始渲染光源
 	void EndLightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);						//结束渲染光源
+	int GetLightNumber();													//获得光源序号
 private:
 	int m_LightNumber;														//光源的ID
 													
