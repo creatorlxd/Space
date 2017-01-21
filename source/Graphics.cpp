@@ -305,6 +305,15 @@ void GraphicsComponent::ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice,LPCTSTR pho
 	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 }
 
+void GraphicsComponent::ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, const std::string & TextureFile)
+{
+	if (m_pTexture != NULL)
+	{
+		SAFE_RELEASE(m_pTexture)
+	}
+	SetTextureFromFileEx(g_pd3dDevice, photoname, TextureFile, m_pTexture);
+}
+
 void GraphicsComponent::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsComponent& physics)
 {
 	D3DXMATRIX matWorld;
