@@ -33,7 +33,7 @@ public:
 	D3DMATERIAL9 m_Material;																//材质
 	//----------------------------------------------------------------------------------------------------------------
 	void ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice,LPCTSTR photoname);										//更换纹理
-	void ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, const std::string& TextureFile);		//更换纹理EX
+	void ChangeTextureEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, const std::string& TextureFile);	//更换纹理EX
 	//----------------------------------------------------------------------------------------------------------------
 	void SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice,PhysicsComponent& physics);						//通过物理量来设置物体的世界变换矩阵，只包含平移和旋转。
 private:
