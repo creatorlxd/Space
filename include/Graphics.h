@@ -8,7 +8,7 @@
 class GraphicsComponent													//图形组件
 {
 public:
-	void init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[]);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
+	void Init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[]);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
 	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname,const std::string& materialname="NULL");								//从文件中读取数据，进行初始化
 	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile, const std::string& materialname = "NULL");	//从文件中读取数据，进行初始化
 	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, const std::string& lightfilename, LPCTSTR photoname, const std::string& materialname = "NULL");					//从文件中读取数据，包括光源，进行初始化

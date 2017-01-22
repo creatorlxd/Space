@@ -92,6 +92,13 @@ public:
 	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);										//绘制光源，即开启光源
 	void LightBeginPrint();																	//开启光源
 	void LightEndPrint();																	//关闭光源
+	void ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname);										//更换纹理
+	void ChangeTextureEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, const std::string& TextureFile);	//更换纹理EX
+	//--------------------------------------------------------------
+	void InitPhysicsFromFile(const std::string& filename);						//从文件中初始化物理信息
+	void GetG();														//获得物体的重力，并将其加到总合力中
+	void RunMovingEngine();											//运行关于移动的物理引擎
+	void RunRoundingEngine();											//运行关于旋转的物理引擎
 private:
 	GraphicsComponent m_Graphics;				//图形
 	bool m_IfPhysics;							//是否有物理

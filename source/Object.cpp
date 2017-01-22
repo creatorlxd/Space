@@ -438,6 +438,36 @@ void Object::LightEndPrint()
 	m_Graphics.LightEndPrint();
 }
 
+void Object::ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname)
+{
+	m_Graphics.ChangeTexture(g_pd3dDevice, photoname);
+}
+
+void Object::ChangeTextureEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, const std::string & TextureFile)
+{
+	m_Graphics.ChangeTextureEx(g_pd3dDevice, photoname, TextureFile);
+}
+
+void Object::InitPhysicsFromFile(const std::string & filename)
+{
+	m_Physics.InitPhysicsFromFile(filename);
+}
+
+void Object::GetG()
+{
+	m_Physics.GetG();
+}
+
+void Object::RunMovingEngine()
+{
+	m_Physics.RunMovingEngine();
+}
+
+void Object::RunRoundingEngine()
+{
+	m_Physics.RunRoundingEngine();
+}
+
 bool ObjectManager::AddObject(Object * obj)
 {
 	m_Content.push_back(obj);

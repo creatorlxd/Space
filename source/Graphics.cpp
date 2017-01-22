@@ -1,7 +1,7 @@
 #include"stdafx.h"
 #include"Graphics.h"
 
-void GraphicsComponent::init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[])
+void GraphicsComponent::Init(LPDIRECT3DDEVICE9 g_pd3dDevice, int VertexSize, int IndexSize, CUSTOMVERTEX Vertices[], WORD Indices[])
 {
 	m_VertexSize = VertexSize;
 	m_IndexSize = IndexSize;
@@ -31,7 +31,7 @@ void GraphicsComponent::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::
 	{
 		file >> Indices[j];
 	}
-	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	Init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
 	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 	file.close();
 }
@@ -55,7 +55,7 @@ void GraphicsComponent::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std
 	{
 		file >> Indices[j];
 	}
-	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	Init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
 	SetTextureFromFileEx(g_pd3dDevice, photoname, TextureFile, m_pTexture);
 	file.close();
 }
@@ -80,7 +80,7 @@ void GraphicsComponent::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, co
 	{
 		file >> Indices[j];
 	}
-	init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
+	Init(g_pd3dDevice, VertexSize, IndexSize, Vertices, Indices);
 	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 	std::fstream lightfile;
 	lightfile.open(lightfilename, std::ios::in);
