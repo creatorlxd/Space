@@ -403,6 +403,41 @@ bool Object::IfPhysics()
 	return m_IfPhysics;
 }
 
+void Object::InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string & materialname)
+{
+	m_Graphics.InitFromFile(g_pd3dDevice, filename, photoname, materialname);
+}
+
+void Object::InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, LPCTSTR photoname, const std::string & TextureFile, const std::string & materialname)
+{
+	m_Graphics.InitFromFileEx(g_pd3dDevice, filename, photoname, TextureFile, materialname);
+}
+
+void Object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename, const std::string & lightfilename, LPCTSTR photoname, const std::string & materialname)
+{
+	m_Graphics.InitWithLightFromFile(g_pd3dDevice, filename, lightfilename, photoname, materialname);
+}
+
+void Object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	m_Graphics.ObjectPrint(g_pd3dDevice);
+}
+
+void Object::LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	m_Graphics.LightPrint(g_pd3dDevice, m_Physics);
+}
+
+void Object::LightBeginPrint()
+{
+	m_Graphics.LightBeginPrint();
+}
+
+void Object::LightEndPrint()
+{
+	m_Graphics.LightEndPrint();
+}
+
 bool ObjectManager::AddObject(Object * obj)
 {
 	m_Content.push_back(obj);

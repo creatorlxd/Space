@@ -84,6 +84,14 @@ public:
 	GraphicsComponent* GetGraphicsComponent();	//获取图形组件的指针
 	PhysicsComponent* GetPhysicsComponent();	//获取物理组件的指针
 	bool IfPhysics();							//是否有物理
+	//--------------------------------------------------------------
+	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& materialname = "NULL");								//从文件中读取数据，进行初始化
+	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile, const std::string& materialname = "NULL");	//从文件中读取数据，进行初始化
+	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, const std::string& lightfilename, LPCTSTR photoname, const std::string& materialname = "NULL");					//从文件中读取数据，包括光源，进行初始化
+	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
+	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);										//绘制光源，即开启光源
+	void LightBeginPrint();																	//开启光源
+	void LightEndPrint();																	//关闭光源
 private:
 	GraphicsComponent m_Graphics;				//图形
 	bool m_IfPhysics;							//是否有物理
