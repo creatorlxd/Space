@@ -61,7 +61,7 @@ void Light::SetLightDirection(float x, float y, float z)
 	m_LightContent.Direction = D3DXVECTOR3(x, y, z);
 }
 
-void Light::SetPointLightsFromFile(const std::string& filename)
+void Light::SetPointLightFromFile(const std::string& filename)
 {
 	m_LightContent.Type = D3DLIGHT_POINT;
 	std::fstream file;
@@ -100,7 +100,7 @@ void Light::SetPointLightsFromFile(const std::string& filename)
 	file.close();
 }
 
-void Light::SetDirectionalLightsFromFile(const std::string& filename)
+void Light::SetDirectionalLightFromFile(const std::string& filename)
 {
 	m_LightContent.Type = D3DLIGHT_DIRECTIONAL;
 	std::fstream file;
@@ -139,7 +139,7 @@ void Light::SetDirectionalLightsFromFile(const std::string& filename)
 	file.close();
 }
 
-void Light::SetSpotLightsFromFile(const std::string& filename)
+void Light::SetSpotLightFromFile(const std::string& filename)
 {
 	m_LightContent.Type = D3DLIGHT_SPOT;
 	std::fstream file;

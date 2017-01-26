@@ -257,19 +257,19 @@ void object::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR filename)	//²
 
 void object::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
-	m_Light.SetPointLightsFromFile(filename);
+	m_Light.SetPointLightFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
 void object::InitDirectionalLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
-	m_Light.SetDirectionalLightsFromFile(filename);
+	m_Light.SetDirectionalLightFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
 void object::InitSpotLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename)
 {
-	m_Light.SetSpotLightsFromFile(filename);
+	m_Light.SetSpotLightFromFile(filename);
 	m_Light.RegisterLight(g_pd3dDevice);
 }
 
