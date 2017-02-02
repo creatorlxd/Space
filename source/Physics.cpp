@@ -94,7 +94,7 @@ void PhysicsComponent::RunMovingEngine()
 	m_F = { 0.00f,0.00f,0.00f };
 }
 
-void PhysicsComponent::RunRoundingEngine()
+void PhysicsComponent::RunRotationEngine()
 {
 }
 
@@ -130,7 +130,7 @@ bool PhysicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
 	{
 		m_Content[i]->GetTime();
 		m_Content[i]->RunMovingEngine();
-		m_Content[i]->RunRoundingEngine();
+		m_Content[i]->RunRotationEngine();
 	}
 	return true;
 }
@@ -141,7 +141,7 @@ bool PhysicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice, float time)
 	{
 		m_Content[i]->SetTimeChange(time);
 		m_Content[i]->RunMovingEngine();
-		m_Content[i]->RunRoundingEngine();
+		m_Content[i]->RunRotationEngine();
 	}
 	return true;
 }

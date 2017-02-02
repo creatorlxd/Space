@@ -373,7 +373,7 @@ void object::RunMovingEngine()
 	m_F = { 0.00f,0.00f,0.00f };
 }
 
-void object::RunRoundingEngine()
+void object::RunRotationEngine()
 {
 }
 
@@ -463,9 +463,9 @@ void Object::RunMovingEngine()
 	m_Physics.RunMovingEngine();
 }
 
-void Object::RunRoundingEngine()
+void Object::RunRotationEngine()
 {
-	m_Physics.RunRoundingEngine();
+	m_Physics.RunRotationEngine();
 }
 
 bool ObjectManager::AddObject(Object * obj)

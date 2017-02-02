@@ -23,7 +23,7 @@ public:
 	void InitPhysicsFromFile(const std::string& filename);						//从文件中初始化物理信息
 	void GetG();														//获得物体的重力，并将其加到总合力中
 	void RunMovingEngine();											//运行关于移动的物理引擎
-	void RunRoundingEngine();											//运行关于旋转的物理引擎
+	void RunRotationEngine();											//运行关于旋转的物理引擎
 private:
 	float m_TimeNow;							//现在的时间
 	float m_TimeChange;						//时间差，即时间变化量
