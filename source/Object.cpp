@@ -517,6 +517,10 @@ bool ObjectManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
 		return false;
 	for (auto i : m_Content)
 	{
+		if (i->IfPhysics())
+		{
+			i->GetGraphicsComponent()->SetMatrix(g_pd3dDevice, *(i->GetPhysicsComponent()));
+		}
 		if ((i->GetGraphicsComponent()->m_Light.GetLightNumber() != -1) && i->IfPhysics())
 		{
 			i->GetGraphicsComponent()->LightPrint(g_pd3dDevice,*(i->GetPhysicsComponent()));
