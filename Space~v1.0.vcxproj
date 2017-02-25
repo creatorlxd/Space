@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="include\ClassDef.h" />
     <ClInclude Include="include\Graphics.h" />
+    <ClInclude Include="include\InputDevice.h" />
     <ClInclude Include="include\LightRender.h" />
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\Physics.h" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Graphics.cpp" />
+    <ClCompile Include="source\InputDevice.cpp" />
     <ClCompile Include="source\LightRender.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Object.cpp" />

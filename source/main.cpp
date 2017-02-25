@@ -9,6 +9,7 @@
 #pragma comment(lib,"winmm.lib")  //调用PlaySound函数所需库文件
 #pragma comment(lib,"d3d9.lib")
 #pragma comment(lib,"d3dx9.lib")
+#pragma comment(lib, "dinput8.lib")  
 void Run(HWND hwnd);
 Window g_window;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)

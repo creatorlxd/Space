@@ -3,40 +3,61 @@
   <Class Name="object">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>Q1EAiAAAAKkABB4AQgAACACgxBcBcDoSAACZCVQIAgA=</HashCode>
-      <FileName>include\object.h</FileName>
+      <HashCode>Q1EAgAAAAKkABB4AQgAACACgxBcBcDoSAACZCVQIAgA=</HashCode>
+      <FileName>include\Object.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Light">
-    <Position X="3" Y="0.5" Width="1.5" />
+  <Class Name="Light" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAEAAAAEABgBCAAAgAAkAAAAAABAAAAAAAgAAAACA=</HashCode>
+      <HashCode>ACACEAAAAAABABCAAAgAAgAAAAAABEAAAAAAgAAAACQ=</HashCode>
       <FileName>include\LightRender.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysicsComponent">
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAGAAAACAAABwAAAAAAAAAwBMAACASAAAQCAAAAAA=</HashCode>
+      <HashCode>AQAAEAAAACAAABwAAAAAAAAAwBMAACASAAAQCAACAAA=</HashCode>
       <FileName>include\Physics.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GraphicsComponent">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QlEAgAAAAIkBBAIEQgAACACgBAQBcBoAAACIAVQIAgA=</HashCode>
+      <HashCode>QlEAhAAAAIkBBAIFQgAACACgBAQBcBgAAACKAVQIAgA=</HashCode>
       <FileName>include\Graphics.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Window">
-    <Position X="10.75" Y="0.5" Width="1.5" />
+    <Position X="11" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AhAAAAAAAAIAACAAgAAAAEgIAQAAAAAAAFAACAgAAAA=</HashCode>
+      <HashCode>AhAAAAAAAAIAACAAoAAAAEgIEQAAAAAAAFgACBgAIAA=</HashCode>
       <FileName>include\Window.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="CUSTOMVERTEX">
-    <Position X="1" Y="0.75" Width="1.5" />
+  <Class Name="Object">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAAAAAEAAgAAAQhAAEACCACBAAAAAAQAAASCRBAAAA=</HashCode>
+      <FileName>include\Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputDevice">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAQAAAAACAAAAAAAAAAAAACAAAAAIA=</HashCode>
+      <FileName>include\InputDevice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputInterface">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEQAAAAAAAAAAACAAAAAAAACEAAAAAA=</HashCode>
+      <FileName>include\InputDevice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CUSTOMVERTEX" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQBJgAQAAABA=</HashCode>
       <FileName>include\Space.h</FileName>

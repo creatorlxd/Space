@@ -5,6 +5,7 @@
 // DirectX
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <dinput.h>
 // Standard Library
 #include <vector>
 #include <string>
