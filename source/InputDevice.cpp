@@ -62,3 +62,64 @@ bool InputDevice::DeviceRead(void * pBuffer, long lSize)
 	}
 	return true;
 }
+
+KeyboardDevice::KeyboardDevice()
+{
+	ZeroMemory(m_Content, sizeof(m_Content));
+}
+
+KeyboardDevice::~KeyboardDevice()
+{
+}
+
+bool KeyboardDevice::Init(HWND hwnd, InputInterface inputinterface)
+{
+	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysKeyboard, &c_dfDIKeyboard))
+		return true;
+	else
+		return false;
+}
+
+bool KeyboardDevice::DeviceRead()
+{
+	if (m_InputDevice.DeviceRead((void*)(m_Content), sizeof(m_Content)))
+		return true;
+	else
+		return false;
+}
+
+bool KeyboardDevice::IfPressDown(int b)
+{
+	return (m_Content[b] & 0x80);
+}
+
+MouseDevice::MouseDevice()
+{
+	m_Content = { 0 };
+	ZeroMemory(&m_Content, sizeof(m_Content));
+}
+
+MouseDevice::~MouseDevice()
+{
+}
+
+bool MouseDevice::Init(HWND hwnd, InputInterface inputinterface)
+{
+	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysMouse, &c_dfDIMouse))
+		return true;
+	else
+		return false;
+}
+
+bool MouseDevice::DeviceRead()
+{
+	if (m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content)))
+		return true;
+	else
+		return false;
+}
+
+DIMOUSESTATE MouseDevice::GetMouseState()
+{
+	return m_Content;
+}

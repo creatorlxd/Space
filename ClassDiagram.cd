@@ -7,7 +7,7 @@
       <FileName>include\Object.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Light" Collapsed="true">
+  <Class Name="Light">
     <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACACEAAAAAABABCAAAgAAgAAAAAABEAAAAAAgAAAACQ=</HashCode>
@@ -56,7 +56,14 @@
       <FileName>include\InputDevice.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="CUSTOMVERTEX" Collapsed="true">
+  <Class Name="KeyboardDevice" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAQAAAAAQAAAABAAAAAAAAAAQAAACAAAAAAA=</HashCode>
+      <FileName>include\InputDevice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CUSTOMVERTEX">
     <Position X="2" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQBJgAQAAABA=</HashCode>

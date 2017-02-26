@@ -23,3 +23,29 @@ public:
 private:
 	LPDIRECTINPUTDEVICE m_InputDevice;	//输入设备
 };
+
+class KeyboardDevice	//键盘设备
+{
+public:
+	KeyboardDevice();
+	~KeyboardDevice();
+	bool Init(HWND hwnd,InputInterface inputinterface);			//初始化
+	bool DeviceRead();											//读取设备
+	bool IfPressDown(int b);									//判断是否按下某个键
+private:
+	InputDevice m_InputDevice;
+	char m_Content[256];										//键盘内容
+};
+
+class MouseDevice		//鼠标设备
+{
+public:
+	MouseDevice();
+	~MouseDevice();
+	bool Init(HWND hwnd, InputInterface inputinterface);			//初始化
+	bool DeviceRead();												//读取设备
+	DIMOUSESTATE GetMouseState();									//获取鼠标内容
+private:
+	InputDevice m_InputDevice;
+	DIMOUSESTATE m_Content;										//鼠标内容
+};
