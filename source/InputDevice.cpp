@@ -51,15 +51,11 @@ bool InputDevice::Init(HWND hwnd, InputInterface inputinterface, REFGUID rguid, 
 bool InputDevice::DeviceRead(void * pBuffer, long lSize)
 {
 	HRESULT hr;
-	LPDIRECTINPUTDEVICE8A InputDevice =(LPDIRECTINPUTDEVICE8A)m_InputDevice;
-	while (true)
-	{
-		InputDevice->Poll();
-		InputDevice->Acquire();          // 获取设备的控制权  
-		if (SUCCEEDED(hr = InputDevice->GetDeviceState(lSize, pBuffer))) break;
-		if (hr != DIERR_INPUTLOST || hr != DIERR_NOTACQUIRED) return false;
-		if (FAILED(InputDevice->Acquire())) return false;
-	}
+	LPDIRECTINPUTDEVICE8A InputDevice = (LPDIRECTINPUTDEVICE8A)m_InputDevice;
+	InputDevice->Poll();
+	InputDevice->Acquire();          // 获取设备的控制权  
+	if (FAILED(hr = InputDevice->GetDeviceState(lSize, pBuffer)))
+		return false;
 	return true;
 }
 
