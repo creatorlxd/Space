@@ -3,6 +3,7 @@
 #include"stdafx.h"
 #include"Texture.h"
 #include"ClassDef.h"
+#include"InputDevice.h"
 void DefaultWindowLoop(HWND hwnd);				//默认的游戏循环函数指针
 void DefaultInitAction(Window* window);					//默认的初始化函数
 LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);	//Windows窗口循环
@@ -20,6 +21,9 @@ public:
 	LPDIRECT3DDEVICE9 GetD3DDevice();				//获取D3D接口
 	int GetWindowWidth();							//获取窗口宽度
 	int GetWindowHeight();							//获取窗口高度
+
+	MouseDevice m_MouseDevice;						//鼠标设备
+	KeyboardDevice m_KeyboardDevice;				//键盘设备
 protected:
 	LPDIRECT3DDEVICE9 m_pd3dDevice;					//D3D9接口
 	int m_WindowWidth;								//窗口宽度
@@ -31,5 +35,6 @@ protected:
 
 	void (*m_pWindowLoop)(HWND hwnd);						//游戏循环内容函数指针
 	void (*m_pInitAction)(Window* window);					//游戏初始化函数
+	InputInterface m_InputInterface;				//输入设备接口
 };
 void SetMainWindow(Window* window);					//设置主窗口

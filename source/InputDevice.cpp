@@ -34,8 +34,8 @@ InputDevice::~InputDevice()
 {
 	if (m_InputDevice != NULL)
 	{
-		SAFE_RELEASE(m_InputDevice);
 		m_InputDevice->Unacquire();
+		SAFE_RELEASE(m_InputDevice);
 	}
 }
 
