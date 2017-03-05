@@ -1,62 +1,53 @@
 #include "stdafx.h"
 #include "InputDevice.h"
 
-InputInterface::InputInterface()
-{
-	m_pDirectInput = NULL;
-}
-
 InputInterface::~InputInterface()
 {
-	if (m_pDirectInput != NULL)
-		SAFE_RELEASE(m_pDirectInput);
+	if (m_pDirectInput)
+		m_pDirectInput->Release();
 }
 
 bool InputInterface::Init(HINSTANCE hInstance)
 {
-	if (FAILED(DirectInput8Create(hInstance, 0x0800, IID_IDirectInput8, (void**)&m_pDirectInput, NULL)))
-		return false;
-	else
-		return true;
+	HRESULT r = DirectInput8Create(hInstance, 0x0800, IID_IDirectInput8, (void**)&m_pDirectInput, NULL);
+	return SUCCEEDED(r);
 }
+
 
 LPDIRECTINPUT8 InputInterface::GetInterface()
 {
 	return m_pDirectInput;
 }
 
-InputDevice::InputDevice()
-{
-	m_InputDevice = NULL;
-}
-
 InputDevice::~InputDevice()
 {
-	if (m_InputDevice != NULL)
-	{
+	if (m_InputDevice) {
 		m_InputDevice->Unacquire();
-		SAFE_RELEASE(m_InputDevice);
+		m_InputDevice->Release();
 	}
 }
 
 bool InputDevice::Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf)
 {
-	if (FAILED(inputinterface.GetInterface()->CreateDevice(rguid, (LPDIRECTINPUTDEVICE8W*)(&m_InputDevice), NULL)))
+	HRESULT r = inputinterface.GetInterface()->CreateDevice(rguid, (LPDIRECTINPUTDEVICE8W*)(&m_InputDevice), NULL);
+	if (SUCCEEDED(r)) {
+		m_InputDevice->SetDataFormat(lpdf);
+		m_InputDevice->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
+		return true;
+	}
+	else {
 		return false;
-	m_InputDevice->SetDataFormat(lpdf);
-	m_InputDevice->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
-	return true;
+	}
 }
 
 bool InputDevice::DeviceRead(void * pBuffer, long lSize)
 {
-	HRESULT hr;
+	
 	LPDIRECTINPUTDEVICE8A InputDevice = (LPDIRECTINPUTDEVICE8A)m_InputDevice;
 	InputDevice->Poll();
 	InputDevice->Acquire();          // 获取设备的控制权  
-	if (FAILED(hr = InputDevice->GetDeviceState(lSize, pBuffer)))
-		return false;
-	return true;
+	HRESULT r = InputDevice->GetDeviceState(lSize, pBuffer);
+	return SUCCEEDED(r);
 }
 
 KeyboardDevice::KeyboardDevice()
@@ -70,23 +61,17 @@ KeyboardDevice::~KeyboardDevice()
 
 bool KeyboardDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
-	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysKeyboard, &c_dfDIKeyboard))
-		return true;
-	else
-		return false;
+	return m_InputDevice.Init(hwnd, inputinterface, GUID_SysKeyboard, &c_dfDIKeyboard);
 }
 
 bool KeyboardDevice::DeviceRead()
 {
-	if (m_InputDevice.DeviceRead((void*)(m_Content), sizeof(m_Content)))
-		return true;
-	else
-		return false;
+	return m_InputDevice.DeviceRead((void*)(m_Content), sizeof(m_Content));
 }
 
 bool KeyboardDevice::IfPressDown(int b)
 {
-	return (m_Content[b] & 0x80);
+	return static_cast<bool>(m_Content[b] & 0x80);
 }
 
 MouseDevice::MouseDevice()
@@ -101,18 +86,12 @@ MouseDevice::~MouseDevice()
 
 bool MouseDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
-	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysMouse, &c_dfDIMouse))
-		return true;
-	else
-		return false;
+	return m_InputDevice.Init(hwnd, inputinterface, GUID_SysMouse, &c_dfDIMouse);
 }
 
 bool MouseDevice::DeviceRead()
 {
-	if (m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content)))
-		return true;
-	else
-		return false;
+	return m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content));
 }
 
 DIMOUSESTATE MouseDevice::GetMouseState()

@@ -11,3 +11,6 @@
 #include <string>
 #include <fstream>
 #include <ctime>
+#include <memory>
+using std::unique_ptr;
+

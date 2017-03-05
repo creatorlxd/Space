@@ -22,8 +22,8 @@ public:
 	int GetWindowWidth();							//获取窗口宽度
 	int GetWindowHeight();							//获取窗口高度
 
-	MouseDevice* m_pMouseDevice;						//鼠标设备
-	KeyboardDevice* m_pKeyboardDevice;				//键盘设备
+	unique_ptr<MouseDevice> m_pMouseDevice;					//鼠标设备
+	unique_ptr<KeyboardDevice> m_pKeyboardDevice;				//键盘设备
 protected:
 	LPDIRECT3DDEVICE9 m_pd3dDevice;					//D3D9接口
 	int m_WindowWidth;								//窗口宽度
@@ -35,6 +35,6 @@ protected:
 
 	void (*m_pWindowLoop)(HWND hwnd);						//游戏循环内容函数指针
 	void (*m_pInitAction)(Window* window);					//游戏初始化函数
-	InputInterface* m_pInputInterface;				//输入设备接口
+	unique_ptr<InputInterface> m_pInputInterface;				//输入设备接口
 };
 void SetMainWindow(Window* window);					//设置主窗口

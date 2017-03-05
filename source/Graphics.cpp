@@ -115,12 +115,12 @@ void GraphicsComponent::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, co
 
 GraphicsComponent::~GraphicsComponent()
 {
-	SAFE_RELEASE(m_pVertexBuffer)
-	SAFE_RELEASE(m_pIndexBuffer)
-	SAFE_RELEASE(m_pAdjBuffer)
-	SAFE_RELEASE(m_pMtrlBuffer)
-	SAFE_RELEASE(m_pMesh);
-	SAFE_RELEASE(m_pTexture)
+	SafeRelease(m_pVertexBuffer);
+	SafeRelease(m_pIndexBuffer);
+	SafeRelease(m_pAdjBuffer);
+	SafeRelease(m_pMtrlBuffer);
+	SafeRelease(m_pMesh);
+	SafeRelease(m_pTexture);
 	if (m_pMaterials != NULL)
 	{
 		delete[] m_pMaterials;
@@ -129,7 +129,7 @@ GraphicsComponent::~GraphicsComponent()
 	{
 		for (DWORD i = 0;i < m_NumMaterials;i++)
 		{
-			SAFE_RELEASE(m_pTextures[i])
+			SafeRelease(m_pTextures[i]);
 		}
 		delete[] m_pTextures;
 	}
@@ -300,7 +300,7 @@ void GraphicsComponent::ChangeTexture(LPDIRECT3DDEVICE9 g_pd3dDevice,LPCTSTR pho
 {
 	if (m_pTexture != NULL)
 	{
-		SAFE_RELEASE(m_pTexture)
+		SafeRelease(m_pTexture);
 	}
 	SetTextureFromFile(g_pd3dDevice, photoname, m_pTexture);
 }
@@ -309,7 +309,7 @@ void GraphicsComponent::ChangeTextureEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR 
 {
 	if (m_pTexture != NULL)
 	{
-		SAFE_RELEASE(m_pTexture)
+		SafeRelease(m_pTexture);
 	}
 	SetTextureFromFileEx(g_pd3dDevice, photoname, TextureFile, m_pTexture);
 }

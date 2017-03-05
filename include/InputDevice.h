@@ -5,7 +5,8 @@
 class InputInterface		//D3DInput接口
 {
 public:
-	InputInterface();
+	InputInterface()
+		: m_pDirectInput(nullptr) {}
 	~InputInterface();
 	InputInterface(const InputInterface&) = delete;
 	bool Init(HINSTANCE hInstance);	//初始化
@@ -17,9 +18,10 @@ private:
 class InputDevice		//输入设备
 {
 public:
-	InputDevice();
+	InputDevice()
+		: m_InputDevice(nullptr) {}
 	~InputDevice();
-	bool Init(HWND hwnd,InputInterface& inputinterface,REFGUID rguid,LPCDIDATAFORMAT lpdf);	//初始化
+	bool Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf);	//初始化
 	bool DeviceRead(void* pBuffer, long lSize);					//读取设备内容
 private:
 	LPDIRECTINPUTDEVICE m_InputDevice;	//输入设备
@@ -30,7 +32,7 @@ class KeyboardDevice	//键盘设备
 public:
 	KeyboardDevice();
 	~KeyboardDevice();
-	bool Init(HWND hwnd,InputInterface& inputinterface);			//初始化
+	bool Init(HWND hwnd, InputInterface& inputinterface);			//初始化
 	bool DeviceRead();											//读取设备
 	bool IfPressDown(int b);									//判断是否按下某个键
 private:
