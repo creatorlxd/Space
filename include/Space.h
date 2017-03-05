@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #ifndef SPACE
 #define SPACE
-#define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }   //定义一个安全释放宏，便于后面COM接口指针的释放
+template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
 
 //-----------------------------------【FVF顶点格式】---------------------------------------------
 

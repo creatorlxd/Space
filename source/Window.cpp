@@ -44,26 +44,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-Window::Window()
+Window::Window() :
+	m_pMouseDevice(new MouseDevice()),
+	m_pKeyboardDevice(new KeyboardDevice()),
+	m_pInputInterface(new InputInterface())
 {
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
 	m_pInitAction = DefaultInitAction;
-	m_pInputInterface = new InputInterface();
-	m_pMouseDevice = new MouseDevice();
-	m_pKeyboardDevice = new KeyboardDevice();
 	SpaceEngineWindow = this;
 }
 
 Window::~Window()
 {
-	delete m_pMouseDevice;
-	delete m_pKeyboardDevice;
 	if (SpaceEngineWindow == this)
 		SpaceEngineWindow = NULL;
-	if(m_pd3dDevice!=NULL)
-		SAFE_RELEASE(m_pd3dDevice)
-	delete m_pInputInterface;
+	if (m_pd3dDevice)
+		SafeRelease(m_pd3dDevice);
 }
 
 void Window::SetWindow(LPCTSTR title, int width, int height)
@@ -139,7 +136,7 @@ void Window::Release()
 	if (SpaceEngineWindow == this)
 		SpaceEngineWindow = NULL;
 	if (m_pd3dDevice != NULL)
-		SAFE_RELEASE(m_pd3dDevice)
+		SafeRelease(m_pd3dDevice);
 	m_pd3dDevice = NULL;
 }
 
@@ -192,7 +189,7 @@ HRESULT Window::Direct3D_Init(HWND hwnd)
 		hwnd, vp, &d3dpp, &m_pd3dDevice)))
 		return E_FAIL;
 
-	SAFE_RELEASE(pD3D) //LPDIRECT3D9接口对象的使命完成，我们将其释放掉
+	SafeRelease(pD3D); //LPDIRECT3D9接口对象的使命完成，我们将其释放掉
 	return S_OK;
 }
 

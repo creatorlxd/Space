@@ -111,12 +111,12 @@ void object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::st
 
 object::~object()
 {
-	SAFE_RELEASE(m_pVertexBuffer)
-	SAFE_RELEASE(m_pIndexBuffer)
-	SAFE_RELEASE(m_pAdjBuffer)
-	SAFE_RELEASE(m_pMtrlBuffer)
-	SAFE_RELEASE(m_pMesh);
-	SAFE_RELEASE(m_pTexture)
+	SafeRelease(m_pVertexBuffer);
+	SafeRelease(m_pIndexBuffer);
+	SafeRelease(m_pAdjBuffer);
+	SafeRelease(m_pMtrlBuffer);
+	SafeRelease(m_pMesh);
+	SafeRelease(m_pTexture);
 	if (m_pMaterials != NULL)
 	{
 		delete[] m_pMaterials;
@@ -125,7 +125,7 @@ object::~object()
 	{
 		for (DWORD i = 0;i < m_NumMaterials;i++)
 		{
-			SAFE_RELEASE(m_pTextures[i])
+			SafeRelease(m_pTextures[i]);
 		}
 		delete[] m_pTextures;
 	}
