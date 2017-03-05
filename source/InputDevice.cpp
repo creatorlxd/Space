@@ -39,7 +39,7 @@ InputDevice::~InputDevice()
 	}
 }
 
-bool InputDevice::Init(HWND hwnd, InputInterface inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf)
+bool InputDevice::Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf)
 {
 	if (FAILED(inputinterface.GetInterface()->CreateDevice(rguid, (LPDIRECTINPUTDEVICE8W*)(&m_InputDevice), NULL)))
 		return false;
@@ -68,7 +68,7 @@ KeyboardDevice::~KeyboardDevice()
 {
 }
 
-bool KeyboardDevice::Init(HWND hwnd, InputInterface inputinterface)
+bool KeyboardDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
 	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysKeyboard, &c_dfDIKeyboard))
 		return true;
@@ -99,7 +99,7 @@ MouseDevice::~MouseDevice()
 {
 }
 
-bool MouseDevice::Init(HWND hwnd, InputInterface inputinterface)
+bool MouseDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
 	if (m_InputDevice.Init(hwnd, inputinterface, GUID_SysMouse, &c_dfDIMouse))
 		return true;
