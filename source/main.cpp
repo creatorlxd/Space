@@ -11,7 +11,6 @@
 #pragma comment(lib,"d3dx9.lib")
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "dinput8.lib") 
 void Run(HWND hwnd);
 Window g_window;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)

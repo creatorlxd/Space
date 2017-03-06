@@ -4,7 +4,7 @@
 InputInterface::~InputInterface()
 {
 	if (m_pDirectInput)
-		m_pDirectInput->Release();
+		SafeRelease(m_pDirectInput);
 }
 
 bool InputInterface::Init(HINSTANCE hInstance)
@@ -23,7 +23,7 @@ InputDevice::~InputDevice()
 {
 	if (m_InputDevice) {
 		m_InputDevice->Unacquire();
-		m_InputDevice->Release();
+		SafeRelease(m_InputDevice);
 	}
 }
 
