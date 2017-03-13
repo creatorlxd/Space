@@ -3,8 +3,7 @@
 
 InputInterface::~InputInterface()
 {
-	if (m_pDirectInput)
-		SafeRelease(m_pDirectInput);
+	SafeRelease(m_pDirectInput);
 }
 
 bool InputInterface::Init(HINSTANCE hInstance)
