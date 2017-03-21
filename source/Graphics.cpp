@@ -245,6 +245,37 @@ void GraphicsComponent::InitFromXFile(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR fi
 	}
 }
 
+void GraphicsComponent::SetLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice,const std::string & lightfilename)
+{
+	std::fstream lightfile;
+	lightfile.open(lightfilename, std::ios::in);
+	std::string true_lightfilename;
+	int light_flag = 0;
+	lightfile >> true_lightfilename;
+	lightfile >> light_flag;
+	lightfile >> m_lx >> m_ly >> m_lz;
+	switch (light_flag)
+	{
+	case 0: {
+		InitPointLightFromFile(g_pd3dDevice, true_lightfilename);
+		break;
+	}
+	case 1: {
+		InitDirectionalLightFromFile(g_pd3dDevice, true_lightfilename);
+		break;
+	}
+	case 2: {
+		InitSpotLightFromFile(g_pd3dDevice, true_lightfilename);
+		break;
+	}
+	default: {
+		InitPointLightFromFile(g_pd3dDevice, true_lightfilename);
+		break;
+	}
+	}
+	lightfile.close();
+}
+
 void GraphicsComponent::InitPointLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & filename)
 {
 	m_Light.SetPointLightFromFile(filename);

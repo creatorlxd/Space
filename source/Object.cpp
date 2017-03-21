@@ -450,7 +450,7 @@ void Object::ChangeTextureEx(LPDIRECT3DDEVICE9 g_pd3dDevice, LPCTSTR photoname, 
 
 void Object::InitPhysicsFromFile(const std::string & filename)
 {
-	m_Physics.InitPhysicsFromFile(filename);
+	m_Physics.InitFromFile(filename);
 }
 
 void Object::GetG()

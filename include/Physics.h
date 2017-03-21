@@ -20,7 +20,7 @@ public:
 	void SetXYZ(float x, float y, float z);								//临时的设置物体质心坐标的函数
 	void SetTimeChange(float second);									//设置时间间隔
 	//---------------------------------------------------------------------------------------------------------------
-	void InitPhysicsFromFile(const std::string& filename);						//从文件中初始化物理信息
+	void InitFromFile(const std::string& filename);						//从文件中初始化物理信息
 	void GetG();														//获得物体的重力，并将其加到总合力中
 	void RunMovingEngine();											//运行关于移动的物理引擎
 	void RunRotationEngine();											//运行关于旋转的物理引擎

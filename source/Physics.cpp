@@ -71,7 +71,7 @@ void PhysicsComponent::SetTimeChange(float second)
 	m_TimeChange = second;
 }
 
-void PhysicsComponent::InitPhysicsFromFile(const std::string & filename)
+void PhysicsComponent::InitFromFile(const std::string & filename)
 {
 	std::fstream file(filename.c_str(), std::ios::in);
 
