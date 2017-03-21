@@ -88,6 +88,7 @@ public:
 	void InitFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& materialname = "NULL");								//从文件中读取数据，进行初始化
 	void InitFromFileEx(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, LPCTSTR photoname, const std::string& TextureFile, const std::string& materialname = "NULL");	//从文件中读取数据，进行初始化
 	void InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& filename, const std::string& lightfilename, LPCTSTR photoname, const std::string& materialname = "NULL");					//从文件中读取数据，包括光源，进行初始化
+	void SetLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string& lightfilename);								//从文件设置光源
 	void ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);					//图形的绘制
 	void LightPrint(LPDIRECT3DDEVICE9 g_pd3dDevice);										//绘制光源，即开启光源
 	void LightBeginPrint();																	//开启光源

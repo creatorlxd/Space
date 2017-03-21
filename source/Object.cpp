@@ -418,6 +418,11 @@ void Object::InitWithLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::st
 	m_Graphics.InitWithLightFromFile(g_pd3dDevice, filename, lightfilename, photoname, materialname);
 }
 
+void Object::SetLightFromFile(LPDIRECT3DDEVICE9 g_pd3dDevice, const std::string & lightfilename)
+{
+	m_Graphics.SetLightFromFile(g_pd3dDevice, lightfilename);
+}
+
 void Object::ObjectPrint(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	m_Graphics.ObjectPrint(g_pd3dDevice);
