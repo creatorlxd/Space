@@ -117,14 +117,14 @@ public:
 			return false;
 		else
 		{
-			for (vector<MemoryBlock>::iterator i = m_FreeMemoryBlocks.begin(); i != m_FreeMemoryBlocks.end(); i += 1)
+			for (std::vector<MemoryBlock>::iterator i = m_FreeMemoryBlocks.begin(); i != m_FreeMemoryBlocks.end(); i += 1)
 			{
 				if ((*i).m_Size >= c.second * sizeof(T))
 				{
 					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, c.second * sizeof(T)));
 					*c.first = (T*)((*i).m_Address);
 					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-					GetInitialization(dest);
+					GetInitialization(c.first);
 					if ((*i).m_Size == c.second * sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -169,7 +169,7 @@ public:
 			m_MemoryBlocks.push_back(MemoryBlock(m_Memory + m_Top, c.second * sizeof(T)));
 			*c.first = (T*)(m_Memory + m_Top);
 			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-			GetInitialization(dest);
+			GetInitialization(c.first);
 			m_Top += c.second * sizeof(T);
 		}
 	}
@@ -229,7 +229,7 @@ template<typename T>
 class UnitPointer :public Pointer<T>	//指向单个对象的指针
 {
 public:
-	UnitPointer(MemoryManager& m) :Pointer(m)
+	UnitPointer(MemoryManager& m) :Pointer<T>(m)
 	{
 		Pointer<T>::InitUnit();
 	}
@@ -239,7 +239,7 @@ template<typename T>
 class ArrayPointer :public Pointer<T>	//指向多个对象形成的数组的指针
 {
 public:
-	ArrayPointer(MemoryManager& m,size_t size) :Pointer(m)
+	ArrayPointer(MemoryManager& m,size_t size) :Pointer<T>(m)
 	{
 		Pointer<T>::InitArray(size);
 	}
