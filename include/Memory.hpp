@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-/*
 static std::map<std::string,void*> s_InitializationMap;		//初始值表
 
 inline void InitInitializationMap()			//初始化初始值表
@@ -23,7 +22,7 @@ inline void ReleaseInitializationMap()		//释放初始值表
 template <typename T>
 inline void GetInitialization(T** c)		//获取该类型的初始值
 {
-	auto i = find(s_InitializationMap.begin(), s_InitializationMap.end(), typeid(*(*c)).name());
+	auto i = s_InitializationMap.find(typeid(*(*c)).name());
 	if (i != s_InitializationMap.end())
 	{
 		memcpy(*c, (*i).second, sizeof(T));
@@ -34,7 +33,7 @@ inline void GetInitialization(T** c)		//获取该类型的初始值
 		memcpy(*c, s_InitializationMap[typeid(T).name()], sizeof(T));
 	}
 }
-*/
+
 
 struct MemoryBlock	//内存块的信息
 {
@@ -70,14 +69,14 @@ public:
 	{
 		m_Memory = malloc(m_MemorySize);
 		m_Top = 0;
-//		InitInitializationMap();
+		InitInitializationMap();
 	}
 
 	~MemoryManager()
 	{
 		free(m_Memory);
 		m_Memory = NULL;
-//		ReleaseInitializationMap();
+		ReleaseInitializationMap();
 	}
 
 	template<typename T>
@@ -94,7 +93,7 @@ public:
 					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, sizeof(T)));
 					*dest = (T*)((*i).m_Address);
 					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-//					GetInitialization(dest);
+					GetInitialization(dest);
 					if ((*i).m_Size == sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -125,7 +124,7 @@ public:
 					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, c.second * sizeof(T)));
 					*c.first = (T*)((*i).m_Address);
 					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-//					GetInitialization(dest);
+					GetInitialization(dest);
 					if ((*i).m_Size == c.second * sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -150,7 +149,7 @@ public:
 			m_MemoryBlocks.push_back(MemoryBlock((void*)((char*)m_Memory + m_Top), sizeof(T)));
 			*dest = (T*)((char*)m_Memory + m_Top);
 			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-//			GetInitialization(dest);
+			GetInitialization(dest);
 			m_Top += sizeof(T);
 		}
 	}
@@ -170,7 +169,7 @@ public:
 			m_MemoryBlocks.push_back(MemoryBlock(m_Memory + m_Top, c.second * sizeof(T)));
 			*c.first = (T*)(m_Memory + m_Top);
 			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-//			GetInitialization(dest);
+			GetInitialization(dest);
 			m_Top += c.second * sizeof(T);
 		}
 	}
