@@ -2,6 +2,17 @@
 #include "stdafx.h"
 #ifndef SPACE
 #define SPACE
+
+#ifdef _UNICODE
+#define tcin wcin
+#define tfstream wfstream
+#else
+#define tcin cin
+#define tfstream fstream
+#endif
+
+using tstring = std::conditional<std::is_same<TCHAR, char>::value, std::string, std::wstring>::type;
+
 template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
 
 //-----------------------------------¡¾FVF¶¥µã¸ñÊ½¡¿---------------------------------------------

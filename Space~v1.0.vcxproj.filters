@@ -50,6 +50,12 @@
     <ClInclude Include="include\InputDevice.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Memory.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\LightRender.cpp">
@@ -80,6 +86,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\InputDevice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

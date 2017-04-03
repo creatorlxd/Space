@@ -12,5 +12,9 @@
 #include <fstream>
 #include <ctime>
 #include <memory>
+#include <xutility>
+#include <cstring>
+#include <type_traits>
+#include <map>
 using std::unique_ptr;
 

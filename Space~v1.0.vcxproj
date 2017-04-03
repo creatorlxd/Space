@@ -155,10 +155,12 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\ClassDef.h" />
     <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\InputDevice.h" />
     <ClInclude Include="include\LightRender.h" />
+    <ClInclude Include="include\Memory.hpp" />
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\Physics.h" />
     <ClInclude Include="include\Space.h" />
@@ -167,6 +169,7 @@
     <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\Graphics.cpp" />
     <ClCompile Include="source\InputDevice.cpp" />
     <ClCompile Include="source\LightRender.cpp" />

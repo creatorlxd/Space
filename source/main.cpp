@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Space.h"
 #include "Window.h"
+#include "Memory.hpp"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
