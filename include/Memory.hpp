@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
+/*
 static std::map<std::string,void*> s_InitializationMap;		//初始值表
 
 inline void InitInitializationMap()			//初始化初始值表
@@ -29,10 +30,11 @@ inline void GetInitialization(T** c)		//获取该类型的初始值
 	}
 	else
 	{
-		s_InitializationMap.insert(make_pair(typeid(T).name(), new T()));
+		s_InitializationMap.insert(std::make_pair(typeid(T).name(), new T()));
 		memcpy(*c, s_InitializationMap[typeid(T).name()], sizeof(T));
 	}
 }
+*/
 
 struct MemoryBlock	//内存块的信息
 {
@@ -68,14 +70,14 @@ public:
 	{
 		m_Memory = malloc(m_MemorySize);
 		m_Top = 0;
-		InitInitializationMap();
+//		InitInitializationMap();
 	}
 
 	~MemoryManager()
 	{
 		free(m_Memory);
 		m_Memory = NULL;
-		ReleaseInitializationMap();
+//		ReleaseInitializationMap();
 	}
 
 	template<typename T>
@@ -85,14 +87,14 @@ public:
 			return false;
 		else
 		{
-			for (vector<MemoryBlock>::iterator i = m_FreeMemoryBlocks.begin(); i != m_FreeMemoryBlocks.end(); i += 1)
+			for (std::vector<MemoryBlock>::iterator i = m_FreeMemoryBlocks.begin(); i != m_FreeMemoryBlocks.end(); i += 1)
 			{
 				if ((*i).m_Size >= sizeof(T))
 				{
 					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, sizeof(T)));
 					*dest = (T*)((*i).m_Address);
 					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-					GetInitialization(dest);
+//					GetInitialization(dest);
 					if ((*i).m_Size == sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -123,7 +125,7 @@ public:
 					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, c.second * sizeof(T)));
 					*c.first = (T*)((*i).m_Address);
 					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-					GetInitialization(dest);
+//					GetInitialization(dest);
 					if ((*i).m_Size == c.second * sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -145,10 +147,10 @@ public:
 	{
 		if (!ReuseMemory(dest))
 		{
-			m_MemoryBlocks.push_back(MemoryBlock(m_Memory + m_Top, sizeof(T)));
-			*dest = (T*)(m_Memory + m_Top);
+			m_MemoryBlocks.push_back(MemoryBlock((void*)((char*)m_Memory + m_Top), sizeof(T)));
+			*dest = (T*)((char*)m_Memory + m_Top);
 			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-			GetInitialization(dest);
+//			GetInitialization(dest);
 			m_Top += sizeof(T);
 		}
 	}
@@ -168,7 +170,7 @@ public:
 			m_MemoryBlocks.push_back(MemoryBlock(m_Memory + m_Top, c.second * sizeof(T)));
 			*c.first = (T*)(m_Memory + m_Top);
 			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-			GetInitialization(dest);
+//			GetInitialization(dest);
 			m_Top += c.second * sizeof(T);
 		}
 	}
@@ -176,7 +178,7 @@ public:
 	template<typename T>
 	bool ReleaseObject(T** dest)
 	{
-		for (vector<MemoryBlock>::iterator i = m_MemoryBlocks.begin(); i != m_MemoryBlocks.end(); i += 1)
+		for (std::vector<MemoryBlock>::iterator i = m_MemoryBlocks.begin(); i != m_MemoryBlocks.end(); i += 1)
 		{
 			if ((*i).m_Address == *dest)
 			{
@@ -227,25 +229,19 @@ public:
 template<typename T>
 class UnitPointer :public Pointer<T>	//指向单个对象的指针
 {
+public:
 	UnitPointer(MemoryManager& m) :Pointer(m)
 	{
-		InitUnit();
-	}
-	~UnitPointer()
-	{
-		~Pointer();
+		Pointer<T>::InitUnit();
 	}
 };
 
 template<typename T>
 class ArrayPointer :public Pointer<T>	//指向多个对象形成的数组的指针
 {
+public:
 	ArrayPointer(MemoryManager& m,size_t size) :Pointer(m)
 	{
-		InitArray(size);
-	}
-	~ArrayPointer()
-	{
-		~Pointer();
+		Pointer<T>::InitArray(size);
 	}
 };
