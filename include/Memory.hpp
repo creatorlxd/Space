@@ -64,6 +64,11 @@ struct MemoryBlock	//内存块的信息
 	}
 };
 
+bool operator < (const MemoryBlock& m1, const MemoryBlock& m2)
+{
+	return (m1.m_Address < m2.m_Address);
+}
+
 void CleanMemoryBlock(const MemoryBlock& mb)
 {
 	memset(mb.m_Address, NULL, mb.m_Size);
@@ -235,6 +240,7 @@ public:
 	{
 		return (Release(dest)&Release(ts...));
 	}
+
 };
 
 template<typename T>

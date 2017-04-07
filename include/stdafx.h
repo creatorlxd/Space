@@ -16,5 +16,7 @@
 #include <cstring>
 #include <type_traits>
 #include <map>
+#include <algorithm>
+#include <new>
 using std::unique_ptr;
 
