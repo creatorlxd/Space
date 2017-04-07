@@ -33,7 +33,20 @@ inline void GetInitialization(T** c)		//获取该类型的初始值
 		memcpy(*c, s_InitializationMap[typeid(T).name()], sizeof(T));
 	}
 }
-
+template <typename T>
+inline void GetInitialization(std::pair<T**,size_t> c)		//获取该类型的初始值
+{
+	auto i = s_InitializationMap.find(typeid(*(*(c.first))).name());
+	if (i != s_InitializationMap.end())
+	{
+		memcpy(*(c.first), (*i).second, c.second*sizeof(T));
+	}
+	else
+	{
+		s_InitializationMap.insert(std::make_pair(typeid(T).name(), new T()));
+		memcpy(*(c.first), s_InitializationMap[typeid(T).name()], c.second * sizeof(T));
+	}
+}
 
 struct MemoryBlock	//内存块的信息
 {
@@ -56,26 +69,25 @@ void CleanMemoryBlock(const MemoryBlock& mb)
 	memset(mb.m_Address, NULL, mb.m_Size);
 }
 
-class MemoryManager		//内存管理器（基于栈，且是唯一的）
+class MemoryManager		//内存管理器（是唯一的）
 {
 protected:
-	size_t m_Top;
-	void* m_Memory;
+	std::vector<MemoryBlock> m_Memories;
 	std::vector<MemoryBlock> m_MemoryBlocks;
 	std::vector<MemoryBlock> m_FreeMemoryBlocks;
 public:
-	static const size_t m_MemorySize = 0xffff;
+	static const size_t m_MemorySize = 0xffffff;
 	MemoryManager()
 	{
-		m_Memory = malloc(m_MemorySize);
-		m_Top = 0;
 		InitInitializationMap();
 	}
 
 	~MemoryManager()
 	{
-		free(m_Memory);
-		m_Memory = NULL;
+		for (auto i : m_Memories)
+		{
+			free(i.m_Address);
+		}
 		ReleaseInitializationMap();
 	}
 
@@ -90,9 +102,10 @@ public:
 			{
 				if ((*i).m_Size >= sizeof(T))
 				{
-					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, sizeof(T)));
+					MemoryBlock m((*i).m_Address, sizeof(T));
+					m_MemoryBlocks.push_back(m);
 					*dest = (T*)((*i).m_Address);
-					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
+					CleanMemoryBlock(m);
 					GetInitialization(dest);
 					if ((*i).m_Size == sizeof(T))
 					{
@@ -121,10 +134,11 @@ public:
 			{
 				if ((*i).m_Size >= c.second * sizeof(T))
 				{
-					m_MemoryBlocks.push_back(MemoryBlock((*i).m_Address, c.second * sizeof(T)));
+					MemoryBlock m((*i).m_Address, c.second * sizeof(T));
+					m_MemoryBlocks.push_back(m);
 					*c.first = (T*)((*i).m_Address);
-					CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-					GetInitialization(c.first);
+					CleanMemoryBlock(m);
+					GetInitialization(c);
 					if ((*i).m_Size == c.second * sizeof(T))
 					{
 						m_FreeMemoryBlocks.erase(i);
@@ -146,11 +160,24 @@ public:
 	{
 		if (!ReuseMemory(dest))
 		{
-			m_MemoryBlocks.push_back(MemoryBlock((void*)((char*)m_Memory + m_Top), sizeof(T)));
-			*dest = (T*)((char*)m_Memory + m_Top);
-			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-			GetInitialization(dest);
-			m_Top += sizeof(T);
+			if (sizeof(T) > m_MemorySize)
+			{
+				MemoryBlock m;
+				m.m_Address = malloc(sizeof(T));
+				m.m_Size = sizeof(T);
+				m_Memories.push_back(m);
+				m_FreeMemoryBlocks.push_back(m);
+				ReuseMemory(dest);
+			}
+			else
+			{
+				MemoryBlock m;
+				m.m_Address = malloc(m_MemorySize);
+				m.m_Size = m_MemorySize;
+				m_Memories.push_back(m);
+				m_FreeMemoryBlocks.push_back(m);
+				ReuseMemory(dest);
+			}
 		}
 	}
 
@@ -166,11 +193,24 @@ public:
 	{
 		if (!ReuseMemory(c))
 		{
-			m_MemoryBlocks.push_back(MemoryBlock(m_Memory + m_Top, c.second * sizeof(T)));
-			*c.first = (T*)(m_Memory + m_Top);
-			CleanMemoryBlock(m_MemoryBlocks[m_MemoryBlocks.size() - 1]);
-			GetInitialization(c.first);
-			m_Top += c.second * sizeof(T);
+			if (c.second*sizeof(T) > m_MemorySize)
+			{
+				MemoryBlock m;
+				m.m_Address = malloc(c.second*sizeof(T));
+				m.m_Size = c.second * sizeof(T);
+				m_Memories.push_back(m);
+				m_FreeMemoryBlocks.push_back(m);
+				ReuseMemory(c);
+			}
+			else
+			{
+				MemoryBlock m;
+				m.m_Address = malloc(m_MemorySize);
+				m.m_Size = m_MemorySize;
+				m_Memories.push_back(m);
+				m_FreeMemoryBlocks.push_back(m);
+				ReuseMemory(c);
+			}
 		}
 	}
 
@@ -216,12 +256,16 @@ public:
 	}
 	void InitArray(size_t size)
 	{
-		m_MemoryManager.NewObject(make_pair(&m_pContent, size));
+		m_MemoryManager.NewObject(std::make_pair(&m_pContent, size));
 	}
 	bool operator = (const Pointer&) = delete;
 	T& operator * ()
 	{
 		return *m_pContent;
+	}
+	T& operator [] (size_t i)
+	{
+		return *(m_pContent + i);
 	}
 };
 
