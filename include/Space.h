@@ -37,4 +37,5 @@ void OpenDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//ø™∆Ù…Ó∂»ª∫¥
 void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//…Ë÷√…Ó∂»ª∫¥Ê
 void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//πÿ±’…Ó∂»ª∫¥Ê
 
+float GetTimeChange();																						//ªÒ»° ±º‰º‰∏Ù
 #endif

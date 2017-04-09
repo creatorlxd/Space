@@ -111,6 +111,7 @@ public:
 	bool AddObject(Object* obj);				//添加对象
 	bool RemoveObject(Object* obj);			//移除对象
 	virtual bool RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice);	//运行管理器
+	virtual bool RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice, float time);	//运行管理器，并指定物理间隔时间
 private:
 	GraphicsManager m_GraphicsManager;			//图形
 	PhysicsManager m_PhysicsManager;			//物理

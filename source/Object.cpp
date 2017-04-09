@@ -536,3 +536,24 @@ bool ObjectManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice)
 
 	return true;
 }
+
+bool ObjectManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice, float time)
+{
+	if (!m_PhysicsManager.RunManager(g_pd3dDevice,time))
+		return false;
+	for (auto i : m_Content)
+	{
+		if (i->IfPhysics())
+		{
+			i->GetGraphicsComponent()->SetMatrix(g_pd3dDevice, *(i->GetPhysicsComponent()));
+		}
+		if ((i->GetGraphicsComponent()->m_Light.GetLightNumber() != -1) && i->IfPhysics())
+		{
+			i->GetGraphicsComponent()->LightPrint(g_pd3dDevice, *(i->GetPhysicsComponent()));
+		}
+	}
+	if (!m_GraphicsManager.RunManager(g_pd3dDevice))
+		return false;
+
+	return true;
+}

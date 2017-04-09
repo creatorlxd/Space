@@ -52,6 +52,7 @@ void PhysicsComponent::GetTime()
 	if (m_TimeNow == 0)
 	{
 		m_TimeNow = timeGetTime()*0.001f;
+		GetTime();
 	}
 	else
 	{

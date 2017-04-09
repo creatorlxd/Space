@@ -51,3 +51,22 @@ void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);
 }
+
+float GetTimeChange()
+{
+	static float TimeNow=0.00f;
+	static float TimeBuffer = 0.00f;
+	static float TimeChange = 0.00f;
+	if (TimeNow == 0.00f)
+	{
+		TimeNow = timeGetTime()*0.001f;
+		return GetTimeChange();
+	}
+	else
+	{
+		TimeBuffer = timeGetTime()*0.001f;
+		TimeChange = TimeBuffer - TimeNow;
+		TimeNow = timeGetTime()*0.001f;
+		return TimeChange;
+	}
+}

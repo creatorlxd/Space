@@ -349,22 +349,24 @@ void GraphicsComponent::SetMatrix(LPDIRECT3DDEVICE9 g_pd3dDevice, PhysicsCompone
 {
 	D3DXMATRIX matWorld;
 	D3DXMATRIX matBuf;
-	D3DXMatrixTranslation(&matWorld, physics.m_Position.x, physics.m_Position.y, physics.m_Position.z);
+	D3DXMatrixIdentity(&matWorld);
 	if (physics.m_rxv != 0)
 	{
 		D3DXMatrixRotationX(&matBuf, physics.m_rxv);
-		matWorld = matBuf*matWorld;
+		matWorld = matWorld*matBuf;
 	}
 	if (physics.m_ryv != 0)
 	{
 		D3DXMatrixRotationY(&matBuf, physics.m_ryv);
-		matWorld = matBuf*matWorld;
+		matWorld = matWorld*matBuf;
 	}
 	if (physics.m_rzv != 0)
 	{
 		D3DXMatrixRotationZ(&matBuf, physics.m_rzv);
-		matWorld = matBuf*matWorld;
+		matWorld = matWorld*matBuf;
 	}
+	D3DXMatrixTranslation(&matBuf, physics.m_Position.x, physics.m_Position.y, physics.m_Position.z);
+	matWorld = matWorld*matBuf;
 	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 }
 
