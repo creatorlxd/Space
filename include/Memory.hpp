@@ -228,6 +228,7 @@ public:
 			{
 				m_FreeMemoryBlocks.push_back(*i);
 				m_MemoryBlocks.erase(i);
+				(*dest)->~T();
 				*dest = NULL;
 				return true;
 			}
