@@ -63,7 +63,7 @@ Window::~Window()
 		SafeRelease(m_pd3dDevice);
 }
 
-void Window::SetWindow(LPCTSTR title, int width, int height)
+void Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
 {
 	m_WindowTitle = title;
 	m_WindowWidth = width;
@@ -98,12 +98,12 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 		m_WindowHeight, NULL, NULL, hInstance, NULL);
 
 	//Direct3D资源的初始化，成功或者失败都用messagebox予以显示
-	if (E_FAIL == Direct3D_Init(hwnd))
+	if (E_FAIL == Direct3DInit(hwnd))
 	{
 		MessageBox(hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
 	m_pInputInterface->Init(hInstance);
-	Objects_Init(hwnd);
+	EnvironmentInit(hwnd);
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
 	MoveWindow(hwnd, 250, 80, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
@@ -140,7 +140,7 @@ void Window::Release()
 	m_pd3dDevice = NULL;
 }
 
-HRESULT Window::Direct3D_Init(HWND hwnd)
+HRESULT Window::Direct3DInit(HWND hwnd)
 {
 	//--------------------------------------------------------------------------------------
 	// 【Direct3D初始化四步曲之一，创接口】：创建Direct3D接口对象, 以便用该Direct3D对象创建Direct3D设备对象
@@ -193,7 +193,7 @@ HRESULT Window::Direct3D_Init(HWND hwnd)
 	return S_OK;
 }
 
-HRESULT Window::Objects_Init(HWND hwnd)
+HRESULT Window::EnvironmentInit(HWND hwnd)
 {
 	m_pMouseDevice->Init(hwnd, *m_pInputInterface);
 	m_pKeyboardDevice->Init(hwnd, *m_pInputInterface);
@@ -204,6 +204,7 @@ HRESULT Window::Objects_Init(HWND hwnd)
 	OpenDepthBuffer(m_pd3dDevice);
 	SetDepthBuffer(m_pd3dDevice);
 	m_pInitAction(this);
+	SetViewPort(m_pd3dDevice, m_WindowWidth, m_WindowHeight);
 	return S_OK;
 }
 
@@ -226,12 +227,12 @@ LPDIRECT3DDEVICE9 Window::GetD3DDevice()
 	return m_pd3dDevice;
 }
 
-int Window::GetWindowWidth()
+DWORD Window::GetWindowWidth()
 {
 	return m_WindowWidth;
 }
 
-int Window::GetWindowHeight()
+DWORD Window::GetWindowHeight()
 {
 	return m_WindowHeight;
 }

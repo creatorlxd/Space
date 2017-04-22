@@ -31,8 +31,8 @@ protected:
 	DWORD m_WindowHeight;								//窗口高度
 	LPCTSTR m_WindowTitle;							//窗口标题
 
-	virtual HRESULT	Direct3D_Init(HWND hwnd);		 //在这个函数中进行Direct3D的初始化
-	virtual HRESULT Objects_Init(HWND hwnd); 		//在这个函数中进行要绘制的物体的资源初始化
+	virtual HRESULT	Direct3DInit(HWND hwnd);		 //在这个函数中进行Direct3D的初始化
+	virtual HRESULT EnvironmentInit(HWND hwnd); 		//在这个函数中进行环境初始化
 
 	void (*m_pWindowLoop)(HWND hwnd);						//游戏循环内容函数指针
 	void (*m_pInitAction)(Window* window);					//游戏初始化函数
