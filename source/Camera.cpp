@@ -13,7 +13,7 @@ void Camera::DirectionsNormalize()
 
 	D3DXVec3Cross(&m_UpDirection, &m_LookDirection, &m_RightDirection);
 	D3DXVec3Cross(&m_RightDirection, &m_UpDirection, &m_LookDirection);
-	D3DXVec3Cross(&m_LookDirection, &m_RightDirection, &m_UpDirection);
+	D3DXVec3Cross(&m_LookDirection, &m_RightDirection, &m_UpDirection);		//TODO:这是我自己加的，可能有错
 
 	D3DXVec3Normalize(&m_LookDirection, &m_LookDirection);
 	D3DXVec3Normalize(&m_UpDirection, &m_UpDirection);
@@ -118,7 +118,8 @@ void Camera::RotationXDirection(float angle)
 	D3DXVec3TransformCoord(&m_UpDirection, &m_UpDirection, &r);
 	D3DXVec3TransformCoord(&m_LookDirection, &m_LookDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position+m_LookDirection * D3DXVec3Length(&buff);
 }
 
 void Camera::RotationYDirection(float angle)
@@ -130,7 +131,8 @@ void Camera::RotationYDirection(float angle)
 	D3DXVec3TransformCoord(&m_UpDirection, &m_UpDirection, &r);
 	D3DXVec3TransformCoord(&m_LookDirection, &m_LookDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position + m_LookDirection * D3DXVec3Length(&buff);
 }
 
 void Camera::RotationZDirection(float angle)
@@ -142,7 +144,8 @@ void Camera::RotationZDirection(float angle)
 	D3DXVec3TransformCoord(&m_UpDirection, &m_UpDirection, &r);
 	D3DXVec3TransformCoord(&m_LookDirection, &m_LookDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position + m_LookDirection * D3DXVec3Length(&buff);
 }
 
 void Camera::RotationRightDirection(float angle)
@@ -153,7 +156,8 @@ void Camera::RotationRightDirection(float angle)
 	D3DXVec3TransformCoord(&m_UpDirection, &m_UpDirection, &r);
 	D3DXVec3TransformCoord(&m_LookDirection, &m_LookDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position + m_LookDirection * D3DXVec3Length(&buff);
 }
 
 void Camera::RotationUpDirection(float angle)
@@ -164,7 +168,8 @@ void Camera::RotationUpDirection(float angle)
 	D3DXVec3TransformCoord(&m_RightDirection, &m_RightDirection, &r);
 	D3DXVec3TransformCoord(&m_LookDirection, &m_LookDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position + m_LookDirection * D3DXVec3Length(&buff);
 }
 
 void Camera::RotationLookDirection(float angle)
@@ -175,5 +180,13 @@ void Camera::RotationLookDirection(float angle)
 	D3DXVec3TransformCoord(&m_RightDirection, &m_RightDirection, &r);
 	D3DXVec3TransformCoord(&m_UpDirection, &m_UpDirection, &r);
 
-	m_TargetPosition = m_LookDirection * D3DXVec3Length(&m_TargetPosition);
+	D3DXVECTOR3 buff = m_TargetPosition - m_Position;
+	m_TargetPosition = m_Position + m_LookDirection * D3DXVec3Length(&buff);
+}
+
+void Camera::Run(LPDIRECT3DDEVICE9 g_pd3dDevice)
+{
+	CalculateViewMatrix();
+	UseViewMatrix(g_pd3dDevice);
+	UseProjectionMatrix(g_pd3dDevice);
 }

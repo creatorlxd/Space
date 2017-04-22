@@ -22,6 +22,12 @@ void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename)
 	file.close();
 }
 
+void SetViewPort(LPDIRECT3DDEVICE9 g_pd3dDevice, DWORD width, DWORD height)
+{
+	D3DVIEWPORT9 vp = { 0,0,width,height,0,1 };
+	g_pd3dDevice->SetViewport(&vp);
+}
+
 void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice)
 {
 	g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);

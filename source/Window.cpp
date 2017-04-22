@@ -236,6 +236,11 @@ int Window::GetWindowHeight()
 	return m_WindowHeight;
 }
 
+bool Window::ReadInputDevice()
+{
+	return (m_pMouseDevice->DeviceRead()&m_pKeyboardDevice->DeviceRead());
+}
+
 void SetMainWindow(Window* window)
 {
 	SpaceEngineWindow = window;

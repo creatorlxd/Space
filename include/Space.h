@@ -28,14 +28,16 @@ struct CUSTOMVERTEX //顶点结构体
 
 //----------------------------------------------------------------------------------------------
 
-void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);									//从文件中初始化材质
+void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);				//从文件中初始化材质
 
-void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);																//开启并设置Alpha融合
-void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);															//关闭Alpha融合
+void SetViewPort(LPDIRECT3DDEVICE9 g_pd3dDevice,DWORD width=800, DWORD height=600);												//设置视口变化
 
-void OpenDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//开启深度缓存
-void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//设置深度缓存
-void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);														//关闭深度缓存
+void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);											//开启并设置Alpha融合
+void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);										//关闭Alpha融合
 
-float GetTimeChange();																						//获取时间间隔
+void OpenDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//开启深度缓存
+void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//设置深度缓存
+void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//关闭深度缓存
+
+float GetTimeChange();																	//获取时间间隔
 #endif
