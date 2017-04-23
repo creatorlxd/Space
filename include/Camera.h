@@ -9,7 +9,7 @@ public:
 	Camera(KeyboardDevice& keyboard,MouseDevice& mouse)
 		:m_KeyBoardDevice(keyboard),m_MouseDevice(mouse),
 		m_Position(D3DXVECTOR3(0.00f,0.00f,0.00f)),
-		m_LookDirection(D3DXVECTOR3(1,0,0)),m_UpDirection(D3DXVECTOR3(0,1,0)),m_RightDirection(D3DXVECTOR3(0,0,1)),
+		m_LookDirection(D3DXVECTOR3(0,0,1)),m_UpDirection(D3DXVECTOR3(0,1,0)),m_RightDirection(D3DXVECTOR3(1,0,0)),
 		m_ViewMatrix(D3DXMATRIX{1,0,0,0,
 								0,1,0,0,
 								0,0,1,0,
