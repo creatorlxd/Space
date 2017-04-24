@@ -13,6 +13,42 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{87f5a5db-0626-4bd0-8888-a80351fd8bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Include">
+      <UniqueIdentifier>{61bb568d-7565-4802-b8d1-9ad70de8b18a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Source">
+      <UniqueIdentifier>{c67e6489-d7e0-46b4-8c1f-c81a558c0cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{86b2121e-ff51-4963-b7e0-c81607069bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Include">
+      <UniqueIdentifier>{52b232d4-da71-4821-a89d-0ce7c3df51cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Source">
+      <UniqueIdentifier>{a4b75698-4479-49ae-a1a0-c27b92076b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{779addf3-4c8c-47e3-b351-f208b14d3e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Include">
+      <UniqueIdentifier>{6e396dc6-9621-437b-8477-55c1a33e9b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source">
+      <UniqueIdentifier>{b7317e87-bc23-404f-9dc7-fbe855dfc323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{72e74f24-c532-4185-a017-1ca856d22de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Include">
+      <UniqueIdentifier>{0a2c57a3-9b65-4a26-bb1d-837628ff865f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{2e91197d-ad36-4986-a41a-7ab9f31b2d81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -26,35 +62,44 @@
     <ClInclude Include="include\Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Graphics.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Physics.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Space.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\ClassDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Object.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\InputDevice.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Memory.hpp">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Component\Include\Component.h">
+      <Filter>Component\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Include\Scene.h">
+      <Filter>Scene\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Include\Game.h">
+      <Filter>Game\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Include\InputDevice.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Include\Memory.hpp">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Include\Space.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Include\stdafx.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Include\Window.h">
+      <Filter>Common\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -67,29 +112,38 @@
     <ClCompile Include="source\Texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="source\stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="source\Graphics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\Physics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="source\Space.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Window.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="source\Object.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\InputDevice.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\Camera.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Source\Scene.cpp">
+      <Filter>Scene\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Source\Component.cpp">
+      <Filter>Component\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Source\Game.cpp">
+      <Filter>Game\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\InputDevice.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\Space.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\stdafx.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\Window.cpp">
+      <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

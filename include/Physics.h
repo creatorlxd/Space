@@ -18,7 +18,7 @@ public:
 	void GetTime();														//获取或更新时间间隔
 	//---------------------------------------------------------------------------------------------------------------
 	void SetXYZ(float x, float y, float z);								//临时的设置物体质心坐标的函数
-	void SetTimeChange(float second);									//设置时间间隔
+	void SetDeltaTime(float second);									//设置时间间隔
 	//---------------------------------------------------------------------------------------------------------------
 	void InitFromFile(const std::string& filename);						//从文件中初始化物理信息
 	void GetG();														//获得物体的重力，并将其加到总合力中
@@ -26,7 +26,7 @@ public:
 	void RunRotationEngine();											//运行关于旋转的物理引擎
 private:
 	float m_TimeNow;							//现在的时间
-	float m_TimeChange;						//时间差，即时间变化量
+	float m_DeltaTime;						//时间差，即时间变化量
 //----------------------------------------------------------------------------------------------------------------
 	D3DVECTOR m_Position;						//物体质心的坐标
 	float m_m;									//物体的质量

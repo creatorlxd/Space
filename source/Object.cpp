@@ -141,7 +141,7 @@ object::object()
 	mpVertices = NULL;
 	mpIndices = NULL;
 	m_TimeNow = 0;
-	m_TimeChange = 0;
+	m_DeltaTime = 0;
 	m_a = { 0,0,0 };
 	m_F = { 0,0,0 };
 	m_m = 0;
@@ -176,7 +176,7 @@ object::object(int& i)
 	mpVertices = NULL;
 	mpIndices = NULL;
 	m_TimeNow = 0;
-	m_TimeChange = 0;
+	m_DeltaTime = 0;
 	m_a = { 0,0,0 };
 	m_F = { 0,0,0 };
 	m_m = 0;
@@ -316,7 +316,7 @@ void object::GetTime()
 	else
 	{
 		TimeBuffer = timeGetTime()*0.001f;
-		m_TimeChange = TimeBuffer - m_TimeNow;
+		m_DeltaTime = TimeBuffer - m_TimeNow;
 		m_TimeNow = timeGetTime()*0.001f;
 	}
 }
@@ -368,8 +368,8 @@ void object::RunMovingEngine()
 {
 	D3DVECTOR buff_v = m_v;
 	m_a = m_F / m_m;
-	m_v = m_v + m_a*m_TimeChange;
-	m_Position = m_Position + ((m_v+buff_v)/2)*m_TimeChange;
+	m_v = m_v + m_a*m_DeltaTime;
+	m_Position = m_Position + ((m_v+buff_v)/2)*m_DeltaTime;
 	m_F = { 0.00f,0.00f,0.00f };
 }
 

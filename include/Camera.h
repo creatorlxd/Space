@@ -44,7 +44,7 @@ public:
 	void RotationLookDirection(float angle);					//沿自己的Z轴旋转
 
 	void Run(LPDIRECT3DDEVICE9 g_pd3dDevice);					//运行（使用）摄像机
-private:
+protected:
 	KeyboardDevice& m_KeyBoardDevice;		//键盘设备
 	MouseDevice& m_MouseDevice;				//鼠标设备
 	D3DXVECTOR3 m_UpDirection, m_RightDirection, m_LookDirection;	//三轴方向向量

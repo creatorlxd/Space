@@ -31,7 +31,7 @@ D3DVECTOR operator / (D3DVECTOR v1, float f)
 PhysicsComponent::PhysicsComponent()
 {
 	m_TimeNow = 0;
-	m_TimeChange = 0;
+	m_DeltaTime = 0;
 	m_a = { 0,0,0 };
 	m_F = { 0,0,0 };
 	m_m = 0;
@@ -57,7 +57,7 @@ void PhysicsComponent::GetTime()
 	else
 	{
 		TimeBuffer = timeGetTime()*0.001f;
-		m_TimeChange = TimeBuffer - m_TimeNow;
+		m_DeltaTime = TimeBuffer - m_TimeNow;
 		m_TimeNow = timeGetTime()*0.001f;
 	}
 }
@@ -67,9 +67,9 @@ void PhysicsComponent::SetXYZ(float x, float y, float z)
 	m_Position = D3DXVECTOR3(x, y, z);
 }
 
-void PhysicsComponent::SetTimeChange(float second)
+void PhysicsComponent::SetDeltaTime(float second)
 {
-	m_TimeChange = second;
+	m_DeltaTime = second;
 }
 
 void PhysicsComponent::InitFromFile(const std::string & filename)
@@ -90,8 +90,8 @@ void PhysicsComponent::RunMovingEngine()
 {
 	D3DVECTOR buff_v = m_v;
 	m_a = m_F / m_m;
-	m_v = m_v + m_a*m_TimeChange;
-	m_Position = m_Position + ((m_v + buff_v) / 2)*m_TimeChange;
+	m_v = m_v + m_a*m_DeltaTime;
+	m_Position = m_Position + ((m_v + buff_v) / 2)*m_DeltaTime;
 	m_F = { 0.00f,0.00f,0.00f };
 }
 
@@ -140,7 +140,7 @@ bool PhysicsManager::RunManager(LPDIRECT3DDEVICE9 g_pd3dDevice, float time)
 {
 	for (size_t i = 0;i < m_Content.size();i++)
 	{
-		m_Content[i]->SetTimeChange(time);
+		m_Content[i]->SetDeltaTime(time);
 		m_Content[i]->RunMovingEngine();
 		m_Content[i]->RunRotationEngine();
 	}
