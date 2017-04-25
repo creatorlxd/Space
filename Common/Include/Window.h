@@ -39,4 +39,4 @@ protected:
 	unique_ptr<InputInterface> m_pInputInterface;				//输入设备接口
 };
 void SetMainWindow(Window* window);					//设置主窗口
-Window* SpaceEngineWindow;
+extern Window* SpaceEngineWindow;
