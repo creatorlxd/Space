@@ -6,7 +6,6 @@ Game* Game::sm_pThis = nullptr;
 Game::Game()
 {
 	sm_pThis = this;
-	m_pThis = this;
 }
 
 Game::~Game()

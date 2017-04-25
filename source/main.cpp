@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Memory.hpp"
 #include "Camera.h"
+#include "../Mesh/Include/Mesh.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
@@ -19,6 +20,10 @@ Window g_Window;
 Camera g_Camera(*(g_Window.m_pKeyboardDevice),*(g_Window.m_pMouseDevice));
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	//test
+	ComponentManager m;
+	Component* t=MeshComponent::NewComponent();
+	//----
 	g_Window.SetWindow();
 	g_Window.InitWindow(hInstance, hPrevInstance,lpCmdLine,nShowCmd,Run,Init);
 	return 0;

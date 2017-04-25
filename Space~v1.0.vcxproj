@@ -161,6 +161,7 @@
     <ClInclude Include="Common\Include\stdafx.h" />
     <ClInclude Include="Common\Include\Window.h" />
     <ClInclude Include="Component\Include\Component.h" />
+    <ClInclude Include="Component\Include\ComponentManager.h" />
     <ClInclude Include="Game\Include\Game.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\ClassDef.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\Physics.h" />
     <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="Mesh\Include\Mesh.h" />
     <ClInclude Include="Scene\Include\Scene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +184,9 @@
     </ClCompile>
     <ClCompile Include="Common\Source\Window.cpp" />
     <ClCompile Include="Component\Source\Component.cpp" />
+    <ClCompile Include="Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Game\Source\Game.cpp" />
+    <ClCompile Include="Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Scene\Source\Scene.cpp" />
     <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\Graphics.cpp" />

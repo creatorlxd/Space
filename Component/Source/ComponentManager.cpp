@@ -1,0 +1,37 @@
+#include "stdafx.h"
+#include "../Include/ComponentManager.h"
+
+ComponentManager* ComponentManager::sm_pThis = nullptr;
+
+ComponentManager::ComponentManager()
+{
+	sm_pThis = this;
+}
+
+ComponentManager::~ComponentManager()
+{
+	for (auto i : m_Content)
+	{
+		delete i;
+	}
+	sm_pThis = nullptr;
+}
+
+ComponentManager * const ComponentManager::GetMainManager()
+{
+	return sm_pThis;
+}
+
+bool ComponentManager::DeleteComponent(Component * pc)
+{
+	for (auto i = m_Content.begin(); i != m_Content.end(); i += 1)
+	{
+		if (*i == pc)
+		{
+			delete pc;
+			m_Content.erase(i);
+			return true;
+		}
+	}
+	return false;
+}

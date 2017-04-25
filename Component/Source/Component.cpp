@@ -18,9 +18,29 @@ std::string Component::GetTypeName()
 	return m_TypeName;
 }
 
+void Component::InitFromFile(std::string filename, int mode)
+{
+
+}
+
+void Component::Start()
+{
+
+}
+
+void Component::Run(float DeltaTime)
+{
+
+}
+
 void Component::Attach(Component * pc)
 {
 	pc->m_pChilds.push_back(this);
+}
+
+void Component::Release()
+{
+
 }
 
 bool Component::IfRun()

@@ -13,33 +13,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{87f5a5db-0626-4bd0-8888-a80351fd8bd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Include">
-      <UniqueIdentifier>{61bb568d-7565-4802-b8d1-9ad70de8b18a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Source">
-      <UniqueIdentifier>{c67e6489-d7e0-46b4-8c1f-c81a558c0cc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{86b2121e-ff51-4963-b7e0-c81607069bed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Include">
-      <UniqueIdentifier>{52b232d4-da71-4821-a89d-0ce7c3df51cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Source">
-      <UniqueIdentifier>{a4b75698-4479-49ae-a1a0-c27b92076b37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{779addf3-4c8c-47e3-b351-f208b14d3e09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Include">
-      <UniqueIdentifier>{6e396dc6-9621-437b-8477-55c1a33e9b61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source">
-      <UniqueIdentifier>{b7317e87-bc23-404f-9dc7-fbe855dfc323}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{72e74f24-c532-4185-a017-1ca856d22de0}</UniqueIdentifier>
     </Filter>
@@ -48,6 +21,48 @@
     </Filter>
     <Filter Include="Common\Source">
       <UniqueIdentifier>{2e91197d-ad36-4986-a41a-7ab9f31b2d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{e8d5e1a2-818e-4be3-bd2d-0a36c078f58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Game">
+      <UniqueIdentifier>{82ef329d-2665-49fc-bbc6-480b66782d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{c6417263-ca5a-4ac8-910e-4dc77de4b62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component">
+      <UniqueIdentifier>{2b516517-8ee5-439f-a88f-41baf8ea7a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\Include">
+      <UniqueIdentifier>{0b507e4e-5d4b-4dd9-8b3b-a6e0d7405a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\Source">
+      <UniqueIdentifier>{0ca2712a-4fb3-4247-9f1e-a4aecf0fea1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Game\Include">
+      <UniqueIdentifier>{5aef1e3f-e9ec-4065-9391-d887c68857ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Game\Source">
+      <UniqueIdentifier>{2878083c-dc9e-46d9-be0b-87dc035df1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\Include">
+      <UniqueIdentifier>{87e11ac2-8c34-4b96-87d9-943a219c51a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\Source">
+      <UniqueIdentifier>{792aeb99-c7ce-4b96-bbd2-f98fd8119105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{b4fa96be-d5f3-4b2b-a7b7-0fe81743ed19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Mesh">
+      <UniqueIdentifier>{62c6dc96-078b-4b1a-acf3-f36ad77ca0f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Mesh\Include">
+      <UniqueIdentifier>{49867c1b-ed13-4b43-8a80-7f236df17f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Mesh\Source">
+      <UniqueIdentifier>{a31d6213-4770-44d8-9587-5fc99e7c4937}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,15 +92,6 @@
     <ClInclude Include="include\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Include\Component.h">
-      <Filter>Component\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Include\Scene.h">
-      <Filter>Scene\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Include\Game.h">
-      <Filter>Game\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Include\InputDevice.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
@@ -100,6 +106,21 @@
     </ClInclude>
     <ClInclude Include="Common\Include\Window.h">
       <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Include\Component.h">
+      <Filter>Game\Component\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Include\Game.h">
+      <Filter>Game\Game\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Include\Scene.h">
+      <Filter>Game\Scene\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Include\Mesh.h">
+      <Filter>Graphics\Mesh\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Include\ComponentManager.h">
+      <Filter>Game\Component\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,15 +145,6 @@
     <ClCompile Include="source\Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Source\Scene.cpp">
-      <Filter>Scene\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Source\Component.cpp">
-      <Filter>Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Source\Game.cpp">
-      <Filter>Game\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Source\InputDevice.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
@@ -144,6 +156,21 @@
     </ClCompile>
     <ClCompile Include="Common\Source\Window.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Source\Component.cpp">
+      <Filter>Game\Component\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Source\Game.cpp">
+      <Filter>Game\Game\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Source\Scene.cpp">
+      <Filter>Game\Scene\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Source\Mesh.cpp">
+      <Filter>Graphics\Mesh\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Source\ComponentManager.cpp">
+      <Filter>Game\Component\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

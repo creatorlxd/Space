@@ -1,15 +1,14 @@
 #pragma once 
 #include "stdafx.h"
 #include "Window.h"
-class Game
+class Game				//顶层游戏类
 {
 public:
 	Game();
 	~Game();
-	Game* const GetMainGame();
+	Game* const GetMainGame();	//获取当前的游戏类指针
 public:
-	Window m_Window;
+	Window m_Window;			//窗口
 protected:
-	Game* m_pThis;
-	static Game* sm_pThis;
+	static Game* sm_pThis;		//当前的游戏指针
 };

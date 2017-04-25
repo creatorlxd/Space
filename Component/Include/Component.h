@@ -8,10 +8,11 @@ public:
 	Component();
 	~Component();
 	std::string GetTypeName();			//获取类型名
-	virtual void Start() = 0;			//在开始时执行
-	virtual void Run(float DeltaTime) = 0;//每帧运行时的操作
+	virtual void InitFromFile(std::string filename, int mode=0);
+	virtual void Start();			//在开始时执行
+	virtual void Run(float DeltaTime);//每帧运行时的操作
 	virtual void Attach(Component* pc);	//成为...组件的依附
-	virtual void Release()=0;				//释放
+	virtual void Release();				//释放
 	bool IfRun();						//是否每帧运行
 	bool IfUse();						//是否使用
 	void ChangeIfRun(bool b);			//更改每帧是否运行
