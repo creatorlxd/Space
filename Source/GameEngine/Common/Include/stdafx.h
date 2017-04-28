@@ -18,4 +18,5 @@
 #include <map>
 #include <algorithm>
 #include <new>
+#include <codecvt>
 using std::unique_ptr;

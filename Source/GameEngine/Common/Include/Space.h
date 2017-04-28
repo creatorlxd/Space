@@ -27,6 +27,9 @@ struct CUSTOMVERTEX //顶点结构体
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX1)	//FVF灵活顶点格式
 
 //----------------------------------------------------------------------------------------------
+tstring StringToTString(const std::string& str);				//string转wstring,目前只支持英文
+
+std::string TStringToString(const tstring& tstr);				//wstring转string,目前只支持英文
 
 void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);				//从文件中初始化材质
 
@@ -40,4 +43,7 @@ void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//设置深度缓存
 void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//关闭深度缓存
 
 float GetDeltaTime();																	//获取时间间隔
+
+//TODO:报错后的处理
+void ThrowError(const tstring& errormessege);										//报错
 #endif

@@ -20,10 +20,6 @@ Window g_Window;
 Camera g_Camera(*(g_Window.m_pKeyboardDevice),*(g_Window.m_pMouseDevice));
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-	//test
-	ComponentManager m;
-	Component* t=MeshComponent::NewComponent();
-	//----
 	g_Window.SetWindow();
 	g_Window.InitWindow(hInstance, hPrevInstance,lpCmdLine,nShowCmd,Run,Init);
 	return 0;

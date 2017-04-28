@@ -1,6 +1,23 @@
 #include "stdafx.h"
 #include "Space.h"
 
+tstring StringToTString(const std::string & str)
+{
+	tstring tstr(str.length(), L' ');
+	std::copy(str.begin(), str.end(), tstr.begin());
+	return tstr;
+}
+
+std::string TStringToString(const tstring & tstr)
+{
+	std::string str;
+	for (auto i : tstr)
+	{
+		str += i;
+	}
+	return str;
+}
+
 void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename)
 {
 	std::fstream file;
@@ -75,4 +92,9 @@ float GetDeltaTime()
 		TimeNow = timeGetTime()*0.001f;
 		return DeltaTime;
 	}
+}
+
+void ThrowError(const tstring & errormessege)
+{
+	MessageBox(NULL, errormessege.c_str(), L"Space Game Engine", NULL);
 }
