@@ -6,6 +6,7 @@ Component::Component()
 	m_TypeName = "NullType";
 	m_IfRun = true;
 	m_IfUse = true;
+	m_pFather = nullptr;
 }
 
 Component::~Component()
@@ -18,7 +19,7 @@ std::string Component::GetTypeName()
 	return m_TypeName;
 }
 
-void Component::InitFromFile(std::string filename, int mode)
+void Component::InitFromFile(const std::string& filename, int mode)
 {
 
 }
@@ -35,7 +36,11 @@ void Component::Run(float DeltaTime)
 
 void Component::Attach(Component * pc)
 {
-	pc->m_pChilds.push_back(this);
+	if (pc)
+	{
+		m_pFather = pc;
+		pc->m_Children.push_back(this);
+	}
 }
 
 void Component::Release()

@@ -155,46 +155,10 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\Include\InputDevice.h" />
-    <ClInclude Include="Common\Include\Memory.hpp" />
-    <ClInclude Include="Common\Include\Space.h" />
-    <ClInclude Include="Common\Include\stdafx.h" />
-    <ClInclude Include="Common\Include\Window.h" />
-    <ClInclude Include="Component\Include\Component.h" />
-    <ClInclude Include="Component\Include\ComponentManager.h" />
-    <ClInclude Include="Game\Include\Game.h" />
-    <ClInclude Include="include\Camera.h" />
-    <ClInclude Include="include\ClassDef.h" />
-    <ClInclude Include="include\Graphics.h" />
-    <ClInclude Include="include\LightRender.h" />
-    <ClInclude Include="include\Object.h" />
-    <ClInclude Include="include\Physics.h" />
-    <ClInclude Include="include\Texture.h" />
-    <ClInclude Include="Mesh\Include\Mesh.h" />
     <ClInclude Include="Scene\Include\Scene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Common\Source\InputDevice.cpp" />
-    <ClCompile Include="Common\Source\Space.cpp" />
-    <ClCompile Include="Common\Source\stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Common\Source\Window.cpp" />
-    <ClCompile Include="Component\Source\Component.cpp" />
-    <ClCompile Include="Component\Source\ComponentManager.cpp" />
-    <ClCompile Include="Game\Source\Game.cpp" />
-    <ClCompile Include="Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Scene\Source\Scene.cpp" />
-    <ClCompile Include="source\Camera.cpp" />
-    <ClCompile Include="source\Graphics.cpp" />
-    <ClCompile Include="source\LightRender.cpp" />
-    <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\Object.cpp" />
-    <ClCompile Include="source\Physics.cpp" />
-    <ClCompile Include="source\Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

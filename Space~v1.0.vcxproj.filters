@@ -71,106 +71,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LightRender.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Physics.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ClassDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Camera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Include\InputDevice.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Include\Memory.hpp">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Include\Space.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Include\stdafx.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Include\Window.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Include\Component.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Include\Game.h">
-      <Filter>Game\Game\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\Include\Scene.h">
       <Filter>Game\Scene\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh\Include\Mesh.h">
-      <Filter>Graphics\Mesh\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Include\ComponentManager.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\LightRender.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Texture.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Physics.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Object.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Camera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\InputDevice.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\Space.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\stdafx.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\Window.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Source\Component.cpp">
-      <Filter>Game\Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Source\Game.cpp">
-      <Filter>Game\Game\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\Source\Scene.cpp">
       <Filter>Game\Scene\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh\Source\Mesh.cpp">
-      <Filter>Graphics\Mesh\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Source\ComponentManager.cpp">
-      <Filter>Game\Component\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,17 +6,23 @@
 class MeshComponent :public Component 
 {
 public:
+	const int ModelFileMode = 1;				//Model文件模式
+	const int XMeshFileMode = 2;				//XMesh文件模式
+
 	static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 	MeshComponent();
+	void Release();
 	~MeshComponent();
 protected:
+	int m_Mode;
+
 	LPDIRECT3DDEVICE9 m_pD3DDevice;
 	LPDIRECT3DVERTEXBUFFER9 m_pVertexBuffer;	//顶点缓存
 	LPDIRECT3DINDEXBUFFER9 m_pIndexBuffer;		//索引缓存
 	int m_VertexSize;							//顶点数
 	int m_IndexSize;							//索引数
-	VOID* mpVertices;							//指向顶点缓存内部数据数组的指针
-	WORD* mpIndices;							//指向索引缓存内部数据数组的指针
+	VOID* m_pVertices;							//指向顶点缓存内部数据数组的指针
+	WORD* m_pIndices;							//指向索引缓存内部数据数组的指针
 	int m_PrimitiveCount;						//图元的数量
 	//----------------------------------------------------------------------------------------------------------------
 	//X-File
