@@ -1,6 +1,6 @@
 #pragma once 
 #include "stdafx.h"
-#include "../../Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentManager.h"
 #include "Window.h"
 
 class MeshComponent :public Component 

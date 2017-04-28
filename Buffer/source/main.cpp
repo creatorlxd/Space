@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "Memory.hpp"
 #include "Camera.h"
-#include "../Mesh/Include/Mesh.h"
+#include "Graphics/Mesh/Include/Mesh.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件

@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\DXSDK\Include;.\include;.\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,7 +103,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\DXSDK\Include;.\include;.\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -120,7 +120,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\DXSDK\Include;.\include;.\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\DXSDK\Include;.\include;.\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,10 +155,46 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scene\Include\Scene.h" />
+    <ClInclude Include="Buffer\include\Camera.h" />
+    <ClInclude Include="Buffer\include\ClassDef.h" />
+    <ClInclude Include="Buffer\include\Graphics.h" />
+    <ClInclude Include="Buffer\include\LightRender.h" />
+    <ClInclude Include="Buffer\include\Object.h" />
+    <ClInclude Include="Buffer\include\Physics.h" />
+    <ClInclude Include="Buffer\include\Texture.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\Include\Space.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
+    <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
+    <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Scene\Source\Scene.cpp" />
+    <ClCompile Include="Buffer\source\Camera.cpp" />
+    <ClCompile Include="Buffer\source\Graphics.cpp" />
+    <ClCompile Include="Buffer\source\LightRender.cpp" />
+    <ClCompile Include="Buffer\source\main.cpp" />
+    <ClCompile Include="Buffer\source\Object.cpp" />
+    <ClCompile Include="Buffer\source\Physics.cpp" />
+    <ClCompile Include="Buffer\source\Texture.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
