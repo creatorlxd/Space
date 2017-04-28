@@ -133,9 +133,6 @@
     <ClCompile Include="Buffer\source\LightRender.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Buffer\source\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Buffer\source\Object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -171,6 +168,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\main.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
