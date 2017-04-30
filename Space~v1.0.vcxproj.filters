@@ -64,10 +64,25 @@
     <Filter Include="Graphics\Mesh\Source">
       <UniqueIdentifier>{a31d6213-4770-44d8-9587-5fc99e7c4937}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document">
+      <UniqueIdentifier>{60fa9161-959c-401e-917b-b3178df7a994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document\Document">
+      <UniqueIdentifier>{49587f5d-80b2-46e9-b901-ee1743ae3ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document\Tutorial">
+      <UniqueIdentifier>{172b2f02-bd6f-4ef5-b71b-31d662b9de31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="README.md">
+      <Filter>Document</Filter>
+    </None>
+    <None Include="Document\Document\Space文件类型.md">
+      <Filter>Document\Document</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

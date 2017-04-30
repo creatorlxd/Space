@@ -1,11 +1,11 @@
-#Space Game Engine Helper
+# Space Game Engine Helper
 ---
-##Space文件类型
+## Space文件类型
 >注：所有文件的后缀名自拟
 
 >注：该处的RGB颜色值均是形如 R G B 1 的四维向量
 
-###1.模型文件
+### 1.模型文件
 格式：
 
 	顶点数
@@ -17,7 +17,7 @@
 用途：可以用来储存模型。用`Object::InitFromFile`或`Object::InitFromFileEx`来读取。
 
 ----------
-###2.材质文件
+### 2.材质文件
 格式：
 
 	反射环境光的颜色值
@@ -30,7 +30,7 @@
 用途：用来储存材质。用`Object::InitFromFile`，`Object::InitFromFileEx`或`InitMaterialFromFile`来读取。
 
 ---
-###3.光源文件
+### 3.光源文件
 格式：
 
 	光源的漫反射颜色值
@@ -58,7 +58,7 @@
 * 用`Light::SetSpotLightFromFile`来读取并设置聚光灯
 
 ---
-###4.光源引导文件
+### 4.光源引导文件
 格式：
 
 	光源文件名
@@ -74,7 +74,7 @@
 用途：用来供模型储存光源。用`Object::InitWithLightFromFile`读取。
 
 ---
-###5.纹理引导文件
+### 5.纹理引导文件
 格式：
 
 	需要过滤掉的RGB颜色
