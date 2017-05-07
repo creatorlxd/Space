@@ -11,7 +11,7 @@ Component::Component()
 
 Component::~Component()
 {
-
+	Release();
 }
 
 std::string Component::GetTypeName()

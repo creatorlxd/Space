@@ -161,7 +161,6 @@
     <ClInclude Include="Buffer\include\ClassDef.h" />
     <ClInclude Include="Buffer\include\Graphics.h" />
     <ClInclude Include="Buffer\include\LightRender.h" />
-    <ClInclude Include="Buffer\include\Object.h" />
     <ClInclude Include="Buffer\include\Physics.h" />
     <ClInclude Include="Buffer\include\Texture.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
@@ -172,6 +171,7 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h" />
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
   </ItemGroup>
@@ -179,7 +179,6 @@
     <ClCompile Include="Buffer\source\Camera.cpp" />
     <ClCompile Include="Buffer\source\Graphics.cpp" />
     <ClCompile Include="Buffer\source\LightRender.cpp" />
-    <ClCompile Include="Buffer\source\Object.cpp" />
     <ClCompile Include="Buffer\source\Physics.cpp" />
     <ClCompile Include="Buffer\source\Texture.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
@@ -194,6 +193,7 @@
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />

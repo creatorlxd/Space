@@ -73,6 +73,15 @@
     <Filter Include="Document\Tutorial">
       <UniqueIdentifier>{172b2f02-bd6f-4ef5-b71b-31d662b9de31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{891a62f1-ecb9-4dda-a4f7-fd19d3802383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Include">
+      <UniqueIdentifier>{cfb09179-5358-4fcb-b6e6-33dd79eca12d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Source">
+      <UniqueIdentifier>{7992344c-92d5-4b9a-b45b-de12f7af54eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -96,9 +105,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Buffer\include\LightRender.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\include\Object.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Buffer\include\Physics.h">
@@ -137,6 +143,9 @@
     <ClInclude Include="Source\GameEngine\Common\Include\Window.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h">
+      <Filter>Game\Object\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -146,9 +155,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Buffer\source\LightRender.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\source\Object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Buffer\source\Physics.cpp">
@@ -186,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp">
+      <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

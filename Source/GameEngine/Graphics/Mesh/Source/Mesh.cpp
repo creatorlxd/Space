@@ -154,3 +154,33 @@ void MeshComponent::InitFromFile(const std::string & filename, int mode)
 	}
 	}
 }
+
+void MeshComponent::Run(float DeltaTime)
+{
+	switch (m_Mode)
+	{
+	case ModelFileMode:
+	{
+		m_pD3DDevice->SetStreamSource(0, m_pVertexBuffer, 0, sizeof(CUSTOMVERTEX));
+		m_pD3DDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+		m_pD3DDevice->SetIndices(m_pIndexBuffer);
+		m_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexSize, 0, (UINT)m_PrimitiveCount);
+		break;
+	}
+	case XMeshFileMode:
+	{
+		for (DWORD i = 0; i < m_NumMaterials; i++)
+		{
+			m_pD3DDevice->SetMaterial(&m_pMaterials[i]);
+			m_pD3DDevice->SetTexture(0, m_pTextures[i]);
+			m_pMesh->DrawSubset(i);
+		}
+		break;
+	}
+	default:
+	{
+		ThrowError(tstring(L"需要设定Mesh的模型类型!!!"));
+		break;
+	}
+	}
+}
