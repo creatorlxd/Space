@@ -14,6 +14,11 @@ public:
 	{
 		Component* operator () ()
 		{
+			if (sm_pThis == nullptr)
+			{
+				ThrowError(L"需要先定义一个组件管理器");
+				return nullptr;
+			}
 			Component* buff = new T();
 			sm_pThis->m_Content.push_back(buff);
 			return buff;

@@ -57,9 +57,9 @@ void Object::Release()
 
 }
 
-void Object::SetRootComponent(const std::string & name)
+bool Object::SetRootComponent(const std::string & name)
 {
-
+	return true;
 }
 
 Component * Object::GetRootComponent()

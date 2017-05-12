@@ -16,7 +16,7 @@ public:
 	void Run(float DeltaTime);								//每帧运行时的操作
 	void Release();											//手动释放
 
-	void SetRootComponent(const std::string& name);			//设置根组件
+	bool SetRootComponent(const std::string& name);			//设置根组件
 	Component* GetRootComponent();							//获取根组件
 
 	bool IfRun();						//是否每帧运行
