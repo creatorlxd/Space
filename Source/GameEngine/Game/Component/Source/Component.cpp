@@ -19,6 +19,33 @@ std::string Component::GetTypeName()
 	return m_TypeName;
 }
 
+Component * Component::GetFatherComponent()
+{
+	return m_pFather;
+}
+
+void Component::SetFatherComponent(Component * pc)
+{
+	m_pFather = pc;
+}
+
+void Component::AddChildComponent(Component * pc)
+{
+	m_Children.push_back(pc);
+}
+
+bool Component::DeleteChildComponent(Component * pc)
+{
+	auto result = std::find(m_Children.begin(), m_Children.end(),pc);
+	if (result == m_Children.end())
+	{
+		ThrowError(L"没有该子组件");
+		return false;
+	}
+	m_Children.erase(result);
+	return true;
+}
+
 void Component::InitFromFile(const std::string& filename, int mode)
 {
 

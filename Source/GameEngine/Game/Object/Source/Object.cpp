@@ -29,11 +29,30 @@ Component * Object::GetComponent(const std::string & name)
 
 bool Object::AddComponent(Component * pc)
 {
+	if (GetComponent(pc->GetTypeName()) != nullptr)
+	{
+		ThrowError(L"已有相同类型的组件了");
+		return false;
+	}
+	m_Components.insert(std::make_pair(pc->GetTypeName(),pc));
 	return true;
 }
 
 bool Object::DeleteComponent(const std::string & name)
 {
+	auto component = m_Components.find(name);
+	if (component == m_Components.end())
+	{
+		ThrowError(L"没找到该类型的组件");
+		return false;
+	}
+	Component* father = (*component).second->GetFatherComponent();
+	if (father != nullptr)
+	{
+		father->DeleteChildComponent((*component).second);
+		(*component).second->SetFatherComponent(nullptr);
+	}
+	m_Components.erase(component);
 	return true;
 }
 

@@ -9,7 +9,7 @@ public:
 	~Object();
 	Component* GetComponent(const std::string& name);		//获取组件的指针
 	bool AddComponent(Component* pc);						//添加组件，并不连接
-	bool DeleteComponent(const std::string& name);			//删除组件，并不去除连接
+	bool DeleteComponent(const std::string& name);			//删除组件，并去除连接
 
 	void Start();											//开始时运行
 	void InitFromFile(std::vector<std::pair<std::string, std::string> > filenames);	//从文件初始化
