@@ -58,7 +58,10 @@ bool Object::DeleteComponent(const std::string & name)
 
 void Object::Start()
 {
-
+	for (auto i : m_Components)
+	{
+		i.second->Start();
+	}
 }
 
 void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filenames)
