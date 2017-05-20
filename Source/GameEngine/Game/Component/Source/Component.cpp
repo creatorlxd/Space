@@ -46,6 +46,11 @@ bool Component::DeleteChildComponent(Component * pc)
 	return true;
 }
 
+std::vector<Component*>& Component::GetChildrenComponent()
+{
+	return m_Children;
+}
+
 void Component::InitFromFile(const std::string& filename, int mode)
 {
 

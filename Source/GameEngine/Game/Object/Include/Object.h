@@ -30,3 +30,5 @@ protected:
 	bool m_IfUse;											//是否使用
 	bool m_IfRun;											//是否每帧运行
 };
+
+void RunComponentOnTree(Component* node,float DeltaTime);	//在树上运行组件(DFS)

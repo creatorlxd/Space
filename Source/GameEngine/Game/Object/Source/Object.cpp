@@ -60,18 +60,41 @@ void Object::Start()
 {
 	for (auto i : m_Components)
 	{
-		i.second->Start();
+		if (i.second->IfUse())
+			i.second->Start();
 	}
 }
 
 void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filenames)
 {
+	std::fstream file;
+	for (auto i : filenames)
+	{
+		auto component = GetComponent(i.first);
+		if (component == nullptr)
+		{
+			continue;
+		}
+		file.open(i.second);
+		
+		std::string filename;
+		int mode=0;
 
+		file >> filename>>mode;
+		component->InitFromFile(filename,mode);
+
+		file.close();
+	}
 }
 
 void Object::Run(float DeltaTime)
 {
-
+	if (m_pRootComponent = nullptr)
+	{
+		ThrowError(L"根组件不能为空");
+		return;
+	}
+	RunComponentOnTree(m_pRootComponent, DeltaTime);
 }
 
 void Object::Release()
@@ -107,4 +130,15 @@ void Object::ChangeIfRun(bool b)
 void Object::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
+}
+
+void RunComponentOnTree(Component * node, float DeltaTime)
+{
+	if (node->IfRun())
+		node->Run(DeltaTime);
+	for (auto i : node->GetChildrenComponent())
+	{
+		if (i->IfRun())
+			i->Run(DeltaTime);
+	}
 }

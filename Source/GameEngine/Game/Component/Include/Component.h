@@ -9,9 +9,10 @@ public:
 	~Component();
 	std::string GetTypeName();			//获取类型名
 	Component* GetFatherComponent();	//获取父组件
-	void SetFatherComponent(Component* pc);
+	void SetFatherComponent(Component* pc);//设置父组件
 	void AddChildComponent(Component* pc);	//添加子组件
 	bool DeleteChildComponent(Component* pc);	//删除子组件
+	std::vector<Component*>& GetChildrenComponent();	//获得子组件数组的引用
 	virtual void InitFromFile(const std::string& filename, int mode=0);
 	virtual void Start();			//在开始时执行
 	virtual void Run(float DeltaTime);//每帧运行时的操作
