@@ -12,6 +12,7 @@ public:
 	void SetFatherComponent(Component* pc);//设置父组件
 	void AddChildComponent(Component* pc);	//添加子组件
 	bool DeleteChildComponent(Component* pc);	//删除子组件
+	Component* FindChildComponent(const std::string& name);	//在所有子组件中寻找类型为name的组件(BFS)
 	std::vector<Component*>& GetChildrenComponent();	//获得子组件数组的引用
 	virtual void InitFromFile(const std::string& filename, int mode=0);
 	virtual void Start();			//在开始时执行

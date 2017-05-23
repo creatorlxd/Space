@@ -89,7 +89,7 @@ void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filen
 
 void Object::Run(float DeltaTime)
 {
-	if (m_pRootComponent = nullptr)
+	if (m_pRootComponent == nullptr)
 	{
 		ThrowError(L"根组件不能为空");
 		return;
@@ -99,12 +99,20 @@ void Object::Run(float DeltaTime)
 
 void Object::Release()
 {
-
+	m_Components.clear();
+	m_pRootComponent = nullptr;
 }
 
 bool Object::SetRootComponent(const std::string & name)
 {
-	return true;
+	auto component = GetComponent(name);
+	if (component == nullptr)
+	{
+		ThrowError(L"没找到该类型的组件");
+		return false;
+	}
+	m_pRootComponent = component;
+	return false;
 }
 
 Component * Object::GetRootComponent()
@@ -134,11 +142,10 @@ void Object::ChangeIfUse(bool b)
 
 void RunComponentOnTree(Component * node, float DeltaTime)
 {
-	if (node->IfRun())
+	if (node->IfRun()&&node->IfUse())
 		node->Run(DeltaTime);
 	for (auto i : node->GetChildrenComponent())
 	{
-		if (i->IfRun())
-			i->Run(DeltaTime);
+		RunComponentOnTree(i, DeltaTime);
 	}
 }

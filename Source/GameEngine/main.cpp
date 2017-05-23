@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Object.h"
+#include "Game/Object/Include/ObjectManager.h"
 #include "Space.h"
 #include "Window.h"
 #include "Memory.hpp"

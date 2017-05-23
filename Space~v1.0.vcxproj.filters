@@ -146,6 +146,9 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectManager.h">
+      <Filter>Game\Object\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -194,6 +197,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp">
+      <Filter>Game\Object\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectManager.cpp">
       <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>

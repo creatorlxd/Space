@@ -19,4 +19,5 @@
 #include <algorithm>
 #include <new>
 #include <codecvt>
+#include <queue>
 using std::unique_ptr;

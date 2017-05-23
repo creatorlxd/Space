@@ -46,6 +46,32 @@ bool Component::DeleteChildComponent(Component * pc)
 	return true;
 }
 
+Component * Component::FindChildComponent(const std::string & name)
+{
+	std::queue<Component*> q;
+	for (auto i : m_Children)
+	{
+		q.push(i);
+	}
+	while (!q.empty())
+	{
+		auto i = q.front();
+		q.pop();
+		if (i->GetTypeName() == name)
+		{
+			return i;
+		}
+		else
+		{
+			for (auto j : i->GetChildrenComponent())
+			{
+				q.push(j);
+			}
+		}
+	}
+	return nullptr;
+}
+
 std::vector<Component*>& Component::GetChildrenComponent()
 {
 	return m_Children;
