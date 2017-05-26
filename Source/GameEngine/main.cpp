@@ -17,7 +17,7 @@
 void Run(HWND hwnd);
 void Init(Window* window);
 Window g_Window;
-Camera g_Camera(*(g_Window.m_pKeyboardDevice),*(g_Window.m_pMouseDevice));
+//Camera g_Camera();
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	g_Window.SetWindow();
@@ -27,19 +27,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 void Init(Window* window)
 {
 	//do somethine to init
-	g_Camera.SetProjectionMatrix(D3DX_PI / 4, static_cast<float>(window->GetWindowWidth()), static_cast<float>(window->GetWindowHeight()));
+//	g_Camera.SetProjectionMatrix(D3DX_PI / 4, static_cast<float>(window->GetWindowWidth()), static_cast<float>(window->GetWindowHeight()));
 }
 void Run(HWND hwnd)
 {
 	SetMainWindow(&g_Window);
 	g_Window.BeginPrint();
-	g_Window.ReadInputDevice();
-	g_Camera.Run(g_Window.GetD3DDevice());
+//	g_Camera.Run(g_Window.GetD3DDevice());
 
 	g_Window.EndPrint();
-	if (g_Window.m_pKeyboardDevice->IfPressDown(DIK_ESCAPE))
+/*	if (g_Window.m_pKeyboardDevice->IfPressDown(DIK_ESCAPE))
 	{
 		g_Window.Release();
 		PostQuitMessage(0);
 	}
+*/
 }

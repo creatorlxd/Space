@@ -44,10 +44,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-Window::Window() :
-	m_pMouseDevice(new MouseDevice()),
-	m_pKeyboardDevice(new KeyboardDevice()),
-	m_pInputInterface(new InputInterface())
+Window::Window()
 {
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
@@ -102,7 +99,6 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	{
 		MessageBox(hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
-	m_pInputInterface->Init(hInstance);
 	EnvironmentInit(hwnd);
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
@@ -195,8 +191,6 @@ HRESULT Window::Direct3DInit(HWND hwnd)
 
 HRESULT Window::EnvironmentInit(HWND hwnd)
 {
-	m_pMouseDevice->Init(hwnd, *m_pInputInterface);
-	m_pKeyboardDevice->Init(hwnd, *m_pInputInterface);
 	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);   //开启背面消隐
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, true);
 	TexturePrintInitEx(m_pd3dDevice);
@@ -235,11 +229,6 @@ DWORD Window::GetWindowWidth()
 DWORD Window::GetWindowHeight()
 {
 	return m_WindowHeight;
-}
-
-bool Window::ReadInputDevice()
-{
-	return (m_pMouseDevice->DeviceRead()&m_pKeyboardDevice->DeviceRead());
 }
 
 void SetMainWindow(Window* window)

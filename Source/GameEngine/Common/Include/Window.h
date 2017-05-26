@@ -21,10 +21,6 @@ public:
 	LPDIRECT3DDEVICE9 GetD3DDevice();				//获取D3D接口
 	DWORD GetWindowWidth();							//获取窗口宽度
 	DWORD GetWindowHeight();							//获取窗口高度
-
-	unique_ptr<MouseDevice> m_pMouseDevice;					//鼠标设备
-	unique_ptr<KeyboardDevice> m_pKeyboardDevice;				//键盘设备
-	bool ReadInputDevice();								//鼠标和键盘的设备的读取
 protected:
 	LPDIRECT3DDEVICE9 m_pd3dDevice;					//D3D9接口
 	DWORD m_WindowWidth;								//窗口宽度
@@ -36,7 +32,6 @@ protected:
 
 	void (*m_pWindowLoop)(HWND hwnd);						//游戏循环内容函数指针
 	void (*m_pInitAction)(Window* window);					//游戏初始化函数
-	unique_ptr<InputInterface> m_pInputInterface;				//输入设备接口
 };
 void SetMainWindow(Window* window);					//设置主窗口
 extern Window* SpaceEngineWindow;
