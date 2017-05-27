@@ -7,7 +7,7 @@ MeshComponent::MeshComponent()
 {
 	m_Mode = 0;
 	m_TypeName = "MeshComponent";
-	if (SpaceEngineWindow != NULL)
+	if (SpaceEngineWindow != nullptr)
 	{
 		m_pD3DDevice = SpaceEngineWindow->GetD3DDevice();
 	}

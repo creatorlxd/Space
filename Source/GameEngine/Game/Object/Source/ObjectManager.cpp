@@ -14,12 +14,18 @@ ObjectManager::~ObjectManager()
 	{
 		delete i;
 	}
-	sm_pThis = nullptr;
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
-ObjectManager * const ObjectManager::GetMainManager()
+ObjectManager * ObjectManager::GetMainManager()
 {
 	return sm_pThis;
+}
+
+void ObjectManager::SetAsMainManager()
+{
+	sm_pThis = this;
 }
 
 Object * ObjectManager::NewObject()
@@ -64,4 +70,13 @@ void ObjectManager::Run(float DeltaTime)
 		if (i->IfUse() && i->IfRun())
 			i->Run(DeltaTime);
 	}
+}
+
+void ObjectManager::Release()
+{
+	for (auto i : m_Content)
+	{
+		delete i;
+	}
+	m_Content.clear();
 }

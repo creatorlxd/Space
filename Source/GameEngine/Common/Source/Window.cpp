@@ -1,29 +1,26 @@
 #include"stdafx.h"
 #include"Window.h"
 
-void DefaultWindowLoop(HWND hwnd)
+Window* Window::sm_pThis = nullptr;
+
+void DefaultWindowLoop()
 {
 	//do nothing
 }
 
-void DefaultInitAction(Window* window)
+void DefaultInitAction()
 {
 	//do nothing
 }
-
-
-Window* SpaceEngineWindow=NULL;								//唯一指针
-
-
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if(SpaceEngineWindow==NULL)
+	if(SpaceEngineWindow==nullptr)
 		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
 	switch (message)						//switch语句开始
 	{
 	case WM_PAINT:						// 若是客户区重绘消息
-		SpaceEngineWindow->m_pWindowLoop(hwnd);                 //调用Direct3D渲染函数
+		SpaceEngineWindow->m_pWindowLoop();                 //调用Direct3D渲染函数
 		ValidateRect(hwnd, NULL);		// 更新客户区的显示
 		break;									//跳出该switch语句
 
@@ -46,18 +43,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 Window::Window()
 {
+	m_Hwnd = NULL;
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
 	m_pInitAction = DefaultInitAction;
-	SpaceEngineWindow = this;
+	SetAsMainWindow();
 }
 
 Window::~Window()
 {
 	if (SpaceEngineWindow == this)
-		SpaceEngineWindow = NULL;
+		sm_pThis = nullptr;
 	if (m_pd3dDevice)
 		SafeRelease(m_pd3dDevice);
+	m_pd3dDevice = NULL;
 }
 
 void Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
@@ -67,7 +66,7 @@ void Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
 	m_WindowHeight = height;
 }
 
-HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(HWND hwnd), void(*InitAction)(Window* window))
+HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(), void(*InitAction)())
 {
 	m_pWindowLoop = WindowLoop;
 	m_pInitAction = InitAction;
@@ -90,21 +89,21 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 		return -1;
 
 	//【3】窗口创建四步曲之三：正式创建窗口
-	HWND hwnd = CreateWindow(L"SpaceEngineWindow", m_WindowTitle,				//喜闻乐见的创建窗口函数CreateWindow
+	m_Hwnd = CreateWindow(L"SpaceEngineWindow", m_WindowTitle,				//喜闻乐见的创建窗口函数CreateWindow
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_WindowWidth,
 		m_WindowHeight, NULL, NULL, hInstance, NULL);
 
 	//Direct3D资源的初始化，成功或者失败都用messagebox予以显示
-	if (E_FAIL == Direct3DInit(hwnd))
+	if (E_FAIL == Direct3DInit(m_Hwnd))
 	{
-		MessageBox(hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
+		MessageBox(m_Hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
-	EnvironmentInit(hwnd);
+	EnvironmentInit(m_Hwnd);
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
-	MoveWindow(hwnd, 250, 80, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
-	ShowWindow(hwnd, nShowCmd);    //调用ShowWindow函数来显示窗口
-	UpdateWindow(hwnd);						//对窗口进行更新，就像我们买了新房子要装修一样
+	MoveWindow(m_Hwnd, 250, 80, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
+	ShowWindow(m_Hwnd, nShowCmd);    //调用ShowWindow函数来显示窗口
+	UpdateWindow(m_Hwnd);						//对窗口进行更新，就像我们买了新房子要装修一样
 
 
 
@@ -119,7 +118,7 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 		}
 		else
 		{
-			m_pWindowLoop(hwnd);   //进行渲染
+			m_pWindowLoop();   //进行渲染
 		}
 	}
 	//【6】窗口类的注销
@@ -130,7 +129,7 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 void Window::Release()
 {
 	if (SpaceEngineWindow == this)
-		SpaceEngineWindow = NULL;
+		sm_pThis = nullptr;
 	if (m_pd3dDevice != NULL)
 		SafeRelease(m_pd3dDevice);
 	m_pd3dDevice = NULL;
@@ -197,8 +196,8 @@ HRESULT Window::EnvironmentInit(HWND hwnd)
 	m_pd3dDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
 	OpenDepthBuffer(m_pd3dDevice);
 	SetDepthBuffer(m_pd3dDevice);
-	m_pInitAction(this);
 	SetViewPort(m_pd3dDevice, m_WindowWidth, m_WindowHeight);
+	m_pInitAction();
 	return S_OK;
 }
 
@@ -216,6 +215,11 @@ void Window::EndPrint()
 	m_pd3dDevice->Present(NULL, NULL, NULL, NULL);	//翻转显示
 }
 
+HWND Window::GetHwnd()
+{
+	return m_Hwnd;
+}
+
 LPDIRECT3DDEVICE9 Window::GetD3DDevice()
 {
 	return m_pd3dDevice;
@@ -231,7 +235,12 @@ DWORD Window::GetWindowHeight()
 	return m_WindowHeight;
 }
 
-void SetMainWindow(Window* window)
+Window * Window::GetMainWindow()
 {
-	SpaceEngineWindow = window;
+	return sm_pThis;
+}
+
+void Window::SetAsMainWindow()
+{
+	sm_pThis = this;
 }

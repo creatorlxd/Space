@@ -14,12 +14,18 @@ ComponentManager::~ComponentManager()
 	{
 		delete i;
 	}
-	sm_pThis = nullptr;
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
-ComponentManager * const ComponentManager::GetMainManager()
+ComponentManager * ComponentManager::GetMainManager()
 {
 	return sm_pThis;
+}
+
+void ComponentManager::SetAsMainManager()
+{
+	sm_pThis = this;
 }
 
 bool ComponentManager::DeleteComponent(Component * pc)
@@ -34,4 +40,13 @@ bool ComponentManager::DeleteComponent(Component * pc)
 		}
 	}
 	return false;
+}
+
+void ComponentManager::Release()
+{
+	for (auto i : m_Content)
+	{
+		delete i;
+	}
+	m_Content.clear();
 }

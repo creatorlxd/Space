@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "Space.h"
 
+#define KEY(str) DIK_##str
+
 class InputInterface		//D3DInput½Ó¿Ú
 {
 public:
