@@ -114,7 +114,7 @@ void Game::ChangeIfReadKeyboard(bool b)
 
 void Game::ChangeIfReadMouse(bool b)
 {
-	m_IfReadMouse = true;
+	m_IfReadMouse = b;
 }
 
 void Game::ReadInputDevice()
