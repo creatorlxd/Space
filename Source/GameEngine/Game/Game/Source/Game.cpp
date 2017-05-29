@@ -52,6 +52,7 @@ void Game::Start()
 	if (!sm_pThis)
 	{
 		ThrowError(L"需要先定义一个Game");
+		return;
 	}
 	if (sm_pThis->m_pScene)
 	{
@@ -64,6 +65,7 @@ void Game::Run()
 	if (!sm_pThis)
 	{
 		ThrowError(L"需要先定义一个Game");
+		return;
 	}
 	auto deltatime = GetDeltaTime();
 	sm_pThis->ReadInputDevice();
