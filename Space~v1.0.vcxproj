@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Document\Document\Space基本组件Component类.md" />
     <None Include="Document\Document\Space文件类型.md" />
     <None Include="README.md" />
   </ItemGroup>
