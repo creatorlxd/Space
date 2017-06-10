@@ -82,6 +82,12 @@
     <Filter Include="Game\Object\Source">
       <UniqueIdentifier>{7992344c-92d5-4b9a-b45b-de12f7af54eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document\Document\GameFarmework">
+      <UniqueIdentifier>{1a8667e2-f534-4c65-bab3-ac743f090b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document\Document\Others">
+      <UniqueIdentifier>{b61ae010-e7d4-41fb-96c2-ea3e5ae9fa5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -90,11 +96,11 @@
     <None Include="README.md">
       <Filter>Document</Filter>
     </None>
-    <None Include="Document\Document\Space文件类型.md">
-      <Filter>Document\Document</Filter>
+    <None Include="Document\Document\GameFarmework\Space基本组件Component类.md">
+      <Filter>Document\Document\GameFarmework</Filter>
     </None>
-    <None Include="Document\Document\Space基本组件Component类.md">
-      <Filter>Document\Document</Filter>
+    <None Include="Document\Document\Others\Space文件类型.md">
+      <Filter>Document\Document\Others</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
