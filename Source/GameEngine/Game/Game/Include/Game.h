@@ -28,6 +28,8 @@ public:
 	void ReadInputDevice();			//读取输入设备
 
 	void StartRunGame();			//开始运行游戏
+
+	static void ExitGame();			//退出游戏
 public:
 	Window m_Window;			//窗口
 	KeyboardDevice m_KeyboardDevice;	//键盘设备

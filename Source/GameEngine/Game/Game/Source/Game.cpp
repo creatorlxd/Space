@@ -146,3 +146,8 @@ void Game::StartRunGame()
 {
 	m_Window.InitWindow(sm_hInstance, sm_hPrevInstance, sm_lpCmdLine, sm_nShowCmd, Run, Start);
 }
+
+void Game::ExitGame()
+{
+	PostQuitMessage(0);
+}

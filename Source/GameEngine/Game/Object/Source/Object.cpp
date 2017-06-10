@@ -51,6 +51,18 @@ bool Object::DeleteComponent(const std::string & name)
 	{
 		father->DeleteChildComponent((*component).second);
 		(*component).second->SetFatherComponent(nullptr);
+		std::stack<Component*> eraselist;
+		for (auto i : (*component).second->GetChildrenComponent())
+		{
+			eraselist.push(i);
+			father->AddChildComponent(i);
+		}
+		while (!eraselist.empty())
+		{
+			auto i = eraselist.top();
+			eraselist.pop();
+			(*component).second->DeleteChildComponent(i);
+		}
 	}
 	m_Components.erase(component);
 	return true;
@@ -75,7 +87,7 @@ void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filen
 		{
 			continue;
 		}
-		file.open(i.second);
+		file.open(i.second,std::ios::in);
 		
 		std::string filename;
 		int mode=0;
@@ -85,6 +97,11 @@ void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filen
 
 		file.close();
 	}
+}
+
+void Object::InitFromFile(const std::string& filename)
+{
+	InitFromFile(ReadAssetsListFromFile(filename));
 }
 
 void Object::Run(float DeltaTime)

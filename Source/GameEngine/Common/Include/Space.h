@@ -46,4 +46,6 @@ float GetDeltaTime();																	//获取时间间隔
 
 //TODO:报错后的处理
 void ThrowError(const tstring& errormessege);										//报错
+
+std::vector<std::pair<std::string, std::string> > ReadAssetsListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 #endif

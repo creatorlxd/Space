@@ -98,3 +98,18 @@ void ThrowError(const tstring & errormessege)
 {
 	MessageBox(NULL, errormessege.c_str(), L"Space Game Engine", NULL);
 }
+
+std::vector<std::pair<std::string, std::string> > ReadAssetsListFromFile(const std::string & filename)
+{
+	std::vector<std::pair<std::string, std::string> > re;
+	std::fstream file(filename, std::ios::in);
+	std::string componentname, assetname;
+
+	while (file >> componentname >> assetname)
+	{
+		re.push_back(make_pair(componentname, assetname));
+	}
+	file.close();
+
+	return re;
+}
