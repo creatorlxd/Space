@@ -9,7 +9,7 @@
 Component组件类是Space游戏引擎中执行动作的基本类。  
 目前已有的大部分功能（比如：网格，材质，纹理，坐标...）都是由通过继承Component类来实现的。
 
-![Component类](../Picture/ComponentView.png "Component类")
+![Component类](../../Picture/ComponentView.png "Component类")
 
 ### 2.如何使用
 在接下来的***如何编写自己的组件***中我们将提到：在每个继承Component的类中都应当有这样的一个公共对象：
@@ -66,6 +66,6 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 
 ### 4.实例：（使用DX9的MeshComponent）
 
-![使用DX9的MeshComponent](../Picture/DX9MeshComponentView.png "使用DX9的MeshComponent")
+![使用DX9的MeshComponent](../../Picture/DX9MeshComponentView.png "使用DX9的MeshComponent")
 
 在图中你可以看到我上文所提到的那些方法和成员变量。
