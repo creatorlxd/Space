@@ -88,6 +88,18 @@
     <Filter Include="Document\Document\Others">
       <UniqueIdentifier>{b61ae010-e7d4-41fb-96c2-ea3e5ae9fa5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{6cd9d7b4-f925-4a37-b03f-9ee0ca23c585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Transform">
+      <UniqueIdentifier>{d6a7c46a-3d3c-44eb-bec3-172bc7054212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Transform\Include">
+      <UniqueIdentifier>{9b83914b-0ccd-4f33-832b-0eece0b63131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Transform\Source">
+      <UniqueIdentifier>{406f481f-78e0-43f2-8b62-dd061d681849}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -158,6 +170,9 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectManager.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h">
+      <Filter>Physics\Transform\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -210,6 +225,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectManager.cpp">
       <Filter>Game\Object\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp">
+      <Filter>Physics\Transform\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

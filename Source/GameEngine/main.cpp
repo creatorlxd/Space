@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Graphics/Mesh/Include/Mesh.h"
 #include "Game/Game/Include/Game.h"
+#include "Physics/Transform/Include/Transform.h"
 
 Game g_Game;
 Scene g_Scene;

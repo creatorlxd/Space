@@ -176,6 +176,7 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
+    <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />
+    <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
