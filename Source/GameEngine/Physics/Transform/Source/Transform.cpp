@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "../Include/Transform.h" 
 
+ComponentManager::NewComponent<TransformComponent> TransformComponent::NewComponent;
+
 TransformComponent::TransformComponent()
 {
 	m_TypeName = "TransformComponent";

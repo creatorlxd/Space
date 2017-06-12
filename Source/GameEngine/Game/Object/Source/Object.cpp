@@ -116,6 +116,12 @@ void Object::Run(float DeltaTime)
 
 void Object::Release()
 {
+	auto info = GetComponent("InformationComponent");
+	if (info)
+	{
+		info->Run(0.00f);
+	}
+
 	m_Components.clear();
 	m_pRootComponent = nullptr;
 }
