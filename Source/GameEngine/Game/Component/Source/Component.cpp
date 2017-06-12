@@ -99,6 +99,11 @@ void Component::Attach(Component * pc)
 		m_pFather = pc;
 		pc->m_Children.push_back(this);
 	}
+	else
+	{
+		ThrowError(L"不能将一个组件链向一个空指针");
+		return;
+	}
 }
 
 void Component::Release()

@@ -11,6 +11,8 @@
 #define tfstream fstream
 #endif
 
+#define STRING(str) #str
+
 using tstring = std::conditional<std::is_same<TCHAR, char>::value, std::string, std::wstring>::type;
 
 template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
@@ -47,5 +49,5 @@ float GetDeltaTime();																	//获取时间间隔
 //TODO:报错后的处理
 void ThrowError(const tstring& errormessege);										//报错
 
-std::vector<std::pair<std::string, std::string> > ReadAssetsListFromFile(const std::string& filename);	//从文件中读取资产文件列表
+std::vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 #endif

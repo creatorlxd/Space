@@ -173,6 +173,9 @@
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h">
       <Filter>Physics\Transform\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectInformation.h">
+      <Filter>Game\Object\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -228,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp">
       <Filter>Physics\Transform\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectInformation.cpp">
+      <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

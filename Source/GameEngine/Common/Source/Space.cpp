@@ -99,7 +99,7 @@ void ThrowError(const tstring & errormessege)
 	MessageBox(NULL, errormessege.c_str(), L"Space Game Engine", NULL);
 }
 
-std::vector<std::pair<std::string, std::string> > ReadAssetsListFromFile(const std::string & filename)
+std::vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string & filename)
 {
 	std::vector<std::pair<std::string, std::string> > re;
 	std::fstream file(filename, std::ios::in);

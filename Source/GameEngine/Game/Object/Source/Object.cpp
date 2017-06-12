@@ -101,7 +101,7 @@ void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filen
 
 void Object::InitFromFile(const std::string& filename)
 {
-	InitFromFile(ReadAssetsListFromFile(filename));
+	InitFromFile(ReadAssetListFromFile(filename));
 }
 
 void Object::Run(float DeltaTime)

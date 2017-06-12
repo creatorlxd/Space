@@ -90,8 +90,11 @@ void Game::SetScene(Scene * ps)
 		ThrowError(L"场景指针不能为空");
 		return;
 	}
-	if(m_pScene==nullptr)
+	if (m_pScene == nullptr)
+	{
 		m_pScene = ps;
+		ps->SetAsMainScene();
+	}
 	else
 	{
 		ThrowError(L"只能在设置第一个场景时使用SetScene");
@@ -111,6 +114,7 @@ void Game::ChangeScene(Scene * ps)
 		return;
 	}
 	m_pScene = ps;
+	ps->SetAsMainScene();
 	ps->Start();
 }
 

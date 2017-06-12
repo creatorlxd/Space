@@ -9,7 +9,7 @@ class Game				//顶层游戏类
 public:
 	Game();
 	~Game();
-	Game* GetMainGame();	//获取当前的游戏类指针
+	static Game* GetMainGame();	//获取当前的游戏类指针
 	void SetAsMainGame();	//设置为主要的游戏
 
 	void Init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);			//初始化

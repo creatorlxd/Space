@@ -173,6 +173,7 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h" />
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectInformation.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectInformation.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
