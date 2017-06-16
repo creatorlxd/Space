@@ -20,8 +20,15 @@ public:
 	void EndPrint();								//结束D3D绘制
 	HWND GetHwnd();									//获取窗口句柄
 	LPDIRECT3DDEVICE9 GetD3DDevice();				//获取D3D接口
+	void SetWindowWidth(DWORD width);				//设置窗口宽度
+	void SetWindowHeight(DWORD height);				//设置窗口高度
 	DWORD GetWindowWidth();							//获取窗口宽度
 	DWORD GetWindowHeight();						//获取窗口高度
+	void Resize();									//改变了窗口大小之后的事
+	void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
+	void SetCursorPosition(int x, int y);			//设置鼠标位置
+	void UpdateWindowSize();						//重新获取窗口大小
+	std::pair<int, int> GetWindowPosition();		//获取窗口位置
 
 	static Window* GetMainWindow();					//获取主窗口指针
 	void SetAsMainWindow();							//设置为主窗口
@@ -39,5 +46,7 @@ protected:
 
 	void (*m_pWindowLoop)();						//游戏循环内容函数指针
 	void (*m_pInitAction)();					//游戏初始化函数
+
+	bool m_IfShowCursor;						//是否显示鼠标
 };
 #define SpaceEngineWindow Window::GetMainWindow()

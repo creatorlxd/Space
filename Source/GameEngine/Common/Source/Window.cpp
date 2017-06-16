@@ -34,6 +34,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);			//向系统表明有个线程有终止请求。用来响应WM_DESTROY消息
 		break;									//跳出该switch语句
 
+	case WM_SIZE:
+		SpaceEngineWindow->SetWindowWidth(LOWORD(lParam));
+		SpaceEngineWindow->SetWindowHeight(HIWORD(lParam));
+		SpaceEngineWindow->Resize();
+		break;
 	default:										//若上述case条件都不符合，则执行该default语句
 		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
 	}
@@ -47,6 +52,7 @@ Window::Window()
 	m_pd3dDevice = NULL;
 	m_pWindowLoop = DefaultWindowLoop;
 	m_pInitAction = DefaultInitAction;
+	m_IfShowCursor = true;
 	SetAsMainWindow();
 }
 
@@ -56,6 +62,10 @@ Window::~Window()
 		sm_pThis = nullptr;
 	if (m_pd3dDevice)
 		SafeRelease(m_pd3dDevice);
+	if (!m_IfShowCursor)
+	{
+		ChangeIfShowCursor(true);
+	}
 	m_pd3dDevice = NULL;
 }
 
@@ -133,6 +143,10 @@ void Window::Release()
 	if (m_pd3dDevice != NULL)
 		SafeRelease(m_pd3dDevice);
 	m_pd3dDevice = NULL;
+	if (!m_IfShowCursor)
+	{
+		ChangeIfShowCursor(true);
+	}
 }
 
 HRESULT Window::Direct3DInit(HWND hwnd)
@@ -225,6 +239,16 @@ LPDIRECT3DDEVICE9 Window::GetD3DDevice()
 	return m_pd3dDevice;
 }
 
+void Window::SetWindowWidth(DWORD width)
+{
+	m_WindowWidth = width;
+}
+
+void Window::SetWindowHeight(DWORD height)
+{
+	m_WindowHeight = height;
+}
+
 DWORD Window::GetWindowWidth()
 {
 	return m_WindowWidth;
@@ -233,6 +257,45 @@ DWORD Window::GetWindowWidth()
 DWORD Window::GetWindowHeight()
 {
 	return m_WindowHeight;
+}
+
+void Window::Resize()
+{
+
+}
+
+void Window::ChangeIfShowCursor(bool b)
+{
+	if (m_IfShowCursor == b)
+	{
+		return;
+	}
+	else
+	{
+		m_IfShowCursor = b;
+		ShowCursor(b);
+	}
+}
+
+void Window::SetCursorPosition(int x, int y)
+{
+	auto pos = GetWindowPosition();
+	SetCursorPos(pos.first + x, pos.second + y);
+}
+
+void Window::UpdateWindowSize()
+{
+	RECT r;
+	GetWindowRect(m_Hwnd, &r);
+	m_WindowWidth = abs(r.right - r.left);
+	m_WindowHeight = abs(r.bottom - r.top);
+}
+
+std::pair<int, int> Window::GetWindowPosition()
+{
+	RECT r;
+	GetWindowRect(m_Hwnd, &r);
+	return std::pair<int, int>(r.left,r.top);
 }
 
 Window * Window::GetMainWindow()
