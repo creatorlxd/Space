@@ -34,7 +34,6 @@ public:
 	Window m_Window;			//窗口
 	KeyboardDevice m_KeyboardDevice;	//键盘设备
 	MouseDevice m_MouseDevice;			//鼠标设备
-	ComponentManager m_ComponentManager;//组件管理器
 private:
 	static Game* sm_pThis;		//当前的游戏指针
 	Scene* m_pScene;			//当前的场景

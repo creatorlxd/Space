@@ -20,6 +20,7 @@ public:
 	Object* FindObject(const std::string& name);
 public:
 	ObjectManager m_ObjectManager;	//对象管理器
+	ComponentManager m_ComponentManager;	//组件管理器
 private:
 	static Scene* sm_pThis;
 	std::map<std::string, Object*> m_ObjectInformation;	//对象信息
