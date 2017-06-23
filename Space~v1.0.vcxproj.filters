@@ -100,6 +100,15 @@
     <Filter Include="Physics\Transform\Source">
       <UniqueIdentifier>{406f481f-78e0-43f2-8b62-dd061d681849}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Message">
+      <UniqueIdentifier>{7ff2a509-82a6-48dd-8385-7ec265e723af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Message\Include">
+      <UniqueIdentifier>{3b7599df-7046-4790-87f3-272ab0792e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Message\Source">
+      <UniqueIdentifier>{750c2f91-cd7e-471d-9515-61fa0efdc1d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -176,6 +185,9 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectInformation.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h">
+      <Filter>Game\Message\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -234,6 +246,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectInformation.cpp">
       <Filter>Game\Object\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp">
+      <Filter>Game\Message\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -35,6 +35,7 @@ bool Object::AddComponent(Component * pc)
 		return false;
 	}
 	m_Components.insert(std::make_pair(pc->GetTypeName(),pc));
+	pc->SetFatherObject(this);
 	return true;
 }
 
@@ -64,6 +65,7 @@ bool Object::DeleteComponent(const std::string & name)
 			(*component).second->DeleteChildComponent(i);
 		}
 	}
+	(*component).second->SetFatherObject(nullptr);
 	m_Components.erase(component);
 	return true;
 }

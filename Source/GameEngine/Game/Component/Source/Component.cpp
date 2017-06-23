@@ -7,6 +7,7 @@ Component::Component()
 	m_IfRun = true;
 	m_IfUse = true;
 	m_pFather = nullptr;
+	m_pFatherObject = nullptr;
 }
 
 Component::~Component()
@@ -129,4 +130,14 @@ void Component::ChangeIfRun(bool b)
 void Component::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
+}
+
+void Component::SetFatherObject(Object * po)
+{
+	m_pFatherObject = po;
+}
+
+Object * Component::GetFatherObject()
+{
+	return m_pFatherObject;
 }

@@ -17,6 +17,7 @@ void Scene::SetAsMainScene()
 {
 	m_ObjectManager.SetAsMainManager();
 	m_ComponentManager.SetAsMainManager();
+	m_MessageManager.SetAsMainManager();
 	sm_pThis = this;
 }
 
@@ -32,6 +33,7 @@ void Scene::Start()
 
 void Scene::Run(float DeltaTime)
 {
+	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }
 
@@ -39,6 +41,7 @@ void Scene::Release()
 {
 	m_ObjectManager.Release();
 	m_ComponentManager.Release();
+	m_MessageManager.Release();
 	m_ObjectInformation.clear();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;

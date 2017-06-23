@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "Space.h"
 
+class Object;
+
 class Component							//组件：用于继承的基类
 {
 public:
@@ -23,10 +25,13 @@ public:
 	bool IfUse();						//是否使用
 	void ChangeIfRun(bool b);			//更改每帧是否运行
 	void ChangeIfUse(bool b);			//更改是否使用
+	void SetFatherObject(Object* po);			//设置所属的Object对象
+	Object* GetFatherObject();				//获取所属的Object对象
 protected:
 	std::string m_TypeName;				//组件的类型名
 	bool m_IfRun;						//是否每帧运行
 	bool m_IfUse;						//是否使用
 	std::vector<Component*> m_Children;	//子组件
 	Component* m_pFather;				//父组件
+	Object* m_pFatherObject;					//所属的Object对象
 };

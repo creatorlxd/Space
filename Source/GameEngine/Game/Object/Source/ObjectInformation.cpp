@@ -6,7 +6,6 @@ ComponentManager::NewComponent<InformationComponent> InformationComponent::NewCo
 InformationComponent::InformationComponent()
 {
 	m_TypeName = "InformationComponent";
-	m_pObject = nullptr;
 	m_IfRun = false;
 }
 
@@ -17,18 +16,13 @@ InformationComponent::~InformationComponent()
 
 void InformationComponent::Run(float DeltaTime)
 {
-	if (m_pObject)
-		Scene::GetMainScene()->DeleteObjectInformation(m_pObject);
+	if (GetFatherObject())
+		Scene::GetMainScene()->DeleteObjectInformation(GetFatherObject());
 	else
 	{
 		ThrowError(L"需要先设置其所在的Object");
 		return;
 	}
-}
-
-void InformationComponent::SetObjectInformation(Object * po)
-{
-	m_pObject = po;
 }
 
 bool RegisterObject(const std::string & name, Object * po)
@@ -52,7 +46,4 @@ bool RegisterObject(const std::string & name, Object * po)
 	auto buff = InformationComponent::NewComponent();
 	po->AddComponent(buff);
 	buff->Attach(po->GetRootComponent());
-
-	auto buff2 = dynamic_cast<InformationComponent*>(buff);
-	buff2->SetObjectInformation(po);
 }

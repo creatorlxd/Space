@@ -11,10 +11,6 @@ public:
 	~InformationComponent();
 
 	void Run(float DeltaTime);
-
-	void SetObjectInformation(Object* po);
-private:
-	Object* m_pObject;
 };
 
 bool RegisterObject(const std::string& name, Object* po);	//×¢²áObject

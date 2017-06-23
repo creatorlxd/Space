@@ -1,6 +1,7 @@
 #pragma once 
 #include "stdafx.h"
 #include "Game/Object/Include/ObjectManager.h"
+#include "Game/Message/Include/Message.h"
 
 class Scene					//场景
 {
@@ -21,6 +22,7 @@ public:
 public:
 	ObjectManager m_ObjectManager;	//对象管理器
 	ComponentManager m_ComponentManager;	//组件管理器
+	MessageManager m_MessageManager;	//消息管理器
 private:
 	static Scene* sm_pThis;
 	std::map<std::string, Object*> m_ObjectInformation;	//对象信息
