@@ -19,6 +19,7 @@ public:
 	bool DeleteObjectInformation(const std::string& name);
 	bool DeleteObjectInformation(Object* po);
 	Object* FindObject(const std::string& name);
+	std::string FindObjectName(Object* po);
 public:
 	ObjectManager m_ObjectManager;	//对象管理器
 	ComponentManager m_ComponentManager;	//组件管理器

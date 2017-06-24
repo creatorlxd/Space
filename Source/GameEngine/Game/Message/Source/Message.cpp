@@ -150,12 +150,70 @@ bool MessageManager::AddReceiver(const std::string & name, Receiver * pr)
 	}
 }
 
-void Sender::Send(const Message & message)
+Receiver * MessageManager::FindReceiver(const std::string & name)
 {
+	auto iter = m_Receivers.find(name);
+	if (iter == m_Receivers.end())
+	{
+		return nullptr;
+	}
+	return (*iter).second;
+}
+
+std::string MessageManager::FindReceiverName(Receiver * pr)
+{
+	for (auto i = m_Receivers.begin(); i != m_Receivers.end(); i++)
+	{
+		if (i->second == pr)
+		{
+			return i->first;
+		}
+	}
+	return std::string();
+}
+
+void Sender::ProduceMessage(const Message & message)
+{
+	if (!MessageManager::GetMainManager())
+	{
+		ThrowError(L"需要先定义一个消息管理器");
+		return;
+	}
 	MessageManager::GetMainManager()->PushMessage(message);
 }
 
-void Sender::Send(const std::string & name, int c)
+void Sender::ProduceMessage(const std::string & name, int c)
 {
+	if (!MessageManager::GetMainManager())
+	{
+		ThrowError(L"需要先定义一个消息管理器");
+		return;
+	}
 	MessageManager::GetMainManager()->PushMessage(Message(name, c));
+}
+
+void Sender::ProduceMessage(MessageManager & manager, const Message & message)
+{
+	manager.PushMessage(message);
+}
+
+void Sender::ProduceMessages(const std::vector<std::string>& names, int c)
+{
+	if (!MessageManager::GetMainManager())
+	{
+		ThrowError(L"需要先定义一个消息管理器");
+		return;
+	}
+	for (auto i : names)
+	{
+		MessageManager::GetMainManager()->PushMessage(Message(i, c));
+	}
+}
+
+void Sender::ProduceMessages(MessageManager & manager, const std::vector<std::string>& names, int c)
+{
+	for (auto i : names)
+	{
+		manager.PushMessage(Message(i, c));
+	}
 }

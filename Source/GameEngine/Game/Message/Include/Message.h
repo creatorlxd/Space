@@ -59,6 +59,8 @@ public:
 	bool DeleteReceiver(const std::string& name);
 	bool DeleteReceiver(Receiver* pr);
 	bool AddReceiver(const std::string& name, Receiver* pr);
+	Receiver* FindReceiver(const std::string& name);
+	std::string FindReceiverName(Receiver* pr);
 private:
 	static MessageManager* sm_pThis;
 	std::map<std::string, Receiver*> m_Receivers;
@@ -68,6 +70,9 @@ private:
 class Sender						//发送器
 {
 public:
-	void Send(const Message& message);
-	void Send(const std::string& name, int c);
+	void ProduceMessage(const Message& message);			//产生并发送消息
+	void ProduceMessage(const std::string& name, int c);	//产生并发送消息
+	void ProduceMessage(MessageManager& manager, const Message& message);	//产生并发送消息
+	void ProduceMessages(const std::vector<std::string>& names, int c);		//发送同一消息给多个对象
+	void ProduceMessages(MessageManager& manager, const std::vector<std::string>& names, int c);	//发送同一消息给多个对象
 };

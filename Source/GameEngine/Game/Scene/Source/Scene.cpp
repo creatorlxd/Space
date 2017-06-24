@@ -99,3 +99,15 @@ Object * Scene::FindObject(const std::string & name)
 		return (*re).second;
 	}
 }
+
+std::string Scene::FindObjectName(Object * po)
+{
+	for (auto i = m_ObjectInformation.begin(); i != m_ObjectInformation.end(); i++)
+	{
+		if (i->second == po)
+		{
+			return i->first;
+		}
+	}
+	return std::string();
+}
