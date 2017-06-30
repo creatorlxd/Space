@@ -46,4 +46,5 @@ bool RegisterObject(const std::string & name, Object * po)
 	auto buff = InformationComponent::NewComponent();
 	po->AddComponent(buff);
 	buff->Attach(po->GetRootComponent());
+	return true;
 }

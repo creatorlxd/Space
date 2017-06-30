@@ -25,16 +25,50 @@ void Receiver::ReceiveMessage(int message)
 	m_MessageQueue.push(message);
 }
 
-Message Receiver::TakeOutMessage()
+int Receiver::TakeOutMessage()
 {
 	auto re = m_MessageQueue.front();
 	m_MessageQueue.pop();
 	return re;
 }
 
+bool Receiver::IfEmpty()
+{
+	return m_MessageQueue.empty();
+}
+
+int Receiver::Size()
+{
+	return m_MessageQueue.size();
+}
+
+void Receiver::Clear()
+{
+	while (!m_MessageQueue.empty())
+	{
+		m_MessageQueue.pop();
+	}
+}
+
+bool Receiver::IfHaveMessage(int c)
+{
+	bool re = false;
+	for (int i = 1; i <= m_MessageQueue.size(); i++)
+	{
+		int buff = TakeOutMessage();
+		if (buff == c)
+		{
+			re = true;
+		}
+		m_MessageQueue.push(buff);
+	}
+	return re;
+}
+
 MessageManager::MessageManager()
 {
 	sm_pThis = this;
+	m_MaxSize = 256;
 }
 
 MessageManager::~MessageManager()
@@ -71,7 +105,8 @@ void MessageManager::PushMessage(const Message & message)
 
 void MessageManager::Run()
 {
-	while (!m_GlobalMessageQueue.empty())
+	int cot = 1;
+	while (!m_GlobalMessageQueue.empty()&&cot<=m_MaxSize)
 	{
 		auto m = m_GlobalMessageQueue.front();
 		m_GlobalMessageQueue.pop();
@@ -81,10 +116,12 @@ void MessageManager::Run()
 			for (auto i : m_Receivers)
 			{
 				i.second->ReceiveMessage(m);
+				cot += 1;
 			}
 		}
 		else
 		{
+			cot += 1;
 			auto rer = m_Receivers.find(m.m_ReceiverName);
 			if (rer != m_Receivers.end())
 			{
@@ -172,6 +209,26 @@ std::string MessageManager::FindReceiverName(Receiver * pr)
 	return std::string();
 }
 
+void MessageManager::SetMaxSize(int i)
+{
+	m_MaxSize = i;
+}
+
+Sender::Sender()
+{
+	m_Name = "Unkown";
+}
+
+Sender::Sender(const std::string & name)
+{
+	m_Name = name;
+}
+
+Sender::~Sender()
+{
+
+}
+
 void Sender::ProduceMessage(const Message & message)
 {
 	if (!MessageManager::GetMainManager())
@@ -179,6 +236,7 @@ void Sender::ProduceMessage(const Message & message)
 		ThrowError(L"需要先定义一个消息管理器");
 		return;
 	}
+	DebugLog(message);
 	MessageManager::GetMainManager()->PushMessage(message);
 }
 
@@ -189,11 +247,13 @@ void Sender::ProduceMessage(const std::string & name, int c)
 		ThrowError(L"需要先定义一个消息管理器");
 		return;
 	}
+	DebugLog(Message(name, c));
 	MessageManager::GetMainManager()->PushMessage(Message(name, c));
 }
 
 void Sender::ProduceMessage(MessageManager & manager, const Message & message)
 {
+	DebugLog(message);
 	manager.PushMessage(message);
 }
 
@@ -206,6 +266,7 @@ void Sender::ProduceMessages(const std::vector<std::string>& names, int c)
 	}
 	for (auto i : names)
 	{
+		DebugLog(Message(i, c));
 		MessageManager::GetMainManager()->PushMessage(Message(i, c));
 	}
 }
@@ -214,6 +275,30 @@ void Sender::ProduceMessages(MessageManager & manager, const std::vector<std::st
 {
 	for (auto i : names)
 	{
+		DebugLog(Message(i, c));
 		manager.PushMessage(Message(i, c));
 	}
+}
+
+void Sender::FastProduceMessage(Receiver & r, const Message & message)
+{
+	DebugLog(message);
+	r.ReceiveMessage(message.m_Content);
+}
+
+void Sender::DebugLog(const Message & message)
+{
+#if defined(DEBUG) | defined(_DEBUG)
+	//TODO:调用日志系统
+#endif
+}
+
+void Sender::SetName(const std::string & name)
+{
+	m_Name = name;
+}
+
+std::string Sender::GetName()
+{
+	return m_Name;
 }

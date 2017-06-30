@@ -108,14 +108,13 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	{
 		MessageBox(m_Hwnd, L"Direct3D初始化失败~！", L"消息窗口", 0); //使用MessageBox函数，创建一个消息窗口 
 	}
-	EnvironmentInit(m_Hwnd);
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
 	MoveWindow(m_Hwnd, 250, 80, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
 	ShowWindow(m_Hwnd, nShowCmd);    //调用ShowWindow函数来显示窗口
 	UpdateWindow(m_Hwnd);						//对窗口进行更新，就像我们买了新房子要装修一样
 
-
+	EnvironmentInit(m_Hwnd);
 
 											//【5】消息循环过程
 	MSG msg = { 0 };  //初始化msg

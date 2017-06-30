@@ -8,6 +8,7 @@
 #include "Game/Game/Include/Game.h"
 #include "Physics/Transform/Include/Transform.h"
 #include "Game/Object/Include/ObjectInformation.h"
+#include "Game/Message/Include/Message.h"
 
 Game g_Game;
 Scene g_Scene;

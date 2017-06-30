@@ -17,8 +17,12 @@ class Receiver						//接收器
 {
 public:
 	void ReceiveMessage(const Message& message);//接受消息
-	void ReceiveMessage(int message);//接受消息
-	Message TakeOutMessage();					//取出消息
+	void ReceiveMessage(int message);			//接受消息
+	int TakeOutMessage();					//取出消息
+	bool IfEmpty();								//是否为空
+	int Size();									//获取队列的大小
+	void Clear();								//清空队列
+	bool IfHaveMessage(int c);					//是否含有某个消息
 private:
 	std::queue<int> m_MessageQueue;
 };
@@ -51,7 +55,7 @@ public:
 				ThrowError(L"已存在该接收器");
 				return nullptr;
 			}
-			auto pointer = new Receiver();
+			Receiver* pointer = new T();
 			sm_pThis->m_Receivers.insert(make_pair(name, pointer));
 			return pointer;
 		}
@@ -61,18 +65,32 @@ public:
 	bool AddReceiver(const std::string& name, Receiver* pr);
 	Receiver* FindReceiver(const std::string& name);
 	std::string FindReceiverName(Receiver* pr);
+	void SetMaxSize(int i);
 private:
 	static MessageManager* sm_pThis;
 	std::map<std::string, Receiver*> m_Receivers;
 	std::queue<Message> m_GlobalMessageQueue;
+	int m_MaxSize;
 };
 
 class Sender						//发送器
 {
 public:
+	Sender();
+	Sender(const std::string& name);
+	~Sender();
+
 	void ProduceMessage(const Message& message);			//产生并发送消息
 	void ProduceMessage(const std::string& name, int c);	//产生并发送消息
 	void ProduceMessage(MessageManager& manager, const Message& message);	//产生并发送消息
 	void ProduceMessages(const std::vector<std::string>& names, int c);		//发送同一消息给多个对象
 	void ProduceMessages(MessageManager& manager, const std::vector<std::string>& names, int c);	//发送同一消息给多个对象
+	void FastProduceMessage(Receiver& r, const Message& message);			//快速发送消息（不经过管理器队列）：不推荐使用
+
+	void DebugLog(const Message& message);
+
+	void SetName(const std::string& name);
+	std::string GetName();
+private:
+	std::string m_Name;
 };
