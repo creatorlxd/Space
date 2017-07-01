@@ -188,6 +188,12 @@
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h">
       <Filter>Game\Message\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h">
+      <Filter>Game\Component\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -249,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp">
       <Filter>Game\Message\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp">
+      <Filter>Game\Component\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

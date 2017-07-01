@@ -1,7 +1,7 @@
 #include"stdafx.h"
 #include "../Include/Mesh.h" 
 
-ComponentManager::NewComponent<MeshComponent> MeshComponent::NewComponent;
+REGISTERCOMPONENTCLASS(MeshComponent);
 
 MeshComponent::MeshComponent()
 {

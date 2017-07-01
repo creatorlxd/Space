@@ -167,9 +167,11 @@
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Include\Space.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h" />
@@ -196,6 +198,7 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp" />

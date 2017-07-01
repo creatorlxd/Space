@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "InputDevice.h"
 #include "Game/Scene/Include/Scene.h"
+#include "Game/Component/Include/ComponentFactoryManager.h"
 
 class Game				//∂•≤„”Œœ∑¿‡
 {

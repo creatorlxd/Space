@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "Component.h"
+#include "ComponentFactoryManager.h"
 
 class ComponentManager							//组件管理器
 {
@@ -12,6 +12,8 @@ public:
 	template<typename T>
 	struct NewComponent							//创建一个组件
 	{
+		std::string m_Name;
+		NewComponent(const std::string& name);
 		Component* operator () ()
 		{
 			if (sm_pThis == nullptr)
@@ -30,3 +32,16 @@ protected:
 	static ComponentManager* sm_pThis;			//当前的管理器指针
 	std::vector<Component*> m_Content;			//所管理的组件
 };
+
+template<typename T>
+inline ComponentManager::NewComponent<T>::NewComponent(const std::string & name)
+{
+	m_Name = name;
+	auto pointer = ComponentFactoryManager::GetMainManager();
+	if (!pointer)
+	{
+		ThrowError(L"必须创建一个组件工厂方法管理器");
+		return;
+	}
+	pointer->AddComponentFactory(name, *this);
+}

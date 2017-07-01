@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../Include/Transform.h" 
 
-ComponentManager::NewComponent<TransformComponent> TransformComponent::NewComponent;
+REGISTERCOMPONENTCLASS(TransformComponent);
 
 TransformComponent::TransformComponent()
 {

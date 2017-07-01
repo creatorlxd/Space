@@ -1,14 +1,5 @@
 #include "stdafx.h"
-#include "Game/Object/Include/ObjectManager.h"
-#include "Space.h"
-#include "Window.h"
-#include "Memory.hpp"
-#include "Camera.h"
-#include "Graphics/Mesh/Include/Mesh.h"
-#include "Game/Game/Include/Game.h"
-#include "Physics/Transform/Include/Transform.h"
-#include "Game/Object/Include/ObjectInformation.h"
-#include "Game/Message/Include/Message.h"
+#include "SpaceGameEngine.h"
 
 Game g_Game;
 Scene g_Scene;

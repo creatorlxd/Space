@@ -53,7 +53,7 @@ void Receiver::Clear()
 bool Receiver::IfHaveMessage(int c)
 {
 	bool re = false;
-	for (int i = 1; i <= m_MessageQueue.size(); i++)
+	for (size_t i = 1; i <= m_MessageQueue.size(); i++)
 	{
 		int buff = TakeOutMessage();
 		if (buff == c)

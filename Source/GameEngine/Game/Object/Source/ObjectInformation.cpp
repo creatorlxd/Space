@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Game/Object/Include/ObjectInformation.h"
 
-ComponentManager::NewComponent<InformationComponent> InformationComponent::NewComponent;
+REGISTERCOMPONENTCLASS(InformationComponent);
 
 InformationComponent::InformationComponent()
 {
