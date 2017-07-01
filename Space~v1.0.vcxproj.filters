@@ -194,6 +194,9 @@
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectFactory.h">
+      <Filter>Game\Object\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -258,6 +261,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp">
       <Filter>Game\Component\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectFactory.cpp">
+      <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

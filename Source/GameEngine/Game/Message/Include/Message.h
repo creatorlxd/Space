@@ -60,6 +60,7 @@ public:
 			return pointer;
 		}
 	};
+	NewReceiver<Receiver> NewBaseReceiver;
 	bool DeleteReceiver(const std::string& name);
 	bool DeleteReceiver(Receiver* pr);
 	bool AddReceiver(const std::string& name, Receiver* pr);
