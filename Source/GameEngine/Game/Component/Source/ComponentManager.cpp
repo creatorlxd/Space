@@ -2,6 +2,7 @@
 #include "../Include/ComponentManager.h"
 
 ComponentManager* ComponentManager::sm_pThis = nullptr;
+ComponentFactoryManager g_ComponentFactoryManager;
 
 ComponentManager::ComponentManager()
 {
@@ -49,4 +50,10 @@ void ComponentManager::Release()
 		delete i;
 	}
 	m_Content.clear();
+}
+
+Component * ComponentManager::NewComponentByName(const std::string & name)
+{
+	std::function<Component*(void)> f = g_ComponentFactoryManager.FindComponentFactory(name);
+	return f();
 }

@@ -21,6 +21,4 @@ private:
 	static ComponentFactoryManager* sm_pThis;
 };
 
-extern ComponentFactoryManager g_ComponentFactoryManager;	//组件工厂方法管理器（用于反射创建组件）
-
 #define REGISTERCOMPONENTCLASS(name) ComponentManager::NewComponent<name> name::NewComponent(#name)

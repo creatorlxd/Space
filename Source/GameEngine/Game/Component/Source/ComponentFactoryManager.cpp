@@ -2,7 +2,6 @@
 #include "../Include/ComponentFactoryManager.h"
 
 ComponentFactoryManager* ComponentFactoryManager::sm_pThis = nullptr;
-ComponentFactoryManager g_ComponentFactoryManager;
 
 ComponentFactoryManager::ComponentFactoryManager()
 {

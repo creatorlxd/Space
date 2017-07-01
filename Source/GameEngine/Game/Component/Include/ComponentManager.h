@@ -28,10 +28,14 @@ public:
 	};
 	bool DeleteComponent(Component* pc);		//删除一个组件
 	void Release();								//释放
+
+	static Component* NewComponentByName(const std::string& name);			//通过组件子类名来创建组件
 protected:
 	static ComponentManager* sm_pThis;			//当前的管理器指针
 	std::vector<Component*> m_Content;			//所管理的组件
 };
+
+extern ComponentFactoryManager g_ComponentFactoryManager;
 
 template<typename T>
 inline ComponentManager::NewComponent<T>::NewComponent(const std::string & name)
