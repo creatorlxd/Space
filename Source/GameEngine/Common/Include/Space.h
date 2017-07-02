@@ -65,17 +65,6 @@ tstring StringToTString(const std::string& str);				//string转wstring,目前只支持
 
 std::string TStringToString(const tstring& tstr);				//wstring转string,目前只支持英文
 
-void InitMaterialFromFile(D3DMATERIAL9 &Material, std::string filename);				//从文件中初始化材质
-
-void SetViewPort(LPDIRECT3DDEVICE9 g_pd3dDevice,DWORD width=800, DWORD height=600);												//设置视口变化
-
-void OpenAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);											//开启并设置Alpha融合
-void CloseAlpha(LPDIRECT3DDEVICE9 g_pd3dDevice);										//关闭Alpha融合
-
-void OpenDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//开启深度缓存
-void SetDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//设置深度缓存
-void CloseDepthBuffer(LPDIRECT3DDEVICE9 g_pd3dDevice);									//关闭深度缓存
-
 float GetDeltaTime();																	//获取时间间隔
 
 //TODO:报错后的处理

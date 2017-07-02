@@ -4,4 +4,4 @@
 
 其开发者目前主要是 creatorlxd
 
-基于DirectX 9.0c图形库
+基于DirectX 11.0c图形库

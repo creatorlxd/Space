@@ -1,8 +1,6 @@
 #pragma once
 #include"Space.h"
 #include"stdafx.h"
-#include"Texture.h"
-#include"ClassDef.h"
 #include"InputDevice.h"
 void DefaultWindowLoop();				//默认的游戏循环函数指针
 void DefaultInitAction();					//默认的初始化函数

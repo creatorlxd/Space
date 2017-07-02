@@ -128,21 +128,6 @@
     <ClInclude Include="Buffer\include\Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer\include\ClassDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\include\Graphics.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\include\LightRender.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\include\Physics.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\include\Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">
       <Filter>Graphics\Mesh\Include</Filter>
     </ClInclude>
@@ -200,18 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\source\Graphics.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\source\LightRender.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\source\Physics.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\source\Texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
