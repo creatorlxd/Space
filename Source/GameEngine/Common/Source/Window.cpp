@@ -49,7 +49,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 Window::Window()
 {
 	m_Hwnd = NULL;
-	m_pd3dDevice = NULL;
+	m_pD3DDevice = nullptr;
+	m_pD3DDeviceContext = nullptr;
+	m_IfUse4xMsaa = true;
+	m_4xMsaaQuality = 0;
+	m_pSwapChain = nullptr;
+	m_pDepthStencilBuffer = nullptr;
+	m_pRenderTargetView = nullptr;
+	m_pDepthStencilView = nullptr;
 	m_pWindowLoop = DefaultWindowLoop;
 	m_pInitAction = DefaultInitAction;
 	m_IfShowCursor = true;
@@ -60,13 +67,12 @@ Window::~Window()
 {
 	if (SpaceEngineWindow == this)
 		sm_pThis = nullptr;
-	if (m_pd3dDevice)
-		SafeRelease(m_pd3dDevice);
+	SafeRelease(m_pD3DDevice);
+	SafeRelease(m_pD3DDeviceContext);
 	if (!m_IfShowCursor)
 	{
 		ChangeIfShowCursor(true);
 	}
-	m_pd3dDevice = NULL;
 }
 
 void Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
@@ -139,9 +145,8 @@ void Window::Release()
 {
 	if (SpaceEngineWindow == this)
 		sm_pThis = nullptr;
-	if (m_pd3dDevice != NULL)
-		SafeRelease(m_pd3dDevice);
-	m_pd3dDevice = NULL;
+	SafeRelease(m_pD3DDevice);
+	SafeRelease(m_pD3DDeviceContext);
 	if (!m_IfShowCursor)
 	{
 		ChangeIfShowCursor(true);
@@ -150,82 +155,102 @@ void Window::Release()
 
 HRESULT Window::Direct3DInit(HWND hwnd)
 {
-	//--------------------------------------------------------------------------------------
-	// 【Direct3D初始化四步曲之一，创接口】：创建Direct3D接口对象, 以便用该Direct3D对象创建Direct3D设备对象
-	//--------------------------------------------------------------------------------------
-	LPDIRECT3D9  pD3D = NULL; //Direct3D接口对象的创建
-	if (NULL == (pD3D = Direct3DCreate9(D3D_SDK_VERSION))) //初始化Direct3D接口对象，并进行DirectX版本协商
-		return E_FAIL;
+	UINT CreateDeviceFlags = 0;
 
-	//--------------------------------------------------------------------------------------
-	// 【Direct3D初始化四步曲之二,取信息】：获取硬件设备信息
-	//--------------------------------------------------------------------------------------
-	D3DCAPS9 caps; int vp = 0;
-	if (FAILED(pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &caps)))
+#if  defined(DEBUG)||defined(_DEBUG)
+	CreateDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
+	D3D_FEATURE_LEVEL featureLevel;
+	HRESULT  hr = D3D11CreateDevice(
+		0,                     //  默认显示适配器
+		D3D_DRIVER_TYPE_HARDWARE,
+		0,                     //  不使用软件设备
+		CreateDeviceFlags,
+		0, 0,               //  默认的特征等级数组
+		D3D11_SDK_VERSION,
+		&m_pD3DDevice,
+		&featureLevel,
+		&m_pD3DDeviceContext);
+	if (FAILED(hr))
 	{
-		return E_FAIL;
+		MessageBox(0, L"D3D11CreateDevice Failed.", 0, 0);
+		return  false;
 	}
-	if (caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
-		vp = D3DCREATE_HARDWARE_VERTEXPROCESSING;   //支持硬件顶点运算，我们就采用硬件顶点运算，妥妥的
+	if (featureLevel != D3D_FEATURE_LEVEL_11_0)
+	{
+		MessageBox(0, L"Direct3D FeatureLevel 11 unsupported.", 0, 0);
+		return  false;
+	}
+	HR(m_pD3DDevice->CheckMultisampleQualityLevels(
+		DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m_4xMsaaQuality));
+	assert(m_4xMsaaQuality > 0);
+
+	DXGI_SWAP_CHAIN_DESC sd;
+	sd.BufferDesc.Width = m_WindowWidth;    // 使用窗口客户区宽度
+	sd.BufferDesc.Height = m_WindowHeight;
+	sd.BufferDesc.RefreshRate.Numerator = 60;
+	sd.BufferDesc.RefreshRate.Denominator = 1;
+	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+	// 是否使用4X MSAA?
+	if (m_IfUse4xMsaa)
+	{
+		sd.SampleDesc.Count = 4;
+		// m4xMsaaQuality是通过CheckMultisampleQualityLevels()方法获得的
+		sd.SampleDesc.Quality = m_4xMsaaQuality - 1;
+	}
+	// NoMSAA
 	else
-		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING; //不支持硬件顶点运算，无奈只好采用软件顶点运算
+	{
+		sd.SampleDesc.Count = 1;
+		sd.SampleDesc.Quality = 0;
+	}
+	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	sd.BufferCount = 1;
+	sd.OutputWindow = m_Hwnd;
+	sd.Windowed = true;
+	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-	//--------------------------------------------------------------------------------------
-	// 【Direct3D初始化四步曲之三，填内容】：填充D3DPRESENT_PARAMETERS结构体
-	//--------------------------------------------------------------------------------------
-	D3DPRESENT_PARAMETERS d3dpp;
-	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.BackBufferWidth = m_WindowWidth;
-	d3dpp.BackBufferHeight = m_WindowHeight;
-	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
-	d3dpp.BackBufferCount = 1;
-	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE;
-	d3dpp.MultiSampleQuality = 0;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.hDeviceWindow = hwnd;
-	d3dpp.Windowed = true;
-	d3dpp.EnableAutoDepthStencil = true;
-	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	d3dpp.Flags = 0;
-	d3dpp.FullScreen_RefreshRateInHz = 0;
-	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	IDXGIDevice* dxgiDevice = 0;
+	HR(m_pD3DDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice));
 
-	//--------------------------------------------------------------------------------------
-	// 【Direct3D初始化四步曲之四，创设备】：创建Direct3D设备接口
-	//--------------------------------------------------------------------------------------
-	if (FAILED(pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
-		hwnd, vp, &d3dpp, &m_pd3dDevice)))
-		return E_FAIL;
+	IDXGIAdapter* dxgiAdapter = 0;
+	HR(dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void**)&dxgiAdapter));
 
-	SafeRelease(pD3D); //LPDIRECT3D9接口对象的使命完成，我们将其释放掉
-	return S_OK;
+	IDXGIFactory* dxgiFactory = 0;
+	HR(dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&dxgiFactory));
+
+	HR(dxgiFactory->CreateSwapChain(m_pD3DDevice, &sd, &m_pSwapChain));
+
+	SafeRelease(dxgiDevice);
+	SafeRelease(dxgiAdapter);
+	SafeRelease(dxgiFactory);
+
+	Resize();
+	return true;
 }
 
 HRESULT Window::EnvironmentInit(HWND hwnd)
 {
-	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);   //开启背面消隐
-	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, true);
-	TexturePrintInitEx(m_pd3dDevice);
-	m_pd3dDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
-	OpenDepthBuffer(m_pd3dDevice);
-	SetDepthBuffer(m_pd3dDevice);
-	SetViewPort(m_pd3dDevice, m_WindowWidth, m_WindowHeight);
 	m_pInitAction();
 	return S_OK;
 }
 
 void Window::BeginPrint()
 {
-	m_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);//一：清屏操作
+	assert(m_pD3DDeviceContext);
+	assert(m_pSwapChain);
 
-	m_pd3dDevice->BeginScene();			//开始绘制
+	m_pD3DDeviceContext->ClearRenderTargetView(m_pRenderTargetView, reinterpret_cast<const float*>(&Colors::Black));
+	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
 void Window::EndPrint()
 {
-	m_pd3dDevice->EndScene();	//结束绘制
-
-	m_pd3dDevice->Present(NULL, NULL, NULL, NULL);	//翻转显示
+	HR(m_pSwapChain->Present(0, 0));
 }
 
 HWND Window::GetHwnd()
@@ -233,9 +258,14 @@ HWND Window::GetHwnd()
 	return m_Hwnd;
 }
 
-LPDIRECT3DDEVICE9 Window::GetD3DDevice()
+ID3D11Device* Window::GetD3DDevice()
 {
-	return m_pd3dDevice;
+	return m_pD3DDevice;
+}
+
+ID3D11DeviceContext * Window::GetD3DDeviceContext()
+{
+	return m_pD3DDeviceContext;
 }
 
 void Window::SetWindowWidth(DWORD width)
@@ -260,7 +290,70 @@ DWORD Window::GetWindowHeight()
 
 void Window::Resize()
 {
+	assert(m_pD3DDeviceContext);
+	assert(m_pD3DDevice);
+	assert(m_pSwapChain);
 
+	// Release the old views, as they hold references to the buffers we
+	// will be destroying.  Also release the old depth/stencil buffer.
+
+	SafeRelease(m_pRenderTargetView);
+	SafeRelease(m_pDepthStencilView);
+	SafeRelease(m_pDepthStencilBuffer);
+
+
+	// Resize the swap chain and recreate the render target view.
+
+	HR(m_pSwapChain->ResizeBuffers(1, m_WindowWidth, m_WindowHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
+	ID3D11Texture2D* backBuffer;
+	HR(m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer)));
+	HR(m_pD3DDevice->CreateRenderTargetView(backBuffer, 0, &m_pRenderTargetView));
+	SafeRelease(backBuffer);
+
+	// Create the depth/stencil buffer and view.
+
+	D3D11_TEXTURE2D_DESC depthStencilDesc;
+
+	depthStencilDesc.Width = m_WindowWidth;
+	depthStencilDesc.Height = m_WindowHeight;
+	depthStencilDesc.MipLevels = 1;
+	depthStencilDesc.ArraySize = 1;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+	// Use 4X MSAA? --must match swap chain MSAA values.
+	if (m_IfUse4xMsaa)
+	{
+		depthStencilDesc.SampleDesc.Count = 4;
+		depthStencilDesc.SampleDesc.Quality = m_4xMsaaQuality - 1;
+	}
+	// No MSAA
+	else
+	{
+		depthStencilDesc.SampleDesc.Count = 1;
+		depthStencilDesc.SampleDesc.Quality = 0;
+	}
+
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	HR(m_pD3DDevice->CreateTexture2D(&depthStencilDesc, 0, &m_pDepthStencilBuffer));
+	HR(m_pD3DDevice->CreateDepthStencilView(m_pDepthStencilBuffer, 0, &m_pDepthStencilView));
+
+
+	// Bind the render target view and depth/stencil view to the pipeline.
+
+	m_pD3DDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+
+	m_ScreenViewport.TopLeftX = 0;
+	m_ScreenViewport.TopLeftY = 0;
+	m_ScreenViewport.Width = static_cast<float>(m_WindowWidth);
+	m_ScreenViewport.Height = static_cast<float>(m_WindowHeight);
+	m_ScreenViewport.MinDepth = 0.0f;
+	m_ScreenViewport.MaxDepth = 1.0f;
+
+	m_pD3DDeviceContext->RSSetViewports(1, &m_ScreenViewport);
 }
 
 void Window::ChangeIfShowCursor(bool b)
@@ -305,4 +398,12 @@ Window * Window::GetMainWindow()
 void Window::SetAsMainWindow()
 {
 	sm_pThis = this;
+}
+
+void Window::ChangeIfUse4xMsaa(bool b)
+{
+}
+
+void Window::SetViewPort()
+{
 }

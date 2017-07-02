@@ -19,7 +19,8 @@ public:
 	void BeginPrint();								//开始D3D绘制
 	void EndPrint();								//结束D3D绘制
 	HWND GetHwnd();									//获取窗口句柄
-	LPDIRECT3DDEVICE9 GetD3DDevice();				//获取D3D接口
+	ID3D11Device* GetD3DDevice();				//获取D3D
+	ID3D11DeviceContext* GetD3DDeviceContext();
 	void SetWindowWidth(DWORD width);				//设置窗口宽度
 	void SetWindowHeight(DWORD height);				//设置窗口高度
 	DWORD GetWindowWidth();							//获取窗口宽度
@@ -32,11 +33,24 @@ public:
 
 	static Window* GetMainWindow();					//获取主窗口指针
 	void SetAsMainWindow();							//设置为主窗口
+
+	void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
+	void SetViewPort();								//设置视口
 protected:
 	static Window* sm_pThis;
 
+	ID3D11Device* m_pD3DDevice;
+	ID3D11DeviceContext* m_pD3DDeviceContext;
+	UINT m_4xMsaaQuality;
+	bool m_IfUse4xMsaa;							//是否使用4X MASS多重采样
+
+	IDXGISwapChain* m_pSwapChain;
+	ID3D11Texture2D* m_pDepthStencilBuffer;
+	ID3D11RenderTargetView* m_pRenderTargetView;
+	ID3D11DepthStencilView* m_pDepthStencilView;
+	D3D11_VIEWPORT m_ScreenViewport;
+
 	HWND m_Hwnd;									//窗口句柄
-	LPDIRECT3DDEVICE9 m_pd3dDevice;					//D3D9接口
 	DWORD m_WindowWidth;								//窗口宽度
 	DWORD m_WindowHeight;								//窗口高度
 	LPCTSTR m_WindowTitle;							//窗口标题
