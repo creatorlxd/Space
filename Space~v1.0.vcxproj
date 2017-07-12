@@ -169,6 +169,7 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
+    <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h" />
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectFactory.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectFactory.cpp" />

@@ -8,6 +8,7 @@
 #include "Game/Object/Include/ObjectFactory.h"
 #include "Game/Game/Include/Game.h"
 #include "Game/Message/Include/Message.h"
+#include "Game/Game/Include/SafeGet.h"
 
 #include "Physics/Transform/Include/Transform.h"
 #include "Graphics/Mesh/Include/Mesh.h"

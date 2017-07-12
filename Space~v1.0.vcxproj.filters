@@ -182,6 +182,9 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectFactory.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h">
+      <Filter>Game\Game\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer\source\Camera.cpp">
@@ -237,6 +240,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectFactory.cpp">
       <Filter>Game\Object\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp">
+      <Filter>Game\Game\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
