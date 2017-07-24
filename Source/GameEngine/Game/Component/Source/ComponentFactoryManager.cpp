@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/ComponentFactoryManager.h"
+using namespace SpaceGameEngine;
 
 ComponentFactoryManager* ComponentFactoryManager::sm_pThis = nullptr;
 

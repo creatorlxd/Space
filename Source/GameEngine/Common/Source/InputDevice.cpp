@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "InputDevice.h"
 
+using namespace SpaceGameEngine;
+
 InputInterface::~InputInterface()
 {
 	SafeRelease(m_pDirectInput);

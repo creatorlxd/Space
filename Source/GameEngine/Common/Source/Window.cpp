@@ -1,19 +1,20 @@
 #include"stdafx.h"
 #include"Window.h"
+using namespace SpaceGameEngine;
 
 Window* Window::sm_pThis = nullptr;
 
-void DefaultWindowLoop()
+void SpaceGameEngine::DefaultWindowLoop()
 {
 	//do nothing
 }
 
-void DefaultInitAction()
+void SpaceGameEngine::DefaultInitAction()
 {
 	//do nothing
 }
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if(SpaceEngineWindow==nullptr)
 		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
@@ -60,6 +61,7 @@ Window::Window()
 	m_pWindowLoop = DefaultWindowLoop;
 	m_pInitAction = DefaultInitAction;
 	m_IfShowCursor = true;
+	m_WindowPosition = m_StartWindowPosition;
 	SetAsMainWindow();
 }
 
@@ -116,7 +118,7 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	}
 
 	//【4】窗口创建四步曲之四：窗口的移动、显示与更新
-	MoveWindow(m_Hwnd, 250, 80, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
+	MoveWindow(m_Hwnd, m_WindowPosition.first, m_WindowPosition.second, m_WindowWidth, m_WindowHeight, true);		//调整窗口显示时的位置，使窗口左上角位于（250,80）处
 	ShowWindow(m_Hwnd, nShowCmd);    //调用ShowWindow函数来显示窗口
 	UpdateWindow(m_Hwnd);						//对窗口进行更新，就像我们买了新房子要装修一样
 
@@ -388,6 +390,19 @@ std::pair<int, int> Window::GetWindowPosition()
 	RECT r;
 	GetWindowRect(m_Hwnd, &r);
 	return std::pair<int, int>(r.left,r.top);
+}
+
+void Window::SetWindowPosition(int x, int y)
+{
+	SetWindowPos(m_Hwnd, HWND_TOPMOST, x, y, m_WindowWidth, m_WindowHeight, SWP_SHOWWINDOW);
+	m_WindowPosition = std::make_pair(x, y);
+}
+
+void Window::SetWindowSize(int x, int y)
+{
+	SetWindowPos(m_Hwnd, HWND_TOPMOST, m_WindowPosition.first, m_WindowPosition.second, x, y, SWP_SHOWWINDOW);
+	m_WindowWidth = x;
+	m_WindowHeight = y;
 }
 
 Window * Window::GetMainWindow()

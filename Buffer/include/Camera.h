@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Space.h"
 #include "InputDevice.h"
-
+using namespace SpaceGameEngine;
 class Camera								//ÉãÏñ»ú
 {
 public:

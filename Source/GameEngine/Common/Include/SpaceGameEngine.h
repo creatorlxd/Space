@@ -12,3 +12,5 @@
 
 #include "Physics/Transform/Include/Transform.h"
 #include "Graphics/Mesh/Include/Mesh.h"
+
+using namespace SpaceGameEngine;

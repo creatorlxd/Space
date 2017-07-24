@@ -2,5 +2,7 @@
 #include "stdafx.h"
 #include "ObjectManager.h"
 #include "ObjectInformation.h"
-
-Object* NewObjectByName(const std::string& name = "");
+namespace SpaceGameEngine
+{
+	Object* NewObjectByName(const std::string& name = "");
+}

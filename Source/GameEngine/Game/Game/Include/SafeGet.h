@@ -5,9 +5,11 @@
 #include "Game/Message/Include/Message.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Game/Game/Include/Game.h"
-
-ComponentManager* GetComponentManager();
-ObjectManager* GetObjectManager();
-MessageManager* GetMessageManager();
-Scene* GetScene();
-Game* GetGame();
+namespace SpaceGameEngine
+{
+	ComponentManager* GetComponentManager();
+	ObjectManager* GetObjectManager();
+	MessageManager* GetMessageManager();
+	Scene* GetScene();
+	Game* GetGame();
+}

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Object.h" 
+using namespace SpaceGameEngine;
 
 Object::Object()
 {
@@ -165,12 +166,12 @@ void Object::ChangeIfUse(bool b)
 	m_IfUse = b;
 }
 
-void RunComponentOnTree(Component * node, float DeltaTime)
+void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)
 {
 	if (node->IfRun()&&node->IfUse())
 		node->Run(DeltaTime);
 	for (auto i : node->GetChildrenComponent())
 	{
-		RunComponentOnTree(i, DeltaTime);
+		SpaceGameEngine::RunComponentOnTree(i, DeltaTime);
 	}
 }

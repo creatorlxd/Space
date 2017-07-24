@@ -1,18 +1,20 @@
 #pragma once
 #include "stdafx.h"
 #include "Game/Scene/Include/Scene.h"
-
-class InformationComponent :public Component			//Object信息组件
+namespace SpaceGameEngine
 {
-public:
-	static ComponentManager::NewComponent<InformationComponent> NewComponent;
+	class InformationComponent :public Component			//Object信息组件
+	{
+	public:
+		static ComponentManager::NewComponent<InformationComponent> NewComponent;
 
-	InformationComponent();
-	~InformationComponent();
+		InformationComponent();
+		~InformationComponent();
 
-	void Run(float DeltaTime);
-};
+		void Run(float DeltaTime);
+	};
 
-bool RegisterObject(const std::string& name, Object* po);	//注册Object
+	bool RegisterObject(const std::string& name, Object* po);	//注册Object
 
 #define REGISTEROBJECT(o) RegisterObject(#o,o);
+}

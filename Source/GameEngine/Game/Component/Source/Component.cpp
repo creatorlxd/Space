@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Component.h"
+using namespace SpaceGameEngine;
 
 Component::Component()
 {

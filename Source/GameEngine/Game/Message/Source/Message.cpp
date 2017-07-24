@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Message.h" 
+using namespace SpaceGameEngine;
 
 MessageManager* MessageManager::sm_pThis = nullptr;
 

@@ -1,5 +1,6 @@
 #include"stdafx.h"
 #include "../Include/Mesh.h" 
+using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(MeshComponent);
 

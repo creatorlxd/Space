@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Scene.h" 
+using namespace SpaceGameEngine;
 
 Scene* Scene::sm_pThis = nullptr;
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Game.h" 
+using namespace SpaceGameEngine;
 
 Game* Game::sm_pThis = nullptr;
 HINSTANCE Game::sm_hInstance=NULL;

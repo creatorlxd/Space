@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Game/Object/Include/ObjectInformation.h"
+using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(InformationComponent);
 
@@ -25,7 +26,7 @@ void InformationComponent::Run(float DeltaTime)
 	}
 }
 
-bool RegisterObject(const std::string & name, Object * po)
+bool SpaceGameEngine::RegisterObject(const std::string & name, Object * po)
 {
 	if (!Scene::GetMainScene())
 	{

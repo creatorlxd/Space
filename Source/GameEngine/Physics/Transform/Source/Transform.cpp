@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../Include/Transform.h" 
+using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(TransformComponent);
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Game/Object/Include/ObjectManager.h"
+using namespace SpaceGameEngine;
 
 ObjectManager* ObjectManager::sm_pThis = nullptr;
 

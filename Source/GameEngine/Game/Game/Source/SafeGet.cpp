@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "../Include/SafeGet.h"
+using namespace SpaceGameEngine;
 
-ComponentManager * GetComponentManager()
+ComponentManager * SpaceGameEngine::GetComponentManager()
 {
 	auto pointer = ComponentManager::GetMainManager();
 	if (!pointer)
@@ -13,7 +14,7 @@ ComponentManager * GetComponentManager()
 	
 }
 
-ObjectManager * GetObjectManager()
+ObjectManager * SpaceGameEngine::GetObjectManager()
 {
 	auto pointer = ObjectManager::GetMainManager();
 	if (!pointer)
@@ -24,7 +25,7 @@ ObjectManager * GetObjectManager()
 	return pointer;
 }
 
-MessageManager* GetMessageManager()
+MessageManager* SpaceGameEngine::GetMessageManager()
 {
 	auto pointer = MessageManager::GetMainManager();
 	if (!pointer)
@@ -35,7 +36,7 @@ MessageManager* GetMessageManager()
 	return pointer;
 }
 
-Scene * GetScene()
+Scene * SpaceGameEngine::GetScene()
 {
 	auto pointer = Scene::GetMainScene();
 	if (!pointer)
@@ -46,7 +47,7 @@ Scene * GetScene()
 	return pointer;
 }
 
-Game * GetGame()
+Game * SpaceGameEngine::GetGame()
 {
 	auto pointer = Game::GetMainGame();
 	if (!pointer)
