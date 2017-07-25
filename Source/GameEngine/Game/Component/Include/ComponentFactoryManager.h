@@ -22,5 +22,5 @@ namespace SpaceGameEngine
 		static ComponentFactoryManager* sm_pThis;
 	};
 
-#define REGISTERCOMPONENTCLASS(name) ComponentManager::NewComponent<name> name::NewComponent(#name)
+#define REGISTERCOMPONENTCLASS(name) SpaceGameEngine::ComponentManager::NewComponent<name> name::NewComponent(#name)
 }
