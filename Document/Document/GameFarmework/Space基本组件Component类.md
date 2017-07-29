@@ -53,7 +53,7 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 
 除此之外，你还要在你的组件类中**加入**以下成员变量。
 
-* 公有的`static ComponentManager::NewComponent<*子类名*> NewComponent`:  
+* 公有的`static ComponentManager::NewComponent<子类名> NewComponent`:  
 用来创建一个组件类，并将其加入管理器，返回其指针。这是必须写的。
 
 * 公有的`static const int`类型的各种`mode`:  
@@ -61,6 +61,11 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 
 * 私有的`int m_Mode`:  
 对应上面提到的组件内部具体模式。
+
+最后，你要在与带有该组件类声明的头文件对应的源文件中，加入以下的代码。
+
+* 组件类的 `注册`:  
+使用 `REGISTERCOMPONENTCLASS`宏来注册组件类，之后你便可以使用其的`NewComponent`和**反射创建组件**的功能了。 
 
 这样你就可以构建自己的组件类了。
 
