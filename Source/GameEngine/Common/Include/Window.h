@@ -38,7 +38,6 @@ namespace SpaceGameEngine
 		void SetAsMainWindow();							//设置为主窗口
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
-		void SetViewPort();								//设置视口
 	protected:
 		static Window* sm_pThis;
 

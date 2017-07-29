@@ -2,19 +2,19 @@
 #include "../Include/Scene.h" 
 using namespace SpaceGameEngine;
 
-Scene* Scene::sm_pThis = nullptr;
+Scene* SpaceGameEngine::Scene::sm_pThis = nullptr;
 
-Scene::Scene()
+SpaceGameEngine::Scene::Scene()
 {
 	sm_pThis = this;
 }
 
-Scene::~Scene()
+SpaceGameEngine::Scene::~Scene()
 {
 	Release();
 }
 
-void Scene::SetAsMainScene()
+void SpaceGameEngine::Scene::SetAsMainScene()
 {
 	m_ObjectManager.SetAsMainManager();
 	m_ComponentManager.SetAsMainManager();
@@ -22,23 +22,23 @@ void Scene::SetAsMainScene()
 	sm_pThis = this;
 }
 
-Scene * Scene::GetMainScene()
+Scene * SpaceGameEngine::Scene::GetMainScene()
 {
 	return sm_pThis;
 }
 
-void Scene::Start()
+void SpaceGameEngine::Scene::Start()
 {
 	m_ObjectManager.Start();
 }
 
-void Scene::Run(float DeltaTime)
+void SpaceGameEngine::Scene::Run(float DeltaTime)
 {
 	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }
 
-void Scene::Release()
+void SpaceGameEngine::Scene::Release()
 {
 	m_ObjectManager.Release();
 	m_ComponentManager.Release();
@@ -48,7 +48,7 @@ void Scene::Release()
 		sm_pThis = nullptr;
 }
 
-bool Scene::AddObjectInformation(const std::string & name, Object * po)
+bool SpaceGameEngine::Scene::AddObjectInformation(const std::string & name, Object * po)
 {
 	if (FindObject(name) != nullptr)
 	{
@@ -62,7 +62,7 @@ bool Scene::AddObjectInformation(const std::string & name, Object * po)
 	}
 }
 
-bool Scene::DeleteObjectInformation(const std::string & name)
+bool SpaceGameEngine::Scene::DeleteObjectInformation(const std::string & name)
 {
 	auto buff = m_ObjectInformation.find(name);
 	if (buff == m_ObjectInformation.end())
@@ -74,7 +74,7 @@ bool Scene::DeleteObjectInformation(const std::string & name)
 	return true;
 }
 
-bool Scene::DeleteObjectInformation(Object * po)
+bool SpaceGameEngine::Scene::DeleteObjectInformation(Object * po)
 {
 	for (auto i = m_ObjectInformation.begin(); i != m_ObjectInformation.end(); i++)
 	{
@@ -88,7 +88,7 @@ bool Scene::DeleteObjectInformation(Object * po)
 	return false;
 }
 
-Object * Scene::FindObject(const std::string & name)
+Object * SpaceGameEngine::Scene::FindObject(const std::string & name)
 {
 	auto re = m_ObjectInformation.find(name);
 	if (re == m_ObjectInformation.end())
@@ -101,7 +101,7 @@ Object * Scene::FindObject(const std::string & name)
 	}
 }
 
-std::string Scene::FindObjectName(Object * po)
+std::string SpaceGameEngine::Scene::FindObjectName(Object * po)
 {
 	for (auto i = m_ObjectInformation.begin(); i != m_ObjectInformation.end(); i++)
 	{

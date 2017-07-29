@@ -2,7 +2,7 @@
 #include "../Include/Component.h"
 using namespace SpaceGameEngine;
 
-Component::Component()
+SpaceGameEngine::Component::Component()
 {
 	m_TypeName = "NullType";
 	m_IfRun = true;
@@ -11,32 +11,32 @@ Component::Component()
 	m_pFatherObject = nullptr;
 }
 
-Component::~Component()
+SpaceGameEngine::Component::~Component()
 {
 	Release();
 }
 
-std::string Component::GetTypeName()
+std::string SpaceGameEngine::Component::GetTypeName()
 {
 	return m_TypeName;
 }
 
-Component * Component::GetFatherComponent()
+Component * SpaceGameEngine::Component::GetFatherComponent()
 {
 	return m_pFather;
 }
 
-void Component::SetFatherComponent(Component * pc)
+void SpaceGameEngine::Component::SetFatherComponent(Component * pc)
 {
 	m_pFather = pc;
 }
 
-void Component::AddChildComponent(Component * pc)
+void SpaceGameEngine::Component::AddChildComponent(Component * pc)
 {
 	m_Children.push_back(pc);
 }
 
-bool Component::DeleteChildComponent(Component * pc)
+bool SpaceGameEngine::Component::DeleteChildComponent(Component * pc)
 {
 	auto result = std::find(m_Children.begin(), m_Children.end(),pc);
 	if (result == m_Children.end())
@@ -48,7 +48,7 @@ bool Component::DeleteChildComponent(Component * pc)
 	return true;
 }
 
-Component * Component::FindChildComponent(const std::string & name)
+Component * SpaceGameEngine::Component::FindChildComponent(const std::string & name)
 {
 	std::queue<Component*> q;
 	for (auto i : m_Children)
@@ -74,27 +74,27 @@ Component * Component::FindChildComponent(const std::string & name)
 	return nullptr;
 }
 
-std::vector<Component*>& Component::GetChildrenComponent()
+std::vector<Component*>& SpaceGameEngine::Component::GetChildrenComponent()
 {
 	return m_Children;
 }
 
-void Component::InitFromFile(const std::string& filename, int mode)
+void SpaceGameEngine::Component::InitFromFile(const std::string& filename, int mode)
 {
 
 }
 
-void Component::Start()
+void SpaceGameEngine::Component::Start()
 {
 
 }
 
-void Component::Run(float DeltaTime)
+void SpaceGameEngine::Component::Run(float DeltaTime)
 {
 
 }
 
-void Component::Attach(Component * pc)
+void SpaceGameEngine::Component::Attach(Component * pc)
 {
 	if (pc)
 	{
@@ -108,37 +108,37 @@ void Component::Attach(Component * pc)
 	}
 }
 
-void Component::Release()
+void SpaceGameEngine::Component::Release()
 {
 
 }
 
-bool Component::IfRun()
+bool SpaceGameEngine::Component::IfRun()
 {
 	return m_IfRun;
 }
 
-bool Component::IfUse()
+bool SpaceGameEngine::Component::IfUse()
 {
 	return m_IfUse;
 }
 
-void Component::ChangeIfRun(bool b)
+void SpaceGameEngine::Component::ChangeIfRun(bool b)
 {
 	m_IfRun = b;
 }
 
-void Component::ChangeIfUse(bool b)
+void SpaceGameEngine::Component::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
 }
 
-void Component::SetFatherObject(Object * po)
+void SpaceGameEngine::Component::SetFatherObject(Object * po)
 {
 	m_pFatherObject = po;
 }
 
-Object * Component::GetFatherObject()
+Object * SpaceGameEngine::Component::GetFatherObject()
 {
 	return m_pFatherObject;
 }

@@ -4,7 +4,7 @@ using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(TransformComponent);
 
-TransformComponent::TransformComponent()
+SpaceGameEngine::TransformComponent::TransformComponent()
 {
 	m_TypeName = "TransformComponent";
 	m_Position = { 0,0,0 };
@@ -12,12 +12,12 @@ TransformComponent::TransformComponent()
 	m_Scale = { 1,1,1 };
 }
 
-TransformComponent::~TransformComponent()
+SpaceGameEngine::TransformComponent::~TransformComponent()
 {
 
 }
 
-void TransformComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filename, int mode)
 {
 	std::fstream file(filename, std::ios::in);
 
@@ -28,37 +28,37 @@ void TransformComponent::InitFromFile(const std::string & filename, int mode)
 	file.close();
 }
 
-void TransformComponent::Run(float DeltaTime)
+void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 {
 
 }
 
-void TransformComponent::SetPosition(const XMFLOAT3 & position)
+void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 {
 	m_Position = position;
 }
 
-void TransformComponent::SetRotation(const XMFLOAT3 & rotation)
+void SpaceGameEngine::TransformComponent::SetRotation(const XMFLOAT3 & rotation)
 {
 	m_Rotation = rotation;
 }
 
-void TransformComponent::SetScale(const XMFLOAT3 & scale)
+void SpaceGameEngine::TransformComponent::SetScale(const XMFLOAT3 & scale)
 {
 	m_Scale = scale;
 }
 
-XMFLOAT3 TransformComponent::GetPosition()
+XMFLOAT3 SpaceGameEngine::TransformComponent::GetPosition()
 {
 	return m_Position;
 }
 
-XMFLOAT3 TransformComponent::GetRotation()
+XMFLOAT3 SpaceGameEngine::TransformComponent::GetRotation()
 {
 	return m_Rotation;
 }
 
-XMFLOAT3 TransformComponent::GetScale()
+XMFLOAT3 SpaceGameEngine::TransformComponent::GetScale()
 {
 	return m_Scale;
 }

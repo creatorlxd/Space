@@ -2,19 +2,19 @@
 #include "../Include/Object.h" 
 using namespace SpaceGameEngine;
 
-Object::Object()
+SpaceGameEngine::Object::Object()
 {
 	m_pRootComponent = nullptr;
 	m_IfUse = true;
 	m_IfRun = true;
 }
 
-Object::~Object()
+SpaceGameEngine::Object::~Object()
 {
 	Release();
 }
 
-Component * Object::GetComponent(const std::string & name)
+Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
 {
 	auto result = m_Components.end();
 	result=m_Components.find(name);
@@ -28,7 +28,7 @@ Component * Object::GetComponent(const std::string & name)
 	}
 }
 
-bool Object::AddComponent(Component * pc)
+bool SpaceGameEngine::Object::AddComponent(Component * pc)
 {
 	if (GetComponent(pc->GetTypeName()) != nullptr)
 	{
@@ -40,7 +40,7 @@ bool Object::AddComponent(Component * pc)
 	return true;
 }
 
-bool Object::DeleteComponent(const std::string & name)
+bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 {
 	auto component = m_Components.find(name);
 	if (component == m_Components.end())
@@ -71,7 +71,7 @@ bool Object::DeleteComponent(const std::string & name)
 	return true;
 }
 
-void Object::Start()
+void SpaceGameEngine::Object::Start()
 {
 	for (auto i : m_Components)
 	{
@@ -80,7 +80,7 @@ void Object::Start()
 	}
 }
 
-void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filenames)
+void SpaceGameEngine::Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filenames)
 {
 	std::fstream file;
 	for (auto i : filenames)
@@ -102,12 +102,12 @@ void Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filen
 	}
 }
 
-void Object::InitFromFile(const std::string& filename)
+void SpaceGameEngine::Object::InitFromFile(const std::string& filename)
 {
 	InitFromFile(ReadAssetListFromFile(filename));
 }
 
-void Object::Run(float DeltaTime)
+void SpaceGameEngine::Object::Run(float DeltaTime)
 {
 	if (m_pRootComponent == nullptr)
 	{
@@ -117,7 +117,7 @@ void Object::Run(float DeltaTime)
 	RunComponentOnTree(m_pRootComponent, DeltaTime);
 }
 
-void Object::Release()
+void SpaceGameEngine::Object::Release()
 {
 	auto info = GetComponent("InformationComponent");
 	if (info)
@@ -129,7 +129,7 @@ void Object::Release()
 	m_pRootComponent = nullptr;
 }
 
-bool Object::SetRootComponent(const std::string & name)
+bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)
 {
 	auto component = GetComponent(name);
 	if (component == nullptr)
@@ -141,27 +141,27 @@ bool Object::SetRootComponent(const std::string & name)
 	return false;
 }
 
-Component * Object::GetRootComponent()
+Component * SpaceGameEngine::Object::GetRootComponent()
 {
 	return m_pRootComponent;
 }
 
-bool Object::IfRun()
+bool SpaceGameEngine::Object::IfRun()
 {
 	return m_IfRun;
 }
 
-bool Object::IfUse()
+bool SpaceGameEngine::Object::IfUse()
 {
 	return m_IfUse;
 }
 
-void Object::ChangeIfRun(bool b)
+void SpaceGameEngine::Object::ChangeIfRun(bool b)
 {
 	m_IfRun = b;
 }
 
-void Object::ChangeIfUse(bool b)
+void SpaceGameEngine::Object::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
 }

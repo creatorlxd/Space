@@ -2,19 +2,19 @@
 #include "../Include/ComponentFactoryManager.h"
 using namespace SpaceGameEngine;
 
-ComponentFactoryManager* ComponentFactoryManager::sm_pThis = nullptr;
+ComponentFactoryManager* SpaceGameEngine::ComponentFactoryManager::sm_pThis = nullptr;
 
-ComponentFactoryManager::ComponentFactoryManager()
+SpaceGameEngine::ComponentFactoryManager::ComponentFactoryManager()
 {
 	sm_pThis = this;
 }
 
-ComponentFactoryManager::~ComponentFactoryManager()
+SpaceGameEngine::ComponentFactoryManager::~ComponentFactoryManager()
 {
 	Release();
 }
 
-void ComponentFactoryManager::Release()
+void SpaceGameEngine::ComponentFactoryManager::Release()
 {
 	if (sm_pThis == this)
 	{
@@ -22,17 +22,17 @@ void ComponentFactoryManager::Release()
 	}
 }
 
-ComponentFactoryManager * ComponentFactoryManager::GetMainManager()
+ComponentFactoryManager * SpaceGameEngine::ComponentFactoryManager::GetMainManager()
 {
 	return sm_pThis;
 }
 
-void ComponentFactoryManager::SetAsMainManager()
+void SpaceGameEngine::ComponentFactoryManager::SetAsMainManager()
 {
 	sm_pThis = this;
 }
 
-bool ComponentFactoryManager::AddComponentFactory(const std::string & name, std::function<Component*(void)> functor)
+bool SpaceGameEngine::ComponentFactoryManager::AddComponentFactory(const std::string & name, std::function<Component*(void)> functor)
 {
 	if (m_Content.find(name) != m_Content.end())
 	{
@@ -43,7 +43,7 @@ bool ComponentFactoryManager::AddComponentFactory(const std::string & name, std:
 	return true;
 }
 
-bool ComponentFactoryManager::DeleteComponentFactory(const std::string & name)
+bool SpaceGameEngine::ComponentFactoryManager::DeleteComponentFactory(const std::string & name)
 {
 	auto iter = m_Content.find(name);
 	if (iter == m_Content.end())
@@ -55,7 +55,7 @@ bool ComponentFactoryManager::DeleteComponentFactory(const std::string & name)
 	return true;
 }
 
-std::function<Component*(void)> ComponentFactoryManager::FindComponentFactory(const std::string & name)
+std::function<Component*(void)> SpaceGameEngine::ComponentFactoryManager::FindComponentFactory(const std::string & name)
 {
 	auto iter = m_Content.find(name);
 	if (iter != m_Content.end())

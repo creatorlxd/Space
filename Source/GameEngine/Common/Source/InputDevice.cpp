@@ -3,24 +3,24 @@
 
 using namespace SpaceGameEngine;
 
-InputInterface::~InputInterface()
+SpaceGameEngine::InputInterface::~InputInterface()
 {
 	SafeRelease(m_pDirectInput);
 }
 
-bool InputInterface::Init(HINSTANCE hInstance)
+bool SpaceGameEngine::InputInterface::Init(HINSTANCE hInstance)
 {
 	HRESULT r = DirectInput8Create(hInstance, 0x0800, IID_IDirectInput8, (void**)&m_pDirectInput, NULL);
 	return SUCCEEDED(r);
 }
 
 
-LPDIRECTINPUT8 InputInterface::GetInterface()
+LPDIRECTINPUT8 SpaceGameEngine::InputInterface::GetInterface()
 {
 	return m_pDirectInput;
 }
 
-InputDevice::~InputDevice()
+SpaceGameEngine::InputDevice::~InputDevice()
 {
 	if (m_InputDevice) {
 		m_InputDevice->Unacquire();
@@ -28,7 +28,7 @@ InputDevice::~InputDevice()
 	}
 }
 
-bool InputDevice::Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf)
+bool SpaceGameEngine::InputDevice::Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid, LPCDIDATAFORMAT lpdf)
 {
 	HRESULT r = inputinterface.GetInterface()->CreateDevice(rguid, (LPDIRECTINPUTDEVICE8W*)(&m_InputDevice), NULL);
 	if (SUCCEEDED(r)) {
@@ -41,7 +41,7 @@ bool InputDevice::Init(HWND hwnd, InputInterface& inputinterface, REFGUID rguid,
 	}
 }
 
-bool InputDevice::DeviceRead(void * pBuffer, long lSize)
+bool SpaceGameEngine::InputDevice::DeviceRead(void * pBuffer, long lSize)
 {
 	
 	LPDIRECTINPUTDEVICE8A InputDevice = (LPDIRECTINPUTDEVICE8A)m_InputDevice;
@@ -51,51 +51,51 @@ bool InputDevice::DeviceRead(void * pBuffer, long lSize)
 	return SUCCEEDED(r);
 }
 
-KeyboardDevice::KeyboardDevice()
+SpaceGameEngine::KeyboardDevice::KeyboardDevice()
 {
 	ZeroMemory(m_Content, sizeof(m_Content));
 }
 
-KeyboardDevice::~KeyboardDevice()
+SpaceGameEngine::KeyboardDevice::~KeyboardDevice()
 {
 }
 
-bool KeyboardDevice::Init(HWND hwnd, InputInterface& inputinterface)
+bool SpaceGameEngine::KeyboardDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
 	return m_InputDevice.Init(hwnd, inputinterface, GUID_SysKeyboard, &c_dfDIKeyboard);
 }
 
-bool KeyboardDevice::DeviceRead()
+bool SpaceGameEngine::KeyboardDevice::DeviceRead()
 {
 	return m_InputDevice.DeviceRead((void*)(m_Content), sizeof(m_Content));
 }
 
-bool KeyboardDevice::IfPressDown(int b)
+bool SpaceGameEngine::KeyboardDevice::IfPressDown(int b)
 {
 	return static_cast<bool>(m_Content[b] & 0x80);
 }
 
-MouseDevice::MouseDevice()
+SpaceGameEngine::MouseDevice::MouseDevice()
 {
 	m_Content = { 0 };
 	ZeroMemory(&m_Content, sizeof(m_Content));
 }
 
-MouseDevice::~MouseDevice()
+SpaceGameEngine::MouseDevice::~MouseDevice()
 {
 }
 
-bool MouseDevice::Init(HWND hwnd, InputInterface& inputinterface)
+bool SpaceGameEngine::MouseDevice::Init(HWND hwnd, InputInterface& inputinterface)
 {
 	return m_InputDevice.Init(hwnd, inputinterface, GUID_SysMouse, &c_dfDIMouse);
 }
 
-bool MouseDevice::DeviceRead()
+bool SpaceGameEngine::MouseDevice::DeviceRead()
 {
 	return m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content));
 }
 
-DIMOUSESTATE MouseDevice::GetMouseState()
+DIMOUSESTATE SpaceGameEngine::MouseDevice::GetMouseState()
 {
 	return m_Content;
 }

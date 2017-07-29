@@ -2,18 +2,18 @@
 #include "../Include/ComponentManager.h"
 using namespace SpaceGameEngine;
 
-ComponentManager* ComponentManager::sm_pThis = nullptr;
+ComponentManager* SpaceGameEngine::ComponentManager::sm_pThis = nullptr;
 namespace SpaceGameEngine 
 {
 	ComponentFactoryManager g_ComponentFactoryManager;
 }
 
-ComponentManager::ComponentManager()
+SpaceGameEngine::ComponentManager::ComponentManager()
 {
 	sm_pThis = this;
 }
 
-ComponentManager::~ComponentManager()
+SpaceGameEngine::ComponentManager::~ComponentManager()
 {
 	for (auto i : m_Content)
 	{
@@ -23,17 +23,17 @@ ComponentManager::~ComponentManager()
 		sm_pThis = nullptr;
 }
 
-ComponentManager * ComponentManager::GetMainManager()
+ComponentManager * SpaceGameEngine::ComponentManager::GetMainManager()
 {
 	return sm_pThis;
 }
 
-void ComponentManager::SetAsMainManager()
+void SpaceGameEngine::ComponentManager::SetAsMainManager()
 {
 	sm_pThis = this;
 }
 
-bool ComponentManager::DeleteComponent(Component * pc)
+bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 {
 	for (auto i = m_Content.begin(); i != m_Content.end(); i += 1)
 	{
@@ -47,16 +47,18 @@ bool ComponentManager::DeleteComponent(Component * pc)
 	return false;
 }
 
-void ComponentManager::Release()
+void SpaceGameEngine::ComponentManager::Release()
 {
 	for (auto i : m_Content)
 	{
 		delete i;
 	}
 	m_Content.clear();
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
-Component * ComponentManager::NewComponentByName(const std::string & name)
+Component * SpaceGameEngine::ComponentManager::NewComponentByName(const std::string & name)
 {
 	std::function<Component*(void)> f = g_ComponentFactoryManager.FindComponentFactory(name);
 	return f();

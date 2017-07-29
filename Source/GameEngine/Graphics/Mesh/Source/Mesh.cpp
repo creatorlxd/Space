@@ -4,42 +4,42 @@ using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(MeshComponent);
 
-MeshComponent::MeshComponent()
+SpaceGameEngine::MeshComponent::MeshComponent()
 {
 
 }
 
-void MeshComponent::Release()
-{
-	
-}
-
-MeshComponent::~MeshComponent()
+void SpaceGameEngine::MeshComponent::Release()
 {
 	
 }
 
-void MeshComponent::WriteInVertexBuffer(CUSTOMVERTEX* pVertices)
+SpaceGameEngine::MeshComponent::~MeshComponent()
+{
+	Release();
+}
+
+void SpaceGameEngine::MeshComponent::WriteInVertexBuffer(CUSTOMVERTEX* pVertices)
 {
 	
 }
 
-void MeshComponent::WriteInIndexBuffer(WORD* pIndices)
+void SpaceGameEngine::MeshComponent::WriteInIndexBuffer(WORD* pIndices)
 {
 	
 }
 
-void MeshComponent::Init(int VertexSize, int IndexSize, CUSTOMVERTEX * pVertices, WORD * pIndices)
+void SpaceGameEngine::MeshComponent::Init(int VertexSize, int IndexSize, CUSTOMVERTEX * pVertices, WORD * pIndices)
 {
 	
 }
 
-void MeshComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)
 {
 	
 }
 
-void MeshComponent::Run(float DeltaTime)
+void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
 	
 }

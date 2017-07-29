@@ -2,14 +2,14 @@
 #include "Game/Object/Include/ObjectManager.h"
 using namespace SpaceGameEngine;
 
-ObjectManager* ObjectManager::sm_pThis = nullptr;
+ObjectManager* SpaceGameEngine::ObjectManager::sm_pThis = nullptr;
 
-ObjectManager::ObjectManager()
+SpaceGameEngine::ObjectManager::ObjectManager()
 {
 	sm_pThis = this;
 }
 
-ObjectManager::~ObjectManager()
+SpaceGameEngine::ObjectManager::~ObjectManager()
 {
 	for (auto i : m_Content)
 	{
@@ -19,17 +19,17 @@ ObjectManager::~ObjectManager()
 		sm_pThis = nullptr;
 }
 
-ObjectManager * ObjectManager::GetMainManager()
+ObjectManager * SpaceGameEngine::ObjectManager::GetMainManager()
 {
 	return sm_pThis;
 }
 
-void ObjectManager::SetAsMainManager()
+void SpaceGameEngine::ObjectManager::SetAsMainManager()
 {
 	sm_pThis = this;
 }
 
-Object * ObjectManager::NewObject()
+Object * SpaceGameEngine::ObjectManager::NewObject()
 {
 	if (sm_pThis == nullptr)
 	{
@@ -41,7 +41,7 @@ Object * ObjectManager::NewObject()
 	return re;
 }
 
-bool ObjectManager::DeleteObject(Object * po)
+bool SpaceGameEngine::ObjectManager::DeleteObject(Object * po)
 {
 	for (auto i = m_Content.begin(); i != m_Content.end(); i += 1)
 	{
@@ -55,7 +55,7 @@ bool ObjectManager::DeleteObject(Object * po)
 	return false;
 }
 
-void ObjectManager::Start()
+void SpaceGameEngine::ObjectManager::Start()
 {
 	for (auto i : m_Content)
 	{
@@ -64,7 +64,7 @@ void ObjectManager::Start()
 	}
 }
 
-void ObjectManager::Run(float DeltaTime)
+void SpaceGameEngine::ObjectManager::Run(float DeltaTime)
 {
 	for (auto i : m_Content)
 	{
@@ -73,7 +73,7 @@ void ObjectManager::Run(float DeltaTime)
 	}
 }
 
-void ObjectManager::Release()
+void SpaceGameEngine::ObjectManager::Release()
 {
 	for (auto i : m_Content)
 	{

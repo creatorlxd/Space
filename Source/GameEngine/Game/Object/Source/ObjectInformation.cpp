@@ -4,18 +4,18 @@ using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(InformationComponent);
 
-InformationComponent::InformationComponent()
+SpaceGameEngine::InformationComponent::InformationComponent()
 {
 	m_TypeName = "InformationComponent";
 	m_IfRun = false;
 }
 
-InformationComponent::~InformationComponent()
+SpaceGameEngine::InformationComponent::~InformationComponent()
 {
 	Release();
 }
 
-void InformationComponent::Run(float DeltaTime)
+void SpaceGameEngine::InformationComponent::Run(float DeltaTime)
 {
 	if (GetFatherObject())
 		Scene::GetMainScene()->DeleteObjectInformation(GetFatherObject());

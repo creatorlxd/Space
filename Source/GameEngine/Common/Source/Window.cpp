@@ -2,7 +2,7 @@
 #include"Window.h"
 using namespace SpaceGameEngine;
 
-Window* Window::sm_pThis = nullptr;
+Window* SpaceGameEngine::Window::sm_pThis = nullptr;
 
 void SpaceGameEngine::DefaultWindowLoop()
 {
@@ -47,7 +47,7 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	return 0;
 }
 
-Window::Window()
+SpaceGameEngine::Window::Window()
 {
 	m_Hwnd = NULL;
 	m_pD3DDevice = nullptr;
@@ -65,7 +65,7 @@ Window::Window()
 	SetAsMainWindow();
 }
 
-Window::~Window()
+SpaceGameEngine::Window::~Window()
 {
 	if (SpaceEngineWindow == this)
 		sm_pThis = nullptr;
@@ -77,14 +77,14 @@ Window::~Window()
 	}
 }
 
-void Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
+void SpaceGameEngine::Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
 {
 	m_WindowTitle = title;
 	m_WindowWidth = width;
 	m_WindowHeight = height;
 }
 
-HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(), void(*InitAction)())
+HRESULT SpaceGameEngine::Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)(), void(*InitAction)())
 {
 	m_pWindowLoop = WindowLoop;
 	m_pInitAction = InitAction;
@@ -143,7 +143,7 @@ HRESULT Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	return 0;
 }
 
-void Window::Release()
+void SpaceGameEngine::Window::Release()
 {
 	if (SpaceEngineWindow == this)
 		sm_pThis = nullptr;
@@ -155,7 +155,7 @@ void Window::Release()
 	}
 }
 
-HRESULT Window::Direct3DInit(HWND hwnd)
+HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 {
 	UINT CreateDeviceFlags = 0;
 
@@ -235,13 +235,13 @@ HRESULT Window::Direct3DInit(HWND hwnd)
 	return true;
 }
 
-HRESULT Window::EnvironmentInit(HWND hwnd)
+HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
 	m_pInitAction();
 	return S_OK;
 }
 
-void Window::BeginPrint()
+void SpaceGameEngine::Window::BeginPrint()
 {
 	assert(m_pD3DDeviceContext);
 	assert(m_pSwapChain);
@@ -250,47 +250,47 @@ void Window::BeginPrint()
 	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void Window::EndPrint()
+void SpaceGameEngine::Window::EndPrint()
 {
 	HR(m_pSwapChain->Present(0, 0));
 }
 
-HWND Window::GetHwnd()
+HWND SpaceGameEngine::Window::GetHwnd()
 {
 	return m_Hwnd;
 }
 
-ID3D11Device* Window::GetD3DDevice()
+ID3D11Device* SpaceGameEngine::Window::GetD3DDevice()
 {
 	return m_pD3DDevice;
 }
 
-ID3D11DeviceContext * Window::GetD3DDeviceContext()
+ID3D11DeviceContext * SpaceGameEngine::Window::GetD3DDeviceContext()
 {
 	return m_pD3DDeviceContext;
 }
 
-void Window::SetWindowWidth(DWORD width)
+void SpaceGameEngine::Window::SetWindowWidth(DWORD width)
 {
 	m_WindowWidth = width;
 }
 
-void Window::SetWindowHeight(DWORD height)
+void SpaceGameEngine::Window::SetWindowHeight(DWORD height)
 {
 	m_WindowHeight = height;
 }
 
-DWORD Window::GetWindowWidth()
+DWORD SpaceGameEngine::Window::GetWindowWidth()
 {
 	return m_WindowWidth;
 }
 
-DWORD Window::GetWindowHeight()
+DWORD SpaceGameEngine::Window::GetWindowHeight()
 {
 	return m_WindowHeight;
 }
 
-void Window::Resize()
+void SpaceGameEngine::Window::Resize()
 {
 	assert(m_pD3DDeviceContext);
 	assert(m_pD3DDevice);
@@ -358,7 +358,7 @@ void Window::Resize()
 	m_pD3DDeviceContext->RSSetViewports(1, &m_ScreenViewport);
 }
 
-void Window::ChangeIfShowCursor(bool b)
+void SpaceGameEngine::Window::ChangeIfShowCursor(bool b)
 {
 	if (m_IfShowCursor == b)
 	{
@@ -371,13 +371,13 @@ void Window::ChangeIfShowCursor(bool b)
 	}
 }
 
-void Window::SetCursorPosition(int x, int y)
+void SpaceGameEngine::Window::SetCursorPosition(int x, int y)
 {
 	auto pos = GetWindowPosition();
 	SetCursorPos(pos.first + x, pos.second + y);
 }
 
-void Window::UpdateWindowSize()
+void SpaceGameEngine::Window::UpdateWindowSize()
 {
 	RECT r;
 	GetWindowRect(m_Hwnd, &r);
@@ -385,40 +385,37 @@ void Window::UpdateWindowSize()
 	m_WindowHeight = abs(r.bottom - r.top);
 }
 
-std::pair<int, int> Window::GetWindowPosition()
+std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 {
 	RECT r;
 	GetWindowRect(m_Hwnd, &r);
 	return std::pair<int, int>(r.left,r.top);
 }
 
-void Window::SetWindowPosition(int x, int y)
+void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
 {
 	SetWindowPos(m_Hwnd, HWND_TOPMOST, x, y, m_WindowWidth, m_WindowHeight, SWP_SHOWWINDOW);
 	m_WindowPosition = std::make_pair(x, y);
 }
 
-void Window::SetWindowSize(int x, int y)
+void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 {
 	SetWindowPos(m_Hwnd, HWND_TOPMOST, m_WindowPosition.first, m_WindowPosition.second, x, y, SWP_SHOWWINDOW);
 	m_WindowWidth = x;
 	m_WindowHeight = y;
 }
 
-Window * Window::GetMainWindow()
+Window * SpaceGameEngine::Window::GetMainWindow()
 {
 	return sm_pThis;
 }
 
-void Window::SetAsMainWindow()
+void SpaceGameEngine::Window::SetAsMainWindow()
 {
 	sm_pThis = this;
 }
 
-void Window::ChangeIfUse4xMsaa(bool b)
+void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 {
-}
-
-void Window::SetViewPort()
-{
+	m_IfUse4xMsaa = b;
 }

@@ -2,13 +2,13 @@
 #include "../Include/Game.h" 
 using namespace SpaceGameEngine;
 
-Game* Game::sm_pThis = nullptr;
-HINSTANCE Game::sm_hInstance=NULL;
-HINSTANCE Game::sm_hPrevInstance = NULL;
-LPSTR Game::sm_lpCmdLine = NULL;
-int Game::sm_nShowCmd=0;
+Game* SpaceGameEngine::Game::sm_pThis = nullptr;
+HINSTANCE SpaceGameEngine::Game::sm_hInstance=NULL;
+HINSTANCE SpaceGameEngine::Game::sm_hPrevInstance = NULL;
+LPSTR SpaceGameEngine::Game::sm_lpCmdLine = NULL;
+int SpaceGameEngine::Game::sm_nShowCmd=0;
 
-Game::Game()
+SpaceGameEngine::Game::Game()
 {
 	sm_pThis = this;
 	m_pScene = nullptr;
@@ -16,22 +16,22 @@ Game::Game()
 	m_IfReadMouse = true;
 }
 
-Game::~Game()
+SpaceGameEngine::Game::~Game()
 {
 	Release();
 }
 
-Game * Game::GetMainGame()
+Game * SpaceGameEngine::Game::GetMainGame()
 {
 	return sm_pThis;
 }
 
-void Game::SetAsMainGame()
+void SpaceGameEngine::Game::SetAsMainGame()
 {
 	sm_pThis = this;
 }
 
-void Game::Init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+void SpaceGameEngine::Game::Init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	m_InputInterface.Init(hInstance);
 
@@ -48,7 +48,7 @@ void Game::Init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, i
 	}
 }
 
-void Game::Start()
+void SpaceGameEngine::Game::Start()
 {
 	if (!sm_pThis)
 	{
@@ -61,7 +61,7 @@ void Game::Start()
 	}
 }
 
-void Game::Run()
+void SpaceGameEngine::Game::Run()
 {
 	if (!sm_pThis)
 	{
@@ -78,13 +78,13 @@ void Game::Run()
 	}
 }
 
-void Game::Release()
+void SpaceGameEngine::Game::Release()
 {
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
 
-void Game::SetScene(Scene * ps)
+void SpaceGameEngine::Game::SetScene(Scene * ps)
 {
 	if (!ps)
 	{
@@ -102,7 +102,7 @@ void Game::SetScene(Scene * ps)
 	}
 }
 
-void Game::ChangeScene(Scene * ps)
+void SpaceGameEngine::Game::ChangeScene(Scene * ps)
 {
 	if (!ps)
 	{
@@ -119,27 +119,27 @@ void Game::ChangeScene(Scene * ps)
 	ps->Start();
 }
 
-bool Game::IfReadKeyboard()
+bool SpaceGameEngine::Game::IfReadKeyboard()
 {
 	return m_IfReadKeyboard;
 }
 
-bool Game::IfReadMouse()
+bool SpaceGameEngine::Game::IfReadMouse()
 {
 	return m_IfReadMouse;
 }
 
-void Game::ChangeIfReadKeyboard(bool b)
+void SpaceGameEngine::Game::ChangeIfReadKeyboard(bool b)
 {
 	m_IfReadKeyboard = b;
 }
 
-void Game::ChangeIfReadMouse(bool b)
+void SpaceGameEngine::Game::ChangeIfReadMouse(bool b)
 {
 	m_IfReadMouse = b;
 }
 
-void Game::ReadInputDevice()
+void SpaceGameEngine::Game::ReadInputDevice()
 {
 	if (m_IfReadKeyboard)
 		m_KeyboardDevice.DeviceRead();
@@ -147,12 +147,12 @@ void Game::ReadInputDevice()
 		m_MouseDevice.DeviceRead();
 }
 
-void Game::StartRunGame()
+void SpaceGameEngine::Game::StartRunGame()
 {
 	m_Window.InitWindow(sm_hInstance, sm_hPrevInstance, sm_lpCmdLine, sm_nShowCmd, Run, Start);
 }
 
-void Game::ExitGame()
+void SpaceGameEngine::Game::ExitGame()
 {
 	PostQuitMessage(0);
 }
