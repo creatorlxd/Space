@@ -62,19 +62,14 @@ SpaceGameEngine::Window::Window()
 	m_pInitAction = DefaultInitAction;
 	m_IfShowCursor = true;
 	m_WindowPosition = m_StartWindowPosition;
+	m_pInputLayout = nullptr;
+	m_pVertexShaderCode = nullptr;
 	SetAsMainWindow();
 }
 
 SpaceGameEngine::Window::~Window()
 {
-	if (SpaceEngineWindow == this)
-		sm_pThis = nullptr;
-	SafeRelease(m_pD3DDevice);
-	SafeRelease(m_pD3DDeviceContext);
-	if (!m_IfShowCursor)
-	{
-		ChangeIfShowCursor(true);
-	}
+	Release();
 }
 
 void SpaceGameEngine::Window::SetWindow(LPCTSTR title, DWORD width, DWORD height)
@@ -149,6 +144,12 @@ void SpaceGameEngine::Window::Release()
 		sm_pThis = nullptr;
 	SafeRelease(m_pD3DDevice);
 	SafeRelease(m_pD3DDeviceContext);
+	SafeRelease(m_pSwapChain);
+	SafeRelease(m_pDepthStencilBuffer);
+	SafeRelease(m_pRenderTargetView);
+	SafeRelease(m_pDepthStencilView);
+	SafeRelease(m_pInputLayout);
+	SafeRelease(m_pVertexShaderCode);
 	if (!m_IfShowCursor)
 	{
 		ChangeIfShowCursor(true);
@@ -238,6 +239,8 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
 	m_pInitAction();
+	CompileShaderFromFile(L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", "vs_5_0", NULL, &m_pVertexShaderCode);
+	SetDefaultInputLayout(m_pD3DDevice, m_pVertexShaderCode, &m_pInputLayout);
 	return S_OK;
 }
 
@@ -418,4 +421,10 @@ void SpaceGameEngine::Window::SetAsMainWindow()
 void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 {
 	m_IfUse4xMsaa = b;
+}
+
+void SpaceGameEngine::Window::SetVertexShaderCode(ID3DBlob * pshader)
+{
+	SafeRelease(m_pVertexShaderCode);
+	m_pVertexShaderCode = pshader;
 }

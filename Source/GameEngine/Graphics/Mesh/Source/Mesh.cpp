@@ -19,7 +19,7 @@ SpaceGameEngine::MeshComponent::~MeshComponent()
 	Release();
 }
 
-void SpaceGameEngine::MeshComponent::WriteInVertexBuffer(CUSTOMVERTEX* pVertices)
+void SpaceGameEngine::MeshComponent::WriteInVertexBuffer(DefaultVertex* pVertices)
 {
 	
 }
@@ -29,7 +29,7 @@ void SpaceGameEngine::MeshComponent::WriteInIndexBuffer(WORD* pIndices)
 	
 }
 
-void SpaceGameEngine::MeshComponent::Init(int VertexSize, int IndexSize, CUSTOMVERTEX * pVertices, WORD * pIndices)
+void SpaceGameEngine::MeshComponent::Init(int VertexSize, int IndexSize, DefaultVertex * pVertices, WORD * pIndices)
 {
 	
 }

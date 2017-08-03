@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,7 +103,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -120,7 +120,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Source\GameEngine;.\DXSDK\Include;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Source\GameEngine;.\Buffer\include;.\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,13 +158,13 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer\include\Camera.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Include\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
+    <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
@@ -180,7 +180,6 @@
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Buffer\source\Camera.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
@@ -190,6 +189,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp" />
+    <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
@@ -204,6 +204,28 @@
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultVS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

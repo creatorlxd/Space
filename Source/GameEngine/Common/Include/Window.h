@@ -38,6 +38,8 @@ namespace SpaceGameEngine
 		void SetAsMainWindow();							//设置为主窗口
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
+
+		void SetVertexShaderCode(ID3DBlob* pshader);	//设置顶点着色器
 	protected:
 		static Window* sm_pThis;
 
@@ -51,6 +53,9 @@ namespace SpaceGameEngine
 		ID3D11RenderTargetView* m_pRenderTargetView;
 		ID3D11DepthStencilView* m_pDepthStencilView;
 		D3D11_VIEWPORT m_ScreenViewport;
+
+		ID3D11InputLayout* m_pInputLayout;
+		ID3DBlob* m_pVertexShaderCode;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

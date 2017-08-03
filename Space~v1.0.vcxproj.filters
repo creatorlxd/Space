@@ -109,6 +109,15 @@
     <Filter Include="Game\Message\Source">
       <UniqueIdentifier>{750c2f91-cd7e-471d-9515-61fa0efdc1d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{3a5cc722-df50-42ea-8c04-898fdc782918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Common">
+      <UniqueIdentifier>{882a02ff-4fad-4e52-b72b-54676ed9036e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dxerr">
+      <UniqueIdentifier>{ec7b4770-eb04-4a4e-8504-00a9bb50bafc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -125,9 +134,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer\include\Camera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">
       <Filter>Graphics\Mesh\Include</Filter>
     </ClInclude>
@@ -185,11 +191,11 @@
     <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h">
       <Filter>Game\Game\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
+      <Filter>dxerr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Buffer\source\Camera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
       <Filter>Graphics\Mesh\Source</Filter>
     </ClCompile>
@@ -244,5 +250,16 @@
     <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp">
       <Filter>Game\Game\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp">
+      <Filter>dxerr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultVS.hlsl">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -15,9 +15,9 @@ namespace SpaceGameEngine
 		void Release();
 		~MeshComponent();
 
-		void WriteInVertexBuffer(CUSTOMVERTEX* pVertices);					//写入顶点缓存内容
+		void WriteInVertexBuffer(DefaultVertex* pVertices);					//写入顶点缓存内容
 		void WriteInIndexBuffer(WORD* pIndices);							//写入索引缓存内容
-		void Init(int VertexSize, int IndexSize, CUSTOMVERTEX* pVertices, WORD* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
+		void Init(int VertexSize, int IndexSize, DefaultVertex* pVertices, WORD* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
 
 		void InitFromFile(const std::string& filename, int mode = 0);			//从文件读取Mesh
 		void Run(float DeltaTime);												//渲染网格

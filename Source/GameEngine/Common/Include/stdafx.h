@@ -3,13 +3,12 @@
 // Windows
 #include <Windows.h>
 // DirectX
-#include <d3d9.h>
-#include <d3dx9.h>
 #include <dinput.h>
 #include <DirectXMath.h>
 #include <d3d11.h>
-#include <DxErr.h>
+#include <dxerr/dxerr.h>
 #include <dxgi.h>
+#include <D3Dcompiler.h>
 // Standard Library
 #include <vector>
 #include <string>
@@ -39,6 +38,7 @@
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxerr.lib")
 #pragma comment(lib,"legacy_stdio_definitions.lib")
+#pragma comment(lib,"D3DCompiler.lib")
 
 using std::unique_ptr;
 using namespace DirectX;
