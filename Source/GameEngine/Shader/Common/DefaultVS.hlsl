@@ -1,6 +1,13 @@
 /*
 Default Shader for the Space Game Engine
 */
+cbuffer Data
+{
+	float4x4 WorldMatrix;
+	float4x4 ViewMatrix;
+	float4x4 ProjectionMatrix;
+	float4 DeltaTime;
+};
 struct DefaultVertex
 {
 	float4 Position : POSITION;

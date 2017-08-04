@@ -63,7 +63,6 @@ SpaceGameEngine::Window::Window()
 	m_IfShowCursor = true;
 	m_WindowPosition = m_StartWindowPosition;
 	m_pInputLayout = nullptr;
-	m_pVertexShaderCode = nullptr;
 	SetAsMainWindow();
 }
 
@@ -149,7 +148,6 @@ void SpaceGameEngine::Window::Release()
 	SafeRelease(m_pRenderTargetView);
 	SafeRelease(m_pDepthStencilView);
 	SafeRelease(m_pInputLayout);
-	SafeRelease(m_pVertexShaderCode);
 	if (!m_IfShowCursor)
 	{
 		ChangeIfShowCursor(true);
@@ -239,8 +237,8 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
 	m_pInitAction();
-	CompileShaderFromFile(L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", "vs_5_0", NULL, &m_pVertexShaderCode);
-	SetDefaultInputLayout(m_pD3DDevice, m_pVertexShaderCode, &m_pInputLayout);
+	m_VertexShader.InitFromFile(m_pD3DDevice,L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", NULL);
+	SetDefaultInputLayout(m_pD3DDevice, m_VertexShader.GetBuffer(), &m_pInputLayout);
 	return S_OK;
 }
 
@@ -251,6 +249,7 @@ void SpaceGameEngine::Window::BeginPrint()
 
 	m_pD3DDeviceContext->ClearRenderTargetView(m_pRenderTargetView, reinterpret_cast<const float*>(&Colors::Black));
 	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
 }
 
 void SpaceGameEngine::Window::EndPrint()
@@ -423,8 +422,7 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 	m_IfUse4xMsaa = b;
 }
 
-void SpaceGameEngine::Window::SetVertexShaderCode(ID3DBlob * pshader)
+void SpaceGameEngine::Window::SetVertexShaderCode(const VertexShader& vs)
 {
-	SafeRelease(m_pVertexShaderCode);
-	m_pVertexShaderCode = pshader;
+	m_VertexShader = vs;
 }

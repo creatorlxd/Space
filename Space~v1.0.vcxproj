@@ -178,6 +178,7 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">

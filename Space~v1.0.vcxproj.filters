@@ -118,6 +118,18 @@
     <Filter Include="dxerr">
       <UniqueIdentifier>{ec7b4770-eb04-4a4e-8504-00a9bb50bafc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderFarmework">
+      <UniqueIdentifier>{04d38d97-7740-4440-bd14-344d3e599c17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\VertexShader">
+      <UniqueIdentifier>{b52bdf6f-d8bc-4225-8527-d8546063b7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\VertexShader\Include">
+      <UniqueIdentifier>{e70d74b8-11c9-4a06-b7a6-0a492556f589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\VertexShader\Source">
+      <UniqueIdentifier>{c3d1b3e2-8b2d-4014-9501-eb9a344b8ccf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -194,6 +206,9 @@
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
       <Filter>dxerr</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h">
+      <Filter>ShaderFarmework\VertexShader\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -252,6 +267,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp">
       <Filter>dxerr</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp">
+      <Filter>ShaderFarmework\VertexShader\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

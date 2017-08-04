@@ -2,6 +2,7 @@
 #include"Space.h"
 #include"stdafx.h"
 #include"InputDevice.h"
+#include "ShaderFarmework/VertexShader/Include/VertexShader.h"
 namespace SpaceGameEngine
 {
 	void DefaultWindowLoop();				//默认的游戏循环函数指针
@@ -39,7 +40,7 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
-		void SetVertexShaderCode(ID3DBlob* pshader);	//设置顶点着色器
+		void SetVertexShaderCode(const VertexShader& vs);	//设置顶点着色器
 	protected:
 		static Window* sm_pThis;
 
@@ -55,7 +56,7 @@ namespace SpaceGameEngine
 		D3D11_VIEWPORT m_ScreenViewport;
 
 		ID3D11InputLayout* m_pInputLayout;
-		ID3DBlob* m_pVertexShaderCode;
+		VertexShader m_VertexShader;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度
