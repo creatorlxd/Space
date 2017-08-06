@@ -3,6 +3,7 @@
 #include"stdafx.h"
 #include"InputDevice.h"
 #include "ShaderFarmework/VertexShader/Include/VertexShader.h"
+#include "ShaderFarmework/PixelShader/Include/PixelShader.h"
 namespace SpaceGameEngine
 {
 	void DefaultWindowLoop();				//默认的游戏循环函数指针

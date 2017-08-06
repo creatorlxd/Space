@@ -1,7 +1,7 @@
 /*
 Default Shader for the Space Game Engine
 */
-cbuffer Data
+cbuffer Data : register(b0)
 {
 	float4x4 WorldMatrix;
 	float4x4 ViewMatrix;

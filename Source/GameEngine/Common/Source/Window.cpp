@@ -159,7 +159,7 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 	UINT CreateDeviceFlags = 0;
 
 #if  defined(DEBUG)||defined(_DEBUG)
-	CreateDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+//	CreateDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
 	D3D_FEATURE_LEVEL featureLevel;

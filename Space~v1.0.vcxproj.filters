@@ -130,6 +130,15 @@
     <Filter Include="ShaderFarmework\VertexShader\Source">
       <UniqueIdentifier>{c3d1b3e2-8b2d-4014-9501-eb9a344b8ccf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderFarmework\PixelShader">
+      <UniqueIdentifier>{f90ccd76-e53e-44bf-9149-445a427e4220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\PixelShader\Include">
+      <UniqueIdentifier>{4389aa04-011b-494f-9ec1-928c3654bf62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\PixelShader\Source">
+      <UniqueIdentifier>{7de0ef7b-2490-4f01-95dc-50dcd0db4efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -209,6 +218,9 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h">
       <Filter>ShaderFarmework\VertexShader\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h">
+      <Filter>ShaderFarmework\PixelShader\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -270,6 +282,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp">
       <Filter>ShaderFarmework\VertexShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp">
+      <Filter>ShaderFarmework\PixelShader\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
