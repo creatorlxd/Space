@@ -41,7 +41,8 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
-		void SetVertexShaderCode(const VertexShader& vs);	//设置顶点着色器
+		void SetVertexShader(const VertexShader& vs);	//设置顶点着色器
+		void SetPixelShader(const PixelShader& ps);		//设置像素着色器
 	protected:
 		static Window* sm_pThis;
 
@@ -58,6 +59,7 @@ namespace SpaceGameEngine
 
 		ID3D11InputLayout* m_pInputLayout;
 		VertexShader m_VertexShader;
+		PixelShader m_PixelShader;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

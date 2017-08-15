@@ -63,5 +63,6 @@ bool SpaceGameEngine::VertexShader::operator=(const VertexShader & vs)
 	Release();
 	m_pBuffer = vs.m_pBuffer;
 	m_pContent = vs.m_pContent;
+	m_pReflection = vs.m_pReflection;
 	return true;
 }

@@ -1,5 +1,8 @@
 #include"stdafx.h"
 #include"Window.h"
+
+//注：引用并修改了毛星云和《Introduction to 3D Game Programming with DirectX 11》中的代码。
+
 using namespace SpaceGameEngine;
 
 Window* SpaceGameEngine::Window::sm_pThis = nullptr;
@@ -238,6 +241,7 @@ HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
 	m_pInitAction();
 	m_VertexShader.InitFromFile(m_pD3DDevice,L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", NULL);
+	m_PixelShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultPS.hlsl", "", "main", NULL);
 	SetDefaultInputLayout(m_pD3DDevice, m_VertexShader.GetBuffer(), &m_pInputLayout);
 	return S_OK;
 }
@@ -250,6 +254,7 @@ void SpaceGameEngine::Window::BeginPrint()
 	m_pD3DDeviceContext->ClearRenderTargetView(m_pRenderTargetView, reinterpret_cast<const float*>(&Colors::Black));
 	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
+	m_PixelShader.SetAsMainShader(m_pD3DDeviceContext);
 }
 
 void SpaceGameEngine::Window::EndPrint()
@@ -422,7 +427,12 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 	m_IfUse4xMsaa = b;
 }
 
-void SpaceGameEngine::Window::SetVertexShaderCode(const VertexShader& vs)
+void SpaceGameEngine::Window::SetVertexShader(const VertexShader& vs)
 {
 	m_VertexShader = vs;
+}
+
+void SpaceGameEngine::Window::SetPixelShader(const PixelShader & ps)
+{
+	m_PixelShader = ps;
 }

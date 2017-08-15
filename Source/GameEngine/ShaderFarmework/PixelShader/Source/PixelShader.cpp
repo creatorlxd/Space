@@ -59,10 +59,11 @@ ID3DBlob * SpaceGameEngine::PixelShader::GetBuffer()
 	return m_pBuffer;
 }
 
-bool SpaceGameEngine::PixelShader::operator=(const PixelShader & vs)
+bool SpaceGameEngine::PixelShader::operator=(const PixelShader & ps)
 {
 	Release();
-	m_pBuffer = vs.m_pBuffer;
-	m_pContent = vs.m_pContent;
+	m_pBuffer = ps.m_pBuffer;
+	m_pContent = ps.m_pContent;
+	m_pReflection = ps.m_pReflection;
 	return true;
 }
