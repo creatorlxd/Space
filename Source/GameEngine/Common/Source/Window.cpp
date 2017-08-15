@@ -155,6 +155,8 @@ void SpaceGameEngine::Window::Release()
 	{
 		ChangeIfShowCursor(true);
 	}
+	m_VertexShader.Release();
+	m_PixelShader.Release();
 }
 
 HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
