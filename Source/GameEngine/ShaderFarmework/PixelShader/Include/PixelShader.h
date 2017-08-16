@@ -26,6 +26,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline void PixelShader::SetConstantBuffer(ID3D11Device * pDevice, ID3D11DeviceContext * pDeviceContext, int index, T & content)
 	{
+		//TODO:有可能会爆
 		ID3D11Buffer* buffer = nullptr;
 
 		D3D11_BUFFER_DESC cbDesc;

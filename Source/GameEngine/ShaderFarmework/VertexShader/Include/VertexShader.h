@@ -27,6 +27,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline void VertexShader::SetConstantBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pDeviceContext, int index, T & content)
 	{
+		//TODO:有可能会爆
 		ID3D11Buffer* buffer=nullptr;
 
 		D3D11_BUFFER_DESC cbDesc;
@@ -48,9 +49,15 @@ namespace SpaceGameEngine
 
 		SafeRelease(&buffer);
 	}
-	struct VSConstantBufferData
+	struct SceneData
 	{
-		XMFLOAT4X4 m_WorldMatrix, m_ViewMatrix, m_ProjectionMatrix;
+		XMFLOAT4X4 m_ViewMatrix, m_ProjectionMatrix;
 		XMFLOAT4 m_DeltaTime;
 	};
+	struct ObjectData
+	{
+		XMFLOAT4X4 m_WorldMatrix;
+	};
+	const int SceneDataIndex = 0;
+	const int ObjectDataIndex = 1;
 }

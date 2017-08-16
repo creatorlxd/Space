@@ -1,12 +1,15 @@
 /*
 Default Shader for the Space Game Engine
 */
-cbuffer Data : register(b0)
+cbuffer SceneData : register(b0)
 {
-	float4x4 WorldMatrix;
 	float4x4 ViewMatrix;
 	float4x4 ProjectionMatrix;
 	float4 DeltaTime;
+};
+cbuffer ObjectData : register(b1)
+{
+	float4x4 WorldMatrix;
 };
 struct DefaultVertexInput
 {
