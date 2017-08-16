@@ -66,6 +66,7 @@ SpaceGameEngine::Window::Window()
 	m_IfShowCursor = true;
 	m_WindowPosition = m_StartWindowPosition;
 	m_pInputLayout = nullptr;
+	m_pRasterizerState = nullptr;
 	SetAsMainWindow();
 }
 
@@ -151,6 +152,7 @@ void SpaceGameEngine::Window::Release()
 	SafeRelease(m_pRenderTargetView);
 	SafeRelease(m_pDepthStencilView);
 	SafeRelease(m_pInputLayout);
+	SafeRelease(m_pRasterizerState);
 	if (!m_IfShowCursor)
 	{
 		ChangeIfShowCursor(true);
@@ -245,6 +247,7 @@ HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 	m_VertexShader.InitFromFile(m_pD3DDevice,L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", NULL);
 	m_PixelShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultPS.hlsl", "", "main", NULL);
 	SetDefaultInputLayout(m_pD3DDevice, m_VertexShader.GetBuffer(), &m_pInputLayout);
+	SetDefaultResterizerState(m_pD3DDevice, &m_pRasterizerState);
 	return S_OK;
 }
 
@@ -257,6 +260,9 @@ void SpaceGameEngine::Window::BeginPrint()
 	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
 	m_PixelShader.SetAsMainShader(m_pD3DDeviceContext);
+	m_pD3DDeviceContext->IASetInputLayout(m_pInputLayout);
+	m_pD3DDeviceContext->RSSetState(m_pRasterizerState);
+	m_pD3DDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 void SpaceGameEngine::Window::EndPrint()

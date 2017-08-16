@@ -58,6 +58,7 @@ namespace SpaceGameEngine
 		D3D11_VIEWPORT m_ScreenViewport;
 
 		ID3D11InputLayout* m_pInputLayout;
+		ID3D11RasterizerState* m_pRasterizerState;
 		VertexShader m_VertexShader;
 		PixelShader m_PixelShader;
 

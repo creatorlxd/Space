@@ -69,6 +69,17 @@ void SpaceGameEngine::SetDefaultInputLayout(ID3D11Device* device, ID3DBlob* Shad
 	device->CreateInputLayout(indesc, 3, ShaderByteCode->GetBufferPointer(), ShaderByteCode->GetBufferSize(), inputlayout);
 }
 
+void SpaceGameEngine::SetDefaultResterizerState(ID3D11Device * device, ID3D11RasterizerState ** rasterizerstate)
+{
+	D3D11_RASTERIZER_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+	desc.FillMode = D3D11_FILL_SOLID;
+	desc.CullMode = D3D11_CULL_BACK;
+	desc.FrontCounterClockwise = false;
+	desc.DepthClipEnable = true;
+	HR(device->CreateRasterizerState(&desc, rasterizerstate));
+}
+
 void SpaceGameEngine::CompileShaderFromFile(LPCWSTR filename,const std::string& includefilename, const std::string & entryname, const std::string & target, D3D_SHADER_MACRO* macros,ID3DBlob ** ShaderByteCode)
 {
 	ID3DBlob* errormsg;

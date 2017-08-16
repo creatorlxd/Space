@@ -75,7 +75,8 @@ namespace SpaceGameEngine
 	std::vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
 	//----------------------------------------------------------------------------------------------
-	void SetDefaultInputLayout(ID3D11Device* device,ID3DBlob* ShaderByteCode, ID3D11InputLayout** inputlayout);										//设置默认的顶点输入格式（需要shader)
+	void SetDefaultInputLayout(ID3D11Device* device,ID3DBlob* ShaderByteCode, ID3D11InputLayout** inputlayout);				//设置默认的顶点输入格式（需要shader)
+	void SetDefaultResterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerstate);				//设置默认的RS状态
 	void CompileShaderFromFile(LPCWSTR filename, const std::string& includefilename, const std::string& entryname, const std::string& target, D3D_SHADER_MACRO* macros, ID3DBlob** ShaderByteCode);	//从文件中读取并编译Shader
 #endif
 
