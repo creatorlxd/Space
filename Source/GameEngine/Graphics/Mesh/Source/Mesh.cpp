@@ -29,7 +29,7 @@ void SpaceGameEngine::MeshComponent::WriteInIndexBuffer(WORD* pIndices)
 	
 }
 
-void SpaceGameEngine::MeshComponent::Init(int VertexSize, int IndexSize, DefaultVertex * pVertices, WORD * pIndices)
+void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSize, DefaultVertex * pVertices, WORD * pIndices)
 {
 	
 }
