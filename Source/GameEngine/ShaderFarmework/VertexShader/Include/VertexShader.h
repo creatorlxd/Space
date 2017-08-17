@@ -19,6 +19,20 @@ namespace SpaceGameEngine
 		void SetConstantBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pDeviceContext,int index, T& content);
 
 		bool operator = (const VertexShader& vs);
+	public:
+		struct SceneData
+		{
+			XMFLOAT4X4 m_ViewMatrix, m_ProjectionMatrix;
+			XMFLOAT4 m_DeltaTime;
+		};
+		struct ObjectData
+		{
+			XMFLOAT4X4 m_WorldMatrix;
+		};
+		static const int SceneDataIndex = 0;
+		static const int ObjectDataIndex = 1;
+		SceneData m_SceneData;
+		ObjectData m_ObjectData;
 	private:
 		ID3D11VertexShader* m_pContent;
 		ID3DBlob* m_pBuffer;
@@ -47,17 +61,6 @@ namespace SpaceGameEngine
 
 		pDeviceContext->VSSetConstantBuffers(index, 1, &buffer);
 
-		SafeRelease(&buffer);
+		SafeRelease(buffer);
 	}
-	struct SceneData
-	{
-		XMFLOAT4X4 m_ViewMatrix, m_ProjectionMatrix;
-		XMFLOAT4 m_DeltaTime;
-	};
-	struct ObjectData
-	{
-		XMFLOAT4X4 m_WorldMatrix;
-	};
-	const int SceneDataIndex = 0;
-	const int ObjectDataIndex = 1;
 }

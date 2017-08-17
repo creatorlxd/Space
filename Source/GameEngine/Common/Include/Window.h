@@ -43,6 +43,14 @@ namespace SpaceGameEngine
 
 		void SetVertexShader(const VertexShader& vs);	//设置顶点着色器
 		void SetPixelShader(const PixelShader& ps);		//设置像素着色器
+
+		VertexShader& GetVertexShader();				//获取顶点着色器
+		PixelShader& GetPixelShader();					//获取像素着色器
+
+		void SetDefaultState();							//设置默认状态
+
+		void GameBegin();								//游戏开始
+		bool GetIfBegin();								//获取游戏是否开始了
 	protected:
 		static Window* sm_pThis;
 
@@ -76,6 +84,8 @@ namespace SpaceGameEngine
 		void(*m_pInitAction)();					//游戏初始化函数
 
 		bool m_IfShowCursor;						//是否显示鼠标
+
+		bool m_IfBegin;							//游戏是否已开始
 	};
 #define SpaceEngineWindow Window::GetMainWindow()
 

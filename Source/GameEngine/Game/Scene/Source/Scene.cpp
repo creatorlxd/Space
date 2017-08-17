@@ -29,11 +29,30 @@ Scene * SpaceGameEngine::Scene::GetMainScene()
 
 void SpaceGameEngine::Scene::Start()
 {
+	//添加默认摄像机
+	Object* DefaultCamera=ObjectManager::NewObject();
+	Component* camera = CameraComponent::NewComponent();
+	DefaultCamera->AddComponent(camera);
+	DefaultCamera->SetRootComponent(CameraComponent::NewComponent.m_Name);
+	REGISTEROBJECT(DefaultCamera);
+	//--------------
+
 	m_ObjectManager.Start();
 }
 
 void SpaceGameEngine::Scene::Run(float DeltaTime)
 {
+	if (CameraComponent::GetMainCamera())
+	{
+		Window::GetMainWindow()->GetVertexShader().m_SceneData.m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
+	}
+	else
+	{
+		ThrowError(L"至少要有一个摄像机");
+	}
+	Window::GetMainWindow()->GetVertexShader().m_SceneData.m_DeltaTime = XMFLOAT4(DeltaTime, DeltaTime, DeltaTime, DeltaTime);
+	Window::GetMainWindow()->GetVertexShader().m_SceneData.m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, (float)((float)Window::GetMainWindow()->GetWindowWidth() / (float)Window::GetMainWindow()->GetWindowHeight()));
+	Window::GetMainWindow()->GetVertexShader().SetConstantBuffer(Window::GetMainWindow()->GetD3DDevice(), Window::GetMainWindow()->GetD3DDeviceContext(), Window::GetMainWindow()->GetVertexShader().SceneDataIndex, Window::GetMainWindow()->GetVertexShader().m_SceneData);
 	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }

@@ -78,6 +78,8 @@ namespace SpaceGameEngine
 	void SetDefaultInputLayout(ID3D11Device* device,ID3DBlob* ShaderByteCode, ID3D11InputLayout** inputlayout);				//设置默认的顶点输入格式（需要shader)
 	void SetDefaultResterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerstate);				//设置默认的RS状态
 	void CompileShaderFromFile(LPCWSTR filename, const std::string& includefilename, const std::string& entryname, const std::string& target, D3D_SHADER_MACRO* macros, ID3DBlob** ShaderByteCode);	//从文件中读取并编译Shader
+
+	XMFLOAT4X4 GetProjectionMatrix(float angle=XM_PIDIV4, float aspectratio=1, float nearz=1.0f, float farz=1000.0f);
 #endif
 
 }

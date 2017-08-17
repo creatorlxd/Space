@@ -2,6 +2,9 @@
 #include "stdafx.h"
 #include "Game/Object/Include/ObjectManager.h"
 #include "Game/Message/Include/Message.h"
+#include "Graphics/Camera/Include/Camera.h"
+#include "Window.h"
+#include "Game/Object/Include/ObjectFactory.h"
 namespace SpaceGameEngine
 {
 	class Scene					//³¡¾°

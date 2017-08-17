@@ -30,7 +30,21 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 
 void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 {
+	XMMATRIX mrebuff, mbuff;
+	XMFLOAT4X4 re;
+	mbuff = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
+	mrebuff = mbuff;
+	mbuff = XMMatrixRotationX(m_Rotation.x);
+	mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	mbuff = XMMatrixRotationY(m_Rotation.y);
+	mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	mbuff = XMMatrixRotationZ(m_Rotation.z);
+	mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	mbuff = XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
+	mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	XMStoreFloat4x4(&re, mrebuff);
 
+	GetGame()->m_Window.GetVertexShader().m_ObjectData.m_WorldMatrix = re;
 }
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)

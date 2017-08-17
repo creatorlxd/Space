@@ -87,3 +87,20 @@ void SpaceGameEngine::CompileShaderFromFile(LPCWSTR filename,const std::string& 
 	ID3DInclude* include = includefilename.empty() == true ? NULL : ((ID3DInclude*)(UINT_PTR)1);
 	D3DCompileFromFile(filename, macros, include, entryname.c_str(), target.c_str(), 0, 0, ShaderByteCode, &errormsg);
 }
+
+XMFLOAT4X4 SpaceGameEngine::GetProjectionMatrix(float angle,float aspectratio,float nearz,float farz)
+{
+	static float option_buff[4] = { 0,0,0,0 };
+	static XMFLOAT4X4 re;
+	if (option_buff[0] != angle || option_buff[1] != aspectratio || option_buff[2] != nearz || option_buff[3] != farz)
+	{
+		option_buff[0] = angle;
+		option_buff[1] = aspectratio;
+		option_buff[2] = nearz;
+		option_buff[3] = farz;
+		XMMATRIX mbuff;
+		mbuff = XMMatrixPerspectiveFovLH(angle, aspectratio, nearz, farz);
+		XMStoreFloat4x4(&re, mbuff);
+	}
+	return re;
+}

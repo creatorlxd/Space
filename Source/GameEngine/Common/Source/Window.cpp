@@ -24,7 +24,8 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	switch (message)						//switch语句开始
 	{
 	case WM_PAINT:						// 若是客户区重绘消息
-		SpaceEngineWindow->m_pWindowLoop();                 //调用Direct3D渲染函数
+		if(SpaceEngineWindow->GetIfBegin())
+			SpaceEngineWindow->m_pWindowLoop();                 //调用Direct3D渲染函数
 		ValidateRect(hwnd, NULL);		// 更新客户区的显示
 		break;									//跳出该switch语句
 
@@ -67,6 +68,7 @@ SpaceGameEngine::Window::Window()
 	m_WindowPosition = m_StartWindowPosition;
 	m_pInputLayout = nullptr;
 	m_pRasterizerState = nullptr;
+	m_IfBegin = false;
 	SetAsMainWindow();
 }
 
@@ -258,11 +260,7 @@ void SpaceGameEngine::Window::BeginPrint()
 
 	m_pD3DDeviceContext->ClearRenderTargetView(m_pRenderTargetView, reinterpret_cast<const float*>(&Colors::Black));
 	m_pD3DDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
-	m_PixelShader.SetAsMainShader(m_pD3DDeviceContext);
-	m_pD3DDeviceContext->IASetInputLayout(m_pInputLayout);
-	m_pD3DDeviceContext->RSSetState(m_pRasterizerState);
-	m_pD3DDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	SetDefaultState();
 }
 
 void SpaceGameEngine::Window::EndPrint()
@@ -443,4 +441,33 @@ void SpaceGameEngine::Window::SetVertexShader(const VertexShader& vs)
 void SpaceGameEngine::Window::SetPixelShader(const PixelShader & ps)
 {
 	m_PixelShader = ps;
+}
+
+VertexShader & SpaceGameEngine::Window::GetVertexShader()
+{
+	return m_VertexShader;
+}
+
+PixelShader & SpaceGameEngine::Window::GetPixelShader()
+{
+	return m_PixelShader;
+}
+
+void SpaceGameEngine::Window::SetDefaultState()
+{
+	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
+	m_PixelShader.SetAsMainShader(m_pD3DDeviceContext);
+	m_pD3DDeviceContext->IASetInputLayout(m_pInputLayout);
+	m_pD3DDeviceContext->RSSetState(m_pRasterizerState);
+	m_pD3DDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
+
+void SpaceGameEngine::Window::GameBegin()
+{
+	m_IfBegin = true;
+}
+
+bool SpaceGameEngine::Window::GetIfBegin()
+{
+	return m_IfBegin;
 }

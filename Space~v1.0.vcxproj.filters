@@ -139,6 +139,15 @@
     <Filter Include="ShaderFarmework\PixelShader\Source">
       <UniqueIdentifier>{7de0ef7b-2490-4f01-95dc-50dcd0db4efc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Camera">
+      <UniqueIdentifier>{0953e999-0b46-4d30-a62c-b9fc52b8a14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Camera\Include">
+      <UniqueIdentifier>{a5b4d2f7-c3f2-4a57-9e0b-3d9335f5fa66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Camera\Source">
+      <UniqueIdentifier>{f7e196f7-e381-4670-a907-65c2c5451d08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -221,6 +230,9 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h">
       <Filter>ShaderFarmework\PixelShader\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h">
+      <Filter>Graphics\Camera\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -285,6 +297,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp">
       <Filter>ShaderFarmework\PixelShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp">
+      <Filter>Graphics\Camera\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

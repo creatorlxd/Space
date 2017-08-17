@@ -83,6 +83,7 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
+	GetGame()->m_Window.GetVertexShader().SetConstantBuffer(GetGame()->m_Window.GetD3DDevice(), GetGame()->m_Window.GetD3DDeviceContext(), GetGame()->m_Window.GetVertexShader().ObjectDataIndex, GetGame()->m_Window.GetVertexShader().m_ObjectData);
 	unsigned int v_strides = sizeof(DefaultVertex);
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer,&v_strides, 0);
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
