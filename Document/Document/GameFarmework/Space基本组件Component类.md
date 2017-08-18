@@ -59,9 +59,6 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 * 公有的`static const int`类型的各种`mode`:  
 用来判断组件的内部具体模式（比如网格组件中分为model文件和XMesh文件两种mode）。对应`InitFromFile(const string& filename,int mode)`的`mode`形参。
 
-* 私有的`int m_Mode`:  
-对应上面提到的组件内部具体模式。
-
 最后，你要在与带有该组件类声明的头文件对应的源文件中，加入以下的代码。
 
 * 组件类的 `注册`:  

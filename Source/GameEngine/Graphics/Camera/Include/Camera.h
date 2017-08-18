@@ -20,6 +20,10 @@ namespace SpaceGameEngine
 		XMFLOAT3 GetPosition();
 		XMFLOAT3 GetLookDirection();
 		XMFLOAT4X4 ComputeViewMatrix();
+		void GoForward(float dis);									//向前走
+		void GoUp(float dis);										//向上走
+		void GoRight(float dis);									//向右走
+		void RotationLookDirection(XMFLOAT3 rotate);				//旋转视角（仅限x,y轴）
 
 		void SetAsMainCamera();
 		static CameraComponent* GetMainCamera();

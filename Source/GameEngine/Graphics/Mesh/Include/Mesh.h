@@ -23,8 +23,6 @@ namespace SpaceGameEngine
 		void InitVertexBuffer();
 		void InitIndexBuffer();
 
-		int m_Mode;
-
 		std::vector<DefaultVertex> m_Vertices;
 		std::vector<unsigned int> m_Indices;
 

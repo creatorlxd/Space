@@ -142,3 +142,13 @@ Object * SpaceGameEngine::Component::GetFatherObject()
 {
 	return m_pFatherObject;
 }
+
+void SpaceGameEngine::Component::SetMode(int m)
+{
+	m_Mode = m;
+}
+
+int SpaceGameEngine::Component::GetMode()
+{
+	return m_Mode;
+}

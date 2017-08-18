@@ -49,7 +49,7 @@ namespace SpaceGameEngine
 
 		void SetDefaultState();							//设置默认状态
 
-		void GameBegin();								//游戏开始
+		void BeginRun();								//游戏开始
 		bool GetIfBegin();								//获取游戏是否开始了
 	protected:
 		static Window* sm_pThis;

@@ -245,11 +245,12 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
-	m_pInitAction();
 	m_VertexShader.InitFromFile(m_pD3DDevice,L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", NULL);
 	m_PixelShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultPS.hlsl", "", "main", NULL);
 	SetDefaultInputLayout(m_pD3DDevice, m_VertexShader.GetBuffer(), &m_pInputLayout);
 	SetDefaultResterizerState(m_pD3DDevice, &m_pRasterizerState);
+
+	m_pInitAction();
 	return S_OK;
 }
 
@@ -462,7 +463,7 @@ void SpaceGameEngine::Window::SetDefaultState()
 	m_pD3DDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-void SpaceGameEngine::Window::GameBegin()
+void SpaceGameEngine::Window::BeginRun()
 {
 	m_IfBegin = true;
 }

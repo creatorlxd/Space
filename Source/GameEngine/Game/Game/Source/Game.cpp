@@ -55,11 +55,11 @@ void SpaceGameEngine::Game::Start()
 		ThrowError(L"需要先定义一个Game");
 		return;
 	}
-	sm_pThis->m_Window.GameBegin();
 	if (sm_pThis->m_pScene)
 	{
 		sm_pThis->m_pScene->Start();
 	}
+	sm_pThis->m_Window.BeginRun();
 }
 
 void SpaceGameEngine::Game::Run()

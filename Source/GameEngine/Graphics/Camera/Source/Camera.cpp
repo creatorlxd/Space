@@ -97,6 +97,46 @@ XMFLOAT4X4 SpaceGameEngine::CameraComponent::ComputeViewMatrix()
 	return re;
 }
 
+void SpaceGameEngine::CameraComponent::GoForward(float dis)
+{
+	XMVECTOR v1, v2;
+	v1 = XMLoadFloat3(&m_Position);
+	v2 = XMLoadFloat3(&m_LookDirection);
+	v1 = v1 + dis*v2;
+	XMStoreFloat3(&m_Position, v1);
+}
+
+void SpaceGameEngine::CameraComponent::GoUp(float dis)
+{
+	XMVECTOR v1, v2;
+	XMFLOAT3 up(0, 1, 0);
+	v1 = XMLoadFloat3(&m_Position);
+	v2 = XMLoadFloat3(&up);
+	v1 = v1 + dis*v2;
+	XMStoreFloat3(&m_Position, v1);
+}
+
+void SpaceGameEngine::CameraComponent::GoRight(float dis)
+{
+	XMVECTOR v1, v2;
+	v1 = XMLoadFloat3(&m_Position);
+	v2 = XMLoadFloat3(&m_RightDirection);
+	v1 = v1 + dis*v2;
+	XMStoreFloat3(&m_Position, v1);
+}
+
+void SpaceGameEngine::CameraComponent::RotationLookDirection(XMFLOAT3 rotate)
+{
+	XMMATRIX mbuff = XMMatrixRotationY(rotate.y);
+	XMMATRIX m = XMMatrixRotationX(rotate.x);
+	XMVECTOR v = XMLoadFloat3(&m_LookDirection);
+	m = m*mbuff;
+	mbuff = XMMatrixRotationZ(rotate.z);
+	m = m*mbuff;
+	v = XMVector3TransformCoord(v, m);
+	XMStoreFloat3(&m_LookDirection, v);
+}
+
 void SpaceGameEngine::CameraComponent::SetAsMainCamera()
 {
 	sm_pThis = this;

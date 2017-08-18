@@ -12,7 +12,7 @@ namespace SpaceGameEngine
 
 		static const int ForRenderingMode = 1 << 0;
 		static const int ForCameraMode = 1 << 1;
-		static const int FatherMode = 1 << 2;
+		static const int FatherTransformMode = 1 << 2;
 
 		TransformComponent();
 		~TransformComponent();

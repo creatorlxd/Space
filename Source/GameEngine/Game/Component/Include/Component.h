@@ -28,8 +28,11 @@ namespace SpaceGameEngine
 		void ChangeIfUse(bool b);			//更改是否使用
 		void SetFatherObject(Object* po);			//设置所属的Object对象
 		Object* GetFatherObject();				//获取所属的Object对象
+		void SetMode(int m);				//获得组件内部具体模式
+		int GetMode();						//设置组件内部具体模式
 	protected:
 		std::string m_TypeName;				//组件的类型名
+		int m_Mode;							//组件内部具体模式
 		bool m_IfRun;						//是否每帧运行
 		bool m_IfUse;						//是否使用
 		std::vector<Component*> m_Children;	//子组件
