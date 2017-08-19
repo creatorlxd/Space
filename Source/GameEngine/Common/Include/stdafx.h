@@ -31,12 +31,10 @@
 //------------------------------------------------------------------------------------------------
 #pragma comment(lib,"winmm.lib")  //调用PlaySound函数所需库文件
 #pragma comment(lib,"d3d9.lib")
-#pragma comment(lib,"d3dx9.lib")
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"dxgi.lib")
-#pragma comment(lib,"dxerr.lib")
 #pragma comment(lib,"legacy_stdio_definitions.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
