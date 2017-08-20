@@ -25,6 +25,7 @@
 #include <queue>
 #include <stack>
 #include <functional>
+#include "ThirdParty/FX11/inc/d3dx11effect.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
@@ -37,6 +38,20 @@
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"legacy_stdio_definitions.lib")
 #pragma comment(lib,"D3DCompiler.lib")
+
+#ifdef _WIN64
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "FX11/Bin/x64/Effects11d.lib")
+#else
+#pragma comment(lib, "FX11/Bin/x64/Effects11.lib")
+#endif
+#else
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "FX11/Bin/x86/Effects11d.lib")
+#else
+#pragma comment(lib, "FX11/Bin/x86/Effects11.lib")
+#endif
+#endif
 
 using std::unique_ptr;
 using namespace DirectX;
