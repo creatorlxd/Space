@@ -1,6 +1,7 @@
 #pragma once 
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
+#include "Physics/Transform/Include/Transform.h"
 
 namespace SpaceGameEngine
 {
@@ -11,14 +12,10 @@ namespace SpaceGameEngine
 		CameraComponent();
 		~CameraComponent();
 
-		void InitFromFile(const std::string& filename, int mode = 0);
 		void Release();
+		void Start();
 		void Run(float DeltaTime);
-
-		void SetPosition(XMFLOAT3 pos);
-		void SetLookDirection(XMFLOAT3 dir);
-		XMFLOAT3 GetPosition();
-		XMFLOAT3 GetLookDirection();
+	
 		XMFLOAT4X4 ComputeViewMatrix();
 		void GoForward(float dis);									//向前走
 		void GoUp(float dis);										//向上走
@@ -32,6 +29,10 @@ namespace SpaceGameEngine
 		XMFLOAT3 m_RightDirection;
 		XMFLOAT3 m_UpDirection;
 		XMFLOAT3 m_Position;
+
+		TransformComponent* m_pTransform;
+		void InitTransform();
+		void UpdatePosition();
 
 		static CameraComponent* sm_pThis;
 	public:

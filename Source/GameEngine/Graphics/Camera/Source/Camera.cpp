@@ -15,19 +15,12 @@ SpaceGameEngine::CameraComponent::CameraComponent()
 	m_UpDirection = { 0,1,0 };
 	m_Position = { 0,0,0 };
 	sm_pThis = this;
+	m_pTransform = nullptr;
 }
 
 SpaceGameEngine::CameraComponent::~CameraComponent()
 {
 	Release();
-}
-
-void SpaceGameEngine::CameraComponent::InitFromFile(const std::string & filename, int mode)
-{
-	std::fstream file(filename, std::ios::in);
-	file >> m_Position.x >> m_Position.y >> m_Position.z;
-	file >> m_LookDirection.x >> m_LookDirection.y >> m_LookDirection.z;
-	file.close();
 }
 
 void SpaceGameEngine::CameraComponent::Release()
@@ -38,33 +31,27 @@ void SpaceGameEngine::CameraComponent::Release()
 	}
 }
 
+void SpaceGameEngine::CameraComponent::Start()
+{
+	InitTransform();
+}
+
 void SpaceGameEngine::CameraComponent::Run(float DeltaTime)
 {
 	SetAsMainCamera();
 }
 
-void SpaceGameEngine::CameraComponent::SetPosition(XMFLOAT3 pos)
-{
-	m_Position = pos;
-}
-
-void SpaceGameEngine::CameraComponent::SetLookDirection(XMFLOAT3 dir)
-{
-	m_LookDirection = dir;
-}
-
-XMFLOAT3 SpaceGameEngine::CameraComponent::GetPosition()
-{
-	return m_Position;
-}
-
-XMFLOAT3 SpaceGameEngine::CameraComponent::GetLookDirection()
-{
-	return m_LookDirection;
-}
-
 XMFLOAT4X4 SpaceGameEngine::CameraComponent::ComputeViewMatrix()
 {
+	if (m_pTransform == nullptr)
+	{
+		ThrowError(L"缺少Transform组件");
+		return XMFLOAT4X4();
+	}
+	m_Position = m_pTransform->GetPosition();
+	m_LookDirection = { 0,0,1 };
+	RotationLookDirection(m_pTransform->GetRotation());
+
 	XMFLOAT4X4 re;
 	XMVECTOR vbuff;
 	vbuff = XMLoadFloat3(&m_LookDirection);
@@ -104,6 +91,7 @@ void SpaceGameEngine::CameraComponent::GoForward(float dis)
 	v2 = XMLoadFloat3(&m_LookDirection);
 	v1 = v1 + dis*v2;
 	XMStoreFloat3(&m_Position, v1);
+	UpdatePosition();
 }
 
 void SpaceGameEngine::CameraComponent::GoUp(float dis)
@@ -114,6 +102,7 @@ void SpaceGameEngine::CameraComponent::GoUp(float dis)
 	v2 = XMLoadFloat3(&up);
 	v1 = v1 + dis*v2;
 	XMStoreFloat3(&m_Position, v1);
+	UpdatePosition();
 }
 
 void SpaceGameEngine::CameraComponent::GoRight(float dis)
@@ -123,6 +112,7 @@ void SpaceGameEngine::CameraComponent::GoRight(float dis)
 	v2 = XMLoadFloat3(&m_RightDirection);
 	v1 = v1 + dis*v2;
 	XMStoreFloat3(&m_Position, v1);
+	UpdatePosition();
 }
 
 void SpaceGameEngine::CameraComponent::RotationLookDirection(XMFLOAT3 rotate)
@@ -145,4 +135,29 @@ void SpaceGameEngine::CameraComponent::SetAsMainCamera()
 CameraComponent * SpaceGameEngine::CameraComponent::GetMainCamera()
 {
 	return sm_pThis;
+}
+
+void SpaceGameEngine::CameraComponent::InitTransform()
+{
+	Component* cb = this;
+	while(cb->GetTypeName()!=TransformComponent::NewComponent.m_Name)
+	{
+		cb = cb->GetFatherComponent();
+		if (cb == nullptr)
+		{
+			ThrowError(L"缺少Transform组件");
+			return;
+		}
+	}
+	m_pTransform = dynamic_cast<TransformComponent*>(cb);
+}
+
+void SpaceGameEngine::CameraComponent::UpdatePosition()
+{
+	if (m_pTransform == nullptr)
+	{
+		ThrowError(L"缺少Transform组件");
+		return;
+	}
+	m_pTransform->SetPosition(m_Position);
 }

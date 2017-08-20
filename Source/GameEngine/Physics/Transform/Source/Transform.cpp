@@ -47,7 +47,7 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
 		XMStoreFloat4x4(&re, mrebuff);
 
-		GetGame()->m_Window.GetVertexShader().m_ObjectData.m_WorldMatrix = re;
+		SpaceEngineWindow->GetVertexShader().m_ObjectData.m_WorldMatrix = re;
 	}
 }
 

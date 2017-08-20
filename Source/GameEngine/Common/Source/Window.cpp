@@ -19,7 +19,7 @@ void SpaceGameEngine::DefaultInitAction()
 
 LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if(SpaceEngineWindow==nullptr)
+	if(Window::GetMainWindow()==nullptr)
 		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
 	switch (message)						//switch语句开始
 	{
@@ -49,6 +49,19 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	}
 
 	return 0;
+}
+
+Window * SpaceGameEngine::GetWindow()
+{
+	if (Window::GetMainWindow() == nullptr)
+	{
+		ThrowError(L"未创建Window对象");
+		return nullptr;
+	}
+	else
+	{
+		return Window::GetMainWindow();
+	}
 }
 
 SpaceGameEngine::Window::Window()
@@ -145,7 +158,7 @@ HRESULT SpaceGameEngine::Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrev
 
 void SpaceGameEngine::Window::Release()
 {
-	if (SpaceEngineWindow == this)
+	if (sm_pThis == this)
 		sm_pThis = nullptr;
 	SafeRelease(m_pD3DDevice);
 	SafeRelease(m_pD3DDeviceContext);

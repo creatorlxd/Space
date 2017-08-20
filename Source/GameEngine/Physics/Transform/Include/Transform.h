@@ -1,7 +1,7 @@
 #pragma once 
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
-#include "Game/Game/Include/SafeGet.h"
+#include "Window.h"
 namespace SpaceGameEngine
 {
 	//TODO:给TransformComponent设定多个模式（包括用于渲染模式，绑定摄像机模式，绑定子物体模式（父模式）。。。）不同的Run(...)
@@ -11,7 +11,7 @@ namespace SpaceGameEngine
 		static ComponentManager::NewComponent<TransformComponent> NewComponent;		//创建组件
 
 		static const int ForRenderingMode = 1 << 0;
-		static const int ForCameraMode = 1 << 1;
+		static const int InformationMode = 1 << 1;
 		static const int FatherTransformMode = 1 << 2;
 
 		TransformComponent();

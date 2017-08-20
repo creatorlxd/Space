@@ -31,9 +31,10 @@ void SpaceGameEngine::Scene::Start()
 {
 	//Ìí¼ÓÄ¬ÈÏÉãÏñ»ú
 	Object* DefaultCamera=ObjectManager::NewObject();
-	Component* camera = CameraComponent::NewComponent();
-	DefaultCamera->AddComponent(camera);
-	DefaultCamera->SetRootComponent(CameraComponent::NewComponent.m_Name);
+	DefaultCamera->AddComponent(CameraComponent::NewComponent());
+	DefaultCamera->AddComponent(TransformComponent::NewComponent());
+	DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
+	DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
 	REGISTEROBJECT(DefaultCamera);
 	//--------------
 

@@ -87,6 +87,8 @@ namespace SpaceGameEngine
 
 		bool m_IfBegin;							//游戏是否已开始
 	};
-#define SpaceEngineWindow Window::GetMainWindow()
+
+	Window* GetWindow();
+#define SpaceEngineWindow SpaceGameEngine::GetWindow()
 
 }
