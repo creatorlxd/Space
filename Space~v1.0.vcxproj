@@ -179,6 +179,7 @@
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h" />
     <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h" />
     <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
@@ -208,6 +209,7 @@
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp" />
   </ItemGroup>
@@ -221,6 +223,16 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultShader.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultVS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>

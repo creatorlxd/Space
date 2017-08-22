@@ -148,6 +148,15 @@
     <Filter Include="Graphics\Camera\Source">
       <UniqueIdentifier>{f7e196f7-e381-4670-a907-65c2c5451d08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderFarmework\EffectShader">
+      <UniqueIdentifier>{e2c97c2e-d27a-4a3e-8b21-c61d1d11c091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\EffectShader\Include">
+      <UniqueIdentifier>{9dc6e681-9fa1-41f3-bfd0-32757bff1c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFarmework\EffectShader\Source">
+      <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -233,6 +242,9 @@
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h">
       <Filter>Graphics\Camera\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h">
+      <Filter>ShaderFarmework\EffectShader\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -301,12 +313,18 @@
     <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp">
       <Filter>Graphics\Camera\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp">
+      <Filter>ShaderFarmework\EffectShader\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">
       <Filter>Shader\Common</Filter>
     </FxCompile>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultVS.hlsl">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\GameEngine\Shader\Common\DefaultShader.fx">
       <Filter>Shader\Common</Filter>
     </FxCompile>
   </ItemGroup>
