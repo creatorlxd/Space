@@ -24,6 +24,8 @@ namespace SpaceGameEngine
 
 		void SetAsMainCamera();
 		static CameraComponent* GetMainCamera();
+		
+		void InitTransform();										//初始化变换信息
 	private:
 		XMFLOAT3 m_LookDirection;
 		XMFLOAT3 m_RightDirection;
@@ -31,7 +33,6 @@ namespace SpaceGameEngine
 		XMFLOAT3 m_Position;
 
 		TransformComponent* m_pTransform;
-		void InitTransform();
 		void UpdatePosition();
 
 		static CameraComponent* sm_pThis;
