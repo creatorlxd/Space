@@ -45,7 +45,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 {
 	SpaceEngineWindow->GetEffectShader().m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
-	SceneData::m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, SpaceEngineWindow->GetWindowWidth() / SpaceEngineWindow->GetWindowHeight(), 1.0f, 1000.0f);
+	SceneData::m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), 1.0f, 1000.0f);
 	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }
