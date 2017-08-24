@@ -8,15 +8,15 @@ cbuffer ObjectData : register(b1)
 };
 struct DefaultVertexInput
 {
-	float4 Position : POSITION;
-	float4 Normal : NORMAL;
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
 	float2 TextureCoord : TEXCOORD0;
 };
 
 struct DefaultVertexOutput
 {
-	float4 Position : POSITION;
-	float4 Normal : NORMAL;
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
 	float2 TextureCoord : TEXCOORD0;
 };
 
@@ -24,7 +24,7 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 {
 	DefaultVertexOutput output;
 
-	output.Position = mul(input.Position, WorldViewProjMatrix);
+	output.Position = mul(float4(input.Position,1.0f), WorldViewProjMatrix);
 
 	output.Normal = input.Normal;
 	output.TextureCoord = input.TextureCoord;
