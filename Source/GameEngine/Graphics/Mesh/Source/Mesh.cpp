@@ -88,12 +88,19 @@ void SpaceGameEngine::MeshComponent::Start()
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
-	GetGame()->m_Window.GetVertexShader().SetConstantBuffer(GetGame()->m_Window.GetD3DDevice(), GetGame()->m_Window.GetD3DDeviceContext(), GetGame()->m_Window.GetVertexShader().ObjectDataIndex, GetGame()->m_Window.GetVertexShader().m_ObjectData);
 	unsigned int v_strides = sizeof(DefaultVertex);
 	unsigned int v_offset = 0;
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer,&v_strides, &v_offset);
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-	GetGame()->m_Window.GetD3DDeviceContext()->DrawIndexed(m_Indices.size(), 0, 0);
+
+	D3DX11_TECHNIQUE_DESC techDesc;
+	SpaceEngineWindow->GetEffectShader().m_pTechnique->GetDesc(&techDesc);
+	for (UINT p = 0; p < techDesc.Passes; ++p)
+	{
+		SpaceEngineWindow->GetEffectShader().m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+
+		SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(m_Indices.size(), 0, 0);
+	}
 }
 
 void SpaceGameEngine::MeshComponent::InitVertexBuffer()

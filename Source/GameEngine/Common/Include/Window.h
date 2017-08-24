@@ -4,6 +4,7 @@
 #include"InputDevice.h"
 #include "ShaderFarmework/VertexShader/Include/VertexShader.h"
 #include "ShaderFarmework/PixelShader/Include/PixelShader.h"
+#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
 namespace SpaceGameEngine
 {
 	void DefaultWindowLoop();				//默认的游戏循环函数指针
@@ -41,11 +42,8 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
-		void SetVertexShader(const VertexShader& vs);	//设置顶点着色器
-		void SetPixelShader(const PixelShader& ps);		//设置像素着色器
-
-		VertexShader& GetVertexShader();				//获取顶点着色器
-		PixelShader& GetPixelShader();					//获取像素着色器
+		void SetEffectShader(const EffectShader& shader);
+		EffectShader& GetEffectShader();
 
 		void SetDefaultState();							//设置默认状态
 
@@ -67,8 +65,7 @@ namespace SpaceGameEngine
 
 		ID3D11InputLayout* m_pInputLayout;
 		ID3D11RasterizerState* m_pRasterizerState;
-		VertexShader m_VertexShader;
-		PixelShader m_PixelShader;
+		EffectShader m_EffectShader;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

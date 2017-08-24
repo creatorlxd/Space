@@ -172,8 +172,7 @@ void SpaceGameEngine::Window::Release()
 	{
 		ChangeIfShowCursor(true);
 	}
-	m_VertexShader.Release();
-	m_PixelShader.Release();
+	m_EffectShader.Release();
 }
 
 HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
@@ -258,9 +257,13 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
-	m_VertexShader.InitFromFile(m_pD3DDevice,L"./Source/GameEngine/Shader/Common/DefaultVS.hlsl", "", "main", NULL);
-	m_PixelShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultPS.hlsl", "", "main", NULL);
-	SetDefaultInputLayout(m_pD3DDevice, m_VertexShader.GetBuffer(), &m_pInputLayout);
+	m_EffectShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultShader.fx");
+	m_EffectShader.SetTechnique("Main");
+
+	D3DX11_PASS_DESC passDesc;
+	m_EffectShader.m_pTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
+	SetDefaultInputLayout(m_pD3DDevice,passDesc.pIAInputSignature,passDesc.IAInputSignatureSize, &m_pInputLayout);
+	
 	SetDefaultResterizerState(m_pD3DDevice, &m_pRasterizerState);
 
 	m_pInitAction();
@@ -447,30 +450,18 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 	m_IfUse4xMsaa = b;
 }
 
-void SpaceGameEngine::Window::SetVertexShader(const VertexShader& vs)
+void SpaceGameEngine::Window::SetEffectShader(const EffectShader & shader)
 {
-	m_VertexShader = vs;
+	m_EffectShader = shader;
 }
 
-void SpaceGameEngine::Window::SetPixelShader(const PixelShader & ps)
+EffectShader & SpaceGameEngine::Window::GetEffectShader()
 {
-	m_PixelShader = ps;
-}
-
-VertexShader & SpaceGameEngine::Window::GetVertexShader()
-{
-	return m_VertexShader;
-}
-
-PixelShader & SpaceGameEngine::Window::GetPixelShader()
-{
-	return m_PixelShader;
+	return m_EffectShader;
 }
 
 void SpaceGameEngine::Window::SetDefaultState()
 {
-	m_VertexShader.SetAsMainShader(m_pD3DDeviceContext);
-	m_PixelShader.SetAsMainShader(m_pD3DDeviceContext);
 	m_pD3DDeviceContext->IASetInputLayout(m_pInputLayout);
 	m_pD3DDeviceContext->RSSetState(m_pRasterizerState);
 	m_pD3DDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

@@ -34,7 +34,6 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 	if (m_Mode&ForRenderingMode)
 	{
 		XMMATRIX mrebuff, mbuff;
-		XMFLOAT4X4 re;
 		mbuff = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
 		mrebuff = mbuff;
 		mbuff = XMMatrixRotationX(m_Rotation.x);
@@ -45,9 +44,9 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
 		mbuff = XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
-		XMStoreFloat4x4(&re, mrebuff);
 
-		SpaceEngineWindow->GetVertexShader().m_ObjectData.m_WorldMatrix = re;
+		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SpaceEngineWindow->GetEffectShader().m_ViewMatrix)*XMLoadFloat4x4(&SpaceEngineWindow->GetEffectShader().m_ProjectionMatrix);
+		SpaceEngineWindow->GetEffectShader().m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));
 	}
 }
 

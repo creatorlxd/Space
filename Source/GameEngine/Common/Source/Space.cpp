@@ -69,6 +69,18 @@ void SpaceGameEngine::SetDefaultInputLayout(ID3D11Device* device, ID3DBlob* Shad
 	device->CreateInputLayout(indesc, 3, ShaderByteCode->GetBufferPointer(), ShaderByteCode->GetBufferSize(), inputlayout);
 }
 
+void SpaceGameEngine::SetDefaultInputLayout(ID3D11Device * device, const void * shadercode, SIZE_T size, ID3D11InputLayout ** inputlayout)
+{
+	static D3D11_INPUT_ELEMENT_DESC indesc[] =
+	{
+		{ "POSITION",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
+		{ "NORMAL",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 },
+		{ "TEXCOORD",0,DXGI_FORMAT_R32G32_FLOAT,0,24,D3D11_INPUT_PER_VERTEX_DATA,0 }
+	};
+	device->CreateInputLayout(indesc, 3, shadercode, size, inputlayout);
+
+}
+
 void SpaceGameEngine::SetDefaultResterizerState(ID3D11Device * device, ID3D11RasterizerState ** rasterizerstate)
 {
 	D3D11_RASTERIZER_DESC desc;

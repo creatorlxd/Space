@@ -43,17 +43,9 @@ void SpaceGameEngine::Scene::Start()
 
 void SpaceGameEngine::Scene::Run(float DeltaTime)
 {
-	if (CameraComponent::GetMainCamera())
-	{
-		Window::GetMainWindow()->GetVertexShader().m_SceneData.m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
-	}
-	else
-	{
-		ThrowError(L"至少要有一个摄像机");
-	}
-	Window::GetMainWindow()->GetVertexShader().m_SceneData.m_DeltaTime = XMFLOAT4(DeltaTime, DeltaTime, DeltaTime, DeltaTime);
-	Window::GetMainWindow()->GetVertexShader().m_SceneData.m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, (float)((float)Window::GetMainWindow()->GetWindowWidth() / (float)Window::GetMainWindow()->GetWindowHeight()));
-	Window::GetMainWindow()->GetVertexShader().SetConstantBuffer(Window::GetMainWindow()->GetD3DDevice(), Window::GetMainWindow()->GetD3DDeviceContext(), Window::GetMainWindow()->GetVertexShader().SceneDataIndex, Window::GetMainWindow()->GetVertexShader().m_SceneData);
+	SpaceEngineWindow->GetEffectShader().m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));
+	SpaceEngineWindow->GetEffectShader().m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
+	SpaceEngineWindow->GetEffectShader().m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, SpaceEngineWindow->GetWindowWidth() / SpaceEngineWindow->GetWindowHeight(), 1.0f, 1000.0f);
 	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }
