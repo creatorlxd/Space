@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
 #include "Window.h"
+#include "Game/Scene/Include/SceneData.h"
 namespace SpaceGameEngine
 {
 	//TODO:给TransformComponent设定多个模式（包括用于渲染模式，绑定摄像机模式，绑定子物体模式（父模式）。。。）不同的Run(...)

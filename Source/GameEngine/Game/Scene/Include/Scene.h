@@ -5,6 +5,7 @@
 #include "Graphics/Camera/Include/Camera.h"
 #include "Window.h"
 #include "Game/Object/Include/ObjectFactory.h"
+#include "SceneData.h"
 namespace SpaceGameEngine
 {
 	class Scene					//³¡¾°

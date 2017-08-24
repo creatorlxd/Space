@@ -245,6 +245,9 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h">
       <Filter>ShaderFarmework\EffectShader\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h">
+      <Filter>Game\Scene\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -315,6 +318,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp">
       <Filter>ShaderFarmework\EffectShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp">
+      <Filter>Game\Scene\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

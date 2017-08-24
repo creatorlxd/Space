@@ -45,7 +45,7 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 		mbuff = XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
 
-		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SpaceEngineWindow->GetEffectShader().m_ViewMatrix)*XMLoadFloat4x4(&SpaceEngineWindow->GetEffectShader().m_ProjectionMatrix);
+		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SceneData::m_ViewMatrix)*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
 		SpaceEngineWindow->GetEffectShader().m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));
 	}
 }
