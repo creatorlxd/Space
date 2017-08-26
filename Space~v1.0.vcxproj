@@ -93,7 +93,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VC_SourcePath)\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -108,7 +108,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VC_SourcePath)\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +127,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VC_SourcePath)\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
       <StackReserveSize>
       </StackReserveSize>
     </Link>
@@ -148,7 +148,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VC_SourcePath)\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\Source\GameEngine\ThirdParty</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
