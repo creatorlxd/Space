@@ -27,10 +27,10 @@ namespace SpaceGameEngine
 		
 		void InitTransform();										//初始化变换信息
 	private:
-		XMFLOAT3 m_LookDirection;
-		XMFLOAT3 m_RightDirection;
-		XMFLOAT3 m_UpDirection;
-		XMFLOAT3 m_Position;
+		XMFLOAT4 m_LookDirection;
+		XMFLOAT4 m_RightDirection;
+		XMFLOAT4 m_UpDirection;
+		XMFLOAT4 m_Position;
 
 		TransformComponent* m_pTransform;
 		void UpdatePosition();
