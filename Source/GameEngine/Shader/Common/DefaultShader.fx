@@ -15,7 +15,7 @@ struct DefaultVertexInput
 
 struct DefaultVertexOutput
 {
-	float4 Position : POSITION;
+	float4 Position : SV_POSITION;
 	float3 Normal : NORMAL;
 	float2 TextureCoord : TEXCOORD0;
 };
