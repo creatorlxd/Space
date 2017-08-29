@@ -411,6 +411,7 @@ std::pair<int, int> SpaceGameEngine::Window::GetCursorPosition()
 {
 	POINT p;
 	GetCursorPos(&p);
+	GetWindowPosition();
 	return std::pair<int, int>(p.x-m_WindowPosition.first,p.y-m_WindowPosition.second);
 }
 
@@ -426,7 +427,8 @@ std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 {
 	RECT r;
 	GetWindowRect(m_Hwnd, &r);
-	return std::pair<int, int>(r.left,r.top);
+	m_WindowPosition = std::pair<int, int>(r.left, r.top);
+	return m_WindowPosition;
 }
 
 void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
