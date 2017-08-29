@@ -407,6 +407,13 @@ void SpaceGameEngine::Window::SetCursorPosition(int x, int y)
 	SetCursorPos(pos.first + x, pos.second + y);
 }
 
+std::pair<int, int> SpaceGameEngine::Window::GetCursorPosition()
+{
+	POINT p;
+	GetCursorPos(&p);
+	return std::pair<int, int>(p.x-m_WindowPosition.first,p.y-m_WindowPosition.second);
+}
+
 void SpaceGameEngine::Window::UpdateWindowSize()
 {
 	RECT r;
@@ -433,6 +440,7 @@ void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 	SetWindowPos(m_Hwnd, HWND_TOPMOST, m_WindowPosition.first, m_WindowPosition.second, x, y, SWP_SHOWWINDOW);
 	m_WindowWidth = x;
 	m_WindowHeight = y;
+	Resize();
 }
 
 Window * SpaceGameEngine::Window::GetMainWindow()

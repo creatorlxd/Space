@@ -31,6 +31,7 @@ namespace SpaceGameEngine
 		void Resize();									//改变了窗口大小之后的事
 		void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
 		void SetCursorPosition(int x, int y);			//设置鼠标位置
+		std::pair<int, int> GetCursorPosition();		//获取鼠标位置
 		void UpdateWindowSize();						//重新获取窗口大小
 		std::pair<int, int> GetWindowPosition();		//获取窗口位置
 
