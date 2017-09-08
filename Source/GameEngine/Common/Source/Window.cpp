@@ -82,6 +82,7 @@ SpaceGameEngine::Window::Window()
 	m_pInputLayout = nullptr;
 	m_pRasterizerState = nullptr;
 	m_IfBegin = false;
+	m_RenderQuality = RenderQuality::MediumQuality;
 	SetAsMainWindow();
 }
 
@@ -258,7 +259,21 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
 	m_EffectShader.InitFromFile(m_pD3DDevice, L"./Source/GameEngine/Shader/Common/DefaultShader.fx");
-	m_EffectShader.SetTechnique("Main");
+	switch (m_RenderQuality)
+	{
+	case SpaceGameEngine::RenderQuality::LowQuality:
+		m_EffectShader.SetTechnique("LowQuality");
+		break;
+	case SpaceGameEngine::RenderQuality::MediumQuality:
+		m_EffectShader.SetTechnique("MediumQuality");
+		break;
+	case SpaceGameEngine::RenderQuality::HighQuality:
+		m_EffectShader.SetTechnique("HighQuality");
+		break;
+	default:
+		m_EffectShader.SetTechnique("MediumQuality");
+		break;
+	}
 
 	D3DX11_PASS_DESC passDesc;
 	m_EffectShader.m_pTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
@@ -485,4 +500,14 @@ void SpaceGameEngine::Window::BeginRun()
 bool SpaceGameEngine::Window::GetIfBegin()
 {
 	return m_IfBegin;
+}
+
+RenderQuality SpaceGameEngine::Window::GetRenderQuality()
+{
+	return m_RenderQuality;
+}
+
+void SpaceGameEngine::Window::SetRenderQuality(const RenderQuality & rq)
+{
+	m_RenderQuality = rq;
 }

@@ -37,7 +37,27 @@ float4 PS(DefaultVertexOutput input) : SV_TARGET
 	return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-technique11 Main
+technique11 MediumQuality
+{
+	pass P0
+	{
+		SetVertexShader(CompileShader(vs_5_0, VS()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_5_0, PS()));
+	}
+}
+
+technique11 HighQuality
+{
+	pass P0
+	{
+		SetVertexShader(CompileShader(vs_5_0, VS()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_5_0, PS()));
+	}
+}
+
+technique11 LowQuality
 {
 	pass P0
 	{

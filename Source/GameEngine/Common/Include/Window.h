@@ -7,6 +7,13 @@
 #include "ShaderFarmework/EffectShader/Include/EffectShader.h"
 namespace SpaceGameEngine
 {
+	enum class RenderQuality :unsigned char
+	{
+		LowQuality=1,
+		MediumQuality=2,
+		HighQuality=3
+	};
+
 	void DefaultWindowLoop();				//默认的游戏循环函数指针
 	void DefaultInitAction();					//默认的初始化函数
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);	//Windows窗口循环
@@ -50,6 +57,9 @@ namespace SpaceGameEngine
 
 		void BeginRun();								//游戏开始
 		bool GetIfBegin();								//获取游戏是否开始了
+
+		RenderQuality GetRenderQuality();
+		void SetRenderQuality(const RenderQuality& rq);
 	protected:
 		static Window* sm_pThis;
 
@@ -84,6 +94,8 @@ namespace SpaceGameEngine
 		bool m_IfShowCursor;						//是否显示鼠标
 
 		bool m_IfBegin;							//游戏是否已开始
+
+		RenderQuality m_RenderQuality;
 	};
 
 	Window* GetWindow();
