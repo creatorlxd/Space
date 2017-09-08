@@ -74,6 +74,16 @@ Component * SpaceGameEngine::Component::FindChildComponent(const std::string & n
 	return nullptr;
 }
 
+Component * SpaceGameEngine::Component::FindFatherComponent(const std::string & name)
+{
+	auto cb = this;
+	while (cb != nullptr&&cb->GetTypeName() != name)
+	{
+		cb = cb->GetFatherComponent();
+	}
+	return cb;
+}
+
 std::vector<Component*>& SpaceGameEngine::Component::GetChildrenComponent()
 {
 	return m_Children;
