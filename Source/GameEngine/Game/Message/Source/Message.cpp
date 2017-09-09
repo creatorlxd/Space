@@ -85,7 +85,7 @@ void SpaceGameEngine::MessageManager::Release()
 	}
 	for (auto i : m_Receivers)
 	{
-		delete i.second;
+		MemoryManager::Delete(i.second);
 	}
 }
 

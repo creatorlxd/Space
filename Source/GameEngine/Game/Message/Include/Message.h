@@ -56,7 +56,7 @@ namespace SpaceGameEngine
 					ThrowError(L"已存在该接收器");
 					return nullptr;
 				}
-				Receiver* pointer = new T();
+				Receiver* pointer = MemoryManager::New<T>();
 				sm_pThis->m_Receivers.insert(make_pair(name, pointer));
 				return pointer;
 			}

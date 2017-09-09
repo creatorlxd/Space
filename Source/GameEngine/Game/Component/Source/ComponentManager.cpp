@@ -17,7 +17,7 @@ SpaceGameEngine::ComponentManager::~ComponentManager()
 {
 	for (auto i : m_Content)
 	{
-		delete i;
+		MemoryManager::Delete(i);
 	}
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
@@ -39,7 +39,7 @@ bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 	{
 		if (*i == pc)
 		{
-			delete pc;
+			MemoryManager::Delete(pc);
 			m_Content.erase(i);
 			return true;
 		}
@@ -51,7 +51,7 @@ void SpaceGameEngine::ComponentManager::Release()
 {
 	for (auto i : m_Content)
 	{
-		delete i;
+		MemoryManager::Delete(i);
 	}
 	m_Content.clear();
 	if (sm_pThis == this)

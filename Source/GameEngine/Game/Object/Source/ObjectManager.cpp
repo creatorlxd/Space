@@ -13,7 +13,7 @@ SpaceGameEngine::ObjectManager::~ObjectManager()
 {
 	for (auto i : m_Content)
 	{
-		delete i;
+		MemoryManager::Delete(i);
 	}
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
@@ -36,7 +36,7 @@ Object * SpaceGameEngine::ObjectManager::NewObject()
 		ThrowError(L"需要先定义一个对象管理器");
 		return nullptr;
 	}
-	auto re = new Object();
+	auto re = MemoryManager::New<Object>();
 	sm_pThis->m_Content.push_back(re);
 	return re;
 }
@@ -47,7 +47,7 @@ bool SpaceGameEngine::ObjectManager::DeleteObject(Object * po)
 	{
 		if (*i == po)
 		{
-			delete po;
+			MemoryManager::Delete(po);
 			m_Content.erase(i);
 			return true;
 		}
@@ -77,7 +77,7 @@ void SpaceGameEngine::ObjectManager::Release()
 {
 	for (auto i : m_Content)
 	{
-		delete i;
+		MemoryManager::Delete(i);
 	}
 	m_Content.clear();
 }

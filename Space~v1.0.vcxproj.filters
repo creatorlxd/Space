@@ -248,6 +248,12 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h">
       <Filter>Game\Scene\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\MemoryManager.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -321,6 +327,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp">
       <Filter>Game\Scene\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\Allocator.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp">
+      <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

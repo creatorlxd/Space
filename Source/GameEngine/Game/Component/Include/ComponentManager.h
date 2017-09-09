@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "ComponentFactoryManager.h"
+#include "MemoryManager.h"
+
 namespace SpaceGameEngine
 {
 	class ComponentManager							//组件管理器
@@ -22,7 +24,7 @@ namespace SpaceGameEngine
 					ThrowError(L"需要先定义一个组件管理器");
 					return nullptr;
 				}
-				Component* buff = new T();
+				Component* buff = MemoryManager::New<T>();
 				sm_pThis->m_Content.push_back(buff);
 				return buff;
 			}

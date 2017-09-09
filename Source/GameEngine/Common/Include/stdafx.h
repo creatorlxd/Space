@@ -25,6 +25,8 @@
 #include <queue>
 #include <stack>
 #include <functional>
+#include <cstdint>
+#include <cstddef>
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
