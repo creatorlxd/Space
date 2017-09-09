@@ -14,6 +14,12 @@ namespace SpaceGameEngine
 		}
 
 		template<typename T>
+		static T* NewArray(size_t size)
+		{
+			return new (Allocate(sizeof(T)*size)) T[size];
+		}
+
+		template<typename T>
 		static void Delete(T *p)
 		{
 			reinterpret_cast<T*>(p)->~T();
