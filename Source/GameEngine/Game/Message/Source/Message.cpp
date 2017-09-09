@@ -141,6 +141,7 @@ bool SpaceGameEngine::MessageManager::DeleteReceiver(const std::string & name)
 	auto i = m_Receivers.find(name);
 	if (i != m_Receivers.end())
 	{
+		MemoryManager::Delete(i->second);
 		m_Receivers.erase(i);
 		return true;
 	}
