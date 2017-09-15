@@ -52,16 +52,28 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 {
+	if (m_pFatherObject)
+	{
+		m_pFatherObject->ProduceMessage(this,Event::PositionChange);
+	}
 	m_Position = position;
 }
 
 void SpaceGameEngine::TransformComponent::SetRotation(const XMFLOAT3 & rotation)
 {
+	if (m_pFatherObject)
+	{
+		m_pFatherObject->ProduceMessage(this, Event::RotationChange);
+	}
 	m_Rotation = rotation;
 }
 
 void SpaceGameEngine::TransformComponent::SetScale(const XMFLOAT3 & scale)
 {
+	if (m_pFatherObject)
+	{
+		m_pFatherObject->ProduceMessage(this, Event::ScaleChange);
+	}
 	m_Scale = scale;
 }
 

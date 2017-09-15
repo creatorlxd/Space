@@ -1,10 +1,17 @@
 #pragma once 
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Object/Include/Object.h"
 #include "Window.h"
 #include "Game/Scene/Include/SceneData.h"
 namespace SpaceGameEngine
 {
+	namespace Event
+	{
+		const unsigned int PositionChange = HashString("PositionChange");
+		const unsigned int RotationChange = HashString("RotationChange");
+		const unsigned int ScaleChange = HashString("ScaleChange");
+	}
+
 	//TODO:给TransformComponent设定多个模式（包括用于渲染模式，绑定摄像机模式，绑定子物体模式（父模式）。。。）不同的Run(...)
 	class TransformComponent :public Component				//物体的基本物理信息
 	{

@@ -72,6 +72,8 @@ namespace SpaceGameEngine
 	//TODO:报错后的处理
 	void ThrowError(const tstring& errormessege);										//报错
 
+	unsigned int HashString(const std::string& str);
+
 	std::vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
 	//----------------------------------------------------------------------------------------------

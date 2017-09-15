@@ -28,9 +28,13 @@ namespace SpaceGameEngine
 		
 		bool IfRender();					//是否渲染
 		void ChangeIfRender(bool b);		//更改是否渲染
+
+		void ProduceMessage(Component* from, unsigned int message);
+		Component* GetComponentByMessage(unsigned int message);
 	protected:
 		std::map<std::string, Component*> m_Components;			//组件们...
 		Component* m_pRootComponent;							//根组件
+		std::map<unsigned int, Component*> m_Message;
 
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行

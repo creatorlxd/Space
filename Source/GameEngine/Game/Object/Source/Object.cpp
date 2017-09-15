@@ -116,6 +116,7 @@ void SpaceGameEngine::Object::Run(float DeltaTime)
 		return;
 	}
 	RunComponentOnTree(m_pRootComponent, DeltaTime);
+	m_Message.clear();
 }
 
 void SpaceGameEngine::Object::Release()
@@ -127,6 +128,7 @@ void SpaceGameEngine::Object::Release()
 	}
 
 	m_Components.clear();
+	m_Message.clear();
 	m_pRootComponent = nullptr;
 }
 
@@ -175,6 +177,22 @@ bool SpaceGameEngine::Object::IfRender()
 void SpaceGameEngine::Object::ChangeIfRender(bool b)
 {
 	m_IfRender = b;
+}
+
+void SpaceGameEngine::Object::ProduceMessage(Component * from, unsigned int message)
+{
+	m_Message.insert(std::make_pair(message, from));
+}
+
+Component * SpaceGameEngine::Object::GetComponentByMessage(unsigned int message)
+{
+	Component* re = nullptr;
+	auto iter = m_Message.find(message);
+	if (iter != m_Message.end())
+	{
+		re = iter->second;
+	}
+	return re;
 }
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)

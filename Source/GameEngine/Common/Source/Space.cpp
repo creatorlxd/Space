@@ -43,6 +43,12 @@ void SpaceGameEngine::ThrowError(const tstring & errormessege)
 	MessageBox(NULL, errormessege.c_str(), L"Space Game Engine", NULL);
 }
 
+unsigned int SpaceGameEngine::HashString(const std::string & str)
+{
+	std::hash<std::string> sh;
+	return static_cast<unsigned int>(sh(str));
+}
+
 std::vector<std::pair<std::string, std::string> > SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
 {
 	std::vector<std::pair<std::string, std::string> > re;
