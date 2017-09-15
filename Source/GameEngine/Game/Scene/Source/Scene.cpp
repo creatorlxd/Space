@@ -29,15 +29,23 @@ Scene * SpaceGameEngine::Scene::GetMainScene()
 
 void SpaceGameEngine::Scene::Start()
 {
-	//添加默认摄像机
-	Object* DefaultCamera=ObjectManager::NewObject();
-	DefaultCamera->AddComponent(CameraComponent::NewComponent());
-	DefaultCamera->AddComponent(TransformComponent::NewComponent());
-	DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
-	DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
-	REGISTEROBJECT(DefaultCamera);
-	//--------------
-
+	static bool ifinit = false;
+	if (!ifinit)
+	{	
+		//添加默认摄像机
+		Object* DefaultCamera = ObjectManager::NewObject();
+		DefaultCamera->AddComponent(CameraComponent::NewComponent());
+		DefaultCamera->AddComponent(TransformComponent::NewComponent());
+		DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
+		DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
+		REGISTEROBJECT(DefaultCamera);
+		//--------------
+		ifinit = true;
+	}
+	else
+	{
+		FindObject("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
+	}
 	m_ObjectManager.Start();
 }
 
@@ -45,7 +53,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 {
 	SpaceEngineWindow->GetEffectShader().m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
-	SceneData::m_ProjectionMatrix = GetProjectionMatrix(XM_PIDIV4, (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), 1.0f, 1000.0f);
+	SceneData::m_ProjectionMatrix = GetProjectionMatrix(CameraComponent::GetMainCamera()->GetAngle(), (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), CameraComponent::GetMainCamera()->GetNearZ(), CameraComponent::GetMainCamera()->GetFarZ());
 	m_MessageManager.Run();
 	m_ObjectManager.Run(DeltaTime);
 }

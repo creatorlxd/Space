@@ -14,6 +14,9 @@ SpaceGameEngine::CameraComponent::CameraComponent()
 	m_RightDirection = { 1,0,0 ,0};
 	m_UpDirection = { 0,1,0 ,0};
 	m_Position = { 0,0,0 ,1};
+	m_Angle = XM_PIDIV4;
+	m_NearZ = 1.0f;
+	m_FarZ = 1000.0f;
 	sm_pThis = this;
 	m_pTransform = nullptr;
 }
@@ -150,6 +153,36 @@ void SpaceGameEngine::CameraComponent::InitTransform()
 		}
 	}
 	m_pTransform = dynamic_cast<TransformComponent*>(cb);
+}
+
+float SpaceGameEngine::CameraComponent::GetAngle()
+{
+	return m_Angle;
+}
+
+void SpaceGameEngine::CameraComponent::SetAngle(float f)
+{
+	m_Angle = f;
+}
+
+float SpaceGameEngine::CameraComponent::GetNearZ()
+{
+	return m_NearZ;
+}
+
+void SpaceGameEngine::CameraComponent::SetNearZ(float f)
+{
+	m_NearZ = f;
+}
+
+float SpaceGameEngine::CameraComponent::GetFarZ()
+{
+	return m_FarZ;
+}
+
+void SpaceGameEngine::CameraComponent::SetFarZ(float f)
+{
+	m_FarZ = f;
 }
 
 void SpaceGameEngine::CameraComponent::UpdatePosition()

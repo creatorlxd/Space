@@ -26,11 +26,22 @@ namespace SpaceGameEngine
 		static CameraComponent* GetMainCamera();
 		
 		void InitTransform();										//初始化变换信息
+
+		float GetAngle();
+		void SetAngle(float f);
+		float GetNearZ();
+		void SetNearZ(float f);
+		float GetFarZ();
+		void SetFarZ(float f);
 	private:
 		XMFLOAT4 m_LookDirection;
 		XMFLOAT4 m_RightDirection;
 		XMFLOAT4 m_UpDirection;
 		XMFLOAT4 m_Position;
+
+		float m_Angle;
+		float m_NearZ;
+		float m_FarZ;
 
 		TransformComponent* m_pTransform;
 		void UpdatePosition();
