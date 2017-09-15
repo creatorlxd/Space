@@ -1,6 +1,6 @@
 #pragma once 
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Object/Include/Object.h"
 #include "Window.h"
 #include "Game/Game/Include/SafeGet.h"
 namespace SpaceGameEngine

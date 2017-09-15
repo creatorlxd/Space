@@ -88,6 +88,10 @@ void SpaceGameEngine::MeshComponent::Start()
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
+	if (m_pFatherObject->IfRender() == false)
+	{
+		return;
+	}
 	unsigned int v_strides = sizeof(DefaultVertex);
 	unsigned int v_offset = 0;
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer,&v_strides, &v_offset);

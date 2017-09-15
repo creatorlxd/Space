@@ -25,12 +25,16 @@ namespace SpaceGameEngine
 		bool IfUse();						//是否使用
 		void ChangeIfRun(bool b);			//更改每帧是否运行
 		void ChangeIfUse(bool b);			//更改是否使用
+		
+		bool IfRender();					//是否渲染
+		void ChangeIfRender(bool b);		//更改是否渲染
 	protected:
 		std::map<std::string, Component*> m_Components;			//组件们...
 		Component* m_pRootComponent;							//根组件
 
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行
+		bool m_IfRender;										//是否渲染
 	};
 
 	void RunComponentOnTree(Component* node, float DeltaTime);	//在树上运行组件(DFS)

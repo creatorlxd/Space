@@ -7,6 +7,7 @@ SpaceGameEngine::Object::Object()
 	m_pRootComponent = nullptr;
 	m_IfUse = true;
 	m_IfRun = true;
+	m_IfRender = true;
 }
 
 SpaceGameEngine::Object::~Object()
@@ -164,6 +165,16 @@ void SpaceGameEngine::Object::ChangeIfRun(bool b)
 void SpaceGameEngine::Object::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
+}
+
+bool SpaceGameEngine::Object::IfRender()
+{
+	return m_IfRender;
+}
+
+void SpaceGameEngine::Object::ChangeIfRender(bool b)
+{
+	m_IfRender = b;
 }
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)
