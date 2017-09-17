@@ -19,7 +19,7 @@ namespace SpaceGameEngine
 		template<typename _other>
 		struct rebind
 		{
-			typedef AllocatorForSTL<T> other;
+			typedef AllocatorForSTL<_other> other;
 		};
 
 		pointer address(reference x)
