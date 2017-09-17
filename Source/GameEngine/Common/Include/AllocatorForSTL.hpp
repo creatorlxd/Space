@@ -30,7 +30,7 @@ namespace SpaceGameEngine
 		{
 			return const_pointer(&x);
 		}
-		pointer allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint = 0)
+		pointer allocate(size_type size)
 		{
 			return pointer(MemoryManager::Allocate(size));
 		}
@@ -45,6 +45,18 @@ namespace SpaceGameEngine
 		void destory(pointer p)
 		{
 			p->~T();
+		}
+		size_type max_size() const
+		{
+			return size_type(UINT_MAX / sizeof(T));
+		}
+		bool operator==(const AllocatorForSTL &rhs)
+		{
+			return true;
+		}
+		bool operator!=(const AllocatorForSTL &rhs)
+		{
+			return !operator==(rhs);
 		}
 	};
 }
