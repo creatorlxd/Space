@@ -9,10 +9,10 @@ namespace SpaceGameEngine
 	{
 	public :
 		typedef T value_type;
-		typedef value_type* pointer;
-		typedef value_type& reference;
-		typedef value_type const* const_pointer;
-		typedef value_type const& const_reference;
+		typedef T *pointer;
+		typedef T &reference;
+		typedef const T *const_pointer;
+		typedef const T &const_reference;
 		typedef size_t size_type;
 		typedef ptrdiff_t difference_type;
 
