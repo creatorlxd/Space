@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Space.h"
+#include "AllocatorForSTL.hpp"
 namespace SpaceGameEngine
 {
 	class Object;
@@ -17,7 +18,7 @@ namespace SpaceGameEngine
 		bool DeleteChildComponent(Component* pc);	//删除子组件
 		Component* FindChildComponent(const std::string& name);	//在所有子组件中寻找类型为name的组件(BFS)
 		Component* FindFatherComponent(const std::string& name);//在所有父组件中寻找类型为name的组件
-		std::vector<Component*>& GetChildrenComponent();	//获得子组件数组的引用
+		Vector<Component*>& GetChildrenComponent();	//获得子组件数组的引用
 		virtual void InitFromFile(const std::string& filename, int mode = 0);
 		virtual void Start();			//在开始时执行
 		virtual void Run(float DeltaTime);//每帧运行时的操作
@@ -36,7 +37,7 @@ namespace SpaceGameEngine
 		int m_Mode;							//组件内部具体模式
 		bool m_IfRun;						//是否每帧运行
 		bool m_IfUse;						//是否使用
-		std::vector<Component*> m_Children;	//子组件
+		Vector<Component*> m_Children;	//子组件
 		Component* m_pFather;				//父组件
 		Object* m_pFatherObject;					//所属的Object对象
 	};

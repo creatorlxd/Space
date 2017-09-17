@@ -84,7 +84,7 @@ Component * SpaceGameEngine::Component::FindFatherComponent(const std::string & 
 	return cb;
 }
 
-std::vector<Component*>& SpaceGameEngine::Component::GetChildrenComponent()
+Vector<Component*>& SpaceGameEngine::Component::GetChildrenComponent()
 {
 	return m_Children;
 }

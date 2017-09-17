@@ -69,7 +69,7 @@ void SpaceGameEngine::MemoryManager::Release()
 SpaceGameEngine::Allocator* SpaceGameEngine::MemoryManager::FindAllocator(size_t size)
 {
 	if (size <= g_MaxBlockSize)
-		return &m_pAllocators[m_pBlockSizeContent[size]];
+		return m_pAllocators+m_pBlockSizeContent[size];
 	else
 		return nullptr;
 }

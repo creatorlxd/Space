@@ -35,7 +35,7 @@ namespace SpaceGameEngine
 		static Component* NewComponentByName(const std::string& name);			//通过组件子类名来创建组件
 	protected:
 		static ComponentManager* sm_pThis;			//当前的管理器指针
-		std::vector<Component*> m_Content;			//所管理的组件
+		Vector<Component*> m_Content;			//所管理的组件
 	};
 
 	extern ComponentFactoryManager g_ComponentFactoryManager;

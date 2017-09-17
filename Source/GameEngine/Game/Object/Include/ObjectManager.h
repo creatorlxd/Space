@@ -19,6 +19,6 @@ namespace SpaceGameEngine
 		void Release();								// Õ∑≈
 	private:
 		static ObjectManager* sm_pThis;
-		std::vector<Object*> m_Content;
+		Vector<Object*> m_Content;
 	};
 }

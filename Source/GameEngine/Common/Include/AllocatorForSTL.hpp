@@ -72,4 +72,11 @@ namespace SpaceGameEngine
 
 		}
 	};
+
+	template<typename T>
+	using Vector = std::vector<T, AllocatorForSTL<T> >;
+
+	template<typename T,typename U>
+	using Map = std::map<T,U, std::less<T>,AllocatorForSTL<std::pair<const T,U> > >;
+
 }

@@ -17,7 +17,7 @@ namespace SpaceGameEngine
 		bool DeleteComponentFactory(const std::string& name);
 		std::function<Component*(void)> FindComponentFactory(const std::string& name);
 	private:
-		std::map<std::string, std::function<Component*(void)> > m_Content;
+		Map<std::string, std::function<Component*(void)> > m_Content;
 
 		static ComponentFactoryManager* sm_pThis;
 	};
