@@ -58,5 +58,14 @@ namespace SpaceGameEngine
 		{
 			return !operator==(rhs);
 		}
+		AllocatorForSTL()
+		{
+
+		}
+		template<typename U>
+		AllocatorForSTL(AllocatorForSTL<U>& alloc)
+		{
+
+		}
 	};
 }
