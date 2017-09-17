@@ -13,7 +13,7 @@ namespace SpaceGameEngine
 		bool DeleteComponent(const std::string& name);			//删除组件，并去除连接
 
 		void Start();											//开始时运行
-		void InitFromFile(std::vector<std::pair<std::string, std::string> > filenames);	//从文件初始化
+		void InitFromFile(Vector<std::pair<std::string, std::string> > filenames);	//从文件初始化
 		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
 		void Run(float DeltaTime);								//每帧运行时的操作
 		void Release();											//手动释放

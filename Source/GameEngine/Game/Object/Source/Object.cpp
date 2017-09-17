@@ -81,7 +81,7 @@ void SpaceGameEngine::Object::Start()
 	}
 }
 
-void SpaceGameEngine::Object::InitFromFile(std::vector<std::pair<std::string, std::string>> filenames)
+void SpaceGameEngine::Object::InitFromFile(Vector<std::pair<std::string, std::string>> filenames)
 {
 	std::fstream file;
 	for (auto i : filenames)

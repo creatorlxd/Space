@@ -31,6 +31,6 @@ namespace SpaceGameEngine
 		MessageManager m_MessageManager;	//消息管理器
 	private:
 		static Scene* sm_pThis;
-		std::map<std::string, Object*> m_ObjectInformation;	//对象信息
+		Map<std::string, Object*> m_ObjectInformation;	//对象信息
 	};
 }

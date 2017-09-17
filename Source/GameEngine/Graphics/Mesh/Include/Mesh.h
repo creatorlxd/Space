@@ -24,8 +24,8 @@ namespace SpaceGameEngine
 		void InitVertexBuffer();
 		void InitIndexBuffer();
 
-		std::vector<DefaultVertex> m_Vertices;
-		std::vector<unsigned int> m_Indices;
+		Vector<DefaultVertex> m_Vertices;
+		Vector<unsigned int> m_Indices;
 
 		ID3D11Buffer* m_pVertexBuffer;
 		ID3D11Buffer* m_pIndexBuffer;

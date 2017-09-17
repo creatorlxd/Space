@@ -79,4 +79,12 @@ namespace SpaceGameEngine
 	template<typename T,typename U>
 	using Map = std::map<T,U, std::less<T>,AllocatorForSTL<std::pair<const T,U> > >;
 
+	template<typename T>
+	using Deque = std::deque<T, AllocatorForSTL<T> >;
+
+	template<typename T>
+	using Queue = std::queue<T, Deque<T> >;
+	
+	template<typename T>
+	using Stack = std::stack<T, Deque<T> >;
 }

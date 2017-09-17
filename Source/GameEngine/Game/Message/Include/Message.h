@@ -25,7 +25,7 @@ namespace SpaceGameEngine
 		void Clear();								//清空队列
 		bool IfHaveMessage(int c);					//是否含有某个消息
 	private:
-		std::queue<int> m_MessageQueue;
+		Queue<int> m_MessageQueue;
 	};
 
 	class MessageManager				//消息管理器
@@ -70,8 +70,8 @@ namespace SpaceGameEngine
 		void SetMaxSize(int i);
 	private:
 		static MessageManager* sm_pThis;
-		std::map<std::string, Receiver*> m_Receivers;
-		std::queue<Message> m_GlobalMessageQueue;
+		Map<std::string, Receiver*> m_Receivers;
+		Queue<Message> m_GlobalMessageQueue;
 		int m_MaxSize;
 	};
 

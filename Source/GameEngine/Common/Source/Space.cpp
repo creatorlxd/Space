@@ -49,9 +49,9 @@ unsigned int SpaceGameEngine::HashString(const std::string & str)
 	return static_cast<unsigned int>(sh(str));
 }
 
-std::vector<std::pair<std::string, std::string> > SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
+Vector<std::pair<std::string, std::string> > SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
 {
-	std::vector<std::pair<std::string, std::string> > re;
+	Vector<std::pair<std::string, std::string> > re;
 	std::fstream file(filename, std::ios::in);
 	std::string componentname, assetname;
 

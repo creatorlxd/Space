@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "AllocatorForSTL.hpp"
 namespace SpaceGameEngine
 {
 #ifndef SPACE
@@ -74,7 +75,7 @@ namespace SpaceGameEngine
 
 	unsigned int HashString(const std::string& str);
 
-	std::vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
+	Vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
 	//----------------------------------------------------------------------------------------------
 	void SetDefaultInputLayout(ID3D11Device* device,ID3DBlob* ShaderByteCode, ID3D11InputLayout** inputlayout);				//设置默认的顶点输入格式（需要shader)
