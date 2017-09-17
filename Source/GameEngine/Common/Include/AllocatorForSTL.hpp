@@ -67,5 +67,9 @@ namespace SpaceGameEngine
 		{
 
 		}
+		AllocatorForSTL(AllocatorForSTL& alloc)
+		{
+
+		}
 	};
 }
