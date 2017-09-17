@@ -22,41 +22,29 @@ namespace SpaceGameEngine
 			typedef AllocatorForSTL<T> other;
 		};
 
-		pointer address(reference x);
-		const_pointer address(const_reference x);
-		pointer allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint = 0);
-		void deallocate(pointer p, size_type size);
-		void construct(pointer p, const_reference ref);
-		void destory(pointer p);
+		pointer address(reference x)
+		{
+			return pointer(&x);
+		}
+		const_pointer address(const_reference x)
+		{
+			return const_pointer(&x);
+		}
+		pointer allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint = 0)
+		{
+			return pointer(MemoryManager::Allocate(size));
+		}
+		void deallocate(pointer p, size_type size)
+		{
+			MemoryManager::Free(p, size * sizeof(T));
+		}
+		void construct(pointer p, const_reference ref)
+		{
+			new (p) T(ref);
+		}
+		void destory(pointer p)
+		{
+			p->~T();
+		}
 	};
-	template<typename T>
-	inline AllocatorForSTL<T>::pointer AllocatorForSTL<T>::address(reference x)
-	{
-		return pointer(&x);
-	}
-	template<typename T>
-	inline AllocatorForSTL<T>::const_pointer AllocatorForSTL<T>::address(const_reference x)
-	{
-		return const_pointer(&x);
-	}
-	template<typename T>
-	inline AllocatorForSTL<T>::pointer AllocatorForSTL<T>::allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint)
-	{
-		return point(MemoryManager::Allocate(size));
-	}
-	template<typename T>
-	inline void AllocatorForSTL<T>::deallocate(pointer p, size_type size)
-	{
-		MemoryManager::Free(p, size*sizeof(T));
-	}
-	template<typename T>
-	inline void AllocatorForSTL<T>::construct(pointer p, const_reference ref)
-	{
-		new (p) T(ref);
-	}
-	template<typename T>
-	inline void AllocatorForSTL<T>::destory(pointer p)
-	{
-		p->~T();
-	}
 }
