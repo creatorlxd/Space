@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Include\MemoryManager.h" />
