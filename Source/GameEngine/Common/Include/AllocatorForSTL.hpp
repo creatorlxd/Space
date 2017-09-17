@@ -32,7 +32,7 @@ namespace SpaceGameEngine
 		}
 		pointer allocate(size_type size)
 		{
-			return pointer(MemoryManager::Allocate(size));
+			return reinterpret_cast<T*>(pointer(MemoryManager::Allocate(size)));
 		}
 		void deallocate(pointer p, size_type size)
 		{
