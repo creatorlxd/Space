@@ -24,23 +24,23 @@ namespace SpaceGameEngine
 
 		pointer address(reference x);
 		const_pointer address(const_reference x);
-		point allocate(size_t size, AllocatorForSTL<void>::const_pointer pHint = 0);
+		pointer allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint = 0);
 		void deallocate(pointer p, size_type size);
 		void construct(pointer p, const_reference ref);
 		void destory(pointer p);
 	};
 	template<typename T>
-	inline pointer AllocatorForSTL<T>::address(reference x)
+	inline AllocatorForSTL<T>::pointer AllocatorForSTL<T>::address(reference x)
 	{
 		return pointer(&x);
 	}
 	template<typename T>
-	inline const_pointer AllocatorForSTL<T>::address(const_reference x)
+	inline AllocatorForSTL<T>::const_pointer AllocatorForSTL<T>::address(const_reference x)
 	{
 		return const_pointer(&x);
 	}
 	template<typename T>
-	inline point AllocatorForSTL<T>::allocate(size_t size, AllocatorForSTL<void>::const_pointer pHint)
+	inline AllocatorForSTL<T>::pointer AllocatorForSTL<T>::allocate(size_type size, AllocatorForSTL<void>::const_pointer pHint)
 	{
 		return point(MemoryManager::Allocate(size));
 	}
