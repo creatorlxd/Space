@@ -46,7 +46,7 @@ void SpaceGameEngine::MemoryManager::Init()
 		size_t j = 0;
 		for (size_t i = 0; i <= g_MaxBlockSize; i++)
 		{
-			if (i >= g_BlockSizes[j]) j += 1;
+			if (i > g_BlockSizes[j]) j += 1;
 			m_pBlockSizeContent[i] = j;
 		}
 
