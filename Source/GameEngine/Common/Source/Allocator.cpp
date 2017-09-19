@@ -45,7 +45,7 @@ void* SpaceGameEngine::Allocator::Allocate()
 {
 	if (!m_pFreeBlockList)
 	{
-		PageHeader* pNewPage = reinterpret_cast<PageHeader*>(new uint8_t[m_PageSize]());
+		PageHeader* pNewPage = reinterpret_cast<PageHeader*>(new uint8_t[m_PageSize+sizeof(PageHeader)]());
 		m_Pages += 1;
 		m_Blocks += m_BlocksPerPage;
 		m_FreeBlocks += m_BlocksPerPage;
