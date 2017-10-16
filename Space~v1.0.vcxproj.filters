@@ -257,6 +257,9 @@
     <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\File.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -335,6 +338,9 @@
       <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\File.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>

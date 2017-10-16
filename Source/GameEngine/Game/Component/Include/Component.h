@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Space.h"
 #include "AllocatorForSTL.hpp"
+#include "File.h"
 namespace SpaceGameEngine
 {
 	class Object;

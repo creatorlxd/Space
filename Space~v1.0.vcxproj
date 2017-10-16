@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\Include\File.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Include\MemoryManager.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameEngine\Common\Source\File.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp" />
