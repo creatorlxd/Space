@@ -6,25 +6,30 @@ namespace SpaceGameEngine
 {
 	typedef fpos_t FilePosition;
 
-	enum FileMode : unsigned char
+	namespace FileMode
 	{
-		None = 0,
-		Read = 1,
-		Write = 2,
-		Append = 4,
-		Binary = 8
-	};
+		const unsigned char None = 0;
+		const unsigned char Read = 1;
+		const unsigned char Write = 2;
+		const unsigned char Append = 4;
+		const unsigned char Binary = 8;
+	}
 
-	enum PrintMode
+	enum class PrintMode:unsigned char
 	{
 		EndLine = 1
 	};
+
+	Vector<std::string> GetDirectoryName(const std::string& filepath);
+
+	void CheckAndCreateDirectory(const std::string& str);					//如果没找到文件所在的目录，则创建目录
 
 	class File
 	{
 	public:
 		File();
 		~File();
+		File(const std::string& filename, unsigned char mode);
 
 		void Open(const std::string& filename, unsigned char mode);
 		void Close();

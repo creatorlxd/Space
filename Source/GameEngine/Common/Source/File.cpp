@@ -13,6 +13,14 @@ SpaceGameEngine::File::~File()
 		Close();
 }
 
+SpaceGameEngine::File::File(const std::string & filename, unsigned char mode)
+{
+	m_pFILE = nullptr;
+	m_FileMode = FileMode::None;
+
+	Open(filename, mode);
+}
+
 void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mode)
 {
 	m_FileName = filename;
@@ -39,6 +47,7 @@ void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mod
 		opt += "+";
 	}
 
+	CheckAndCreateDirectory(filename);
 	if (fopen_s(&m_pFILE, filename.c_str(), opt.c_str()) != 0)
 		ThrowError(L"can not open file:" + StringToTString(filename));
 
@@ -217,7 +226,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine:
 {
 	switch (pm)
 	{
-	case EndLine:
+	case PrintMode::EndLine:
 	{
 		fscanf_s(m_pFILE, "\n");
 		fflush(m_pFILE);
@@ -331,4 +340,51 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long double & ld
 	if ((m_FileMode&FileMode::Write) != 0)
 		fprintf_s(m_pFILE, "%Lf", ld);
 	return *this;
+}
+
+SpaceGameEngine::Vector<std::string> SpaceGameEngine::GetDirectoryName(const std::string & filepath)
+{
+	if (filepath.empty())
+		return Vector<std::string>();
+
+	Vector<std::string> re;
+	std::string buffer;
+	int index = 0;
+
+	char c = ' ';
+	while (c == ' ')
+		c = filepath[index++];
+	while (index<=filepath.length())
+	{
+		if (c != '/')
+		{
+			buffer += c;
+		}
+		else
+		{
+			re.push_back(buffer);
+			buffer.clear();
+		}
+		c = filepath[(index++)%filepath.length()];
+	}
+	return re;
+}
+
+void SpaceGameEngine::CheckAndCreateDirectory(const std::string & str)
+{
+	auto folder = GetDirectoryName(str);
+	std::string buffer;
+	for (int i = 0; i<folder.size(); i++)
+	{
+		if (folder[i] == "." || folder[i] == "..")
+		{
+			buffer += folder[i] + "/";
+		}
+		else
+		{
+			buffer += folder[i] + "/";
+			if (_access(buffer.c_str(), 0) == -1)
+				_mkdir(buffer.c_str());
+		}
+	}
 }

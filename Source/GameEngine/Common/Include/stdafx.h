@@ -27,6 +27,8 @@
 #include <functional>
 #include <cstdint>
 #include <cstddef>
+#include <direct.h>
+#include <io.h>
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
