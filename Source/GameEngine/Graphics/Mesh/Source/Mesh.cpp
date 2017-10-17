@@ -46,7 +46,7 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 	case ModelFileMode:
 	{
 		int v_s, i_s;
-		std::fstream file(filename, std::ios::in);
+		File file(filename, FileMode::Read);
 
 		file >> v_s >> i_s;
 
@@ -70,7 +70,7 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 			m_Indices.push_back(ibuff);
 		}
 
-		file.close();
+		file.Close();
 		break;
 	}
 	default:

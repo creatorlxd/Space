@@ -20,13 +20,13 @@ SpaceGameEngine::TransformComponent::~TransformComponent()
 void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filename, int mode)
 {
 	m_Mode = mode;
-	std::fstream file(filename, std::ios::in);
+	File file(filename, FileMode::Read);
 
 	file >> m_Position.x >> m_Position.y >> m_Position.z;
 	file >> m_Rotation.x >> m_Rotation.y >> m_Rotation.z;
 	file >> m_Scale.x >> m_Scale.y >> m_Scale.z;
 
-	file.close();
+	file.Close();
 }
 
 void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
