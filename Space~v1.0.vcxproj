@@ -183,6 +183,7 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
+    <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h" />
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
     <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h" />
     <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp" />

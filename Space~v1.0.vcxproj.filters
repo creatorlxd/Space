@@ -157,6 +157,18 @@
     <Filter Include="ShaderFarmework\EffectShader\Source">
       <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{7fd3f078-668d-42ab-9a84-ed202683bd69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\BoundingBox">
+      <UniqueIdentifier>{87252653-2212-4d03-88c5-1276ff1c17f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\BoundingBox\Include">
+      <UniqueIdentifier>{3d2606f6-42a5-4e32-99ef-b30d4fbb77b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\BoundingBox\Source">
+      <UniqueIdentifier>{2d3b452a-1cf6-4cc3-9165-963c30a45965}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -260,6 +272,9 @@
     <ClInclude Include="Source\GameEngine\Common\Include\File.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h">
+      <Filter>Math\BoundingBox\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -342,6 +357,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\File.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp">
+      <Filter>Math\BoundingBox\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
