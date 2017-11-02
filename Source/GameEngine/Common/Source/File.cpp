@@ -108,26 +108,38 @@ void SpaceGameEngine::File::Wirte(const void * adr, size_t size)
 {
 	fwrite(adr, size, 1, m_pFILE);
 }
+SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t & wc)
+{
+	if ((m_FileMode&FileMode::Read) != 0)
+		fscanf_s(m_pFILE, " \r\n\t%C", &wc, sizeof(wchar_t));
+	return *this;
+}
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
 {
-	std::string str;
-	*this >> str;
-	memcpy(cstr, str.c_str(), sizeof(char)*str.size());
+	if ((m_FileMode&FileMode::Read) != 0)
+	{
+		std::string str;
+		*this >> str;
+		memcpy(cstr, str.c_str(), sizeof(char)*str.size());
+	}
 	return *this;
 }
 
 SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 {
-	str.clear();
-	char c = ' ';
-	while (c == ' ' || c == '\r' || c == '\n')
+	if ((m_FileMode&FileMode::Read) != 0)
 	{
-		c = fgetc(m_pFILE);
-	}
-	while (c != ' '&&c != EOF&&c != '\r'&&c != '\n')
-	{
-		str += c;
-		c = fgetc(m_pFILE);
+		str.clear();
+		char c = ' ';
+		while (c == ' ' || c == '\r' || c == '\n')
+		{
+			c = fgetc(m_pFILE);
+		}
+		while (c != ' '&&c != EOF&&c != '\r'&&c != '\n')
+		{
+			str += c;
+			c = fgetc(m_pFILE);
+		}
 	}
 	return *this;
 }

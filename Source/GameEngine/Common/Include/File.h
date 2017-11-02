@@ -41,6 +41,7 @@ namespace SpaceGameEngine
 		void Read(void* adr, size_t size);
 		void Wirte(const void* adr, size_t size);
 
+		File& operator >> (wchar_t& wc);
 		File& operator >> (char* cstr);
 		File& operator >> (std::string& str);
 		File& operator >> (int& i);
