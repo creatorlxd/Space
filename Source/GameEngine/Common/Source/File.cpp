@@ -118,6 +118,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
 
 SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 {
+	str.clear();
 	char c = ' ';
 	while (c == ' ' || c == '\r' || c == '\n')
 	{
