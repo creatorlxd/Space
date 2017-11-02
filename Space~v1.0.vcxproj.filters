@@ -275,6 +275,9 @@
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h">
       <Filter>Math\BoundingBox\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\StringConverter.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -360,6 +363,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp">
       <Filter>Math\BoundingBox\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\StringConverter.cpp">
+      <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

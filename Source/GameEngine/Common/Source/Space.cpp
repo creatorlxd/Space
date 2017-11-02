@@ -2,23 +2,6 @@
 #include "Space.h"
 using namespace SpaceGameEngine;
 
-tstring SpaceGameEngine::StringToTString(const std::string & str)
-{
-	tstring tstr(str.length(), L' ');
-	std::copy(str.begin(), str.end(), tstr.begin());
-	return tstr;
-}
-
-std::string SpaceGameEngine::TStringToString(const tstring & tstr)
-{
-	std::string str;
-	for (auto i : tstr)
-	{
-		str += i;
-	}
-	return str;
-}
-
 float SpaceGameEngine::GetDeltaTime()
 {
 	static float TimeNow=0.00f;
@@ -38,11 +21,21 @@ float SpaceGameEngine::GetDeltaTime()
 	}
 }
 
-void SpaceGameEngine::ThrowError(const tstring & errormessege)
+void SpaceGameEngine::ThrowError(const TString & errormessage)
 {
-	MessageBox(NULL, errormessege.c_str(), L"Space Game Engine", NULL);
+	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
 }
-
+#ifndef _UNICODE
+void SpaceGameEngine::ThrowError(const std::wstring errormessage)
+{
+	ThrowError(WStringToTString(errormessage));
+}
+#else
+void SpaceGameEngine::ThrowError(const std::string errormessage)
+{
+	ThrowError(StringToTString(errormessage));
+}
+#endif
 unsigned int SpaceGameEngine::HashString(const std::string & str)
 {
 	std::hash<std::string> sh;

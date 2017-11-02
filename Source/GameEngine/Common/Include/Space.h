@@ -1,18 +1,11 @@
 #pragma once
 #include "stdafx.h"
 #include "AllocatorForSTL.hpp"
+#include "StringConverter.h"
 namespace SpaceGameEngine
 {
 #ifndef SPACE
 #define SPACE
-
-#ifdef _UNICODE
-#define tcin wcin
-#define tfstream wfstream
-#else
-#define tcin cin
-#define tfstream fstream
-#endif
 
 #define STRING(str) #str
 
@@ -33,8 +26,6 @@ namespace SpaceGameEngine
 #define HR(x) (x)
 #endif
 #endif 
-
-	using tstring = std::conditional<std::is_same<TCHAR, char>::value, std::string, std::wstring>::type;
 
 	template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
 
@@ -64,14 +55,16 @@ namespace SpaceGameEngine
 	}
 
 	//----------------------------------------------------------------------------------------------
-	tstring StringToTString(const std::string& str);				//string转wstring,目前只支持英文
-
-	std::string TStringToString(const tstring& tstr);				//wstring转string,目前只支持英文
 
 	float GetDeltaTime();																	//获取时间间隔
 
 	//TODO:报错后的处理
-	void ThrowError(const tstring& errormessege);										//报错
+	void ThrowError(const TString& errormessage);		//报错
+#ifndef _UNICODE
+	void ThrowError(const std::wstring errormessage);
+#else
+	void ThrowError(const std::string errormessage);
+#endif
 
 	unsigned int HashString(const std::string& str);
 

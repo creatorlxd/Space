@@ -49,7 +49,7 @@ void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mod
 
 	CheckAndCreateDirectory(filename);
 	if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
-		ThrowError(L"can not open file:" + StringToTString(filename));
+		ThrowError(StringToTString("can not open file:"+filename));
 
 	if ((mode&FileMode::Append) != 0)
 	{
