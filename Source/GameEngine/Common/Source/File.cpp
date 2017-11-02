@@ -3,7 +3,7 @@
 
 SpaceGameEngine::File::File()
 {
-	m_pFILE = nullptr;
+	m_pFile = nullptr;
 	m_FileMode = FileMode::None;
 }
 
@@ -15,7 +15,7 @@ SpaceGameEngine::File::~File()
 
 SpaceGameEngine::File::File(const std::string & filename, unsigned char mode)
 {
-	m_pFILE = nullptr;
+	m_pFile = nullptr;
 	m_FileMode = FileMode::None;
 
 	Open(filename, mode);
@@ -48,12 +48,12 @@ void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mod
 	}
 
 	CheckAndCreateDirectory(filename);
-	if (fopen_s(&m_pFILE, filename.c_str(), opt.c_str()) != 0)
+	if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
 		ThrowError(L"can not open file:" + StringToTString(filename));
 
 	if ((mode&FileMode::Append) != 0)
 	{
-		fseek(m_pFILE, 0, SEEK_END);
+		fseek(m_pFile, 0, SEEK_END);
 	}
 }
 
@@ -62,7 +62,7 @@ void SpaceGameEngine::File::Close()
 	if (m_FileMode == FileMode::None)
 		ThrowError(L"can not Close a File without Open or has been closed");
 
-	fclose(m_pFILE);
+	fclose(m_pFile);
 	m_FileMode = FileMode::None;
 	m_FileName.clear();
 }
@@ -70,48 +70,76 @@ void SpaceGameEngine::File::Close()
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetBeginPosition()
 {
 	FilePosition buff, re;
-	fgetpos(m_pFILE, &buff);
-	fseek(m_pFILE, 0, SEEK_SET);
-	fgetpos(m_pFILE, &re);
-	fsetpos(m_pFILE, &buff);
+	fgetpos(m_pFile, &buff);
+	fseek(m_pFile, 0, SEEK_SET);
+	fgetpos(m_pFile, &re);
+	fsetpos(m_pFile, &buff);
 	return re;
 }
 
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetEndPosition()
 {
 	FilePosition buff, re;
-	fgetpos(m_pFILE, &buff);
-	fseek(m_pFILE, 0L, SEEK_END);
-	fgetpos(m_pFILE, &re);
-	fsetpos(m_pFILE, &buff);
+	fgetpos(m_pFile, &buff);
+	fseek(m_pFile, 0L, SEEK_END);
+	fgetpos(m_pFile, &re);
+	fsetpos(m_pFile, &buff);
 	return re;
 }
 
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetCurrentPosition()
 {
 	FilePosition re;
-	fgetpos(m_pFILE, &re);
+	fgetpos(m_pFile, &re);
 	return re;
 }
 
 void SpaceGameEngine::File::SetFilePosition(FilePosition pos)
 {
-	fsetpos(m_pFILE, &pos);
+	fsetpos(m_pFile, &pos);
 }
 
 void SpaceGameEngine::File::Read(void * adr, size_t size)
 {
-	fread_s(adr, size, size, 1, m_pFILE);
+	fread_s(adr, size, size, 1, m_pFile);
 }
 
 void SpaceGameEngine::File::Wirte(const void * adr, size_t size)
 {
-	fwrite(adr, size, 1, m_pFILE);
+	fwrite(adr, size, 1, m_pFile);
+}
+SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t * cwstr)
+{
+	if ((m_FileMode&FileMode::Read) != 0)
+	{
+		std::wstring wstr;
+		*this >> wstr;
+		memcpy(cwstr, wstr.c_str(), sizeof(wchar_t)*wstr.size());
+	}
+	return *this;
+}
+SpaceGameEngine::File & SpaceGameEngine::File::operator>>(std::wstring & wstr)
+{
+	if ((m_FileMode&FileMode::Read) != 0)
+	{
+		wstr.clear();
+		wchar_t c = L' ';
+		while (c == L' ' || c == L'\r' || c == L'\n')
+		{
+			c = fgetwc(m_pFile);
+		}
+		while (c != L' '&&c != EOF&&c != L'\r'&&c != L'\n')
+		{
+			wstr += c;
+			c = fgetwc(m_pFile);
+		}
+	}
+	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t & wc)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, " \r\n\t%C", &wc, sizeof(wchar_t));
+		fscanf_s(m_pFile, " \r\n\t%C", &wc, (unsigned int)sizeof(wchar_t));
 	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
@@ -133,12 +161,12 @@ SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 		char c = ' ';
 		while (c == ' ' || c == '\r' || c == '\n')
 		{
-			c = fgetc(m_pFILE);
+			c = fgetc(m_pFile);
 		}
 		while (c != ' '&&c != EOF&&c != '\r'&&c != '\n')
 		{
 			str += c;
-			c = fgetc(m_pFILE);
+			c = fgetc(m_pFile);
 		}
 	}
 	return *this;
@@ -147,105 +175,135 @@ SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(int & i)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%d", &i);
+		fscanf_s(m_pFile, "%d", &i);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned int & ui)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%ud", &ui);
+		fscanf_s(m_pFile, "%ud", &ui);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(short & s)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%hd", &s);
+		fscanf_s(m_pFile, "%hd", &s);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned short & us)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%hud", &us);
+		fscanf_s(m_pFile, "%hud", &us);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long & l)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%ld", &l);
+		fscanf_s(m_pFile, "%ld", &l);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long & ul)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%uld", &ul);
+		fscanf_s(m_pFile, "%uld", &ul);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long long & ll)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%I64d", &ll);
+		fscanf_s(m_pFile, "%I64d", &ll);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long long & ull)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%I64ud", &ull);
+		fscanf_s(m_pFile, "%I64ud", &ull);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char & c)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, " \r\n\t%c", &c, sizeof(char));
+		fscanf_s(m_pFile, " \r\n\t%c", &c, (unsigned int)sizeof(char));
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned char & uc)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%hhu", &uc);
+		fscanf_s(m_pFile, "%hhu", &uc);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(float & f)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%f", &f);
+		fscanf_s(m_pFile, "%f", &f);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(double & d)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%lf", &d);
+		fscanf_s(m_pFile, "%lf", &d);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long double & ld)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
-		fscanf_s(m_pFILE, "%Lf", &ld);
+		fscanf_s(m_pFile, "%Lf", &ld);
+	return *this;
+}
+
+SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t * wcstr)
+{
+	if ((m_FileMode&FileMode::Write) != 0)
+	{
+		fprintf_s(m_pFile, "%S", wcstr);
+	}
+	return *this;
+}
+
+SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const std::wstring & wstr)
+{
+	if ((m_FileMode&FileMode::Write) != 0)
+	{
+		fprintf_s(m_pFile, "%S", wstr.c_str());
+	}
+	return *this;
+}
+
+SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t & wc)
+{
+	if ((m_FileMode&FileMode::Write) != 0)
+	{
+		fprintf_s(m_pFile, "%C", wc);
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine::PrintMode & pm)
 {
-	switch (pm)
+	if ((m_FileMode&FileMode::Write) != 0)
 	{
-	case PrintMode::EndLine:
-	{
-		fscanf_s(m_pFILE, "\n");
-		fflush(m_pFILE);
-	}
-	default:
-		break;
+		switch (pm)
+		{
+		case PrintMode::EndLine:
+		{
+			fscanf_s(m_pFile, "\n");
+			fflush(m_pFile);
+		}
+		default:
+			break;
+		}
 	}
 	return *this;
 }
@@ -253,105 +311,105 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine:
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const char * cstr)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%s", cstr);
+		fprintf_s(m_pFile, "%s", cstr);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const std::string & str)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%s", str.c_str());
+		fprintf_s(m_pFile, "%s", str.c_str());
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const int & i)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%d", i);
+		fprintf_s(m_pFile, "%d", i);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned int & ui)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%ud", ui);
+		fprintf_s(m_pFile, "%ud", ui);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const short & s)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%hd", s);
+		fprintf_s(m_pFile, "%hd", s);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned short & us)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%hud", us);
+		fprintf_s(m_pFile, "%hud", us);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long & l)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%ld", l);
+		fprintf_s(m_pFile, "%ld", l);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned long & ul)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%lud", ul);
+		fprintf_s(m_pFile, "%lud", ul);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long long & ll)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%I64d", ll);
+		fprintf_s(m_pFile, "%I64d", ll);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned long long & ull)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%I64ud", ull);
+		fprintf_s(m_pFile, "%I64ud", ull);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const char & c)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%c", c);
+		fprintf_s(m_pFile, "%c", c);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned char & uc)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%hhu", uc);
+		fprintf_s(m_pFile, "%hhu", uc);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const float & f)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%f", f);
+		fprintf_s(m_pFile, "%f", f);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const double & d)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%lf", d);
+		fprintf_s(m_pFile, "%lf", d);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long double & ld)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFILE, "%Lf", ld);
+		fprintf_s(m_pFile, "%Lf", ld);
 	return *this;
 }
 

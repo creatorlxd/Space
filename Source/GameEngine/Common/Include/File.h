@@ -41,6 +41,8 @@ namespace SpaceGameEngine
 		void Read(void* adr, size_t size);
 		void Wirte(const void* adr, size_t size);
 
+		File& operator >> (wchar_t* cwstr);
+		File& operator >> (std::wstring& wstr);
 		File& operator >> (wchar_t& wc);
 		File& operator >> (char* cstr);
 		File& operator >> (std::string& str);
@@ -58,6 +60,9 @@ namespace SpaceGameEngine
 		File& operator >> (double& d);
 		File& operator >> (long double& ld);
 
+		File& operator << (const wchar_t* wcstr);
+		File& operator << (const std::wstring& wstr);
+		File& operator << (const wchar_t& wc);
 		File& operator << (const PrintMode& pm);
 		File& operator << (const char* cstr);
 		File& operator << (const std::string& str);
@@ -75,7 +80,7 @@ namespace SpaceGameEngine
 		File& operator << (const double& d);
 		File& operator << (const long double& ld);
 	private:
-		FILE* m_pFILE;
+		FILE* m_pFile;
 		std::string m_FileName;
 		unsigned int m_FileMode;
 	};
