@@ -41,34 +41,46 @@ void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mod
 	m_FileName = filename;
 	m_FileMode = mode;
 	std::string opt;
-	if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) == 0)
+	if ((mode&FileMode::Append) != 0 && (mode&FileMode::Write) != 0)
 	{
-		opt = "r";
+		opt = "a";
+		if (mode&FileMode::Binary)
+		{
+			opt += "b";
+		}
+		if (mode&FileMode::Read)
+		{
+			opt += "+";
+		}
+		CheckAndCreateDirectory(filename);
+		if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
+			ThrowError(StringToTString("can not open file:" + filename));
 	}
-	if ((mode&FileMode::Read) == 0 && (mode&FileMode::Write) != 0)
+	else
 	{
-		opt = "w";
-	}
-	if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) != 0)
-	{
-		opt = "r";
-	}
-	if ((mode&FileMode::Binary) != 0)
-	{
-		opt += "b";
-	}
-	if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) != 0)
-	{
-		opt += "+";
-	}
-
-	CheckAndCreateDirectory(filename);
-	if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
-		ThrowError(StringToTString("can not open file:"+filename));
-
-	if ((mode&FileMode::Append) != 0)
-	{
-		fseek(m_pFile, 0, SEEK_END);
+		if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) == 0)
+		{
+			opt = "r";
+		}
+		if ((mode&FileMode::Read) == 0 && (mode&FileMode::Write) != 0)
+		{
+			opt = "w";
+		}
+		if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) != 0)
+		{
+			opt = "r";
+		}
+		if ((mode&FileMode::Binary) != 0)
+		{
+			opt += "b";
+		}
+		if ((mode&FileMode::Read) != 0 && (mode&FileMode::Write) != 0)
+		{
+			opt += "+";
+		}
+		CheckAndCreateDirectory(filename);
+		if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
+			ThrowError(StringToTString("can not open file:" + filename));
 	}
 }
 
@@ -119,7 +131,7 @@ void SpaceGameEngine::File::Read(void * adr, size_t size)
 	fread_s(adr, size, size, 1, m_pFile);
 }
 
-void SpaceGameEngine::File::Wirte(const void * adr, size_t size)
+void SpaceGameEngine::File::Write(const void * adr, size_t size)
 {
 	fwrite(adr, size, 1, m_pFile);
 }

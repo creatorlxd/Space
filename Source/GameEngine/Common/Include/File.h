@@ -54,7 +54,7 @@ namespace SpaceGameEngine
 		void SetFilePosition(FilePosition pos);
 
 		void Read(void* adr, size_t size);
-		void Wirte(const void* adr, size_t size);
+		void Write(const void* adr, size_t size);
 
 		File& operator >> (wchar_t* cwstr);
 		File& operator >> (std::wstring& wstr);
