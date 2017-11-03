@@ -313,7 +313,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine:
 		{
 		case PrintMode::EndLine:
 		{
-			fscanf_s(m_pFile, "\n");
+			fprintf_s(m_pFile, "\n");
 			fflush(m_pFile);
 		}
 		default:
