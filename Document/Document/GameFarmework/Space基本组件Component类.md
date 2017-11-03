@@ -45,7 +45,7 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 * `void Start()`:  
 由其实例在其所在场景***开始***时所执行的操作，如果你不需要也可以不写。
 	
-* `void Run()`:  
+* `void Run(float DeltaTime)`:  
 由其实例在其所在场景***每帧***时所执行的操作，如果你不需要也可以不写。
 
 * `void Release()`:  
