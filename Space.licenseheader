@@ -1,3 +1,4 @@
+﻿extensions: .hpp .cpp .h .c
 /*
 Copyright 2017 creatorlxd
 
@@ -13,16 +14,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#include "stdafx.h"
-#include "../Include/ObjectFactory.h"
-using namespace SpaceGameEngine;
-
-Object * SpaceGameEngine::NewObjectByName(const std::string & name)
-{
-	Object* po = ObjectManager::NewObject();
-	if (name != "")
-	{
-		RegisterObject(name, po);
-	}
-	return po;
-}
