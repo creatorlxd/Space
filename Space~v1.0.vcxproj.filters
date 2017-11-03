@@ -184,6 +184,9 @@
       <Filter>Document\Document\Others</Filter>
     </None>
     <None Include="Space.licenseheader" />
+    <None Include="Source\GameEngine\dxerr\dxerr.licenseheader">
+      <Filter>dxerr</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">
