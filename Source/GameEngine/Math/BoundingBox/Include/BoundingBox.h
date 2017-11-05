@@ -15,6 +15,9 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
+#include "AllocatorForSTL.hpp"
+#include "Math/Common/Include/MathDefinition.h"
+#include "Math/Common/Include/XMathExtension.h"
 
 namespace SpaceGameEngine
 {
@@ -22,6 +25,8 @@ namespace SpaceGameEngine
 	{
 		XMFLOAT3 m_MinPosition;
 		XMFLOAT3 m_MaxPosition;
+		AxisAlignedBoundingBox();
+		AxisAlignedBoundingBox(const XMFLOAT3& minl, const XMFLOAT3& maxl);
 	};
 
 	typedef AxisAlignedBoundingBox AABB;
@@ -29,4 +34,6 @@ namespace SpaceGameEngine
 	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否相交
 
 	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const XMFLOAT3& position);				//是否相交
+
+	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
 }

@@ -169,6 +169,15 @@
     <Filter Include="Math\BoundingBox\Source">
       <UniqueIdentifier>{2d3b452a-1cf6-4cc3-9165-963c30a45965}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Common">
+      <UniqueIdentifier>{1cdd77a7-c466-4d29-af2b-f842baaf7f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Common\Include">
+      <UniqueIdentifier>{810efe66-0f61-43ea-bd8d-d9b36c829bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Common\Source">
+      <UniqueIdentifier>{911d78d1-fdd9-4802-aae7-e4fc641bcb0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -282,6 +291,12 @@
     <ClInclude Include="Source\GameEngine\Common\Include\StringConverter.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Include\MathDefinition.h">
+      <Filter>Math\Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Include\XMathExtension.h">
+      <Filter>Math\Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -370,6 +385,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\StringConverter.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Source\MathDefinition.cpp">
+      <Filter>Math\Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Source\XMathExtension.cpp">
+      <Filter>Math\Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

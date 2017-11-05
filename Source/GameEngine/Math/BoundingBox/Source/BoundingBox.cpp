@@ -16,6 +16,18 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/BoundingBox.h" 
 
+SpaceGameEngine::AxisAlignedBoundingBox::AxisAlignedBoundingBox()
+{
+	m_MinPosition = XMFLOAT3(0, 0, 0);
+	m_MaxPosition = XMFLOAT3(0, 0, 0);
+}
+
+SpaceGameEngine::AxisAlignedBoundingBox::AxisAlignedBoundingBox(const XMFLOAT3 & minl, const XMFLOAT3 & maxl)
+{
+	m_MinPosition = minl;
+	m_MaxPosition = maxl;
+}
+
 bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb1, const AxisAlignedBoundingBox & aabb2)
 {
 	if (aabb1.m_MinPosition.x >= aabb2.m_MaxPosition.x || aabb1.m_MaxPosition.x <= aabb2.m_MinPosition.x)
@@ -36,4 +48,19 @@ bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb, const XMF
 	if (aabb.m_MinPosition.z > position.z || aabb.m_MaxPosition.z < position.z)
 		return false;
 	return true;
+}
+
+SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points)
+{
+	XMFLOAT3 minl((float)MaxIntValue,(float)MaxIntValue,(float)MaxIntValue), maxl(0.0f,0.0f,0.0f);
+	for (auto& i : points)
+	{
+		minl.x = min(minl.x, i.x);
+		minl.y = min(minl.y, i.y);
+		minl.z = min(minl.z, i.z);
+		maxl.x = max(maxl.x, i.x);
+		maxl.y = max(maxl.y, i.y);
+		maxl.z = max(maxl.z, i.z);
+	}
+	return AxisAlignedBoundingBox(minl, maxl);
 }
