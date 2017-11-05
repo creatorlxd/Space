@@ -16,7 +16,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/StringConverter.h"
 
-std::wstring SpaceGameEngine::StringToWString(const std::string str)
+std::wstring SpaceGameEngine::StringToWString(const std::string& str)
 {
 	std::wstring wstr;
 	size_t size;
@@ -34,7 +34,7 @@ std::string SpaceGameEngine::WStringToString(const std::wstring & wstr)
 	return str;
 }
 
-SpaceGameEngine::TString SpaceGameEngine::StringToTString(const std::string str)
+SpaceGameEngine::TString SpaceGameEngine::StringToTString(const std::string& str)
 {
 #ifdef _UNICODE
 	return StringToWString(str);
@@ -43,7 +43,7 @@ SpaceGameEngine::TString SpaceGameEngine::StringToTString(const std::string str)
 #endif
 }
 
-SpaceGameEngine::TString SpaceGameEngine::WStringToTString(const std::wstring wstr)
+SpaceGameEngine::TString SpaceGameEngine::WStringToTString(const std::wstring& wstr)
 {
 #ifdef _UNICODE
 	return wstr;

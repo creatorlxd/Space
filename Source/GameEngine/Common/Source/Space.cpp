@@ -41,12 +41,12 @@ void SpaceGameEngine::ThrowError(const TString & errormessage)
 	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
 }
 #ifndef _UNICODE
-void SpaceGameEngine::ThrowError(const std::wstring errormessage)
+void SpaceGameEngine::ThrowError(const std::wstring& errormessage)
 {
 	ThrowError(WStringToTString(errormessage));
 }
 #else
-void SpaceGameEngine::ThrowError(const std::string errormessage)
+void SpaceGameEngine::ThrowError(const std::string& errormessage)
 {
 	ThrowError(StringToTString(errormessage));
 }

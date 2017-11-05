@@ -76,9 +76,9 @@ namespace SpaceGameEngine
 	//TODO:报错后的处理
 	void ThrowError(const TString& errormessage);		//报错
 #ifndef _UNICODE
-	void ThrowError(const std::wstring errormessage);
+	void ThrowError(const std::wstring& errormessage);
 #else
-	void ThrowError(const std::string errormessage);
+	void ThrowError(const std::string& errormessage);
 #endif
 
 	unsigned int HashString(const std::string& str);
