@@ -44,6 +44,8 @@ limitations under the License.
 #include <cstddef>
 #include <direct.h>
 #include <io.h>
+#include <forward_list>
+
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------

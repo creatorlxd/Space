@@ -20,4 +20,6 @@ limitations under the License.
 namespace SpaceGameEngine
 {
 	bool operator < (const XMFLOAT3& v1, const XMFLOAT3& v2);
+
+	bool operator > (const XMFLOAT3& v1, const XMFLOAT3& v2);
 }

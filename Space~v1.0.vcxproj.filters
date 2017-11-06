@@ -178,6 +178,15 @@
     <Filter Include="Math\Common\Source">
       <UniqueIdentifier>{911d78d1-fdd9-4802-aae7-e4fc641bcb0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\GlobalOctree">
+      <UniqueIdentifier>{34898192-eaee-4790-973e-166204ef67c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GlobalOctree\Include">
+      <UniqueIdentifier>{3eb06260-6f3f-4588-9bbb-2f3ffe1ebdde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GlobalOctree\Source">
+      <UniqueIdentifier>{7c5932c6-f2f2-4b50-ae2e-77c8224c7eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -297,6 +306,9 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Include\XMathExtension.h">
       <Filter>Math\Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\GlobalOctree\Include\GlobalOctree.h">
+      <Filter>Graphics\GlobalOctree\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -391,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Source\XMathExtension.cpp">
       <Filter>Math\Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\GlobalOctree\Source\GlobalOctree.cpp">
+      <Filter>Graphics\GlobalOctree\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
