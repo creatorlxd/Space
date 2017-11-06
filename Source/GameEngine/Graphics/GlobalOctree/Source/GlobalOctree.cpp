@@ -16,6 +16,17 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/GlobalOctree.h"
 
+SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode()
+{
+	m_IfLeafNode = true;
+	m_Deepth = 1;
+}
+
+SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode(const AxisAlignedBoundingBox & space, int deepth)
+{
+	Init(space, deepth);
+}
+
 void SpaceGameEngine::GlobalOctreeNode::Init(const AxisAlignedBoundingBox & space,int deepth)
 {
 	m_Space = space;

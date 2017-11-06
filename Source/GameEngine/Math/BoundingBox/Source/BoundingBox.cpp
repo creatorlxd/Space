@@ -52,11 +52,12 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb, const XMFLO
 
 bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb1, const AxisAlignedBoundingBox & aabb2)
 {
-	if (aabb1.m_MinPosition > aabb2.m_MinPosition)
+	if ((aabb1.m_MinPosition.x <= aabb2.m_MinPosition.x&&aabb1.m_MaxPosition.x >= aabb2.m_MaxPosition.x) &&
+		(aabb1.m_MinPosition.y <= aabb2.m_MinPosition.y&&aabb1.m_MaxPosition.y >= aabb2.m_MaxPosition.y) &&
+		(aabb1.m_MinPosition.z <= aabb2.m_MinPosition.z&&aabb1.m_MaxPosition.z >= aabb2.m_MaxPosition.z))
+		return true;
+	else
 		return false;
-	if (aabb1.m_MaxPosition < aabb2.m_MaxPosition)
-		return false;
-	return true;
 }
 
 SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points)

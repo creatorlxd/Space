@@ -26,6 +26,8 @@ namespace SpaceGameEngine
 
 	struct GlobalOctreeNode
 	{
+		GlobalOctreeNode();
+		GlobalOctreeNode(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void InsertObject(const GlobalOctreeData& data);
 		void Release();
@@ -33,8 +35,8 @@ namespace SpaceGameEngine
 		ForwardList<GlobalOctreeData> m_Content;
 		AxisAlignedBoundingBox m_Space;
 		GlobalOctreeNode* m_ChildrenNode[8];
-		bool m_IfLeafNode = true;
-		int m_Deepth = 1;
+		bool m_IfLeafNode;
+		int m_Deepth;
 	};
 
 	class GlobalOctree
