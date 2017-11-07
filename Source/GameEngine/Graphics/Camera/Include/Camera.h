@@ -41,6 +41,7 @@ namespace SpaceGameEngine
 		static CameraComponent* GetMainCamera();
 		
 		void InitTransform();										//初始化变换信息
+		TransformComponent* GetTransform();
 
 		float GetAngle();
 		void SetAngle(float f);

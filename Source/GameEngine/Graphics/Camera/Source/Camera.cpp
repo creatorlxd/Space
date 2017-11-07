@@ -170,6 +170,11 @@ void SpaceGameEngine::CameraComponent::InitTransform()
 	m_pTransform = dynamic_cast<TransformComponent*>(cb);
 }
 
+TransformComponent * SpaceGameEngine::CameraComponent::GetTransform()
+{
+	return m_pTransform;
+}
+
 float SpaceGameEngine::CameraComponent::GetAngle()
 {
 	return m_Angle;
