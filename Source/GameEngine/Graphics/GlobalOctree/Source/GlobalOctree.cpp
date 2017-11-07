@@ -237,10 +237,35 @@ SpaceGameEngine::GlobalOctree::~GlobalOctree()
 
 void SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
 {
+	if (!m_IfInit)
+	{
+		m_IntializaionData.push_back(data);
+	}
+	else
+	{
+		m_RootNode.InsertObject(data);
+	}
 }
 
 void SpaceGameEngine::GlobalOctree::BuildTree()
 {
+	m_IfInit = true;
+	Vector<AxisAlignedBoundingBox> aabb;
+	for (const auto& i : m_IntializaionData)
+	{
+		aabb.push_back(i.first);
+	}
+	AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(aabb);
+	m_RootNode.Init(max_space);
+	for (const auto& i : m_IntializaionData)
+	{
+		m_RootNode.InsertObject(i);
+	}
+}
+
+void SpaceGameEngine::GlobalOctree::Run()
+{
+	m_RootNode.Run();
 }
 
 void SpaceGameEngine::GlobalOctree::Release()

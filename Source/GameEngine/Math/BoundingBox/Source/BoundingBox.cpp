@@ -75,6 +75,21 @@ SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingB
 	return AxisAlignedBoundingBox(minl, maxl);
 }
 
+SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs)
+{
+	XMFLOAT3 minl((float)MaxIntValue, (float)MaxIntValue, (float)MaxIntValue), maxl(0.0f, 0.0f, 0.0f);
+	for (auto i : aabbs)
+	{
+		minl.x = min(minl.x, i.m_MinPosition.x);
+		minl.y = min(minl.y, i.m_MinPosition.y);
+		minl.z = min(minl.z, i.m_MinPosition.z);
+		maxl.x = max(maxl.x, i.m_MaxPosition.x);
+		maxl.y = max(maxl.y, i.m_MaxPosition.y);
+		maxl.z = max(maxl.z, i.m_MaxPosition.z);
+	}
+	return AxisAlignedBoundingBox(minl, maxl);
+}
+
 int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 {
 	XMFLOAT3 point[8];

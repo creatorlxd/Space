@@ -48,9 +48,11 @@ namespace SpaceGameEngine
 		~GlobalOctree();
 		void AddObject(const GlobalOctreeData& data);
 		void BuildTree();
+		void Run();
 		void Release();
 	private:
 		GlobalOctreeNode m_RootNode;
 		Vector<GlobalOctreeData> m_IntializaionData;
+		bool m_IfInit = false;
 	};
 }
