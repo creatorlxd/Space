@@ -15,14 +15,14 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/Component.h"
+#include "Game/Object/Include/Object.h"
 #include "Math/BoundingBox/Include/BoundingBox.h"
 
 namespace SpaceGameEngine
 {
 	const int GlobalOctreeMaxDeepth = 8;
 
-	using GlobalOctreeData = std::pair<AxisAlignedBoundingBox, Component*>;	//first:aabb;second:component*
+	using GlobalOctreeData = std::pair<AxisAlignedBoundingBox, Object*>;	//first:aabb;second:component*
 
 	struct GlobalOctreeNode
 	{
@@ -30,6 +30,9 @@ namespace SpaceGameEngine
 		GlobalOctreeNode(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void InsertObject(const GlobalOctreeData& data);
+		void Run();
+		void SetObjectRenderState(bool state);
+		void UpdateObjectData(const GlobalOctreeData& data);
 		void Release();
 
 		ForwardList<GlobalOctreeData> m_Content;
@@ -42,7 +45,12 @@ namespace SpaceGameEngine
 	class GlobalOctree
 	{
 	public:
+		~GlobalOctree();
+		void AddObject(const GlobalOctreeData& data);
+		void BuildTree();
+		void Release();
 	private:
 		GlobalOctreeNode m_RootNode;
+		Vector<GlobalOctreeData> m_IntializaionData;
 	};
 }

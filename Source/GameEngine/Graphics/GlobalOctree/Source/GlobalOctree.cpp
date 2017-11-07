@@ -129,10 +129,95 @@ void SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & da
 	}
 }
 
+void SpaceGameEngine::GlobalOctreeNode::Run()
+{
+	for (const auto& i : m_Content)
+	{
+		if (IfIntersectWithFrustum(i.first))
+			i.second->ChangeIfRender(true);
+		else
+			i.second->ChangeIfRender(false);
+	}
+	if (!m_IfLeafNode)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			int buff = IfIntersectWithFrustum(m_ChildrenNode[i]->m_Space);
+			if (buff==8)
+			{
+				m_ChildrenNode[i]->SetObjectRenderState(true);
+			}
+			else if (buff > 0)
+			{
+				m_ChildrenNode[i]->Run();
+			}
+			else
+			{
+				m_ChildrenNode[i]->SetObjectRenderState(false);
+			}
+		}
+	}
+}
+
+void SpaceGameEngine::GlobalOctreeNode::SetObjectRenderState(bool state)
+{
+	for (const auto& i : m_Content)
+	{
+		i.second->ChangeIfRender(state);
+	}
+	if (!m_IfLeafNode)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			m_ChildrenNode[i]->SetObjectRenderState(state);
+		}
+	}
+}
+
+void SpaceGameEngine::GlobalOctreeNode::UpdateObjectData(const GlobalOctreeData & data)
+{
+	Queue<GlobalOctreeNode*> que;
+	que.push(this);
+	bool if_find = false;
+	while (!que.empty())
+	{
+		GlobalOctreeNode* node = que.front();
+		que.pop();
+		auto iter = node->m_Content.before_begin();
+		for (auto i = node->m_Content.begin(); i != node->m_Content.end(); i++)
+		{
+			if (i->second == data.second)
+			{
+				if_find = true;
+				node->m_Content.erase_after(iter);
+				break;
+			}
+			iter++;
+		}
+		if (if_find)
+		{
+			break;
+		}
+		else
+		{
+			for (int i = 0; i < 8; i++)
+			{
+				que.push(node->m_ChildrenNode[i]);
+			}
+		}
+	}
+	if (!if_find)
+		ThrowError("can not find the object in global octree");
+	InsertObject(data);
+}
+
 void SpaceGameEngine::GlobalOctreeNode::Release()
 {
 	if (m_IfLeafNode)
+	{
+		m_Content.clear();
 		return;
+	}
 	else
 	{
 		for (int i = 0; i < 8; i++)
@@ -140,5 +225,25 @@ void SpaceGameEngine::GlobalOctreeNode::Release()
 			m_ChildrenNode[i]->Release();
 			MemoryManager::Delete(m_ChildrenNode[i]);
 		}
+		m_Content.clear();
+		m_IfLeafNode = true;
 	}
+}
+
+SpaceGameEngine::GlobalOctree::~GlobalOctree()
+{
+	Release();
+}
+
+void SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
+{
+}
+
+void SpaceGameEngine::GlobalOctree::BuildTree()
+{
+}
+
+void SpaceGameEngine::GlobalOctree::Release()
+{
+	m_RootNode.Release();
 }
