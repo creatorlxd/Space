@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once 
 #include "stdafx.h"
 #include "AllocatorForSTL.hpp"
+#include "Game/Scene/Include/SceneData.h"
 #include "Math/Common/Include/MathDefinition.h"
 #include "Math/Common/Include/XMathExtension.h"
 
@@ -38,4 +39,6 @@ namespace SpaceGameEngine
 	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//ÊÇ·ñ°üº¬
 	
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
+
+	int IfIntersectWithFrustum(const AxisAlignedBoundingBox& aabb);
 }

@@ -23,4 +23,6 @@ namespace SpaceGameEngine
 		static XMFLOAT4X4 m_ViewMatrix;
 		static XMFLOAT4X4 m_ProjectionMatrix;
 	};
+	
+	bool IfIntersectWithFrustum(const XMFLOAT3 & position);
 }

@@ -20,3 +20,22 @@ using namespace SpaceGameEngine;
 
 XMFLOAT4X4 SpaceGameEngine::SceneData::m_ViewMatrix;
 XMFLOAT4X4 SpaceGameEngine::SceneData::m_ProjectionMatrix;
+
+bool SpaceGameEngine::IfIntersectWithFrustum(const XMFLOAT3 & position)
+{
+	XMFLOAT4 vec(position.x, position.y, position.z, 1.0f);
+	XMMATRIX mbuff = XMLoadFloat4x4(&SceneData::m_ViewMatrix);
+	mbuff = mbuff*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
+	XMVECTOR vbuff = XMLoadFloat4(&vec);
+	vbuff = XMVector4Transform(vbuff, mbuff);
+	XMFLOAT4 pos_after;
+	XMStoreFloat4(&pos_after, vbuff);
+	vbuff = vbuff / pos_after.w;
+	XMStoreFloat4(&pos_after, vbuff);
+	if ((pos_after.x >= -1.0f&&pos_after.x <= 1.0f) &&
+		(pos_after.y >= -1.0f&&pos_after.y <= 1.0f) &&
+		(pos_after.z >= 0.0f&&pos_after.z <= 1.0f))
+		return true;
+	else
+		return false;
+}
