@@ -261,6 +261,7 @@ void SpaceGameEngine::GlobalOctree::BuildTree()
 	{
 		m_RootNode.InsertObject(i);
 	}
+	m_IntializaionData.clear();
 }
 
 void SpaceGameEngine::GlobalOctree::Run()
