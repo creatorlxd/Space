@@ -211,6 +211,14 @@ void SpaceGameEngine::GlobalOctreeNode::UpdateObjectData(const GlobalOctreeData 
 	InsertObject(data);
 }
 
+void SpaceGameEngine::GlobalOctreeNode::UpdateObjectRenderState(const GlobalOctreeData & data)
+{
+	if (IfIntersectWithFrustum(data.first))
+		data.second->ChangeIfRender(true);
+	else
+		data.second->ChangeIfRender(false);
+}
+
 void SpaceGameEngine::GlobalOctreeNode::Release()
 {
 	if (m_IfLeafNode)
@@ -264,6 +272,17 @@ void SpaceGameEngine::GlobalOctree::BuildTree()
 	m_IntializaionData.clear();
 }
 
+void SpaceGameEngine::GlobalOctree::BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox & space)
+{
+	m_IfInit = true;
+	m_RootNode.Init(space);
+	for (const auto& i : m_IntializaionData)
+	{
+		m_RootNode.InsertObject(i);
+	}
+	m_IntializaionData.clear();
+}
+
 void SpaceGameEngine::GlobalOctree::Run()
 {
 	m_RootNode.Run();
@@ -272,4 +291,10 @@ void SpaceGameEngine::GlobalOctree::Run()
 void SpaceGameEngine::GlobalOctree::Release()
 {
 	m_RootNode.Release();
+}
+
+void SpaceGameEngine::GlobalOctree::UpdateObject(const GlobalOctreeData & data)
+{
+	m_RootNode.UpdateObjectData(data);
+	m_RootNode.UpdateObjectRenderState(data);
 }

@@ -25,3 +25,40 @@ bool SpaceGameEngine::operator > (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 {
 	return (v1.x>v2.x&&v1.y>v2.y&&v1.z>v2.z);
 }
+
+bool SpaceGameEngine::operator == (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
+{
+	return (v1.x == v2.x&&v1.y == v2.y&&v1.z == v2.z);
+}
+
+bool SpaceGameEngine::operator != (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
+{
+	return !(v1 == v2);
+}
+
+XMFLOAT3 SpaceGameEngine::TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data)
+{
+	static XMMATRIX mrebuff, mbuff;
+	static XMFLOAT3 pos, rot, sca;
+	if (pos != position || rot != rotation || sca != scale)
+	{
+		pos = position;
+		rot = rotation;
+		sca = scale;
+		mbuff = XMMatrixScaling(scale.x, scale.y, scale.z);
+		mrebuff = mbuff;
+		mbuff = XMMatrixRotationX(rotation.x);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixRotationY(rotation.y);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixRotationZ(rotation.z);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixTranslation(position.x, position.y, position.z);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	}
+	XMFLOAT4 vbuff(data.x, data.y, data.z, 1.0f);
+	XMVECTOR vvec = XMLoadFloat4(&vbuff);
+	vvec=XMVector4Transform(vvec, mrebuff);
+	XMStoreFloat4(&vbuff, vvec);
+	return XMFLOAT3(vbuff.x, vbuff.y, vbuff.z);
+}

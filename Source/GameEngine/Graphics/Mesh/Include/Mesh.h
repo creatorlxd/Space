@@ -18,12 +18,14 @@ limitations under the License.
 #include "Game/Object/Include/Object.h"
 #include "Window.h"
 #include "Game/Game/Include/SafeGet.h"
+#include "Game/Scene/Include/Scene.h"
 namespace SpaceGameEngine
 {
 	class MeshComponent :public Component
 	{
 	public:
 		static const int ModelFileMode = 1;				//Model文件模式
+		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
 
 		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
@@ -44,5 +46,7 @@ namespace SpaceGameEngine
 
 		ID3D11Buffer* m_pVertexBuffer;
 		ID3D11Buffer* m_pIndexBuffer;
+
+		AxisAlignedBoundingBox m_Space;
 	};
 }

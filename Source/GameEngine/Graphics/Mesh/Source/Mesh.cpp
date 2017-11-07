@@ -99,10 +99,35 @@ void SpaceGameEngine::MeshComponent::Start()
 {
 	InitVertexBuffer();
 	InitIndexBuffer();
+	
+	if (m_pFatherObject == nullptr)
+	{
+		ThrowError("the father object of mesh component can not be nullptr");
+	}
+	Vector<XMFLOAT3> points;
+	for (const auto& i : m_Vertices)
+	{
+		points.push_back(i.m_Position);
+	}
+	m_Space = GetAxisAlignedBoundingBox(points);
+	Scene::GetMainScene()->m_GlobalOctree.AddObject(std::make_pair(m_Space, m_pFatherObject));
 }
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
+	if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+		m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+		m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
+	{
+		Vector<XMFLOAT3> points;
+		TransformComponent* transform = dynamic_cast<TransformComponent*>(m_pFatherObject->GetComponent("TransformComponent"));
+		for (const auto& i : m_Vertices)
+		{
+			points.push_back(TransformByWorldMatrix(transform->GetPosition(), transform->GetRotation(), transform->GetScale(), i.m_Position));
+		}
+		m_Space = GetAxisAlignedBoundingBox(points);
+		Scene::GetMainScene()->m_GlobalOctree.UpdateObject(std::make_pair(m_Space, m_pFatherObject));
+	}
 	if (m_pFatherObject->IfRender() == false)
 	{
 		return;

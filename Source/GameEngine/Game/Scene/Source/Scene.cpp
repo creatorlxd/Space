@@ -62,6 +62,7 @@ void SpaceGameEngine::Scene::Start()
 		FindObject("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
 	}
 	m_ObjectManager.Start();
+	m_GlobalOctree.BuildTree();
 }
 
 void SpaceGameEngine::Scene::Run(float DeltaTime)
@@ -70,12 +71,14 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
 	SceneData::m_ProjectionMatrix = GetProjectionMatrix(CameraComponent::GetMainCamera()->GetAngle(), (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), CameraComponent::GetMainCamera()->GetNearZ(), CameraComponent::GetMainCamera()->GetFarZ());
 	m_MessageManager.Run();
+	m_GlobalOctree.Run();
 	m_ObjectManager.Run(DeltaTime);
 }
 
 void SpaceGameEngine::Scene::Release()
 {
 	m_ObjectManager.Release();
+	m_GlobalOctree.Release();
 	m_ComponentManager.Release();
 	m_MessageManager.Release();
 	m_ObjectInformation.clear();

@@ -21,6 +21,7 @@ limitations under the License.
 #include "Window.h"
 #include "Game/Object/Include/ObjectFactory.h"
 #include "SceneData.h"
+#include "Graphics/GlobalOctree/Include/GlobalOctree.h"
 namespace SpaceGameEngine
 {
 	class Scene					//场景
@@ -44,6 +45,7 @@ namespace SpaceGameEngine
 		ObjectManager m_ObjectManager;	//对象管理器
 		ComponentManager m_ComponentManager;	//组件管理器
 		MessageManager m_MessageManager;	//消息管理器
+		GlobalOctree m_GlobalOctree;		//全局八叉树
 	private:
 		static Scene* sm_pThis;
 		Map<std::string, Object*> m_ObjectInformation;	//对象信息
