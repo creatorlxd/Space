@@ -56,9 +56,8 @@ void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSiz
 void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)
 {
 	m_Mode = mode;
-	switch (m_Mode)
-	{
-	case ModelFileMode:
+	
+	if (m_Mode&ModelFileMode)
 	{
 		int v_s, i_s;
 		File file(filename, FileMode::Read);
@@ -86,12 +85,6 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 		}
 
 		file.Close();
-		break;
-	}
-	default:
-	{
-		break;
-	}
 	}
 }
 
