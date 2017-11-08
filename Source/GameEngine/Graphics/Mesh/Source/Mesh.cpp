@@ -24,6 +24,7 @@ SpaceGameEngine::MeshComponent::MeshComponent()
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
 	m_TypeName = "MeshComponent";
+	m_pTransform = nullptr;
 }
 
 void SpaceGameEngine::MeshComponent::Release()
@@ -32,6 +33,7 @@ void SpaceGameEngine::MeshComponent::Release()
 	SafeRelease(m_pIndexBuffer);
 	m_Vertices.clear();
 	m_Indices.clear();
+	m_pTransform = nullptr;
 }
 
 SpaceGameEngine::MeshComponent::~MeshComponent()
@@ -93,6 +95,8 @@ void SpaceGameEngine::MeshComponent::Start()
 	InitVertexBuffer();
 	InitIndexBuffer();
 	
+	m_pTransform = dynamic_cast<TransformComponent*>(FindFatherComponent(STRING(TransformComponent)));
+
 	if ((m_Mode&MeshComponent::DynamicMode) == 0)
 	{
 		if (m_pFatherObject == nullptr)
@@ -102,7 +106,7 @@ void SpaceGameEngine::MeshComponent::Start()
 		Vector<XMFLOAT3> points;
 		for (const auto& i : m_Vertices)
 		{
-			points.push_back(i.m_Position);
+			points.push_back(TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), i.m_Position));
 		}
 		m_Space = GetAxisAlignedBoundingBox(points);
 		Scene::GetMainScene()->m_GlobalOctree.AddObject(std::make_pair(m_Space, m_pFatherObject));
@@ -118,10 +122,9 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 			m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
 		{
 			Vector<XMFLOAT3> points;
-			TransformComponent* transform = dynamic_cast<TransformComponent*>(m_pFatherObject->GetComponent("TransformComponent"));
 			for (const auto& i : m_Vertices)
 			{
-				points.push_back(TransformByWorldMatrix(transform->GetPosition(), transform->GetRotation(), transform->GetScale(), i.m_Position));
+				points.push_back(TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), i.m_Position));
 			}
 			m_Space = GetAxisAlignedBoundingBox(points);
 			Scene::GetMainScene()->m_GlobalOctree.UpdateObject(std::make_pair(m_Space, m_pFatherObject));

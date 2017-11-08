@@ -47,6 +47,7 @@ namespace SpaceGameEngine
 		ID3D11Buffer* m_pVertexBuffer;
 		ID3D11Buffer* m_pIndexBuffer;
 
+		TransformComponent* m_pTransform;
 		AxisAlignedBoundingBox m_Space;
 	};
 }
