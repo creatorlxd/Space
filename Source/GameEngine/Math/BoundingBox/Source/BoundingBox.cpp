@@ -128,7 +128,7 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 	}
 	if (if_front || if_behind)
 		return false;
-	if (ans_x == 8 && ans_y == 8)
+	if (ans_x == 8 || ans_y == 8)
 		return false;
 	return true;
 }
