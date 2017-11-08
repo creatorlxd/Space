@@ -25,4 +25,5 @@ namespace SpaceGameEngine
 	};
 	
 	bool IfIntersectWithFrustum(const XMFLOAT3 & position);
+	XMFLOAT3 TransformByViewProjectionMatrix(const XMFLOAT3& position);
 }

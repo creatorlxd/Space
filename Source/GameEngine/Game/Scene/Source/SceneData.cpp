@@ -39,3 +39,16 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const XMFLOAT3 & position)
 	else
 		return false;
 }
+
+XMFLOAT3 SpaceGameEngine::TransformByViewProjectionMatrix(const XMFLOAT3 & position)
+{
+	XMFLOAT4 vec(position.x, position.y, position.z, 1.0f);
+	XMMATRIX mbuff = XMLoadFloat4x4(&SceneData::m_ViewMatrix);
+	mbuff = mbuff*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
+	XMVECTOR vbuff = XMLoadFloat4(&vec);
+	vbuff = XMVector4Transform(vbuff, mbuff);
+	XMFLOAT4 pos_after;
+	vbuff = vbuff / XMVectorGetW(vbuff);
+	XMStoreFloat4(&pos_after, vbuff);
+	return XMFLOAT3(pos_after.x, pos_after.y, pos_after.z);
+}

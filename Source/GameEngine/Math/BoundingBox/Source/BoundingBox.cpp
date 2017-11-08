@@ -102,10 +102,33 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 	point[6] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
 	point[7] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
 	
+	XMFLOAT3 point_after[8];
+	bool if_front = true, if_behind = true;
+	int flag_x = 0, flag_y = 0;
+	int ans_x = 0, ans_y = 0;
 	for (int i = 0; i < 8; i++)
 	{
-		if (IfIntersectWithFrustum(point[i]))
+		point_after[i] = TransformByViewProjectionMatrix(point[i]);
+		if (point_after[i].z >= 0)
+			if_front = false;
+		if (point_after[i].z <= 1)
+			if_behind = false;
+		if (point_after[i].x >= -1.0f&&point_after[i].x <= 1.0f&&
+			point_after[i].y >= -1.0f&&point_after[i].y <= 1.0f&&
+			point_after[i].z >= 0.0f&&point_after[i].z <= 1.0f)
 			return true;
+		if (flag_x == 0)
+			flag_x = (point_after[i].x > 0 ? 1 : -1);
+		if (flag_y == 0)
+			flag_y = (point_after[i].y > 0 ? 1 : -1);
+		if (flag_x*point_after[i].x == 1)
+			ans_x += 1;
+		if (flag_y*point_after[i].y == 1)
+			ans_y += 1;
 	}
-	return false;
+	if (if_front || if_behind)
+		return false;
+	if (ans_x == 8 || ans_y == 8)
+		return false;
+	return true;
 }
