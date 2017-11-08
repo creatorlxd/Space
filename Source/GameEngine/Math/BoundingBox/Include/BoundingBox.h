@@ -42,5 +42,5 @@ namespace SpaceGameEngine
 
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs);
 
-	int IfIntersectWithFrustum(const AxisAlignedBoundingBox& aabb);
+	bool IfIntersectWithFrustum(const AxisAlignedBoundingBox& aabb);
 }

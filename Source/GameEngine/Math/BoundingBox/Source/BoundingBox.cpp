@@ -90,7 +90,7 @@ SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingB
 	return AxisAlignedBoundingBox(minl, maxl);
 }
 
-int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
+bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 {
 	XMFLOAT3 point[8];
 	point[0] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
@@ -102,11 +102,10 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 	point[6] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
 	point[7] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
 	
-	int re=0;
 	for (int i = 0; i < 8; i++)
 	{
 		if (IfIntersectWithFrustum(point[i]))
-			re += 1;
+			return true;
 	}
-	return re;
+	return false;
 }
