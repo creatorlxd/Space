@@ -124,9 +124,9 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 			point_after[i].y >= -1.0f&&point_after[i].y <= 1.0f&&
 			point_after[i].z >= 0.0f&&point_after[i].z <= 1.0f)
 			return true;
-		if (flag_x == 0 && i == 0)
+		if (flag_x == 0 && point_cot == 1)
 			flag_x = (point_after[i].x > 1 ? 1 : (point_after[i].x < -1 ? -1 : 0));
-		if (flag_y == 0 && i == 0)
+		if (flag_y == 0 && point_cot == 1)
 			flag_y = (point_after[i].y > 1 ? 1 : (point_after[i].y < -1 ? -1 : 0));
 		if (flag_x == (point_after[i].x > 1 ? 1 : (point_after[i].x < -1 ? -1 : 0)))
 			ans_x += 1;
