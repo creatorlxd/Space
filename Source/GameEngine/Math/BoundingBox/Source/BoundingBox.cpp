@@ -106,13 +106,21 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 	bool if_front = true, if_behind = true;
 	int flag_x = 0, flag_y = 0;
 	int ans_x = 0, ans_y = 0;
+	int point_cot = 0;
 	for (int i = 0; i < 8; i++)
 	{
+		point_cot += 1;
 		point_after[i] = TransformByViewProjectionMatrix(point[i]);
 		if (point_after[i].z >= 0)
+		{
 			if_front = false;
+			point_cot -= 1;
+		}
 		if (point_after[i].z <= 1)
+		{
 			if_behind = false;
+			point_cot -= 1;
+		}
 		if (point_after[i].x >= -1.0f&&point_after[i].x <= 1.0f&&
 			point_after[i].y >= -1.0f&&point_after[i].y <= 1.0f&&
 			point_after[i].z >= 0.0f&&point_after[i].z <= 1.0f)
@@ -128,7 +136,7 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 	}
 	if (if_front || if_behind)
 		return false;
-	if (ans_x == 8 || ans_y == 8)
+	if (ans_x == point_cot || ans_y == point_cot)
 		return false;
 	return true;
 }
