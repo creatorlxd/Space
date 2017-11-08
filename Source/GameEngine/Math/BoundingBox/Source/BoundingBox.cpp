@@ -112,15 +112,11 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 		point_cot += 1;
 		point_after[i] = TransformByViewProjectionMatrix(point[i]);
 		if (point_after[i].z >= 0)
-		{
 			if_front = false;
-			point_cot -= 1;
-		}
 		if (point_after[i].z <= 1)
-		{
 			if_behind = false;
+		if (point_after[i].z > 1 || point_after[i].z < 0)
 			point_cot -= 1;
-		}
 		if (point_after[i].x >= -1.0f&&point_after[i].x <= 1.0f&&
 			point_after[i].y >= -1.0f&&point_after[i].y <= 1.0f&&
 			point_after[i].z >= 0.0f&&point_after[i].z <= 1.0f)
