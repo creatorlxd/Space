@@ -36,6 +36,11 @@ bool SpaceGameEngine::operator != (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 	return !(v1 == v2);
 }
 
+bool SpaceGameEngine::operator < (const XMFLOAT2 & v1, const XMFLOAT2 & v2)
+{
+	return (v1.x < v2.x&&v1.y < v2.y);
+}
+
 XMFLOAT3 SpaceGameEngine::TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data)
 {
 	static XMMATRIX mrebuff, mbuff;

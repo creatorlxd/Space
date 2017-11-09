@@ -45,6 +45,7 @@ limitations under the License.
 #include <direct.h>
 #include <io.h>
 #include <forward_list>
+#include <set>
 
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 

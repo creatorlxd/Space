@@ -105,4 +105,7 @@ namespace SpaceGameEngine
 
 	template<typename T>
 	using ForwardList = std::forward_list<T, AllocatorForSTL<T> >;
+
+	template<typename T, typename _Pr = std::less<T> >
+	using Set = std::set<T, _Pr, AllocatorForSTL<T> >;
 }
