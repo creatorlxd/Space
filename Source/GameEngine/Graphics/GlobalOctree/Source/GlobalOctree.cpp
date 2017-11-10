@@ -133,7 +133,7 @@ void SpaceGameEngine::GlobalOctreeNode::Run()
 {
 	for (const auto& i : m_Content)
 	{
-		if (IfIntersectWithFrustum(i.first))
+		if (IfIntersectWithFrustum(i.first) >= 0)
 			i.second->ChangeIfRender(true);
 		else
 			i.second->ChangeIfRender(false);
@@ -147,7 +147,7 @@ void SpaceGameEngine::GlobalOctreeNode::Run()
 			{
 				m_ChildrenNode[i]->SetObjectRenderState(true);
 			}
-			else if (buff > 0)
+			else if (buff >= 0)
 			{
 				m_ChildrenNode[i]->Run();
 			}

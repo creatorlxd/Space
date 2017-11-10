@@ -90,7 +90,7 @@ SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingB
 	return AxisAlignedBoundingBox(minl, maxl);
 }
 
-bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
+int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 {
 	XMFLOAT3 point[8];
 	point[0] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
@@ -107,6 +107,7 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 	int flag_x = 0, flag_y = 0;
 	int ans_x = 0, ans_y = 0;
 	int point_cot = 0;
+	int re = 0;
 	for (int i = 0; i < 8; i++)
 	{
 		point_cot += 1;
@@ -123,7 +124,10 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 		if (point_after[i].x >= -1.0f&&point_after[i].x <= 1.0f&&
 			point_after[i].y >= -1.0f&&point_after[i].y <= 1.0f&&
 			point_after[i].z >= 0.0f&&point_after[i].z <= 1.0f)
-			return true;
+		{
+			re += 1;
+			continue;
+		}
 		if (flag_x == 0 && point_cot == 1)
 			flag_x = (point_after[i].x > 1 ? 1 : (point_after[i].x < -1 ? -1 : 0));
 		if (flag_y == 0 && point_cot == 1)
@@ -133,9 +137,36 @@ bool SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb
 		if (flag_y == (point_after[i].y > 1 ? 1 : (point_after[i].y < -1 ? -1 : 0)))
 			ans_y += 1;
 	}
+	if (re > 0)
+		return re;
 	if (if_front || if_behind)
-		return false;
+		return -1;
 	if (ans_x == point_cot || ans_y == point_cot)
-		return false;
-	return true;
+		return -1;
+	static XMFLOAT2 point_left[8];
+	int point_left_size = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		if (point_after[i].z >= 0 && point_after[i].z <= 1)
+			point_left[point_left_size++] = XMFLOAT2(point_after[i].x, point_after[i].y);
+	}
+	/*
+	use y=k*x+b to find the line bewteen two point if cross the rectangle
+	*/
+	float k, b;
+	float y[2];
+	for (int i = 0; i < point_left_size; i++)
+	{
+		for (int j = i + 1; j < point_left_size; j++)
+		{
+			k = (point_left[i].y - point_left[j].y) / (point_left[i].x - point_left[j].x);
+			b = (point_left[i].x*point_left[j].y) - (point_left[j].x*point_left[i].y) / (point_left[i].x - point_left[j].x);
+			y[0] = k*-1.0f + b;
+			y[1] = k + b;
+			if ((y[0] >= -1 && y[0] <= 1) || (y[1] >= -1 && y[1] <= 1) ||
+				(y[0] > 1 && y[1] < -1) || (y[0] < -1 && y[1]>1))
+				return 0;
+		}
+	}
+	return -1;
 }
