@@ -94,7 +94,27 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 {
 	AxisAlignedBoundingBox aabb_after(TransformByViewProjectionMatrix(aabb.m_MinPosition), TransformByViewProjectionMatrix(aabb.m_MaxPosition));
 	if (IfIntersect(aabb_after, AxisAlignedBoundingBox(XMFLOAT3(-1.0f, -1.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f))))
-		return true;
+	{
+		XMFLOAT3 point[8];
+		point[0] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+		point[1] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+		point[2] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MinPosition.z);
+		point[3] = XMFLOAT3(aabb.m_MinPosition);
+		point[4] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MaxPosition.z);
+		point[5] = XMFLOAT3(aabb.m_MaxPosition);
+		point[6] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+		point[7] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+		int re = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			point[i] = TransformByViewProjectionMatrix(point[i]);
+			if (point[i].x >= -1.0f&&point[i].x <= 1.0f&&
+				point[i].y >= -1.0f&&point[i].y <= 1.0f&&
+				point[i].z >= 0.0f&&point[i].z <= 1.0f)
+				re += 1;
+		}
+		return re;
+	}
 	else
-		return false;
+		return -1;
 }
