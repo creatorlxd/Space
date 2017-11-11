@@ -159,13 +159,17 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 	{
 		for (int j = i + 1; j < point_left_size; j++)
 		{
-			k = (point_left[i].y - point_left[j].y) / (point_left[i].x - point_left[j].x);
-			b = (point_left[i].x*point_left[j].y) - (point_left[j].x*point_left[i].y) / (point_left[i].x - point_left[j].x);
-			y[0] = k*-1.0f + b;
-			y[1] = k + b;
-			if ((y[0] >= -1 && y[0] <= 1) || (y[1] >= -1 && y[1] <= 1) ||
-				(y[0] > 1 && y[1] < -1) || (y[0] < -1 && y[1]>1))
-				return 0;
+			if (min(point_left[i].x, point_left[j].x) <= 1 && max(point_left[i].x, point_left[j].x) >= -1 &&
+				min(point_left[i].y, point_left[j].y) <= 1 && max(point_left[i].y, point_left[j].y) >= -1)
+			{
+				k = (point_left[i].y - point_left[j].y) / (point_left[i].x - point_left[j].x);
+				b = (point_left[i].x*point_left[j].y) - (point_left[j].x*point_left[i].y) / (point_left[i].x - point_left[j].x);
+				y[0] = k*-1.0f + b;
+				y[1] = k + b;
+				if ((y[0] >= -1 && y[0] <= 1) || (y[1] >= -1 && y[1] <= 1) ||
+					(y[0] > 1 && y[1] < -1) || (y[0] < -1 && y[1]>1))
+					return 0;
+			}
 		}
 	}
 	return -1;
