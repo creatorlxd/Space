@@ -141,7 +141,7 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 		return re;
 	if (if_front || if_behind)
 		return -1;
-	if (ans_x == point_cot || ans_y == point_cot)
+	if ((ans_x == point_cot&&flag_x != 0) || (ans_y == point_cot&&flag_y != 0))
 		return -1;
 	static XMFLOAT2 point_left[8];
 	int point_left_size = 0;
