@@ -62,7 +62,7 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb1, const Axis
 
 SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points)
 {
-	XMFLOAT3 minl((float)MaxIntValue,(float)MaxIntValue,(float)MaxIntValue), maxl(0.0f,0.0f,0.0f);
+	XMFLOAT3 minl((float)MaxIntValue,(float)MaxIntValue,(float)MaxIntValue), maxl(-(float)MaxIntValue, -(float)MaxIntValue, -(float)MaxIntValue);
 	for (auto& i : points)
 	{
 		minl.x = min(minl.x, i.x);
@@ -77,7 +77,7 @@ SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingB
 
 SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs)
 {
-	XMFLOAT3 minl((float)MaxIntValue, (float)MaxIntValue, (float)MaxIntValue), maxl(0.0f, 0.0f, 0.0f);
+	XMFLOAT3 minl((float)MaxIntValue, (float)MaxIntValue, (float)MaxIntValue), maxl(-(float)MaxIntValue, -(float)MaxIntValue, -(float)MaxIntValue);
 	for (auto i : aabbs)
 	{
 		minl.x = min(minl.x, i.m_MinPosition.x);
@@ -145,11 +145,21 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 		return -1;
 	static XMFLOAT2 point_left[8];
 	int point_left_size = 0;
+	AxisAlignedBoundingBox box(XMFLOAT3((float)MaxIntValue, (float)MaxIntValue, 0),XMFLOAT3(-(float)MaxIntValue, -(float)MaxIntValue, 0));
 	for (int i = 0; i < 8; i++)
 	{
 		if (point_after[i].z >= 0 && point_after[i].z <= 1)
+		{
 			point_left[point_left_size++] = XMFLOAT2(point_after[i].x, point_after[i].y);
+		}
+		box.m_MinPosition.x = min(box.m_MinPosition.x, point_after[i].x);
+		box.m_MinPosition.y = min(box.m_MinPosition.y, point_after[i].y);
+		
+		box.m_MaxPosition.x = max(box.m_MaxPosition.x, point_after[i].x);
+		box.m_MaxPosition.y = max(box.m_MaxPosition.y, point_after[i].y);
 	}
+	if (IfInclude(box, AxisAlignedBoundingBox(XMFLOAT3(-1.0f, -1.0f, 0), XMFLOAT3(1.0f, 1.0f, 0))))
+		return 0;
 	/*
 	use y=k*x+b to find the line bewteen two point if cross the rectangle
 	*/
@@ -162,6 +172,8 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 			if (min(point_left[i].x, point_left[j].x) <= 1 && max(point_left[i].x, point_left[j].x) >= -1 &&
 				min(point_left[i].y, point_left[j].y) <= 1 && max(point_left[i].y, point_left[j].y) >= -1)
 			{
+				if (point_left[i].x == point_left[j].x)
+					return 0;
 				k = (point_left[i].y - point_left[j].y) / (point_left[i].x - point_left[j].x);
 				b = ((point_left[i].x*point_left[j].y) - (point_left[j].x*point_left[i].y)) / (point_left[i].x - point_left[j].x);
 				y[0] = k*-1.0f + b;
