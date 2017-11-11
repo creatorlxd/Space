@@ -187,6 +187,24 @@
     <Filter Include="Graphics\GlobalOctree\Source">
       <UniqueIdentifier>{7c5932c6-f2f2-4b50-ae2e-77c8224c7eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Plane">
+      <UniqueIdentifier>{232eb870-32cd-49c5-9437-ba2364068104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Frustum">
+      <UniqueIdentifier>{373d5deb-22ed-4075-a95c-7883851eeeb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Frustum\Include">
+      <UniqueIdentifier>{00e1a1e3-3336-46ac-b37d-a4be878d6107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Frustum\Source">
+      <UniqueIdentifier>{59202b13-f728-4791-b26a-3863352b9f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Plane\Include">
+      <UniqueIdentifier>{8be6c8a9-27d8-44fd-87d4-5520fae431a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Plane\Source">
+      <UniqueIdentifier>{bebc0586-325a-4824-89a2-e81aa2497962}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -309,6 +327,12 @@
     <ClInclude Include="Source\GameEngine\Graphics\GlobalOctree\Include\GlobalOctree.h">
       <Filter>Graphics\GlobalOctree\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Frustum\Include\Frustum.h">
+      <Filter>Math\Frustum\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Plane\Include\Plane.h">
+      <Filter>Math\Plane\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -406,6 +430,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\GlobalOctree\Source\GlobalOctree.cpp">
       <Filter>Graphics\GlobalOctree\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Frustum\Source\Frustum.cpp">
+      <Filter>Math\Frustum\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Plane\Source\Plane.cpp">
+      <Filter>Math\Plane\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
