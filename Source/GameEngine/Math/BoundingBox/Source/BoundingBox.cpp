@@ -60,7 +60,7 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb1, const Axis
 		return false;
 }
 
-int SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb, const Frustum & frustum)
+int SpaceGameEngine::IfInclude(const Frustum& frustum, const AxisAlignedBoundingBox& aabb)
 {
 	XMFLOAT3 point[8];
 	point[0] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
@@ -143,5 +143,5 @@ int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 		XMStoreFloat4x4(&resultmatrix, m1);
 		frustum = GetFrustumFromMatrix(resultmatrix);
 	}
-	return IfInclude(aabb, frustum);
+	return IfInclude(frustum, aabb);
 }
