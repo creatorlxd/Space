@@ -15,3 +15,44 @@ limitations under the License.
 */
 #include "stdafx.h"
 #include "../Include/Plane.h"
+
+SpaceGameEngine::Plane::Plane(XMFLOAT3 dir, float d)
+{
+	m_Direction = dir;
+	m_Distance = d;
+}
+
+SpaceGameEngine::Plane::Plane(XMFLOAT4 c)
+{
+	m_Direction = XMFLOAT3(c.x, c.y, c.z);
+	m_Distance = c.z;
+}
+
+SpaceGameEngine::Plane::Plane()
+{
+
+}
+
+bool SpaceGameEngine::IfBehindPlane(const Plane & plane, const XMFLOAT3 & position)
+{
+	XMVECTOR vbuff1 = XMLoadFloat3(&plane.m_Direction);
+	XMVECTOR vbuff2 = XMLoadFloat3(&position);
+	vbuff1 = XMVector3Dot(vbuff1, vbuff2);
+	float dt = XMVectorGetX(vbuff1);
+	if (dt + plane.m_Distance < 0)
+		return true;
+	else
+		return false;
+}
+
+SpaceGameEngine::Plane SpaceGameEngine::NormalizePlace(const Plane & plane)
+{
+	Plane re;
+	XMVECTOR vbuff1 = XMLoadFloat3(&plane.m_Direction);
+	XMVECTOR len = XMVector3Length(vbuff1);
+	XMVectorSetW(vbuff1,plane.m_Distance);
+	vbuff1 = XMVectorDivide(vbuff1, len);
+	XMStoreFloat3(&re.m_Direction, vbuff1);
+	re.m_Distance = XMVectorGetW(vbuff1);
+	return re;
+}

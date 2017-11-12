@@ -41,6 +41,16 @@ bool SpaceGameEngine::operator < (const XMFLOAT2 & v1, const XMFLOAT2 & v2)
 	return (v1.x < v2.x&&v1.y < v2.y);
 }
 
+bool SpaceGameEngine::operator == (const XMFLOAT4X4 & m1, const XMFLOAT4X4 & m2)
+{
+	return memcmp(&m1, &m2, sizeof(XMFLOAT4X4)) == 0;
+}
+
+bool SpaceGameEngine::operator != (const XMFLOAT4X4 & m1, const XMFLOAT4X4 & m2)
+{
+	return !(m1 == m2);
+}
+
 XMFLOAT3 SpaceGameEngine::TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data)
 {
 	static XMMATRIX mrebuff, mbuff;

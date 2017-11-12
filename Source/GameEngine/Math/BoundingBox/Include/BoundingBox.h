@@ -19,6 +19,7 @@ limitations under the License.
 #include "Game/Scene/Include/SceneData.h"
 #include "Math/Common/Include/MathDefinition.h"
 #include "Math/Common/Include/XMathExtension.h"
+#include "Math/Frustum/Include/Frustum.h"
 
 namespace SpaceGameEngine
 {
@@ -37,6 +38,8 @@ namespace SpaceGameEngine
 	bool IfInclude(const AxisAlignedBoundingBox& aabb, const XMFLOAT3& position);				//是否包含
 
 	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
+
+	int IfInclude(const AxisAlignedBoundingBox& aabb, const Frustum& frustum);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
 	
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
 

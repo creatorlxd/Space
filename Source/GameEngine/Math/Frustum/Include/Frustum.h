@@ -15,9 +15,17 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "../../Common/Include/MathDefinition.h"
+#include "Math/Common/Include/MathDefinition.h"
+#include "Math/Plane/Include/Plane.h"
 
 namespace SpaceGameEngine
 {
+	struct Frustum
+	{
+		Plane m_NearPlane, m_FarPlane;
+		Plane m_LeftPlane, m_RightPlane;
+		Plane m_TopPlane, m_BottomPlane;
+	};
 
+	Frustum GetFrustumFromMatrix(const XMFLOAT4X4& matrix);
 }

@@ -29,5 +29,9 @@ namespace SpaceGameEngine
 
 	bool operator < (const XMFLOAT2& v1, const XMFLOAT2& v2);
 
+	bool operator == (const XMFLOAT4X4& m1, const XMFLOAT4X4& m2);
+
+	bool operator != (const XMFLOAT4X4& m1, const XMFLOAT4X4& m2);
+
 	XMFLOAT3 TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data);
 }

@@ -60,6 +60,44 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb1, const Axis
 		return false;
 }
 
+int SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb, const Frustum & frustum)
+{
+	XMFLOAT3 point[8];
+	point[0] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+	point[1] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+	point[2] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MinPosition.z);
+	point[3] = XMFLOAT3(aabb.m_MinPosition);
+	point[4] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MaxPosition.z);
+	point[5] = XMFLOAT3(aabb.m_MaxPosition);
+	point[6] = XMFLOAT3(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+	point[7] = XMFLOAT3(aabb.m_MinPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+
+	Plane planes[6] = { frustum.m_NearPlane,frustum.m_FarPlane,
+						frustum.m_LeftPlane,frustum.m_RightPlane,
+						frustum.m_TopPlane,frustum.m_BottomPlane };
+	bool flag[8];
+	memset(flag, true, sizeof(flag));
+	for (int i = 0; i < 6; i++)
+	{
+		int fa_cot = 0;
+		for (int j = 0; j < 8; j++)
+			if (IfBehindPlane(planes[i], point[j]))
+			{
+				flag[j] = false;
+				fa_cot += 1;
+			}
+		if (fa_cot == 8)
+			return -1;
+	}
+	int re = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		if (flag[i])
+			re += 1;
+	}
+	return re;
+}
+
 SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points)
 {
 	XMFLOAT3 minl((float)MaxIntValue,(float)MaxIntValue,(float)MaxIntValue), maxl(-(float)MaxIntValue, -(float)MaxIntValue, -(float)MaxIntValue);
@@ -92,5 +130,18 @@ SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingB
 
 int SpaceGameEngine::IfIntersectWithFrustum(const AxisAlignedBoundingBox & aabb)
 {
-	
+	static XMFLOAT4X4 viewmatrix,projmatrix,resultmatrix;
+	static Frustum frustum;
+	if (viewmatrix != SceneData::m_ViewMatrix || projmatrix != SceneData::m_ProjectionMatrix)
+	{
+		viewmatrix = SceneData::m_ViewMatrix;
+		projmatrix = SceneData::m_ProjectionMatrix;
+		XMMATRIX m1, m2;
+		m1 = XMLoadFloat4x4(&viewmatrix);
+		m2 = XMLoadFloat4x4(&projmatrix);
+		m1 = m1*m2;
+		XMStoreFloat4x4(&resultmatrix, m1);
+		frustum = GetFrustumFromMatrix(resultmatrix);
+	}
+	return IfInclude(aabb, frustum);
 }

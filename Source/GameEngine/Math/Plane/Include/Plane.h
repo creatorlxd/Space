@@ -15,9 +15,21 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "../../Common/Include/MathDefinition.h"
+#include "Math/Common/Include/MathDefinition.h"
 
 namespace SpaceGameEngine
 {
+	struct Plane
+	{
+		XMFLOAT3 m_Direction;
+		float m_Distance;
+		
+		Plane(XMFLOAT3 dir, float d);
+		Plane(XMFLOAT4 c);
+		Plane();
+	};
 
+	bool IfBehindPlane(const Plane& plane, const XMFLOAT3& position);
+
+	Plane NormalizePlace(const Plane& plane);
 }
