@@ -83,8 +83,6 @@ namespace SpaceGameEngine
 
 	unsigned int HashString(const std::string& str);
 
-	Vector<std::pair<std::string, std::string> > ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
-
 	//----------------------------------------------------------------------------------------------
 	void SetDefaultInputLayout(ID3D11Device* device,ID3DBlob* ShaderByteCode, ID3D11InputLayout** inputlayout);				//设置默认的顶点输入格式（需要shader)
 	void SetDefaultInputLayout(ID3D11Device* device, const void* shadercode, SIZE_T size, ID3D11InputLayout** inputlayout);

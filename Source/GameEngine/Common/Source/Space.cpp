@@ -57,21 +57,6 @@ unsigned int SpaceGameEngine::HashString(const std::string & str)
 	return static_cast<unsigned int>(sh(str));
 }
 
-Vector<std::pair<std::string, std::string> > SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
-{
-	Vector<std::pair<std::string, std::string> > re;
-	std::fstream file(filename, std::ios::in);
-	std::string componentname, assetname;
-
-	while (file >> componentname >> assetname)
-	{
-		re.push_back(make_pair(componentname, assetname));
-	}
-	file.close();
-
-	return re;
-}
-
 void SpaceGameEngine::SetDefaultInputLayout(ID3D11Device* device, ID3DBlob* ShaderByteCode,ID3D11InputLayout** inputlayout)
 {
 	static D3D11_INPUT_ELEMENT_DESC indesc[]=

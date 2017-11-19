@@ -56,6 +56,8 @@ namespace SpaceGameEngine
 		void Read(void* adr, size_t size);
 		void Write(const void* adr, size_t size);
 
+		bool IfFileReadOver();				//文件是否读取完了
+
 		File& operator >> (wchar_t* cwstr);
 		File& operator >> (std::wstring& wstr);
 		File& operator >> (wchar_t& wc);
@@ -98,5 +100,6 @@ namespace SpaceGameEngine
 		FILE* m_pFile;
 		std::string m_FileName;
 		unsigned int m_FileMode;
+		bool m_IfFileReadOver;
 	};
 }

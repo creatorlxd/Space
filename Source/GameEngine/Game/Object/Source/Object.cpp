@@ -17,6 +17,21 @@ limitations under the License.
 #include "../Include/Object.h" 
 using namespace SpaceGameEngine;
 
+Vector<std::pair<std::string, std::pair<std::string, int>>> SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
+{
+	Vector<std::pair<std::string, std::pair<std::string, int>>> re;
+	File file(filename,FileMode::Read);
+	std::string componentname, assetname;
+	int mode;
+	while ((file >> componentname >> assetname >> mode).IfFileReadOver() == false)
+	{
+		re.push_back(make_pair(componentname, make_pair(assetname, mode)));
+	}
+	file.Close();
+
+	return re;
+}
+
 SpaceGameEngine::Object::Object()
 {
 	m_pRootComponent = nullptr;
@@ -96,25 +111,15 @@ void SpaceGameEngine::Object::Start()
 	}
 }
 
-void SpaceGameEngine::Object::InitFromFile(Vector<std::pair<std::string, std::string>> filenames)
+void SpaceGameEngine::Object::InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames)
 {
-	std::fstream file;
-	for (auto i : filenames)
+	for (const auto& i : filenames)
 	{
-		auto component = GetComponent(i.first);
-		if (component == nullptr)
+		auto pointer = GetComponent(i.first);
+		if (pointer)
 		{
-			continue;
+			pointer->InitFromFile(i.second.first, i.second.second);
 		}
-		file.open(i.second,std::ios::in);
-		
-		std::string filename;
-		int mode=0;
-
-		file >> filename>>mode;
-		component->InitFromFile(filename,mode);
-
-		file.close();
 	}
 }
 

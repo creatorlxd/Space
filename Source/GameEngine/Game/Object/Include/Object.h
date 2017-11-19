@@ -18,6 +18,9 @@ limitations under the License.
 #include "Game/Component/Include/ComponentManager.h"
 namespace SpaceGameEngine
 {
+
+	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
+
 	class Object			//基本物体对象
 	{
 	public:
@@ -28,7 +31,7 @@ namespace SpaceGameEngine
 		bool DeleteComponent(const std::string& name);			//删除组件，并去除连接
 
 		void Start();											//开始时运行
-		void InitFromFile(Vector<std::pair<std::string, std::string> > filenames);	//从文件初始化
+		void InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames);	//从文件初始化
 		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
 		void Run(float DeltaTime);								//每帧运行时的操作
 		void Release();											//手动释放
