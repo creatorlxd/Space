@@ -131,6 +131,8 @@ void SpaceGameEngine::File::Read(void * adr, size_t size)
 {
 	if (fread_s(adr, size, size, 1, m_pFile) == 0)
 		m_IfFileReadOver = true;
+	else
+		m_IfFileReadOver = false;
 }
 
 void SpaceGameEngine::File::Write(const void * adr, size_t size)
@@ -170,14 +172,20 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(std::wstring & wstr)
 		}
 		if (wstr.empty())
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
 	}
 	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t & wc)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, " \r\n\t%C", &wc, (unsigned int)sizeof(wchar_t)) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
@@ -208,6 +216,8 @@ SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 		}
 		if (str.empty())
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
 	}
 	return *this;
 }
@@ -215,104 +225,156 @@ SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(int & i)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%d", &i) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned int & ui)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%ud", &ui) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(short & s)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%hd", &s) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned short & us)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%hud", &us) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long & l)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%ld", &l) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long & ul)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%uld", &ul) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long long & ll)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%I64d", &ll) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long long & ull)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%I64ud", &ull) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char & c)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, " \r\n\t%c", &c, (unsigned int)sizeof(char)) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned char & uc)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%hhu", &uc) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(float & f)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%f", &f) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(double & d)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%lf", &d) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long double & ld)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
+	{
 		if (fscanf_s(m_pFile, "%Lf", &ld) == EOF)
 			m_IfFileReadOver = true;
+		else
+			m_IfFileReadOver = false;
+	}
 	return *this;
 }
 
