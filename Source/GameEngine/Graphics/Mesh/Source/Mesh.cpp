@@ -29,6 +29,10 @@ SpaceGameEngine::MeshComponent::MeshComponent()
 
 void SpaceGameEngine::MeshComponent::Release()
 {
+	if (m_pTransform)
+	{
+		Scene::GetMainScene()->m_GlobalOctree.DeleteObject(m_pFatherObject);
+	}
 	SafeRelease(m_pVertexBuffer);
 	SafeRelease(m_pIndexBuffer);
 	m_Vertices.clear();
@@ -45,13 +49,15 @@ void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSiz
 {
 	m_Vertices.clear();
 	m_Indices.clear();
+	m_Vertices.resize(VertexSize);
+	m_Indices.resize(IndexSize);
 	for (int i = 0; i < VertexSize; i++)
 	{
-		m_Vertices.push_back(pVertices[i]);
+		m_Vertices[i] = pVertices[i];
 	}
 	for (int i = 0; i < IndexSize; i++)
 	{
-		m_Indices.push_back(pIndices[i]);
+		m_Indices[i] = pIndices[i];
 	}
 }
 

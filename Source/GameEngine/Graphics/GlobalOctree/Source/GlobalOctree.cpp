@@ -238,6 +238,28 @@ void SpaceGameEngine::GlobalOctreeNode::Release()
 	}
 }
 
+bool SpaceGameEngine::GlobalOctreeNode::DeleteObjectData(GlobalOctreeData::second_type pointer)
+{
+	auto iter = m_Content.before_begin();
+	for (auto i = m_Content.begin(); i != m_Content.end(); i++,iter++)
+	{
+		if (i->second == pointer)
+		{
+			m_Content.erase_after(iter);
+			return true;
+		}
+	}
+	if (!m_IfLeafNode)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if (m_ChildrenNode[i]->DeleteObjectData(pointer))
+				return true;
+		}
+	}
+	return false;
+}
+
 SpaceGameEngine::GlobalOctree::~GlobalOctree()
 {
 	Release();
@@ -252,6 +274,26 @@ void SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
 	else
 	{
 		m_RootNode.InsertObject(data);
+	}
+}
+
+bool SpaceGameEngine::GlobalOctree::DeleteObject(GlobalOctreeData::second_type pointer)
+{
+	if (!m_IfInit)
+	{
+		for (auto i = m_IntializaionData.begin(); i != m_IntializaionData.end(); i++)
+		{
+			if (i->second == pointer)
+			{
+				m_IntializaionData.erase(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return m_RootNode.DeleteObjectData(pointer);
 	}
 }
 

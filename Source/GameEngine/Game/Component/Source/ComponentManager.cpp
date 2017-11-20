@@ -32,7 +32,8 @@ SpaceGameEngine::ComponentManager::~ComponentManager()
 {
 	for (auto i : m_Content)
 	{
-		MemoryManager::Delete(i);
+		if(i)
+			MemoryManager::Delete(i);
 	}
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
@@ -67,7 +68,8 @@ void SpaceGameEngine::ComponentManager::Release()
 {
 	for (auto i : m_Content)
 	{
-		MemoryManager::Delete(i);
+		if(i)
+			MemoryManager::Delete(i);
 	}
 	m_Content.clear();
 	m_FreeIndexList = Queue<unsigned int>();

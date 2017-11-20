@@ -83,21 +83,14 @@ bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 	if (father != nullptr)
 	{
 		father->DeleteChildComponent((*component).second);
-		(*component).second->SetFatherComponent(nullptr);
-		std::stack<Component*> eraselist;
 		for (auto i : (*component).second->GetChildrenComponent())
 		{
-			eraselist.push(i);
-			father->AddChildComponent(i);
+			i->Attach(father);
 		}
-		while (!eraselist.empty())
-		{
-			auto i = eraselist.top();
-			eraselist.pop();
-			(*component).second->DeleteChildComponent(i);
-		}
+		component->second->GetChildrenComponent().clear();
 	}
 	(*component).second->SetFatherObject(nullptr);
+	ComponentManager::DestoryComponent(component->second);
 	m_Components.erase(component);
 	return true;
 }
