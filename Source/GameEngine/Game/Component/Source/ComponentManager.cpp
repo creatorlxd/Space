@@ -50,12 +50,13 @@ void SpaceGameEngine::ComponentManager::SetAsMainManager()
 
 bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 {
-	for (auto i = m_Content.begin(); i != m_Content.end(); i += 1)
+	for (unsigned int i = 0; i < m_Content.size(); i++)
 	{
-		if (*i == pc)
+		if (m_Content[i] == pc)
 		{
 			MemoryManager::Delete(pc);
-			m_Content.erase(i);
+			m_FreeIndexList.push(i);
+			m_Content[i] = nullptr;
 			return true;
 		}
 	}
@@ -69,8 +70,18 @@ void SpaceGameEngine::ComponentManager::Release()
 		MemoryManager::Delete(i);
 	}
 	m_Content.clear();
+	m_FreeIndexList = Queue<unsigned int>();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
+}
+
+void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
+{
+	pc->Release();
+	if (sm_pThis)
+		sm_pThis->DeleteComponent(pc);
+	else
+		ThrowError("当前未设定组件管理器");
 }
 
 Component * SpaceGameEngine::ComponentManager::NewComponentByName(const std::string & name)

@@ -52,18 +52,34 @@ Object * SpaceGameEngine::ObjectManager::NewObject()
 		return nullptr;
 	}
 	auto re = MemoryManager::New<Object>();
-	sm_pThis->m_Content.push_back(re);
+	if (!sm_pThis->m_FreeIndexList.empty())
+	{
+		sm_pThis->m_Content[sm_pThis->m_FreeIndexList.front()] = re;
+		sm_pThis->m_FreeIndexList.pop();
+	}
+	else
+		sm_pThis->m_Content.push_back(re);
 	return re;
+}
+
+void SpaceGameEngine::ObjectManager::DestoryObject(Object * po)
+{
+	po->Release();
+	if (sm_pThis)
+		sm_pThis->DeleteObject(po);
+	else
+		ThrowError("当前未设定对象管理器");
 }
 
 bool SpaceGameEngine::ObjectManager::DeleteObject(Object * po)
 {
-	for (auto i = m_Content.begin(); i != m_Content.end(); i += 1)
+	for (unsigned int i = 0; i < m_Content.size(); i++)
 	{
-		if (*i == po)
+		if (m_Content[i] == po)
 		{
 			MemoryManager::Delete(po);
-			m_Content.erase(i);
+			m_FreeIndexList.push(i);
+			m_Content[i] = nullptr;
 			return true;
 		}
 	}
@@ -95,4 +111,7 @@ void SpaceGameEngine::ObjectManager::Release()
 		MemoryManager::Delete(i);
 	}
 	m_Content.clear();
+	m_FreeIndexList = Queue<unsigned int>();
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }

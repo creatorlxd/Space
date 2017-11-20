@@ -146,7 +146,8 @@ void SpaceGameEngine::Object::Release()
 	{
 		info->Run(0.00f);
 	}
-
+	for (const auto& i : m_Components)
+		ComponentManager::DestoryComponent(i.second);
 	m_Components.clear();
 	m_Message.clear();
 	m_pRootComponent = nullptr;

@@ -40,17 +40,26 @@ namespace SpaceGameEngine
 					return nullptr;
 				}
 				Component* buff = MemoryManager::New<T>();
-				sm_pThis->m_Content.push_back(buff);
+				if (!sm_pThis->m_FreeIndexList.empty())
+				{
+					sm_pThis->m_Content[sm_pThis->m_FreeIndexList.front()] = buff;
+					sm_pThis->m_FreeIndexList.pop();
+				}
+				else
+					sm_pThis->m_Content.push_back(buff);
 				return buff;
 			}
 		};
 		bool DeleteComponent(Component* pc);		//删除一个组件
 		void Release();								//释放
 
+		static void DestoryComponent(Component* pc);
+
 		static Component* NewComponentByName(const std::string& name);			//通过组件子类名来创建组件
 	protected:
 		static ComponentManager* sm_pThis;			//当前的管理器指针
 		Vector<Component*> m_Content;			//所管理的组件
+		Queue<unsigned int> m_FreeIndexList;
 	};
 
 	extern ComponentFactoryManager g_ComponentFactoryManager;

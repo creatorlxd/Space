@@ -27,6 +27,7 @@ namespace SpaceGameEngine
 		static ObjectManager* GetMainManager();		//获取主要的管理器
 		void SetAsMainManager();					//设置为主管理器
 		static Object* NewObject();					//创建一个Object
+		static void DestoryObject(Object* po);
 		bool DeleteObject(Object* po);				//删除一个Object
 
 		void Start();								//执行开始操作
@@ -35,5 +36,6 @@ namespace SpaceGameEngine
 	private:
 		static ObjectManager* sm_pThis;
 		Vector<Object*> m_Content;
+		Queue<unsigned int> m_FreeIndexList;
 	};
 }
