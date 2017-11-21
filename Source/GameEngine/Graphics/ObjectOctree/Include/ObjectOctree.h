@@ -26,6 +26,7 @@ namespace SpaceGameEngine
 	{
 		int m_Content[3];
 		IndexTriangle();
+		IndexTriangle(int i1, int i2, int i3);
 	};
 
 	bool operator == (const IndexTriangle& it1, const IndexTriangle& it2);
@@ -53,5 +54,18 @@ namespace SpaceGameEngine
 		ObjectOctreeNode* m_ChildrenNode[8];
 		bool m_IfLeafNode;
 		int m_Deepth;
+	};
+
+	struct ObjectOctree
+	{
+	public:
+		ObjectOctree(const Vector<DefaultVertex>& data) :m_RootNode(data)
+		{}
+		void BuildTree(const Vector<unsigned int> indices);
+		~ObjectOctree();
+		void Release();
+		Vector<unsigned int> Run(XMFLOAT3 position,XMFLOAT3 rotation,XMFLOAT3 scale);
+	private:
+		ObjectOctreeNode m_RootNode;
 	};
 }

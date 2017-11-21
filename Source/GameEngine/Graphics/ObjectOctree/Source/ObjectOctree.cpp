@@ -23,6 +23,13 @@ SpaceGameEngine::IndexTriangle::IndexTriangle()
 	m_Content[2] = -1;
 }
 
+SpaceGameEngine::IndexTriangle::IndexTriangle(int i1, int i2, int i3)
+{
+	m_Content[0] = i1;
+	m_Content[1] = i2;
+	m_Content[2] = i3;
+}
+
 bool SpaceGameEngine::operator==(const IndexTriangle & it1, const IndexTriangle & it2)
 {
 	return (memcmp(it1.m_Content, it2.m_Content, sizeof(int) * 3) == 0);
@@ -225,4 +232,35 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::GetIndi
 		}
 	}
 	return re;
+}
+
+void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int> indices)
+{
+	Vector<XMFLOAT3> points;
+	points.resize(m_RootNode.m_VertexData.size());
+	for (int i=0;i<m_RootNode.m_VertexData.size();i++)
+	{
+		points[i] = m_RootNode.m_VertexData[i].m_Position;
+	}
+	auto space = GetAxisAlignedBoundingBox(points);
+	m_RootNode.Init(space);
+	for (int i = 0; i < indices.size(); i+=3)
+	{
+		m_RootNode.InsertTriangle(IndexTriangle(indices[i], indices[i + 1], indices[i + 2]));
+	}
+}
+
+SpaceGameEngine::ObjectOctree::~ObjectOctree()
+{
+	Release();
+}
+
+void SpaceGameEngine::ObjectOctree::Release()
+{
+	m_RootNode.Release();
+}
+
+SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
+{
+	return m_RootNode.Run(position,rotation,scale);
 }
