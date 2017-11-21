@@ -19,7 +19,7 @@ using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(MeshComponent);
 
-SpaceGameEngine::MeshComponent::MeshComponent()
+SpaceGameEngine::MeshComponent::MeshComponent() :m_ObjectOctree(m_Vertices)
 {
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
@@ -33,6 +33,7 @@ void SpaceGameEngine::MeshComponent::Release()
 	{
 		Scene::GetMainScene()->m_GlobalOctree.DeleteObject(m_pFatherObject);
 	}
+	m_ObjectOctree.Release();
 	SafeRelease(m_pVertexBuffer);
 	SafeRelease(m_pIndexBuffer);
 	m_Vertices.clear();
@@ -64,7 +65,7 @@ void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSiz
 void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)
 {
 	m_Mode = mode;
-	
+
 	if (m_Mode&ModelFileMode)
 	{
 		int v_s, i_s;
@@ -100,9 +101,9 @@ void SpaceGameEngine::MeshComponent::Start()
 {
 	InitVertexBuffer();
 	InitIndexBuffer();
-	
-	m_pTransform = dynamic_cast<TransformComponent*>(FindFatherComponent(STRING(TransformComponent)));
 
+	m_pTransform = dynamic_cast<TransformComponent*>(FindFatherComponent(STRING(TransformComponent)));
+	m_ObjectOctree.BuildTree(m_Indices);
 	if ((m_Mode&MeshComponent::DynamicMode) == 0)
 	{
 		if (m_pFatherObject == nullptr)
@@ -140,9 +141,16 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 	{
 		return;
 	}
+	auto indices_buffer = m_ObjectOctree.Run(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale());
+	D3D11_MAPPED_SUBRESOURCE mappeddata;
+	HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer,0,D3D11_MAP_WRITE_DISCARD,0,&mappeddata));
+	unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
+	for (int i = 0; i < indices_buffer.size(); i++)
+		pi[i] = indices_buffer[i];
+	SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
 	unsigned int v_strides = sizeof(DefaultVertex);
 	unsigned int v_offset = 0;
-	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer,&v_strides, &v_offset);
+	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
 	GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	D3DX11_TECHNIQUE_DESC techDesc;
@@ -151,7 +159,7 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 	{
 		SpaceEngineWindow->GetEffectShader().m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
 
-		SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(m_Indices.size(), 0, 0);
+		SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(indices_buffer.size(), 0, 0);
 	}
 }
 
@@ -174,15 +182,15 @@ void SpaceGameEngine::MeshComponent::InitVertexBuffer()
 void SpaceGameEngine::MeshComponent::InitIndexBuffer()
 {
 	D3D11_BUFFER_DESC desc;
-	desc.Usage = D3D11_USAGE_IMMUTABLE;
+	desc.Usage = D3D11_USAGE_DYNAMIC;
 	desc.ByteWidth = sizeof(unsigned int)*m_Indices.size();
-	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	desc.BindFlags = D3D11_CPU_ACCESS_WRITE;
 	desc.CPUAccessFlags = 0;
 	desc.MiscFlags = 0;
 	desc.StructureByteStride = 0;
 
 	D3D11_SUBRESOURCE_DATA initdata;
 	initdata.pSysMem = m_Indices.data();
-	
+
 	HR(GetGame()->m_Window.GetD3DDevice()->CreateBuffer(&desc, &initdata, &m_pIndexBuffer));
 }

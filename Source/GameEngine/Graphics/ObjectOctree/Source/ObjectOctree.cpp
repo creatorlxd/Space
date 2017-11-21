@@ -167,7 +167,6 @@ bool SpaceGameEngine::ObjectOctreeNode::DeleteTriangle(const IndexTriangle & dat
 
 SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
 {
-	XMMATRIX worldmatrix = GetWorldMatrix(position, rotation, scale);
 	Vector<unsigned int> re;
 	for (const auto& i : m_Content)
 	{
@@ -177,7 +176,10 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMF
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			int buff = IfIntersectWithFrustum(m_ChildrenNode[i]->m_Space);
+			auto aabb = m_ChildrenNode[i]->m_Space;
+			aabb.m_MinPosition = TransformByWorldMatrix(position, rotation, scale, aabb.m_MinPosition);
+			aabb.m_MaxPosition = TransformByWorldMatrix(position, rotation, scale, aabb.m_MaxPosition);
+			int buff = IfIntersectWithFrustum(aabb);
 			if (buff == 8)
 			{
 				auto buffer = m_ChildrenNode[i]->GetIndices();

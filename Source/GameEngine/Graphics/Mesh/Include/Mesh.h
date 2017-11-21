@@ -19,6 +19,8 @@ limitations under the License.
 #include "Window.h"
 #include "Game/Game/Include/SafeGet.h"
 #include "Game/Scene/Include/Scene.h"
+#include "Graphics/ObjectOctree/Include/ObjectOctree.h"
+
 namespace SpaceGameEngine
 {
 	class MeshComponent :public Component
@@ -49,5 +51,7 @@ namespace SpaceGameEngine
 
 		TransformComponent* m_pTransform;
 		AxisAlignedBoundingBox m_Space;
+
+		ObjectOctree m_ObjectOctree;
 	};
 }
