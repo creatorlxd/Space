@@ -28,6 +28,7 @@ namespace SpaceGameEngine
 	public:
 		static const int ModelFileMode = 1;				//Model文件模式
 		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
+		static const int WholeMode = 4;					//Whole mode do not use object octree
 
 		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();

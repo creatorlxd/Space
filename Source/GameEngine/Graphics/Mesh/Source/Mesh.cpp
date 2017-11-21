@@ -33,7 +33,8 @@ void SpaceGameEngine::MeshComponent::Release()
 	{
 		Scene::GetMainScene()->m_GlobalOctree.DeleteObject(m_pFatherObject);
 	}
-	m_ObjectOctree.Release();
+	if ((m_Mode&MeshComponent::WholeMode) == 0)
+		m_ObjectOctree.Release();
 	SafeRelease(m_pVertexBuffer);
 	SafeRelease(m_pIndexBuffer);
 	m_Vertices.clear();
@@ -103,7 +104,8 @@ void SpaceGameEngine::MeshComponent::Start()
 	InitIndexBuffer();
 
 	m_pTransform = dynamic_cast<TransformComponent*>(FindFatherComponent(STRING(TransformComponent)));
-	m_ObjectOctree.BuildTree(m_Indices);
+	if ((m_Mode&MeshComponent::WholeMode) == 0)
+		m_ObjectOctree.BuildTree(m_Indices);
 	if ((m_Mode&MeshComponent::DynamicMode) == 0)
 	{
 		if (m_pFatherObject == nullptr)
@@ -141,25 +143,44 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 	{
 		return;
 	}
-	auto indices_buffer = m_ObjectOctree.Run(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale());
-	D3D11_MAPPED_SUBRESOURCE mappeddata;
-	HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
-	unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
-	for (int i = 0; i < indices_buffer.size(); i++)
-		pi[i] = indices_buffer[i];
-	SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
-	unsigned int v_strides = sizeof(DefaultVertex);
-	unsigned int v_offset = 0;
-	GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
-	GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-	D3DX11_TECHNIQUE_DESC techDesc;
-	SpaceEngineWindow->GetEffectShader().m_pTechnique->GetDesc(&techDesc);
-	for (UINT p = 0; p < techDesc.Passes; ++p)
+	if ((m_Mode&MeshComponent::WholeMode) == 0)
 	{
-		SpaceEngineWindow->GetEffectShader().m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+		auto indices_buffer = m_ObjectOctree.Run(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale());
+		D3D11_MAPPED_SUBRESOURCE mappeddata;
+		HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
+		unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
+		for (int i = 0; i < indices_buffer.size(); i++)
+			pi[i] = indices_buffer[i];
+		SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
+		unsigned int v_strides = sizeof(DefaultVertex);
+		unsigned int v_offset = 0;
+		GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
+		GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-		SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(indices_buffer.size(), 0, 0);
+		D3DX11_TECHNIQUE_DESC techDesc;
+		SpaceEngineWindow->GetEffectShader().m_pTechnique->GetDesc(&techDesc);
+		for (UINT p = 0; p < techDesc.Passes; ++p)
+		{
+			SpaceEngineWindow->GetEffectShader().m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+
+			SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(indices_buffer.size(), 0, 0);
+		}
+	}
+	else
+	{
+		unsigned int v_strides = sizeof(DefaultVertex);
+		unsigned int v_offset = 0;
+		GetGame()->m_Window.GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
+		GetGame()->m_Window.GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		D3DX11_TECHNIQUE_DESC techDesc;
+		SpaceEngineWindow->GetEffectShader().m_pTechnique->GetDesc(&techDesc);
+		for (UINT p = 0; p < techDesc.Passes; ++p)
+		{
+			SpaceEngineWindow->GetEffectShader().m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+
+			SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(m_Indices.size(), 0, 0);
+		}
 	}
 }
 
@@ -182,12 +203,24 @@ void SpaceGameEngine::MeshComponent::InitVertexBuffer()
 void SpaceGameEngine::MeshComponent::InitIndexBuffer()
 {
 	D3D11_BUFFER_DESC desc;
-	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.ByteWidth = sizeof(unsigned int)*m_Indices.size();
-	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	desc.MiscFlags = 0;
-	desc.StructureByteStride = 0;
+	if ((m_Mode&MeshComponent::WholeMode) == 0)
+	{
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.ByteWidth = sizeof(unsigned int)*m_Indices.size();
+		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		desc.MiscFlags = 0;
+		desc.StructureByteStride = 0;
+	}
+	else
+	{
+		desc.Usage = D3D11_USAGE_IMMUTABLE;
+		desc.ByteWidth = sizeof(unsigned int)*m_Indices.size();
+		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		desc.CPUAccessFlags = 0;
+		desc.MiscFlags = 0;
+		desc.StructureByteStride = 0;
+	}
 
 	D3D11_SUBRESOURCE_DATA initdata;
 	initdata.pSysMem = m_Indices.data();
