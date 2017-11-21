@@ -45,7 +45,7 @@ SpaceGameEngine::MeshComponent::~MeshComponent()
 	Release();
 }
 
-void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSize, DefaultVertex * pVertices, WORD * pIndices)
+void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSize, DefaultVertex * pVertices, unsigned int* pIndices)
 {
 	m_Vertices.clear();
 	m_Indices.clear();

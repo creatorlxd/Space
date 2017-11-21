@@ -77,3 +77,26 @@ XMFLOAT3 SpaceGameEngine::TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rot
 	XMStoreFloat4(&vbuff, vvec);
 	return XMFLOAT3(vbuff.x, vbuff.y, vbuff.z);
 }
+
+XMMATRIX SpaceGameEngine::GetWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
+{
+	static XMMATRIX mrebuff, mbuff;
+	static XMFLOAT3 pos, rot, sca;
+	if (pos != position || rot != rotation || sca != scale)
+	{
+		pos = position;
+		rot = rotation;
+		sca = scale;
+		mbuff = XMMatrixScaling(scale.x, scale.y, scale.z);
+		mrebuff = mbuff;
+		mbuff = XMMatrixRotationX(rotation.x);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixRotationY(rotation.y);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixRotationZ(rotation.z);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+		mbuff = XMMatrixTranslation(position.x, position.y, position.z);
+		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
+	}
+	return mrebuff;
+}

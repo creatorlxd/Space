@@ -78,11 +78,11 @@ namespace SpaceGameEngine
 
 		}
 		template<typename U>
-		AllocatorForSTL(AllocatorForSTL<U>& alloc)
+		AllocatorForSTL(const AllocatorForSTL<U>& alloc)
 		{
 
 		}
-		AllocatorForSTL(AllocatorForSTL& alloc)
+		AllocatorForSTL(const AllocatorForSTL& alloc)
 		{
 
 		}

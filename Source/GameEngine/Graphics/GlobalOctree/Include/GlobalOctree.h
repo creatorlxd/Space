@@ -27,6 +27,7 @@ namespace SpaceGameEngine
 	struct GlobalOctreeNode
 	{
 		GlobalOctreeNode();
+		~GlobalOctreeNode();
 		GlobalOctreeNode(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void InsertObject(const GlobalOctreeData& data);

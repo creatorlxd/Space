@@ -39,7 +39,7 @@ namespace SpaceGameEngine
 
 	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
 
-	int IfInclude(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
+	int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
 	
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
 

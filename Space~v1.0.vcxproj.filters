@@ -205,6 +205,24 @@
     <Filter Include="Math\Plane\Source">
       <UniqueIdentifier>{bebc0586-325a-4824-89a2-e81aa2497962}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\ObjectOctree">
+      <UniqueIdentifier>{1b6823c5-3fe8-4b06-80da-d89313a968d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ObjectOctree\Include">
+      <UniqueIdentifier>{17650b0d-b451-4e28-b1b8-f2ce502a40ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ObjectOctree\Source">
+      <UniqueIdentifier>{9a3df364-7abe-4c65-b2c7-4a9756a94d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Triangle">
+      <UniqueIdentifier>{495c02ef-c2fd-406d-b9ba-93c57e457983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Triangle\Include">
+      <UniqueIdentifier>{8664f206-aa37-4ae0-9418-fa0887f97c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Triangle\Source">
+      <UniqueIdentifier>{8f29b68f-376d-408d-8689-83f2ede8baa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -333,6 +351,12 @@
     <ClInclude Include="Source\GameEngine\Math\Plane\Include\Plane.h">
       <Filter>Math\Plane\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\ObjectOctree\Include\ObjectOctree.h">
+      <Filter>Graphics\ObjectOctree\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Triangle\Include\Triangle.h">
+      <Filter>Math\Triangle\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -436,6 +460,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Plane\Source\Plane.cpp">
       <Filter>Math\Plane\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\ObjectOctree\Source\ObjectOctree.cpp">
+      <Filter>Graphics\ObjectOctree\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Triangle\Source\Triangle.cpp">
+      <Filter>Math\Triangle\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

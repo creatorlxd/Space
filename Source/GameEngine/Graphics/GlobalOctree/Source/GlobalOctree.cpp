@@ -22,8 +22,14 @@ SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode()
 	m_Deepth = 1;
 }
 
+SpaceGameEngine::GlobalOctreeNode::~GlobalOctreeNode()
+{
+	Release();
+}
+
 SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode(const AxisAlignedBoundingBox & space, int deepth)
 {
+	m_IfLeafNode = true;
 	Init(space, deepth);
 }
 
