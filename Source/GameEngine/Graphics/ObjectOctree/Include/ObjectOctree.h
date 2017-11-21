@@ -33,10 +33,10 @@ namespace SpaceGameEngine
 
 	struct ObjectOctreeNode
 	{
-		ObjectOctreeNode(const Vector<DefaultVertex>& data) :
+		ObjectOctreeNode(Vector<DefaultVertex>* data) :
 			m_VertexData(data), m_IfLeafNode(true), m_Deepth(1)
 		{};
-		ObjectOctreeNode(const Vector<DefaultVertex>& data, const AxisAlignedBoundingBox& space, int deepth = 1) :
+		ObjectOctreeNode(Vector<DefaultVertex>* data, const AxisAlignedBoundingBox& space, int deepth = 1) :
 			m_VertexData(data), m_IfLeafNode(true), m_Space(space), m_Deepth(deepth)
 		{};
 		~ObjectOctreeNode();
@@ -44,11 +44,11 @@ namespace SpaceGameEngine
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void InsertTriangle(const IndexTriangle& data);
 		bool DeleteTriangle(const IndexTriangle& data);
-		Vector<unsigned int> Run(XMFLOAT3 position,XMFLOAT3 rotation,XMFLOAT3 scale);
+		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 		void Release();
 		Vector<unsigned int> GetIndices();
 
-		const Vector<DefaultVertex>& m_VertexData;
+		Vector<DefaultVertex>* m_VertexData;
 		ForwardList<IndexTriangle> m_Content;
 		AxisAlignedBoundingBox m_Space;
 		ObjectOctreeNode* m_ChildrenNode[8];
@@ -59,12 +59,12 @@ namespace SpaceGameEngine
 	struct ObjectOctree
 	{
 	public:
-		ObjectOctree(const Vector<DefaultVertex>& data) :m_RootNode(data)
+		ObjectOctree(Vector<DefaultVertex>* data) :m_RootNode(data)
 		{}
 		void BuildTree(const Vector<unsigned int> indices);
 		~ObjectOctree();
 		void Release();
-		Vector<unsigned int> Run(XMFLOAT3 position,XMFLOAT3 rotation,XMFLOAT3 scale);
+		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 	private:
 		ObjectOctreeNode m_RootNode;
 	};

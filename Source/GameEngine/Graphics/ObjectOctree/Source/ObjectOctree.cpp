@@ -48,7 +48,7 @@ void SpaceGameEngine::ObjectOctreeNode::Init(const AxisAlignedBoundingBox & spac
 
 void SpaceGameEngine::ObjectOctreeNode::InsertTriangle(const IndexTriangle & data)
 {
-	Triangle triangle(m_VertexData[data.m_Content[0]].m_Position, m_VertexData[data.m_Content[1]].m_Position, m_VertexData[data.m_Content[2]].m_Position);
+	Triangle triangle((*m_VertexData)[data.m_Content[0]].m_Position, (*m_VertexData)[data.m_Content[1]].m_Position, (*m_VertexData)[data.m_Content[2]].m_Position);
 	if (!IfInclude(m_Space, triangle))
 		return;
 	if (m_Deepth == ObjectOctreeMaxDeepth)
@@ -187,7 +187,7 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMF
 			}
 			else if (buff >= 0)
 			{
-				auto buffer=m_ChildrenNode[i]->Run(position,rotation,scale);
+				auto buffer = m_ChildrenNode[i]->Run(position, rotation, scale);
 				re.insert(re.end(), buffer.begin(), buffer.end());
 			}
 			else
@@ -225,7 +225,7 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::GetIndi
 	{
 		re.insert(re.end(), i.m_Content, i.m_Content + 3);
 	}
-	if(!m_IfLeafNode)
+	if (!m_IfLeafNode)
 	{
 		for (int i = 0; i < 8; i++)
 		{
@@ -239,14 +239,14 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::GetIndi
 void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int> indices)
 {
 	Vector<XMFLOAT3> points;
-	points.resize(m_RootNode.m_VertexData.size());
-	for (int i=0;i<m_RootNode.m_VertexData.size();i++)
+	points.resize(m_RootNode.m_VertexData->size());
+	for (int i = 0; i<m_RootNode.m_VertexData->size(); i++)
 	{
-		points[i] = m_RootNode.m_VertexData[i].m_Position;
+		points[i] = (*m_RootNode.m_VertexData)[i].m_Position;
 	}
 	auto space = GetAxisAlignedBoundingBox(points);
 	m_RootNode.Init(space);
-	for (int i = 0; i < indices.size(); i+=3)
+	for (int i = 0; i < indices.size(); i += 3)
 	{
 		m_RootNode.InsertTriangle(IndexTriangle(indices[i], indices[i + 1], indices[i + 2]));
 	}
@@ -264,5 +264,5 @@ void SpaceGameEngine::ObjectOctree::Release()
 
 SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
 {
-	return m_RootNode.Run(position,rotation,scale);
+	return m_RootNode.Run(position, rotation, scale);
 }

@@ -19,7 +19,7 @@ using namespace SpaceGameEngine;
 
 REGISTERCOMPONENTCLASS(MeshComponent);
 
-SpaceGameEngine::MeshComponent::MeshComponent() :m_ObjectOctree(m_Vertices)
+SpaceGameEngine::MeshComponent::MeshComponent() :m_ObjectOctree(&m_Vertices)
 {
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
@@ -143,7 +143,7 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 	}
 	auto indices_buffer = m_ObjectOctree.Run(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale());
 	D3D11_MAPPED_SUBRESOURCE mappeddata;
-	HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer,0,D3D11_MAP_WRITE_DISCARD,0,&mappeddata));
+	HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
 	unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
 	for (int i = 0; i < indices_buffer.size(); i++)
 		pi[i] = indices_buffer[i];
