@@ -186,6 +186,7 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GlobalOctree\Include\GlobalOctree.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Material\Include\Material.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
     <ClInclude Include="Source\GameEngine\Graphics\ObjectOctree\Include\ObjectOctree.h" />
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GlobalOctree\Source\GlobalOctree.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ObjectOctree\Source\ObjectOctree.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp" />

@@ -223,6 +223,15 @@
     <Filter Include="Math\Triangle\Source">
       <UniqueIdentifier>{8f29b68f-376d-408d-8689-83f2ede8baa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Material">
+      <UniqueIdentifier>{0c2464fb-196e-4710-825d-4be0db13b53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Material\Include">
+      <UniqueIdentifier>{2afba7d9-e7f1-4f80-a51b-d7b40b5e952d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Material\Source">
+      <UniqueIdentifier>{dfbd1844-733f-40fc-94f1-b468825895c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -357,6 +366,9 @@
     <ClInclude Include="Source\GameEngine\Math\Triangle\Include\Triangle.h">
       <Filter>Math\Triangle\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Material\Include\Material.h">
+      <Filter>Graphics\Material\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -466,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Triangle\Source\Triangle.cpp">
       <Filter>Math\Triangle\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp">
+      <Filter>Graphics\Material\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

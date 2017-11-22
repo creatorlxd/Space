@@ -13,29 +13,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once 
+#pragma once
 #include "stdafx.h"
-#include "Space.h"
 
 namespace SpaceGameEngine
 {
-	class EffectShader
+	struct Material			//²ÄÖÊ
 	{
-	public:
-		EffectShader();
-		~EffectShader();
-		void Release();
-		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
-		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
+		Material();
 
-		void SetTechnique(const std::string& filename);
-
-		void operator = (const EffectShader& shader);
-	private:
-		ID3DX11Effect* m_pContent;
-	public:
-		ID3DX11EffectTechnique* m_pTechnique;
-		ID3DX11EffectMatrixVariable* m_pWorldViewProjMatrix;
-		ID3DX11EffectVectorVariable* m_pDeltaTime;
+		XMFLOAT4 Ambient;
+		XMFLOAT4 Diffuse;
+		XMFLOAT4 Specular; // Specular.w = SpecularPower
+		XMFLOAT4 Reflect;
 	};
-}
+};

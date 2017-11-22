@@ -39,7 +39,7 @@ void SpaceGameEngine::EffectShader::Release()
 	m_pWorldViewProjMatrix = nullptr;
 }
 
-void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, const std::string & includefilename, D3D_SHADER_MACRO * macros)
+void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
 {
 	DWORD shaderFlags = 0;
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -56,7 +56,7 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
 {
-	InitFromFile(pDevice, filename, "", NULL);
+	InitFromFile(pDevice, filename, NULL);
 }
 
 void SpaceGameEngine::EffectShader::SetTechnique(const std::string & filename)
