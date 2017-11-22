@@ -71,3 +71,4 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 ![使用DX9的MeshComponent](../../Picture/DX9MeshComponentView.png "使用DX9的MeshComponent")
 
 在图中你可以看到我上文所提到的那些方法和成员变量。
+> 注：现在已不需要在组件类中定义`m_Mode`！！！
