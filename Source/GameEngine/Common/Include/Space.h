@@ -19,8 +19,6 @@ limitations under the License.
 #include "StringConverter.h"
 namespace SpaceGameEngine
 {
-#ifndef SPACE
-#define SPACE
 
 #define STRING(str) #str
 
@@ -90,6 +88,5 @@ namespace SpaceGameEngine
 	void CompileShaderFromFile(LPCWSTR filename, const std::string& includefilename, const std::string& entryname, const std::string& target, D3D_SHADER_MACRO* macros, ID3DBlob** ShaderByteCode);	//从文件中读取并编译Shader
 
 	XMFLOAT4X4 GetProjectionMatrix(float angle=XM_PIDIV4, float aspectratio=1, float nearz=1.0f, float farz=1000.0f);
-#endif
 
 }
