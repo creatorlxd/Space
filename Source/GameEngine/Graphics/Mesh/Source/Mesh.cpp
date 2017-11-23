@@ -102,16 +102,15 @@ void SpaceGameEngine::MeshComponent::Start()
 {
 	InitVertexBuffer();
 	InitIndexBuffer();
-
-	m_pTransform = dynamic_cast<TransformComponent*>(FindFatherComponent(STRING(TransformComponent)));
+	if (m_pFatherObject == nullptr)
+	{
+		ThrowError("the father object of mesh component can not be nullptr");
+	}
+	m_pTransform = m_pFatherObject->GetComponent<TransformComponent>();
 	if ((m_Mode&MeshComponent::WholeMode) == 0)
 		m_ObjectOctree.BuildTree(m_Indices);
 	if ((m_Mode&MeshComponent::DynamicMode) == 0)
 	{
-		if (m_pFatherObject == nullptr)
-		{
-			ThrowError("the father object of mesh component can not be nullptr");
-		}
 		Vector<XMFLOAT3> points;
 		for (const auto& i : m_Vertices)
 		{

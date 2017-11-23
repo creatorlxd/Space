@@ -157,6 +157,7 @@ CameraComponent * SpaceGameEngine::CameraComponent::GetMainCamera()
 
 void SpaceGameEngine::CameraComponent::InitTransform()
 {
+	/*
 	Component* cb = this;
 	while(cb->GetTypeName()!=TransformComponent::NewComponent.m_Name)
 	{
@@ -168,6 +169,13 @@ void SpaceGameEngine::CameraComponent::InitTransform()
 		}
 	}
 	m_pTransform = dynamic_cast<TransformComponent*>(cb);
+	*/
+	if (m_pFatherObject == nullptr)
+	{
+		ThrowError("the father object of mesh component can not be nullptr");
+		return;
+	}
+	m_pTransform = m_pFatherObject->GetComponent<TransformComponent>();
 }
 
 TransformComponent * SpaceGameEngine::CameraComponent::GetTransform()

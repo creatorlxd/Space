@@ -27,6 +27,8 @@ namespace SpaceGameEngine
 		Object();
 		~Object();
 		Component* GetComponent(const std::string& name);		//获取组件的指针
+		template<typename T>
+		T* GetComponent();
 		bool AddComponent(Component* pc);						//添加组件，并不连接
 		bool DeleteComponent(const std::string& name);			//删除组件，并去除连接
 
@@ -60,4 +62,11 @@ namespace SpaceGameEngine
 	};
 
 	void RunComponentOnTree(Component* node, float DeltaTime);	//在树上运行组件(DFS)
+
+	template<typename T>
+	inline T * Object::GetComponent()
+	{
+		return dynamic_cast<T*>(GetComponent(T::NewComponent.m_Name));
+	}
+	
 }
