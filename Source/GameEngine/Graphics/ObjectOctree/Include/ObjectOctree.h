@@ -44,9 +44,9 @@ namespace SpaceGameEngine
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void InsertTriangle(const IndexTriangle& data);
 		bool DeleteTriangle(const IndexTriangle& data);
-		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
+		void Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale,Vector<unsigned int>& indices,unsigned int& index);
 		void Release();
-		Vector<unsigned int> GetIndices();
+		void GetIndices(Vector<unsigned int>& indices, unsigned int& index);
 
 		Vector<DefaultVertex>* m_VertexData;
 		ForwardList<IndexTriangle> m_Content;
@@ -55,17 +55,21 @@ namespace SpaceGameEngine
 		bool m_IfLeafNode;
 		int m_Deepth;
 	};
-
+	
+	/*
+	warning : do not use nullptr to initliazation
+	*/
 	struct ObjectOctree
 	{
 	public:
 		ObjectOctree(Vector<DefaultVertex>* data) :m_RootNode(data)
 		{}
-		void BuildTree(const Vector<unsigned int> indices);
+		void BuildTree(const Vector<unsigned int>& indices);
 		~ObjectOctree();
 		void Release();
 		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 	private:
+		int m_MaxIndicesSize;
 		ObjectOctreeNode m_RootNode;
 	};
 }

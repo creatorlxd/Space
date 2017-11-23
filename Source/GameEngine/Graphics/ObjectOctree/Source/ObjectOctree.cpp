@@ -165,12 +165,13 @@ bool SpaceGameEngine::ObjectOctreeNode::DeleteTriangle(const IndexTriangle & dat
 	return false;
 }
 
-SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
+void SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Vector<unsigned int>& indices, unsigned int& index)
 {
-	Vector<unsigned int> re;
 	for (const auto& i : m_Content)
 	{
-		re.insert(re.end(), i.m_Content, i.m_Content + 3);
+		indices[index++] = i.m_Content[0];
+		indices[index++] = i.m_Content[1];
+		indices[index++] = i.m_Content[2];
 	}
 	if (!m_IfLeafNode)
 	{
@@ -182,13 +183,11 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMF
 			int buff = IfIntersectWithFrustum(aabb);
 			if (buff == 8)
 			{
-				auto buffer = m_ChildrenNode[i]->GetIndices();
-				re.insert(re.end(), buffer.begin(), buffer.end());
+				m_ChildrenNode[i]->GetIndices(indices,index);
 			}
 			else if (buff >= 0)
 			{
-				auto buffer = m_ChildrenNode[i]->Run(position, rotation, scale);
-				re.insert(re.end(), buffer.begin(), buffer.end());
+				m_ChildrenNode[i]->Run(position, rotation, scale, indices, index);
 			}
 			else
 			{
@@ -196,7 +195,6 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::Run(XMF
 			}
 		}
 	}
-	return re;
 }
 
 void SpaceGameEngine::ObjectOctreeNode::Release()
@@ -218,26 +216,26 @@ void SpaceGameEngine::ObjectOctreeNode::Release()
 	}
 }
 
-SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctreeNode::GetIndices()
+void SpaceGameEngine::ObjectOctreeNode::GetIndices(Vector<unsigned int>& indices, unsigned int& index)
 {
-	Vector<unsigned int> re;
 	for (const auto& i : m_Content)
 	{
-		re.insert(re.end(), i.m_Content, i.m_Content + 3);
+		indices[index++] = i.m_Content[0];
+		indices[index++] = i.m_Content[1];
+		indices[index++] = i.m_Content[2];
 	}
 	if (!m_IfLeafNode)
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			auto buffer = m_ChildrenNode[i]->GetIndices();
-			re.insert(re.end(), buffer.begin(), buffer.end());
+			m_ChildrenNode[i]->GetIndices(indices,index);
 		}
 	}
-	return re;
 }
 
-void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int> indices)
+void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indices)
 {
+	m_MaxIndicesSize = indices.size();
 	Vector<XMFLOAT3> points;
 	points.resize(m_RootNode.m_VertexData->size());
 	for (int i = 0; i<m_RootNode.m_VertexData->size(); i++)
@@ -264,5 +262,8 @@ void SpaceGameEngine::ObjectOctree::Release()
 
 SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
 {
-	return m_RootNode.Run(position, rotation, scale);
+	Vector<unsigned int> vecbuff(m_MaxIndicesSize);
+	unsigned int index = 0;
+	m_RootNode.Run(position, rotation, scale,vecbuff,index);
+	return Vector<unsigned int>(vecbuff.begin(), vecbuff.begin() + index);
 }
