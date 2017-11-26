@@ -32,6 +32,8 @@ namespace SpaceGameEngine
 	class Receiver						//接收器
 	{
 	public:
+		virtual ~Receiver();
+
 		void ReceiveMessage(const Message& message);//接受消息
 		void ReceiveMessage(int message);			//接受消息
 		int TakeOutMessage();					//取出消息

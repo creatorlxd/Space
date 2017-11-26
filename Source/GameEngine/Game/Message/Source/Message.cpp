@@ -31,6 +31,11 @@ SpaceGameEngine::Message::Message(int c)
 	m_Content = c;
 }
 
+SpaceGameEngine::Receiver::~Receiver()
+{
+	
+}
+
 void SpaceGameEngine::Receiver::ReceiveMessage(const Message & message)
 {
 	m_MessageQueue.push(message.m_Content);
@@ -60,10 +65,7 @@ int SpaceGameEngine::Receiver::Size()
 
 void SpaceGameEngine::Receiver::Clear()
 {
-	while (!m_MessageQueue.empty())
-	{
-		m_MessageQueue.pop();
-	}
+	m_MessageQueue = Queue<int>();
 }
 
 bool SpaceGameEngine::Receiver::IfHaveMessage(int c)
