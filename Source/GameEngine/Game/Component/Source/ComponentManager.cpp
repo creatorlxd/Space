@@ -30,10 +30,17 @@ SpaceGameEngine::ComponentManager::ComponentManager()
 
 SpaceGameEngine::ComponentManager::~ComponentManager()
 {
-	for (auto i : m_Content)
+	if (m_FreeIndexList.size() == m_Content.size())
 	{
-		if(i)
-			MemoryManager::Delete(i);
+
+	}
+	else
+	{
+		for (auto i : m_Content)
+		{
+			if (i)
+				MemoryManager::Delete(i);
+		}
 	}
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
@@ -66,10 +73,17 @@ bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 
 void SpaceGameEngine::ComponentManager::Release()
 {
-	for (auto i : m_Content)
+	if (m_FreeIndexList.size() == m_Content.size())
 	{
-		if(i)
-			MemoryManager::Delete(i);
+		
+	}
+	else
+	{
+		for (auto i : m_Content)
+		{
+			if (i)
+				MemoryManager::Delete(i);
+		}
 	}
 	m_Content.clear();
 	m_FreeIndexList = Queue<unsigned int>();

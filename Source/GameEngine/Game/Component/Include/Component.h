@@ -26,7 +26,7 @@ namespace SpaceGameEngine
 	{
 	public:
 		Component();
-		~Component();
+		virtual ~Component();
 		std::string GetTypeName();			//获取类型名
 		Component* GetFatherComponent();	//获取父组件
 		void SetFatherComponent(Component* pc);//设置父组件
