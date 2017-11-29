@@ -232,6 +232,15 @@
     <Filter Include="Graphics\Material\Source">
       <UniqueIdentifier>{dfbd1844-733f-40fc-94f1-b468825895c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Light">
+      <UniqueIdentifier>{bdc4e69f-a3ea-4aef-bd06-3372abb2e31f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Light\Include">
+      <UniqueIdentifier>{0ce705b7-00bd-4a42-8c64-2b33aacd557e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Light\Source">
+      <UniqueIdentifier>{5d6d1741-29f5-4698-b522-895666a9d63f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -369,6 +378,9 @@
     <ClInclude Include="Source\GameEngine\Graphics\Material\Include\Material.h">
       <Filter>Graphics\Material\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\Light.h">
+      <Filter>Graphics\Light\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -481,6 +493,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp">
       <Filter>Graphics\Material\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\Light.cpp">
+      <Filter>Graphics\Light\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
