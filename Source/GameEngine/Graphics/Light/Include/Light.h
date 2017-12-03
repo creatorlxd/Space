@@ -20,9 +20,10 @@ namespace SpaceGameEngine
 {
 	enum LightType :uint32_t
 	{
+		UnkownLight = 0,
 		DirectionLight = 1,
 		PointLight = 2,
-		SpotLight = 4
+		SpotLight = 3
 	};
 
 	/*

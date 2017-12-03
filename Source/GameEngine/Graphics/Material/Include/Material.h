@@ -22,9 +22,9 @@ namespace SpaceGameEngine
 	{
 		Material();
 
-		XMFLOAT4 Ambient;
-		XMFLOAT4 Diffuse;
-		XMFLOAT4 Specular; // Specular.w = SpecularPower
-		XMFLOAT4 Reflect;
+		XMFLOAT4 m_Ambient;
+		XMFLOAT4 m_Diffuse;
+		XMFLOAT4 m_Specular; // Specular.w = SpecularPower
+		XMFLOAT4 m_Reflect;
 	};
 };

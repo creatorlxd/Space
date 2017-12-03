@@ -1,4 +1,4 @@
-﻿extensions: .hpp .cpp .h .c
+﻿extensions: .hpp .cpp .h .c .fx .hlsl
 /*
 Copyright 2017 creatorlxd
 
