@@ -241,6 +241,9 @@
     <Filter Include="Graphics\Light\Source">
       <UniqueIdentifier>{5d6d1741-29f5-4698-b522-895666a9d63f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\Lighting">
+      <UniqueIdentifier>{339048cc-9aa7-44e6-a665-b62b38b887dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -507,6 +510,9 @@
     </FxCompile>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultShader.fx">
       <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\GameEngine\Shader\Lighting\Light.fx">
+      <Filter>Shader\Lighting</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

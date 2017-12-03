@@ -1,3 +1,5 @@
+#include "../Lighting/Light.fx"
+
 cbuffer SceneData : register(b0)
 {
 	float4 DeltaTime;
