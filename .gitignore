@@ -253,4 +253,4 @@ paket-files/
 *.rar
 
 # For My Use
-!**/ThirdParty/**/*.lib
+!**/ThirdParty/
