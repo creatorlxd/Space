@@ -252,4 +252,4 @@ paket-files/
 *.sln.iml
 *.rar
 
-!./Source/GameEngine/ThirdParty/
+!/Source/GameEngine/ThirdParty/
