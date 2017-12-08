@@ -251,3 +251,5 @@ paket-files/
 .idea/
 *.sln.iml
 *.rar
+
+!./Source/GameEngine/ThirdParty/

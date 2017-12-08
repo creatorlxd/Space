@@ -48,6 +48,7 @@ limitations under the License.
 #include <set>
 
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
+#include "ThirdParty/tinyxml2/include/tinyxml2.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
@@ -71,6 +72,20 @@ limitations under the License.
 #pragma comment(lib, "FX11/Bin/x86/Effects11d.lib")
 #else
 #pragma comment(lib, "FX11/Bin/x86/Effects11.lib")
+#endif
+#endif
+
+#ifdef _WIN64
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "tinyxml2/lib/x64/Debug/tinyxml2.lib")
+#else
+#pragma comment(lib, "tinyxml2/lib/x64/Release/tinyxml2.lib")
+#endif
+#else
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "tinyxml2/lib/x86/Debug/tinyxml2.lib")
+#else
+#pragma comment(lib, "tinyxml2/lib/x86/Release/tinyxml2.lib")
 #endif
 #endif
 
