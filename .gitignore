@@ -11,14 +11,14 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
+[Dd]ebug/*
+[Dd]ebugPublic/*
+[Rr]elease/*
+[Rr]eleases/*
+x64/*
+x86/*
 bld/
-[Bb]in/
+[Bb]in/*
 [Oo]bj/
 [Ll]og/
 
@@ -252,5 +252,5 @@ paket-files/
 *.sln.iml
 *.rar
 
-# For My Use
-!**/ThirdParty/
+#ForMyUse
+!/Source/GameEngine/ThirdParty/
