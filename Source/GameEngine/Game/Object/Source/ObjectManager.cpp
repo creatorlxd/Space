@@ -154,6 +154,8 @@ Object * SpaceGameEngine::CloneObject(Object * po)
 				auto container = src->GetChildrenComponent();
 				for (auto i = container.begin(); i != container.end(); i++)
 				{
+					if ((*i)->GetTypeName() == "InformationComponent")
+						continue;
 					Component* cbuff = CloneComponent(*i);
 					re->AddComponent(cbuff);
 					cbuff->Attach(dis);
