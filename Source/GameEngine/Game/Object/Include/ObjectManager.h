@@ -39,5 +39,5 @@ namespace SpaceGameEngine
 		Queue<unsigned int> m_FreeIndexList;
 	};
 
-	Object* CloneObject(Object* po);
+	Object* CloneObject(Object* po);				//∏¥÷∆∂‘œÛ
 }
