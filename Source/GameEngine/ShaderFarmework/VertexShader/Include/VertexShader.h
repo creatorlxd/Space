@@ -33,7 +33,8 @@ namespace SpaceGameEngine
 		template<typename T>
 		void SetConstantBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pDeviceContext,int index, T& content);
 
-		bool operator = (const VertexShader& vs);
+		VertexShader(const VertexShader&) = delete;
+		bool operator = (const VertexShader& vs) = delete;
 	public:
 		struct SceneData
 		{

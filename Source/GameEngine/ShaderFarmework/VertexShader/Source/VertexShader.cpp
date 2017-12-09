@@ -73,6 +73,7 @@ ID3DBlob * SpaceGameEngine::VertexShader::GetBuffer()
 	return m_pBuffer;
 }
 
+/*
 bool SpaceGameEngine::VertexShader::operator=(const VertexShader & vs)
 {
 	Release();
@@ -81,3 +82,4 @@ bool SpaceGameEngine::VertexShader::operator=(const VertexShader & vs)
 	m_pReflection = vs.m_pReflection;
 	return true;
 }
+*/

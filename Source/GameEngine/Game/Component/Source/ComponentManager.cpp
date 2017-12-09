@@ -18,10 +18,6 @@ limitations under the License.
 using namespace SpaceGameEngine;
 
 ComponentManager* SpaceGameEngine::ComponentManager::sm_pThis = nullptr;
-namespace SpaceGameEngine 
-{
-	ComponentFactoryManager g_ComponentFactoryManager;
-}
 
 SpaceGameEngine::ComponentManager::ComponentManager()
 {
@@ -102,6 +98,18 @@ void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
 
 Component * SpaceGameEngine::ComponentManager::NewComponentByName(const std::string & name)
 {
-	std::function<Component*(void)> f = g_ComponentFactoryManager.FindComponentFactory(name);
-	return f();
+	return g_ComponentInformationManager.GetInformation(name).m_FactoryFunction();
+}
+
+SpaceGameEngine::Component* SpaceGameEngine::CloneComponent(Component* pc)
+{
+	size_t size = g_ComponentInformationManager.GetInformation(pc->GetTypeName()).m_MemorySize;
+	Component* re = ComponentManager::NewComponentByName(pc->GetTypeName());
+	memcpy(re, pc, size);
+
+	re->SetFatherComponent(nullptr);
+	re->GetChildrenComponent().clear();
+	re->SetFatherObject(nullptr);
+
+	return re;
 }

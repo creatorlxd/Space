@@ -65,7 +65,6 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
-		void SetEffectShader(const EffectShader& shader);
 		EffectShader& GetEffectShader();
 
 		void SetDefaultState();							//设置默认状态

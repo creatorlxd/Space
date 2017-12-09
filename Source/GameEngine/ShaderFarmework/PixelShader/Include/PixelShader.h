@@ -32,7 +32,8 @@ namespace SpaceGameEngine
 		template<typename T>
 		void SetConstantBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pDeviceContext, int index, T& content);
 
-		bool operator = (const PixelShader& ps);
+		PixelShader(const PixelShader&) = delete;
+		bool operator = (const PixelShader& ps) = delete;
 	private:
 		ID3D11PixelShader* m_pContent;
 		ID3DBlob* m_pBuffer;

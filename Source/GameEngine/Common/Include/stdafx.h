@@ -46,6 +46,7 @@ limitations under the License.
 #include <io.h>
 #include <forward_list>
 #include <set>
+#include <chrono>
 
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 #include "ThirdParty/tinyxml2/include/tinyxml2.h"

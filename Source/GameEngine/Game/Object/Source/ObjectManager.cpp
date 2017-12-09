@@ -129,3 +129,44 @@ void SpaceGameEngine::ObjectManager::Release()
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
+
+Object * SpaceGameEngine::CloneObject(Object * po)
+{
+	Queue<std::pair<Component*, Component*>> que;		//first of the pair : component in src ; second : component in dist
+	if (po->GetRootComponent())
+	{
+		Object* re = ObjectManager::NewObject();
+		Component* droot = CloneComponent(po->GetRootComponent());
+		re->AddComponent(droot);
+		re->SetRootComponent(droot->GetTypeName());
+		que.push(std::make_pair(po->GetRootComponent(), droot));
+		while (!que.empty())
+		{
+			auto pair = que.front();
+			que.pop();
+			Component* src = pair.first;
+			Component* dis = pair.second;
+
+			if (src->GetChildrenComponent().empty())
+				continue;
+			else
+			{
+				auto container = src->GetChildrenComponent();
+				for (auto i = container.begin(); i != container.end(); i++)
+				{
+					Component* cbuff = CloneComponent(*i);
+					re->AddComponent(cbuff);
+					cbuff->Attach(dis);
+					que.push(std::make_pair(*i, cbuff));
+				}
+			}
+		}
+
+		return re;
+	}
+	else
+	{
+		ThrowError("Object need root component");
+		return nullptr;
+	}
+}

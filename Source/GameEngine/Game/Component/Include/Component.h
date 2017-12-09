@@ -18,6 +18,8 @@ limitations under the License.
 #include "Space.h"
 #include "AllocatorForSTL.hpp"
 #include "File.h"
+#include "ComponentInformationManager.h"
+
 namespace SpaceGameEngine
 {
 	class Object;
@@ -57,4 +59,17 @@ namespace SpaceGameEngine
 		Component* m_pFather;				//父组件
 		Object* m_pFatherObject;					//所属的Object对象
 	};
+
+	template<typename T>
+	T* CloneComponent(Component* pc)
+	{
+		T* re = T::NewComponent();
+		memcpy(re, pc, sizeof(T));
+		
+		re->SetFatherComponent(nullptr);
+		re->GetChildrenComponent().clear();
+		re->SetFatherObject(nullptr);
+
+		return re;
+	}
 }

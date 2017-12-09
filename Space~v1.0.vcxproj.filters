@@ -309,9 +309,6 @@
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h">
       <Filter>Game\Message\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
@@ -384,6 +381,15 @@
     <ClInclude Include="Source\GameEngine\Graphics\Light\Include\Light.h">
       <Filter>Graphics\Light\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\Error.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\TimeTool.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h">
+      <Filter>Game\Component\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -430,9 +436,6 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp">
       <Filter>Game\Message\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp">
-      <Filter>Game\Component\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectFactory.cpp">
       <Filter>Game\Object\Source</Filter>
@@ -499,6 +502,15 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Light\Source\Light.cpp">
       <Filter>Graphics\Light\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\Error.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\TimeTool.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp">
+      <Filter>Game\Component\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

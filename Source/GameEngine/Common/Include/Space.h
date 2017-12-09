@@ -17,6 +17,9 @@ limitations under the License.
 #include "stdafx.h"
 #include "AllocatorForSTL.hpp"
 #include "StringConverter.h"
+#include "Error.h"
+#include "TimeTool.h"
+
 namespace SpaceGameEngine
 {
 
@@ -68,16 +71,6 @@ namespace SpaceGameEngine
 	}
 
 	//----------------------------------------------------------------------------------------------
-
-	float GetDeltaTime();																	//获取时间间隔
-
-	//TODO:报错后的处理
-	void ThrowError(const TString& errormessage);		//报错
-#ifndef _UNICODE
-	void ThrowError(const std::wstring& errormessage);
-#else
-	void ThrowError(const std::string& errormessage);
-#endif
 
 	unsigned int HashString(const std::string& str);
 

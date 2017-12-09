@@ -15,8 +15,12 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "ComponentFactoryManager.h"
+#include "Component.h"
+#include "ComponentInformationManager.h"
 #include "MemoryManager.h"
+
+#define REGISTERCOMPONENTCLASS(classname) \
+ComponentManager::NewComponent<classname> classname::NewComponent(STRING(classname));
 
 namespace SpaceGameEngine
 {
@@ -62,19 +66,12 @@ namespace SpaceGameEngine
 		Queue<unsigned int> m_FreeIndexList;
 	};
 
-	extern ComponentFactoryManager g_ComponentFactoryManager;
-
 	template<typename T>
 	inline ComponentManager::NewComponent<T>::NewComponent(const std::string & name)
 	{
 		m_Name = name;
-		auto pointer = ComponentFactoryManager::GetMainManager();
-		if (!pointer)
-		{
-			ThrowError(L"必须创建一个组件工厂方法管理器");
-			return;
-		}
-		pointer->AddComponentFactory(name, *this);
+		g_ComponentInformationManager.AddInformation(ComponentInformation(name, sizeof(T),*this));
 	}
 
+	Component* CloneComponent(Component* pc);
 }

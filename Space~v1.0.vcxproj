@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\Include\Error.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\File.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
@@ -170,10 +171,11 @@
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\StringConverter.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\TimeTool.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactoryManager.h" />
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h" />
@@ -202,6 +204,7 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameEngine\Common\Source\Error.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\File.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp" />
@@ -213,11 +216,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\StringConverter.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Source\TimeTool.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Allocator.cpp" />
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactoryManager.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp" />

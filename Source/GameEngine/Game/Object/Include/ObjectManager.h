@@ -38,4 +38,6 @@ namespace SpaceGameEngine
 		Vector<Object*> m_Content;
 		Queue<unsigned int> m_FreeIndexList;
 	};
+
+	Object* CloneObject(Object* po);
 }

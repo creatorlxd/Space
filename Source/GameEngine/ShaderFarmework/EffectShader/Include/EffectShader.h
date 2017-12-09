@@ -30,12 +30,16 @@ namespace SpaceGameEngine
 
 		void SetTechnique(const std::string& filename);
 
-		void operator = (const EffectShader& shader);
+		EffectShader(const EffectShader&) = delete;
+		void operator = (const EffectShader& shader) = delete;
 	private:
 		ID3DX11Effect* m_pContent;
 	public:
 		ID3DX11EffectTechnique* m_pTechnique;
+
 		ID3DX11EffectMatrixVariable* m_pWorldViewProjMatrix;
 		ID3DX11EffectVectorVariable* m_pDeltaTime;
+		ID3DX11EffectVectorVariable* m_pCameraPosition;
+		ID3DX11EffectVariable* m_pMaterial;
 	};
 }

@@ -17,40 +17,6 @@ limitations under the License.
 #include "Space.h"
 using namespace SpaceGameEngine;
 
-float SpaceGameEngine::GetDeltaTime()
-{
-	static float TimeNow=0.00f;
-	static float TimeBuffer = 0.00f;
-	static float DeltaTime = 0.00f;
-	if (TimeNow == 0.00f)
-	{
-		TimeNow = timeGetTime()*0.001f;
-		return SpaceGameEngine::GetDeltaTime();
-	}
-	else
-	{
-		TimeBuffer = timeGetTime()*0.001f;
-		DeltaTime = TimeBuffer - TimeNow;
-		TimeNow = timeGetTime()*0.001f;
-		return DeltaTime;
-	}
-}
-
-void SpaceGameEngine::ThrowError(const TString & errormessage)
-{
-	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
-}
-#ifndef _UNICODE
-void SpaceGameEngine::ThrowError(const std::wstring& errormessage)
-{
-	ThrowError(WStringToTString(errormessage));
-}
-#else
-void SpaceGameEngine::ThrowError(const std::string& errormessage)
-{
-	ThrowError(StringToTString(errormessage));
-}
-#endif
 unsigned int SpaceGameEngine::HashString(const std::string & str)
 {
 	std::hash<std::string> sh;

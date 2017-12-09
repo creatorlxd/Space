@@ -74,6 +74,7 @@ ID3DBlob * SpaceGameEngine::PixelShader::GetBuffer()
 	return m_pBuffer;
 }
 
+/*
 bool SpaceGameEngine::PixelShader::operator=(const PixelShader & ps)
 {
 	Release();
@@ -82,3 +83,4 @@ bool SpaceGameEngine::PixelShader::operator=(const PixelShader & ps)
 	m_pReflection = ps.m_pReflection;
 	return true;
 }
+*/

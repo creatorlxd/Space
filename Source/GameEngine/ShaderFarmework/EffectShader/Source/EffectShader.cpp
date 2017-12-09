@@ -37,6 +37,8 @@ void SpaceGameEngine::EffectShader::Release()
 	m_pTechnique = nullptr;
 	m_pDeltaTime = nullptr;
 	m_pWorldViewProjMatrix = nullptr;
+	m_pCameraPosition = nullptr;
+	m_pMaterial = nullptr;
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
@@ -50,8 +52,11 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	D3DX11CompileEffectFromFile(filename, macros, D3D_COMPILE_STANDARD_FILE_INCLUDE, shaderFlags, NULL, pDevice, &m_pContent, &ErrorMessage);
 	SafeRelease(ErrorMessage);
 
+	//Intialization Variable
 	m_pDeltaTime = m_pContent->GetVariableByName("g_DeltaTime")->AsVector();
 	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("g_WorldViewProjMatrix")->AsMatrix();
+	m_pCameraPosition = m_pContent->GetVariableByName("g_CameraPosition")->AsVector();
+	m_pMaterial = m_pContent->GetVariableByName("g_Material");
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
@@ -64,6 +69,7 @@ void SpaceGameEngine::EffectShader::SetTechnique(const std::string & filename)
 	m_pTechnique=m_pContent->GetTechniqueByName(filename.c_str());
 }
 
+/*
 void SpaceGameEngine::EffectShader::operator=(const EffectShader & shader)
 {
 	Release();
@@ -72,3 +78,4 @@ void SpaceGameEngine::EffectShader::operator=(const EffectShader & shader)
 	m_pDeltaTime = shader.m_pDeltaTime;
 	m_pWorldViewProjMatrix = shader.m_pWorldViewProjMatrix;
 }
+*/
