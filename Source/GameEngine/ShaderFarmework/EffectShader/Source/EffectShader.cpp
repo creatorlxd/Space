@@ -50,8 +50,8 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	D3DX11CompileEffectFromFile(filename, macros, D3D_COMPILE_STANDARD_FILE_INCLUDE, shaderFlags, NULL, pDevice, &m_pContent, &ErrorMessage);
 	SafeRelease(ErrorMessage);
 
-	m_pDeltaTime = m_pContent->GetVariableByName("DeltaTime")->AsVector();
-	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("WorldViewProjMatrix")->AsMatrix();
+	m_pDeltaTime = m_pContent->GetVariableByName("g_DeltaTime")->AsVector();
+	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("g_WorldViewProjMatrix")->AsMatrix();
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
