@@ -72,7 +72,7 @@ namespace SpaceGameEngine
 		
 		auto pa = pc->GetAsset();
 		if (pa)
-			re->InitFromFile(pa->m_FileName);
+			re->InitFromFile(pa->m_FileName,pc->GetMode());
 		re->SetMode(pc->GetMode());
 
 		return re;
