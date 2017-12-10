@@ -244,6 +244,15 @@
     <Filter Include="Shader\Lighting">
       <UniqueIdentifier>{339048cc-9aa7-44e6-a665-b62b38b887dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Asset">
+      <UniqueIdentifier>{07ef822e-4b23-4836-802c-12292f3e29dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Asset\Include">
+      <UniqueIdentifier>{86c09375-00e7-4a2a-a4ce-1bd25485739a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Asset\Source">
+      <UniqueIdentifier>{9b11897a-4d37-4889-9529-1ecdd30c6066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -390,6 +399,12 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h">
       <Filter>Game\Component\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\Asset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -511,6 +526,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp">
       <Filter>Game\Component\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\Asset.cpp">
+      <Filter>Game\Asset\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp">
+      <Filter>Game\Asset\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

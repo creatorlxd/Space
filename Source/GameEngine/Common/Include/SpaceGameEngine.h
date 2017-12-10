@@ -28,5 +28,7 @@ limitations under the License.
 #include "Physics/Transform/Include/Transform.h"
 #include "Graphics/Mesh/Include/Mesh.h"
 #include "Graphics/Camera/Include/Camera.h"
+#include "Graphics/Light/Include/Light.h"
+#include "Graphics/Material/Include/Material.h"
 
 using namespace SpaceGameEngine;
