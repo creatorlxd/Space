@@ -107,7 +107,7 @@ SpaceGameEngine::Component* SpaceGameEngine::CloneComponent(Component* pc)
 	
 	auto pa = pc->GetAsset();
 	if (pa)
-		re->InitFromFile(pa->m_FileName);
+		re->InitFromFile(pa->m_FileName,pc->GetMode());
 	re->SetMode(pc->GetMode());
 
 	re->SetFatherComponent(nullptr);
