@@ -46,7 +46,7 @@ void SpaceGameEngine::Receiver::ReceiveMessage(unsigned int message)
 	m_MessageQueue.push(message);
 }
 
-int SpaceGameEngine::Receiver::TakeOutMessage()
+unsigned int SpaceGameEngine::Receiver::TakeOutMessage()
 {
 	auto re = m_MessageQueue.front();
 	m_MessageQueue.pop();
@@ -73,7 +73,7 @@ bool SpaceGameEngine::Receiver::IfHaveMessage(unsigned int c)
 	bool re = false;
 	for (size_t i = 1; i <= m_MessageQueue.size(); i++)
 	{
-		int buff = TakeOutMessage();
+		unsigned int buff = TakeOutMessage();
 		if (buff == c)
 		{
 			re = true;

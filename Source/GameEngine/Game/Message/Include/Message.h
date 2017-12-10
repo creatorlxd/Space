@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 
 		void ReceiveMessage(const Message& message);//接受消息
 		void ReceiveMessage(unsigned int message);			//接受消息
-		int TakeOutMessage();					//取出消息
+		unsigned int TakeOutMessage();					//取出消息
 		bool IfEmpty();								//是否为空
 		int Size();									//获取队列的大小
 		void Clear();								//清空队列
