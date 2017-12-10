@@ -103,9 +103,12 @@ Component * SpaceGameEngine::ComponentManager::NewComponentByName(const std::str
 
 SpaceGameEngine::Component* SpaceGameEngine::CloneComponent(Component* pc)
 {
-	size_t size = g_ComponentInformationManager.GetInformation(pc->GetTypeName()).m_MemorySize;
 	Component* re = ComponentManager::NewComponentByName(pc->GetTypeName());
-	memcpy(re, pc, size);
+	
+	auto pa = pc->GetAsset();
+	if (pa)
+		re->InitFromFile(pa->m_FileName);
+	re->SetMode(pc->GetMode());
 
 	re->SetFatherComponent(nullptr);
 	re->GetChildrenComponent().clear();

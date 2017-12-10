@@ -139,7 +139,7 @@ void SpaceGameEngine::Component::Release()
 	m_Children.clear();
 	m_pFather = nullptr;
 	m_pFatherObject = nullptr;
-	m_Assets.clear();
+	m_pAsset = nullptr;
 	m_Mode = 0;
 }
 
@@ -183,7 +183,7 @@ int SpaceGameEngine::Component::GetMode()
 	return m_Mode;
 }
 
-Vector<const Asset*>& SpaceGameEngine::Component::GetAssets()
+const Asset* SpaceGameEngine::Component::GetAsset()
 {
-	return m_Assets;
+	return m_pAsset;
 }
