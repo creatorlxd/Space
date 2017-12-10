@@ -69,32 +69,9 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 
 	if (m_Mode&ModelFileMode)
 	{
-		int v_s, i_s;
-		File file(filename, FileMode::Read);
-
-		file >> v_s >> i_s;
-
-		m_Vertices.clear();
-		m_Indices.clear();
-
-		DefaultVertex vbuff;
-		unsigned int ibuff;
-
-		for (int i = 0; i < v_s; i++)
-		{
-			file >> vbuff.m_Position.x >> vbuff.m_Position.y >> vbuff.m_Position.z;
-			file >> vbuff.m_Normal.x >> vbuff.m_Normal.y >> vbuff.m_Normal.z;
-			file >> vbuff.m_TextureCoord.x >> vbuff.m_TextureCoord.y;
-			m_Vertices.push_back(vbuff);
-		}
-
-		for (int i = 0; i < i_s; i++)
-		{
-			file >> ibuff;
-			m_Indices.push_back(ibuff);
-		}
-
-		file.Close();
+		const MeshForModelFileAsset* ma = ReadAssetFromFile<MeshForModelFileAsset>(filename);
+		m_Vertices = ma->m_Vertices;
+		m_Indices = ma->m_Indices;
 	}
 }
 

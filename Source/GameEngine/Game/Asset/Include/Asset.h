@@ -22,6 +22,7 @@ namespace SpaceGameEngine
 {
 	struct Asset
 	{
+		Asset();
 		virtual ~Asset();
 		std::string m_FileName, m_TypeName;
 		virtual void InitFromFile(const std::string& filename);
@@ -33,7 +34,7 @@ namespace SpaceGameEngine
 		~AssetManager();
 		void Release();
 		template<typename T>
-		const T* NewAsset(const std::string& filename);
+		const T* NewAssetFromFile(const std::string& filename);
 		bool AddAsset(Asset* pa);
 		const Asset* GetAsset(const std::string& name);
 	private:
@@ -43,7 +44,7 @@ namespace SpaceGameEngine
 	AssetManager& GetAssetManager();
 
 	template<typename T>
-	inline const T * AssetManager::NewAsset(const std::string & filename)
+	inline const T * AssetManager::NewAssetFromFile(const std::string & filename)
 	{
 		T* re = MemoryManager::New<T>();
 		re->InitFromFile(filename);
@@ -61,7 +62,7 @@ namespace SpaceGameEngine
 		}
 		else
 		{
-			return GetAssetManager().NewAsset<T>(filename);
+			return GetAssetManager().NewAssetFromFile<T>(filename);
 		}
 	}
 }

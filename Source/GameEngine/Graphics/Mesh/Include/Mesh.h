@@ -20,6 +20,7 @@ limitations under the License.
 #include "Game/Game/Include/SafeGet.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Graphics/ObjectOctree/Include/ObjectOctree.h"
+#include "Game/Asset/Include/MeshAsset.h"
 
 namespace SpaceGameEngine
 {

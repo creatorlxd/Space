@@ -405,6 +405,9 @@
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h">
       <Filter>Game\Asset\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\MeshAsset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -531,6 +534,9 @@
       <Filter>Game\Asset\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp">
+      <Filter>Game\Asset\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\MeshAsset.cpp">
       <Filter>Game\Asset\Source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,23 +13,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+#pragma once
 #include "stdafx.h"
-#include "../Include/TransformAsset.h"
+#include "Asset.h"
 
-SpaceGameEngine::TransformAsset::TransformAsset()
+namespace SpaceGameEngine
 {
-	m_TypeName = "TransformAsset";
-}
+	struct MeshForModelFileAsset :public Asset
+	{
+		MeshForModelFileAsset();
+		void InitFromFile(const std::string& filename);
 
-void SpaceGameEngine::TransformAsset::InitFromFile(const std::string & filename)
-{
-	m_FileName = filename;
-
-	File file(filename, FileMode::Read);
-
-	file >> m_Position.x >> m_Position.y >> m_Position.z;
-	file >> m_Rotation.x >> m_Rotation.y >> m_Rotation.z;
-	file >> m_Scale.x >> m_Scale.y >> m_Scale.z;
-
-	file.Close();
+		Vector<DefaultVertex> m_Vertices;
+		Vector<unsigned int> m_Indices;
+	};
 }

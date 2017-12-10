@@ -16,6 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/Asset.h"
 
+SpaceGameEngine::Asset::Asset()
+{
+	m_TypeName = "NullAsset";
+}
+
 SpaceGameEngine::Asset::~Asset()
 {
 
