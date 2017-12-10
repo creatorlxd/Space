@@ -33,7 +33,7 @@ namespace SpaceGameEngine
 		~AssetManager();
 		void Release();
 		template<typename T>
-		const Asset* NewAsset(const std::string& filename);
+		const T* NewAsset(const std::string& filename);
 		bool AddAsset(Asset* pa);
 		const Asset* GetAsset(const std::string& name);
 	private:
@@ -43,7 +43,7 @@ namespace SpaceGameEngine
 	AssetManager& GetAssetManager();
 
 	template<typename T>
-	inline const Asset * AssetManager::NewAsset(const std::string & filename)
+	inline const T * AssetManager::NewAsset(const std::string & filename)
 	{
 		T* re = MemoryManager::New<T>();
 		re->InitFromFile(filename);
@@ -52,7 +52,7 @@ namespace SpaceGameEngine
 	}
 
 	template<typename T>
-	const T* GetAsset(const std::string& filename)
+	const T* GetAssetByFileName(const std::string& filename)
 	{
 		auto rebuff = GetAssetManager().GetAsset(filename);
 		if (rebuff)

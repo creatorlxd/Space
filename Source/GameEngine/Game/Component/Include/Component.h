@@ -52,8 +52,8 @@ namespace SpaceGameEngine
 		void SetMode(int m);				//获得组件内部具体模式
 		int GetMode();						//设置组件内部具体模式
 		template<typename T>
-		const Asset* ReadAssetFromFile(const std::string& filename);
-		Vector<const Asset*>& GetAsset();
+		const T* ReadAssetFromFile(const std::string& filename);
+		Vector<const Asset*>& GetAssets();
 	protected:
 		std::string m_TypeName;				//组件的类型名
 		int m_Mode;							//组件内部具体模式
@@ -62,7 +62,7 @@ namespace SpaceGameEngine
 		Vector<Component*> m_Children;	//子组件
 		Component* m_pFather;				//父组件
 		Object* m_pFatherObject;					//所属的Object对象
-		Vector<const Asset*> m_Asset;				//Asset
+		Vector<const Asset*> m_Assets;				//Asset
 	};
 
 	template<typename T>
@@ -79,10 +79,10 @@ namespace SpaceGameEngine
 	}
 
 	template<typename T>
-	inline const Asset * Component::ReadAssetFromFile(const std::string & filename)
+	inline const T * Component::ReadAssetFromFile(const std::string & filename)
 	{
-		auto re = GetAsset<T>();
-		m_Asset.push_back((const Asset*)re);
+		auto re = GetAssetByFileName<T>(filename);
+		m_Assets.push_back((const Asset*)re);
 		return re;
 	}
 }

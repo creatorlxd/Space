@@ -18,6 +18,8 @@ limitations under the License.
 #include "Game/Object/Include/Object.h"
 #include "Window.h"
 #include "Game/Scene/Include/SceneData.h"
+#include "Game/Asset/Include/TransformAsset.h"
+
 namespace SpaceGameEngine
 {
 	namespace Event
