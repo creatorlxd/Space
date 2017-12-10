@@ -147,7 +147,7 @@ Object * SpaceGameEngine::CloneObject(Object * po)
 			Component* src = pair.first;
 			Component* dis = pair.second;
 
-			if (src->GetChildrenComponent().empty()|src->GetTypeName()=="InformationComponent")
+			if (src->GetChildrenComponent().empty() || src->GetTypeName() == "InformationComponent")
 				continue;
 			else
 			{

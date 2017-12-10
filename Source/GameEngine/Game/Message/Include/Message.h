@@ -21,10 +21,10 @@ namespace SpaceGameEngine
 	struct Message					//消息
 	{
 		std::string m_ReceiverName;		//接受器的名称
-		int m_Content;					//消息的内容		
+		unsigned int m_Content;					//消息的内容		
 		Message();
-		Message(int c);
-		Message(const std::string& name, int c) :
+		Message(unsigned int c);
+		Message(const std::string& name, unsigned int c) :
 			m_ReceiverName(name), m_Content(c)
 		{}
 	};
@@ -35,14 +35,14 @@ namespace SpaceGameEngine
 		virtual ~Receiver();
 
 		void ReceiveMessage(const Message& message);//接受消息
-		void ReceiveMessage(int message);			//接受消息
+		void ReceiveMessage(unsigned int message);			//接受消息
 		int TakeOutMessage();					//取出消息
 		bool IfEmpty();								//是否为空
 		int Size();									//获取队列的大小
 		void Clear();								//清空队列
-		bool IfHaveMessage(int c);					//是否含有某个消息
+		bool IfHaveMessage(unsigned int c);					//是否含有某个消息
 	private:
-		Queue<int> m_MessageQueue;
+		Queue<unsigned int> m_MessageQueue;
 	};
 
 	class MessageManager				//消息管理器
@@ -100,10 +100,10 @@ namespace SpaceGameEngine
 		~Sender();
 
 		void ProduceMessage(const Message& message);			//产生并发送消息
-		void ProduceMessage(const std::string& name, int c);	//产生并发送消息
+		void ProduceMessage(const std::string& name, unsigned int c);	//产生并发送消息
 		void ProduceMessage(MessageManager& manager, const Message& message);	//产生并发送消息
-		void ProduceMessages(const std::vector<std::string>& names, int c);		//发送同一消息给多个对象
-		void ProduceMessages(MessageManager& manager, const std::vector<std::string>& names, int c);	//发送同一消息给多个对象
+		void ProduceMessages(const std::vector<std::string>& names, unsigned int c);		//发送同一消息给多个对象
+		void ProduceMessages(MessageManager& manager, const std::vector<std::string>& names, unsigned int c);	//发送同一消息给多个对象
 		void FastProduceMessage(Receiver& r, const Message& message);			//快速发送消息（不经过管理器队列）：不推荐使用
 
 		void DebugLog(const Message& message);
