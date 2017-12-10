@@ -52,7 +52,7 @@ namespace SpaceGameEngine
 	}
 
 	template<typename T>
-	const T* GetAssetFromFile(const std::string& filename)
+	const T* GetAsset(const std::string& filename)
 	{
 		auto rebuff = GetAssetManager().GetAsset(filename);
 		if (rebuff)

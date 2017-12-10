@@ -24,6 +24,7 @@ SpaceGameEngine::Component::Component()
 	m_IfUse = true;
 	m_pFather = nullptr;
 	m_pFatherObject = nullptr;
+	m_Mode = 0;
 }
 
 SpaceGameEngine::Component::~Component()
@@ -135,7 +136,11 @@ void SpaceGameEngine::Component::Attach(Component * pc)
 
 void SpaceGameEngine::Component::Release()
 {
-
+	m_Children.clear();
+	m_pFather = nullptr;
+	m_pFatherObject = nullptr;
+	m_Asset.clear();
+	m_Mode = 0;
 }
 
 bool SpaceGameEngine::Component::IfRun()
@@ -176,4 +181,9 @@ void SpaceGameEngine::Component::SetMode(int m)
 int SpaceGameEngine::Component::GetMode()
 {
 	return m_Mode;
+}
+
+Vector<const Asset*>& SpaceGameEngine::Component::GetAsset()
+{
+	return m_Asset;
 }

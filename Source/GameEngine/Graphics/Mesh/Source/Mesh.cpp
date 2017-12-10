@@ -148,7 +148,7 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 		D3D11_MAPPED_SUBRESOURCE mappeddata;
 		HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
 		unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
-		for (int i = 0; i < indices_buffer.size(); i++)
+		for (unsigned int i = 0; i < indices_buffer.size(); i++)
 			pi[i] = indices_buffer[i];
 		SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
 		unsigned int v_strides = sizeof(DefaultVertex);

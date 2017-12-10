@@ -19,6 +19,7 @@ limitations under the License.
 #include "AllocatorForSTL.hpp"
 #include "File.h"
 #include "ComponentInformationManager.h"
+#include "../../Asset/Include/Asset.h"
 
 namespace SpaceGameEngine
 {
@@ -50,6 +51,9 @@ namespace SpaceGameEngine
 		Object* GetFatherObject();				//获取所属的Object对象
 		void SetMode(int m);				//获得组件内部具体模式
 		int GetMode();						//设置组件内部具体模式
+		template<typename T>
+		const Asset* ReadAssetFromFile(const std::string& filename);
+		Vector<const Asset*>& GetAsset();
 	protected:
 		std::string m_TypeName;				//组件的类型名
 		int m_Mode;							//组件内部具体模式
@@ -58,6 +62,7 @@ namespace SpaceGameEngine
 		Vector<Component*> m_Children;	//子组件
 		Component* m_pFather;				//父组件
 		Object* m_pFatherObject;					//所属的Object对象
+		Vector<const Asset*> m_Asset;				//Asset
 	};
 
 	template<typename T>
@@ -70,6 +75,14 @@ namespace SpaceGameEngine
 		re->GetChildrenComponent().clear();
 		re->SetFatherObject(nullptr);
 
+		return re;
+	}
+
+	template<typename T>
+	inline const Asset * Component::ReadAssetFromFile(const std::string & filename)
+	{
+		auto re = GetAsset<T>();
+		m_Asset.push_back((const Asset*)re);
 		return re;
 	}
 }
