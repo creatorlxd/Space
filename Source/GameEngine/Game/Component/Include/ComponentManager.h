@@ -20,7 +20,7 @@ limitations under the License.
 #include "MemoryManager.h"
 
 #define REGISTERCOMPONENTCLASS(classname) \
-ComponentManager::NewComponent<classname> classname::NewComponent(STRING(classname));
+SpaceGameEngine::ComponentManager::NewComponent<classname> classname::NewComponent(STRING(classname));
 
 namespace SpaceGameEngine
 {
