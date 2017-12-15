@@ -291,6 +291,7 @@
     <None Include="ClassDiagram.cd" />
     <None Include="Document\Document\GameFarmework\Space基本组件Component类.md" />
     <None Include="Document\Document\Others\Space文件类型.md" />
+    <None Include="Document\Document\Others\ToDoList.md" />
     <None Include="README.md" />
     <None Include="Source\GameEngine\dxerr\dxerr.licenseheader" />
     <None Include="Space.licenseheader" />
