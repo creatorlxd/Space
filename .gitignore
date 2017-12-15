@@ -252,5 +252,9 @@ paket-files/
 *.sln.iml
 *.rar
 
-#ForMyUse
+# ForMyUse
 !/Source/GameEngine/ThirdParty/
+/UnitTestForDebug/
+/UnitTestForRelease/
+/**/UnitTest.tlog
+/**/vc141.idb

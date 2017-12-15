@@ -110,9 +110,5 @@ SpaceGameEngine::Component* SpaceGameEngine::CloneComponent(Component* pc)
 		re->InitFromFile(pa->m_FileName,pc->GetMode());
 	re->SetMode(pc->GetMode());
 
-	re->SetFatherComponent(nullptr);
-	re->GetChildrenComponent().clear();
-	re->SetFatherObject(nullptr);
-
 	return re;
 }

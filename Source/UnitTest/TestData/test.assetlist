@@ -1,0 +1,2 @@
+MeshComponent /Source/UnitTest/TestData/test.model 1
+TransformComponent /Source/UnitTest/TestData/position.txt 1

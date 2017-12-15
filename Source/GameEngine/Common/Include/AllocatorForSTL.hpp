@@ -94,6 +94,9 @@ namespace SpaceGameEngine
 	template<typename T,typename U>
 	using Map = std::map<T,U, std::less<T>,AllocatorForSTL<std::pair<const T,U> > >;
 
+	template<typename T,typename U>
+	using HashMap = std::unordered_map < T, U, std::hash<T>, std::equal_to<T>, AllocatorForSTL<std::pair<const T, U>>>;
+
 	template<typename T>
 	using Deque = std::deque<T, AllocatorForSTL<T> >;
 

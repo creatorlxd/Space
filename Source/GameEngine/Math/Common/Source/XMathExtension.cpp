@@ -18,12 +18,18 @@ limitations under the License.
 
 bool SpaceGameEngine::operator < (const XMFLOAT3& v1, const XMFLOAT3& v2)
 {
-	return (v1.x<v2.x&&v1.y<v2.y&&v1.z<v2.z);
+	if (v1.x < v2.x&&v1.y < v2.y&&v1.z < v2.z)
+		return true;
+	else
+		return (v1.x < v2.x||v1.y < v2.y||v1.z < v2.z);
 }
 
 bool SpaceGameEngine::operator > (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 {
-	return (v1.x>v2.x&&v1.y>v2.y&&v1.z>v2.z);
+	if (v1.x > v2.x&&v1.y > v2.y&&v1.z > v2.z)
+		return true;
+	else
+		return (v1.x > v2.x || v1.y > v2.y || v1.z > v2.z);
 }
 
 bool SpaceGameEngine::operator == (const XMFLOAT3 & v1, const XMFLOAT3 & v2)

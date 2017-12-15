@@ -38,7 +38,7 @@ namespace SpaceGameEngine
 		bool AddAsset(Asset* pa);
 		const Asset* GetAsset(const std::string& name);
 	private:
-		Map<std::string, Asset*> m_Content;
+		HashMap<std::string, Asset*> m_Content;
 	};
 
 	AssetManager& GetAssetManager();
