@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Space~v1.0", "Space~v1.0.vcxproj", "{A6853ED8-93D0-4AB8-9095-7B3EF8739760}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "Source\UnitTest\UnitTest\UnitTest.vcxproj", "{FA815404-3D03-4FFE-BDCA-4483F0735BC0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -35,22 +33,6 @@ Global
 		{A6853ED8-93D0-4AB8-9095-7B3EF8739760}.UnitTestForRelease|x64.Build.0 = UnitTestForRelease|x64
 		{A6853ED8-93D0-4AB8-9095-7B3EF8739760}.UnitTestForRelease|x86.ActiveCfg = UnitTestForRelease|Win32
 		{A6853ED8-93D0-4AB8-9095-7B3EF8739760}.UnitTestForRelease|x86.Build.0 = UnitTestForRelease|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Debug|x64.ActiveCfg = Debug|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Debug|x64.Build.0 = Debug|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Debug|x86.ActiveCfg = Debug|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Debug|x86.Build.0 = Debug|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Release|x64.ActiveCfg = Release|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Release|x64.Build.0 = Release|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Release|x86.ActiveCfg = Release|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.Release|x86.Build.0 = Release|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForDebug|x64.ActiveCfg = UnitTestForDebug|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForDebug|x64.Build.0 = UnitTestForDebug|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForDebug|x86.ActiveCfg = UnitTestForDebug|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForDebug|x86.Build.0 = UnitTestForDebug|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForRelease|x64.ActiveCfg = UnitTestForRelease|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForRelease|x64.Build.0 = UnitTestForRelease|x64
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForRelease|x86.ActiveCfg = UnitTestForRelease|Win32
-		{FA815404-3D03-4FFE-BDCA-4483F0735BC0}.UnitTestForRelease|x86.Build.0 = UnitTestForRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
