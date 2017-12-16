@@ -31,6 +31,8 @@ namespace SpaceGameEngine
 		AxisAlignedBoundingBox(const XMFLOAT3& minl, const XMFLOAT3& maxl);
 	};
 
+	bool operator == (const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);
+
 	typedef AxisAlignedBoundingBox AABB;
 
 	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	// «∑Òœ‡Ωª

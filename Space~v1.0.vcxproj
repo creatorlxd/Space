@@ -385,7 +385,12 @@
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ObjectOctree\Source\ObjectOctree.cpp" />
-    <ClCompile Include="Source\GameEngine\main.cpp" />
+    <ClCompile Include="Source\GameEngine\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Source\MathDefinition.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Source\XMathExtension.cpp" />

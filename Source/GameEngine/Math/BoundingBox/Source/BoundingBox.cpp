@@ -28,6 +28,11 @@ SpaceGameEngine::AxisAlignedBoundingBox::AxisAlignedBoundingBox(const XMFLOAT3 &
 	m_MaxPosition = maxl;
 }
 
+bool SpaceGameEngine::operator==(const AxisAlignedBoundingBox & aabb1, const AxisAlignedBoundingBox & aabb2)
+{
+	return (aabb1.m_MinPosition == aabb2.m_MinPosition) && (aabb1.m_MaxPosition == aabb2.m_MaxPosition);
+}
+
 bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb1, const AxisAlignedBoundingBox & aabb2)
 {
 	if (aabb1.m_MinPosition.x >= aabb2.m_MaxPosition.x || aabb1.m_MaxPosition.x <= aabb2.m_MinPosition.x)
