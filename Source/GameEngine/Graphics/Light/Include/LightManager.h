@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 
 	struct Lighting			//受到光照的信息
 	{
-		ForwardList<LightEx*> m_Content;
+		Vector<LightEx*> m_Content;
 	};
 
 	class LightManager
