@@ -19,7 +19,7 @@ limitations under the License.
 SpaceGameEngine::LightEx::LightEx()
 {
 	m_IfOn = true;
-	m_LightMode = LightMode::Normal;
+	m_Mode = LightMode::Normal;
 }
 
 SpaceGameEngine::LightManager* SpaceGameEngine::LightManager::sm_pThis = nullptr;

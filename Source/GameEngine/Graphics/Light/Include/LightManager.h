@@ -29,7 +29,7 @@ namespace SpaceGameEngine
 		};
 
 		LightEx();
-		LightMode m_LightMode;
+		LightMode m_Mode;
 		bool m_IfOn;		//光源的开启状态
 		Light m_Content;
 	};
