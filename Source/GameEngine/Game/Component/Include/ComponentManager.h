@@ -70,7 +70,7 @@ namespace SpaceGameEngine
 	inline ComponentManager::NewComponent<T>::NewComponent(const std::string & name)
 	{
 		m_Name = name;
-		g_ComponentInformationManager.AddInformation(ComponentInformation(name, sizeof(T),*this));
+		GetComponentInformationManager().AddInformation(ComponentInformation(name, sizeof(T),*this));
 	}
 
 	Component* CloneComponent(Component* pc);

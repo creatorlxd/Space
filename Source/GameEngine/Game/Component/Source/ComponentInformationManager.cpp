@@ -16,11 +16,6 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/ComponentInformationManager.h"
 
-namespace SpaceGameEngine
-{
-	ComponentInformationManager g_ComponentInformationManager;
-}
-
 SpaceGameEngine::ComponentInformation::ComponentInformation()
 {
 	ZeroMemory(this, sizeof(ComponentInformation));
@@ -63,4 +58,10 @@ const SpaceGameEngine::ComponentInformation & SpaceGameEngine::ComponentInformat
 	}
 	else
 		return iter->second;
+}
+
+SpaceGameEngine::ComponentInformationManager & SpaceGameEngine::GetComponentInformationManager()
+{
+	static ComponentInformationManager g_ComponentInformationManager;
+	return g_ComponentInformationManager;
 }

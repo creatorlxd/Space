@@ -41,5 +41,5 @@ namespace SpaceGameEngine
 		Map<std::string, ComponentInformation> m_Content;
 	};
 
-	extern ComponentInformationManager g_ComponentInformationManager;
+	ComponentInformationManager& GetComponentInformationManager();
 }

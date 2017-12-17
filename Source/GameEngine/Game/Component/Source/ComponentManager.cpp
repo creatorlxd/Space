@@ -98,7 +98,7 @@ void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
 
 Component * SpaceGameEngine::ComponentManager::NewComponentByName(const std::string & name)
 {
-	return g_ComponentInformationManager.GetInformation(name).m_FactoryFunction();
+	return GetComponentInformationManager().GetInformation(name).m_FactoryFunction();
 }
 
 SpaceGameEngine::Component* SpaceGameEngine::CloneComponent(Component* pc)
