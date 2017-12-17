@@ -16,15 +16,15 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Asset.h"
-#include "Graphics/Material/Include/Material.h"
+#include "Graphics/Light/Include/Light.h"
 
 namespace SpaceGameEngine
 {
-	struct MaterialAsset :public Asset
+	struct LightAsset :public Asset
 	{
-		MaterialAsset();
+		LightAsset();
 		void InitFromFile(const std::string& filename);
 
-		Material m_Content;
+		Light m_Content;
 	};
 }

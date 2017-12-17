@@ -417,6 +417,15 @@
     <ClInclude Include="Source\GameEngine\Graphics\Material\Include\MaterialComponent.h">
       <Filter>Graphics\Material\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightComponent.h">
+      <Filter>Graphics\Light\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightManager.h">
+      <Filter>Graphics\Light\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -553,6 +562,15 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\MaterialComponent.cpp">
       <Filter>Graphics\Material\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightComponent.cpp">
+      <Filter>Graphics\Light\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightManager.cpp">
+      <Filter>Graphics\Light\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp">
+      <Filter>Game\Asset\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

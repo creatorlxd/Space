@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "../Include/MaterialAsset.h"
+#include "../Include/LightAsset.h"
 
-SpaceGameEngine::MaterialAsset::MaterialAsset()
+SpaceGameEngine::LightAsset::LightAsset()
 {
-	m_TypeName = "MaterialAsset";
+	m_TypeName = "LightAsset";
 }
 
-void SpaceGameEngine::MaterialAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::LightAsset::InitFromFile(const std::string & filename)
 {
 	m_FileName = filename;
 
@@ -30,8 +30,12 @@ void SpaceGameEngine::MaterialAsset::InitFromFile(const std::string & filename)
 	file >> m_Content.m_Ambient.x >> m_Content.m_Ambient.y >> m_Content.m_Ambient.z >> m_Content.m_Ambient.w;
 	file >> m_Content.m_Diffuse.x >> m_Content.m_Diffuse.y >> m_Content.m_Diffuse.z >> m_Content.m_Diffuse.w;
 	file >> m_Content.m_Specular.x >> m_Content.m_Specular.y >> m_Content.m_Specular.z >> m_Content.m_Specular.w;
-	//TODO:now do not need reflect
-	//file >> m_Content.m_Reflect.x >> m_Content.m_Reflect.y >> m_Content.m_Reflect.z >> m_Content.m_Reflect.w;
+	file >> m_Content.m_Position.x >> m_Content.m_Position.y >> m_Content.m_Position.z;
+	file >> m_Content.m_Range;
+	file >> m_Content.m_Direction.x >> m_Content.m_Direction.y >> m_Content.m_Direction.z;
+	file >> m_Content.m_SpotLightOption;
+	file >> m_Content.m_LightOption.x >> m_Content.m_LightOption.y >> m_Content.m_LightOption.z;
+	file >> (uint32_t&)m_Content.m_Type;
 
 	file.Close();
 }

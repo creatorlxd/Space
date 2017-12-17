@@ -312,6 +312,7 @@
     <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\Asset.h" />
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MaterialAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MeshAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h" />
@@ -330,6 +331,8 @@
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h" />
     <ClInclude Include="Source\GameEngine\Graphics\GlobalOctree\Include\GlobalOctree.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Light\Include\Light.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightComponent.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightManager.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Material\Include\Material.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Material\Include\MaterialComponent.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
@@ -367,6 +370,7 @@
     <ClCompile Include="Source\GameEngine\Common\Source\Allocator.cpp" />
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\Asset.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MaterialAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MeshAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp" />
@@ -385,6 +389,8 @@
     <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\GlobalOctree\Source\GlobalOctree.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Light\Source\Light.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightComponent.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightManager.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\MaterialComponent.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
