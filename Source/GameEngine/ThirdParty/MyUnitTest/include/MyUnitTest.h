@@ -77,7 +77,7 @@ UnitTestGroup name(#name,{
 		void AddUnitTestGroup(const UnitTestGroup& group);
 		void ListUnitTest();
 		void RunAllUnitTest();
-		void RunUnitTestMethod(const string& group_name,const string& name="");
+		void RunUnitTestMethod(const string& group_name,const string& name="*");
 	private:
 		unordered_map<string, UnitTestGroup> m_Content;
 	};
