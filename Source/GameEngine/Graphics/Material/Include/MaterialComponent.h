@@ -16,16 +16,26 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
+#include "Game/Asset/Include/MaterialAsset.h"
+#include "Game/Game/Include/Game.h"
 
 namespace SpaceGameEngine
 {
-	struct Material			//²ÄÖÊ
+	class MaterialComponent :public Component
 	{
-		Material();
+	public:
+		MaterialComponent();
+		~MaterialComponent();
 
-		XMFLOAT4 m_Ambient;
-		XMFLOAT4 m_Diffuse;
-		XMFLOAT4 m_Specular;	// Specular.w = SpecularPower
-		XMFLOAT4 m_Reflect;		//TODO:do not use now
+		static const int SingleMode = 1;
+		static const int MultipleMode = 2;
+
+		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
+
+		void InitFromFile(const std::string& filename, int mode = 0);
+		void Run(float DeltaTime);
+		void Release();
+	private:
+		Vector<Material> m_Content;
 	};
-};
+}
