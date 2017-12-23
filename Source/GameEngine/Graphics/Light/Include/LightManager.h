@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 
 	struct Lighting			//受到光照的信息
 	{
-		Vector<LightEx*> m_Content;
+		Vector<std::pair<float,LightEx*>> m_Content;	//<distance pointer>
 	};
 
 	class LightManager
