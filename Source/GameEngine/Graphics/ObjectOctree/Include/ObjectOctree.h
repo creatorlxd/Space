@@ -59,7 +59,7 @@ namespace SpaceGameEngine
 	/*
 	warning : do not use nullptr to initliazation
 	*/
-	struct ObjectOctree
+	class ObjectOctree
 	{
 	public:
 		ObjectOctree(Vector<DefaultVertex>* data) :m_RootNode(data)
