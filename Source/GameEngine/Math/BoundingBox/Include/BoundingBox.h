@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
-#include "AllocatorForSTL.hpp"
+#include "Common/MemoryManager/Include/AllocatorForSTL.hpp"
 #include "Game/Scene/Include/SceneData.h"
 #include "Math/Common/Include/MathDefinition.h"
 #include "Math/Common/Include/XMathExtension.h"

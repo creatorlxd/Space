@@ -16,7 +16,7 @@ limitations under the License.
 #pragma once 
 #include "stdafx.h"
 #include "Game/Object/Include/Object.h"
-#include "Window.h"
+#include "Common/Utility/Include/Window.h"
 #include "Game/Game/Include/SafeGet.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Graphics/ObjectOctree/Include/ObjectOctree.h"

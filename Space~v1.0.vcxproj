@@ -297,19 +297,19 @@
     <None Include="Space.licenseheader" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp" />
-    <ClInclude Include="Source\GameEngine\Common\Include\Error.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\File.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp" />
-    <ClInclude Include="Source\GameEngine\Common\Include\MemoryManager.h" />
+    <ClInclude Include="Source\GameEngine\Common\Error\Include\Error.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\StringConverter.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\TimeTool.h" />
-    <ClInclude Include="Source\GameEngine\Common\Include\Window.h" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Allocator.h" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\AllocatorForSTL.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Memory.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\MemoryManager.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\File.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\InputDevice.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\StringConverter.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\TimeTool.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\Window.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\Asset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h" />
@@ -349,10 +349,9 @@
     <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\GameEngine\Common\Source\Error.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\File.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Error\Source\Error.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\Allocator.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\MemoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -364,10 +363,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnitTestForRelease|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\StringConverter.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\TimeTool.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp" />
-    <ClCompile Include="Source\GameEngine\Common\Source\Allocator.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\File.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\InputDevice.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\StringConverter.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\TimeTool.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\Window.cpp" />
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\Asset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp" />

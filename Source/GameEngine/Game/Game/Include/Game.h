@@ -15,8 +15,8 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
-#include "Window.h"
-#include "InputDevice.h"
+#include "Common/Utility/Include/Window.h"
+#include "Common/Utility/Include/InputDevice.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Game/Component/Include/ComponentManager.h"
 

@@ -17,7 +17,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "Component.h"
 #include "ComponentInformationManager.h"
-#include "MemoryManager.h"
+#include "Common/MemoryManager/Include/MemoryManager.h"
 
 #define REGISTERCOMPONENTCLASS(classname) \
 SpaceGameEngine::ComponentManager::NewComponent<classname> classname::NewComponent(STRING(classname));

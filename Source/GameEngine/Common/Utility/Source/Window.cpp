@@ -13,8 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#include"stdafx.h"
-#include"Window.h"
+#include "stdafx.h"
+#include "../Include/Window.h"
 
 //注：引用并修改了毛星云和《Introduction to 3D Game Programming with DirectX 11》中的代码。
 

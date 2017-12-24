@@ -16,8 +16,8 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Space.h"
-#include "AllocatorForSTL.hpp"
-#include "File.h"
+#include "Common/MemoryManager/Include/AllocatorForSTL.hpp"
+#include "Common/Utility/Include/File.h"
 #include "ComponentInformationManager.h"
 #include "../../Asset/Include/Asset.h"
 

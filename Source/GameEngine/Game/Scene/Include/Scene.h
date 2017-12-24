@@ -18,7 +18,7 @@ limitations under the License.
 #include "Game/Object/Include/ObjectManager.h"
 #include "Game/Message/Include/Message.h"
 #include "Graphics/Camera/Include/Camera.h"
-#include "Window.h"
+#include "Common/Utility/Include/Window.h"
 #include "Game/Object/Include/ObjectFactory.h"
 #include "SceneData.h"
 #include "Graphics/GlobalOctree/Include/GlobalOctree.h"

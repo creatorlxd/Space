@@ -253,6 +253,33 @@
     <Filter Include="Game\Asset\Source">
       <UniqueIdentifier>{9b11897a-4d37-4889-9529-1ecdd30c6066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\MemoryManager">
+      <UniqueIdentifier>{4e6e36f3-0168-4c54-b956-4ff3c52caf25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\MemoryManager\Include">
+      <UniqueIdentifier>{41a9b3a2-459b-42a3-8e9b-adb1b9e26d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\MemoryManager\Source">
+      <UniqueIdentifier>{552f9fe9-b1b7-4e97-ba40-97966331dbaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Utility">
+      <UniqueIdentifier>{6ed3c927-261e-414f-a9aa-4c8d17674d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Utility\Include">
+      <UniqueIdentifier>{4be5d3ec-d944-4aba-8399-684fa338025c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Utility\Source">
+      <UniqueIdentifier>{0d8db31b-a51a-4b87-a517-1552b19eabdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error">
+      <UniqueIdentifier>{56bd697b-0fad-4e09-a7b5-90931971f7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error\Include">
+      <UniqueIdentifier>{42ee98fe-7380-4e9e-b3a6-e6c4734c2700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error\Source">
+      <UniqueIdentifier>{0425187d-1b86-4d83-94fb-d0db33beddc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -291,19 +318,10 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h">
       <Filter>Game\Scene\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\InputDevice.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Memory.hpp">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\Include\Space.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Window.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h">
@@ -348,23 +366,8 @@
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h">
       <Filter>Game\Scene\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Allocator.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\MemoryManager.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\AllocatorForSTL.hpp">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\File.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h">
       <Filter>Math\BoundingBox\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\StringConverter.h">
-      <Filter>Common\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Math\Common\Include\MathDefinition.h">
       <Filter>Math\Common\Include</Filter>
@@ -393,12 +396,6 @@
     <ClInclude Include="Source\GameEngine\Graphics\Light\Include\Light.h">
       <Filter>Graphics\Light\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Error.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\TimeTool.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h">
       <Filter>Game\Component\Include</Filter>
     </ClInclude>
@@ -426,6 +423,36 @@
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h">
       <Filter>Game\Asset\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Allocator.h">
+      <Filter>Common\MemoryManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\AllocatorForSTL.hpp">
+      <Filter>Common\MemoryManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Memory.hpp">
+      <Filter>Common\MemoryManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\MemoryManager.h">
+      <Filter>Common\MemoryManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Error\Include\Error.h">
+      <Filter>Common\Error\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\File.h">
+      <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\InputDevice.h">
+      <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\StringConverter.h">
+      <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\TimeTool.h">
+      <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\Window.h">
+      <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -443,16 +470,10 @@
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp">
       <Filter>Game\Scene\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\InputDevice.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\Window.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -497,20 +518,8 @@
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp">
       <Filter>Game\Scene\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\Allocator.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\MemoryManager.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\File.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp">
       <Filter>Math\BoundingBox\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\StringConverter.cpp">
-      <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Source\MathDefinition.cpp">
       <Filter>Math\Common\Source</Filter>
@@ -539,12 +548,6 @@
     <ClCompile Include="Source\GameEngine\Graphics\Light\Source\Light.cpp">
       <Filter>Graphics\Light\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\Error.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\TimeTool.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp">
       <Filter>Game\Component\Source</Filter>
     </ClCompile>
@@ -571,6 +574,30 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp">
       <Filter>Game\Asset\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\Allocator.cpp">
+      <Filter>Common\MemoryManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\MemoryManager.cpp">
+      <Filter>Common\MemoryManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Error\Source\Error.cpp">
+      <Filter>Common\Error\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\File.cpp">
+      <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\InputDevice.cpp">
+      <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\StringConverter.cpp">
+      <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\TimeTool.cpp">
+      <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\Window.cpp">
+      <Filter>Common\Utility\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
