@@ -43,6 +43,7 @@ namespace SpaceGameEngine
 		GlobalOctreeNode* m_ChildrenNode[8];
 		bool m_IfLeafNode;
 		int m_Deepth;
+		GlobalOctreeNode* m_pFather;
 	};
 
 	class GlobalOctree

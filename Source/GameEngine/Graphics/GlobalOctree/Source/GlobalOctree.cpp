@@ -20,6 +20,7 @@ SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode()
 {
 	m_IfLeafNode = true;
 	m_Deepth = 1;
+	m_pFather = nullptr;
 }
 
 SpaceGameEngine::GlobalOctreeNode::~GlobalOctreeNode()
@@ -31,6 +32,7 @@ SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode(const AxisAlignedBoundingBox
 {
 	m_IfLeafNode = true;
 	Init(space, deepth);
+	m_pFather = nullptr;
 }
 
 void SpaceGameEngine::GlobalOctreeNode::Init(const AxisAlignedBoundingBox & space,int deepth)
@@ -113,6 +115,7 @@ void SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & da
 			{
 				m_ChildrenNode[i] = MemoryManager::New<GlobalOctreeNode>();
 				m_ChildrenNode[i]->Init(space[i], m_Deepth + 1);
+				m_ChildrenNode[i]->m_pFather = this;
 			}
 			m_ChildrenNode[index]->InsertObject(data);
 		}
@@ -229,6 +232,7 @@ void SpaceGameEngine::GlobalOctreeNode::Release()
 {
 	if (m_IfLeafNode)
 	{
+		m_pFather = nullptr;
 		m_Content.clear();
 		return;
 	}
@@ -239,6 +243,7 @@ void SpaceGameEngine::GlobalOctreeNode::Release()
 			m_ChildrenNode[i]->Release();
 			MemoryManager::Delete(m_ChildrenNode[i]);
 		}
+		m_pFather = nullptr;
 		m_Content.clear();
 		m_IfLeafNode = true;
 	}
