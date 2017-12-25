@@ -41,14 +41,14 @@ void SpaceGameEngine::GlobalOctreeNode::Init(const AxisAlignedBoundingBox & spac
 	m_Deepth = deepth;
 }
 
-void SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & data)
+SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & data)
 {
 	if (!IfInclude(m_Space, data.first))
-		return;
+		return nullptr;
 	if (m_Deepth == GlobalOctreeMaxDeepth)
 	{
 		m_Content.push_front(data);
-		return;
+		return this;
 	}
 	if (m_IfLeafNode)
 	{
@@ -117,11 +117,12 @@ void SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & da
 				m_ChildrenNode[i]->Init(space[i], m_Deepth + 1);
 				m_ChildrenNode[i]->m_pFather = this;
 			}
-			m_ChildrenNode[index]->InsertObject(data);
+			return m_ChildrenNode[index]->InsertObject(data);
 		}
 		else
 		{
 			m_Content.push_front(data);
+			return this;
 		}
 	}
 	else
@@ -130,11 +131,11 @@ void SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & da
 		{
 			if(IfInclude(m_ChildrenNode[i]->m_Space,data.first))
 			{
-				m_ChildrenNode[i]->InsertObject(data);
-				return;
+				return m_ChildrenNode[i]->InsertObject(data);
 			}
 		}
 		m_Content.push_front(data);
+		return this;
 	}
 }
 
@@ -183,7 +184,7 @@ void SpaceGameEngine::GlobalOctreeNode::SetObjectRenderState(bool state)
 	}
 }
 
-void SpaceGameEngine::GlobalOctreeNode::UpdateObjectData(const GlobalOctreeData & data)
+SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctreeNode::UpdateObjectData(const GlobalOctreeData & data)
 {
 	Queue<GlobalOctreeNode*> que;
 	que.push(this);
@@ -209,15 +210,18 @@ void SpaceGameEngine::GlobalOctreeNode::UpdateObjectData(const GlobalOctreeData 
 		}
 		else
 		{
-			for (int i = 0; i < 8; i++)
+			if (m_IfLeafNode == false)
 			{
-				que.push(node->m_ChildrenNode[i]);
+				for (int i = 0; i < 8; i++)
+				{
+					que.push(node->m_ChildrenNode[i]);
+				}
 			}
 		}
 	}
 	if (!if_find)
 		ThrowError("can not find the object in global octree");
-	InsertObject(data);
+	return InsertObject(data);
 }
 
 void SpaceGameEngine::GlobalOctreeNode::UpdateObjectRenderState(const GlobalOctreeData & data)
@@ -276,15 +280,16 @@ SpaceGameEngine::GlobalOctree::~GlobalOctree()
 	Release();
 }
 
-void SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
+SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
 {
 	if (!m_IfInit)
 	{
 		m_IntializaionData.push_back(data);
+		return nullptr;
 	}
 	else
 	{
-		m_RootNode.InsertObject(data);
+		return m_RootNode.InsertObject(data);
 	}
 }
 
@@ -346,8 +351,9 @@ void SpaceGameEngine::GlobalOctree::Release()
 	m_RootNode.Release();
 }
 
-void SpaceGameEngine::GlobalOctree::UpdateObject(const GlobalOctreeData & data)
+SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctree::UpdateObject(const GlobalOctreeData & data)
 {
-	m_RootNode.UpdateObjectData(data);
+	GlobalOctreeNode* re=m_RootNode.UpdateObjectData(data);
 	m_RootNode.UpdateObjectRenderState(data);
+	return re;
 }

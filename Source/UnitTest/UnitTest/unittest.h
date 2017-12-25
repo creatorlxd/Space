@@ -53,6 +53,22 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		else
 			return UnitTestResult::Fail;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestVector)
+	{
+		try {
+			int ti[8] = { 1,2,3,4,5,6,7,8 };
+			Vector<int> vi(ti, ti + 8);
+			for (auto i : vi)
+			{
+				cout << i << endl;
+			}
+		}
+		catch (...)
+		{
+			return UnitTestResult::Fail;
+		}
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

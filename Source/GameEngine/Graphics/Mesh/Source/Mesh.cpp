@@ -25,6 +25,7 @@ SpaceGameEngine::MeshComponent::MeshComponent() :m_ObjectOctree(&m_Vertices)
 	m_pIndexBuffer = nullptr;
 	m_TypeName = "MeshComponent";
 	m_pTransform = nullptr;
+	m_pGlobalOctreeNode = nullptr;
 }
 
 void SpaceGameEngine::MeshComponent::Release()
@@ -40,6 +41,9 @@ void SpaceGameEngine::MeshComponent::Release()
 	m_Vertices.clear();
 	m_Indices.clear();
 	m_pTransform = nullptr;
+	m_pGlobalOctreeNode = nullptr;
+	m_pVertexBuffer = nullptr;
+	m_pIndexBuffer = nullptr;
 }
 
 SpaceGameEngine::MeshComponent::~MeshComponent()
@@ -84,6 +88,10 @@ void SpaceGameEngine::MeshComponent::Start()
 		ThrowError("the father object of mesh component can not be nullptr");
 	}
 	m_pTransform = m_pFatherObject->GetComponent<TransformComponent>();
+	if (m_pTransform == nullptr)
+	{
+		ThrowError("the mesh need transform");
+	}
 	if ((m_Mode&MeshComponent::WholeMode) == 0)
 		m_ObjectOctree.BuildTree(m_Indices);
 	if ((m_Mode&MeshComponent::DynamicMode) == 0)
@@ -91,10 +99,11 @@ void SpaceGameEngine::MeshComponent::Start()
 		Vector<XMFLOAT3> points;
 		for (const auto& i : m_Vertices)
 		{
-			points.push_back(TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), i.m_Position));
+			points.push_back(i.m_Position);
 		}
-		m_Space = GetAxisAlignedBoundingBox(points);
-		Scene::GetMainScene()->m_GlobalOctree.AddObject(std::make_pair(m_Space, m_pFatherObject));
+		m_BaseSpace = GetAxisAlignedBoundingBox(points);
+		m_Space = TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), m_BaseSpace);
+		m_pGlobalOctreeNode=Scene::GetMainScene()->m_GlobalOctree.AddObject(GlobalOctreeData(m_Space, m_pFatherObject));
 	}
 }
 
@@ -106,13 +115,37 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 			m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
 			m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
 		{
-			Vector<XMFLOAT3> points;
-			for (const auto& i : m_Vertices)
+			bool if_recompute = true;
+
+			if (m_pFatherObject->GetComponentByMessage(Event::RotationChange) &&
+				(m_pFatherObject->GetComponentByMessage(Event::PositionChange) == nullptr) &&
+				(m_pFatherObject->GetComponentByMessage(Event::ScaleChange) == nullptr))
 			{
-				points.push_back(TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), i.m_Position));
+				static XMFLOAT3 rotation = m_pTransform->GetRotation();
+				if (rotation != m_pTransform->GetRotation())
+				{
+					auto ro_now = m_pTransform->GetRotation();
+					if ((rotation.x == ro_now.x && (m_Mode&MeshComponent::XAxisAlignedMode)) ||
+						(rotation.y == ro_now.y && (m_Mode&MeshComponent::YAxisAlignedMode)) ||
+						(rotation.z == ro_now.z && (m_Mode&MeshComponent::ZAxisAlignedMode)))
+					{
+						rotation = ro_now;
+						if_recompute = false;
+					}
+				}
 			}
-			m_Space = GetAxisAlignedBoundingBox(points);
-			Scene::GetMainScene()->m_GlobalOctree.UpdateObject(std::make_pair(m_Space, m_pFatherObject));
+
+			if (if_recompute)
+			{
+				m_Space = TransformByWorldMatrix(m_pTransform->GetPosition(), m_pTransform->GetRotation(), m_pTransform->GetScale(), m_BaseSpace);
+				if (m_pGlobalOctreeNode)
+				{
+					m_pGlobalOctreeNode->DeleteObjectData(m_pFatherObject);
+					m_pGlobalOctreeNode = Scene::GetMainScene()->m_GlobalOctree.AddObject(GlobalOctreeData(m_Space, m_pFatherObject));
+				}
+				else
+					m_pGlobalOctreeNode = Scene::GetMainScene()->m_GlobalOctree.UpdateObject(GlobalOctreeData(m_Space, m_pFatherObject));
+			}
 		}
 	}
 	if (m_pFatherObject->IfRender() == false)

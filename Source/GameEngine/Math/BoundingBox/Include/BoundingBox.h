@@ -48,4 +48,6 @@ namespace SpaceGameEngine
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs);
 
 	int IfIntersectWithFrustum(const AxisAlignedBoundingBox& aabb);
+
+	AxisAlignedBoundingBox TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, const AxisAlignedBoundingBox& aabb);
 }

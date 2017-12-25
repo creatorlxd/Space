@@ -30,6 +30,9 @@ namespace SpaceGameEngine
 		static const int ModelFileMode = 1;				//Model文件模式
 		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
 		static const int WholeMode = 4;					//Whole mode do not use object octree
+		static const int XAxisAlignedMode = 8;
+		static const int YAxisAlignedMode = 16;
+		static const int ZAxisAlignedMode = 32;
 
 		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
@@ -53,6 +56,9 @@ namespace SpaceGameEngine
 
 		TransformComponent* m_pTransform;
 		AxisAlignedBoundingBox m_Space;
+		AxisAlignedBoundingBox m_BaseSpace;
+
+		GlobalOctreeNode* m_pGlobalOctreeNode;
 
 		ObjectOctree m_ObjectOctree;
 	};

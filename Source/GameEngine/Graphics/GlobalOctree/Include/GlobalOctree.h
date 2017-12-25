@@ -30,10 +30,10 @@ namespace SpaceGameEngine
 		~GlobalOctreeNode();
 		GlobalOctreeNode(const AxisAlignedBoundingBox& space, int deepth = 1);
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
-		void InsertObject(const GlobalOctreeData& data);
+		GlobalOctreeNode* InsertObject(const GlobalOctreeData& data);
 		void Run();
 		void SetObjectRenderState(bool state);
-		void UpdateObjectData(const GlobalOctreeData& data);
+		GlobalOctreeNode* UpdateObjectData(const GlobalOctreeData& data);
 		void UpdateObjectRenderState(const GlobalOctreeData& data);
 		void Release();
 		bool DeleteObjectData(GlobalOctreeData::second_type pointer);
@@ -50,13 +50,13 @@ namespace SpaceGameEngine
 	{
 	public:
 		~GlobalOctree();
-		void AddObject(const GlobalOctreeData& data);
+		GlobalOctreeNode* AddObject(const GlobalOctreeData& data);
 		bool DeleteObject(GlobalOctreeData::second_type pointer);
 		void BuildTree();
 		void BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox& space);
 		void Run();
 		void Release();
-		void UpdateObject(const GlobalOctreeData& data);
+		GlobalOctreeNode* UpdateObject(const GlobalOctreeData& data);
 	private:
 		GlobalOctreeNode m_RootNode;
 		Vector<GlobalOctreeData> m_IntializaionData;
