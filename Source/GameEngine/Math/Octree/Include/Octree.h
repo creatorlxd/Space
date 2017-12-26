@@ -208,7 +208,7 @@ namespace SpaceGameEngine
 			auto iter = m_Content.before_begin();
 			for (auto i = m_Content.begin(); i != m_Content.end(); i++, iter++)
 			{
-				if (i->second == pointer)
+				if (i->second == content)
 				{
 					m_Content.erase_after(iter);
 					return true;
@@ -218,7 +218,7 @@ namespace SpaceGameEngine
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					if (m_ChildrenNode[i]->DeleteData(pointer))
+					if (m_ChildrenNode[i]->DeleteData(content))
 						return true;
 				}
 			}
@@ -337,7 +337,7 @@ namespace SpaceGameEngine
 		{
 			Release();
 		}
-		OctreeNode<T, MaxDeepth>* AddData(const DataType& data)
+		OctreeNode<T, MaxDeepth>* InsertData(const DataType& data)
 		{
 			if (!m_IfInit)
 			{
@@ -349,7 +349,7 @@ namespace SpaceGameEngine
 				return m_RootNode.InsertData(data);
 			}
 		}
-		bool DeleteData(typename DataType::second_type data)
+		bool DeleteData(const T& data)
 		{
 			if (!m_IfInit)
 			{
@@ -371,12 +371,12 @@ namespace SpaceGameEngine
 		void BuildTree()
 		{
 			m_IfInit = true;
-			Vector<AxisAlignedBoundingBox> aabb;
+			Vector<XMFLOAT3> points;
 			for (const auto& i : m_IntializaionData)
 			{
-				aabb.push_back(i.first);
+				points.push_back(i.first);
 			}
-			AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(aabb);
+			AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(points);
 			m_RootNode.Init(max_space);
 			for (const auto& i : m_IntializaionData)
 			{

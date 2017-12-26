@@ -42,6 +42,11 @@ void SpaceGameEngine::LightManager::Release()
 		sm_pThis = nullptr;
 }
 
+void SpaceGameEngine::LightManager::StartRun()
+{
+	m_LightingOctree.BuildTree();
+}
+
 void SpaceGameEngine::LightManager::AddLight(LightEx * plight)
 {
 	//TODO:
@@ -54,15 +59,19 @@ void SpaceGameEngine::LightManager::DeleteLight(LightEx * plight)
 
 void SpaceGameEngine::LightManager::AddLighting(Lighting * plg)
 {
+	size_t index = -1;
 	if (m_FreeIndexList.empty())
 	{
 		m_Content.push_back(plg);
+		index = m_Content.size() - 1;
 	}
 	else
 	{
 		m_Content[m_FreeIndexList.front()] = plg;
+		index = m_FreeIndexList.front();
 		m_FreeIndexList.pop();
 	}
+	m_LightingOctree.InsertData(std::make_pair(plg->m_Position, index));
 }
 
 void SpaceGameEngine::LightManager::DeleteLighting(Lighting * plg)
@@ -72,6 +81,7 @@ void SpaceGameEngine::LightManager::DeleteLighting(Lighting * plg)
 	{
 		m_FreeIndexList.push(iter - m_Content.begin());
 		*iter = nullptr;
+		m_LightingOctree.DeleteData(iter - m_Content.begin());
 	}
 	else
 	{

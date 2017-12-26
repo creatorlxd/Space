@@ -37,6 +37,7 @@ namespace SpaceGameEngine
 
 	struct Lighting			//受到光照的信息
 	{
+		XMFLOAT3 m_Position;
 		Vector<std::pair<float,LightEx*>> m_Content;	//<distance pointer>
 	};
 
@@ -46,6 +47,8 @@ namespace SpaceGameEngine
 		LightManager();
 		~LightManager();
 		void Release();
+
+		void StartRun();
 
 		void AddLight(LightEx* plight);
 		void DeleteLight(LightEx* plight);
