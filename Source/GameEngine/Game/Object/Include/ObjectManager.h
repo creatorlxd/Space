@@ -39,5 +39,5 @@ namespace SpaceGameEngine
 		Queue<unsigned int> m_FreeIndexList;
 	};
 
-	Object* CloneObject(Object* po);				//复制对象(now can't use)
+	Object* CloneObject(Object* po);				//复制对象(在被复制对象所在场景运行时不能使用)
 }

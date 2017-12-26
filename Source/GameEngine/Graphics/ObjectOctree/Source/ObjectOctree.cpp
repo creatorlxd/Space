@@ -177,9 +177,7 @@ void SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			auto aabb = m_ChildrenNode[i]->m_Space;
-			aabb.m_MinPosition = TransformByWorldMatrix(position, rotation, scale, aabb.m_MinPosition);
-			aabb.m_MaxPosition = TransformByWorldMatrix(position, rotation, scale, aabb.m_MaxPosition);
+			auto aabb = TransformByWorldMatrix(position,rotation,scale,m_ChildrenNode[i]->m_Space);
 			int buff = IfIntersectWithFrustum(aabb);
 			if (buff == 8)
 			{
