@@ -38,6 +38,7 @@ void SpaceGameEngine::LightManager::Release()
 {
 	m_Content.clear();
 	m_FreeIndexList = Queue<unsigned int>();
+	m_LightingOctree.Release();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
