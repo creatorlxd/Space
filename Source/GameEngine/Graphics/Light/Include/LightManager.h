@@ -17,6 +17,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "Space.h"
 #include "Light.h"
+#include "Math/Octree/Include/Octree.h"
 
 namespace SpaceGameEngine
 {
@@ -56,6 +57,7 @@ namespace SpaceGameEngine
 	private:
 		Vector<Lighting*> m_Content;		//不负责释放
 		Queue<unsigned int> m_FreeIndexList;
+		Octree<XMFLOAT3> m_LightingOctree;
 
 		static LightManager* sm_pThis;
 	};

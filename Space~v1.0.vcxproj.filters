@@ -280,6 +280,15 @@
     <Filter Include="Common\Error\Source">
       <UniqueIdentifier>{0425187d-1b86-4d83-94fb-d0db33beddc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Octree">
+      <UniqueIdentifier>{7ab69f4a-8062-47ec-9845-c7418c266413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Octree\Include">
+      <UniqueIdentifier>{9bea09b9-49eb-4203-b029-ab449a4be58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Octree\Source">
+      <UniqueIdentifier>{4474b145-10c8-4a69-9230-9fb536f61b43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -452,6 +461,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\Window.h">
       <Filter>Common\Utility\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Octree\Include\Octree.h">
+      <Filter>Math\Octree\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

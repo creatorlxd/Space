@@ -341,6 +341,7 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Include\MathDefinition.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Include\XMathExtension.h" />
     <ClInclude Include="Source\GameEngine\Math\Frustum\Include\Frustum.h" />
+    <ClInclude Include="Source\GameEngine\Math\Octree\Include\Octree.h" />
     <ClInclude Include="Source\GameEngine\Math\Plane\Include\Plane.h" />
     <ClInclude Include="Source\GameEngine\Math\Triangle\Include\Triangle.h" />
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
