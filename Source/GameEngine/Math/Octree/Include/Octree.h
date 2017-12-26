@@ -22,7 +22,7 @@ namespace SpaceGameEngine
 	template<typename T, unsigned int MaxDeepth = 8>
 	struct OctreeNode
 	{
-		using DataType = std::pair<XMFLOAT3, T>;
+		typedef typename std::pair<XMFLOAT3, T> DataType;
 		static const int OctreeMaxDeepth = MaxDeepth;
 
 		OctreeNode()
@@ -331,7 +331,7 @@ namespace SpaceGameEngine
 	class Octree
 	{
 	public:
-		using DataType = OctreeNode<T, MaxDeepth>::DataTpye;
+		typedef typename OctreeNode<T, MaxDeepth>::DataType DataType;
 
 		~Octree()
 		{
@@ -349,7 +349,7 @@ namespace SpaceGameEngine
 				return m_RootNode.InsertData(data);
 			}
 		}
-		bool DeleteData(DataType::second_type data)
+		bool DeleteData(typename DataType::second_type data)
 		{
 			if (!m_IfInit)
 			{
