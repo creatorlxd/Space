@@ -37,57 +37,76 @@ SpaceGameEngine::LightManager::~LightManager()
 void SpaceGameEngine::LightManager::Release()
 {
 	m_Content.clear();
+	m_DirectionLights.clear();
+	m_DynamicLights.clear();
 	m_FreeIndexList = Queue<unsigned int>();
-	m_LightingOctree.Release();
+	m_LightOctree.Release();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
 
-void SpaceGameEngine::LightManager::StartRun()
+void SpaceGameEngine::LightManager::InsertLight(LightEx * plight)
 {
-	m_LightingOctree.BuildTree();
-}
-
-void SpaceGameEngine::LightManager::AddLight(LightEx * plight)
-{
-	//TODO:
+	if (plight->m_Mode == LightEx::LightMode::Normal&&
+		plight->m_Content.m_Type != LightType::DirectionLight&&
+		plight->m_Content.m_Type != LightType::UnkownLight)
+	{
+		if (m_FreeIndexList.empty())
+		{
+			m_Content.push_back(plight);
+			m_LightOctree.InsertData(std::make_pair(plight->m_Content.m_Position, m_Content.size() - 1));
+		}
+		else
+		{
+			m_Content[m_FreeIndexList.front()] = plight;
+			m_LightOctree.InsertData(std::make_pair(plight->m_Content.m_Position, m_FreeIndexList.front()));
+			m_FreeIndexList.pop();
+		}
+	}
+	else
+	{
+		if (plight->m_Content.m_Type != LightType::UnkownLight)
+		{
+			if (plight->m_Mode == LightEx::LightMode::Dynamic)
+				m_DynamicLights.push_back(plight);
+			else
+				m_DirectionLights.push_back(plight);
+		}
+	}
 }
 
 void SpaceGameEngine::LightManager::DeleteLight(LightEx * plight)
 {
-	//TODO:
-}
-
-void SpaceGameEngine::LightManager::AddLighting(Lighting * plg)
-{
-	size_t index = -1;
-	if (m_FreeIndexList.empty())
+	if (plight->m_Mode == LightEx::LightMode::Normal&&
+		plight->m_Content.m_Type != LightType::DirectionLight&&
+		plight->m_Content.m_Type != LightType::UnkownLight)
 	{
-		m_Content.push_back(plg);
-		index = m_Content.size() - 1;
-	}
-	else
-	{
-		m_Content[m_FreeIndexList.front()] = plg;
-		index = m_FreeIndexList.front();
-		m_FreeIndexList.pop();
-	}
-	m_LightingOctree.InsertData(std::make_pair(plg->m_Position, index));
-}
-
-void SpaceGameEngine::LightManager::DeleteLighting(Lighting * plg)
-{
-	auto iter = std::find(m_Content.begin(), m_Content.end(), plg);
-	if (iter != m_Content.end())
-	{
+		auto iter = std::find(m_Content.begin(), m_Content.end(), plight);
+		if (iter == m_Content.end())
+		{
+			ThrowError("do not have this light");
+		}
 		m_FreeIndexList.push(iter - m_Content.begin());
-		*iter = nullptr;
-		m_LightingOctree.DeleteData(iter - m_Content.begin());
+		m_LightOctree.DeleteData(iter - m_Content.begin());
 	}
 	else
 	{
-		ThrowError("do not have this Lighting");
+		if (plight->m_Content.m_Type != LightType::UnkownLight)
+		{
+			if (plight->m_Mode == LightEx::LightMode::Dynamic)
+				m_DynamicLights.erase(std::find(m_DynamicLights.begin(), m_DynamicLights.end(), plight));
+			else
+				m_DirectionLights.erase(std::find(m_DirectionLights.begin(), m_DirectionLights.end(), plight));
+		}
 	}
+}
+
+SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::GetLight(TransformComponent * transform)
+{
+	if (m_LightOctree.IfInit() == false)
+		m_LightOctree.BuildTree();
+
+	return Vector<Light>();		//TODO:
 }
 
 void SpaceGameEngine::LightManager::SetAsMainManager()

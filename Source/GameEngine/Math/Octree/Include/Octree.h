@@ -406,6 +406,10 @@ namespace SpaceGameEngine
 		{
 			return m_RootNode.FindOctreeNode(position);
 		}
+		bool IfInit()
+		{
+			return m_IfInit;
+		}
 	private:
 		OctreeNode<Key, T, MaxDeepth> m_RootNode;
 		Vector<DataType> m_IntializaionData;

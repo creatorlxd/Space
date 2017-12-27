@@ -18,6 +18,7 @@ limitations under the License.
 #include "Space.h"
 #include "Light.h"
 #include "Math/Octree/Include/Octree.h"
+#include "Physics/Transform/Include/Transform.h"
 
 namespace SpaceGameEngine
 {
@@ -35,12 +36,6 @@ namespace SpaceGameEngine
 		Light m_Content;
 	};
 
-	struct Lighting			//受到光照的信息
-	{
-		XMFLOAT3 m_Position;
-		Vector<std::pair<float,LightEx*>> m_Content;	//<distance pointer>
-	};
-
 	class LightManager
 	{
 	public:
@@ -48,19 +43,19 @@ namespace SpaceGameEngine
 		~LightManager();
 		void Release();
 
-		void StartRun();
-
-		void AddLight(LightEx* plight);
+		void InsertLight(LightEx* plight);
 		void DeleteLight(LightEx* plight);
-		void AddLighting(Lighting* plg);
-		void DeleteLighting(Lighting* plg);
+
+		Vector<Light> GetLight(TransformComponent* transform);			//transform是camera的transform
 
 		void SetAsMainManager();
 		static LightManager* GetMainManager();
 	private:
-		Vector<Lighting*> m_Content;		//不负责释放
+		Vector<LightEx*> m_Content;		//不负责释放
+		Vector<LightEx*> m_DirectionLights;
+		Vector<LightEx*> m_DynamicLights;
 		Queue<unsigned int> m_FreeIndexList;
-		Octree<XMFLOAT3,unsigned int> m_LightingOctree;
+		Octree<XMFLOAT3,unsigned int> m_LightOctree;
 
 		static LightManager* sm_pThis;
 	};
