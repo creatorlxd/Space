@@ -3,6 +3,7 @@
 #include "SpaceGameEngine.h"
 #include "Game/Asset/Include/MaterialAsset.h"
 #include "Game/Asset/Include/LightAsset.h"
+#include "Math/Octree/Include/Octree.h"
 
 #pragma comment(lib,"MyUnitTest.lib")
 #pragma comment(lib,"Space~v1.0.lib")
@@ -68,6 +69,18 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		{
 			return UnitTestResult::Fail;
 		}
+	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestOctree)
+	{
+		Octree<XMFLOAT3, int> test;
+		test.InsertData(std::make_pair(XMFLOAT3{ 1,1,1 }, 0));
+		test.InsertData(std::make_pair(XMFLOAT3{ 0,0,0 }, 1));
+		test.BuildTree();
+		test.BuildTreeWithSpaceLimit({ {-5,-5,-5} ,{5,5,5} });
+		test.DeleteData(1);
+		auto tp = test.FindOctreeNode({ 0,0,0 });
+		test.Release();
 	}
 	TEST_METHOD_END
 }
