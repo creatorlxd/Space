@@ -49,7 +49,7 @@ void SpaceGameEngine::ObjectOctreeNode::Init(const AxisAlignedBoundingBox & spac
 void SpaceGameEngine::ObjectOctreeNode::InsertTriangle(const IndexTriangle & data)
 {
 	Triangle triangle((*m_VertexData)[data.m_Content[0]].m_Position, (*m_VertexData)[data.m_Content[1]].m_Position, (*m_VertexData)[data.m_Content[2]].m_Position);
-	if (!IfInclude(m_Space, triangle))
+	if (!IfIntersect(m_Space, triangle))
 		return;
 	if (m_Deepth == ObjectOctreeMaxDeepth)
 	{

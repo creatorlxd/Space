@@ -30,4 +30,5 @@ namespace SpaceGameEngine
 
 	int IfIntersect(const Frustum& frustum, const Triangle& triangle);
 	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Triangle& triangle);
+	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const Triangle& triangle);
 }

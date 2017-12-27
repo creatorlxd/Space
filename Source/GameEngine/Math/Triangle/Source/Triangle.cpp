@@ -70,3 +70,13 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb, const Trian
 	}
 	return true;
 }
+
+bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb, const Triangle & triangle)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if (IfIntersect(aabb, triangle.m_Positions[i]) == false)
+			return false;
+	}
+	return true;
+}
