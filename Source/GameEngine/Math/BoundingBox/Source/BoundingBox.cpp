@@ -46,11 +46,11 @@ bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb1, const Ax
 
 bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox & aabb, const XMFLOAT3 & position)
 {
-	if (aabb.m_MinPosition.x > position.x || aabb.m_MaxPosition.x < position.x)
+	if (aabb.m_MinPosition.x >= position.x || aabb.m_MaxPosition.x <= position.x)
 		return false;
-	if (aabb.m_MinPosition.y > position.y || aabb.m_MaxPosition.y < position.y)
+	if (aabb.m_MinPosition.y >= position.y || aabb.m_MaxPosition.y <= position.y)
 		return false;
-	if (aabb.m_MinPosition.z > position.z || aabb.m_MaxPosition.z < position.z)
+	if (aabb.m_MinPosition.z >= position.z || aabb.m_MaxPosition.z <= position.z)
 		return false;
 	return true;
 }
