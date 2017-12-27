@@ -60,7 +60,7 @@ namespace SpaceGameEngine
 	private:
 		Vector<Lighting*> m_Content;		//不负责释放
 		Queue<unsigned int> m_FreeIndexList;
-		Octree<unsigned int> m_LightingOctree;
+		Octree<XMFLOAT3,unsigned int> m_LightingOctree;
 
 		static LightManager* sm_pThis;
 	};

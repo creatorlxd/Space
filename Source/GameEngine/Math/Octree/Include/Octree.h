@@ -19,10 +19,10 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	template<typename T, unsigned int MaxDeepth = 8>
+	template<typename Key,typename T, unsigned int MaxDeepth = 8>
 	struct OctreeNode
 	{
-		typedef typename std::pair<XMFLOAT3, T> DataType;
+		typedef typename std::pair<Key, T> DataType;
 		static const int OctreeMaxDeepth = MaxDeepth;
 
 		OctreeNode()
@@ -47,7 +47,7 @@ namespace SpaceGameEngine
 			m_Space = space;
 			m_Deepth = deepth;
 		}
-		OctreeNode<T,OctreeMaxDeepth>* InsertData(const DataType& data)
+		OctreeNode<Key,T,OctreeMaxDeepth>* InsertData(const DataType& data)
 		{
 			if (!IfIntersect(m_Space, data.first))
 				return nullptr;
@@ -119,7 +119,7 @@ namespace SpaceGameEngine
 					m_IfLeafNode = false;
 					for (int i = 0; i < 8; i++)
 					{
-						m_ChildrenNode[i] = MemoryManager::New<OctreeNode<T, OctreeMaxDeepth>>();
+						m_ChildrenNode[i] = MemoryManager::New<OctreeNode<Key, T, OctreeMaxDeepth>>();
 						m_ChildrenNode[i]->Init(space[i], m_Deepth + 1);
 						m_ChildrenNode[i]->m_pFather = this;
 					}
@@ -144,14 +144,14 @@ namespace SpaceGameEngine
 				return this;
 			}
 		}
-		OctreeNode<T, OctreeMaxDeepth>* UpdateData(const DataType& data)
+		OctreeNode<Key, T, OctreeMaxDeepth>* UpdateData(const DataType& data)
 		{
-			Queue<OctreeNode<T, OctreeMaxDeepth>*> que;
+			Queue<OctreeNode<Key, T, OctreeMaxDeepth>*> que;
 			que.push(this);
 			bool if_find = false;
 			while (!que.empty())
 			{
-				OctreeNode<T, OctreeMaxDeepth>* node = que.front();
+				OctreeNode<Key, T, OctreeMaxDeepth>* node = que.front();
 				que.pop();
 				auto iter = node->m_Content.before_begin();
 				for (auto i = node->m_Content.begin(); i != node->m_Content.end(); i++)
@@ -224,9 +224,9 @@ namespace SpaceGameEngine
 			}
 			return false;
 		}
-		OctreeNode<T, MaxDeepth>* FindOctreeNode(const XMFLOAT3& position)
+		OctreeNode<Key, T, OctreeMaxDeepth>* FindOctreeNode(const Key& key)
 		{
-			if (!IfInclude(m_Space, position))
+			if (!IfInclude(m_Space, key))
 				return nullptr;
 			if (m_Deepth == OctreeMaxDeepth)
 			{
@@ -283,7 +283,7 @@ namespace SpaceGameEngine
 				int index = -1;
 				for (int i = 0; i < 8; i++)
 				{
-					if (IfInclude(space[i], position))
+					if (IfInclude(space[i], key))
 					{
 						if_child = true;
 						index = i;
@@ -295,11 +295,11 @@ namespace SpaceGameEngine
 					m_IfLeafNode = false;
 					for (int i = 0; i < 8; i++)
 					{
-						m_ChildrenNode[i] = MemoryManager::New<OctreeNode<T, OctreeMaxDeepth>>();
+						m_ChildrenNode[i] = MemoryManager::New<OctreeNode<Key, T, OctreeMaxDeepth>>();
 						m_ChildrenNode[i]->Init(space[i], m_Deepth + 1);
 						m_ChildrenNode[i]->m_pFather = this;
 					}
-					return m_ChildrenNode[index]->FindOctreeNode(position);
+					return m_ChildrenNode[index]->FindOctreeNode(key);
 				}
 				else
 				{
@@ -310,9 +310,9 @@ namespace SpaceGameEngine
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					if (IfInclude(m_ChildrenNode[i]->m_Space, position))
+					if (IfInclude(m_ChildrenNode[i]->m_Space, key))
 					{
-						return m_ChildrenNode[i]->FindOctreeNode(position);
+						return m_ChildrenNode[i]->FindOctreeNode(key);
 					}
 				}
 				return this;
@@ -321,23 +321,23 @@ namespace SpaceGameEngine
 
 		ForwardList<DataType> m_Content;
 		AxisAlignedBoundingBox m_Space;
-		OctreeNode<T, OctreeMaxDeepth>* m_ChildrenNode[8];
+		OctreeNode<Key, T, OctreeMaxDeepth>* m_ChildrenNode[8];
 		bool m_IfLeafNode;
 		int m_Deepth;
-		OctreeNode<T, OctreeMaxDeepth>* m_pFather;
+		OctreeNode<Key, T, OctreeMaxDeepth>* m_pFather;
 	};
 
-	template<typename T, unsigned int MaxDeepth = 8>
+	template<typename Key, typename T, unsigned int MaxDeepth = 8>
 	class Octree
 	{
 	public:
-		typedef typename OctreeNode<T, MaxDeepth>::DataType DataType;
+		typedef typename OctreeNode<Key, T, MaxDeepth>::DataType DataType;
 
 		~Octree()
 		{
 			Release();
 		}
-		OctreeNode<T, MaxDeepth>* InsertData(const DataType& data)
+		OctreeNode<Key, T, MaxDeepth>* InsertData(const DataType& data)
 		{
 			if (!m_IfInit)
 			{
@@ -398,16 +398,16 @@ namespace SpaceGameEngine
 		{
 			m_RootNode.Release();
 		}
-		OctreeNode<T, MaxDeepth>* UpdateData(const DataType& data)
+		OctreeNode<Key, T, MaxDeepth>* UpdateData(const DataType& data)
 		{
 			return m_RootNode.UpdateData(data);
 		}
-		OctreeNode<T, MaxDeepth>* FindOctreeNode(const XMFLOAT3& position)
+		OctreeNode<Key, T, MaxDeepth>* FindOctreeNode(const XMFLOAT3& position)
 		{
 			return m_RootNode.FindOctreeNode(position);
 		}
 	private:
-		OctreeNode<T, MaxDeepth> m_RootNode;
+		OctreeNode<Key, T, MaxDeepth> m_RootNode;
 		Vector<DataType> m_IntializaionData;
 		bool m_IfInit = false;
 	};
