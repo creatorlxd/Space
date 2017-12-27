@@ -43,7 +43,7 @@ void SpaceGameEngine::GlobalOctreeNode::Init(const AxisAlignedBoundingBox & spac
 
 SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctreeNode::InsertObject(const GlobalOctreeData & data)
 {
-	if (!IfInclude(m_Space, data.first))
+	if (!IfIntersect(m_Space, data.first))
 		return nullptr;
 	if (m_Deepth == GlobalOctreeMaxDeepth)
 	{
