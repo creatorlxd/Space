@@ -91,14 +91,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\c++\Space~v1.0\Source\GameEngine;D:\c++\Space~v1.0\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Source\GameEngine;..\..\..\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\c++\Space~v1.0\Source\GameEngine\ThirdParty;D:\c++\Space~v1.0\Source\GameEngine\ThirdParty\MyUnitTest\library\Release\x86;D:\c++\Space~v1.0\UnitTestForRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\Source\GameEngine\ThirdParty;..\..\..\Source\GameEngine\ThirdParty\MyUnitTest\library\Release\x86;..\..\..\UnitTestForRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -108,12 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\c++\Space~v1.0\Source\GameEngine;D:\c++\Space~v1.0\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Source\GameEngine;..\..\..\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\c++\Space~v1.0\Source\GameEngine\ThirdParty;D:\c++\Space~v1.0\Source\GameEngine\ThirdParty\MyUnitTest\library\Debug\x86;D:\c++\Space~v1.0\UnitTestForDebug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\Source\GameEngine\ThirdParty;..\..\..\Source\GameEngine\ThirdParty\MyUnitTest\library\Debug\x86;..\..\..\UnitTestForDebug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,12 +123,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\c++\Space~v1.0\Source\GameEngine;D:\c++\Space~v1.0\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Source\GameEngine;..\..\..\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\c++\Space~v1.0\Source\GameEngine\ThirdParty;D:\c++\Space~v1.0\Source\GameEngine\ThirdParty\MyUnitTest\library\Debug\x64;D:\c++\Space~v1.0\x64\UnitTestForDebug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\Source\GameEngine\ThirdParty;..\..\..\Source\GameEngine\ThirdParty\MyUnitTest\library\Debug\x64;..\..\..\x64\UnitTestForDebug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,14 +140,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\c++\Space~v1.0\Source\GameEngine;D:\c++\Space~v1.0\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Source\GameEngine;..\..\..\Source\GameEngine\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\c++\Space~v1.0\Source\GameEngine\ThirdParty;D:\c++\Space~v1.0\Source\GameEngine\ThirdParty\MyUnitTest\library\Release\x64;D:\c++\Space~v1.0\x64\UnitTestForRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\Source\GameEngine\ThirdParty;..\..\..\Source\GameEngine\ThirdParty\MyUnitTest\library\Release\x64;..\..\..\x64\UnitTestForRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
