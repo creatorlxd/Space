@@ -106,7 +106,48 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 	if (m_LightOctree.IfInit() == false)
 		m_LightOctree.BuildTree();
 
-	return Vector<Light>();		//TODO:
+	Vector<Light> re;
+	for (unsigned int i = 0; i < min(MaxLightSize, m_DirectionLights.size());i++)
+	{
+		re.push_back(m_DirectionLights[i]->m_Content);
+	}
+
+	if (re.size() > MaxLightSize)
+		return re;
+
+	XMFLOAT3 position = transform->GetPosition();
+	XMFLOAT3 rotation = transform->GetRotation();
+	XMFLOAT3 unit_vector{ 0.0f,0.0f,1.0f };
+	XMMATRIX rotationmat = XMMatrixRotationX(rotation.x)*XMMatrixRotationY(rotation.y)*XMMatrixRotationZ(rotation.z);
+	XMVECTOR direction = XMLoadFloat3(&unit_vector);
+	direction = XMVector3Transform(direction, rotationmat);
+
+	XMVECTOR vbuff1, vbuff2;
+
+	for (auto i : m_DynamicLights)
+	{
+		vbuff1 = XMLoadFloat3(&position);
+		vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+		vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+		if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+		{
+			if (i->m_Content.m_Type == LightType::PointLight)
+				re.push_back(i->m_Content);
+			else if (i->m_Content.m_Type == LightType::SpotLight)
+			{
+				vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+				vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
+				if (XMVectorGetX(vbuff2) >= 0.0f)
+					re.push_back(i->m_Content);
+			}
+		}
+	}
+
+	if (re.size() > MaxLightSize)
+		return re;
+
+	auto poctreenode = m_LightOctree.FindOctreeNode(position);
+	//TODO:
 }
 
 void SpaceGameEngine::LightManager::SetAsMainManager()

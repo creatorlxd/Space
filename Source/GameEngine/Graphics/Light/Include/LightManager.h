@@ -39,6 +39,8 @@ namespace SpaceGameEngine
 	class LightManager
 	{
 	public:
+		static const unsigned int MaxLightSize = 8;						//一个场景最多处理的光源数
+
 		LightManager();
 		~LightManager();
 		void Release();

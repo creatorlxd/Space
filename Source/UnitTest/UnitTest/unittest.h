@@ -82,6 +82,19 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		auto tp = test.FindOctreeNode({ 0,0,0 });
 		test.Release();
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestXMVector)
+	{
+		XMFLOAT3 test{ 0,0,0 };
+		XMVECTOR vbuff = XMLoadFloat3(&test);
+		XMMATRIX mat = XMMatrixTranslation(1, 1, 1);
+		vbuff = XMVector3Transform(vbuff, mat);
+		XMStoreFloat3(&test, vbuff);
+		/*cout << test.x << " " << test.y << " " << test.z << endl;*/
+		XMFLOAT3 except{ 1,1,1 };
+		if (test != except)
+			return UnitTestResult::Fail;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
