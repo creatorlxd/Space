@@ -42,6 +42,7 @@ namespace SpaceGameEngine
 		ID3DX11EffectVectorVariable* m_pCameraPosition;
 		ID3DX11EffectVariable* m_pMaterial;
 		ID3DX11EffectVariable* m_pLights;
+		ID3DX11EffectMatrixVariable* m_pWorldMatrix;
 		ID3DX11EffectMatrixVariable* m_pInverseTransposeMatrix;
 	};
 }
