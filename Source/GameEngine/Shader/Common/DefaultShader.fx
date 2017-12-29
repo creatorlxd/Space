@@ -56,7 +56,13 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 
 float4 PS(DefaultVertexOutput input) : SV_TARGET
 {
-	return float4(1.0f, 1.0f, 1.0f, 1.0f);
+	float4 color = float4(0.0f,0.0f,0.0f,1.0f);
+	for (unsigned int i = 0; i < g_Lights.m_Size[0]; i++)
+	{
+		color += GetColorByLight(g_Material, g_Lights.m_Content[i], g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal);
+	}
+	color.a = g_Material.m_Diffuse.a;
+	return color;
 }
 
 technique11 MediumQuality

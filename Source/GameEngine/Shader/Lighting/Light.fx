@@ -181,4 +181,5 @@ float4 GetColorByLight(Material material, Light light,float3 eyepos, float3 pos,
 struct Lights
 {
 	Light m_Content[8];
+	unsigned int m_Size[4];
 };

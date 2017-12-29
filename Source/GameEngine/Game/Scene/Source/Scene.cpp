@@ -75,9 +75,21 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	SpaceEngineWindow->GetEffectShader().m_pCameraPosition->SetFloatVector(reinterpret_cast<float*>(&vbuff));
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
 	SceneData::m_ProjectionMatrix = GetProjectionMatrix(CameraComponent::GetMainCamera()->GetAngle(), (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), CameraComponent::GetMainCamera()->GetNearZ(), CameraComponent::GetMainCamera()->GetFarZ());
-	auto lights = m_LightManager.GetLight(CameraComponent::GetMainCamera()->GetTransform());
-	lights = Vector<Light>(lights.begin(), lights.begin() + min(8, lights.size()));
-	SpaceEngineWindow->GetEffectShader().m_pLights->SetRawValue(lights.data(), 0, sizeof(Light)*lights.size());
+	
+	struct Lights
+	{
+		Light m_Content[LightManager::MaxLightSize];
+		uint32_t m_Size[4];
+	};
+	static Lights lights;
+	lights.m_Size[0] = 0;
+	auto lights_buff = m_LightManager.GetLight(CameraComponent::GetMainCamera()->GetTransform());
+	for (const auto i : lights_buff)
+	{
+		lights.m_Content[lights.m_Size[0]++] = i;
+	}
+	SpaceEngineWindow->GetEffectShader().m_pLights->SetRawValue(&lights, 0, sizeof(lights));
+	
 	m_MessageManager.Run();
 	m_GlobalOctree.Run();
 	m_ObjectManager.Run(DeltaTime);
