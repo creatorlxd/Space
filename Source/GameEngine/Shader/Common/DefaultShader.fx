@@ -19,6 +19,7 @@ cbuffer SceneData : register(b0)
 {
 	float4 g_DeltaTime;
 	float4 g_CameraPosition;		//eye position
+	Lights g_Lights;
 };
 cbuffer ObjectData : register(b1)
 {

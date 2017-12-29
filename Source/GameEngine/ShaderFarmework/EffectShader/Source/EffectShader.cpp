@@ -24,6 +24,8 @@ SpaceGameEngine::EffectShader::EffectShader()
 	m_pTechnique = nullptr;
 	m_pWorldViewProjMatrix = nullptr;
 	m_pDeltaTime = nullptr;
+	m_pMaterial = nullptr;
+	m_pLights = nullptr;
 }
 
 SpaceGameEngine::EffectShader::~EffectShader()
@@ -39,6 +41,7 @@ void SpaceGameEngine::EffectShader::Release()
 	m_pWorldViewProjMatrix = nullptr;
 	m_pCameraPosition = nullptr;
 	m_pMaterial = nullptr;
+	m_pLights = nullptr;
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
@@ -57,6 +60,7 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("g_WorldViewProjMatrix")->AsMatrix();
 	m_pCameraPosition = m_pContent->GetVariableByName("g_CameraPosition")->AsVector();
 	m_pMaterial = m_pContent->GetVariableByName("g_Material");
+	m_pLights = m_pContent->GetVariableByName("g_Lights");
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)

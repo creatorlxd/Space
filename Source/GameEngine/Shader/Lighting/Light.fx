@@ -176,3 +176,9 @@ float4 GetColorByLight(Material material, Light light,float3 eyepos, float3 pos,
 
 	return litcolor;
 }
+
+#define MaxLightSize 8
+struct Lights
+{
+	Light m_Content[8];
+};

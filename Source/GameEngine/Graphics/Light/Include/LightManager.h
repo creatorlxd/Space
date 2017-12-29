@@ -46,6 +46,7 @@ namespace SpaceGameEngine
 		void Release();
 
 		void InsertLight(LightEx* plight);
+		void UpdateLight(LightEx* plight);
 		void DeleteLight(LightEx* plight);
 
 		Vector<Light> GetLight(TransformComponent* transform);			//transformÊÇcameraµÄtransform

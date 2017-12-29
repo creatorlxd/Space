@@ -15,3 +15,56 @@ limitations under the License.
 */
 #include "stdafx.h"
 #include "../Include/LightComponent.h"
+
+using namespace SpaceGameEngine;
+
+REGISTERCOMPONENTCLASS(LightComponent);
+
+SpaceGameEngine::LightComponent::LightComponent()
+{
+	m_TypeName = "LightComponent";
+}
+
+SpaceGameEngine::LightComponent::~LightComponent()
+{
+	Release();
+}
+
+void SpaceGameEngine::LightComponent::InitFromFile(const std::string & filename, int mode)
+{
+	m_Mode = mode;
+	auto lightasset = ReadAssetFromFile<LightAsset>(filename);
+	m_Content.m_Content = lightasset->m_Content;
+	if (mode == StaticMode)
+		m_Content.m_Mode = LightEx::LightMode::Normal;
+	else if (mode == DynamicMode)
+		m_Content.m_Mode = LightEx::LightMode::Dynamic;
+}
+
+void SpaceGameEngine::LightComponent::Start()
+{
+	Scene::GetMainScene()->m_LightManager.InsertLight(&m_Content);
+}
+
+void SpaceGameEngine::LightComponent::Run(float DeltaTime)
+{
+}
+
+void SpaceGameEngine::LightComponent::Release()
+{
+	if (m_Mode != 0)
+	{
+		Scene::GetMainScene()->m_LightManager.DeleteLight(&m_Content);
+		m_Mode = 0;
+	}
+}
+
+bool SpaceGameEngine::LightComponent::IfOn()
+{
+	return m_Content.m_IfOn;
+}
+
+void SpaceGameEngine::LightComponent::ChangeIfOn(bool b)
+{
+	m_Content.m_IfOn = b;
+}

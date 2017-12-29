@@ -75,6 +75,19 @@ void SpaceGameEngine::LightManager::InsertLight(LightEx * plight)
 	}
 }
 
+void SpaceGameEngine::LightManager::UpdateLight(LightEx * plight)
+{
+	if (plight->m_Mode != LightEx::LightMode::Normal)
+		return;
+	auto iter = find(m_Content.begin(), m_Content.end(), plight);
+	if (iter == m_Content.end())
+	{
+		ThrowError("can not update the light which not in manager");
+		return;
+	}
+	m_LightOctree.UpdateData(std::make_pair(plight->m_Content.m_Position, iter-m_Content.begin()));
+}
+
 void SpaceGameEngine::LightManager::DeleteLight(LightEx * plight)
 {
 	if (plight->m_Mode == LightEx::LightMode::Normal&&

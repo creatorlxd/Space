@@ -34,6 +34,7 @@ void SpaceGameEngine::Scene::SetAsMainScene()
 	m_ObjectManager.SetAsMainManager();
 	m_ComponentManager.SetAsMainManager();
 	m_MessageManager.SetAsMainManager();
+	m_LightManager.SetAsMainManager();
 	sm_pThis = this;
 }
 
@@ -74,6 +75,9 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	SpaceEngineWindow->GetEffectShader().m_pCameraPosition->SetFloatVector(reinterpret_cast<float*>(&vbuff));
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
 	SceneData::m_ProjectionMatrix = GetProjectionMatrix(CameraComponent::GetMainCamera()->GetAngle(), (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), CameraComponent::GetMainCamera()->GetNearZ(), CameraComponent::GetMainCamera()->GetFarZ());
+	auto lights = m_LightManager.GetLight(CameraComponent::GetMainCamera()->GetTransform());
+	lights = Vector<Light>(lights.begin(), lights.begin() + min(8, lights.size()));
+	SpaceEngineWindow->GetEffectShader().m_pLights->SetRawValue(lights.data(), 0, sizeof(Light)*lights.size());
 	m_MessageManager.Run();
 	m_GlobalOctree.Run();
 	m_ObjectManager.Run(DeltaTime);
@@ -86,6 +90,7 @@ void SpaceGameEngine::Scene::Release()
 	m_ComponentManager.Release();
 	m_MessageManager.Release();
 	m_ObjectInformation.clear();
+	m_LightManager.Release();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }

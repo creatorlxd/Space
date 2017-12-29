@@ -15,3 +15,32 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
+#include "LightManager.h"
+#include "Game/Scene/Include/Scene.h"
+#include "Game/Asset/Include/LightAsset.h"
+
+namespace SpaceGameEngine
+{
+	class LightComponent :public Component
+	{
+	public:
+
+		static const int StaticMode = 1;
+		static const int DynamicMode = 2;
+
+		LightComponent();
+		~LightComponent();
+
+		void InitFromFile(const std::string& filename, int mode = 0);
+		void Start();
+		void Run(float DeltaTime);
+		void Release();
+
+		bool IfOn();
+		void ChangeIfOn(bool b);
+
+		static ComponentManager::NewComponent<LightComponent> NewComponent;
+	private:
+		LightEx m_Content;
+	};
+}
