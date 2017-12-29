@@ -18,6 +18,8 @@ limitations under the License.
 #include "LightManager.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Game/Asset/Include/LightAsset.h"
+#include "Physics/Transform/Include/Transform.h"
+#include "Math/Common/Include/XMathExtension.h"
 
 namespace SpaceGameEngine
 {
@@ -42,5 +44,6 @@ namespace SpaceGameEngine
 		static ComponentManager::NewComponent<LightComponent> NewComponent;
 	private:
 		LightEx m_Content;
+		TransformComponent* m_pTransform;
 	};
 }

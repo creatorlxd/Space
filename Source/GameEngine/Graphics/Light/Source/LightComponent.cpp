@@ -23,6 +23,7 @@ REGISTERCOMPONENTCLASS(LightComponent);
 SpaceGameEngine::LightComponent::LightComponent()
 {
 	m_TypeName = "LightComponent";
+	m_pTransform = nullptr;
 }
 
 SpaceGameEngine::LightComponent::~LightComponent()
@@ -48,6 +49,16 @@ void SpaceGameEngine::LightComponent::Start()
 
 void SpaceGameEngine::LightComponent::Run(float DeltaTime)
 {
+	if (m_Mode == StaticMode)
+	{
+		if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+			m_pFatherObject->GetComponentByMessage(Event::RotationChange))
+		{
+			m_Content.m_Content.m_Position = m_pTransform->GetPosition();
+			m_Content.m_Content.m_Direction = GetDirectionByRotation(m_pTransform->GetRotation());
+			Scene::GetMainScene()->m_LightManager.UpdateLight(&m_Content);
+		}
+	}
 }
 
 void SpaceGameEngine::LightComponent::Release()
@@ -57,6 +68,7 @@ void SpaceGameEngine::LightComponent::Release()
 		Scene::GetMainScene()->m_LightManager.DeleteLight(&m_Content);
 		m_Mode = 0;
 	}
+	m_pTransform = nullptr;
 }
 
 bool SpaceGameEngine::LightComponent::IfOn()

@@ -135,6 +135,7 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 	XMMATRIX rotationmat = XMMatrixRotationX(rotation.x)*XMMatrixRotationY(rotation.y)*XMMatrixRotationZ(rotation.z);
 	XMVECTOR direction = XMLoadFloat3(&unit_vector);
 	direction = XMVector3Transform(direction, rotationmat);
+	direction = XMVector3Normalize(direction);
 
 	XMVECTOR vbuff1, vbuff2;
 
