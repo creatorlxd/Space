@@ -123,3 +123,12 @@ XMFLOAT3 SpaceGameEngine::GetDirectionByRotation(XMFLOAT3 rotation)
 	XMStoreFloat3(&re, direction);
 	return re;
 }
+
+XMMATRIX SpaceGameEngine::InverseTransposeMatrix(CXMMATRIX M)
+{
+	XMMATRIX A = M;
+	A.r[3] = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+
+	XMVECTOR det = XMMatrixDeterminant(A);
+	return XMMatrixTranspose(XMMatrixInverse(&det, A));
+}

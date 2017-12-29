@@ -40,4 +40,6 @@ namespace SpaceGameEngine
 	XMMATRIX GetWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 
 	XMFLOAT3 GetDirectionByRotation(XMFLOAT3 rotation);
+
+	XMMATRIX InverseTransposeMatrix(CXMMATRIX M);
 }

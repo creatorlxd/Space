@@ -19,6 +19,7 @@ limitations under the License.
 #include "Common/Utility/Include/Window.h"
 #include "Game/Scene/Include/SceneData.h"
 #include "Game/Asset/Include/TransformAsset.h"
+#include "Math/Common/Include/XMathExtension.h"
 
 namespace SpaceGameEngine
 {

@@ -26,6 +26,7 @@ SpaceGameEngine::EffectShader::EffectShader()
 	m_pDeltaTime = nullptr;
 	m_pMaterial = nullptr;
 	m_pLights = nullptr;
+	m_pInverseTransposeMatrix = nullptr;
 }
 
 SpaceGameEngine::EffectShader::~EffectShader()
@@ -42,6 +43,7 @@ void SpaceGameEngine::EffectShader::Release()
 	m_pCameraPosition = nullptr;
 	m_pMaterial = nullptr;
 	m_pLights = nullptr;
+	m_pInverseTransposeMatrix = nullptr;
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
@@ -61,6 +63,7 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	m_pCameraPosition = m_pContent->GetVariableByName("g_CameraPosition")->AsVector();
 	m_pMaterial = m_pContent->GetVariableByName("g_Material");
 	m_pLights = m_pContent->GetVariableByName("g_Lights");
+	m_pInverseTransposeMatrix = m_pContent->GetVariableByName("g_InverseTransposeMatrix")->AsMatrix();
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
