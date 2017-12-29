@@ -16,7 +16,9 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/MaterialComponent.h"
 
-REGISTERCOMPONENTCLASS(SpaceGameEngine::MaterialComponent);
+using namespace SpaceGameEngine;
+
+REGISTERCOMPONENTCLASS(MaterialComponent);
 
 SpaceGameEngine::MaterialComponent::MaterialComponent()
 {
