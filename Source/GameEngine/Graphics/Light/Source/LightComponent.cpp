@@ -45,6 +45,11 @@ void SpaceGameEngine::LightComponent::InitFromFile(const std::string & filename,
 void SpaceGameEngine::LightComponent::Start()
 {
 	m_pTransform = m_pFatherObject->GetComponent<TransformComponent>();
+	if (m_pTransform == nullptr)
+	{
+		ThrowError("the Light need Transform");
+		return;
+	}
 	m_Content.m_Content.m_Position = m_pTransform->GetPosition();
 	m_Content.m_Content.m_Direction = GetDirectionByRotation(m_pTransform->GetRotation());
 	Scene::GetMainScene()->m_LightManager.InsertLight(&m_Content);
