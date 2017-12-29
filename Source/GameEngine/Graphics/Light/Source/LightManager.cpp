@@ -109,7 +109,8 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 	Vector<Light> re;
 	for (unsigned int i = 0; i < min(MaxLightSize, m_DirectionLights.size());i++)
 	{
-		re.push_back(m_DirectionLights[i]->m_Content);
+		if(m_DirectionLights[i]->m_IfOn)
+			re.push_back(m_DirectionLights[i]->m_Content);
 	}
 
 	if (re.size() > MaxLightSize)
@@ -126,19 +127,22 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 
 	for (auto i : m_DynamicLights)
 	{
-		vbuff1 = XMLoadFloat3(&position);
-		vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
-		vbuff2 = XMVector3Length(vbuff2 - vbuff1);
-		if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+		if (i->m_IfOn)
 		{
-			if (i->m_Content.m_Type == LightType::PointLight)
-				re.push_back(i->m_Content);
-			else if (i->m_Content.m_Type == LightType::SpotLight)
+			vbuff1 = XMLoadFloat3(&position);
+			vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+			vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+			if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 			{
-				vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
-				vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
-				if (XMVectorGetX(vbuff2) >= 0.0f)
+				if (i->m_Content.m_Type == LightType::PointLight)
 					re.push_back(i->m_Content);
+				else if (i->m_Content.m_Type == LightType::SpotLight)
+				{
+					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+					vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
+					if (XMVectorGetX(vbuff2) >= 0.0f)
+						re.push_back(i->m_Content);
+				}
 			}
 		}
 	}
@@ -147,7 +151,108 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 		return re;
 
 	auto poctreenode = m_LightOctree.FindOctreeNode(position);
-	//TODO:
+	auto pnode = poctreenode;
+	auto pnode2 = pnode;
+	while (pnode != nullptr&&re.size() <= MaxLightSize)
+	{
+		if (pnode == poctreenode)
+		{
+			Vector<unsigned int> content;
+			pnode->GetContent(content);
+			for (auto index : content)
+			{
+				if (re.size() > MaxLightSize)
+					return re;
+				auto i = m_Content[index];
+				if (i->m_IfOn)
+				{
+					vbuff1 = XMLoadFloat3(&position);
+					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+					{
+						if (i->m_Content.m_Type == LightType::PointLight)
+							re.push_back(i->m_Content);
+						else if (i->m_Content.m_Type == LightType::SpotLight)
+						{
+							vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+							vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
+							if (XMVectorGetX(vbuff2) >= 0.0f)
+								re.push_back(i->m_Content);
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			for (auto pchild : pnode->m_ChildrenNode)
+			{
+				if (pchild != pnode2)
+				{
+					if (re.size() > MaxLightSize)
+						return re;
+					Vector<unsigned int> content;
+					pchild->GetContent(content);
+					for (auto index : content)
+					{
+						if (re.size() > MaxLightSize)
+							return re;
+						auto i = m_Content[index];
+						if (i->m_IfOn)
+						{
+							vbuff1 = XMLoadFloat3(&position);
+							vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+							vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+							if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+							{
+								if (i->m_Content.m_Type == LightType::PointLight)
+									re.push_back(i->m_Content);
+								else if (i->m_Content.m_Type == LightType::SpotLight)
+								{
+									vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+									vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
+									if (XMVectorGetX(vbuff2) >= 0.0f)
+										re.push_back(i->m_Content);
+								}
+							}
+						}
+					}
+				}
+			}
+			if (re.size() > MaxLightSize)
+				return re;
+			for (auto index : pnode->m_Content)
+			{
+				if (re.size() > MaxLightSize)
+					return re;
+				auto i = m_Content[index.second];
+				if (i->m_IfOn)
+				{
+					vbuff1 = XMLoadFloat3(&position);
+					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+					{
+						if (i->m_Content.m_Type == LightType::PointLight)
+							re.push_back(i->m_Content);
+						else if (i->m_Content.m_Type == LightType::SpotLight)
+						{
+							vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+							vbuff2 = XMVector3Dot(direction, vbuff2 - vbuff1);
+							if (XMVectorGetX(vbuff2) >= 0.0f)
+								re.push_back(i->m_Content);
+						}
+					}
+				}
+			}
+			if (re.size() > MaxLightSize)
+				return re;
+		}
+		pnode2 = pnode;
+		pnode = pnode->m_pFather;
+	}
+	return re;
 }
 
 void SpaceGameEngine::LightManager::SetAsMainManager()

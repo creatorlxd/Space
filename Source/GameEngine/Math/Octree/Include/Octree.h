@@ -318,6 +318,18 @@ namespace SpaceGameEngine
 				return this;
 			}
 		}
+		void GetContent(Vector<T>& content)
+		{
+			for (const auto i : m_Content)
+			{
+				content.push_back(i.second);
+			}
+			if (!m_IfLeafNode)
+			{
+				for (int i = 0; i < 8; i++)
+					m_ChildrenNode[i]->GetContent(content);
+			}
+		}
 
 		ForwardList<DataType> m_Content;
 		AxisAlignedBoundingBox m_Space;
@@ -409,6 +421,12 @@ namespace SpaceGameEngine
 		bool IfInit()
 		{
 			return m_IfInit;
+		}
+		Vector<T> GetContent()
+		{
+			Vector<T> re;
+			m_RootNode.GetContent(re);
+			return re;
 		}
 	private:
 		OctreeNode<Key, T, MaxDeepth> m_RootNode;

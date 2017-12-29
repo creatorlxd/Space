@@ -80,6 +80,9 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		test.BuildTreeWithSpaceLimit({ {-5,-5,-5} ,{5,5,5} });
 		test.DeleteData(1);
 		auto tp = test.FindOctreeNode({ 0,0,0 });
+		auto content = test.GetContent();
+		for (auto i : content)
+			cout << i << endl;
 		test.Release();
 	}
 	TEST_METHOD_END,
