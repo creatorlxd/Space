@@ -181,7 +181,7 @@ float4 GetColorByLights(Material material, Lights lights,float3 eyepos, float3 p
 	for (unsigned int i = 0; i < lights.m_Size[0]; i++)
 	{
 		ComputeCommonLight(material, lights.m_Content[i], pos, normal, toeye, ambient, diffuse, specular);
-		litcolor = ambient + diffuse + specular;
+		litcolor += ambient + diffuse + specular;
 	}
 
 	litcolor.a = material.m_Diffuse.a;
