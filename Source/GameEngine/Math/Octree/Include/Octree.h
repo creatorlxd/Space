@@ -382,7 +382,7 @@ namespace SpaceGameEngine
 		}
 		void BuildTree()
 		{
-			if (!m_IfInit)
+			if (!m_IfInit&&m_IntializaionData.size() >= 2)
 			{
 				m_IfInit = true;
 				Vector<XMFLOAT3> points;
