@@ -32,6 +32,7 @@ SpaceGameEngine::MaterialComponent::~MaterialComponent()
 
 void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filename, int mode)
 {
+	m_Mode = mode;
 	if (m_Mode == SingleMode)
 	{
 		const MaterialAsset* ma = ReadAssetFromFile<MaterialAsset>(filename);
