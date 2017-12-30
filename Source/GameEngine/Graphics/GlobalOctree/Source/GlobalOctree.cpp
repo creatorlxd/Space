@@ -315,30 +315,36 @@ bool SpaceGameEngine::GlobalOctree::DeleteObject(GlobalOctreeData::second_type p
 
 void SpaceGameEngine::GlobalOctree::BuildTree()
 {
-	m_IfInit = true;
-	Vector<AxisAlignedBoundingBox> aabb;
-	for (const auto& i : m_IntializaionData)
+	if (!m_IfInit)
 	{
-		aabb.push_back(i.first);
+		m_IfInit = true;
+		Vector<AxisAlignedBoundingBox> aabb;
+		for (const auto& i : m_IntializaionData)
+		{
+			aabb.push_back(i.first);
+		}
+		AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(aabb);
+		m_RootNode.Init(max_space);
+		for (const auto& i : m_IntializaionData)
+		{
+			m_RootNode.InsertObject(i);
+		}
+		m_IntializaionData.clear();
 	}
-	AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(aabb);
-	m_RootNode.Init(max_space);
-	for (const auto& i : m_IntializaionData)
-	{
-		m_RootNode.InsertObject(i);
-	}
-	m_IntializaionData.clear();
 }
 
 void SpaceGameEngine::GlobalOctree::BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox & space)
 {
-	m_IfInit = true;
-	m_RootNode.Init(space);
-	for (const auto& i : m_IntializaionData)
+	if (!m_IfInit)
 	{
-		m_RootNode.InsertObject(i);
+		m_IfInit = true;
+		m_RootNode.Init(space);
+		for (const auto& i : m_IntializaionData)
+		{
+			m_RootNode.InsertObject(i);
+		}
+		m_IntializaionData.clear();
 	}
-	m_IntializaionData.clear();
 }
 
 void SpaceGameEngine::GlobalOctree::Run()

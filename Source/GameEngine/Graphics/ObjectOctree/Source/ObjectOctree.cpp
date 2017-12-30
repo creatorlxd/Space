@@ -233,6 +233,11 @@ void SpaceGameEngine::ObjectOctreeNode::GetIndices(Vector<unsigned int>& indices
 
 void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indices)
 {
+	if (indices.size() < 2)
+	{
+		ThrowError("the number of the indices can not less than 2");
+		return;
+	}
 	m_MaxIndicesSize = indices.size();
 	Vector<XMFLOAT3> points;
 	points.resize(m_RootNode.m_VertexData->size());
