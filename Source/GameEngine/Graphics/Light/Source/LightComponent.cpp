@@ -57,15 +57,13 @@ void SpaceGameEngine::LightComponent::Start()
 
 void SpaceGameEngine::LightComponent::Run(float DeltaTime)
 {
-	if (m_Mode == StaticMode)
+	if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+		m_pFatherObject->GetComponentByMessage(Event::RotationChange))
 	{
-		if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
-			m_pFatherObject->GetComponentByMessage(Event::RotationChange))
-		{
-			m_Content.m_Content.m_Position = m_pTransform->GetPosition();
-			m_Content.m_Content.m_Direction = GetDirectionByRotation(m_pTransform->GetRotation());
+		m_Content.m_Content.m_Position = m_pTransform->GetPosition();
+		m_Content.m_Content.m_Direction = GetDirectionByRotation(m_pTransform->GetRotation());
+		if (m_Mode == StaticMode)
 			Scene::GetMainScene()->m_LightManager.UpdateLight(&m_Content);
-		}
 	}
 }
 
