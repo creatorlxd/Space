@@ -157,6 +157,10 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 					if (XMVectorGetX(vbuff2) >= 0.0f)
 						re.push_back(i->m_Content);
 				}
+				else
+				{
+					re.push_back(i->m_Content);
+				}
 			}
 		}
 	}
