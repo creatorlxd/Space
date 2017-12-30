@@ -226,7 +226,7 @@ namespace SpaceGameEngine
 		}
 		OctreeNode<Key, T, OctreeMaxDeepth>* FindOctreeNode(const Key& key)
 		{
-			if (!IfInclude(m_Space, key))
+			if (!IfIntersect(m_Space, key))
 				return nullptr;
 			if (m_Deepth == OctreeMaxDeepth)
 			{
@@ -382,29 +382,35 @@ namespace SpaceGameEngine
 		}
 		void BuildTree()
 		{
-			m_IfInit = true;
-			Vector<XMFLOAT3> points;
-			for (const auto& i : m_IntializaionData)
+			if (!m_IfInit)
 			{
-				points.push_back(i.first);
+				m_IfInit = true;
+				Vector<XMFLOAT3> points;
+				for (const auto& i : m_IntializaionData)
+				{
+					points.push_back(i.first);
+				}
+				AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(points);
+				m_RootNode.Init(max_space);
+				for (const auto& i : m_IntializaionData)
+				{
+					m_RootNode.InsertData(i);
+				}
+				m_IntializaionData.clear();
 			}
-			AxisAlignedBoundingBox max_space = GetAxisAlignedBoundingBox(points);
-			m_RootNode.Init(max_space);
-			for (const auto& i : m_IntializaionData)
-			{
-				m_RootNode.InsertData(i);
-			}
-			m_IntializaionData.clear();
 		}
 		void BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox& space)
 		{
-			m_IfInit = true;
-			m_RootNode.Init(space);
-			for (const auto& i : m_IntializaionData)
+			if (!m_IfInit)
 			{
-				m_RootNode.InsertData(i);
+				m_IfInit = true;
+				m_RootNode.Init(space);
+				for (const auto& i : m_IntializaionData)
+				{
+					m_RootNode.InsertData(i);
+				}
+				m_IntializaionData.clear();
 			}
-			m_IntializaionData.clear();
 		}
 		void Release()
 		{
