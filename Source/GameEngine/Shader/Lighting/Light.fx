@@ -188,3 +188,25 @@ float4 GetColorByLights(Material material, Lights lights,float3 eyepos, float3 p
 
 	return litcolor;
 }
+
+void GetColorByLightsEx(Material material, Lights lights, float3 eyepos, float3 pos, float3 normal,out float4 ambient,out float4 diffuse,out float4 specular)
+{
+	ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+	float4 A = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 D = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 S = float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+	normal = normalize(normal);
+	float3 toeye = normalize(eyepos - pos);
+
+	for (unsigned int i = 0; i < lights.m_Size[0]; i++)
+	{
+		ComputeCommonLight(material, lights.m_Content[i], pos, normal, toeye, A, D, S);
+		ambient += A;
+		diffuse += D;
+		specular += S;
+	}
+}
