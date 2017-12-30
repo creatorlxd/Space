@@ -48,7 +48,7 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 	DefaultVertexOutput output;
 
 	output.m_Position = mul(float4(input.m_Position,1.0f), g_WorldViewProjMatrix);
-	output.m_WorldPosition = mul(float4(input.m_Position,1.0f),g_WorldMatrix);
+	output.m_WorldPosition = mul(float4(input.m_Position, 1.0f), g_WorldMatrix).xyz;
 
 	output.m_Normal = mul(input.m_Normal,(float3x3)g_InverseTransposeMatrix);
 	output.m_TextureCoord = input.m_TextureCoord;
@@ -58,13 +58,7 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 
 float4 PS(DefaultVertexOutput input) : SV_TARGET
 {
-	float4 color = float4(0.0f,0.0f,0.0f,1.0f);
-	for (unsigned int i = 0; i < g_Lights.m_Size[0]; i++)
-	{
-		color += GetColorByLight(g_Material, g_Lights.m_Content[i], g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal);
-	}
-	color.a = g_Material.m_Diffuse.a;
-	return color;
+	return GetColorByLights(g_Material,g_Lights,g_CameraPosition.xyz,input.m_WorldPosition,input.m_Normal);
 }
 
 technique11 MediumQuality

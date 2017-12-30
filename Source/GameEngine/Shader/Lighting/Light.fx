@@ -153,12 +153,22 @@ void ComputeCommonLight(Material material, Light light, float3 pos, float3 norma
 	}
 	default:
 	{
+		ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		spec = float4(0.0f, 0.0f, 0.0f, 0.0f);
 		break;
 	}
 	}
 }
 
-float4 GetColorByLight(Material material, Light light,float3 eyepos, float3 pos, float3 normal)
+#define MaxLightSize 8
+struct Lights
+{
+	Light m_Content[8];
+	unsigned int m_Size[4];
+};
+
+float4 GetColorByLights(Material material, Lights lights,float3 eyepos, float3 pos, float3 normal)
 {
 	float4 litcolor = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	float4 ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -168,18 +178,13 @@ float4 GetColorByLight(Material material, Light light,float3 eyepos, float3 pos,
 	normal = normalize(normal);
 	float3 toeye = normalize(eyepos - pos);
 
-	ComputeCommonLight(material, light, pos, normal, toeye, ambient, diffuse, specular);
-
-	litcolor = ambient + diffuse + specular;
+	for (unsigned int i = 0; i < lights.m_Size[0]; i++)
+	{
+		ComputeCommonLight(material, lights.m_Content[i], pos, normal, toeye, ambient, diffuse, specular);
+		litcolor = ambient + diffuse + specular;
+	}
 
 	litcolor.a = material.m_Diffuse.a;
 
 	return litcolor;
 }
-
-#define MaxLightSize 8
-struct Lights
-{
-	Light m_Content[8];
-	unsigned int m_Size[4];
-};
