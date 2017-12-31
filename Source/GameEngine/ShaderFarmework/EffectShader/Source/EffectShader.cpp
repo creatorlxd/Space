@@ -22,12 +22,6 @@ SpaceGameEngine::EffectShader::EffectShader()
 {
 	m_pContent = nullptr;
 	m_pTechnique = nullptr;
-	m_pWorldViewProjMatrix = nullptr;
-	m_pDeltaTime = nullptr;
-	m_pMaterial = nullptr;
-	m_pLights = nullptr;
-	m_pInverseTransposeMatrix = nullptr;
-	m_pWorldMatrix = nullptr;
 }
 
 SpaceGameEngine::EffectShader::~EffectShader()
@@ -39,13 +33,6 @@ void SpaceGameEngine::EffectShader::Release()
 {
 	SafeRelease(m_pContent);
 	m_pTechnique = nullptr;
-	m_pDeltaTime = nullptr;
-	m_pWorldViewProjMatrix = nullptr;
-	m_pCameraPosition = nullptr;
-	m_pMaterial = nullptr;
-	m_pLights = nullptr;
-	m_pInverseTransposeMatrix = nullptr;
-	m_pWorldMatrix = nullptr;
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
@@ -58,15 +45,6 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	ID3DBlob* ErrorMessage=nullptr;
 	D3DX11CompileEffectFromFile(filename, macros, D3D_COMPILE_STANDARD_FILE_INCLUDE, shaderFlags, NULL, pDevice, &m_pContent, &ErrorMessage);
 	SafeRelease(ErrorMessage);
-
-	//Intialization Variable
-	m_pDeltaTime = m_pContent->GetVariableByName("g_DeltaTime")->AsVector();
-	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("g_WorldViewProjMatrix")->AsMatrix();
-	m_pCameraPosition = m_pContent->GetVariableByName("g_CameraPosition")->AsVector();
-	m_pMaterial = m_pContent->GetVariableByName("g_Material");
-	m_pLights = m_pContent->GetVariableByName("g_Lights");
-	m_pInverseTransposeMatrix = m_pContent->GetVariableByName("g_InverseTransposeMatrix")->AsMatrix();
-	m_pWorldMatrix = m_pContent->GetVariableByName("g_WorldMatrix")->AsMatrix();
 }
 
 void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
@@ -85,7 +63,52 @@ void SpaceGameEngine::EffectShader::operator=(const EffectShader & shader)
 	Release();
 	m_pContent = shader.m_pContent;
 	m_pTechnique = shader.m_pTechnique;
-	m_pDeltaTime = shader.m_pDeltaTime;
-	m_pWorldViewProjMatrix = shader.m_pWorldViewProjMatrix;
 }
 */
+
+SpaceGameEngine::DefaultEffectShader::DefaultEffectShader()
+{
+	EffectShader();
+	m_pWorldViewProjMatrix = nullptr;
+	m_pDeltaTime = nullptr;
+	m_pMaterial = nullptr;
+	m_pLights = nullptr;
+	m_pInverseTransposeMatrix = nullptr;
+	m_pWorldMatrix = nullptr;
+}
+
+SpaceGameEngine::DefaultEffectShader::~DefaultEffectShader()
+{
+	Release();
+}
+
+void SpaceGameEngine::DefaultEffectShader::Release()
+{
+	EffectShader::Release();
+	m_pDeltaTime = nullptr;
+	m_pWorldViewProjMatrix = nullptr;
+	m_pCameraPosition = nullptr;
+	m_pMaterial = nullptr;
+	m_pLights = nullptr;
+	m_pInverseTransposeMatrix = nullptr;
+	m_pWorldMatrix = nullptr;
+}
+
+void SpaceGameEngine::DefaultEffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename)
+{
+	DefaultEffectShader::InitFromFile(pDevice, filename, NULL);
+}
+
+void SpaceGameEngine::DefaultEffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, D3D_SHADER_MACRO * macros)
+{
+	EffectShader::InitFromFile(pDevice, filename, macros);
+
+	//Intialization Variable
+	m_pDeltaTime = m_pContent->GetVariableByName("g_DeltaTime")->AsVector();
+	m_pWorldViewProjMatrix = m_pContent->GetVariableByName("g_WorldViewProjMatrix")->AsMatrix();
+	m_pCameraPosition = m_pContent->GetVariableByName("g_CameraPosition")->AsVector();
+	m_pMaterial = m_pContent->GetVariableByName("g_Material");
+	m_pLights = m_pContent->GetVariableByName("g_Lights");
+	m_pInverseTransposeMatrix = m_pContent->GetVariableByName("g_InverseTransposeMatrix")->AsMatrix();
+	m_pWorldMatrix = m_pContent->GetVariableByName("g_WorldMatrix")->AsMatrix();
+}

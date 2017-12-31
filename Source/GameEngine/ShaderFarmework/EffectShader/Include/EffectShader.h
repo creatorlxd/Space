@@ -23,20 +23,30 @@ namespace SpaceGameEngine
 	{
 	public:
 		EffectShader();
-		~EffectShader();
-		void Release();
-		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
-		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
+		virtual ~EffectShader();
+		virtual void Release();
+		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
+		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
 
 		void SetTechnique(const std::string& filename);
 
 		EffectShader(const EffectShader&) = delete;
 		void operator = (const EffectShader& shader) = delete;
-	private:
+	protected:
 		ID3DX11Effect* m_pContent;
 	public:
 		ID3DX11EffectTechnique* m_pTechnique;
+	};
 
+	class DefaultEffectShader :public EffectShader
+	{
+	public:
+		DefaultEffectShader();
+		~DefaultEffectShader();
+		void Release();
+		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
+		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
+	public:
 		ID3DX11EffectMatrixVariable* m_pWorldViewProjMatrix;
 		ID3DX11EffectVectorVariable* m_pDeltaTime;
 		ID3DX11EffectVectorVariable* m_pCameraPosition;

@@ -490,7 +490,7 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 	m_IfUse4xMsaa = b;
 }
 
-EffectShader & SpaceGameEngine::Window::GetEffectShader()
+DefaultEffectShader & SpaceGameEngine::Window::GetEffectShader()
 {
 	return m_EffectShader;
 }
