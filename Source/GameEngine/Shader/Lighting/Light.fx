@@ -164,7 +164,7 @@ void ComputeCommonLight(Material material, Light light, float3 pos, float3 norma
 #define MaxLightSize 8
 struct Lights
 {
-	Light m_Content[8];
+	Light m_Content[MaxLightSize];
 	unsigned int m_Size[4];
 };
 
