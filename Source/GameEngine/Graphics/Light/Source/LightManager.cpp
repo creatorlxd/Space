@@ -130,19 +130,20 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 		return re;
 
 	XMFLOAT3 position = transform->GetPosition();
-	XMVECTOR vbuff1, vbuff2;
+	//XMVECTOR vbuff1, vbuff2;
 
 	for (auto i : m_DynamicLights)
 	{
 		if (i->m_IfOn)
 		{
-			vbuff1 = XMLoadFloat3(&position);
+			/*vbuff1 = XMLoadFloat3(&position);
 			vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
 			vbuff2 = XMVector3Length(vbuff2 - vbuff1);
 			if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 			{
 				re.push_back(i->m_Content);
-			}
+			}*/
+			re.push_back(i->m_Content);
 		}
 	}
 
@@ -165,13 +166,14 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 				auto i = m_Content[index];
 				if (i->m_IfOn)
 				{
-					vbuff1 = XMLoadFloat3(&position);
+					/*vbuff1 = XMLoadFloat3(&position);
 					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
 					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
 					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 					{
 						re.push_back(i->m_Content);
-					}
+					}*/
+					re.push_back(i->m_Content);
 				}
 			}
 		}
@@ -192,13 +194,14 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 						auto i = m_Content[index];
 						if (i->m_IfOn)
 						{
-							vbuff1 = XMLoadFloat3(&position);
+							/*vbuff1 = XMLoadFloat3(&position);
 							vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
 							vbuff2 = XMVector3Length(vbuff2 - vbuff1);
 							if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 							{
 								re.push_back(i->m_Content);
-							}
+							}*/
+							re.push_back(i->m_Content);
 						}
 					}
 				}
@@ -212,13 +215,14 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 				auto i = m_Content[index.second];
 				if (i->m_IfOn)
 				{
-					vbuff1 = XMLoadFloat3(&position);
+					/*vbuff1 = XMLoadFloat3(&position);
 					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
 					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
 					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 					{
 						re.push_back(i->m_Content);
-					}
+					}*/
+					re.push_back(i->m_Content);
 				}
 			}
 			if (re.size() > MaxLightSize)
