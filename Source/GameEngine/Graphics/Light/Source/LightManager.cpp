@@ -153,83 +153,98 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 	auto poctreenode = m_LightOctree.FindOctreeNode(position);
 	auto pnode = poctreenode;
 	auto pnode2 = pnode;
-	while (pnode != nullptr&&re.size() <= MaxLightSize)
+	if (poctreenode != nullptr)
 	{
-		if (pnode == poctreenode)
+		while (pnode != nullptr&&re.size() <= MaxLightSize)
 		{
-			Vector<unsigned int> content;
-			pnode->GetContent(content);
-			for (auto index : content)
+			if (pnode == poctreenode)
 			{
-				if (re.size() > MaxLightSize)
-					return re;
-				auto i = m_Content[index];
-				if (i->m_IfOn)
-				{
-					/*vbuff1 = XMLoadFloat3(&position);
-					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
-					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
-					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
-					{
-						re.push_back(i->m_Content);
-					}*/
-					re.push_back(i->m_Content);
-				}
-			}
-		}
-		else
-		{
-			for (auto pchild : pnode->m_ChildrenNode)
-			{
-				if (pchild != pnode2)
+				Vector<unsigned int> content;
+				pnode->GetContent(content);
+				for (auto index : content)
 				{
 					if (re.size() > MaxLightSize)
 						return re;
-					Vector<unsigned int> content;
-					pchild->GetContent(content);
-					for (auto index : content)
+					auto i = m_Content[index];
+					if (i->m_IfOn)
 					{
-						if (re.size() > MaxLightSize)
-							return re;
-						auto i = m_Content[index];
-						if (i->m_IfOn)
+						/*vbuff1 = XMLoadFloat3(&position);
+						vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+						vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+						if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
 						{
-							/*vbuff1 = XMLoadFloat3(&position);
-							vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
-							vbuff2 = XMVector3Length(vbuff2 - vbuff1);
-							if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
-							{
-								re.push_back(i->m_Content);
-							}*/
 							re.push_back(i->m_Content);
-						}
+						}*/
+						re.push_back(i->m_Content);
 					}
 				}
 			}
-			if (re.size() > MaxLightSize)
-				return re;
-			for (auto index : pnode->m_Content)
+			else
 			{
+				for (auto pchild : pnode->m_ChildrenNode)
+				{
+					if (pchild != pnode2)
+					{
+						if (re.size() > MaxLightSize)
+							return re;
+						Vector<unsigned int> content;
+						pchild->GetContent(content);
+						for (auto index : content)
+						{
+							if (re.size() > MaxLightSize)
+								return re;
+							auto i = m_Content[index];
+							if (i->m_IfOn)
+							{
+								/*vbuff1 = XMLoadFloat3(&position);
+								vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+								vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+								if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+								{
+									re.push_back(i->m_Content);
+								}*/
+								re.push_back(i->m_Content);
+							}
+						}
+					}
+				}
 				if (re.size() > MaxLightSize)
 					return re;
-				auto i = m_Content[index.second];
-				if (i->m_IfOn)
+				for (auto index : pnode->m_Content)
 				{
-					/*vbuff1 = XMLoadFloat3(&position);
-					vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
-					vbuff2 = XMVector3Length(vbuff2 - vbuff1);
-					if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+					if (re.size() > MaxLightSize)
+						return re;
+					auto i = m_Content[index.second];
+					if (i->m_IfOn)
 					{
+						/*vbuff1 = XMLoadFloat3(&position);
+						vbuff2 = XMLoadFloat3(&i->m_Content.m_Position);
+						vbuff2 = XMVector3Length(vbuff2 - vbuff1);
+						if (XMVectorGetX(vbuff2) <= i->m_Content.m_Range)
+						{
+							re.push_back(i->m_Content);
+						}*/
 						re.push_back(i->m_Content);
-					}*/
-					re.push_back(i->m_Content);
+					}
 				}
+				if (re.size() > MaxLightSize)
+					return re;
 			}
-			if (re.size() > MaxLightSize)
-				return re;
+			pnode2 = pnode;
+			pnode = pnode->m_pFather;
 		}
-		pnode2 = pnode;
-		pnode = pnode->m_pFather;
+	}
+	else
+	{
+		auto content = m_LightOctree.GetContent();
+		for (auto i : content)
+		{
+			if (re.size() > MaxLightSize)
+			{
+				return re;
+			}
+			re.push_back(m_Content[i]->m_Content);
+		}
 	}
 	return re;
 }
