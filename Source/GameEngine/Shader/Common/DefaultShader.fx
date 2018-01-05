@@ -32,6 +32,14 @@ cbuffer ObjectData : register(b1)
 
 Texture2D g_Texture;
 
+SamplerState g_SamplerState
+{
+	Filter = ANISOTROPIC;
+	MaxAnisotropy = 4;
+	AddressU = WRAP;
+	AddressV = WRAP;
+};
+
 struct DefaultVertexInput
 {
 	float3 m_Position : POSITION;
@@ -55,14 +63,23 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 	output.m_WorldPosition = mul(float4(input.m_Position, 1.0f), g_WorldMatrix).xyz;
 
 	output.m_Normal = mul(input.m_Normal,(float3x3)g_InverseTransposeMatrix);
-	output.m_TextureCoord = mul(float4(input.m_TextureCoord,0.0f,1.0f),g_TextureTransformMatrix);
+	output.m_TextureCoord = mul(float4(input.m_TextureCoord,0.0f,1.0f),g_TextureTransformMatrix).xy;
 
 	return output;
 }
 
 float4 PS(DefaultVertexOutput input) : SV_TARGET
 {
-	return GetColorByLights(g_Material,g_Lights,g_CameraPosition.xyz,input.m_WorldPosition,input.m_Normal);
+	float4 ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 litcolor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 texcolor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	GetColorByLightsEx(g_Material, g_Lights, g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal, ambient, diffuse, specular);
+	texcolor = g_Texture.Sample(g_SamplerState, input.m_TextureCoord);
+	litcolor = texcolor * (ambient + diffuse) + specular;
+	litcolor.a = g_Material.m_Diffuse.a*texcolor.a;
+	return litcolor;
 }
 
 technique11 MediumQuality
