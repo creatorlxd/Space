@@ -289,6 +289,9 @@
     <Filter Include="Math\Octree\Source">
       <UniqueIdentifier>{4474b145-10c8-4a69-9230-9fb536f61b43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DDSTextureLoader">
+      <UniqueIdentifier>{827f611b-fe2a-40b3-abd4-a9afb216d39c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -309,6 +312,9 @@
     </None>
     <None Include="Document\Document\Others\ToDoList.md">
       <Filter>Document\Document\Others</Filter>
+    </None>
+    <None Include="Source\GameEngine\DDSTextureLoader\dxerr.licenseheader">
+      <Filter>DDSTextureLoader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -465,6 +471,9 @@
     <ClInclude Include="Source\GameEngine\Math\Octree\Include\Octree.h">
       <Filter>Math\Octree\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h">
+      <Filter>DDSTextureLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -610,6 +619,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\Window.cpp">
       <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.cpp">
+      <Filter>DDSTextureLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

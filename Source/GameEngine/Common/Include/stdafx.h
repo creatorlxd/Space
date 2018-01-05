@@ -51,6 +51,7 @@ limitations under the License.
 
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 #include "ThirdParty/tinyxml2/include/tinyxml2.h"
+#include "ThirdParty/DirectXTex/include/DirectXTex.h"
 
 //-----------------------------------【库文件包含部分】---------------------------------------
 //	描述：包含程序所依赖的库文件
@@ -88,6 +89,20 @@ limitations under the License.
 #pragma comment(lib, "tinyxml2/lib/x86/Debug/tinyxml2.lib")
 #else
 #pragma comment(lib, "tinyxml2/lib/x86/Release/tinyxml2.lib")
+#endif
+#endif
+
+#ifdef _WIN64
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "DirectXTex/lib/x64/Debug/DirectXTex.lib")
+#else
+#pragma comment(lib, "DirectXTex/lib/x64/Release/DirectXTex.lib")
+#endif
+#else
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "DirectXTex/lib/x86/Debug/DirectXTex.lib")
+#else
+#pragma comment(lib, "DirectXTex/lib/x86/Release/DirectXTex.lib")
 #endif
 #endif
 

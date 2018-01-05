@@ -19,6 +19,7 @@ limitations under the License.
 #include "../Utility/Include/StringConverter.h"
 #include "../Utility/Include/InputDevice.h"
 #include "../Utility/Include/TimeTool.h"
+#include "DDSTextureLoader/DDSTextureLoader.h"
 
 namespace SpaceGameEngine
 {
