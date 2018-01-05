@@ -23,6 +23,7 @@ REGISTERCOMPONENTCLASS(TextureComponent);
 SpaceGameEngine::TextureComponent::TextureComponent()
 {
 	m_TypeName = STRING(TextureComponent);
+	m_FileName = "";
 
 	m_TextureTransformMatrix = XMMatrixIdentity();
 }
@@ -34,7 +35,7 @@ SpaceGameEngine::TextureComponent::~TextureComponent()
 
 void SpaceGameEngine::TextureComponent::Release()
 {
-
+	m_FileName = "";
 }
 
 void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filename, int mode)
@@ -42,14 +43,17 @@ void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filenam
 	m_Mode = mode;
 	if (m_Mode&SingleMode)
 	{
-		auto ptex = ReadAssetFromFile<TextureAsset>(filename);
-		m_Content.push_back(const_cast<TextureForShader*>(&(ptex->m_Content)));
+		m_FileName = filename;
 	}
 }
 
 void SpaceGameEngine::TextureComponent::Start()
 {
-	
+	if (m_Mode&SingleMode)
+	{
+		auto ptex = ReadAssetFromFile<TextureAsset>(m_FileName);
+		m_Content.push_back(const_cast<TextureForShader*>(&(ptex->m_Content)));
+	}
 }
 
 void SpaceGameEngine::TextureComponent::Run(float DeltaTime)

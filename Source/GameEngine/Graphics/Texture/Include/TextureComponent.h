@@ -40,5 +40,7 @@ namespace SpaceGameEngine
 	private:
 		Vector<TextureForShader*> m_Content;
 		XMMATRIX m_TextureTransformMatrix;
+		
+		std::string m_FileName;					//用于延迟初始化
 	};
 }
