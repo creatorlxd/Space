@@ -317,6 +317,7 @@
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MaterialAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MeshAsset.h" />
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\TextureAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h" />
@@ -339,6 +340,8 @@
     <ClInclude Include="Source\GameEngine\Graphics\Material\Include\MaterialComponent.h" />
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h" />
     <ClInclude Include="Source\GameEngine\Graphics\ObjectOctree\Include\ObjectOctree.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\Texture.h" />
+    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\TextureComponent.h" />
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Include\MathDefinition.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Include\XMathExtension.h" />
@@ -377,6 +380,7 @@
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MaterialAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MeshAsset.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\TextureAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp" />
@@ -399,6 +403,8 @@
     <ClCompile Include="Source\GameEngine\Graphics\Material\Source\MaterialComponent.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp" />
     <ClCompile Include="Source\GameEngine\Graphics\ObjectOctree\Source\ObjectOctree.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\Texture.cpp" />
+    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\TextureComponent.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForDebug|x64'">true</ExcludedFromBuild>

@@ -53,3 +53,8 @@ void SpaceGameEngine::MaterialComponent::Release()
 {
 	m_Content.clear();
 }
+
+void SpaceGameEngine::MaterialComponent::AddMaterial(const Material & m)
+{
+	m_Content.push_back(m);
+}

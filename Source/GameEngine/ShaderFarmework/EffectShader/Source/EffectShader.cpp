@@ -111,4 +111,6 @@ void SpaceGameEngine::DefaultEffectShader::InitFromFile(ID3D11Device * pDevice, 
 	m_pLights = m_pContent->GetVariableByName("g_Lights");
 	m_pInverseTransposeMatrix = m_pContent->GetVariableByName("g_InverseTransposeMatrix")->AsMatrix();
 	m_pWorldMatrix = m_pContent->GetVariableByName("g_WorldMatrix")->AsMatrix();
+	m_pTextureTransformMatrix = m_pContent->GetVariableByName("g_TextureTransformMatrix")->AsMatrix();
+	m_pTexture = m_pContent->GetVariableByName("g_Texture")->AsShaderResource();
 }

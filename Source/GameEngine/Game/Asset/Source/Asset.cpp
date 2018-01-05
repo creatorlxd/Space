@@ -19,6 +19,7 @@ limitations under the License.
 SpaceGameEngine::Asset::Asset()
 {
 	m_TypeName = "NullAsset";
+	m_FileName = "Null";
 }
 
 SpaceGameEngine::Asset::~Asset()

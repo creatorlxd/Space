@@ -54,5 +54,7 @@ namespace SpaceGameEngine
 		ID3DX11EffectVariable* m_pLights;
 		ID3DX11EffectMatrixVariable* m_pWorldMatrix;
 		ID3DX11EffectMatrixVariable* m_pInverseTransposeMatrix;
+		ID3DX11EffectMatrixVariable* m_pTextureTransformMatrix;
+		ID3DX11EffectShaderResourceVariable* m_pTexture;
 	};
 }

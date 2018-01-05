@@ -15,29 +15,16 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
-#include "Game/Asset/Include/MaterialAsset.h"
-#include "Game/Game/Include/Game.h"
+#include "Space.h"
 
 namespace SpaceGameEngine
 {
-	class MaterialComponent :public Component
+	struct TextureForShader
 	{
-	public:
-		MaterialComponent();
-		~MaterialComponent();
-
-		static const int SingleMode = 1;
-		static const int MultipleMode = 2;
-
-		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
-
-		void InitFromFile(const std::string& filename, int mode = 0);
-		void Run(float DeltaTime);
+		TextureForShader();
+		~TextureForShader();
 		void Release();
 
-		void AddMaterial(const Material& m);
-	private:
-		Vector<Material> m_Content;
+		ID3D11ShaderResourceView* m_pContent;
 	};
 }

@@ -14,30 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
-#include "Game/Asset/Include/MaterialAsset.h"
+#include "Asset.h"
 #include "Game/Game/Include/Game.h"
+#include "Graphics/Texture/Include/Texture.h"
 
 namespace SpaceGameEngine
 {
-	class MaterialComponent :public Component
+	struct TextureAsset :public Asset
 	{
-	public:
-		MaterialComponent();
-		~MaterialComponent();
+		TextureAsset();
+		void InitFromFile(const std::string& filename);
 
-		static const int SingleMode = 1;
-		static const int MultipleMode = 2;
+		TextureForShader m_Content;
 
-		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
-
-		void InitFromFile(const std::string& filename, int mode = 0);
-		void Run(float DeltaTime);
-		void Release();
-
-		void AddMaterial(const Material& m);
-	private:
-		Vector<Material> m_Content;
+		TextureAsset& operator = (const TextureAsset& t);
 	};
 }

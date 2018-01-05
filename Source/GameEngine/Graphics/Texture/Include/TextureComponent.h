@@ -16,28 +16,29 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
-#include "Game/Asset/Include/MaterialAsset.h"
-#include "Game/Game/Include/Game.h"
+#include "Texture.h"
+#include "Game/Asset/Include/TextureAsset.h"
 
 namespace SpaceGameEngine
 {
-	class MaterialComponent :public Component
+	class TextureComponent:public Component		//纹理组件，目前还不支持多纹理
 	{
 	public:
-		MaterialComponent();
-		~MaterialComponent();
-
 		static const int SingleMode = 1;
 		static const int MultipleMode = 2;
 
-		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
+		TextureComponent();
+		~TextureComponent();
+		void Release();
+		static ComponentManager::NewComponent<TextureComponent> NewComponent;
 
 		void InitFromFile(const std::string& filename, int mode = 0);
+		void Start();
 		void Run(float DeltaTime);
-		void Release();
 
-		void AddMaterial(const Material& m);
+		void SetTransformMatrix(const XMMATRIX& mat);
 	private:
-		Vector<Material> m_Content;
+		Vector<TextureForShader*> m_Content;
+		XMMATRIX m_TextureTransformMatrix;
 	};
 }

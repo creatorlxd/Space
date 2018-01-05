@@ -292,6 +292,15 @@
     <Filter Include="DDSTextureLoader">
       <UniqueIdentifier>{827f611b-fe2a-40b3-abd4-a9afb216d39c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Texture">
+      <UniqueIdentifier>{a8e1af1d-6838-4ff9-84ea-3bd201445325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Texture\Include">
+      <UniqueIdentifier>{4e470e81-dd60-4905-9416-eaad67a86984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Texture\Source">
+      <UniqueIdentifier>{1227c23f-f1c2-4949-9af7-0878b9621bf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -474,6 +483,15 @@
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h">
       <Filter>DDSTextureLoader</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\Texture.h">
+      <Filter>Graphics\Texture\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\TextureAsset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\TextureComponent.h">
+      <Filter>Graphics\Texture\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -622,6 +640,15 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.cpp">
       <Filter>DDSTextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\Texture.cpp">
+      <Filter>Graphics\Texture\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\TextureAsset.cpp">
+      <Filter>Game\Asset\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\TextureComponent.cpp">
+      <Filter>Graphics\Texture\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

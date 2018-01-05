@@ -27,7 +27,11 @@ cbuffer ObjectData : register(b1)
 	float4x4 g_WorldMatrix;
 	float4x4 g_InverseTransposeMatrix;
 	Material g_Material;
+	float4x4 g_TextureTransformMatrix;
 };
+
+Texture2D g_Texture;
+
 struct DefaultVertexInput
 {
 	float3 m_Position : POSITION;
@@ -51,7 +55,7 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 	output.m_WorldPosition = mul(float4(input.m_Position, 1.0f), g_WorldMatrix).xyz;
 
 	output.m_Normal = mul(input.m_Normal,(float3x3)g_InverseTransposeMatrix);
-	output.m_TextureCoord = input.m_TextureCoord;
+	output.m_TextureCoord = mul(float4(input.m_TextureCoord,0.0f,1.0f),g_TextureTransformMatrix);
 
 	return output;
 }
