@@ -322,7 +322,7 @@
     <None Include="Document\Document\Others\ToDoList.md">
       <Filter>Document\Document\Others</Filter>
     </None>
-    <None Include="Source\GameEngine\DDSTextureLoader\dxerr.licenseheader">
+    <None Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.licenseheader">
       <Filter>DDSTextureLoader</Filter>
     </None>
   </ItemGroup>
