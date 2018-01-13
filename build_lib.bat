@@ -1,0 +1,1 @@
+build.exe . .\build .\UnitTestForRelease .\x64\UnitTestForRelease

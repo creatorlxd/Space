@@ -258,3 +258,4 @@ paket-files/
 /UnitTestForRelease/
 /**/UnitTest.tlog
 /**/vc141.idb
+/build/
