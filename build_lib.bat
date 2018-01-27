@@ -1,1 +1,1 @@
-build.exe . .\build .\UnitTestForRelease .\x64\UnitTestForRelease
+build.exe . .\build .\BuildLibrary .\x64\BuildLibrary

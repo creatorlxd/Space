@@ -6,7 +6,7 @@
 #include "Math/Octree/Include/Octree.h"
 
 #pragma comment(lib,"MyUnitTest.lib")
-#pragma comment(lib,"Space~v1.0.lib")
+#pragma comment(lib,"Space.lib")
 
 using namespace MyUnitTest;
 
