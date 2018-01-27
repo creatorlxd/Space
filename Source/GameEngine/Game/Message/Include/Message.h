@@ -38,7 +38,7 @@ namespace SpaceGameEngine
 		void ReceiveMessage(unsigned int message);			//接受消息
 		unsigned int TakeOutMessage();					//取出消息
 		bool IfEmpty();								//是否为空
-		int Size();									//获取队列的大小
+		size_t Size();									//获取队列的大小
 		void Clear();								//清空队列
 		bool IfHaveMessage(unsigned int c);					//是否含有某个消息
 	private:

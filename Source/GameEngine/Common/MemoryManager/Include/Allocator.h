@@ -68,12 +68,12 @@ namespace SpaceGameEngine
 		size_t m_PageSize;		//^^^^^^^^^^^^^^^^^^^
 		size_t m_AlignmentSize;	//BlockSize+AlignmentSize=alignment=2^n
 		size_t m_BlockSize;
-		uint32_t m_BlocksPerPage;
+		size_t m_BlocksPerPage;
 
 		//以下皆为数量
-		uint32_t m_Pages;
-		uint32_t m_Blocks;
-		uint32_t m_FreeBlocks;
+		size_t m_Pages;
+		size_t m_Blocks;
+		size_t m_FreeBlocks;
 
 		Allocator(const Allocator& clone);
 		Allocator& operator = (const Allocator& rhs);

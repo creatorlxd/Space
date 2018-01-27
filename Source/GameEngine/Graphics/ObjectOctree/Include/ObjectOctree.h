@@ -69,7 +69,7 @@ namespace SpaceGameEngine
 		void Release();
 		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 	private:
-		int m_MaxIndicesSize;
+		size_t m_MaxIndicesSize;
 		ObjectOctreeNode m_RootNode;
 	};
 }

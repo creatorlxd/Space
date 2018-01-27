@@ -39,7 +39,7 @@ void SpaceGameEngine::LightManager::Release()
 	m_Content.clear();
 	m_DirectionLights.clear();
 	m_DynamicLights.clear();
-	m_FreeIndexList = Queue<unsigned int>();
+	m_FreeIndexList = Queue<size_t>();
 	m_LightOctree.Release();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
@@ -159,7 +159,7 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 		{
 			if (pnode == poctreenode)
 			{
-				Vector<unsigned int> content;
+				Vector<size_t> content;
 				pnode->GetContent(content);
 				for (auto index : content)
 				{
@@ -187,7 +187,7 @@ SpaceGameEngine::Vector<SpaceGameEngine::Light> SpaceGameEngine::LightManager::G
 					{
 						if (re.size() > MaxLightSize)
 							return re;
-						Vector<unsigned int> content;
+						Vector<size_t> content;
 						pchild->GetContent(content);
 						for (auto index : content)
 						{

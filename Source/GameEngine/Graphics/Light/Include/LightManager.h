@@ -57,8 +57,8 @@ namespace SpaceGameEngine
 		Vector<LightEx*> m_Content;		//不负责释放
 		Vector<LightEx*> m_DirectionLights;
 		Vector<LightEx*> m_DynamicLights;
-		Queue<unsigned int> m_FreeIndexList;
-		Octree<XMFLOAT3,unsigned int> m_LightOctree;
+		Queue<size_t> m_FreeIndexList;
+		Octree<XMFLOAT3,size_t> m_LightOctree;
 
 		static LightManager* sm_pThis;
 	};

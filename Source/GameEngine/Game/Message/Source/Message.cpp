@@ -58,7 +58,7 @@ bool SpaceGameEngine::Receiver::IfEmpty()
 	return m_MessageQueue.empty();
 }
 
-int SpaceGameEngine::Receiver::Size()
+size_t SpaceGameEngine::Receiver::Size()
 {
 	return m_MessageQueue.size();
 }
