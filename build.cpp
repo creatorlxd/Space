@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])
 	else
 		x64_lib = src;
 	//------------
-	search_copy(src, "Source\\GameEngine", {"h","hpp","hlsl","fx"}, path_format(des) + "include");
+	search_copy(src, "Source\\GameEngine", {"h","hpp","inl","hlsl","fx","lib"}, path_format(des) + "include");
 	search_copy(x86_lib, "", {"lib"}, path_format(des) + "lib\\x86");
 	search_copy(x64_lib, "", {"lib"}, path_format(des) + "lib\\x64");
 	return 0;
