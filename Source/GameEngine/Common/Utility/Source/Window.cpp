@@ -57,7 +57,8 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	case WM_SIZE:
 		SpaceEngineWindow->SetWindowWidth(LOWORD(lParam));
 		SpaceEngineWindow->SetWindowHeight(HIWORD(lParam));
-		SpaceEngineWindow->Resize();
+		if (SpaceEngineWindow->GetWindowWidth() != 0 | SpaceEngineWindow->GetWindowHeight() != 0)
+			SpaceEngineWindow->Resize();
 		break;
 	default:										//若上述case条件都不符合，则执行该default语句
 		return DefWindowProc(hwnd, message, wParam, lParam);		//调用缺省的窗口过程
