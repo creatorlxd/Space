@@ -134,6 +134,16 @@ XMMATRIX SpaceGameEngine::GetWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, X
 	return mrebuff;
 }
 
+XMFLOAT3 SpaceGameEngine::RotationVector(XMFLOAT3 rotation, XMFLOAT3 v)
+{
+	XMFLOAT3 re;
+	XMMATRIX rotationmat = XMMatrixRotationX(rotation.x)*XMMatrixRotationY(rotation.y)*XMMatrixRotationZ(rotation.z);
+	XMVECTOR ve = XMLoadFloat3(&v);
+	ve = XMVector3Transform(ve, rotationmat);
+	XMStoreFloat3(&re, ve);
+	return re;
+}
+
 XMFLOAT3 SpaceGameEngine::GetDirectionByRotation(XMFLOAT3 rotation)
 {
 	XMFLOAT3 re;
