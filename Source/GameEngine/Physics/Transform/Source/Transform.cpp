@@ -25,9 +25,6 @@ SpaceGameEngine::TransformComponent::TransformComponent()
 	m_Position = { 0,0,0 };
 	m_Rotation = { 0,0,0 };
 	m_Scale = { 1,1,1 };
-	m_DeltaPosition = { 0,0,0 };
-	m_DeltaRotation = { 0,0,0 };
-	m_DeltaScale = { 0,0,0 };
 }
 
 SpaceGameEngine::TransformComponent::~TransformComponent()
@@ -70,20 +67,12 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::TransformComponent::EveryFrameCleanUp()
-{
-	m_DeltaPosition = { 0,0,0 };
-	m_DeltaRotation = { 0,0,0 };
-	m_DeltaScale = { 0,0,0 };
-}
-
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 {
 	if (m_pFatherObject&&position != m_Position)
 	{
 		m_pFatherObject->ProduceMessage(this,Event::PositionChange);
 	}
-	m_DeltaPosition = Add(m_DeltaPosition, Substract(position, m_Position));
 	m_Position = position;
 }
 
@@ -93,7 +82,6 @@ void SpaceGameEngine::TransformComponent::SetRotation(const XMFLOAT3 & rotation)
 	{
 		m_pFatherObject->ProduceMessage(this, Event::RotationChange);
 	}
-	m_DeltaRotation = Add(m_DeltaRotation, Substract(rotation, m_Rotation));
 	m_Rotation = rotation;
 }
 
@@ -103,7 +91,6 @@ void SpaceGameEngine::TransformComponent::SetScale(const XMFLOAT3 & scale)
 	{
 		m_pFatherObject->ProduceMessage(this, Event::ScaleChange);
 	}
-	m_DeltaScale = Add(m_DeltaScale, Substract(scale, m_Scale));
 	m_Scale = scale;
 }
 
@@ -120,19 +107,4 @@ XMFLOAT3 SpaceGameEngine::TransformComponent::GetRotation()
 XMFLOAT3 SpaceGameEngine::TransformComponent::GetScale()
 {
 	return m_Scale;
-}
-
-XMFLOAT3 SpaceGameEngine::TransformComponent::GetDeltaPosition()
-{
-	return m_DeltaPosition;
-}
-
-XMFLOAT3 SpaceGameEngine::TransformComponent::GetDeltaRotation()
-{
-	return m_DeltaRotation;
-}
-
-XMFLOAT3 SpaceGameEngine::TransformComponent::GetDeltaScale()
-{
-	return m_DeltaScale;
 }

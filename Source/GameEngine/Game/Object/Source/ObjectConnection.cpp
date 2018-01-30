@@ -38,9 +38,12 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange) ||
 			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::ScaleChange))
 		{
-			m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(),m_pFatherTransform->GetDeltaPosition()));
-			m_pChildTransform->SetRotation(Add(m_pChildTransform->GetRotation(), m_pFatherTransform->GetDeltaRotation()));
-			m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), m_pFatherTransform->GetDeltaScale()));
+			m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(),Substract(m_pFatherTransform->GetPosition(),m_PositionBuffer)));
+			m_pChildTransform->SetRotation(Add(m_pChildTransform->GetRotation(), Substract(m_pFatherTransform->GetRotation(), m_RotationBuffer)));
+			m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), Substract(m_pFatherTransform->GetScale(), m_ScaleBuffer)));
+			m_PositionBuffer = m_pFatherTransform->GetPosition();
+			m_RotationBuffer = m_pFatherTransform->GetRotation();
+			m_ScaleBuffer = m_pFatherTransform->GetScale();
 		}
 	}
 }
@@ -49,6 +52,12 @@ void SpaceGameEngine::ConnectComponent::SetTransform(TransformComponent * father
 {
 	m_pFatherTransform = father;
 	m_pChildTransform = child;
+	if (father)
+	{
+		m_PositionBuffer = father->GetPosition();
+		m_RotationBuffer = father->GetRotation();
+		m_ScaleBuffer = father->GetScale();
+	}
 	m_IfInit = true;
 }
 

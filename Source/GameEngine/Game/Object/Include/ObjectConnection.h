@@ -37,6 +37,10 @@ namespace SpaceGameEngine
 		TransformComponent * m_pFatherTransform;
 		TransformComponent * m_pChildTransform;
 		bool m_IfInit;
+
+		XMFLOAT3 m_PositionBuffer;
+		XMFLOAT3 m_RotationBuffer;
+		XMFLOAT3 m_ScaleBuffer;
 	};
 
 	void ConnectObject(Object* father, Object* child);

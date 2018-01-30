@@ -45,7 +45,6 @@ namespace SpaceGameEngine
 
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Run(float DeltaTime);
-		void EveryFrameCleanUp();
 
 		void SetPosition(const XMFLOAT3& position);
 		void SetRotation(const XMFLOAT3& rotation);
@@ -55,16 +54,9 @@ namespace SpaceGameEngine
 		XMFLOAT3 GetRotation();
 		XMFLOAT3 GetScale();
 
-		XMFLOAT3 GetDeltaPosition();
-		XMFLOAT3 GetDeltaRotation();
-		XMFLOAT3 GetDeltaScale();
 	private:
 		XMFLOAT3 m_Position;								//位置坐标
 		XMFLOAT3 m_Rotation;								//旋转的弧度
-		XMFLOAT3 m_Scale;									//缩放的比例
-
-		XMFLOAT3 m_DeltaPosition;								
-		XMFLOAT3 m_DeltaRotation;								
-		XMFLOAT3 m_DeltaScale;									
+		XMFLOAT3 m_Scale;									//缩放的比例								
 	};
 }
