@@ -79,7 +79,7 @@ void SpaceGameEngine::TransformComponent::EveryFarmeCleanUp()
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 {
-	if (m_pFatherObject)
+	if (m_pFatherObject&&position != m_Position)
 	{
 		m_pFatherObject->ProduceMessage(this,Event::PositionChange);
 	}
@@ -89,7 +89,7 @@ void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 
 void SpaceGameEngine::TransformComponent::SetRotation(const XMFLOAT3 & rotation)
 {
-	if (m_pFatherObject)
+	if (m_pFatherObject&&rotation != m_Rotation)
 	{
 		m_pFatherObject->ProduceMessage(this, Event::RotationChange);
 	}
@@ -99,7 +99,7 @@ void SpaceGameEngine::TransformComponent::SetRotation(const XMFLOAT3 & rotation)
 
 void SpaceGameEngine::TransformComponent::SetScale(const XMFLOAT3 & scale)
 {
-	if (m_pFatherObject)
+	if (m_pFatherObject&&scale != m_Scale)
 	{
 		m_pFatherObject->ProduceMessage(this, Event::ScaleChange);
 	}
