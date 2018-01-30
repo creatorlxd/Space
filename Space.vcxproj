@@ -399,7 +399,7 @@
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h" />
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h" />
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ConnectComponent.h" />
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectConnection.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectFactory.h" />
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectInformation.h" />

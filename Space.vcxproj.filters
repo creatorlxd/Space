@@ -492,7 +492,7 @@
     <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\TextureComponent.h">
       <Filter>Graphics\Texture\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ConnectComponent.h">
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectConnection.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
   </ItemGroup>

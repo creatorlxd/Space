@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "../Include/ConnectComponent.h"
+#include "../Include/ObjectConnection.h"
 
 using namespace SpaceGameEngine;
 

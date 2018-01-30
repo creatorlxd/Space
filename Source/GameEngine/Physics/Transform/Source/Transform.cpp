@@ -70,7 +70,7 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::TransformComponent::EveryFarmeCleanUp()
+void SpaceGameEngine::TransformComponent::EveryFrameCleanUp()
 {
 	m_DeltaPosition = { 0,0,0 };
 	m_DeltaRotation = { 0,0,0 };

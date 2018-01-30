@@ -21,6 +21,7 @@ limitations under the License.
 #include "Game/Object/Include/ObjectManager.h"
 #include "Game/Object/Include/ObjectInformation.h"
 #include "Game/Object/Include/ObjectFactory.h"
+#include "Game/Object/Include/ObjectConnection.h"
 #include "Game/Game/Include/Game.h"
 #include "Game/Message/Include/Message.h"
 #include "Game/Game/Include/SafeGet.h"
