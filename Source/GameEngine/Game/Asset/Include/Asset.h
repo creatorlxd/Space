@@ -58,7 +58,7 @@ namespace SpaceGameEngine
 		auto rebuff = GetAssetManager().GetAsset(filename);
 		if (rebuff)
 		{
-			return reinterpret_cast<const T*>(rebuff);
+			return dynamic_cast<const T*>(rebuff);
 		}
 		else
 		{

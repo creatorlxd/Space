@@ -48,6 +48,8 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 * `void Run(float DeltaTime)`:  
 由其实例在其所在场景***每帧***时所执行的操作，如果你不需要也可以不写。
 
+* `void EveryFrameCleanUp()`:  
+每帧该组件要做的清理工作。如果你不需要也可以不写。
 * `void Release()`:  
 释放组件时的操作，如果你没有要释放的内容就不需要写。
 

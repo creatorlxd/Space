@@ -35,6 +35,10 @@ namespace SpaceGameEngine
 
 	bool operator != (const XMFLOAT4X4& m1, const XMFLOAT4X4& m2);
 
+	XMFLOAT3 Add(const XMFLOAT3& v1, const XMFLOAT3& v2);
+
+	XMFLOAT3 Substract(const XMFLOAT3& v1, const XMFLOAT3& v2);
+
 	XMFLOAT3 TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data);
 
 	XMMATRIX GetWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);

@@ -41,6 +41,7 @@ namespace SpaceGameEngine
 		virtual void InitFromFile(const std::string& filename, int mode = 0);
 		virtual void Start();			//在开始时执行
 		virtual void Run(float DeltaTime);//每帧运行时的操作
+		virtual void EveryFrameCleanUp();
 		virtual void Attach(Component* pc);	//成为...组件的依附
 		virtual void Release();				//释放
 		bool IfRun();						//是否每帧运行

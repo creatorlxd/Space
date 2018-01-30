@@ -62,6 +62,28 @@ bool SpaceGameEngine::operator != (const XMFLOAT4X4 & m1, const XMFLOAT4X4 & m2)
 	return !(m1 == m2);
 }
 
+XMFLOAT3 SpaceGameEngine::Add(const XMFLOAT3 & v1, const XMFLOAT3 & v2)
+{
+	XMVECTOR ve1, ve2;
+	ve1 = XMLoadFloat3(&v1);
+	ve2 = XMLoadFloat3(&v2);
+	ve2 = ve1 + ve2;
+	XMFLOAT3 re;
+	XMStoreFloat3(&re, ve2);
+	return re;
+}
+
+XMFLOAT3 SpaceGameEngine::Substract(const XMFLOAT3 & v1, const XMFLOAT3 & v2)
+{
+	XMVECTOR ve1, ve2;
+	ve1 = XMLoadFloat3(&v1);
+	ve2 = XMLoadFloat3(&v2);
+	ve2 = ve1 - ve2;
+	XMFLOAT3 re;
+	XMStoreFloat3(&re, ve2);
+	return re;
+}
+
 XMFLOAT3 SpaceGameEngine::TransformByWorldMatrix(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, XMFLOAT3 data)
 {
 	static XMMATRIX mrebuff, mbuff;

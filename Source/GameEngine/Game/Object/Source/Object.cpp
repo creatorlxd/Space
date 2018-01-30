@@ -38,6 +38,8 @@ SpaceGameEngine::Object::Object()
 	m_IfUse = true;
 	m_IfRun = true;
 	m_IfRender = true;
+	m_IfChild = false;
+	m_pFather = nullptr;
 }
 
 SpaceGameEngine::Object::~Object()
@@ -129,7 +131,22 @@ void SpaceGameEngine::Object::Run(float DeltaTime)
 		return;
 	}
 	RunComponentOnTree(m_pRootComponent, DeltaTime);
+	if (!m_Children.empty())
+	{
+		for (auto i : m_Children)
+		{
+			if (i->IfRun() && i->IfUse())
+				i->Run(DeltaTime);
+		}
+	}
 	m_Message.clear();
+}
+
+void SpaceGameEngine::Object::EveryFrameCleanUp()
+{
+	for (auto i : m_Components)
+		if (i.second->IfRun() && i.second->IfUse())
+			i.second->EveryFrameCleanUp();
 }
 
 void SpaceGameEngine::Object::Release()
@@ -143,7 +160,6 @@ void SpaceGameEngine::Object::Release()
 		ComponentManager::DestoryComponent(i.second);
 	m_Components.clear();
 	m_Message.clear();
-	m_pRootComponent = nullptr;
 }
 
 bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)
@@ -207,6 +223,57 @@ Component * SpaceGameEngine::Object::GetComponentByMessage(unsigned int message)
 		re = iter->second;
 	}
 	return re;
+}
+
+Vector<Object*>& SpaceGameEngine::Object::GetChildren()
+{
+	return m_Children;
+}
+
+void SpaceGameEngine::Object::AddChildObject(Object * po)
+{
+	if (po)
+		m_Children.push_back(po);
+	else
+		ThrowError("不能将空对象指针作为子对象");
+}
+
+void SpaceGameEngine::Object::DeleteChildObject(Object * po)
+{
+	auto iter = std::find(m_Children.begin(), m_Children.end(), po);
+	if (iter == m_Children.end())
+		ThrowError("没有该子对象");
+	else
+		m_Children.erase(iter);
+}
+
+bool SpaceGameEngine::Object::IfChild()
+{
+	return m_IfChild;
+}
+
+void SpaceGameEngine::Object::Attach(Object* po)
+{
+	if (po == nullptr)
+		ThrowError("不能链上空指针");
+	else
+	{
+		po->AddChildObject(this);
+		m_pFather = po;
+		m_IfChild = true;
+	}
+}
+
+void SpaceGameEngine::Object::Discon()
+{
+	if (m_IfChild)
+	{
+		m_IfChild = false;
+		m_pFather->DeleteChildObject(this);
+		m_pFather = nullptr;
+	}
+	else
+		ThrowError("该对象不是子对象");
 }
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)

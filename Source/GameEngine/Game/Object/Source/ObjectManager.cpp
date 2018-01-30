@@ -106,8 +106,13 @@ void SpaceGameEngine::ObjectManager::Run(float DeltaTime)
 {
 	for (auto i : m_Content)
 	{
-		if (i->IfUse() && i->IfRun())
+		if (i->IfUse() && i->IfRun() && (!i->IfChild()))
 			i->Run(DeltaTime);
+	}
+	for (auto i : m_Content)
+	{
+		if (i->IfUse() && i->IfRun())
+			i->EveryFrameCleanUp();
 	}
 }
 

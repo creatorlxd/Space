@@ -120,12 +120,17 @@ void SpaceGameEngine::Component::Run(float DeltaTime)
 
 }
 
+void SpaceGameEngine::Component::EveryFrameCleanUp()
+{
+
+}
+
 void SpaceGameEngine::Component::Attach(Component * pc)
 {
 	if (pc)
 	{
 		m_pFather = pc;
-		pc->m_Children.push_back(this);
+		pc->AddChildComponent(this);
 	}
 	else
 	{
@@ -137,10 +142,6 @@ void SpaceGameEngine::Component::Attach(Component * pc)
 void SpaceGameEngine::Component::Release()
 {
 	m_Children.clear();
-	m_pFather = nullptr;
-	m_pFatherObject = nullptr;
-	m_pAsset = nullptr;
-	m_Mode = 0;
 }
 
 bool SpaceGameEngine::Component::IfRun()

@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once 
 #include "stdafx.h"
 #include "Game/Component/Include/ComponentManager.h"
+
 namespace SpaceGameEngine
 {
 
@@ -36,6 +37,7 @@ namespace SpaceGameEngine
 		void InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames);	//从文件初始化
 		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
 		void Run(float DeltaTime);								//每帧运行时的操作
+		void EveryFrameCleanUp();
 		void Release();											//手动释放
 
 		bool SetRootComponent(const std::string& name);			//设置根组件
@@ -51,14 +53,29 @@ namespace SpaceGameEngine
 
 		void ProduceMessage(Component* from, unsigned int message);
 		Component* GetComponentByMessage(unsigned int message);
+
+		Vector<Object*>& GetChildren();
+		void AddChildObject(Object* po);
+		void DeleteChildObject(Object* po);
+		bool IfChild();
+
+		friend void ConnectObject(Object* father, Object* child);
+		friend void DisconObject(Object* child);
+	private:
+		void Attach(Object* po);
+		void Discon();						//断开
+
 	protected:
 		Map<std::string, Component*> m_Components;			//组件们...
 		Component* m_pRootComponent;							//根组件
 		Map<unsigned int, Component*> m_Message;
+		Object* m_pFather;									//父对象
+		Vector<Object*> m_Children;							//子对象
 
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行
 		bool m_IfRender;										//是否渲染
+		bool m_IfChild;											//是否是子对象
 	};
 
 	void RunComponentOnTree(Component* node, float DeltaTime);	//在树上运行组件(DFS)

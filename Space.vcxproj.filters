@@ -492,6 +492,9 @@
     <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\TextureComponent.h">
       <Filter>Graphics\Texture\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Object\Include\ConnectComponent.h">
+      <Filter>Game\Object\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -649,6 +652,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\TextureComponent.cpp">
       <Filter>Graphics\Texture\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ConnectComponent.cpp">
+      <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
