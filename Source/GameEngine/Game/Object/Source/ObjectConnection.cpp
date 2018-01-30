@@ -38,14 +38,14 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange) ||
 			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::ScaleChange))
 		{
-			m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(),Substract(m_pFatherTransform->GetPosition(),m_PositionBuffer)));
+			m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(), Substract(m_pFatherTransform->GetPosition(), m_PositionBuffer)));
 			m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), Substract(m_pFatherTransform->GetScale(), m_ScaleBuffer)));
 			if (m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
 			{
-				auto dis = Substract(m_pFatherTransform->GetPosition(), m_pChildTransform->GetPosition());
+				auto dis = Substract(m_pChildTransform->GetPosition(), m_pFatherTransform->GetPosition());
 				auto angle = Substract(m_pFatherTransform->GetRotation(), m_RotationBuffer);
 				dis = RotationVector(angle, dis);
-				m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(), dis));
+				m_pChildTransform->SetPosition(Add(dis,m_pFatherTransform->GetPosition()));
 				m_pChildTransform->SetRotation(Add(m_pChildTransform->GetRotation(), angle));
 			}
 			m_PositionBuffer = m_pFatherTransform->GetPosition();
