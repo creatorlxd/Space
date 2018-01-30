@@ -653,7 +653,7 @@
     <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\TextureComponent.cpp">
       <Filter>Graphics\Texture\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\ConnectComponent.cpp">
+    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectConnection.cpp">
       <Filter>Game\Object\Source</Filter>
     </ClCompile>
   </ItemGroup>
