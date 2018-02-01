@@ -16,6 +16,31 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/XMathExtension.h"
 
+bool SpaceGameEngine::FloatEqual(float f1, float f2)
+{
+	return std::fabs(f1 - f2) < FloatEpsilon ? true : false;
+}
+
+bool SpaceGameEngine::FloatLess(float f1, float f2)
+{
+	return FloatEqual(f1, f2) ? false : f1 < f2;
+}
+
+bool SpaceGameEngine::FloatMore(float f1, float f2)
+{
+	return FloatEqual(f1, f2) ? false : f1 > f2;
+}
+
+bool SpaceGameEngine::FloatLessOrEqual(float f1, float f2)
+{
+	return FloatEqual(f1, f2) ? true : f1 < f2;
+}
+
+bool SpaceGameEngine::FloatMoreOrEqual(float f1, float f2)
+{
+	return FloatEqual(f1, f2) ? true : f1 > f2;
+}
+
 bool SpaceGameEngine::operator < (const XMFLOAT3& v1, const XMFLOAT3& v2)
 {
 	if (v1.x < v2.x&&v1.y < v2.y&&v1.z < v2.z)

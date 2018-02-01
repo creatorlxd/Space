@@ -19,6 +19,17 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	const float FloatEpsilon = 0.000001f;
+	bool FloatEqual(float f1, float f2);
+
+	bool FloatLess(float f1, float f2);
+
+	bool FloatMore(float f1, float f2);
+
+	bool FloatLessOrEqual(float f1, float f2);
+
+	bool FloatMoreOrEqual(float f1, float f2);
+
 	bool operator < (const XMFLOAT3& v1, const XMFLOAT3& v2);
 
 	bool operator > (const XMFLOAT3& v1, const XMFLOAT3& v2);
