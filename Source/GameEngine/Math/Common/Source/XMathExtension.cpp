@@ -33,38 +33,52 @@ bool SpaceGameEngine::FloatMore(float f1, float f2)
 
 bool SpaceGameEngine::FloatLessOrEqual(float f1, float f2)
 {
-	return FloatEqual(f1, f2) ? true : f1 < f2;
+	return FloatEqual(f1, f2) ? true : f1 <= f2;
 }
 
 bool SpaceGameEngine::FloatMoreOrEqual(float f1, float f2)
 {
-	return FloatEqual(f1, f2) ? true : f1 > f2;
+	return FloatEqual(f1, f2) ? true : f1 >= f2;
 }
 
 bool SpaceGameEngine::operator < (const XMFLOAT3& v1, const XMFLOAT3& v2)
 {
-	if (v1.x < v2.x&&v1.y < v2.y&&v1.z < v2.z)
+	/*if (v1.x < v2.x&&v1.y < v2.y&&v1.z < v2.z)
 		return true;
 	else
-		return (v1.x < v2.x||v1.y < v2.y||v1.z < v2.z);
+		return (v1.x < v2.x||v1.y < v2.y||v1.z < v2.z);*/
+
+	if (FloatLess(v1.x, v2.x) && FloatLess(v1.y, v2.y) && FloatLess(v1.z, v2.z))
+		return true;
+	else
+		return (FloatLess(v1.x, v2.x) || FloatLess(v1.y, v2.y) || FloatLess(v1.z, v2.z));
 }
 
 bool SpaceGameEngine::operator > (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 {
-	if (v1.x > v2.x&&v1.y > v2.y&&v1.z > v2.z)
+	/*if (v1.x > v2.x&&v1.y > v2.y&&v1.z > v2.z)
 		return true;
 	else
-		return (v1.x > v2.x || v1.y > v2.y || v1.z > v2.z);
+		return (v1.x > v2.x || v1.y > v2.y || v1.z > v2.z);*/
+
+	if (FloatMore(v1.x, v2.x) && FloatMore(v1.y, v2.y) && FloatMore(v1.z, v2.z))
+		return true;
+	else
+		return (FloatMore(v1.x, v2.x) || FloatMore(v1.y, v2.y) || FloatMore(v1.z, v2.z));
 }
 
 bool SpaceGameEngine::operator == (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 {
-	return (v1.x == v2.x&&v1.y == v2.y&&v1.z == v2.z);
+	//return (v1.x == v2.x&&v1.y == v2.y&&v1.z == v2.z);
+
+	return (FloatEqual(v1.x, v2.x) && FloatEqual(v1.y, v2.y) && FloatEqual(v1.z, v2.z));
 }
 
 bool SpaceGameEngine::operator == (const XMFLOAT4 & v1, const XMFLOAT4 & v2)
 {
-	return (v1.x == v2.x&&v1.y == v2.y&&v1.z == v2.z&&v1.w == v2.w);
+	//return (v1.x == v2.x&&v1.y == v2.y&&v1.z == v2.z&&v1.w == v2.w);
+
+	return (FloatEqual(v1.x, v2.x) && FloatEqual(v1.y, v2.y) && FloatEqual(v1.z, v2.z) && FloatEqual(v1.w, v2.w));
 }
 
 bool SpaceGameEngine::operator != (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
@@ -72,14 +86,17 @@ bool SpaceGameEngine::operator != (const XMFLOAT3 & v1, const XMFLOAT3 & v2)
 	return !(v1 == v2);
 }
 
-bool SpaceGameEngine::operator < (const XMFLOAT2 & v1, const XMFLOAT2 & v2)
-{
-	return (v1.x < v2.x&&v1.y < v2.y);
-}
-
 bool SpaceGameEngine::operator == (const XMFLOAT4X4 & m1, const XMFLOAT4X4 & m2)
 {
-	return memcmp(&m1, &m2, sizeof(XMFLOAT4X4)) == 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (FloatEqual(m1.m[i][j], m2.m[i][j]) == false)
+				return false;
+		}
+	}
+	return true;
 }
 
 bool SpaceGameEngine::operator != (const XMFLOAT4X4 & m1, const XMFLOAT4X4 & m2)
