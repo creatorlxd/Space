@@ -1,4 +1,6 @@
 # To Do List
+* 将渲染系统抽象出来，可以顺带解决自定义shader的问题。
+
 * 解决浮点误差的问题，从`Math`出发，`XMathExtension`已完成。
 
 * 加入自定义shader组件。需要改动`Window`类
