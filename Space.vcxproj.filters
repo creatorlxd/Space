@@ -301,6 +301,15 @@
     <Filter Include="Graphics\Texture\Source">
       <UniqueIdentifier>{1227c23f-f1c2-4949-9af7-0878b9621bf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\RenderSystem">
+      <UniqueIdentifier>{42714294-5220-46a7-9a3e-ba4e7c1df780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\RenderSystem\Include">
+      <UniqueIdentifier>{9e09fd67-e19b-4e4e-a545-8dabba616938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\RenderSystem\Source">
+      <UniqueIdentifier>{c967c89c-52c9-4a8d-a2b7-1a5a8141614d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -495,6 +504,12 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectConnection.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\RenderSystem\Include\RenderSystem.h">
+      <Filter>Graphics\RenderSystem\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Graphics\RenderSystem\Include\RenderObject.h">
+      <Filter>Graphics\RenderSystem\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -655,6 +670,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectConnection.cpp">
       <Filter>Game\Object\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\RenderSystem\Source\RenderObject.cpp">
+      <Filter>Graphics\RenderSystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Graphics\RenderSystem\Source\RenderSystem.cpp">
+      <Filter>Graphics\RenderSystem\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

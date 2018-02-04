@@ -1,0 +1,55 @@
+/*
+Copyright 2018 creatorlxd
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+#pragma once
+#include "stdafx.h"
+#include "Game/Asset/Include/TransformAsset.h"
+#include "Game/Asset/Include/MaterialAsset.h"
+#include "Game/Asset/Include/TextureAsset.h"
+#include "Game/Asset/Include/LightAsset.h"
+#include "Game/Asset/Include/MeshAsset.h"
+#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "Game/Object/Include/Object.h"
+
+namespace SpaceGameEngine
+{
+	class RenderObject
+	{
+	public:
+		RenderObject();
+		~RenderObject();
+
+		void Init();
+		void Render();
+	public:
+		static const int ModelFileMode = 1;				//Model文件模式
+		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
+		static const int WholeMode = 4;					//Whole mode do not use object octree
+		static const int XAxisAlignedMode = 8;
+		static const int YAxisAlignedMode = 16;
+		static const int ZAxisAlignedMode = 32;
+	public:
+		DefaultEffectShader* m_pShader;
+		Object* m_pObject;
+
+		Vector<TransformAsset> m_TransformAsset;
+		Vector<MaterialAsset> m_MaterialAsset;
+		Vector<TextureAsset> m_TextureAsset;
+		MeshForModelFileAsset m_MeshForModelFileAsset;
+
+		int m_Mode;
+		bool m_IfRender;
+	};
+}

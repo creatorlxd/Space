@@ -21,6 +21,15 @@ SpaceGameEngine::TextureAsset::TextureAsset()
 	m_TypeName = "TextureAsset";
 }
 
+SpaceGameEngine::TextureAsset::TextureAsset(const TextureAsset & ta)
+{
+	if (ta.m_FileName != "Null")
+	{
+		m_Content.Release();
+		InitFromFile(ta.m_FileName);
+	}
+}
+
 void SpaceGameEngine::TextureAsset::InitFromFile(const std::string & filename)
 {
 	m_FileName = filename;
@@ -34,10 +43,6 @@ SpaceGameEngine::TextureAsset & SpaceGameEngine::TextureAsset::operator=(const T
 	{
 		m_Content.Release();
 		InitFromFile(t.m_FileName);
-	}
-	else
-	{
-		ThrowError("can not copy asset which have not be initialized");
 	}
 	return *this;
 }

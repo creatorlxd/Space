@@ -40,6 +40,7 @@ SpaceGameEngine::Object::Object()
 	m_IfRender = true;
 	m_IfChild = false;
 	m_pFather = nullptr;
+	m_pRenderObject = nullptr;
 }
 
 SpaceGameEngine::Object::~Object()
@@ -160,6 +161,7 @@ void SpaceGameEngine::Object::Release()
 		ComponentManager::DestoryComponent(i.second);
 	m_Components.clear();
 	m_Message.clear();
+	m_Children.clear();
 }
 
 bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)
@@ -250,6 +252,16 @@ void SpaceGameEngine::Object::DeleteChildObject(Object * po)
 bool SpaceGameEngine::Object::IfChild()
 {
 	return m_IfChild;
+}
+
+void SpaceGameEngine::Object::SetRenderObject(RenderObject * pro)
+{
+	m_pRenderObject = pro;
+}
+
+RenderObject * SpaceGameEngine::Object::GetRenderObject()
+{
+	return m_pRenderObject;
 }
 
 void SpaceGameEngine::Object::Attach(Object* po)

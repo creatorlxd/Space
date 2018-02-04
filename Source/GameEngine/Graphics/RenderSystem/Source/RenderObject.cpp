@@ -13,21 +13,26 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
-#include "Asset.h"
-#include "Game/Game/Include/Game.h"
-#include "Graphics/Texture/Include/Texture.h"
+#include "stdafx.h"
+#include "../Include/RenderObject.h"
 
-namespace SpaceGameEngine
+SpaceGameEngine::RenderObject::RenderObject()
 {
-	struct TextureAsset :public Asset
-	{
-		TextureAsset();
-		TextureAsset(const TextureAsset& ta);
-		void InitFromFile(const std::string& filename);
+	m_pShader = nullptr;
+	m_pObject = nullptr;
+	m_Mode = 0;
+	m_IfRender = true;
+}
 
-		TextureForShader m_Content;
+SpaceGameEngine::RenderObject::~RenderObject()
+{
 
-		TextureAsset& operator = (const TextureAsset& t);
-	};
+}
+
+void SpaceGameEngine::RenderObject::Init()
+{
+}
+
+void SpaceGameEngine::RenderObject::Render()
+{
 }

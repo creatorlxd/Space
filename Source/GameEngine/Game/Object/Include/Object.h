@@ -19,6 +19,7 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	class RenderObject;
 
 	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
@@ -61,7 +62,12 @@ namespace SpaceGameEngine
 
 		friend void ConnectObject(Object* father, Object* child);
 		friend void DisconObject(Object* child);
+
+		void SetRenderObject(RenderObject* pro);
+		RenderObject* GetRenderObject();
+
 	private:
+		
 		void Attach(Object* po);
 		void Discon();						//断开
 
@@ -71,6 +77,7 @@ namespace SpaceGameEngine
 		Map<unsigned int, Component*> m_Message;
 		Object* m_pFather;									//父对象
 		Vector<Object*> m_Children;							//子对象
+		RenderObject* m_pRenderObject;						//渲染对象
 
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行

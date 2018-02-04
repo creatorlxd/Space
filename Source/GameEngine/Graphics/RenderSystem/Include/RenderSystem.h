@@ -14,20 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "Asset.h"
-#include "Game/Game/Include/Game.h"
-#include "Graphics/Texture/Include/Texture.h"
+#include "stdafx.h"
+#include "RenderObject.h"
 
 namespace SpaceGameEngine
 {
-	struct TextureAsset :public Asset
+	class RenderSystem
 	{
-		TextureAsset();
-		TextureAsset(const TextureAsset& ta);
-		void InitFromFile(const std::string& filename);
+	public:
+		RenderSystem();
+		~RenderSystem();
 
-		TextureForShader m_Content;
+		void Release();
 
-		TextureAsset& operator = (const TextureAsset& t);
+		RenderObject* NewRenderObject();
+		void DeleteRenderObject(RenderObject* pro);
+	private:
+		Vector<RenderObject*> m_Content;
+		Queue<size_t> m_FreeIndexList;
 	};
 }
