@@ -29,6 +29,9 @@ namespace SpaceGameEngine
 
 		RenderObject* NewRenderObject();
 		void DeleteRenderObject(RenderObject* pro);
+
+		void Init();
+		void Render();
 	private:
 		Vector<RenderObject*> m_Content;
 		Queue<size_t> m_FreeIndexList;

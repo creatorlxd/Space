@@ -62,10 +62,29 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 		{
 			m_FreeIndexList.push(iter - m_Content.begin());
 			delete *iter;
+			*iter = nullptr;
 		}
 		else
 			ThrowError("do not have this RenderObject");
 	}
 	else
 		ThrowError("can not delete nullptr");
+}
+
+void SpaceGameEngine::RenderSystem::Init()
+{
+	for (auto i : m_Content)
+	{
+		if (i != nullptr)
+			i->Init();
+	}
+}
+
+void SpaceGameEngine::RenderSystem::Render()
+{
+	for (auto i : m_Content)
+	{
+		if (i != nullptr)
+			i->Render();
+	}
 }
