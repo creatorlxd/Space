@@ -256,6 +256,11 @@ void SpaceGameEngine::Object::DeleteChildObject(Object * po)
 		m_Children.erase(iter);
 }
 
+SpaceGameEngine::Object* SpaceGameEngine::Object::GetFatherObject()
+{
+	return m_pFather;
+}
+
 bool SpaceGameEngine::Object::IfChild()
 {
 	return m_IfChild;
@@ -297,10 +302,13 @@ void SpaceGameEngine::Object::Discon()
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)
 {
-	if (node->IfRun()&&node->IfUse())
-		node->Run(DeltaTime);
-	for (auto i : node->GetChildrenComponent())
+	if (node)
 	{
-		SpaceGameEngine::RunComponentOnTree(i, DeltaTime);
+		if (node->IfRun() && node->IfUse())
+			node->Run(DeltaTime);
+		for (auto i : node->GetChildrenComponent())
+		{
+			SpaceGameEngine::RunComponentOnTree(i, DeltaTime);
+		}
 	}
 }

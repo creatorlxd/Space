@@ -72,6 +72,11 @@ Object * SpaceGameEngine::ObjectManager::NewObject()
 
 void SpaceGameEngine::ObjectManager::DestoryObject(Object * po)
 {
+	if (po == nullptr)
+	{
+		ThrowError("can not delete nullptr");
+		return;
+	}
 	if (sm_pThis)
 		sm_pThis->DeleteObject(po);
 	else
@@ -84,6 +89,10 @@ bool SpaceGameEngine::ObjectManager::DeleteObject(Object * po)
 	{
 		if (m_Content[i] == po)
 		{
+			if (po->IfChild() && po->GetFatherObject())
+			{
+				po->GetFatherObject()->DeleteChildObject(po);
+			}
 			MemoryManager::Delete(po);
 			m_FreeIndexList.push(i);
 			m_Content[i] = nullptr;

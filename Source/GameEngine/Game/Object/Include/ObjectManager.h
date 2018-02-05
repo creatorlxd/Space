@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Object.h"
+
 namespace SpaceGameEngine
 {
 	class ObjectManager			//Object对象管理器

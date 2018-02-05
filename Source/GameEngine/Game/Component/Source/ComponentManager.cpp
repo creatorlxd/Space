@@ -89,6 +89,11 @@ void SpaceGameEngine::ComponentManager::Clear()
 
 void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
 {
+	if (pc == nullptr)
+	{
+		ThrowError("can not delete nullptr");
+		return;
+	}
 	if (sm_pThis)
 		sm_pThis->DeleteComponent(pc);
 	else

@@ -58,6 +58,7 @@ namespace SpaceGameEngine
 		Vector<Object*>& GetChildren();
 		void AddChildObject(Object* po);
 		void DeleteChildObject(Object* po);
+		Object* GetFatherObject();
 		bool IfChild();
 
 		friend void ConnectObject(Object* father, Object* child);
