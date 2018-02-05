@@ -26,10 +26,10 @@ SpaceGameEngine::EffectShader::EffectShader()
 
 SpaceGameEngine::EffectShader::~EffectShader()
 {
-	Release();
+	SafeRelease(m_pContent);
 }
 
-void SpaceGameEngine::EffectShader::Release()
+void SpaceGameEngine::EffectShader::Clear()
 {
 	SafeRelease(m_pContent);
 	m_pTechnique = nullptr;
@@ -79,12 +79,12 @@ SpaceGameEngine::DefaultEffectShader::DefaultEffectShader()
 
 SpaceGameEngine::DefaultEffectShader::~DefaultEffectShader()
 {
-	Release();
+	
 }
 
-void SpaceGameEngine::DefaultEffectShader::Release()
+void SpaceGameEngine::DefaultEffectShader::Clear()
 {
-	EffectShader::Release();
+	EffectShader::Clear();
 	m_pDeltaTime = nullptr;
 	m_pWorldViewProjMatrix = nullptr;
 	m_pCameraPosition = nullptr;

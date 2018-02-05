@@ -48,7 +48,8 @@ SpaceGameEngine::MemoryManager::MemoryManager()
 
 SpaceGameEngine::MemoryManager::~MemoryManager()
 {
-	Release();
+	delete[] m_pAllocators;
+	delete[] m_pBlockSizeContent;
 }
 
 void SpaceGameEngine::MemoryManager::Init()
@@ -75,7 +76,7 @@ void SpaceGameEngine::MemoryManager::Init()
 	}
 }
 
-void SpaceGameEngine::MemoryManager::Release()
+void SpaceGameEngine::MemoryManager::Clear()
 {
 	delete[] m_pAllocators;
 	delete[] m_pBlockSizeContent;

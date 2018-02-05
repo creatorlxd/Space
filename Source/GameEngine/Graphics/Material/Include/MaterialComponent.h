@@ -34,7 +34,7 @@ namespace SpaceGameEngine
 
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Run(float DeltaTime);
-		void Release();
+		void Clear();
 
 		void AddMaterial(const Material& m);
 	private:

@@ -38,10 +38,13 @@ SpaceGameEngine::CameraComponent::CameraComponent()
 
 SpaceGameEngine::CameraComponent::~CameraComponent()
 {
-	Release();
+	if (sm_pThis == this)
+	{
+		sm_pThis = nullptr;
+	}
 }
 
-void SpaceGameEngine::CameraComponent::Release()
+void SpaceGameEngine::CameraComponent::Clear()
 {
 	if (sm_pThis == this)
 	{

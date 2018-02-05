@@ -23,7 +23,7 @@ namespace SpaceGameEngine
 	{
 		TextureForShader();
 		~TextureForShader();
-		void Release();
+		void Clear();
 
 		ID3D11ShaderResourceView* m_pContent;
 	};

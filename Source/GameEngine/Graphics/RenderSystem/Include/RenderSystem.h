@@ -25,7 +25,7 @@ namespace SpaceGameEngine
 		RenderSystem();
 		~RenderSystem();
 
-		void Release();
+		void Clear();
 
 		RenderObject* NewRenderObject();
 		void DeleteRenderObject(RenderObject* pro);

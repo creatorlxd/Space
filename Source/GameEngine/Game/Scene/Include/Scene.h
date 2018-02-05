@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 		static Scene* GetMainScene();	//获取主场景
 		void Start();					//开始
 		void Run(float DeltaTime);		//每帧的运行
-		void Release();					//释放
+		void Clear();					//释放
 
 		bool AddObjectInformation(const std::string& name, Object* po);
 		bool DeleteObjectInformation(const std::string& name);

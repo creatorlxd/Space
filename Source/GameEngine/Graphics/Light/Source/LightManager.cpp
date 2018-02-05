@@ -31,16 +31,17 @@ SpaceGameEngine::LightManager::LightManager()
 
 SpaceGameEngine::LightManager::~LightManager()
 {
-	Release();
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
-void SpaceGameEngine::LightManager::Release()
+void SpaceGameEngine::LightManager::Clear()
 {
 	m_Content.clear();
 	m_DirectionLights.clear();
 	m_DynamicLights.clear();
 	m_FreeIndexList = Queue<size_t>();
-	m_LightOctree.Release();
+	m_LightOctree.Clear();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }

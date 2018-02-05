@@ -39,7 +39,7 @@ namespace SpaceGameEngine
 		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
 		void Run(float DeltaTime);								//每帧运行时的操作
 		void EveryFrameCleanUp();
-		void Release();											//手动释放
+		void Clear();											//手动释放
 
 		bool SetRootComponent(const std::string& name);			//设置根组件
 		Component* GetRootComponent();							//获取根组件

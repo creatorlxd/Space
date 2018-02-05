@@ -26,14 +26,19 @@ SpaceGameEngine::VertexShader::VertexShader()
 
 SpaceGameEngine::VertexShader::~VertexShader()
 {
-	Release();
+	SafeRelease(m_pContent);
+	SafeRelease(m_pBuffer);
+	SafeRelease(m_pReflection);
 }
 
-void SpaceGameEngine::VertexShader::Release()
+void SpaceGameEngine::VertexShader::Clear()
 {
 	SafeRelease(m_pContent);
 	SafeRelease(m_pBuffer);
 	SafeRelease(m_pReflection);
+	m_pContent = nullptr;
+	m_pBuffer = nullptr;
+	m_pReflection = nullptr;
 }
 
 void SpaceGameEngine::VertexShader::InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, const std::string& includefilename, const std::string& entryname, D3D_SHADER_MACRO* macros)

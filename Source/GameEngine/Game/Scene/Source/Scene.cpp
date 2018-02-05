@@ -26,7 +26,8 @@ SpaceGameEngine::Scene::Scene()
 
 SpaceGameEngine::Scene::~Scene()
 {
-	Release();
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
 void SpaceGameEngine::Scene::SetAsMainScene()
@@ -95,14 +96,14 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	m_ObjectManager.Run(DeltaTime);
 }
 
-void SpaceGameEngine::Scene::Release()
+void SpaceGameEngine::Scene::Clear()
 {
-	m_ObjectManager.Release();
-	m_GlobalOctree.Release();
-	m_ComponentManager.Release();
-	m_MessageManager.Release();
+	m_ObjectManager.Clear();
+	m_GlobalOctree.Clear();
+	m_ComponentManager.Clear();
+	m_MessageManager.Clear();
 	m_ObjectInformation.clear();
-	m_LightManager.Release();
+	m_LightManager.Clear();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }

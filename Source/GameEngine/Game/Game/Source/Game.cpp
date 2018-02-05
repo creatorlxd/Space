@@ -33,7 +33,8 @@ SpaceGameEngine::Game::Game()
 
 SpaceGameEngine::Game::~Game()
 {
-	Release();
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
 Game * SpaceGameEngine::Game::GetMainGame()
@@ -94,7 +95,7 @@ void SpaceGameEngine::Game::Run()
 	}
 }
 
-void SpaceGameEngine::Game::Release()
+void SpaceGameEngine::Game::Clear()
 {
 	if (sm_pThis == this)
 		sm_pThis = nullptr;

@@ -67,7 +67,7 @@ bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 	return false;
 }
 
-void SpaceGameEngine::ComponentManager::Release()
+void SpaceGameEngine::ComponentManager::Clear()
 {
 	if (m_FreeIndexList.size() == m_Content.size())
 	{
@@ -89,7 +89,6 @@ void SpaceGameEngine::ComponentManager::Release()
 
 void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
 {
-	pc->Release();
 	if (sm_pThis)
 		sm_pThis->DeleteComponent(pc);
 	else

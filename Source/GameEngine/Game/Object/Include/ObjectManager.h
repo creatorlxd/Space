@@ -32,7 +32,7 @@ namespace SpaceGameEngine
 
 		void Start();								//执行开始操作
 		void Run(float DeltaTime);					//执行每帧的操作
-		void Release();								//释放
+		void Clear();								//释放
 	private:
 		static ObjectManager* sm_pThis;
 		Vector<Object*> m_Content;

@@ -34,15 +34,19 @@ void SpaceGameEngine::Asset::InitFromFile(const std::string & filename)
 
 SpaceGameEngine::AssetManager::~AssetManager()
 {
-	Release();
+	for (const auto& i : m_Content)
+	{
+		MemoryManager::Delete(i.second);
+	}
 }
 
-void SpaceGameEngine::AssetManager::Release()
+void SpaceGameEngine::AssetManager::Clear()
 {
 	for (const auto& i : m_Content)
 	{
 		MemoryManager::Delete(i.second);
 	}
+	m_Content.clear();
 }
 
 bool SpaceGameEngine::AssetManager::AddAsset(Asset * pa)

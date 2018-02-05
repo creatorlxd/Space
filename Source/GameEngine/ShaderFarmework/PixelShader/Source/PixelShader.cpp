@@ -27,14 +27,19 @@ SpaceGameEngine::PixelShader::PixelShader()
 
 SpaceGameEngine::PixelShader::~PixelShader()
 {
-	Release();
+	SafeRelease(m_pContent);
+	SafeRelease(m_pBuffer);
+	SafeRelease(m_pReflection);
 }
 
-void SpaceGameEngine::PixelShader::Release()
+void SpaceGameEngine::PixelShader::Clear()
 {
 	SafeRelease(m_pContent);
 	SafeRelease(m_pBuffer);
 	SafeRelease(m_pReflection);
+	m_pContent = nullptr;
+	m_pBuffer = nullptr;
+	m_pReflection = nullptr;
 }
 
 void SpaceGameEngine::PixelShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR filename, const std::string & includefilename, const std::string & entryname, D3D_SHADER_MACRO * macros)

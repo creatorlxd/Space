@@ -37,7 +37,7 @@ bool SpaceGameEngine::operator==(const IndexTriangle & it1, const IndexTriangle 
 
 SpaceGameEngine::ObjectOctreeNode::~ObjectOctreeNode()
 {
-	Release();
+	
 }
 
 void SpaceGameEngine::ObjectOctreeNode::Init(const AxisAlignedBoundingBox & space, int deepth)
@@ -195,23 +195,26 @@ void SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation
 	}
 }
 
-void SpaceGameEngine::ObjectOctreeNode::Release()
+void SpaceGameEngine::ObjectOctreeNode::Clear()
 {
 	if (m_IfLeafNode)
 	{
-		m_Content.clear();
-		return;
+
 	}
 	else
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			m_ChildrenNode[i]->Release();
+			m_ChildrenNode[i]->Clear();
 			MemoryManager::Delete(m_ChildrenNode[i]);
+			m_ChildrenNode[i] = nullptr;
 		}
-		m_Content.clear();
 		m_IfLeafNode = true;
 	}
+	m_Content.clear();
+	m_VertexData = nullptr;
+	m_Space = AxisAlignedBoundingBox();
+	m_Deepth = 1;
 }
 
 void SpaceGameEngine::ObjectOctreeNode::GetIndices(Vector<unsigned int>& indices, unsigned int& index)
@@ -255,12 +258,12 @@ void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indice
 
 SpaceGameEngine::ObjectOctree::~ObjectOctree()
 {
-	Release();
+	
 }
 
-void SpaceGameEngine::ObjectOctree::Release()
+void SpaceGameEngine::ObjectOctree::Clear()
 {
-	m_RootNode.Release();
+	m_RootNode.Clear();
 }
 
 SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)

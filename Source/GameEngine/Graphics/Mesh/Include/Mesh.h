@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 
 		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
-		void Release();
+		void Clear();
 		~MeshComponent();
 
 		void InitFromMemory(int VertexSize, int IndexSize, DefaultVertex* pVertices, unsigned int* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）

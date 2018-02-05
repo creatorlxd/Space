@@ -91,10 +91,17 @@ SpaceGameEngine::MessageManager::MessageManager()
 
 SpaceGameEngine::MessageManager::~MessageManager()
 {
-	Release();
+	if (sm_pThis == this)
+	{
+		sm_pThis = nullptr;
+	}
+	for (auto i : m_Receivers)
+	{
+		MemoryManager::Delete(i.second);
+	}
 }
 
-void SpaceGameEngine::MessageManager::Release()
+void SpaceGameEngine::MessageManager::Clear()
 {
 	if (sm_pThis == this)
 	{
@@ -104,6 +111,9 @@ void SpaceGameEngine::MessageManager::Release()
 	{
 		MemoryManager::Delete(i.second);
 	}
+	m_Receivers.clear();
+	m_GlobalMessageQueue = Queue<Message>();
+	m_MaxSize = 256;
 }
 
 void SpaceGameEngine::MessageManager::SetAsMainManager()

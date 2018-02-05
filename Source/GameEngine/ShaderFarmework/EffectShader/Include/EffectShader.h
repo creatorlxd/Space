@@ -24,7 +24,7 @@ namespace SpaceGameEngine
 	public:
 		EffectShader();
 		virtual ~EffectShader();
-		virtual void Release();
+		virtual void Clear();
 		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
 		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
 
@@ -43,7 +43,7 @@ namespace SpaceGameEngine
 	public:
 		DefaultEffectShader();
 		~DefaultEffectShader();
-		void Release();
+		void Clear();
 		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
 		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
 	public:

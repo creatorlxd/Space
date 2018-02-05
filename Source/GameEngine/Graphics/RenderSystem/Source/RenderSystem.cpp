@@ -23,15 +23,33 @@ SpaceGameEngine::RenderSystem::RenderSystem()
 
 SpaceGameEngine::RenderSystem::~RenderSystem()
 {
-	Release();
+	if (m_FreeIndexList.size() == m_Content.size())
+	{
+
+	}
+	else
+	{
+		for (auto i : m_Content)
+		{
+			if (i)
+				MemoryManager::Delete(i);
+		}
+	}
 }
 
-void SpaceGameEngine::RenderSystem::Release()
+void SpaceGameEngine::RenderSystem::Clear()
 {
-	for (auto i : m_Content)
+	if (m_FreeIndexList.size() == m_Content.size())
 	{
-		if (i != nullptr)
-			delete i;
+
+	}
+	else
+	{
+		for (auto i : m_Content)
+		{
+			if (i)
+				MemoryManager::Delete(i);
+		}
 	}
 	m_FreeIndexList = Queue<size_t>();
 }

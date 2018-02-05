@@ -83,7 +83,7 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		auto content = test.GetContent();
 		for (auto i : content)
 			cout << i << endl;
-		test.Release();
+		test.Clear();
 	}
 	TEST_METHOD_END,
 	TEST_METHOD_BEGIN(TestXMVector)

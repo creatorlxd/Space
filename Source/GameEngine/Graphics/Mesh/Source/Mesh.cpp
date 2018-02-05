@@ -28,14 +28,14 @@ SpaceGameEngine::MeshComponent::MeshComponent() :m_ObjectOctree(&m_Vertices)
 	m_pGlobalOctreeNode = nullptr;
 }
 
-void SpaceGameEngine::MeshComponent::Release()
+void SpaceGameEngine::MeshComponent::Clear()
 {
-	if (m_pTransform)
+	if (m_pTransform && (m_Mode&MeshComponent::DynamicMode) == 0)
 	{
 		Scene::GetMainScene()->m_GlobalOctree.DeleteObject(m_pFatherObject);
 	}
 	if ((m_Mode&MeshComponent::WholeMode) == 0)
-		m_ObjectOctree.Release();
+		m_ObjectOctree.Clear();
 	SafeRelease(m_pVertexBuffer);
 	SafeRelease(m_pIndexBuffer);
 	m_Vertices.clear();
@@ -48,7 +48,8 @@ void SpaceGameEngine::MeshComponent::Release()
 
 SpaceGameEngine::MeshComponent::~MeshComponent()
 {
-	Release();
+	SafeRelease(m_pVertexBuffer);
+	SafeRelease(m_pIndexBuffer);
 }
 
 void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSize, DefaultVertex * pVertices, unsigned int* pIndices)

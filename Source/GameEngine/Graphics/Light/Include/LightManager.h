@@ -43,7 +43,7 @@ namespace SpaceGameEngine
 
 		LightManager();
 		~LightManager();
-		void Release();
+		void Clear();
 
 		void InsertLight(LightEx* plight);
 		void UpdateLight(LightEx* plight);

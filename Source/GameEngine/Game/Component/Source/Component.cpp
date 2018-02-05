@@ -25,11 +25,12 @@ SpaceGameEngine::Component::Component()
 	m_pFather = nullptr;
 	m_pFatherObject = nullptr;
 	m_Mode = 0;
+	m_pAsset = nullptr;
 }
 
 SpaceGameEngine::Component::~Component()
 {
-	Release();
+	
 }
 
 std::string SpaceGameEngine::Component::GetTypeName()
@@ -139,9 +140,16 @@ void SpaceGameEngine::Component::Attach(Component * pc)
 	}
 }
 
-void SpaceGameEngine::Component::Release()
+void SpaceGameEngine::Component::Clear()
 {
 	m_Children.clear();
+	m_TypeName = "NullType";
+	m_IfRun = true;
+	m_IfUse = true;
+	m_pFather = nullptr;
+	m_pFatherObject = nullptr;
+	m_Mode = 0;
+	m_pAsset = nullptr;
 }
 
 bool SpaceGameEngine::Component::IfRun()

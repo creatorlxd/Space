@@ -40,7 +40,6 @@ namespace SpaceGameEngine
 		~Window();
 		void SetWindow(LPCTSTR title = L"SpaceEngineWindow", DWORD width = 800, DWORD height = 600);			//设置窗口信息
 		virtual HRESULT InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd, void(*WindowLoop)() = DefaultWindowLoop, void(*InitAction)() = DefaultInitAction);	//初始化，需先SetWindow
-		virtual void Release();							//释放窗口
 		void BeginPrint();								//开始D3D绘制
 		void EndPrint();								//结束D3D绘制
 		HWND GetHwnd();									//获取窗口句柄
@@ -75,6 +74,9 @@ namespace SpaceGameEngine
 		RenderQuality GetRenderQuality();
 		void SetRenderQuality(const RenderQuality& rq);
 	protected:
+		virtual void Release();							//释放窗口
+		bool m_IfReleased;
+
 		static Window* sm_pThis;
 
 		ID3D11Device* m_pD3DDevice;

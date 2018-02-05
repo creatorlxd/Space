@@ -34,7 +34,8 @@ SpaceGameEngine::ObjectManager::~ObjectManager()
 	{
 		for (auto i : m_Content)
 		{
-			MemoryManager::Delete(i);
+			if (i)
+				MemoryManager::Delete(i);
 		}
 	}
 	if (sm_pThis == this)
@@ -71,7 +72,6 @@ Object * SpaceGameEngine::ObjectManager::NewObject()
 
 void SpaceGameEngine::ObjectManager::DestoryObject(Object * po)
 {
-	po->Release();
 	if (sm_pThis)
 		sm_pThis->DeleteObject(po);
 	else
@@ -116,7 +116,7 @@ void SpaceGameEngine::ObjectManager::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::ObjectManager::Release()
+void SpaceGameEngine::ObjectManager::Clear()
 {
 	if (m_FreeIndexList.size() == m_Content.size())
 	{
@@ -126,7 +126,8 @@ void SpaceGameEngine::ObjectManager::Release()
 	{
 		for (auto i : m_Content)
 		{
-			MemoryManager::Delete(i);
+			if (i)
+				MemoryManager::Delete(i);
 		}
 	}
 	m_Content.clear();

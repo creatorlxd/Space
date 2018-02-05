@@ -30,10 +30,10 @@ SpaceGameEngine::TextureComponent::TextureComponent()
 
 SpaceGameEngine::TextureComponent::~TextureComponent()
 {
-	Release();
+	
 }
 
-void SpaceGameEngine::TextureComponent::Release()
+void SpaceGameEngine::TextureComponent::Clear()
 {
 	m_FileName = "";
 }

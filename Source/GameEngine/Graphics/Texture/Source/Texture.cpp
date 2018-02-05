@@ -23,10 +23,11 @@ SpaceGameEngine::TextureForShader::TextureForShader()
 
 SpaceGameEngine::TextureForShader::~TextureForShader()
 {
-	Release();
+	if (m_pContent)
+		SafeRelease(m_pContent);
 }
 
-void SpaceGameEngine::TextureForShader::Release()
+void SpaceGameEngine::TextureForShader::Clear()
 {
 	if (m_pContent)
 		SafeRelease(m_pContent);

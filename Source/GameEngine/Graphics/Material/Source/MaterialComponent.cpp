@@ -27,7 +27,7 @@ SpaceGameEngine::MaterialComponent::MaterialComponent()
 
 SpaceGameEngine::MaterialComponent::~MaterialComponent()
 {
-	Release();
+
 }
 
 void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filename, int mode)
@@ -49,7 +49,7 @@ void SpaceGameEngine::MaterialComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::MaterialComponent::Release()
+void SpaceGameEngine::MaterialComponent::Clear()
 {
 	m_Content.clear();
 }

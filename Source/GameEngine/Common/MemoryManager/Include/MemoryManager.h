@@ -46,7 +46,7 @@ namespace SpaceGameEngine
 		~MemoryManager();
 
 		static void Init();
-		static void Release();
+		static void Clear();
 
 		static void* Allocate(size_t size);
 		static void Free(void* p, size_t size);

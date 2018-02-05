@@ -55,7 +55,7 @@ namespace SpaceGameEngine
 			}
 		};
 		bool DeleteComponent(Component* pc);		//删除一个组件
-		void Release();								//释放
+		void Clear();
 
 		static void DestoryComponent(Component* pc);
 

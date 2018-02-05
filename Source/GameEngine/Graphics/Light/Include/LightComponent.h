@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
-		void Release();
+		void Clear();
 
 		bool IfOn();
 		void ChangeIfOn(bool b);

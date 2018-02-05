@@ -29,7 +29,7 @@ namespace SpaceGameEngine
 
 		TextureComponent();
 		~TextureComponent();
-		void Release();
+		void Clear();
 		static ComponentManager::NewComponent<TextureComponent> NewComponent;
 
 		void InitFromFile(const std::string& filename, int mode = 0);

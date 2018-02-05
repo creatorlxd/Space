@@ -45,7 +45,7 @@ SpaceGameEngine::Object::Object()
 
 SpaceGameEngine::Object::~Object()
 {
-	Release();
+	
 }
 
 Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
@@ -150,7 +150,7 @@ void SpaceGameEngine::Object::EveryFrameCleanUp()
 			i.second->EveryFrameCleanUp();
 }
 
-void SpaceGameEngine::Object::Release()
+void SpaceGameEngine::Object::Clear()
 {
 	auto info = GetComponent("InformationComponent");
 	if (info)
@@ -162,6 +162,13 @@ void SpaceGameEngine::Object::Release()
 	m_Components.clear();
 	m_Message.clear();
 	m_Children.clear();
+	m_pRootComponent = nullptr;
+	m_IfUse = true;
+	m_IfRun = true;
+	m_IfRender = true;
+	m_IfChild = false;
+	m_pFather = nullptr;
+	m_pRenderObject = nullptr;
 }
 
 bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)

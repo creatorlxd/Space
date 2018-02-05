@@ -28,7 +28,10 @@ SpaceGameEngine::LightComponent::LightComponent()
 
 SpaceGameEngine::LightComponent::~LightComponent()
 {
-	Release();
+	if (m_Mode != 0)
+	{
+		Scene::GetMainScene()->m_LightManager.DeleteLight(&m_Content);
+	}
 }
 
 void SpaceGameEngine::LightComponent::InitFromFile(const std::string & filename, int mode)
@@ -67,7 +70,7 @@ void SpaceGameEngine::LightComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::LightComponent::Release()
+void SpaceGameEngine::LightComponent::Clear()
 {
 	if (m_Mode != 0)
 	{

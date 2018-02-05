@@ -27,7 +27,7 @@ SpaceGameEngine::InformationComponent::InformationComponent()
 
 SpaceGameEngine::InformationComponent::~InformationComponent()
 {
-	Release();
+	
 }
 
 void SpaceGameEngine::InformationComponent::Run(float DeltaTime)

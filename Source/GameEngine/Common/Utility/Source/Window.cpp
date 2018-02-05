@@ -82,6 +82,7 @@ Window * SpaceGameEngine::GetWindow()
 
 SpaceGameEngine::Window::Window()
 {
+	m_IfReleased = false;
 	m_Hwnd = NULL;
 	m_pD3DDevice = nullptr;
 	m_pD3DDeviceContext = nullptr;
@@ -175,21 +176,24 @@ HRESULT SpaceGameEngine::Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrev
 
 void SpaceGameEngine::Window::Release()
 {
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-	SafeRelease(m_pD3DDevice);
-	SafeRelease(m_pD3DDeviceContext);
-	SafeRelease(m_pSwapChain);
-	SafeRelease(m_pDepthStencilBuffer);
-	SafeRelease(m_pRenderTargetView);
-	SafeRelease(m_pDepthStencilView);
-	SafeRelease(m_pInputLayout);
-	SafeRelease(m_pRasterizerState);
-	if (!m_IfShowCursor)
+	if (!m_IfReleased)
 	{
-		ChangeIfShowCursor(true);
+		if (sm_pThis == this)
+			sm_pThis = nullptr;
+		SafeRelease(m_pD3DDevice);
+		SafeRelease(m_pD3DDeviceContext);
+		SafeRelease(m_pSwapChain);
+		SafeRelease(m_pDepthStencilBuffer);
+		SafeRelease(m_pRenderTargetView);
+		SafeRelease(m_pDepthStencilView);
+		SafeRelease(m_pInputLayout);
+		SafeRelease(m_pRasterizerState);
+		if (!m_IfShowCursor)
+		{
+			ChangeIfShowCursor(true);
+		}
+		m_IfReleased = true;
 	}
-	m_EffectShader.Release();
 }
 
 HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)

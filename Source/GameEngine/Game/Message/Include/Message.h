@@ -50,7 +50,7 @@ namespace SpaceGameEngine
 	public:
 		MessageManager();
 		~MessageManager();
-		void Release();
+		void Clear();
 
 		void SetAsMainManager();
 		static MessageManager* GetMainManager();
