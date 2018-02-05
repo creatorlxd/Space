@@ -28,10 +28,7 @@ SpaceGameEngine::LightComponent::LightComponent()
 
 SpaceGameEngine::LightComponent::~LightComponent()
 {
-	if (m_Mode != 0)
-	{
-		Scene::GetMainScene()->m_LightManager.DeleteLight(&m_Content);
-	}
+	
 }
 
 void SpaceGameEngine::LightComponent::InitFromFile(const std::string & filename, int mode)
