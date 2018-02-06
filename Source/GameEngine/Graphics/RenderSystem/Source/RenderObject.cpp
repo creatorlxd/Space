@@ -31,8 +31,15 @@ SpaceGameEngine::RenderObject::~RenderObject()
 
 void SpaceGameEngine::RenderObject::Init()
 {
+
 }
 
 void SpaceGameEngine::RenderObject::Render()
 {
+
+}
+
+void SpaceGameEngine::RenderObject::Clear()
+{
+
 }

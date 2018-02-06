@@ -33,6 +33,7 @@ namespace SpaceGameEngine
 
 		void Init();
 		void Render();
+		void Clear();
 	public:
 		static const int ModelFileMode = 1;				//Model文件模式
 		static const int DynamicMode = 2;				//Dynamic mode do not use global octree

@@ -56,7 +56,7 @@ void SpaceGameEngine::RenderSystem::Clear()
 
 SpaceGameEngine::RenderObject * SpaceGameEngine::RenderSystem::NewRenderObject()
 {
-	RenderObject* re = new RenderObject();
+	RenderObject* re = MemoryManager::New<RenderObject>();
 
 	if (m_FreeIndexList.empty())
 	{
@@ -79,7 +79,8 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 		if (iter != m_Content.end())
 		{
 			m_FreeIndexList.push(iter - m_Content.begin());
-			delete *iter;
+			(*iter)->Clear();
+			MemoryManager::Delete(*iter);
 			*iter = nullptr;
 		}
 		else
