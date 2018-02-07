@@ -60,5 +60,11 @@ void SpaceGameEngine::MaterialComponent::Run(float DeltaTime)
 
 void SpaceGameEngine::MaterialComponent::Clear()
 {
-	
+	if (m_Mode == SingleMode)
+	{
+		if (m_pFatherObject->GetRenderObject())
+		{
+			*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+		}
+	}
 }

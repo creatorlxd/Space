@@ -65,6 +65,7 @@ bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 					i->Attach(pc->GetFatherComponent());
 				pc->GetFatherComponent()->DeleteChildComponent(pc);
 			}
+			pc->Clear();
 			MemoryManager::Delete(pc);
 			m_FreeIndexList.push(i);
 			m_Content[i] = nullptr;

@@ -75,6 +75,18 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 	}
 }
 
+void SpaceGameEngine::TransformComponent::Clear()
+{
+	if (m_Mode&ForRenderingMode)
+	{
+		if (m_pFatherObject->GetRenderObject())
+		{
+			RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
+			m_pFatherObject->SetRenderObject(nullptr);
+		}
+	}
+}
+
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)
 {
 	if (m_pFatherObject&&position != m_Position)

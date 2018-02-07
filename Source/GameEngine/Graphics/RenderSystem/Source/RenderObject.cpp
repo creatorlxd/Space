@@ -203,6 +203,14 @@ void SpaceGameEngine::RenderObject::Clear()
 			}
 		}
 	}
+	m_pObject = nullptr;
+	m_Mode = 0;
+	m_IfRender = true;
+	m_Type = RenderObjectType::Unkown;
+	m_pVertexBuffer = nullptr;
+	m_pIndexBuffer = nullptr;
+	m_pGlobalOctreeNode = nullptr;
+	m_pGlobalOctreeNode = nullptr;
 }
 
 void SpaceGameEngine::RenderObject::InitVertexBuffer()

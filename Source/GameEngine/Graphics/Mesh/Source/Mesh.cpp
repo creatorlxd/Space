@@ -26,7 +26,13 @@ SpaceGameEngine::MeshComponent::MeshComponent()
 
 void SpaceGameEngine::MeshComponent::Clear()
 {
-	
+	if (m_Mode&ModelFileMode)
+	{
+		if (m_pFatherObject->GetRenderObject())
+		{
+			m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
+		}
+	}
 }
 
 SpaceGameEngine::MeshComponent::~MeshComponent()

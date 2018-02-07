@@ -41,6 +41,7 @@ namespace SpaceGameEngine
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
+		void Clear();
 
 		void SetPosition(const XMFLOAT3& position);
 		void SetRotation(const XMFLOAT3& rotation);
