@@ -48,7 +48,7 @@ namespace SpaceGameEngine
 		static const int YAxisAlignedMode = 16;
 		static const int ZAxisAlignedMode = 32;
 	public:
-		DefaultEffectShader* m_pShader;
+		Vector<DefaultEffectShader*> m_Shader;
 		Object* m_pObject;
 
 		Vector<TransformAsset> m_TransformAsset;

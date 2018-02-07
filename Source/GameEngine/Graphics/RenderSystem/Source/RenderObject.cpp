@@ -18,7 +18,6 @@ limitations under the License.
 
 SpaceGameEngine::RenderObject::RenderObject()
 {
-	m_pShader = nullptr;
 	m_pObject = nullptr;
 	m_Mode = 0;
 	m_IfRender = true;
@@ -34,9 +33,9 @@ void SpaceGameEngine::RenderObject::Init()
 {
 	if (m_Type == RenderObjectType::Model)
 	{
-		if (m_pShader == nullptr)
+		if (m_Shader.empty())
 		{
-			m_pShader = &SpaceEngineWindow->GetEffectShader();
+			m_Shader.push_back(&SpaceEngineWindow->GetEffectShader());
 		}
 
 

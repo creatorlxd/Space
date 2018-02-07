@@ -60,7 +60,7 @@ void SpaceGameEngine::TextureComponent::Run(float DeltaTime)
 {
 	if (m_Mode&SingleMode)
 	{
-		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShaders();
+		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShader();
 		for (auto i : shaders)
 		{
 			i->m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureTransformMatrix));

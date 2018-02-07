@@ -62,7 +62,7 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 
 		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SceneData::m_ViewMatrix)*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
 		
-		auto shaders = SpaceEngineWindow->GetDefaultEffectShaders();
+		auto shaders = SpaceEngineWindow->GetDefaultEffectShader();
 		for (auto i : shaders)
 		{
 			i->m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));

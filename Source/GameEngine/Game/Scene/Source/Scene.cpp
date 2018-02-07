@@ -88,7 +88,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 		lights.m_Content[lights.m_Size[0]++] = i;
 	}
 	
-	auto shaders = SpaceEngineWindow->GetDefaultEffectShaders();
+	auto shaders = SpaceEngineWindow->GetDefaultEffectShader();
 	for (auto i : shaders)
 	{
 		i->m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));

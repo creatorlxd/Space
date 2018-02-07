@@ -66,7 +66,7 @@ namespace SpaceGameEngine
 
 		void InitDefaultEffectShaderFromFile(const std::string& filename,DefaultEffectShader& shader);
 		DefaultEffectShader& GetEffectShader();
-		Vector<DefaultEffectShader*>& GetDefaultEffectShaders();
+		Vector<DefaultEffectShader*>& GetDefaultEffectShader();
 
 		void SetDefaultState();							//设置默认状态
 
@@ -98,7 +98,7 @@ namespace SpaceGameEngine
 		ID3D11RasterizerState* m_pRasterizerState;
 		
 		DefaultEffectShader m_EffectShader;
-		Vector<DefaultEffectShader*> m_DefaultEffectShaders;
+		Vector<DefaultEffectShader*> m_DefaultEffectShader;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

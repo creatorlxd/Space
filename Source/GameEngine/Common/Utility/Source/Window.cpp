@@ -505,7 +505,7 @@ void SpaceGameEngine::Window::InitDefaultEffectShaderFromFile(const std::string 
 		shader.m_pTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
 		SetDefaultInputLayout(m_pD3DDevice, passDesc.pIAInputSignature, passDesc.IAInputSignatureSize, &m_pInputLayout);
 	
-		m_DefaultEffectShaders.push_back(&shader);
+		m_DefaultEffectShader.push_back(&shader);
 	}
 	else
 	{
@@ -518,9 +518,9 @@ DefaultEffectShader & SpaceGameEngine::Window::GetEffectShader()
 	return m_EffectShader;
 }
 
-Vector<DefaultEffectShader*>& SpaceGameEngine::Window::GetDefaultEffectShaders()
+Vector<DefaultEffectShader*>& SpaceGameEngine::Window::GetDefaultEffectShader()
 {
-	return m_DefaultEffectShaders;
+	return m_DefaultEffectShader;
 }
 
 void SpaceGameEngine::Window::SetDefaultState()
