@@ -210,7 +210,8 @@ void SpaceGameEngine::RenderObject::Clear()
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
 	m_pGlobalOctreeNode = nullptr;
-	m_pGlobalOctreeNode = nullptr;
+	m_Space = AxisAlignedBoundingBox();
+	m_BaseSpace = AxisAlignedBoundingBox();
 }
 
 void SpaceGameEngine::RenderObject::InitVertexBuffer()

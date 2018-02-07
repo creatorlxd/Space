@@ -31,6 +31,8 @@ void SpaceGameEngine::MeshComponent::Clear()
 		if (m_pFatherObject->GetRenderObject())
 		{
 			m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
+			SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+			SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
 		}
 	}
 	Component::Clear();
