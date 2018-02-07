@@ -190,6 +190,7 @@ void SpaceGameEngine::Scene::DeleteObject(Object * po)
 		if (po->GetRenderObject())
 		{
 			m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
+			po->SetRenderObject(nullptr);
 		}
 		m_ObjectManager.DeleteObject(po);
 	}
