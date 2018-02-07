@@ -283,6 +283,11 @@ HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 	SetDefaultResterizerState(m_pD3DDevice, &m_pRasterizerState);
 
 	m_pInitAction();
+	
+	for (auto i : m_InitializationDefaultEffectShaderList)
+		InitDefaultEffectShaderFromFile(i.second, *i.first);
+	m_InitializationDefaultEffectShaderList.clear();
+
 	return S_OK;
 }
 
@@ -478,27 +483,34 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 
 void SpaceGameEngine::Window::InitDefaultEffectShaderFromFile(const std::string & filename, DefaultEffectShader & shader)
 {
-	shader.InitFromFile(m_pD3DDevice, StringToWString(filename).c_str());
-	switch (m_RenderQuality)
+	if (m_IfBegin)
 	{
-	case SpaceGameEngine::RenderQuality::LowQuality:
-		shader.SetTechnique("LowQuality");
-		break;
-	case SpaceGameEngine::RenderQuality::MediumQuality:
-		shader.SetTechnique("MediumQuality");
-		break;
-	case SpaceGameEngine::RenderQuality::HighQuality:
-		shader.SetTechnique("HighQuality");
-		break;
-	default:
-		shader.SetTechnique("MediumQuality");
-		break;
+		shader.InitFromFile(m_pD3DDevice, StringToWString(filename).c_str());
+		switch (m_RenderQuality)
+		{
+		case SpaceGameEngine::RenderQuality::LowQuality:
+			shader.SetTechnique("LowQuality");
+			break;
+		case SpaceGameEngine::RenderQuality::MediumQuality:
+			shader.SetTechnique("MediumQuality");
+			break;
+		case SpaceGameEngine::RenderQuality::HighQuality:
+			shader.SetTechnique("HighQuality");
+			break;
+		default:
+			shader.SetTechnique("MediumQuality");
+			break;
+		}
+		D3DX11_PASS_DESC passDesc;
+		shader.m_pTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
+		SetDefaultInputLayout(m_pD3DDevice, passDesc.pIAInputSignature, passDesc.IAInputSignatureSize, &m_pInputLayout);
+	
+		m_DefaultEffectShaders.push_back(&shader);
 	}
-	D3DX11_PASS_DESC passDesc;
-	shader.m_pTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
-	SetDefaultInputLayout(m_pD3DDevice, passDesc.pIAInputSignature, passDesc.IAInputSignatureSize, &m_pInputLayout);
-
-	m_DefaultEffectShaders.push_back(&shader);
+	else
+	{
+		m_InitializationDefaultEffectShaderList.push_back(std::make_pair(&shader, filename));
+	}
 }
 
 DefaultEffectShader & SpaceGameEngine::Window::GetEffectShader()

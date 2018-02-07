@@ -34,6 +34,11 @@ void SpaceGameEngine::RenderObject::Init()
 {
 	if (m_Type == RenderObjectType::Model)
 	{
+		if (m_pShader == nullptr)
+		{
+			m_pShader = &SpaceEngineWindow->GetEffectShader();
+		}
+
 
 	}
 }

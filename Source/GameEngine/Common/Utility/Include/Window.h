@@ -75,6 +75,8 @@ namespace SpaceGameEngine
 
 		RenderQuality GetRenderQuality();
 		void SetRenderQuality(const RenderQuality& rq);
+	private:
+		Vector<std::pair<DefaultEffectShader*, std::string>> m_InitializationDefaultEffectShaderList;
 	protected:
 		virtual void Release();							//ÊÍ·Å´°¿Ú
 		bool m_IfReleased;
