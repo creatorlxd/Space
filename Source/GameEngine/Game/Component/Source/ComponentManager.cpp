@@ -102,8 +102,10 @@ void SpaceGameEngine::ComponentManager::DestoryComponent(Component * pc)
 		return;
 	}
 	if (sm_pThis)
+	{
 		if (!sm_pThis->DeleteComponent(pc))
 			ThrowError("do not have this component");
+	}
 	else
 		ThrowError("当前未设定组件管理器");
 }

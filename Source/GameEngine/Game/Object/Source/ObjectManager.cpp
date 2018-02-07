@@ -78,8 +78,10 @@ void SpaceGameEngine::ObjectManager::DestoryObject(Object * po)
 		return;
 	}
 	if (sm_pThis)
-		if(!sm_pThis->DeleteObject(po))
+	{
+		if (!sm_pThis->DeleteObject(po))
 			ThrowError("do not have this object");
+	}
 	else
 		ThrowError("当前未设定对象管理器");
 }
