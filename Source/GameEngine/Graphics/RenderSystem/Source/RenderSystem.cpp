@@ -16,9 +16,12 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/RenderSystem.h"
 
+SpaceGameEngine::RenderSystem* SpaceGameEngine::RenderSystem::sm_pThis = nullptr;
+
 SpaceGameEngine::RenderSystem::RenderSystem()
 {
-
+	sm_pThis = this;
+	m_pGlobalOctree = nullptr;
 }
 
 SpaceGameEngine::RenderSystem::~RenderSystem()
@@ -35,6 +38,8 @@ SpaceGameEngine::RenderSystem::~RenderSystem()
 				MemoryManager::Delete(i);
 		}
 	}
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
 void SpaceGameEngine::RenderSystem::Clear()
@@ -52,6 +57,9 @@ void SpaceGameEngine::RenderSystem::Clear()
 		}
 	}
 	m_FreeIndexList = Queue<size_t>();
+	m_pGlobalOctree = nullptr;
+	if (sm_pThis == this)
+		sm_pThis = nullptr;
 }
 
 SpaceGameEngine::RenderObject * SpaceGameEngine::RenderSystem::NewRenderObject()
@@ -92,10 +100,15 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 
 void SpaceGameEngine::RenderSystem::Init()
 {
+	if (m_pGlobalOctree == nullptr)
+		ThrowError("使用RenderSystem时，需先设置GlobalOctree");
 	for (auto i : m_Content)
 	{
 		if (i != nullptr)
+		{
+			i->m_pGlobalOctree = m_pGlobalOctree;
 			i->Init();
+		}
 	}
 }
 
@@ -103,7 +116,17 @@ void SpaceGameEngine::RenderSystem::Render()
 {
 	for (auto i : m_Content)
 	{
-		if (i != nullptr)
+		if (i != nullptr&&i->m_IfRender)
 			i->Render();
 	}
+}
+
+SpaceGameEngine::RenderSystem * SpaceGameEngine::RenderSystem::GetMainRenderSystem()
+{
+	return sm_pThis;
+}
+
+void SpaceGameEngine::RenderSystem::SetAsMainRenderSystem()
+{
+	sm_pThis = this;
 }

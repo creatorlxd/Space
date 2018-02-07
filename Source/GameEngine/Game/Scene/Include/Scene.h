@@ -43,12 +43,15 @@ namespace SpaceGameEngine
 		bool DeleteObjectInformation(Object* po);
 		Object* FindObject(const std::string& name);
 		std::string FindObjectName(Object* po);
+
+		void DeleteObject(Object* po);
 	public:
 		ObjectManager m_ObjectManager;	//对象管理器
 		ComponentManager m_ComponentManager;	//组件管理器
 		MessageManager m_MessageManager;	//消息管理器
 		GlobalOctree m_GlobalOctree;		//全局八叉树
 		LightManager m_LightManager;		//光源管理器
+		RenderSystem m_RenderSystem;
 	private:
 		static Scene* sm_pThis;
 		Map<std::string, Object*> m_ObjectInformation;	//对象信息

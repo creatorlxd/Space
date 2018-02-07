@@ -42,33 +42,30 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 	m_Scale = ta->m_Scale;
 }
 
+void SpaceGameEngine::TransformComponent::Start()
+{
+	if (m_Mode&ForRenderingMode)
+	{
+		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+	}
+}
+
 void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 {
 	if (m_Mode&ForRenderingMode)
 	{
-		XMMATRIX mrebuff, mbuff;
-		mbuff = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
-		mrebuff = mbuff;
-		mbuff = XMMatrixRotationX(m_Rotation.x);
-		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
-		mbuff = XMMatrixRotationY(m_Rotation.y);
-		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
-		mbuff = XMMatrixRotationZ(m_Rotation.z);
-		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
-		mbuff = XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
-		mrebuff = XMMatrixMultiply(mrebuff, mbuff);
-
-		auto inversetransposemat = InverseTransposeMatrix(mrebuff);
-
-		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SceneData::m_ViewMatrix)*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
-		
-		auto shaders = SpaceEngineWindow->GetDefaultEffectShader();
-		for (auto i : shaders)
+		if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+			m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+			m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
 		{
-			i->m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));
-			i->m_pWorldMatrix->SetMatrix(reinterpret_cast<float*>(&mrebuff));
-			i->m_pInverseTransposeMatrix->SetMatrix(reinterpret_cast<float*>(&inversetransposemat));
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
 		}
+		m_pFatherObject->GetRenderObject()->m_IfRender = m_pFatherObject->IfRender();
 	}
 }
 

@@ -397,6 +397,7 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h" />
+    <ClInclude Include="Source\GameEngine\Game\Event\Include\Event.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h" />
     <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h" />
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h" />
@@ -466,6 +467,7 @@
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Event\Source\Event.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp" />

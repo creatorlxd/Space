@@ -20,6 +20,7 @@ limitations under the License.
 #include "Common/Utility/Include/File.h"
 #include "ComponentInformationManager.h"
 #include "../../Asset/Include/Asset.h"
+#include "Game/Event/Include/Event.h"
 
 namespace SpaceGameEngine
 {

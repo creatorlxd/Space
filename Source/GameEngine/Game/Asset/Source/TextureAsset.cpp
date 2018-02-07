@@ -34,7 +34,7 @@ void SpaceGameEngine::TextureAsset::InitFromFile(const std::string & filename)
 {
 	m_FileName = filename;
 
-	CreateDDSTextureFromFile(Game::GetMainGame()->m_Window.GetD3DDevice(), StringToWString(filename).c_str(), nullptr, &m_Content.m_pContent);
+	CreateDDSTextureFromFile(SpaceEngineWindow->GetD3DDevice(), StringToWString(filename).c_str(), nullptr, &m_Content.m_pContent);
 }
 
 SpaceGameEngine::TextureAsset & SpaceGameEngine::TextureAsset::operator=(const TextureAsset & t)

@@ -13,34 +13,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
 #include "stdafx.h"
-#include "RenderObject.h"
-
-namespace SpaceGameEngine
-{
-	class RenderSystem
-	{
-	public:
-		RenderSystem();
-		~RenderSystem();
-
-		void Clear();
-
-		RenderObject* NewRenderObject();
-		void DeleteRenderObject(RenderObject* pro);
-
-		void Init();
-		void Render();
-
-		static RenderSystem* GetMainRenderSystem();
-		void SetAsMainRenderSystem();
-	public:
-		GlobalOctree * m_pGlobalOctree;
-	private:
-		Vector<RenderObject*> m_Content;
-		Queue<size_t> m_FreeIndexList;
-
-		static RenderSystem* sm_pThis;
-	};
-}
+#include "../Include/Event.h"

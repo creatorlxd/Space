@@ -52,7 +52,14 @@ void SpaceGameEngine::TextureComponent::Start()
 	if (m_Mode&SingleMode)
 	{
 		auto ptex = ReadAssetFromFile<TextureAsset>(m_FileName);
-		m_Content.push_back(const_cast<TextureForShader*>(&(ptex->m_Content)));
+		if (m_pFatherObject->GetRenderObject())
+		{
+			m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
+			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ptex;
+			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+		}
+		else
+			ThrowError("物体对象不能没有RenderObject");
 	}
 }
 
@@ -60,16 +67,23 @@ void SpaceGameEngine::TextureComponent::Run(float DeltaTime)
 {
 	if (m_Mode&SingleMode)
 	{
-		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShader();
-		for (auto i : shaders)
-		{
-			i->m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureTransformMatrix));
-			i->m_pTexture->SetResource(m_Content[0]->m_pContent);
-		}
+		
 	}
 }
 
 void SpaceGameEngine::TextureComponent::SetTransformMatrix(const XMMATRIX & mat)
 {
 	m_TextureTransformMatrix = mat;
+	(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+}
+
+void SpaceGameEngine::TextureComponent::AddTexture(const std::string& filename, XMMATRIX mat)
+{
+	auto ta = GetAssetByFileName<TextureAsset>(filename);
+	if (m_pFatherObject->GetRenderObject())
+	{
+		m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
+		(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ta;
+		(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = mat;
+	}
 }

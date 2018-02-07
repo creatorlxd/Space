@@ -20,16 +20,11 @@ limitations under the License.
 #include "Game/Scene/Include/SceneData.h"
 #include "Game/Asset/Include/TransformAsset.h"
 #include "Math/Common/Include/XMathExtension.h"
+#include "Graphics/RenderSystem/Include/RenderSystem.h"
+
 
 namespace SpaceGameEngine
 {
-	namespace Event
-	{
-		const unsigned int PositionChange = HashString("PositionChange");
-		const unsigned int RotationChange = HashString("RotationChange");
-		const unsigned int ScaleChange = HashString("ScaleChange");
-	}
-
 	//TODO:给TransformComponent设定多个模式（包括用于渲染模式，绑定摄像机模式，绑定子物体模式（父模式）。。。）不同的Run(...)
 	class TransformComponent :public Component				//物体的基本物理信息
 	{
@@ -38,12 +33,13 @@ namespace SpaceGameEngine
 
 		static const int ForRenderingMode = 1 << 0;
 		static const int InformationMode = 1 << 1;
-		static const int FatherTransformMode = 1 << 2;
+		static const int ChildTransformMode = 1 << 2;
 
 		TransformComponent();
 		~TransformComponent();
 
 		void InitFromFile(const std::string& filename, int mode = 0);
+		void Start();
 		void Run(float DeltaTime);
 
 		void SetPosition(const XMFLOAT3& position);

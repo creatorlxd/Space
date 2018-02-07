@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "Asset.h"
-#include "Game/Game/Include/Game.h"
+#include "Common/Utility/Include/Window.h"
 #include "Graphics/Texture/Include/Texture.h"
 
 namespace SpaceGameEngine

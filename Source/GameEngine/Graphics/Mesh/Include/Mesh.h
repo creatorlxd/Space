@@ -39,27 +39,9 @@ namespace SpaceGameEngine
 		void Clear();
 		~MeshComponent();
 
-		void InitFromMemory(int VertexSize, int IndexSize, DefaultVertex* pVertices, unsigned int* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
-
 		void InitFromFile(const std::string& filename, int mode = 1);			//从文件读取Mesh
+		void InitFromMemory(int VertexSize, int IndexSize, DefaultVertex* pVertices, unsigned int* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
 		void Start();
 		void Run(float DeltaTime);												//渲染网格
-	protected:
-		void InitVertexBuffer();
-		void InitIndexBuffer();
-
-		Vector<DefaultVertex> m_Vertices;
-		Vector<unsigned int> m_Indices;
-
-		ID3D11Buffer* m_pVertexBuffer;
-		ID3D11Buffer* m_pIndexBuffer;
-
-		TransformComponent* m_pTransform;
-		AxisAlignedBoundingBox m_Space;
-		AxisAlignedBoundingBox m_BaseSpace;
-
-		GlobalOctreeNode* m_pGlobalOctreeNode;
-
-		ObjectOctree m_ObjectOctree;
 	};
 }

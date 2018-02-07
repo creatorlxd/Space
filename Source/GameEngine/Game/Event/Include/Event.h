@@ -15,32 +15,15 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "RenderObject.h"
+#include "Space.h"
 
 namespace SpaceGameEngine
 {
-	class RenderSystem
+	namespace Event
 	{
-	public:
-		RenderSystem();
-		~RenderSystem();
-
-		void Clear();
-
-		RenderObject* NewRenderObject();
-		void DeleteRenderObject(RenderObject* pro);
-
-		void Init();
-		void Render();
-
-		static RenderSystem* GetMainRenderSystem();
-		void SetAsMainRenderSystem();
-	public:
-		GlobalOctree * m_pGlobalOctree;
-	private:
-		Vector<RenderObject*> m_Content;
-		Queue<size_t> m_FreeIndexList;
-
-		static RenderSystem* sm_pThis;
-	};
+		//transform event
+		const unsigned int PositionChange = HashString("PositionChange");
+		const unsigned int RotationChange = HashString("RotationChange");
+		const unsigned int ScaleChange = HashString("ScaleChange");
+	}
 }

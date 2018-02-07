@@ -22,6 +22,10 @@ limitations under the License.
 #include "Game/Asset/Include/MeshAsset.h"
 #include "ShaderFarmework/EffectShader/Include/EffectShader.h"
 #include "Game/Object/Include/Object.h"
+#include "Math/Common/Include/XMathExtension.h"
+#include "Game/Scene/Include/SceneData.h"
+#include "Graphics/GlobalOctree/Include/GlobalOctree.h"
+#include "Graphics/ObjectOctree/Include/ObjectOctree.h"
 
 namespace SpaceGameEngine
 {
@@ -40,6 +44,9 @@ namespace SpaceGameEngine
 		void Init();
 		void Render();
 		void Clear();
+	private:
+		void InitVertexBuffer();
+		void InitIndexBuffer();
 	public:
 		static const int ModelFileMode = 1;				//Model文件模式
 		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
@@ -48,16 +55,28 @@ namespace SpaceGameEngine
 		static const int YAxisAlignedMode = 16;
 		static const int ZAxisAlignedMode = 32;
 	public:
+		GlobalOctree * m_pGlobalOctree;
+
 		Vector<DefaultEffectShader*> m_Shader;
 		Object* m_pObject;
 
-		Vector<TransformAsset> m_TransformAsset;
+		TransformAsset m_TransformAsset;
 		Vector<MaterialAsset> m_MaterialAsset;
-		Vector<TextureAsset> m_TextureAsset;
+		Vector<std::pair<TextureAsset,XMMATRIX>> m_TextureAsset;
 		MeshForModelFileAsset m_MeshForModelFileAsset;
 
 		int m_Mode;
 		RenderObjectType m_Type;
 		bool m_IfRender;
+
+		ID3D11Buffer* m_pVertexBuffer;
+		ID3D11Buffer* m_pIndexBuffer;
+
+		AxisAlignedBoundingBox m_Space;
+		AxisAlignedBoundingBox m_BaseSpace;
+
+		GlobalOctreeNode* m_pGlobalOctreeNode;
+
+		ObjectOctree m_ObjectOctree;
 	};
 }

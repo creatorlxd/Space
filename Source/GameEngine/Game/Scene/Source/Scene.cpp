@@ -36,6 +36,7 @@ void SpaceGameEngine::Scene::SetAsMainScene()
 	m_ComponentManager.SetAsMainManager();
 	m_MessageManager.SetAsMainManager();
 	m_LightManager.SetAsMainManager();
+	m_RenderSystem.SetAsMainRenderSystem();
 	sm_pThis = this;
 }
 
@@ -64,6 +65,8 @@ void SpaceGameEngine::Scene::Start()
 		FindObject("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
 	}
 	m_ObjectManager.Start();
+	m_RenderSystem.m_pGlobalOctree = &m_GlobalOctree;
+	m_RenderSystem.Init();
 	m_GlobalOctree.BuildTree();
 }
 
@@ -99,6 +102,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	m_MessageManager.Run();
 	m_GlobalOctree.Run();
 	m_ObjectManager.Run(DeltaTime);
+	m_RenderSystem.Render();
 }
 
 void SpaceGameEngine::Scene::Clear()
@@ -109,6 +113,7 @@ void SpaceGameEngine::Scene::Clear()
 	m_MessageManager.Clear();
 	m_ObjectInformation.clear();
 	m_LightManager.Clear();
+	m_RenderSystem.Clear();
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
@@ -176,4 +181,22 @@ std::string SpaceGameEngine::Scene::FindObjectName(Object * po)
 		}
 	}
 	return std::string();
+}
+
+void SpaceGameEngine::Scene::DeleteObject(Object * po)
+{
+	if (po)
+	{
+		if (po->GetComponent(STRING(InformationComponent)))
+		{
+			DeleteObjectInformation(po);
+		}
+		if (po->GetRenderObject())
+		{
+			m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
+		}
+		m_ObjectManager.DeleteObject(po);
+	}
+	else
+		ThrowError("can not delete nullptr");
 }

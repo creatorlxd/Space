@@ -28,16 +28,15 @@ namespace SpaceGameEngine
 		~MaterialComponent();
 
 		static const int SingleMode = 1;
-		static const int MultipleMode = 2;
 
 		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
 
 		void InitFromFile(const std::string& filename, int mode = 0);
+		void Start();
 		void Run(float DeltaTime);
 		void Clear();
 
-		void AddMaterial(const Material& m);
 	private:
-		Vector<Material> m_Content;
+		
 	};
 }

@@ -18,6 +18,7 @@ limitations under the License.
 #include "Game/Component/Include/ComponentManager.h"
 #include "Texture.h"
 #include "Game/Asset/Include/TextureAsset.h"
+#include "Game/Game/Include/Game.h"
 
 namespace SpaceGameEngine
 {
@@ -37,8 +38,8 @@ namespace SpaceGameEngine
 		void Run(float DeltaTime);
 
 		void SetTransformMatrix(const XMMATRIX& mat);
+		void AddTexture(const std::string& filename, XMMATRIX mat);
 	private:
-		Vector<TextureForShader*> m_Content;
 		XMMATRIX m_TextureTransformMatrix;
 		
 		std::string m_FileName;					//用于延迟初始化

@@ -271,15 +271,6 @@
     <Filter Include="Common\Utility\Source">
       <UniqueIdentifier>{0d8db31b-a51a-4b87-a517-1552b19eabdf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Error">
-      <UniqueIdentifier>{56bd697b-0fad-4e09-a7b5-90931971f7c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Error\Include">
-      <UniqueIdentifier>{42ee98fe-7380-4e9e-b3a6-e6c4734c2700}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Error\Source">
-      <UniqueIdentifier>{0425187d-1b86-4d83-94fb-d0db33beddc3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math\Octree">
       <UniqueIdentifier>{7ab69f4a-8062-47ec-9845-c7418c266413}</UniqueIdentifier>
     </Filter>
@@ -309,6 +300,24 @@
     </Filter>
     <Filter Include="Graphics\RenderSystem\Source">
       <UniqueIdentifier>{c967c89c-52c9-4a8d-a2b7-1a5a8141614d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error">
+      <UniqueIdentifier>{56bd697b-0fad-4e09-a7b5-90931971f7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error\Include">
+      <UniqueIdentifier>{42ee98fe-7380-4e9e-b3a6-e6c4734c2700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Error\Source">
+      <UniqueIdentifier>{0425187d-1b86-4d83-94fb-d0db33beddc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Event">
+      <UniqueIdentifier>{0718a9f4-a00e-421c-95ee-63fcec0b1c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Event\Include">
+      <UniqueIdentifier>{e886c07d-5316-4aa8-ad38-624ab215b3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Event\Source">
+      <UniqueIdentifier>{85f23c2b-16e1-405e-a5fc-0fd2e89372ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -513,6 +522,9 @@
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\ShaderAsset.h">
       <Filter>Game\Asset\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Event\Include\Event.h">
+      <Filter>Game\Event\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -682,6 +694,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\ShaderAsset.cpp">
       <Filter>Game\Asset\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Event\Source\Event.cpp">
+      <Filter>Game\Event\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

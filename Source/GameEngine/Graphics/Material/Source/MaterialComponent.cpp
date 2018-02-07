@@ -36,27 +36,29 @@ void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filena
 	if (m_Mode == SingleMode)
 	{
 		const MaterialAsset* ma = ReadAssetFromFile<MaterialAsset>(filename);
-		m_Content.clear();
-		m_Content.push_back(ma->m_Content);
+	}
+}
+
+void SpaceGameEngine::MaterialComponent::Start()
+{
+	if (m_Mode == SingleMode)
+	{
+		if (m_pFatherObject->GetRenderObject())
+		{
+			m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
+			(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = (dynamic_cast<MaterialAsset*>(const_cast<Asset*>(m_pAsset)))->m_Content;
+		}
+		else
+			ThrowError("物体对象不能没有RenderObject");
 	}
 }
 
 void SpaceGameEngine::MaterialComponent::Run(float DeltaTime)
 {
-	if (m_Mode == SingleMode)
-	{
-		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShader();
-		for(auto i:shaders)
-			i->m_pMaterial->SetRawValue(&m_Content[0], 0, sizeof(m_Content[0]));
-	}
+	
 }
 
 void SpaceGameEngine::MaterialComponent::Clear()
 {
-	m_Content.clear();
-}
-
-void SpaceGameEngine::MaterialComponent::AddMaterial(const Material & m)
-{
-	m_Content.push_back(m);
+	
 }
