@@ -261,6 +261,15 @@ SpaceGameEngine::Object* SpaceGameEngine::Object::GetFatherObject()
 	return m_pFather;
 }
 
+void SpaceGameEngine::Object::SetFatherObject(Object * po)
+{
+	m_pFather = po;
+	if (po == nullptr)
+		m_IfChild = false;
+	else
+		m_IfChild = true;
+}
+
 bool SpaceGameEngine::Object::IfChild()
 {
 	return m_IfChild;
