@@ -45,6 +45,7 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 	{
 		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
 		m_pFatherObject->GetRenderObject()->m_Type = RenderObjectType::Model;
+		m_pFatherObject->GetRenderObject()->m_pObject = m_pFatherObject;
 	}
 }
 
