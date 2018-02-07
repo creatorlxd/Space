@@ -99,7 +99,7 @@ void SpaceGameEngine::RenderObject::Render()
 
 			//material
 			for (auto i : shaders)
-				i->m_pMaterial->SetRawValue(&m_MaterialAsset[0], 0, sizeof(m_MaterialAsset[0]));
+				i->m_pMaterial->SetRawValue(&m_MaterialAsset[0].m_Content, 0, sizeof(m_MaterialAsset[0]));
 
 			//texture
 			for (auto i : shaders)
