@@ -510,6 +510,9 @@
     <ClInclude Include="Source\GameEngine\Graphics\RenderSystem\Include\RenderObject.h">
       <Filter>Graphics\RenderSystem\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\ShaderAsset.h">
+      <Filter>Game\Asset\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -676,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\RenderSystem\Source\RenderSystem.cpp">
       <Filter>Graphics\RenderSystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\ShaderAsset.cpp">
+      <Filter>Game\Asset\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

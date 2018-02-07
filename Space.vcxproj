@@ -391,6 +391,7 @@
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MaterialAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\MeshAsset.h" />
+    <ClInclude Include="Source\GameEngine\Game\Asset\Include\ShaderAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\TextureAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h" />
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h" />
@@ -459,6 +460,7 @@
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MaterialAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\MeshAsset.cpp" />
+    <ClCompile Include="Source\GameEngine\Game\Asset\Source\ShaderAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\TextureAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp" />
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp" />

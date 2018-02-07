@@ -64,6 +64,7 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
+		void InitDefaultEffectShaderFromFile(const std::string& filename,DefaultEffectShader& shader);
 		DefaultEffectShader& GetEffectShader();
 
 		void SetDefaultState();							//设置默认状态
@@ -92,7 +93,9 @@ namespace SpaceGameEngine
 
 		ID3D11InputLayout* m_pInputLayout;
 		ID3D11RasterizerState* m_pRasterizerState;
+		
 		DefaultEffectShader m_EffectShader;
+		Vector<DefaultEffectShader*> m_DefaultEffectShaders;
 
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

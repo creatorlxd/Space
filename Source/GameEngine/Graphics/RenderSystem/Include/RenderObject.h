@@ -25,6 +25,12 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	enum class RenderObjectType :uint32_t
+	{
+		Unkown = 0,
+		Model = 1
+	};
+
 	class RenderObject
 	{
 	public:
@@ -51,6 +57,7 @@ namespace SpaceGameEngine
 		MeshForModelFileAsset m_MeshForModelFileAsset;
 
 		int m_Mode;
+		RenderObjectType m_Type;
 		bool m_IfRender;
 	};
 }

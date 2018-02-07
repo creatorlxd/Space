@@ -13,43 +13,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+#pragma once
 #include "stdafx.h"
-#include "../Include/RenderObject.h"
+#include "Asset.h"
+#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "Common/Utility/Include/Window.h"
 
-SpaceGameEngine::RenderObject::RenderObject()
+namespace SpaceGameEngine
 {
-	m_pShader = nullptr;
-	m_pObject = nullptr;
-	m_Mode = 0;
-	m_IfRender = true;
-	m_Type = RenderObjectType::Unkown;
-}
-
-SpaceGameEngine::RenderObject::~RenderObject()
-{
-
-}
-
-void SpaceGameEngine::RenderObject::Init()
-{
-	if (m_Type == RenderObjectType::Model)
+	struct DefaultEffectShaderAsset :public Asset
 	{
+		DefaultEffectShaderAsset();
+		~DefaultEffectShaderAsset();
+		void InitFromFile(const std::string& filename);
 
-	}
-}
-
-void SpaceGameEngine::RenderObject::Render()
-{
-	if (m_Type == RenderObjectType::Model)
-	{
-
-	}
-}
-
-void SpaceGameEngine::RenderObject::Clear()
-{
-	if (m_Type == RenderObjectType::Model)
-	{
-
-	}
+		DefaultEffectShader m_Content;
+	};
 }

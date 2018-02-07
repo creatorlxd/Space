@@ -14,42 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "../Include/RenderObject.h"
+#include "../Include/ShaderAsset.h"
 
-SpaceGameEngine::RenderObject::RenderObject()
+SpaceGameEngine::DefaultEffectShaderAsset::DefaultEffectShaderAsset()
 {
-	m_pShader = nullptr;
-	m_pObject = nullptr;
-	m_Mode = 0;
-	m_IfRender = true;
-	m_Type = RenderObjectType::Unkown;
+	m_TypeName = STRING(DefaultEffectShaderAsset);
 }
 
-SpaceGameEngine::RenderObject::~RenderObject()
+SpaceGameEngine::DefaultEffectShaderAsset::~DefaultEffectShaderAsset()
 {
-
+	
 }
 
-void SpaceGameEngine::RenderObject::Init()
+void SpaceGameEngine::DefaultEffectShaderAsset::InitFromFile(const std::string & filename)
 {
-	if (m_Type == RenderObjectType::Model)
-	{
-
-	}
-}
-
-void SpaceGameEngine::RenderObject::Render()
-{
-	if (m_Type == RenderObjectType::Model)
-	{
-
-	}
-}
-
-void SpaceGameEngine::RenderObject::Clear()
-{
-	if (m_Type == RenderObjectType::Model)
-	{
-
-	}
+	m_FileName = filename;
+	SpaceEngineWindow->InitDefaultEffectShaderFromFile(filename, m_Content);
 }
