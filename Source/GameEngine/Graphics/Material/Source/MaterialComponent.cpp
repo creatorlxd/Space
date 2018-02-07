@@ -45,7 +45,9 @@ void SpaceGameEngine::MaterialComponent::Run(float DeltaTime)
 {
 	if (m_Mode == SingleMode)
 	{
-		Game::GetMainGame()->m_Window.GetEffectShader().m_pMaterial->SetRawValue(&m_Content[0], 0, sizeof(m_Content[0]));
+		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShaders();
+		for(auto i:shaders)
+			i->m_pMaterial->SetRawValue(&m_Content[0], 0, sizeof(m_Content[0]));
 	}
 }
 

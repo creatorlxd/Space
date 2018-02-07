@@ -66,6 +66,7 @@ namespace SpaceGameEngine
 
 		void InitDefaultEffectShaderFromFile(const std::string& filename,DefaultEffectShader& shader);
 		DefaultEffectShader& GetEffectShader();
+		Vector<DefaultEffectShader*>& GetDefaultEffectShaders();
 
 		void SetDefaultState();							//ÉèÖÃÄ¬ÈÏ×´Ì¬
 

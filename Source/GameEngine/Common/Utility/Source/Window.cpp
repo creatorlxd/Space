@@ -506,6 +506,11 @@ DefaultEffectShader & SpaceGameEngine::Window::GetEffectShader()
 	return m_EffectShader;
 }
 
+Vector<DefaultEffectShader*>& SpaceGameEngine::Window::GetDefaultEffectShaders()
+{
+	return m_DefaultEffectShaders;
+}
+
 void SpaceGameEngine::Window::SetDefaultState()
 {
 	m_pD3DDeviceContext->IASetInputLayout(m_pInputLayout);

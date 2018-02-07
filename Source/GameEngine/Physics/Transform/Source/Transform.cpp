@@ -61,9 +61,14 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 		auto inversetransposemat = InverseTransposeMatrix(mrebuff);
 
 		XMMATRIX result = mrebuff*XMLoadFloat4x4(&SceneData::m_ViewMatrix)*XMLoadFloat4x4(&SceneData::m_ProjectionMatrix);
-		SpaceEngineWindow->GetEffectShader().m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));
-		SpaceEngineWindow->GetEffectShader().m_pWorldMatrix->SetMatrix(reinterpret_cast<float*>(&mrebuff));
-		SpaceEngineWindow->GetEffectShader().m_pInverseTransposeMatrix->SetMatrix(reinterpret_cast<float*>(&inversetransposemat));
+		
+		auto shaders = SpaceEngineWindow->GetDefaultEffectShaders();
+		for (auto i : shaders)
+		{
+			i->m_pWorldViewProjMatrix->SetMatrix(reinterpret_cast<float*>(&result));
+			i->m_pWorldMatrix->SetMatrix(reinterpret_cast<float*>(&mrebuff));
+			i->m_pInverseTransposeMatrix->SetMatrix(reinterpret_cast<float*>(&inversetransposemat));
+		}
 	}
 }
 

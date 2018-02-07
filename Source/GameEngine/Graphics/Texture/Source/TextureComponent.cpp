@@ -60,8 +60,12 @@ void SpaceGameEngine::TextureComponent::Run(float DeltaTime)
 {
 	if (m_Mode&SingleMode)
 	{
-		Game::GetMainGame()->m_Window.GetEffectShader().m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureTransformMatrix));
-		Game::GetMainGame()->m_Window.GetEffectShader().m_pTexture->SetResource(m_Content[0]->m_pContent);
+		auto shaders = Game::GetMainGame()->m_Window.GetDefaultEffectShaders();
+		for (auto i : shaders)
+		{
+			i->m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureTransformMatrix));
+			i->m_pTexture->SetResource(m_Content[0]->m_pContent);
+		}
 	}
 }
 

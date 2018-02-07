@@ -72,8 +72,6 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	XMFLOAT3 camera_pos3 = CameraComponent::GetMainCamera()->GetTransform()->GetPosition();
 	XMFLOAT4 camera_pos4(camera_pos3.x, camera_pos3.y, camera_pos3.z, 1.0f);
 	XMVECTOR vbuff = XMLoadFloat4(&camera_pos4);
-	SpaceEngineWindow->GetEffectShader().m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));
-	SpaceEngineWindow->GetEffectShader().m_pCameraPosition->SetFloatVector(reinterpret_cast<float*>(&vbuff));
 	SceneData::m_ViewMatrix = CameraComponent::GetMainCamera()->ComputeViewMatrix();
 	SceneData::m_ProjectionMatrix = GetProjectionMatrix(CameraComponent::GetMainCamera()->GetAngle(), (float)(SpaceEngineWindow->GetWindowWidth()) / (float)(SpaceEngineWindow->GetWindowHeight()), CameraComponent::GetMainCamera()->GetNearZ(), CameraComponent::GetMainCamera()->GetFarZ());
 	
@@ -89,8 +87,15 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	{
 		lights.m_Content[lights.m_Size[0]++] = i;
 	}
-	SpaceEngineWindow->GetEffectShader().m_pLights->SetRawValue(&lights, 0, sizeof(lights));
 	
+	auto shaders = SpaceEngineWindow->GetDefaultEffectShaders();
+	for (auto i : shaders)
+	{
+		i->m_pDeltaTime->SetFloatVector(reinterpret_cast<float*>(&XMVectorReplicate(DeltaTime)));
+		i->m_pCameraPosition->SetFloatVector(reinterpret_cast<float*>(&vbuff));
+		i->m_pLights->SetRawValue(&lights, 0, sizeof(lights));
+	}
+
 	m_MessageManager.Run();
 	m_GlobalOctree.Run();
 	m_ObjectManager.Run(DeltaTime);
