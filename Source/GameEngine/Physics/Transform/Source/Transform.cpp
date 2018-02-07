@@ -40,13 +40,16 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 	m_Position = ta->m_Position;
 	m_Rotation = ta->m_Rotation;
 	m_Scale = ta->m_Scale;
+
+	if (m_Mode&ForRenderingMode)
+		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
+
 }
 
 void SpaceGameEngine::TransformComponent::Start()
 {
 	if (m_Mode&ForRenderingMode)
 	{
-		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
