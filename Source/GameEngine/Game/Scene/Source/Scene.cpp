@@ -187,10 +187,6 @@ void SpaceGameEngine::Scene::DeleteObject(Object * po)
 {
 	if (po)
 	{
-		if (po->GetComponent(STRING(InformationComponent)))
-		{
-			DeleteObjectInformation(po);
-		}
 		if (po->GetRenderObject())
 		{
 			m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
