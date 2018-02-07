@@ -75,6 +75,7 @@ void SpaceGameEngine::LightComponent::Clear()
 		m_Mode = 0;
 	}
 	m_pTransform = nullptr;
+	Component::Clear();
 }
 
 bool SpaceGameEngine::LightComponent::IfOn()

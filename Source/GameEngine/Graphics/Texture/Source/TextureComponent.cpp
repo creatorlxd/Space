@@ -44,6 +44,7 @@ void SpaceGameEngine::TextureComponent::Clear()
 			m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_FileName = "Null";
 		}
 	}
+	Component::Clear();
 }
 
 void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filename, int mode)

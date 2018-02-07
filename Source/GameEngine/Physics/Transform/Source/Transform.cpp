@@ -85,6 +85,7 @@ void SpaceGameEngine::TransformComponent::Clear()
 			m_pFatherObject->SetRenderObject(nullptr);
 		}
 	}
+	Component::Clear();
 }
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)

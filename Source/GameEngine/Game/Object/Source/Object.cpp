@@ -93,7 +93,6 @@ bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 		component->second->GetChildrenComponent().clear();
 		component->second->SetFatherComponent(nullptr);
 	}
-	(*component).second->SetFatherObject(nullptr);
 	ComponentManager::DestoryComponent(component->second);
 	m_Components.erase(component);
 	return true;

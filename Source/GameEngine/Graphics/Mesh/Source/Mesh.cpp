@@ -33,6 +33,7 @@ void SpaceGameEngine::MeshComponent::Clear()
 			m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
 		}
 	}
+	Component::Clear();
 }
 
 SpaceGameEngine::MeshComponent::~MeshComponent()

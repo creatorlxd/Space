@@ -143,7 +143,6 @@ void SpaceGameEngine::Component::Attach(Component * pc)
 void SpaceGameEngine::Component::Clear()
 {
 	m_Children.clear();
-	m_TypeName = "NullType";
 	m_IfRun = true;
 	m_IfUse = true;
 	m_pFather = nullptr;

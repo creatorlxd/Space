@@ -67,4 +67,5 @@ void SpaceGameEngine::MaterialComponent::Clear()
 			*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
 		}
 	}
+	Component::Clear();
 }
