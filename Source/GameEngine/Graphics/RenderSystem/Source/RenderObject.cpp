@@ -148,43 +148,46 @@ void SpaceGameEngine::RenderObject::Render()
 					}
 				}
 			}
-			if ((m_Mode&RenderObject::WholeMode) == 0)
+			if (m_pVertexBuffer&&m_pIndexBuffer)
 			{
-				auto indices_buffer = m_ObjectOctree.Run(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale);
-				D3D11_MAPPED_SUBRESOURCE mappeddata;
-				HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
-				unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
-				for (unsigned int i = 0; i < indices_buffer.size(); i++)
-					pi[i] = indices_buffer[i];
-				SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
-				unsigned int v_strides = sizeof(DefaultVertex);
-				unsigned int v_offset = 0;
-				SpaceEngineWindow->GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
-				SpaceEngineWindow->GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-				D3DX11_TECHNIQUE_DESC techDesc;
-				m_Shader[0]->m_pTechnique->GetDesc(&techDesc);
-				for (UINT p = 0; p < techDesc.Passes; ++p)
+				if ((m_Mode&RenderObject::WholeMode) == 0)
 				{
-					m_Shader[0]->m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+					auto indices_buffer = m_ObjectOctree.Run(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale);
+					D3D11_MAPPED_SUBRESOURCE mappeddata;
+					HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(m_pIndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappeddata));
+					unsigned int* pi = reinterpret_cast<unsigned int*>(mappeddata.pData);
+					for (unsigned int i = 0; i < indices_buffer.size(); i++)
+						pi[i] = indices_buffer[i];
+					SpaceEngineWindow->GetD3DDeviceContext()->Unmap(m_pIndexBuffer, 0);
+					unsigned int v_strides = sizeof(DefaultVertex);
+					unsigned int v_offset = 0;
+					SpaceEngineWindow->GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
+					SpaceEngineWindow->GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-					SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(indices_buffer.size(), 0, 0);
+					D3DX11_TECHNIQUE_DESC techDesc;
+					m_Shader[0]->m_pTechnique->GetDesc(&techDesc);
+					for (UINT p = 0; p < techDesc.Passes; ++p)
+					{
+						m_Shader[0]->m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+
+						SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(indices_buffer.size(), 0, 0);
+					}
 				}
-			}
-			else
-			{
-				unsigned int v_strides = sizeof(DefaultVertex);
-				unsigned int v_offset = 0;
-				SpaceEngineWindow->GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
-				SpaceEngineWindow->GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-				D3DX11_TECHNIQUE_DESC techDesc;
-				m_Shader[0]->m_pTechnique->GetDesc(&techDesc);
-				for (UINT p = 0; p < techDesc.Passes; ++p)
+				else
 				{
-					m_Shader[0]->m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+					unsigned int v_strides = sizeof(DefaultVertex);
+					unsigned int v_offset = 0;
+					SpaceEngineWindow->GetD3DDeviceContext()->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &v_strides, &v_offset);
+					SpaceEngineWindow->GetD3DDeviceContext()->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-					SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(m_MeshForModelFileAsset.m_Indices.size(), 0, 0);
+					D3DX11_TECHNIQUE_DESC techDesc;
+					m_Shader[0]->m_pTechnique->GetDesc(&techDesc);
+					for (UINT p = 0; p < techDesc.Passes; ++p)
+					{
+						m_Shader[0]->m_pTechnique->GetPassByIndex(p)->Apply(0, SpaceEngineWindow->GetD3DDeviceContext());
+
+						SpaceEngineWindow->GetD3DDeviceContext()->DrawIndexed(m_MeshForModelFileAsset.m_Indices.size(), 0, 0);
+					}
 				}
 			}
 		}
