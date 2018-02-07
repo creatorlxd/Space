@@ -42,8 +42,10 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 	m_Scale = ta->m_Scale;
 
 	if (m_Mode&ForRenderingMode)
+	{
 		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
-
+		m_pFatherObject->GetRenderObject()->m_Type = RenderObjectType::Model;
+	}
 }
 
 void SpaceGameEngine::TransformComponent::Start()
