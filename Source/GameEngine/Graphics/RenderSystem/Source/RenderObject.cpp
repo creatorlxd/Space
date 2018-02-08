@@ -100,12 +100,15 @@ void SpaceGameEngine::RenderObject::Render()
 			//material
 			for (auto i : shaders)
 				i->m_pMaterial->SetRawValue(&m_MaterialAsset[0].m_Content, 0, sizeof(m_MaterialAsset[0].m_Content));
-
+			
 			//texture
-			for (auto i : shaders)
+			if (m_TextureAsset[0].first.m_Content.m_pContent)
 			{
-				i->m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureAsset[0].second));
-				i->m_pTexture->SetResource(m_TextureAsset[0].first.m_Content.m_pContent);
+				for (auto i : shaders)
+				{
+					i->m_pTextureTransformMatrix->SetMatrix(reinterpret_cast<float*>(&m_TextureAsset[0].second));
+					i->m_pTexture->SetResource(m_TextureAsset[0].first.m_Content.m_pContent);
+				}
 			}
 
 			//mesh
