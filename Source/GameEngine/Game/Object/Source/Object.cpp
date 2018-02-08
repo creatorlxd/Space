@@ -101,6 +101,10 @@ bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 		ThrowError(L"没找到该类型的组件");
 		return false;
 	}
+	if (name == m_pRootComponent->GetTypeName())
+	{
+		ThrowError("can not delete root component");
+	}
 	ComponentManager::DestoryComponent(component->second);
 	m_Components.erase(component);
 	return true;
