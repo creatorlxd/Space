@@ -55,7 +55,7 @@ SpaceGameEngine::Object::~Object()
 	{
 		for (auto i : m_Children)
 		{
-			DisconObject(i);
+			i->Discon();
 		}
 	}
 	if (!m_Components.empty())
