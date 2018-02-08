@@ -43,7 +43,6 @@ namespace SpaceGameEngine
 
 		void Init();
 		void Render();
-		void Clear();
 	private:
 		void InitVertexBuffer();
 		void InitIndexBuffer();

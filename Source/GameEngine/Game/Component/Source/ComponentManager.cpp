@@ -58,20 +58,6 @@ bool SpaceGameEngine::ComponentManager::DeleteComponent(Component * pc)
 	{
 		if (m_Content[i] == pc)
 		{
-			if (pc->GetFatherComponent())
-			{
-				auto children_components = pc->GetChildrenComponent();
-				for (auto i : children_components)
-					i->Attach(pc->GetFatherComponent());
-				pc->GetFatherComponent()->DeleteChildComponent(pc);
-			}
-			if (!pc->GetChildrenComponent().empty())
-			{
-				auto children_components = pc->GetChildrenComponent();
-				for (auto i : children_components)
-					i->SetFatherComponent(nullptr);
-			}
-			pc->Clear();
 			MemoryManager::Delete(pc);
 			m_FreeIndexList.push(i);
 			m_Content[i] = nullptr;

@@ -20,6 +20,7 @@ limitations under the License.
 namespace SpaceGameEngine
 {
 	class RenderObject;
+	void DisconObject(Object* child);
 
 	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 

@@ -28,11 +28,14 @@ void SpaceGameEngine::MeshComponent::Clear()
 {
 	if (m_Mode&ModelFileMode)
 	{
-		if (m_pFatherObject->GetRenderObject())
+		if (m_pFatherObject)
 		{
-			m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
-			SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
-			SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+			if (m_pFatherObject->GetRenderObject())
+			{
+				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+			}
 		}
 	}
 	Component::Clear();
@@ -40,7 +43,18 @@ void SpaceGameEngine::MeshComponent::Clear()
 
 SpaceGameEngine::MeshComponent::~MeshComponent()
 {
-	
+	if (m_Mode&ModelFileMode)
+	{
+		if (m_pFatherObject)
+		{
+			if (m_pFatherObject->GetRenderObject())
+			{
+				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+			}
+		}
+	}
 }
 
 void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)

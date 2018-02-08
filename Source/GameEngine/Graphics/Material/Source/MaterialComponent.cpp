@@ -27,7 +27,16 @@ SpaceGameEngine::MaterialComponent::MaterialComponent()
 
 SpaceGameEngine::MaterialComponent::~MaterialComponent()
 {
-
+	if (m_Mode == SingleMode)
+	{
+		if (m_pFatherObject)
+		{
+			if (m_pFatherObject->GetRenderObject())
+			{
+				*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+			}
+		}
+	}
 }
 
 void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filename, int mode)
@@ -62,9 +71,12 @@ void SpaceGameEngine::MaterialComponent::Clear()
 {
 	if (m_Mode == SingleMode)
 	{
-		if (m_pFatherObject->GetRenderObject())
+		if (m_pFatherObject)
 		{
-			*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+			if (m_pFatherObject->GetRenderObject())
+			{
+				*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+			}
 		}
 	}
 	Component::Clear();

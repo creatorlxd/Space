@@ -29,7 +29,16 @@ SpaceGameEngine::TransformComponent::TransformComponent()
 
 SpaceGameEngine::TransformComponent::~TransformComponent()
 {
-
+	if (m_Mode&ForRenderingMode)
+	{
+		if (m_pFatherObject)
+		{
+			if (m_pFatherObject->GetRenderObject())
+			{
+				RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
+			}
+		}
+	}
 }
 
 void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filename, int mode)
@@ -79,10 +88,12 @@ void SpaceGameEngine::TransformComponent::Clear()
 {
 	if (m_Mode&ForRenderingMode)
 	{
-		if (m_pFatherObject->GetRenderObject())
+		if (m_pFatherObject)
 		{
-			RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
-			m_pFatherObject->SetRenderObject(nullptr);
+			if (m_pFatherObject->GetRenderObject())
+			{
+				RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
+			}
 		}
 	}
 	Component::Clear();

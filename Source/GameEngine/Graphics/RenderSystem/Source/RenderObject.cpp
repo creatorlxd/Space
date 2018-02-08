@@ -32,6 +32,10 @@ SpaceGameEngine::RenderObject::~RenderObject()
 {
 	SafeRelease(m_pVertexBuffer);
 	SafeRelease(m_pIndexBuffer);
+	if (m_pObject)
+	{
+		m_pObject->SetRenderObject(nullptr);
+	}
 }
 
 void SpaceGameEngine::RenderObject::Init()
@@ -195,29 +199,6 @@ void SpaceGameEngine::RenderObject::Render()
 			}
 		}
 	}
-}
-
-void SpaceGameEngine::RenderObject::Clear()
-{
-	if (m_Type == RenderObjectType::Model)
-	{
-		if (m_Mode&ModelFileMode)
-		{
-			if ((m_Mode&RenderObject::DynamicMode) == 0)
-			{
-				m_pGlobalOctree->DeleteObject(m_pObject);
-			}
-		}
-	}
-	m_pObject = nullptr;
-	m_Mode = 0;
-	m_IfRender = true;
-	m_Type = RenderObjectType::Unkown;
-	m_pVertexBuffer = nullptr;
-	m_pIndexBuffer = nullptr;
-	m_pGlobalOctreeNode = nullptr;
-	m_Space = AxisAlignedBoundingBox();
-	m_BaseSpace = AxisAlignedBoundingBox();
 }
 
 void SpaceGameEngine::RenderObject::InitVertexBuffer()

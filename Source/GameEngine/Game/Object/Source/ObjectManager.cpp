@@ -92,16 +92,6 @@ bool SpaceGameEngine::ObjectManager::DeleteObject(Object * po)
 	{
 		if (m_Content[i] == po)
 		{
-			if (po->IfChild() && po->GetFatherObject())
-			{
-				po->GetFatherObject()->DeleteChildObject(po);
-			}
-			if (!po->GetChildren().empty())
-			{
-				for (auto i : po->GetChildren())
-					i->SetFatherObject(nullptr);
-			}
-			po->Clear();
 			MemoryManager::Delete(po);
 			m_FreeIndexList.push(i);
 			m_Content[i] = nullptr;

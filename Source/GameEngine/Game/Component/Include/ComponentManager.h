@@ -24,6 +24,8 @@ SpaceGameEngine::ComponentManager::NewComponent<classname> classname::NewCompone
 
 namespace SpaceGameEngine
 {
+	class Object;
+
 	class ComponentManager							//组件管理器
 	{
 	public:
@@ -54,12 +56,14 @@ namespace SpaceGameEngine
 				return buff;
 			}
 		};
-		bool DeleteComponent(Component* pc);		//删除一个组件
 		void Clear();
 
-		static void DestoryComponent(Component* pc);
-
 		static Component* NewComponentByName(const std::string& name);			//通过组件子类名来创建组件
+
+		friend class Object;
+	private:
+		static void DestoryComponent(Component* pc);
+		bool DeleteComponent(Component* pc);		//删除一个组件
 	protected:
 		static ComponentManager* sm_pThis;			//当前的管理器指针
 		Vector<Component*> m_Content;			//所管理的组件

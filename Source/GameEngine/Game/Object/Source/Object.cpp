@@ -45,7 +45,26 @@ SpaceGameEngine::Object::Object()
 
 SpaceGameEngine::Object::~Object()
 {
-	
+	if (m_pFather&&m_IfChild)
+	{
+		m_pFather->DeleteChildObject(this);
+		if (GetComponent(STRING(ConnectComponent)))
+			DeleteComponent(STRING(ConnectComponent));
+	}
+	if (!m_Children.empty())
+	{
+		for (auto i : m_Children)
+		{
+			DisconObject(i);
+		}
+	}
+	if (!m_Components.empty())
+	{
+		for (auto i : m_Components)
+		{
+			i.second->SetFatherObject(nullptr);
+		}
+	}
 }
 
 Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
@@ -82,17 +101,6 @@ bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 		ThrowError(L"没找到该类型的组件");
 		return false;
 	}
-	Component* father = (*component).second->GetFatherComponent();
-	if (father != nullptr)
-	{
-		father->DeleteChildComponent((*component).second);
-		for (auto i : (*component).second->GetChildrenComponent())
-		{
-			i->Attach(father);
-		}
-		component->second->SetFatherComponent(nullptr);
-	}
-	component->second->GetChildrenComponent().clear();
 	ComponentManager::DestoryComponent(component->second);
 	m_Components.erase(component);
 	return true;
@@ -152,10 +160,18 @@ void SpaceGameEngine::Object::EveryFrameCleanUp()
 
 void SpaceGameEngine::Object::Clear()
 {
-	auto info = GetComponent("InformationComponent");
-	if (info)
+	if (m_pFather&&m_IfChild)
 	{
-		info->Run(0.00f);
+		m_pFather->DeleteChildObject(this);
+		if (GetComponent(STRING(ConnectComponent)))
+			DeleteComponent(STRING(ConnectComponent));
+	}
+	if (!m_Children.empty())
+	{
+		for (auto i : m_Children)
+		{
+			DisconObject(i);
+		}
 	}
 	for (const auto& i : m_Components)
 		ComponentManager::DestoryComponent(i.second);

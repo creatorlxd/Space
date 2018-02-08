@@ -87,7 +87,6 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 		if (iter != m_Content.end())
 		{
 			m_FreeIndexList.push(iter - m_Content.begin());
-			(*iter)->Clear();
 			MemoryManager::Delete(*iter);
 			*iter = nullptr;
 		}
