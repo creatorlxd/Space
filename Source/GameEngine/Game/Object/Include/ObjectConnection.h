@@ -32,8 +32,10 @@ namespace SpaceGameEngine
 		
 		void Run(float DeltaTime);
 
-		void SetTransform(TransformComponent* father,TransformComponent* child);
+		void SetObject(Object* father, Object* child);
 	private:
+		Object * m_pFatherObject;
+		Object * m_pChildObject;
 		TransformComponent * m_pFatherTransform;
 		TransformComponent * m_pChildTransform;
 		bool m_IfInit;

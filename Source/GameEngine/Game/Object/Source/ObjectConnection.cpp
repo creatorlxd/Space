@@ -26,53 +26,65 @@ SpaceGameEngine::ConnectComponent::ConnectComponent()
 	m_pFatherTransform = nullptr;
 	m_pChildTransform = nullptr;
 	m_IfInit = false;
+	ConnectComponent::m_pFatherObject = nullptr;
+	m_pChildObject = nullptr;
 }
 
 void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 {
 	if (m_IfInit == false)
-		ThrowError("ConnectComponent需要先SetTransform");
+		ThrowError("ConnectComponent需要先SetObject");
 	else
 	{
-		if (m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::PositionChange) ||
-			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange) ||
-			m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::ScaleChange))
+		if (ConnectComponent::m_pFatherObject&&m_pChildObject)
 		{
-			m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(), Substract(m_pFatherTransform->GetPosition(), m_PositionBuffer)));
-			m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), Substract(m_pFatherTransform->GetScale(), m_ScaleBuffer)));
-			if (m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
+			if (ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+				ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+				ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
 			{
-				auto dis = Substract(m_pChildTransform->GetPosition(), m_pFatherTransform->GetPosition());
-				auto angle = Substract(m_pFatherTransform->GetRotation(), m_RotationBuffer);
-				dis = RotationVector(angle, dis);
-				m_pChildTransform->SetPosition(Add(dis,m_pFatherTransform->GetPosition()));
-				m_pChildTransform->SetRotation(Add(m_pChildTransform->GetRotation(), angle));
+				m_pFatherTransform = ConnectComponent::m_pFatherObject->GetComponent<TransformComponent>();
+				m_pChildTransform = m_pChildObject->GetComponent<TransformComponent>();
+				m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(), Substract(m_pFatherTransform->GetPosition(), m_PositionBuffer)));
+				m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), Substract(m_pFatherTransform->GetScale(), m_ScaleBuffer)));
+				if (m_pFatherTransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
+				{
+					auto dis = Substract(m_pChildTransform->GetPosition(), m_pFatherTransform->GetPosition());
+					auto angle = Substract(m_pFatherTransform->GetRotation(), m_RotationBuffer);
+					dis = RotationVector(angle, dis);
+					m_pChildTransform->SetPosition(Add(dis, m_pFatherTransform->GetPosition()));
+					m_pChildTransform->SetRotation(Add(m_pChildTransform->GetRotation(), angle));
+				}
+				m_PositionBuffer = m_pFatherTransform->GetPosition();
+				m_RotationBuffer = m_pFatherTransform->GetRotation();
+				m_ScaleBuffer = m_pFatherTransform->GetScale();
 			}
-			m_PositionBuffer = m_pFatherTransform->GetPosition();
-			m_RotationBuffer = m_pFatherTransform->GetRotation();
-			m_ScaleBuffer = m_pFatherTransform->GetScale();
 		}
 	}
 }
 
-void SpaceGameEngine::ConnectComponent::SetTransform(TransformComponent * father, TransformComponent * child)
+void SpaceGameEngine::ConnectComponent::SetObject(Object* father, Object* child)
 {
-	m_pFatherTransform = father;
-	m_pChildTransform = child;
-	if (father)
+	if (father&&child)
 	{
-		m_PositionBuffer = father->GetPosition();
-		m_RotationBuffer = father->GetRotation();
-		m_ScaleBuffer = father->GetScale();
+		m_pFatherTransform = father->GetComponent<TransformComponent>();
+		m_pChildTransform = child->GetComponent<TransformComponent>();
+		if (father)
+		{
+			m_PositionBuffer = m_pFatherTransform->GetPosition();
+			m_RotationBuffer = m_pFatherTransform->GetRotation();
+			m_ScaleBuffer = m_pFatherTransform->GetScale();
+		}
+		m_IfInit = true;
 	}
-	m_IfInit = true;
+	else
+		ThrowError("father&child object can not be nullptr");
 }
 
 void SpaceGameEngine::ConnectObject(Object * father, Object * child)
 {
 	child->Attach(father);
 	child->AddComponent(ConnectComponent::NewComponent());
-	child->GetComponent<ConnectComponent>()->SetTransform(father->GetComponent<TransformComponent>(), child->GetComponent<TransformComponent>());
+	child->GetComponent<ConnectComponent>()->SetObject(father, child);
 	if (child->GetRootComponent() != nullptr)
 	{
 		child->GetRootComponent()->Attach(child->GetComponent(STRING(ConnectComponent)));
