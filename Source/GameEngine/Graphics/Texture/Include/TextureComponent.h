@@ -36,6 +36,7 @@ namespace SpaceGameEngine
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
+		void Copy(Component* pc);
 
 		void SetTransformMatrix(const XMMATRIX& mat);
 		void AddTexture(const std::string& filename, XMMATRIX mat);

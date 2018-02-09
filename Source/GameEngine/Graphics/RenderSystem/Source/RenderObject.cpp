@@ -26,6 +26,7 @@ SpaceGameEngine::RenderObject::RenderObject() :m_ObjectOctree(&m_MeshForModelFil
 	m_pIndexBuffer = nullptr;
 	m_pGlobalOctreeNode = nullptr;
 	m_pGlobalOctreeNode = nullptr;
+	m_IfInit = false;
 }
 
 SpaceGameEngine::RenderObject::~RenderObject()
@@ -40,33 +41,37 @@ SpaceGameEngine::RenderObject::~RenderObject()
 
 void SpaceGameEngine::RenderObject::Init()
 {
-	if (m_Type == RenderObjectType::Model)
+	if (!m_IfInit)
 	{
-		if (m_Shader.empty())
+		if (m_Type == RenderObjectType::Model)
 		{
-			m_Shader.push_back(&SpaceEngineWindow->GetEffectShader());
-		}
+			if (m_Shader.empty())
+			{
+				m_Shader.push_back(&SpaceEngineWindow->GetEffectShader());
+			}
 
-		if (m_Mode&ModelFileMode)
-		{
-			InitVertexBuffer();
-			InitIndexBuffer();
-			if ((m_Mode&RenderObject::WholeMode) == 0)
+			if (m_Mode&ModelFileMode)
 			{
-				m_ObjectOctree.BuildTree(m_MeshForModelFileAsset.m_Indices);
-			}
-			if ((m_Mode&RenderObject::DynamicMode) == 0)
-			{
-				Vector<XMFLOAT3> points;
-				for (const auto& i : m_MeshForModelFileAsset.m_Vertices)
+				InitVertexBuffer();
+				InitIndexBuffer();
+				if ((m_Mode&RenderObject::WholeMode) == 0)
 				{
-					points.push_back(i.m_Position);
+					m_ObjectOctree.BuildTree(m_MeshForModelFileAsset.m_Indices);
 				}
-				m_BaseSpace = GetAxisAlignedBoundingBox(points);
-				m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
-				m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
+				if ((m_Mode&RenderObject::DynamicMode) == 0)
+				{
+					Vector<XMFLOAT3> points;
+					for (const auto& i : m_MeshForModelFileAsset.m_Vertices)
+					{
+						points.push_back(i.m_Position);
+					}
+					m_BaseSpace = GetAxisAlignedBoundingBox(points);
+					m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
+					m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
+				}
 			}
 		}
+		m_IfInit = true;
 	}
 }
 

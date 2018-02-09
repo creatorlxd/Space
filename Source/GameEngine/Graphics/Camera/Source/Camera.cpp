@@ -54,6 +54,36 @@ void SpaceGameEngine::CameraComponent::Run(float DeltaTime)
 	SetAsMainCamera();
 }
 
+void SpaceGameEngine::CameraComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			auto src = dynamic_cast<CameraComponent*>(pc);
+			m_Mode = src->m_Mode;
+			m_pAsset = src->m_pAsset;
+			m_LookDirection = src->m_LookDirection;
+			m_RightDirection = src->m_RightDirection;
+			m_UpDirection = src->m_UpDirection;
+			m_Position = src->m_Position;
+
+			m_Angle = src->m_Angle;
+			m_NearZ = src->m_NearZ;
+			m_FarZ = src->m_FarZ;
+
+			InitTransform();
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
+}
+
 XMFLOAT4X4 SpaceGameEngine::CameraComponent::ComputeViewMatrix()
 {
 	if (m_pTransform == nullptr)

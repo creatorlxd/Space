@@ -35,7 +35,7 @@ namespace SpaceGameEngine
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();
-
+		void Copy(Component* pc);
 	private:
 		
 	};

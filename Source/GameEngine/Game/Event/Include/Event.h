@@ -25,5 +25,7 @@ namespace SpaceGameEngine
 		const unsigned int PositionChange = HashString("PositionChange");
 		const unsigned int RotationChange = HashString("RotationChange");
 		const unsigned int ScaleChange = HashString("ScaleChange");
+		const unsigned int TransformAdd = HashString("TransformAdd");
+		const unsigned int TransformDelete = HashString("TransformDelete");
 	}
 }

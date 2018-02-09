@@ -1,5 +1,5 @@
 # To Do List
-* 去除所有的`Clear`方法，改用RAII管理资源。
+* 为`CameraComponent`加上`InitFromFile`
 
 * 加入自定义shader组件。
 

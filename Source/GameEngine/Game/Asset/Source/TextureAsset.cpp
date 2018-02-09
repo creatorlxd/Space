@@ -26,7 +26,16 @@ SpaceGameEngine::TextureAsset::TextureAsset(const TextureAsset & ta)
 	if (ta.m_FileName != "Null")
 	{
 		m_Content.Release();
-		InitFromFile(ta.m_FileName);
+		if (m_FileName == "Null")
+			InitFromFile(ta.m_FileName);
+		if (ta.m_Content.m_pContent != m_Content.m_pContent)
+		{
+			ID3D11Resource* dst = nullptr;
+			ID3D11Resource* src = nullptr;
+			m_Content.m_pContent->GetResource(&dst);
+			ta.m_Content.m_pContent->GetResource(&src);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
 	}
 }
 
@@ -42,7 +51,16 @@ SpaceGameEngine::TextureAsset & SpaceGameEngine::TextureAsset::operator=(const T
 	if (t.m_FileName != "Null")
 	{
 		m_Content.Release();
-		InitFromFile(t.m_FileName);
+		if (m_FileName == "Null")
+			InitFromFile(t.m_FileName);
+		if (t.m_Content.m_pContent != m_Content.m_pContent)
+		{
+			ID3D11Resource* dst = nullptr;
+			ID3D11Resource* src = nullptr;
+			m_Content.m_pContent->GetResource(&dst);
+			t.m_Content.m_pContent->GetResource(&src);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
 	}
 	return *this;
 }

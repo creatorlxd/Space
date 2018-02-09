@@ -42,6 +42,7 @@ namespace SpaceGameEngine
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();
+		void Copy(Component* pc);
 
 		void SetPosition(const XMFLOAT3& position);
 		void SetRotation(const XMFLOAT3& rotation);

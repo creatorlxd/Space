@@ -81,6 +81,29 @@ void SpaceGameEngine::TextureComponent::Run(float DeltaTime)
 	}
 }
 
+void SpaceGameEngine::TextureComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			m_Mode = pc->GetMode();
+			m_pAsset = pc->GetAsset();
+			if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+			{
+				(*m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_TextureAsset.rbegin());
+			}
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
+}
+
 void SpaceGameEngine::TextureComponent::SetTransformMatrix(const XMMATRIX & mat)
 {
 	m_TextureTransformMatrix = mat;

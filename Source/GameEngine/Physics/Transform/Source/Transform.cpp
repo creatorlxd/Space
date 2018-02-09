@@ -51,6 +51,8 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 
 void SpaceGameEngine::TransformComponent::Start()
 {
+	if(m_pFatherObject)
+		m_pFatherObject->ProduceMessage(this, Event::TransformAdd);
 	if (m_Mode&ForRenderingMode)
 	{
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
@@ -77,6 +79,8 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 
 void SpaceGameEngine::TransformComponent::CleanUp()
 {
+	if (m_pFatherObject)
+		m_pFatherObject->ProduceMessage(this, Event::TransformDelete);
 	if (m_Mode&ForRenderingMode)
 	{
 		if (m_pFatherObject)
@@ -88,6 +92,35 @@ void SpaceGameEngine::TransformComponent::CleanUp()
 			}
 		}
 	}
+}
+
+void SpaceGameEngine::TransformComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			auto src = dynamic_cast<TransformComponent*>(pc);
+			m_Mode = src->m_Mode;
+			m_pAsset = src->m_pAsset;
+			m_Position = src->m_Position;
+			m_Rotation = src->m_Rotation;
+			m_Scale = src->m_Scale;
+			if ((m_Mode&ForRenderingMode)&&m_pFatherObject->GetRenderObject())
+			{
+				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+			}
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
 }
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)

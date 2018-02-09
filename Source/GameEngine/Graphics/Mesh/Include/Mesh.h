@@ -43,5 +43,6 @@ namespace SpaceGameEngine
 		void InitFromMemory(int VertexSize, int IndexSize, DefaultVertex* pVertices, unsigned int* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
 		void Start();
 		void Run(float DeltaTime);												//渲染网格
+		void Copy(Component* pc);
 	};
 }

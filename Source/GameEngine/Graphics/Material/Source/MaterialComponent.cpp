@@ -71,3 +71,26 @@ void SpaceGameEngine::MaterialComponent::CleanUp()
 		}
 	}
 }
+
+void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			m_Mode = pc->GetMode();
+			m_pAsset = pc->GetAsset();
+			if (m_pFatherObject->GetRenderObject()&&pc->GetFatherObject()->GetRenderObject())
+			{
+				(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_MaterialAsset.rbegin());
+			}
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
+}

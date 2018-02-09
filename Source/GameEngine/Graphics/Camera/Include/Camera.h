@@ -29,7 +29,8 @@ namespace SpaceGameEngine
 
 		void Start();
 		void Run(float DeltaTime);
-	
+		void Copy(Component* pc);
+
 		XMFLOAT4X4 ComputeViewMatrix();
 		void GoForward(float dis);									//向前走
 		void GoUp(float dis);										//向上走

@@ -54,6 +54,9 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 * `void CleanUp()`:  
 清理组件与外部关系的操作，不释放组件，在`Object::DeleteComponent`时被调用。如果你不需要也可以不写。但是如果你写了的话，最好在你的`Clear`函数的末尾调用`Component::Clear()`。
 
+* `void Copy(Component* pc)`:  
+负责该组件类的复制。最好做安全检查。不要忘记将`m_Mode&m_pAsset`一并复制
+
 除此之外，你还要在你的组件类中**加入**以下成员变量。
 
 * 公有的`static ComponentManager::NewComponent<子类名> NewComponent`:  

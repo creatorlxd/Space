@@ -67,6 +67,7 @@ namespace SpaceGameEngine
 		int m_Mode;
 		RenderObjectType m_Type;
 		bool m_IfRender;
+		bool m_IfInit;
 
 		ID3D11Buffer* m_pVertexBuffer;
 		ID3D11Buffer* m_pIndexBuffer;

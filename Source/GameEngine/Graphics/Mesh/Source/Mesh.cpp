@@ -86,3 +86,28 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
 	
 }
+
+void SpaceGameEngine::MeshComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			m_Mode = pc->GetMode();
+			m_pAsset = pc->GetAsset();
+			if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+			{
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = pc->GetFatherObject()->GetRenderObject()->m_MeshForModelFileAsset;
+			}
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
+}

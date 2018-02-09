@@ -145,6 +145,10 @@ void SpaceGameEngine::Component::CleanUp()
 	
 }
 
+void SpaceGameEngine::Component::Copy(Component * pc)
+{
+}
+
 bool SpaceGameEngine::Component::IfRun()
 {
 	return m_IfRun;
@@ -188,4 +192,17 @@ int SpaceGameEngine::Component::GetMode()
 const Asset* SpaceGameEngine::Component::GetAsset()
 {
 	return m_pAsset;
+}
+
+void SpaceGameEngine::CopyComponent(Component * dst, Component * src)
+{
+	if (dst&&src)
+	{
+		if (dst->GetTypeName() == src->GetTypeName())
+		{
+			dst->Copy(src);
+		}
+		else
+			ThrowError("dst's type must equal to src's type");
+	}
 }

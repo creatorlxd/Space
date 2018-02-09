@@ -44,6 +44,7 @@ namespace SpaceGameEngine
 		virtual void EveryFrameCleanUp();
 		virtual void Attach(Component* pc);	//成为...组件的依附
 		virtual void CleanUp();				//清理
+		virtual void Copy(Component* pc);
 		bool IfRun();						//是否每帧运行
 		bool IfUse();						//是否使用
 		void ChangeIfRun(bool b);			//更改每帧是否运行
@@ -86,4 +87,6 @@ namespace SpaceGameEngine
 		m_pAsset = (const Asset*)re;
 		return re;
 	}
+
+	void CopyComponent(Component* dst, Component* src);
 }
