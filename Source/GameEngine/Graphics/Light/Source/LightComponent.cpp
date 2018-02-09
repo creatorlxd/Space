@@ -67,15 +67,12 @@ void SpaceGameEngine::LightComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::LightComponent::Clear()
+void SpaceGameEngine::LightComponent::CleanUp()
 {
 	if (m_Mode != 0)
 	{
 		Scene::GetMainScene()->m_LightManager.DeleteLight(&m_Content);
-		m_Mode = 0;
 	}
-	m_pTransform = nullptr;
-	Component::Clear();
 }
 
 bool SpaceGameEngine::LightComponent::IfOn()

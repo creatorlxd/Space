@@ -30,34 +30,22 @@ SpaceGameEngine::TextureComponent::TextureComponent()
 
 SpaceGameEngine::TextureComponent::~TextureComponent()
 {
-	if (m_Mode == SingleMode)
-	{
-		if (m_pFatherObject)
-		{
-			if (m_pFatherObject->GetRenderObject())
-			{
-				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_Content.Clear();
-				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_FileName = "Null";
-			}
-		}
-	}
+	
 }
 
-void SpaceGameEngine::TextureComponent::Clear()
+void SpaceGameEngine::TextureComponent::CleanUp()
 {
-	m_FileName = "";
 	if (m_Mode == SingleMode)
 	{
 		if (m_pFatherObject)
 		{
 			if (m_pFatherObject->GetRenderObject())
 			{
-				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_Content.Clear();
+				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_Content.Release();
 				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_FileName = "Null";
 			}
 		}
 	}
-	Component::Clear();
 }
 
 void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filename, int mode)

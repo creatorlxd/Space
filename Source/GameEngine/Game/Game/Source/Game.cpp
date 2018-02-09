@@ -95,12 +95,6 @@ void SpaceGameEngine::Game::Run()
 	}
 }
 
-void SpaceGameEngine::Game::Clear()
-{
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-}
-
 void SpaceGameEngine::Game::SetScene(Scene * ps)
 {
 	if (!ps)

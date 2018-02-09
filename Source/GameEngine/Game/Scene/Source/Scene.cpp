@@ -105,19 +105,6 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	m_RenderSystem.Render();
 }
 
-void SpaceGameEngine::Scene::Clear()
-{
-	m_ObjectManager.Clear();
-	m_GlobalOctree.Clear();
-	m_ComponentManager.Clear();
-	m_MessageManager.Clear();
-	m_ObjectInformation.clear();
-	m_LightManager.Clear();
-	m_RenderSystem.Clear();
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-}
-
 bool SpaceGameEngine::Scene::AddObjectInformation(const std::string & name, Object * po)
 {
 	if (FindObject(name) != nullptr)

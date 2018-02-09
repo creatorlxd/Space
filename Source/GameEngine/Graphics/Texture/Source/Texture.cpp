@@ -27,7 +27,7 @@ SpaceGameEngine::TextureForShader::~TextureForShader()
 		SafeRelease(m_pContent);
 }
 
-void SpaceGameEngine::TextureForShader::Clear()
+void SpaceGameEngine::TextureForShader::Release()
 {
 	if (m_pContent)
 		SafeRelease(m_pContent);

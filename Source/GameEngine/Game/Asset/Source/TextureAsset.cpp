@@ -25,7 +25,7 @@ SpaceGameEngine::TextureAsset::TextureAsset(const TextureAsset & ta)
 {
 	if (ta.m_FileName != "Null")
 	{
-		m_Content.Clear();
+		m_Content.Release();
 		InitFromFile(ta.m_FileName);
 	}
 }
@@ -41,7 +41,7 @@ SpaceGameEngine::TextureAsset & SpaceGameEngine::TextureAsset::operator=(const T
 {
 	if (t.m_FileName != "Null")
 	{
-		m_Content.Clear();
+		m_Content.Release();
 		InitFromFile(t.m_FileName);
 	}
 	return *this;

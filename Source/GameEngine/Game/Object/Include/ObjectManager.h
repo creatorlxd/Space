@@ -31,7 +31,6 @@ namespace SpaceGameEngine
 
 		void Start();								//执行开始操作
 		void Run(float DeltaTime);					//执行每帧的操作
-		void Clear();								//释放
 
 		friend class Scene;
 	private:

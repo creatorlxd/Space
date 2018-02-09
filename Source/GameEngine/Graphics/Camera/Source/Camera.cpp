@@ -42,26 +42,6 @@ SpaceGameEngine::CameraComponent::~CameraComponent()
 	{
 		sm_pThis = nullptr;
 	}
-	m_TypeName = "CameraComponent";
-	m_IfRun = false;
-	m_LookDirection = { 0,0,1 ,0 };
-	m_RightDirection = { 1,0,0 ,0 };
-	m_UpDirection = { 0,1,0 ,0 };
-	m_Position = { 0,0,0 ,1 };
-	m_Angle = XM_PIDIV4;
-	m_NearZ = 1.0f;
-	m_FarZ = 1000.0f;
-	sm_pThis = this;
-	m_pTransform = nullptr;
-	Component::Clear();
-}
-
-void SpaceGameEngine::CameraComponent::Clear()
-{
-	if (sm_pThis == this)
-	{
-		sm_pThis = nullptr;
-	}
 }
 
 void SpaceGameEngine::CameraComponent::Start()

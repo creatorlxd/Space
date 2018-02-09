@@ -45,7 +45,7 @@ namespace SpaceGameEngine
 		void InsertTriangle(const IndexTriangle& data);
 		bool DeleteTriangle(const IndexTriangle& data);
 		void Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale,Vector<unsigned int>& indices,unsigned int& index);
-		void Clear();
+		void Release();
 		void GetIndices(Vector<unsigned int>& indices, unsigned int& index);
 
 		Vector<DefaultVertex>* m_VertexData;
@@ -66,7 +66,6 @@ namespace SpaceGameEngine
 		{}
 		void BuildTree(const Vector<unsigned int>& indices);
 		~ObjectOctree();
-		void Clear();
 		Vector<unsigned int> Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 	private:
 		size_t m_MaxIndicesSize;

@@ -35,17 +35,6 @@ SpaceGameEngine::LightManager::~LightManager()
 		sm_pThis = nullptr;
 }
 
-void SpaceGameEngine::LightManager::Clear()
-{
-	m_Content.clear();
-	m_DirectionLights.clear();
-	m_DynamicLights.clear();
-	m_FreeIndexList = Queue<size_t>();
-	m_LightOctree.Clear();
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-}
-
 void SpaceGameEngine::LightManager::InsertLight(LightEx * plight)
 {
 	if (plight->m_Mode == LightEx::LightMode::Normal&&

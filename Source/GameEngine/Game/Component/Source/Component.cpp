@@ -30,18 +30,7 @@ SpaceGameEngine::Component::Component()
 
 SpaceGameEngine::Component::~Component()
 {
-	if (m_pFather)
-	{
-		for (auto i : m_Children)
-			i->Attach(GetFatherComponent());
-		m_Children.clear();
-		m_pFather->DeleteChildComponent(this);
-	}
-	if (!m_Children.empty())
-	{
-		for (auto i : m_Children)
-			i->SetFatherComponent(nullptr);
-	}
+	
 }
 
 std::string SpaceGameEngine::Component::GetTypeName()
@@ -151,27 +140,9 @@ void SpaceGameEngine::Component::Attach(Component * pc)
 	}
 }
 
-void SpaceGameEngine::Component::Clear()
+void SpaceGameEngine::Component::CleanUp()
 {
-	if (m_pFather)
-	{
-		for (auto i : m_Children)
-			i->Attach(GetFatherComponent());
-		m_Children.clear();
-		m_pFather->DeleteChildComponent(this);
-	}
-	if (!m_Children.empty())
-	{
-		for (auto i : m_Children)
-			i->SetFatherComponent(nullptr);
-	}
-	m_Children.clear();
-	m_IfRun = true;
-	m_IfUse = true;
-	m_pFather = nullptr;
-	m_pFatherObject = nullptr;
-	m_Mode = 0;
-	m_pAsset = nullptr;
+	
 }
 
 bool SpaceGameEngine::Component::IfRun()

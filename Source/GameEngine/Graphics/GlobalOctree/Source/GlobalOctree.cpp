@@ -232,7 +232,7 @@ void SpaceGameEngine::GlobalOctreeNode::UpdateObjectRenderState(const GlobalOctr
 		data.second->ChangeIfRender(false);
 }
 
-void SpaceGameEngine::GlobalOctreeNode::Clear()
+void SpaceGameEngine::GlobalOctreeNode::Release()
 {
 	if (m_IfLeafNode)
 	{
@@ -242,7 +242,7 @@ void SpaceGameEngine::GlobalOctreeNode::Clear()
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			m_ChildrenNode[i]->Clear();
+			m_ChildrenNode[i]->Release();
 			MemoryManager::Delete(m_ChildrenNode[i]);
 			m_ChildrenNode[i] = nullptr;
 		}
@@ -278,7 +278,10 @@ bool SpaceGameEngine::GlobalOctreeNode::DeleteObjectData(GlobalOctreeData::secon
 
 SpaceGameEngine::GlobalOctree::~GlobalOctree()
 {
-	
+	if (m_IfInit)
+	{
+		m_RootNode.Release();
+	}
 }
 
 SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctree::AddObject(const GlobalOctreeData & data)
@@ -351,12 +354,6 @@ void SpaceGameEngine::GlobalOctree::BuildTreeWithSpaceLimit(const AxisAlignedBou
 void SpaceGameEngine::GlobalOctree::Run()
 {
 	m_RootNode.Run();
-}
-
-void SpaceGameEngine::GlobalOctree::Clear()
-{
-	m_RootNode.Clear();
-	m_IfInit = false;
 }
 
 SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctree::UpdateObject(const GlobalOctreeData & data)

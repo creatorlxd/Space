@@ -44,7 +44,7 @@ namespace SpaceGameEngine
 		virtual void Run(float DeltaTime);//每帧运行时的操作
 		virtual void EveryFrameCleanUp();
 		virtual void Attach(Component* pc);	//成为...组件的依附
-		virtual void Clear();
+		virtual void CleanUp();				//清理
 		bool IfRun();						//是否每帧运行
 		bool IfUse();						//是否使用
 		void ChangeIfRun(bool b);			//更改每帧是否运行

@@ -40,15 +40,6 @@ SpaceGameEngine::AssetManager::~AssetManager()
 	}
 }
 
-void SpaceGameEngine::AssetManager::Clear()
-{
-	for (const auto& i : m_Content)
-	{
-		MemoryManager::Delete(i.second);
-	}
-	m_Content.clear();
-}
-
 bool SpaceGameEngine::AssetManager::AddAsset(Asset * pa)
 {
 	if (pa == nullptr)

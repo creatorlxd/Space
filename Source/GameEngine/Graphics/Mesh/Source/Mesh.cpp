@@ -24,7 +24,7 @@ SpaceGameEngine::MeshComponent::MeshComponent()
 	m_TypeName = "MeshComponent";
 }
 
-void SpaceGameEngine::MeshComponent::Clear()
+void SpaceGameEngine::MeshComponent::CleanUp()
 {
 	if (m_Mode&ModelFileMode)
 	{
@@ -38,23 +38,11 @@ void SpaceGameEngine::MeshComponent::Clear()
 			}
 		}
 	}
-	Component::Clear();
 }
 
 SpaceGameEngine::MeshComponent::~MeshComponent()
 {
-	if (m_Mode&ModelFileMode)
-	{
-		if (m_pFatherObject)
-		{
-			if (m_pFatherObject->GetRenderObject())
-			{
-				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
-			}
-		}
-	}
+	
 }
 
 void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)

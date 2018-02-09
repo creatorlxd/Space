@@ -195,7 +195,7 @@ void SpaceGameEngine::ObjectOctreeNode::Run(XMFLOAT3 position, XMFLOAT3 rotation
 	}
 }
 
-void SpaceGameEngine::ObjectOctreeNode::Clear()
+void SpaceGameEngine::ObjectOctreeNode::Release()
 {
 	if (m_IfLeafNode)
 	{
@@ -205,7 +205,7 @@ void SpaceGameEngine::ObjectOctreeNode::Clear()
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			m_ChildrenNode[i]->Clear();
+			m_ChildrenNode[i]->Release();
 			MemoryManager::Delete(m_ChildrenNode[i]);
 			m_ChildrenNode[i] = nullptr;
 		}
@@ -258,12 +258,7 @@ void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indice
 
 SpaceGameEngine::ObjectOctree::~ObjectOctree()
 {
-	
-}
-
-void SpaceGameEngine::ObjectOctree::Clear()
-{
-	m_RootNode.Clear();
+	m_RootNode.Release();
 }
 
 SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)

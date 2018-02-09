@@ -32,7 +32,6 @@ namespace SpaceGameEngine
 	{
 	public:
 		~AssetManager();
-		void Clear();
 		template<typename T>
 		const T* NewAssetFromFile(const std::string& filename);
 		bool AddAsset(Asset* pa);

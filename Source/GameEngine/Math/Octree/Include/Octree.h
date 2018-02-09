@@ -183,7 +183,7 @@ namespace SpaceGameEngine
 				ThrowError("can not find the data in octree");
 			return InsertData(data);
 		}
-		void Clear()
+		void Release()
 		{
 			if (m_IfLeafNode)
 			{
@@ -193,7 +193,7 @@ namespace SpaceGameEngine
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					m_ChildrenNode[i]->Clear();
+					m_ChildrenNode[i]->Release();
 					MemoryManager::Delete(m_ChildrenNode[i]);
 					m_ChildrenNode[i] = nullptr;
 				}
@@ -348,7 +348,8 @@ namespace SpaceGameEngine
 
 		~Octree()
 		{
-			
+			if (m_IfInit)
+				m_RootNode.Release();
 		}
 		OctreeNode<Key, T, MaxDeepth>* InsertData(const DataType& data)
 		{
@@ -412,11 +413,6 @@ namespace SpaceGameEngine
 				}
 				m_IntializaionData.clear();
 			}
-		}
-		void Clear()
-		{
-			m_RootNode.Clear();
-			m_IfInit = false;
 		}
 		OctreeNode<Key, T, MaxDeepth>* UpdateData(const DataType& data)
 		{

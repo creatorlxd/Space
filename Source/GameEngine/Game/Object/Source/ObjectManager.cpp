@@ -127,26 +127,6 @@ void SpaceGameEngine::ObjectManager::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::ObjectManager::Clear()
-{
-	if (m_FreeIndexList.size() == m_Content.size())
-	{
-
-	}
-	else
-	{
-		for (auto i : m_Content)
-		{
-			if (i)
-				MemoryManager::Delete(i);
-		}
-	}
-	m_Content.clear();
-	m_FreeIndexList = Queue<unsigned int>();
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-}
-
 Object * SpaceGameEngine::CloneObject(Object * po)
 {
 	Queue<std::pair<Component*, Component*>> que;		//first of the pair : component in src ; second : component in dist

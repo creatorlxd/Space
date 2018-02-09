@@ -27,7 +27,6 @@ namespace SpaceGameEngine
 		CameraComponent();
 		~CameraComponent();
 
-		void Clear();
 		void Start();
 		void Run(float DeltaTime);
 	

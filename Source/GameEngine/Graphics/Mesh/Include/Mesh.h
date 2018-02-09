@@ -36,7 +36,7 @@ namespace SpaceGameEngine
 
 		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
-		void Clear();
+		void CleanUp();
 		~MeshComponent();
 
 		void InitFromFile(const std::string& filename, int mode = 1);			//从文件读取Mesh

@@ -162,35 +162,6 @@ void SpaceGameEngine::Object::EveryFrameCleanUp()
 			i.second->EveryFrameCleanUp();
 }
 
-void SpaceGameEngine::Object::Clear()
-{
-	if (m_pFather&&m_IfChild)
-	{
-		m_pFather->DeleteChildObject(this);
-		if (GetComponent(STRING(ConnectComponent)))
-			DeleteComponent(STRING(ConnectComponent));
-	}
-	if (!m_Children.empty())
-	{
-		for (auto i : m_Children)
-		{
-			DisconObject(i);
-		}
-	}
-	for (const auto& i : m_Components)
-		ComponentManager::DestoryComponent(i.second);
-	m_Components.clear();
-	m_Message.clear();
-	m_Children.clear();
-	m_pRootComponent = nullptr;
-	m_IfUse = true;
-	m_IfRun = true;
-	m_IfRender = true;
-	m_IfChild = false;
-	m_pFather = nullptr;
-	m_pRenderObject = nullptr;
-}
-
 bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)
 {
 	auto component = GetComponent(name);

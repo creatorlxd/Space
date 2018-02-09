@@ -42,26 +42,6 @@ SpaceGameEngine::RenderSystem::~RenderSystem()
 		sm_pThis = nullptr;
 }
 
-void SpaceGameEngine::RenderSystem::Clear()
-{
-	if (m_FreeIndexList.size() == m_Content.size())
-	{
-
-	}
-	else
-	{
-		for (auto i : m_Content)
-		{
-			if (i)
-				MemoryManager::Delete(i);
-		}
-	}
-	m_FreeIndexList = Queue<size_t>();
-	m_pGlobalOctree = nullptr;
-	if (sm_pThis == this)
-		sm_pThis = nullptr;
-}
-
 SpaceGameEngine::RenderObject * SpaceGameEngine::RenderSystem::NewRenderObject()
 {
 	RenderObject* re = MemoryManager::New<RenderObject>();

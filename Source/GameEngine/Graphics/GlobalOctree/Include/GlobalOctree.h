@@ -35,7 +35,7 @@ namespace SpaceGameEngine
 		void SetObjectRenderState(bool state);
 		GlobalOctreeNode* UpdateObjectData(const GlobalOctreeData& data);
 		void UpdateObjectRenderState(const GlobalOctreeData& data);
-		void Clear();
+		void Release();
 		bool DeleteObjectData(GlobalOctreeData::second_type pointer);
 
 		ForwardList<GlobalOctreeData> m_Content;
@@ -55,7 +55,6 @@ namespace SpaceGameEngine
 		void BuildTree();
 		void BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox& space);
 		void Run();
-		void Clear();
 		GlobalOctreeNode* UpdateObject(const GlobalOctreeData& data);
 	private:
 		GlobalOctreeNode m_RootNode;

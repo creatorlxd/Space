@@ -29,16 +29,7 @@ SpaceGameEngine::TransformComponent::TransformComponent()
 
 SpaceGameEngine::TransformComponent::~TransformComponent()
 {
-	if (m_Mode&ForRenderingMode)
-	{
-		if (m_pFatherObject)
-		{
-			if (m_pFatherObject->GetRenderObject())
-			{
-				RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
-			}
-		}
-	}
+	
 }
 
 void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filename, int mode)
@@ -84,7 +75,7 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 	}
 }
 
-void SpaceGameEngine::TransformComponent::Clear()
+void SpaceGameEngine::TransformComponent::CleanUp()
 {
 	if (m_Mode&ForRenderingMode)
 	{
@@ -96,7 +87,6 @@ void SpaceGameEngine::TransformComponent::Clear()
 			}
 		}
 	}
-	Component::Clear();
 }
 
 void SpaceGameEngine::TransformComponent::SetPosition(const XMFLOAT3 & position)

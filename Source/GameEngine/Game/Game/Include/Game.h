@@ -33,7 +33,6 @@ namespace SpaceGameEngine
 		void Init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);			//初始化
 		static void Start();			//开始
 		static void Run();				//每帧的运行
-		void Clear();
 
 		void SetScene(Scene* ps);		//第一次设置场景
 		void ChangeScene(Scene* ps);	//改变场景
