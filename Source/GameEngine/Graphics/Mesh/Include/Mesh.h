@@ -34,7 +34,7 @@ namespace SpaceGameEngine
 		static const int YAxisAlignedMode = 16;
 		static const int ZAxisAlignedMode = 32;
 
-		static ComponentManager::NewComponent<MeshComponent> NewComponent;		//创建组件
+		static ComponentFactory<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
 		void CleanUp();
 		~MeshComponent();

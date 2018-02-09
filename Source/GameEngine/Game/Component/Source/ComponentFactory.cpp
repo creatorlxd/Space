@@ -13,23 +13,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
 #include "stdafx.h"
-#include "Game/Scene/Include/Scene.h"
-namespace SpaceGameEngine
+#include "../Include/ComponentFactory.h"
+
+SpaceGameEngine::Component * SpaceGameEngine::NewComponentByTypeName(const std::string type_name)
 {
-	class InformationComponent :public Component			//Object信息组件
-	{
-	public:
-		static ComponentManager::NewComponent<InformationComponent> NewComponent;
-
-		InformationComponent();
-		~InformationComponent();
-
-		void Run(float DeltaTime);
-	};
-
-	bool RegisterObject(const std::string& name, Object* po);	//注册Object
-
-#define REGISTEROBJECT(o) RegisterObject(#o,o);
+	return GetComponentInformationManager().GetInformation(type_name).m_FactoryFunction();
 }

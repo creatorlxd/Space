@@ -26,14 +26,14 @@ SpaceGameEngine::Scene::Scene()
 
 SpaceGameEngine::Scene::~Scene()
 {
+	for (auto i : m_Content)
+		MemoryManager::Delete(i.second);
 	if (sm_pThis == this)
 		sm_pThis = nullptr;
 }
 
 void SpaceGameEngine::Scene::SetAsMainScene()
 {
-	m_ObjectManager.SetAsMainManager();
-	m_ComponentManager.SetAsMainManager();
 	m_MessageManager.SetAsMainManager();
 	m_LightManager.SetAsMainManager();
 	m_RenderSystem.SetAsMainRenderSystem();
@@ -51,22 +51,27 @@ void SpaceGameEngine::Scene::Start()
 	if (!ifinit)
 	{	
 		//添加默认摄像机
-		Object* DefaultCamera = ObjectManager::NewObject();
+		Object* DefaultCamera = NewObject("DefaultCamera");
 		DefaultCamera->AddComponent(CameraComponent::NewComponent());
 		DefaultCamera->AddComponent(TransformComponent::NewComponent());
 		DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
 		DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
-		REGISTEROBJECT(DefaultCamera);
 		//--------------
 		ifinit = true;
 	}
 	else
 	{
-		FindObject("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
+		GetObjectByName("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
 	}
-	m_ObjectManager.Start();
-	m_RenderSystem.m_pGlobalOctree = &m_GlobalOctree;
-	m_RenderSystem.Init();
+	
+	for (auto i : m_Content)
+	{
+		if (i.second)
+			if (i.second->IfUse())
+				i.second->Start();
+	}
+
+	m_RenderSystem.Init(&m_GlobalOctree);
 	m_GlobalOctree.BuildTree();
 }
 
@@ -101,88 +106,103 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 
 	m_MessageManager.Run();
 	m_GlobalOctree.Run();
-	m_ObjectManager.Run(DeltaTime);
+	
+	for (auto i : m_Content)
+	{
+		if (i.second)
+			if (i.second->IfUse() && i.second->IfRun() && (!i.second->IfChild()))
+				i.second->Run(DeltaTime);
+	}
+	for (auto i : m_Content)
+	{
+		if (i.second)
+			if (i.second->IfUse() && i.second->IfRun())
+				i.second->EveryFrameCleanUp();
+	}
+
 	m_RenderSystem.Render();
 }
 
-bool SpaceGameEngine::Scene::AddObjectInformation(const std::string & name, Object * po)
+Object * SpaceGameEngine::Scene::NewObject(const std::string name)
 {
-	if (FindObject(name) != nullptr)
+	if (GetObjectByName(name) != nullptr)
 	{
-		ThrowError(L"该Object已注册过了");
-		return false;
-	}
-	else
-	{
-		m_ObjectInformation.insert(std::make_pair(name, po));
-		return true;
-	}
-}
-
-bool SpaceGameEngine::Scene::DeleteObjectInformation(const std::string & name)
-{
-	auto buff = m_ObjectInformation.find(name);
-	if (buff == m_ObjectInformation.end())
-	{
-		ThrowError(L"该Object还没有注册");
-		return false;
-	}
-	m_ObjectInformation.erase(buff);
-	return true;
-}
-
-bool SpaceGameEngine::Scene::DeleteObjectInformation(Object * po)
-{
-	for (auto i = m_ObjectInformation.begin(); i != m_ObjectInformation.end(); i++)
-	{
-		if ((*i).second == po)
-		{
-			m_ObjectInformation.erase(i);
-			return true;
-		}
-	}
-	ThrowError(L"该Object还没有注册");
-	return false;
-}
-
-Object * SpaceGameEngine::Scene::FindObject(const std::string & name)
-{
-	auto re = m_ObjectInformation.find(name);
-	if (re == m_ObjectInformation.end())
-	{
+		ThrowError(L"Object的Name重复了");
 		return nullptr;
 	}
 	else
 	{
-		return (*re).second;
+		auto re = MemoryManager::New<Object>();
+		m_Content.insert(std::make_pair(name, re));
+		return re;
 	}
 }
 
-std::string SpaceGameEngine::Scene::FindObjectName(Object * po)
+Object * SpaceGameEngine::Scene::GetObjectByName(const std::string name)
 {
-	for (auto i = m_ObjectInformation.begin(); i != m_ObjectInformation.end(); i++)
+	auto iter = m_Content.find(name);
+	if (iter != m_Content.end())
 	{
-		if (i->second == po)
-		{
-			return i->first;
-		}
+		return iter->second;
 	}
-	return std::string();
+	else
+	{
+		return nullptr;
+	}
 }
 
-void SpaceGameEngine::Scene::DeleteObject(Object * po)
+bool SpaceGameEngine::Scene::DeleteObject(Object * po)
 {
 	if (po)
 	{
 		if (po->GetRenderObject())
 		{
 			m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
+			po->SetRenderObject(nullptr);
 			m_GlobalOctree.DeleteObject(po);
 		}
-		if (po->GetComponent(STRING(InformationComponent)))
-			DeleteObjectInformation(po);
-		m_ObjectManager.DeleteObject(po);
+		
+		auto iter = m_Content.end();
+		for (auto i=m_Content.begin();i!=m_Content.end();i++)
+		{
+			if (i->second == po)
+			{
+				iter = i;
+				break;
+			}
+		}
+		if (iter != m_Content.end())
+		{
+			iter->second->ReleaseComponentWhenRuntime();
+			if (iter->second->GetFatherObject()&& iter->second->IfChild())
+			{
+				iter->second->GetFatherObject()->DeleteChildObject(iter->second);
+			}
+			if (!iter->second->GetChildren().empty())
+			{
+				for (auto i : iter->second->GetChildren())
+				{
+					DisconObject(i);
+				}
+			}
+			MemoryManager::Delete(iter->second);
+			m_Content.erase(iter);
+			return true;
+		}
+		else
+		{
+			ThrowError("do not have this object in scene");
+			return false;
+		}
 	}
 	else
+	{
 		ThrowError("can not delete nullptr");
+		return false;
+	}
+}
+
+bool SpaceGameEngine::Scene::DeleteObject(const std::string name)
+{
+	return DeleteObject(GetObjectByName(name));
 }

@@ -41,7 +41,7 @@ namespace SpaceGameEngine
 		bool IfOn();
 		void ChangeIfOn(bool b);
 
-		static ComponentManager::NewComponent<LightComponent> NewComponent;
+		static ComponentFactory<LightComponent> NewComponent;
 	private:
 		LightEx m_Content;
 		TransformComponent* m_pTransform;

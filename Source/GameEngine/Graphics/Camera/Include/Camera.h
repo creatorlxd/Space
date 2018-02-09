@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/Component.h"
 #include "Physics/Transform/Include/Transform.h"
 
 namespace SpaceGameEngine
@@ -63,6 +63,6 @@ namespace SpaceGameEngine
 
 		static CameraComponent* sm_pThis;
 	public:
-		static ComponentManager::NewComponent<CameraComponent> NewComponent;
+		static ComponentFactory<CameraComponent> NewComponent;
 	};
 }

@@ -15,12 +15,12 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentFactory.h"
+#include "Common/Utility/Include/File.h"
 
 namespace SpaceGameEngine
 {
 	class RenderObject;
-	void DisconObject(Object* child);
 
 	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
@@ -68,8 +68,8 @@ namespace SpaceGameEngine
 		void SetRenderObject(RenderObject* pro);
 		RenderObject* GetRenderObject();
 
+		void ReleaseComponentWhenRuntime();
 	private:
-		
 		void Attach(Object* po);
 		void Discon();						//断开
 

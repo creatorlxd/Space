@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentFactory.h"
 
 namespace SpaceGameEngine
 {

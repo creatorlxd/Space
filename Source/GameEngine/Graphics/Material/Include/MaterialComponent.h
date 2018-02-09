@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentFactory.h"
 #include "Game/Asset/Include/MaterialAsset.h"
 #include "Game/Game/Include/Game.h"
 
@@ -29,7 +29,7 @@ namespace SpaceGameEngine
 
 		static const int SingleMode = 1;
 
-		static ComponentManager::NewComponent<MaterialComponent> NewComponent;
+		static ComponentFactory<MaterialComponent> NewComponent;
 
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Start();

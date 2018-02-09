@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentFactory.h"
 #include "Physics/Transform/Include/Transform.h"
 
 namespace SpaceGameEngine
@@ -26,7 +26,7 @@ namespace SpaceGameEngine
 	class ConnectComponent :public Component
 	{
 	public:
-		static ComponentManager::NewComponent<ConnectComponent> NewComponent;
+		static ComponentFactory<ConnectComponent> NewComponent;
 
 		ConnectComponent();
 		

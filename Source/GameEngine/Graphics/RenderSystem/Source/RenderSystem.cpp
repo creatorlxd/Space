@@ -77,10 +77,14 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 		ThrowError("can not delete nullptr");
 }
 
-void SpaceGameEngine::RenderSystem::Init()
+void SpaceGameEngine::RenderSystem::Init(GlobalOctree* pgo)
 {
-	if (m_pGlobalOctree == nullptr)
-		ThrowError("使用RenderSystem时，需先设置GlobalOctree");
+	if (pgo == nullptr)
+	{
+		ThrowError("pointer to GlobalOctree can not be nullptr");
+		return;
+	}
+	m_pGlobalOctree = pgo;
 	for (auto i : m_Content)
 	{
 		if (i != nullptr)

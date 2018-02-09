@@ -15,30 +15,29 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Space.h"
-#include "Component.h"
+#include "ComponentInformationManager.h"
+
+#define REGISTERCOMPONENTCLASS(classname) \
+SpaceGameEngine::ComponentFactory<classname> classname::NewComponent(STRING(classname));
 
 namespace SpaceGameEngine
 {
-	struct ComponentInformation
+	template<typename T>
+	struct ComponentFactory							//创建一个组件
 	{
 		std::string m_Name;
-		size_t m_MemorySize;
-		std::function<Component*(void)> m_FactoryFunction;
-
-		ComponentInformation();
-		ComponentInformation(const std::string& name, size_t size);
-		ComponentInformation(const std::string& name, size_t size, std::function<Component*(void)> func);
+		ComponentFactory(const std::string& name);
+		Component* operator () ()
+		{
+			return MemoryManager::New<T>();
+		}
 	};
-
-	class ComponentInformationManager
+	template<typename T>
+	inline ComponentFactory<T>::ComponentFactory(const std::string & name)
 	{
-	public:
-		bool AddInformation(const ComponentInformation& info);
-		const ComponentInformation& GetInformation(const std::string& name);
-	private:
-		Map<std::string, ComponentInformation> m_Content;
-	};
+		m_Name = name;
+		GetComponentInformationManager().AddInformation(ComponentInformation(name, sizeof(T), *this));
+	}
 
-	ComponentInformationManager& GetComponentInformationManager();
+	Component* NewComponentByTypeName(const std::string type_name);
 }

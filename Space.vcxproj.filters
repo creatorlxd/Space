@@ -351,9 +351,6 @@
     <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h">
       <Filter>Game\Component\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentManager.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h">
       <Filter>Game\Game\Include</Filter>
     </ClInclude>
@@ -369,23 +366,14 @@
     <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h">
       <Filter>Game\Object\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectManager.h">
-      <Filter>Game\Object\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h">
       <Filter>Physics\Transform\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectInformation.h">
-      <Filter>Game\Object\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h">
       <Filter>Game\Message\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h">
       <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectFactory.h">
-      <Filter>Game\Object\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h">
       <Filter>Game\Game\Include</Filter>
@@ -525,15 +513,15 @@
     <ClInclude Include="Source\GameEngine\Game\Event\Include\Event.h">
       <Filter>Game\Event\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactory.h">
+      <Filter>Game\Component\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
       <Filter>Graphics\Mesh\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp">
-      <Filter>Game\Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentManager.cpp">
       <Filter>Game\Component\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp">
@@ -554,20 +542,11 @@
     <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp">
       <Filter>Game\Object\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectManager.cpp">
-      <Filter>Game\Object\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp">
       <Filter>Physics\Transform\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectInformation.cpp">
-      <Filter>Game\Object\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp">
       <Filter>Game\Message\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectFactory.cpp">
-      <Filter>Game\Object\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp">
       <Filter>Game\Game\Source</Filter>
@@ -697,6 +676,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Event\Source\Event.cpp">
       <Filter>Game\Event\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactory.cpp">
+      <Filter>Game\Component\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

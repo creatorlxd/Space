@@ -18,7 +18,6 @@ limitations under the License.
 #include "Space.h"
 #include "Common/MemoryManager/Include/AllocatorForSTL.hpp"
 #include "Common/Utility/Include/File.h"
-#include "ComponentInformationManager.h"
 #include "../../Asset/Include/Asset.h"
 #include "Game/Event/Include/Event.h"
 

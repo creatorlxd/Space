@@ -17,29 +17,6 @@ limitations under the License.
 #include "../Include/SafeGet.h"
 using namespace SpaceGameEngine;
 
-ComponentManager * SpaceGameEngine::GetComponentManager()
-{
-	auto pointer = ComponentManager::GetMainManager();
-	if (!pointer)
-	{
-		ThrowError(L"需要先创建一个组件管理器");
-		return nullptr;
-	}
-	return pointer;
-	
-}
-
-ObjectManager * SpaceGameEngine::GetObjectManager()
-{
-	auto pointer = ObjectManager::GetMainManager();
-	if (!pointer)
-	{
-		ThrowError(L"需要先创建一个对象管理器");
-		return nullptr;
-	}
-	return pointer;
-}
-
 MessageManager* SpaceGameEngine::GetMessageManager()
 {
 	auto pointer = MessageManager::GetMainManager();

@@ -28,14 +28,14 @@ namespace SpaceGameEngine
 		RenderObject* NewRenderObject();
 		void DeleteRenderObject(RenderObject* pro);
 
-		void Init();
+		void Init(GlobalOctree* pgo);
 		void Render();
 
 		static RenderSystem* GetMainRenderSystem();
 		void SetAsMainRenderSystem();
-	public:
-		GlobalOctree * m_pGlobalOctree;
+		
 	private:
+		GlobalOctree * m_pGlobalOctree;
 		Vector<RenderObject*> m_Content;
 		Queue<size_t> m_FreeIndexList;
 

@@ -19,7 +19,9 @@ limitations under the License.
 void SpaceGameEngine::ThrowError(const TString & errormessage)
 {
 	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
+#if defined(_DEBUG)|defined(DEBUG)	
 	DebugBreak();
+#endif
 }
 #ifndef _UNICODE
 void SpaceGameEngine::ThrowError(const std::wstring& errormessage)

@@ -45,26 +45,9 @@ SpaceGameEngine::Object::Object()
 
 SpaceGameEngine::Object::~Object()
 {
-	if (m_pFather&&m_IfChild)
-	{
-		m_pFather->DeleteChildObject(this);
-		if (GetComponent(STRING(ConnectComponent)))
-			DeleteComponent(STRING(ConnectComponent));
-	}
-	if (!m_Children.empty())
-	{
-		for (auto i : m_Children)
-		{
-			i->Discon();
-		}
-	}
-	if (!m_Components.empty())
-	{
-		for (auto i : m_Components)
-		{
-			i.second->SetFatherObject(nullptr);
-		}
-	}
+	for (auto i : m_Components)
+		if (i.second)
+			MemoryManager::Delete(i.second);
 }
 
 Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
@@ -83,14 +66,24 @@ Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
 
 bool SpaceGameEngine::Object::AddComponent(Component * pc)
 {
-	if (GetComponent(pc->GetTypeName()) != nullptr)
+	if (pc)
 	{
-		ThrowError(L"已有相同类型的组件了");
+		if (GetComponent(pc->GetTypeName()) != nullptr)
+		{
+			ThrowError(L"已有相同类型的组件了");
+			pc->CleanUp();
+			MemoryManager::Delete(pc);
+			return false;
+		}
+		m_Components.insert(std::make_pair(pc->GetTypeName(), pc));
+		pc->SetFatherObject(this);
+		return true;
+	}
+	else
+	{
+		ThrowError("can not add nullptr as a component");
 		return false;
 	}
-	m_Components.insert(std::make_pair(pc->GetTypeName(),pc));
-	pc->SetFatherObject(this);
-	return true;
 }
 
 bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
@@ -105,7 +98,20 @@ bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
 	{
 		ThrowError("can not delete root component");
 	}
-	ComponentManager::DestoryComponent(component->second);
+	component->second->CleanUp();
+	if (component->second->GetFatherComponent())
+	{
+		for (auto i : component->second->GetChildrenComponent())
+			i->Attach(component->second->GetFatherComponent());
+		component->second->GetChildrenComponent().clear();
+		component->second->GetFatherComponent()->DeleteChildComponent(component->second);
+	}
+	if (!component->second->GetChildrenComponent().empty())
+	{
+		for (auto i : component->second->GetChildrenComponent())
+			i->SetFatherComponent(nullptr);
+	}
+	MemoryManager::Delete(component->second);
 	m_Components.erase(component);
 	return true;
 }
@@ -298,6 +304,12 @@ void SpaceGameEngine::Object::Discon()
 	}
 	else
 		ThrowError("该对象不是子对象");
+}
+
+void SpaceGameEngine::Object::ReleaseComponentWhenRuntime()
+{
+	for (auto i : m_Components)
+		i.second->CleanUp();
 }
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)

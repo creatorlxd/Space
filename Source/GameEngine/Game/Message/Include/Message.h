@@ -15,7 +15,8 @@ limitations under the License.
 */
 #pragma once 
 #include "stdafx.h"
-#include "Game/Object/Include/ObjectManager.h"
+#include "Game/Object/Include/Object.h"
+
 namespace SpaceGameEngine
 {
 	struct Message					//ÏûÏ¢

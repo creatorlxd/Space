@@ -18,7 +18,7 @@ limitations under the License.
 #include "Common/Utility/Include/Window.h"
 #include "Common/Utility/Include/InputDevice.h"
 #include "Game/Scene/Include/Scene.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/Component.h"
 
 namespace SpaceGameEngine
 {

@@ -84,6 +84,7 @@ void SpaceGameEngine::TransformComponent::CleanUp()
 			if (m_pFatherObject->GetRenderObject())
 			{
 				RenderSystem::GetMainRenderSystem()->DeleteRenderObject(m_pFatherObject->GetRenderObject());
+				m_pFatherObject->SetRenderObject(nullptr);
 			}
 		}
 	}

@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "stdafx.h"
-#include "Game/Component/Include/ComponentManager.h"
+#include "Game/Component/Include/ComponentFactory.h"
 #include "Texture.h"
 #include "Game/Asset/Include/TextureAsset.h"
 #include "Game/Game/Include/Game.h"
@@ -31,7 +31,7 @@ namespace SpaceGameEngine
 		TextureComponent();
 		~TextureComponent();
 		void CleanUp();
-		static ComponentManager::NewComponent<TextureComponent> NewComponent;
+		static ComponentFactory<TextureComponent> NewComponent;
 
 		void InitFromFile(const std::string& filename, int mode = 0);
 		void Start();
