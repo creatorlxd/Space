@@ -41,6 +41,7 @@ namespace SpaceGameEngine
 		void SetTexture(TextureAsset& ta);
 		void SetTransformMatrix(const XMMATRIX& mat);
 		void AddTexture(const std::string& filename, XMMATRIX mat);
+		TextureAsset GetTexture();
 	private:
 		XMMATRIX m_TextureTransformMatrix;
 		

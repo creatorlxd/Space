@@ -140,3 +140,8 @@ void SpaceGameEngine::MeshComponent::SetMesh(const MeshForModelFileAsset & mmfa)
 		}
 	}
 }
+
+MeshForModelFileAsset SpaceGameEngine::MeshComponent::GetMesh()
+{
+	return m_Content;
+}

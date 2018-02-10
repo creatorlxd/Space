@@ -46,6 +46,7 @@ namespace SpaceGameEngine
 		void Copy(Component* pc);
 
 		void SetMesh(const MeshForModelFileAsset& mmfa);
+		MeshForModelFileAsset GetMesh();
 	private:
 		MeshForModelFileAsset m_Content;
 	};

@@ -38,6 +38,7 @@ namespace SpaceGameEngine
 		void Copy(Component* pc);
 
 		void SetMaterial(const Material& ma);
+		Material GetMaterial();
 	private:
 		Material m_Content;
 	};

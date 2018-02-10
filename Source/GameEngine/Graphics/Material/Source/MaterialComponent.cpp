@@ -91,11 +91,12 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 			auto src = dynamic_cast<MaterialComponent*>(pc);
 			if (m_Mode == SingleMode)
 			{
+				m_Content = src->m_Content;
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
 					if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
 						m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
-					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()).m_Content = src->m_Content;
+					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()).m_Content = m_Content;
 					m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
 				}
 			}
@@ -124,4 +125,9 @@ void SpaceGameEngine::MaterialComponent::SetMaterial(const Material & ma)
 			}
 		}
 	}
+}
+
+Material SpaceGameEngine::MaterialComponent::GetMaterial()
+{
+	return m_Content;
 }
