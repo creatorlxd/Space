@@ -32,7 +32,9 @@ void SpaceGameEngine::MeshComponent::CleanUp()
 		{
 			if (m_pFatherObject->GetRenderObject())
 			{
-				m_pFatherObject->GetRenderObject()->SetMesh(MeshForModelFileAsset());
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = false;
 			}
 		}

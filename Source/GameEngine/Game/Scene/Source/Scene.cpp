@@ -259,6 +259,7 @@ void SpaceGameEngine::CopyObject(Object * dst, Object * src)
 			if (SpaceEngineWindow->IfBegin())
 			{
 				dst->Start();
+				dst->GetRenderObject()->m_pGlobalOctree = &Scene::GetMainScene()->m_GlobalOctree;
 				dst->GetRenderObject()->Init();
 			}
 		}
