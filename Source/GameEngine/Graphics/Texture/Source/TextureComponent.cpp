@@ -99,6 +99,8 @@ void SpaceGameEngine::TextureComponent::Copy(Component * pc)
 			{
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
+					if (m_pFatherObject->GetRenderObject()->m_TextureAsset.empty())
+						m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
 					(*m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_TextureAsset.rbegin());
 					m_pFatherObject->GetRenderObject()->m_IfHaveTexture = true;
 				}

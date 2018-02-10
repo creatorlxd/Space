@@ -90,6 +90,8 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 			{
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
+					if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
+						m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
 					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_MaterialAsset.rbegin());
 					m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
 				}
