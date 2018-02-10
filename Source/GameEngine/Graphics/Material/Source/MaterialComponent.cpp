@@ -36,6 +36,7 @@ void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filena
 	if (m_Mode == SingleMode)
 	{
 		const MaterialAsset* ma = ReadAssetFromFile<MaterialAsset>(filename);
+		m_Content = ma->m_Content;
 	}
 }
 
@@ -49,7 +50,7 @@ void SpaceGameEngine::MaterialComponent::Start()
 			{
 				if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
 					m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
-				(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = (dynamic_cast<MaterialAsset*>(const_cast<Asset*>(m_pAsset)))->m_Content;
+				(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = m_Content;
 				m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
 			}
 		}
@@ -71,7 +72,8 @@ void SpaceGameEngine::MaterialComponent::CleanUp()
 		{
 			if (m_pFatherObject->GetRenderObject())
 			{
-				*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+				if(m_pFatherObject->GetRenderObject()->m_IfHaveMaterial)
+					*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
 				m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = false;
 			}
 		}
@@ -86,13 +88,14 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 		{
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
+			auto src = dynamic_cast<MaterialComponent*>(pc);
 			if (m_Mode == SingleMode)
 			{
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
 					if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
 						m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
-					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_MaterialAsset.rbegin());
+					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()).m_Content = src->m_Content;
 					m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
 				}
 			}
@@ -105,4 +108,20 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 	}
 	else
 		ThrowError("component can not be nullptr");
+}
+
+void SpaceGameEngine::MaterialComponent::SetMaterial(const Material & ma)
+{
+	if (m_Mode == SingleMode)
+	{
+		m_Content = ma;
+		if (m_pFatherObject)
+		{
+			if (m_pFatherObject->GetRenderObject())
+			{
+				if (m_pFatherObject->GetRenderObject()->m_IfHaveMaterial)
+					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()).m_Content = m_Content;
+			}
+		}
+	}
 }

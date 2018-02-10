@@ -32,9 +32,7 @@ void SpaceGameEngine::MeshComponent::CleanUp()
 		{
 			if (m_pFatherObject->GetRenderObject())
 			{
-				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+				m_pFatherObject->GetRenderObject()->SetMesh(MeshForModelFileAsset());
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = false;
 			}
 		}
@@ -53,22 +51,23 @@ void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, 
 	if (m_Mode&ModelFileMode)
 	{
 		const MeshForModelFileAsset* ma = ReadAssetFromFile<MeshForModelFileAsset>(filename);
+		m_Content = *ma;
 	}
 }
 
 void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSize, DefaultVertex * pVertices, unsigned int* pIndices)
 {
-	m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Vertices.clear();
-	m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Indices.clear();
-	m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Vertices.resize(VertexSize);
-	m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Indices.resize(IndexSize);
+	m_Content.m_Vertices.clear();
+	m_Content.m_Indices.clear();
+	m_Content.m_Vertices.resize(VertexSize);
+	m_Content.m_Indices.resize(IndexSize);
 	for (int i = 0; i < VertexSize; i++)
 	{
-		m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Vertices[i] = pVertices[i];
+		m_Content.m_Vertices[i] = pVertices[i];
 	}
 	for (int i = 0; i < IndexSize; i++)
 	{
-		m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Indices[i] = pIndices[i];
+		m_Content.m_Indices[i] = pIndices[i];
 	}
 }
 
@@ -81,7 +80,7 @@ void SpaceGameEngine::MeshComponent::Start()
 			m_pFatherObject->GetRenderObject()->m_Mode = m_Mode;
 			if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh == false)
 			{
-				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = *(dynamic_cast<MeshForModelFileAsset*>(const_cast<Asset*>(m_pAsset)));
+				m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
 			}
 		}
@@ -103,13 +102,13 @@ void SpaceGameEngine::MeshComponent::Copy(Component * pc)
 		{
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
+			auto src = dynamic_cast<MeshComponent*>(pc);
 			if (m_Mode&ModelFileMode)
 			{
+				m_Content = src->m_Content;
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
-					SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
-					SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
-					m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = pc->GetFatherObject()->GetRenderObject()->m_MeshForModelFileAsset;
+					m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
 					m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
 				}
 			}
@@ -122,4 +121,20 @@ void SpaceGameEngine::MeshComponent::Copy(Component * pc)
 	}
 	else
 		ThrowError("component can not be nullptr");
+}
+
+void SpaceGameEngine::MeshComponent::SetMesh(const MeshForModelFileAsset & mmfa)
+{
+	if (m_Mode&ModelFileMode)
+	{
+		m_Content = mmfa;
+		if (m_pFatherObject)
+		{
+			if (m_pFatherObject->GetRenderObject())
+			{
+				if (m_pFatherObject->GetRenderObject()->m_IfHaveTexture)
+					m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
+			}
+		}
+	}
 }

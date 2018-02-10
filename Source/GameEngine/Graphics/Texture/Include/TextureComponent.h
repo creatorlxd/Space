@@ -38,11 +38,13 @@ namespace SpaceGameEngine
 		void Run(float DeltaTime);
 		void Copy(Component* pc);
 
+		void SetTexture(TextureAsset& ta);
 		void SetTransformMatrix(const XMMATRIX& mat);
 		void AddTexture(const std::string& filename, XMMATRIX mat);
 	private:
 		XMMATRIX m_TextureTransformMatrix;
 		
 		std::string m_FileName;					//用于延迟初始化
+		TextureAsset m_Content;
 	};
 }

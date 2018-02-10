@@ -36,7 +36,9 @@ namespace SpaceGameEngine
 		void Run(float DeltaTime);
 		void CleanUp();
 		void Copy(Component* pc);
+
+		void SetMaterial(const Material& ma);
 	private:
-		
+		Material m_Content;
 	};
 }

@@ -43,6 +43,7 @@ namespace SpaceGameEngine
 
 		void Init();
 		void Render();
+		void SetMesh(const MeshForModelFileAsset& mmfa);
 	private:
 		void InitVertexBuffer();
 		void InitIndexBuffer();

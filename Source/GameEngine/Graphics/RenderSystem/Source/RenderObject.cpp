@@ -221,6 +221,42 @@ void SpaceGameEngine::RenderObject::Render()
 	}
 }
 
+void SpaceGameEngine::RenderObject::SetMesh(const MeshForModelFileAsset & mmfa)
+{
+	m_IfHaveMesh = true;
+	m_MeshForModelFileAsset = mmfa;
+	if (m_IfInit)
+	{
+		SafeRelease(m_pVertexBuffer);
+		SafeRelease(m_pIndexBuffer);
+		m_ObjectOctree.~ObjectOctree();
+		m_ObjectOctree = ObjectOctree(&m_MeshForModelFileAsset.m_Vertices);
+		if (m_Type == RenderObjectType::Model)
+		{
+			if (m_Mode&ModelFileMode)
+			{
+				InitVertexBuffer();
+				InitIndexBuffer();
+				if ((m_Mode&RenderObject::WholeMode) == 0)
+				{
+					m_ObjectOctree.BuildTree(m_MeshForModelFileAsset.m_Indices);
+				}
+				if ((m_Mode&RenderObject::DynamicMode) == 0)
+				{
+					Vector<XMFLOAT3> points;
+					for (const auto& i : m_MeshForModelFileAsset.m_Vertices)
+					{
+						points.push_back(i.m_Position);
+					}
+					m_BaseSpace = GetAxisAlignedBoundingBox(points);
+					m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
+					m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
+				}
+			}
+		}
+	}
+}
+
 void SpaceGameEngine::RenderObject::InitVertexBuffer()
 {
 	D3D11_BUFFER_DESC desc;
