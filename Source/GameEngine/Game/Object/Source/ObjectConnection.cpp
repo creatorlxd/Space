@@ -38,7 +38,7 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 	{
 		if (ConnectComponent::m_pFatherObject&&m_pChildObject)
 		{
-			if (ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::TransformDelete)==nullptr)
+			if (ConnectComponent::m_pFatherObject->GetComponent(STRING(TransformComponent)))
 			{
 				if (m_pFatherTransform&&m_pChildTransform)
 				{
