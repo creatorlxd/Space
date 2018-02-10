@@ -71,6 +71,7 @@ void SpaceGameEngine::TextureComponent::Start()
 					m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
 				(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ptex;
 				(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+				m_pFatherObject->GetRenderObject()->m_IfHaveTexture = true;
 			}
 		}
 		else

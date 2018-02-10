@@ -80,7 +80,10 @@ void SpaceGameEngine::MeshComponent::Start()
 		if (m_pFatherObject->GetRenderObject())
 		{
 			if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh == false)
+			{
 				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = *(dynamic_cast<MeshForModelFileAsset*>(const_cast<Asset*>(m_pAsset)));
+				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
+			}
 		}
 		else
 			ThrowError("物体对象不能没有RenderObject");

@@ -50,6 +50,7 @@ void SpaceGameEngine::MaterialComponent::Start()
 				if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
 					m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
 				(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = (dynamic_cast<MaterialAsset*>(const_cast<Asset*>(m_pAsset)))->m_Content;
+				m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
 			}
 		}
 		else
