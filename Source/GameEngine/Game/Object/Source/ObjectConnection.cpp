@@ -26,7 +26,7 @@ SpaceGameEngine::ConnectComponent::ConnectComponent()
 	m_pFatherTransform = nullptr;
 	m_pChildTransform = nullptr;
 	m_IfInit = false;
-	ConnectComponent::m_pFatherObject = nullptr;
+	ConnectComponent::_m_pFatherObject = nullptr;
 	m_pChildObject = nullptr;
 }
 
@@ -36,15 +36,15 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 		ThrowError("ConnectComponentÐèÒªÏÈSetObject");
 	else
 	{
-		if (ConnectComponent::m_pFatherObject&&m_pChildObject)
+		if (ConnectComponent::_m_pFatherObject&&m_pChildObject)
 		{
-			if (ConnectComponent::m_pFatherObject->GetComponent(STRING(TransformComponent)) && ConnectComponent::m_pChildObject->GetComponent(STRING(TransformComponent)))
+			if (ConnectComponent::_m_pFatherObject->GetComponent(STRING(TransformComponent)) && ConnectComponent::m_pChildObject->GetComponent(STRING(TransformComponent)))
 			{
 				if (m_pFatherTransform&&m_pChildTransform)
 				{
-					if (ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
-						ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
-						ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
+					if (ConnectComponent::_m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+						ConnectComponent::_m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+						ConnectComponent::_m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
 					{
 						m_pChildTransform->SetPosition(Add(m_pChildTransform->GetPosition(), Substract(m_pFatherTransform->GetPosition(), m_PositionBuffer)));
 						m_pChildTransform->SetScale(Add(m_pChildTransform->GetScale(), Substract(m_pFatherTransform->GetScale(), m_ScaleBuffer)));
@@ -64,7 +64,7 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 				}
 				else
 				{
-					m_pFatherTransform = ConnectComponent::m_pFatherObject->GetComponent<TransformComponent>();
+					m_pFatherTransform = ConnectComponent::_m_pFatherObject->GetComponent<TransformComponent>();
 					m_pChildTransform = m_pChildObject->GetComponent<TransformComponent>();
 				}
 			}
@@ -81,7 +81,7 @@ void SpaceGameEngine::ConnectComponent::SetObject(Object* father, Object* child)
 {
 	if (father&&child)
 	{
-		ConnectComponent::m_pFatherObject = father;
+		ConnectComponent::_m_pFatherObject = father;
 		m_pChildObject = child;
 		m_pFatherTransform = father->GetComponent<TransformComponent>();
 		m_pChildTransform = child->GetComponent<TransformComponent>();

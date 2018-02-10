@@ -74,11 +74,11 @@ void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSiz
 
 void SpaceGameEngine::MeshComponent::Start()
 {
-	m_pFatherObject->GetRenderObject()->m_Mode = m_Mode;
 	if (m_Mode&ModelFileMode)
 	{
 		if (m_pFatherObject->GetRenderObject())
 		{
+			m_pFatherObject->GetRenderObject()->m_Mode = m_Mode;
 			if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh == false)
 			{
 				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = *(dynamic_cast<MeshForModelFileAsset*>(const_cast<Asset*>(m_pAsset)));

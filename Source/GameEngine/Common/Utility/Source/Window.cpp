@@ -39,7 +39,7 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	switch (message)						//switch语句开始
 	{
 	case WM_PAINT:						// 若是客户区重绘消息
-		if(SpaceEngineWindow->GetIfBegin())
+		if(SpaceEngineWindow->IfBegin())
 			SpaceEngineWindow->m_pWindowLoop();                 //调用Direct3D渲染函数
 		ValidateRect(hwnd, NULL);		// 更新客户区的显示
 		break;									//跳出该switch语句
@@ -535,7 +535,7 @@ void SpaceGameEngine::Window::BeginRun()
 	m_IfBegin = true;
 }
 
-bool SpaceGameEngine::Window::GetIfBegin()
+bool SpaceGameEngine::Window::IfBegin()
 {
 	return m_IfBegin;
 }

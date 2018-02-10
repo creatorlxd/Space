@@ -206,3 +206,67 @@ bool SpaceGameEngine::Scene::DeleteObject(const std::string name)
 {
 	return DeleteObject(GetObjectByName(name));
 }
+
+void SpaceGameEngine::CopyObject(Object * dst, Object * src)
+{
+	if (dst&&src)
+	{
+		if (src->GetRootComponent())
+		{
+			Queue<std::pair<Component*, Component*>> que;		//pair<dst's component,src's component>
+			if (src->GetRenderObject())
+			{
+				dst->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
+				dst->GetRenderObject()->m_Type = src->GetRenderObject()->m_Type;
+				dst->GetRenderObject()->m_pObject = dst;
+			}
+			if (src->IfChild() && src->GetRootComponent()->GetTypeName() == STRING(ConnectComponent))
+			{
+				dst->AddComponent(MemoryManager::New<Component>());
+				dst->SetRootComponent(STRING(Component));
+			}
+			else
+			{
+				dst->AddComponent(NewComponentByTypeName(src->GetRootComponent()->GetTypeName()));
+				dst->SetRootComponent(src->GetRootComponent()->GetTypeName());
+				dst->GetRootComponent()->Copy(src->GetRootComponent());
+			}
+			que.push(std::make_pair(dst->GetRootComponent(), src->GetRootComponent()));
+
+			while (!que.empty())
+			{
+				auto pair = que.front();
+				que.pop();
+				auto _dst = pair.first;
+				auto _src = pair.second;
+
+				if (_src->GetChildrenComponent().empty())
+					continue;
+				else
+				{
+					auto contianer = _src->GetChildrenComponent();
+					for (auto i : contianer)
+					{
+						dst->AddComponent(NewComponentByTypeName(i->GetTypeName()));
+						auto ndst = dst->GetComponent(i->GetTypeName());
+						ndst->Copy(i);
+						ndst->Attach(_dst);
+						que.push(std::make_pair(ndst, i));
+					}
+				}
+			}
+
+			if (SpaceEngineWindow->IfBegin())
+			{
+				dst->Start();
+				dst->GetRenderObject()->Init();
+			}
+		}
+		else
+			ThrowError("src object must set root component");
+	}
+	else
+	{
+		ThrowError("can not copy nullptr");
+	}
+}

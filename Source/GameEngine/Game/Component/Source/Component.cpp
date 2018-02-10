@@ -19,7 +19,7 @@ using namespace SpaceGameEngine;
 
 SpaceGameEngine::Component::Component()
 {
-	m_TypeName = "NullType";
+	m_TypeName = "Component";
 	m_IfRun = true;
 	m_IfUse = true;
 	m_pFather = nullptr;

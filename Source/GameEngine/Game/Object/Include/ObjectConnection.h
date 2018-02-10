@@ -34,7 +34,7 @@ namespace SpaceGameEngine
 
 		void SetObject(Object* father, Object* child);
 	private:
-		Object * m_pFatherObject;
+		Object * _m_pFatherObject;
 		Object * m_pChildObject;
 		TransformComponent * m_pFatherTransform;
 		TransformComponent * m_pChildTransform;

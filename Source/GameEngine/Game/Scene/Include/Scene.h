@@ -18,7 +18,7 @@ limitations under the License.
 #include "Game/Message/Include/Message.h"
 #include "Graphics/Camera/Include/Camera.h"
 #include "Common/Utility/Include/Window.h"
-#include "Game/Object/Include/Object.h"
+#include "Game/Object/Include/ObjectConnection.h"
 #include "SceneData.h"
 #include "Graphics/GlobalOctree/Include/GlobalOctree.h"
 #include "Graphics/Light/Include/LightManager.h"
@@ -50,4 +50,10 @@ namespace SpaceGameEngine
 		static Scene* sm_pThis;
 		HashMap<std::string, Object*> m_Content;//储存Object
 	};
+
+	/*
+	复制Object对象
+	注意：dst必须指向空的Object对象
+	*/
+	void CopyObject(Object* dst, Object* src);
 }

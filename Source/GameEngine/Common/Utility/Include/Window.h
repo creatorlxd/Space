@@ -71,7 +71,7 @@ namespace SpaceGameEngine
 		void SetDefaultState();							//设置默认状态
 
 		void BeginRun();								//游戏开始
-		bool GetIfBegin();								//获取游戏是否开始了
+		bool IfBegin();								//获取游戏是否开始了
 
 		RenderQuality GetRenderQuality();
 		void SetRenderQuality(const RenderQuality& rq);
