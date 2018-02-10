@@ -37,6 +37,7 @@ namespace SpaceGameEngine
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();
+		void Copy(Component* pc);
 
 		bool IfOn();
 		void ChangeIfOn(bool b);

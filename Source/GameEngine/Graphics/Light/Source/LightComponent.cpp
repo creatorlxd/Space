@@ -75,6 +75,25 @@ void SpaceGameEngine::LightComponent::CleanUp()
 	}
 }
 
+void SpaceGameEngine::LightComponent::Copy(Component * pc)
+{
+	if (pc)
+	{
+		if (pc->GetTypeName() == m_TypeName)
+		{
+			auto src = dynamic_cast<LightComponent*>(pc);
+			m_Content = src->m_Content;
+		}
+		else
+		{
+			ThrowError("dst's type must equal to src's type");
+			return;
+		}
+	}
+	else
+		ThrowError("component can not be nullptr");
+}
+
 bool SpaceGameEngine::LightComponent::IfOn()
 {
 	return m_Content.m_IfOn;

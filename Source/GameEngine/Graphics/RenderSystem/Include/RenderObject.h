@@ -54,6 +54,11 @@ namespace SpaceGameEngine
 		static const int YAxisAlignedMode = 16;
 		static const int ZAxisAlignedMode = 32;
 	public:
+		bool m_IfHaveTransform;
+		bool m_IfHaveMaterial;
+		bool m_IfHaveTexture;
+		bool m_IfHaveMesh;
+
 		GlobalOctree * m_pGlobalOctree;
 
 		Vector<DefaultEffectShader*> m_Shader;

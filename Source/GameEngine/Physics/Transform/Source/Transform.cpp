@@ -43,9 +43,12 @@ void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filen
 
 	if (m_Mode&ForRenderingMode)
 	{
-		m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
-		m_pFatherObject->GetRenderObject()->m_Type = RenderObjectType::Model;
-		m_pFatherObject->GetRenderObject()->m_pObject = m_pFatherObject;
+		if (m_pFatherObject->GetRenderObject() == nullptr)
+		{
+			m_pFatherObject->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
+			m_pFatherObject->GetRenderObject()->m_Type = RenderObjectType::Model;
+			m_pFatherObject->GetRenderObject()->m_pObject = m_pFatherObject;
+		}
 	}
 }
 
@@ -55,9 +58,13 @@ void SpaceGameEngine::TransformComponent::Start()
 		m_pFatherObject->ProduceMessage(this, Event::TransformAdd);
 	if (m_Mode&ForRenderingMode)
 	{
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+		if (m_pFatherObject->GetRenderObject()->m_IfHaveTransform == false)
+		{
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+			m_pFatherObject->GetRenderObject()->m_IfHaveTransform = true;
+		}
 	}
 }
 
@@ -65,14 +72,9 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 {
 	if (m_Mode&ForRenderingMode)
 	{
-		if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
-			m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
-			m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
-		{
-			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
-			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
-			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
-		}
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
 		m_pFatherObject->GetRenderObject()->m_IfRender = m_pFatherObject->IfRender();
 	}
 }
@@ -111,6 +113,7 @@ void SpaceGameEngine::TransformComponent::Copy(Component * pc)
 				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
 				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
 				m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+				m_pFatherObject->GetRenderObject()->m_IfHaveTransform = true;
 			}
 		}
 		else

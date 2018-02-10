@@ -45,8 +45,12 @@ void SpaceGameEngine::MaterialComponent::Start()
 	{
 		if (m_pFatherObject->GetRenderObject())
 		{
-			m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
-			(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = (dynamic_cast<MaterialAsset*>(const_cast<Asset*>(m_pAsset)))->m_Content;
+			if (m_pFatherObject->GetRenderObject()->m_IfHaveMaterial == false)
+			{
+				if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())
+					m_pFatherObject->GetRenderObject()->m_MaterialAsset.emplace_back();
+				(m_pFatherObject->GetRenderObject()->m_MaterialAsset.end() - 1)->m_Content = (dynamic_cast<MaterialAsset*>(const_cast<Asset*>(m_pAsset)))->m_Content;
+			}
 		}
 		else
 			ThrowError("物体对象不能没有RenderObject");
@@ -67,6 +71,7 @@ void SpaceGameEngine::MaterialComponent::CleanUp()
 			if (m_pFatherObject->GetRenderObject())
 			{
 				*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin() = MaterialAsset();
+				m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = false;
 			}
 		}
 	}
@@ -80,9 +85,13 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 		{
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
-			if (m_pFatherObject->GetRenderObject()&&pc->GetFatherObject()->GetRenderObject())
+			if (m_Mode == SingleMode)
 			{
-				(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_MaterialAsset.rbegin());
+				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+				{
+					(*m_pFatherObject->GetRenderObject()->m_MaterialAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_MaterialAsset.rbegin());
+					m_pFatherObject->GetRenderObject()->m_IfHaveMaterial = true;
+				}
 			}
 		}
 		else

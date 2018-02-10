@@ -201,6 +201,7 @@ void SpaceGameEngine::CopyComponent(Component * dst, Component * src)
 		if (dst->GetTypeName() == src->GetTypeName())
 		{
 			dst->Copy(src);
+			dst->Start();
 		}
 		else
 			ThrowError("dst's type must equal to src's type");

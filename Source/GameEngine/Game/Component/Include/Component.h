@@ -68,19 +68,6 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	T* CloneComponent(Component* pc)
-	{
-		T* re = T::NewComponent();
-		
-		auto pa = pc->GetAsset();
-		if (pa)
-			re->InitFromFile(pa->m_FileName,pc->GetMode());
-		re->SetMode(pc->GetMode());
-
-		return re;
-	}
-
-	template<typename T>
 	inline const T * Component::ReadAssetFromFile(const std::string & filename)
 	{
 		auto re = GetAssetByFileName<T>(filename);

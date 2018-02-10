@@ -35,6 +35,7 @@ void SpaceGameEngine::MeshComponent::CleanUp()
 				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
 				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
 				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = false;
 			}
 		}
 	}
@@ -74,12 +75,16 @@ void SpaceGameEngine::MeshComponent::InitFromMemory(int VertexSize, int IndexSiz
 void SpaceGameEngine::MeshComponent::Start()
 {
 	m_pFatherObject->GetRenderObject()->m_Mode = m_Mode;
-	if (m_pFatherObject->GetRenderObject())
+	if (m_Mode&ModelFileMode)
 	{
-		m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = *(dynamic_cast<MeshForModelFileAsset*>(const_cast<Asset*>(m_pAsset)));
+		if (m_pFatherObject->GetRenderObject())
+		{
+			if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh == false)
+				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = *(dynamic_cast<MeshForModelFileAsset*>(const_cast<Asset*>(m_pAsset)));
+		}
+		else
+			ThrowError("物体对象不能没有RenderObject");
 	}
-	else
-		ThrowError("物体对象不能没有RenderObject");
 }
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
@@ -95,11 +100,15 @@ void SpaceGameEngine::MeshComponent::Copy(Component * pc)
 		{
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
-			if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+			if (m_Mode&ModelFileMode)
 			{
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
-				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
-				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = pc->GetFatherObject()->GetRenderObject()->m_MeshForModelFileAsset;
+				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+				{
+					SafeRelease(m_pFatherObject->GetRenderObject()->m_pVertexBuffer);
+					SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
+					m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = pc->GetFatherObject()->GetRenderObject()->m_MeshForModelFileAsset;
+					m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
+				}
 			}
 		}
 		else

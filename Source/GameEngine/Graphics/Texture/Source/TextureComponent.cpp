@@ -42,7 +42,8 @@ void SpaceGameEngine::TextureComponent::CleanUp()
 			if (m_pFatherObject->GetRenderObject())
 			{
 				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_Content.Release();
-				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_FileName = "Null";
+				m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()->first.m_FileName = "";
+				m_pFatherObject->GetRenderObject()->m_IfHaveTexture = false;
 			}
 		}
 	}
@@ -59,14 +60,18 @@ void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filenam
 
 void SpaceGameEngine::TextureComponent::Start()
 {
-	if (m_Mode&SingleMode)
+	if (m_Mode == SingleMode)
 	{
 		auto ptex = ReadAssetFromFile<TextureAsset>(m_FileName);
 		if (m_pFatherObject->GetRenderObject())
 		{
-			m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
-			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ptex;
-			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+			if (m_pFatherObject->GetRenderObject()->m_IfHaveTexture == false)
+			{
+				if (m_pFatherObject->GetRenderObject()->m_TextureAsset.empty())
+					m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
+				(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ptex;
+				(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+			}
 		}
 		else
 			ThrowError("物体对象不能没有RenderObject");
@@ -75,7 +80,7 @@ void SpaceGameEngine::TextureComponent::Start()
 
 void SpaceGameEngine::TextureComponent::Run(float DeltaTime)
 {
-	if (m_Mode&SingleMode)
+	if (m_Mode == SingleMode)
 	{
 		
 	}
@@ -89,9 +94,13 @@ void SpaceGameEngine::TextureComponent::Copy(Component * pc)
 		{
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
-			if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+			if (m_Mode == SingleMode)
 			{
-				(*m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_TextureAsset.rbegin());
+				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
+				{
+					(*m_pFatherObject->GetRenderObject()->m_TextureAsset.rbegin()) = (*pc->GetFatherObject()->GetRenderObject()->m_TextureAsset.rbegin());
+					m_pFatherObject->GetRenderObject()->m_IfHaveTexture = true;
+				}
 			}
 		}
 		else
@@ -106,17 +115,23 @@ void SpaceGameEngine::TextureComponent::Copy(Component * pc)
 
 void SpaceGameEngine::TextureComponent::SetTransformMatrix(const XMMATRIX & mat)
 {
-	m_TextureTransformMatrix = mat;
-	(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+	if (m_Mode == SingleMode)
+	{
+		m_TextureTransformMatrix = mat;
+		(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = m_TextureTransformMatrix;
+	}
 }
 
 void SpaceGameEngine::TextureComponent::AddTexture(const std::string& filename, XMMATRIX mat)
 {
-	auto ta = GetAssetByFileName<TextureAsset>(filename);
-	if (m_pFatherObject->GetRenderObject())
+	if (m_Mode != SingleMode)
 	{
-		m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
-		(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ta;
-		(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = mat;
+		auto ta = GetAssetByFileName<TextureAsset>(filename);
+		if (m_pFatherObject->GetRenderObject())
+		{
+			m_pFatherObject->GetRenderObject()->m_TextureAsset.emplace_back();
+			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->first = *ta;
+			(m_pFatherObject->GetRenderObject()->m_TextureAsset.end() - 1)->second = mat;
+		}
 	}
 }
