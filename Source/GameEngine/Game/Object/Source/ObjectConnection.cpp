@@ -38,7 +38,7 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 	{
 		if (ConnectComponent::m_pFatherObject&&m_pChildObject)
 		{
-			if (ConnectComponent::m_pFatherObject->GetComponent(STRING(TransformComponent)))
+			if ((ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::TransformDelete) == nullptr) && ConnectComponent::m_pFatherObject->GetComponent(STRING(TransformComponent)) && ConnectComponent::m_pChildObject->GetComponent(STRING(TransformComponent)))
 			{
 				if (m_pFatherTransform&&m_pChildTransform)
 				{
@@ -67,8 +67,8 @@ void SpaceGameEngine::ConnectComponent::Run(float DeltaTime)
 					if (ConnectComponent::m_pFatherObject->GetComponentByMessage(Event::TransformAdd))
 					{
 						m_pFatherTransform = ConnectComponent::m_pFatherObject->GetComponent<TransformComponent>();
-						m_pChildTransform = m_pChildObject->GetComponent<TransformComponent>();
 					}
+					m_pChildTransform = m_pChildObject->GetComponent<TransformComponent>();
 				}
 			}
 			else
