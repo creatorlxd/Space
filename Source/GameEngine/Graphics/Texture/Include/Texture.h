@@ -16,14 +16,17 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Space.h"
+#include "Common/Utility/Include/Window.h"
 
 namespace SpaceGameEngine
 {
 	struct TextureForShader
 	{
 		TextureForShader();
+		TextureForShader(const TextureForShader& texture);
 		~TextureForShader();
 		void Release();
+		TextureForShader& operator = (const TextureForShader& texture);
 
 		ID3D11ShaderResourceView* m_pContent;
 	};

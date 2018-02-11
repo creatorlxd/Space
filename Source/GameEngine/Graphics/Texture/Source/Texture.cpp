@@ -21,6 +21,33 @@ SpaceGameEngine::TextureForShader::TextureForShader()
 	m_pContent = nullptr;
 }
 
+SpaceGameEngine::TextureForShader::TextureForShader(const TextureForShader & texture)
+{
+	if (texture.m_pContent)
+	{
+		if (m_pContent)
+		{
+			ID3D11Resource* dst = nullptr;
+			ID3D11Resource* src = nullptr;
+			m_pContent->GetResource(&dst);
+			texture.m_pContent->GetResource(&src);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
+		else
+		{
+			D3D11_TEXTURE2D_DESC desc;
+			ID3D11Resource* src = nullptr;
+			ID3D11Resource* dst = nullptr;
+			texture.m_pContent->GetResource(&src);
+			auto ptex = dynamic_cast<ID3D11Texture2D*>(src);
+			ptex->GetDesc(&desc);
+			SpaceEngineWindow->GetD3DDevice()->CreateTexture2D(&desc, NULL, (ID3D11Texture2D**)&m_pContent);
+			m_pContent->GetResource(&dst);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
+	}
+}
+
 SpaceGameEngine::TextureForShader::~TextureForShader()
 {
 	if (m_pContent)
@@ -31,4 +58,32 @@ void SpaceGameEngine::TextureForShader::Release()
 {
 	if (m_pContent)
 		SafeRelease(m_pContent);
+}
+
+SpaceGameEngine::TextureForShader& SpaceGameEngine::TextureForShader::operator=(const TextureForShader & texture)
+{
+	if (texture.m_pContent)
+	{
+		if (m_pContent)
+		{
+			ID3D11Resource* dst = nullptr;
+			ID3D11Resource* src = nullptr;
+			m_pContent->GetResource(&dst);
+			texture.m_pContent->GetResource(&src);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
+		else
+		{
+			D3D11_TEXTURE2D_DESC desc;
+			ID3D11Resource* src = nullptr;
+			ID3D11Resource* dst = nullptr;
+			texture.m_pContent->GetResource(&src);
+			auto ptex = dynamic_cast<ID3D11Texture2D*>(src);
+			ptex->GetDesc(&desc);
+			SpaceEngineWindow->GetD3DDevice()->CreateTexture2D(&desc, NULL, (ID3D11Texture2D**)&m_pContent);
+			m_pContent->GetResource(&dst);
+			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
+		}
+	}
+	return *this;
 }
