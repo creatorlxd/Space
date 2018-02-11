@@ -125,7 +125,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	for (auto i : m_Content)
 	{
 		if (i.second)
-			if (i.second->IfUse() && i.second->IfRun() && (!i.second->IfChild()))
+			if (i.second->IfUse() && i.second->IfRun())
 				i.second->ClearMessage();
 	}
 }
