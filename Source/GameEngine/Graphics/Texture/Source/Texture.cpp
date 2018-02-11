@@ -78,7 +78,8 @@ SpaceGameEngine::TextureForShader& SpaceGameEngine::TextureForShader::operator=(
 			ID3D11Resource* src = nullptr;
 			ID3D11Resource* dst = nullptr;
 			texture.m_pContent->GetResource(&src);
-			auto ptex = dynamic_cast<ID3D11Texture2D*>(src);
+			ID3D11Texture2D* ptex;
+			HR(src->QueryInterface <ID3D11Texture2D>(&ptex));
 			ptex->GetDesc(&desc);
 			SpaceEngineWindow->GetD3DDevice()->CreateTexture2D(&desc, NULL, (ID3D11Texture2D**)&m_pContent);
 			m_pContent->GetResource(&dst);
