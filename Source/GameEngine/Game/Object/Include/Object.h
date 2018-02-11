@@ -54,6 +54,7 @@ namespace SpaceGameEngine
 
 		void ProduceMessage(Component* from, unsigned int message);
 		Component* GetComponentByMessage(unsigned int message);
+		void ClearMessage();
 
 		Vector<Object*>& GetChildren();
 		void AddChildObject(Object* po);

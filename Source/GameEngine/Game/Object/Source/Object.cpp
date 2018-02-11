@@ -158,7 +158,6 @@ void SpaceGameEngine::Object::Run(float DeltaTime)
 				i->Run(DeltaTime);
 		}
 	}
-	m_Message.clear();
 }
 
 void SpaceGameEngine::Object::EveryFrameCleanUp()
@@ -229,6 +228,11 @@ Component * SpaceGameEngine::Object::GetComponentByMessage(unsigned int message)
 		re = iter->second;
 	}
 	return re;
+}
+
+void SpaceGameEngine::Object::ClearMessage()
+{
+	m_Message.clear();
 }
 
 Vector<Object*>& SpaceGameEngine::Object::GetChildren()

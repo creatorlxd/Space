@@ -121,6 +121,13 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	}
 
 	m_RenderSystem.Render();
+	
+	for (auto i : m_Content)
+	{
+		if (i.second)
+			if (i.second->IfUse() && i.second->IfRun() && (!i.second->IfChild()))
+				i.second->ClearMessage();
+	}
 }
 
 Object * SpaceGameEngine::Scene::NewObject(const std::string name)
