@@ -74,14 +74,18 @@ SpaceGameEngine::TextureForShader& SpaceGameEngine::TextureForShader::operator=(
 		}
 		else
 		{
-			D3D11_TEXTURE2D_DESC desc;
+			D3D11_TEXTURE2D_DESC texdesc;
+			D3D11_SHADER_RESOURCE_VIEW_DESC desc;
 			ID3D11Resource* src = nullptr;
 			ID3D11Resource* dst = nullptr;
+			ID3D11Texture2D* ptex = nullptr;
+			ID3D11Texture2D* texbuff = nullptr;
 			texture.m_pContent->GetResource(&src);
-			ID3D11Texture2D* ptex;
+			texture.m_pContent->GetDesc(&desc);
 			HR(src->QueryInterface <ID3D11Texture2D>(&ptex));
-			ptex->GetDesc(&desc);
-			SpaceEngineWindow->GetD3DDevice()->CreateTexture2D(&desc, NULL, (ID3D11Texture2D**)&m_pContent);
+			ptex->GetDesc(&texdesc);
+			SpaceEngineWindow->GetD3DDevice()->CreateTexture2D(&texdesc, NULL, (ID3D11Texture2D**)&texbuff);
+			SpaceEngineWindow->GetD3DDevice()->CreateShaderResourceView(texbuff, &desc, &m_pContent);
 			m_pContent->GetResource(&dst);
 			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
 		}
