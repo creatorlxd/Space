@@ -105,7 +105,6 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	}
 
 	m_MessageManager.Run();
-	m_GlobalOctree.Run();
 	
 	for (auto i : m_Content)
 	{
@@ -120,6 +119,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 				i.second->EveryFrameCleanUp();
 	}
 
+	m_GlobalOctree.Run();
 	m_RenderSystem.Render();
 	
 	for (auto i : m_Content)
