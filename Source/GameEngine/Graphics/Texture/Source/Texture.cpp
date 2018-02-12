@@ -32,10 +32,6 @@ SpaceGameEngine::TextureForShader::TextureForShader(const TextureForShader & tex
 			m_pContent->GetResource(&dst);
 			texture.m_pContent->GetResource(&src);
 			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
-
-			D3D11_MAPPED_SUBRESOURCE mappeddata;
-			HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(dst, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappeddata));
-			SpaceEngineWindow->GetD3DDeviceContext()->Unmap(dst, 0);
 		}
 		else
 		{
@@ -53,10 +49,6 @@ SpaceGameEngine::TextureForShader::TextureForShader(const TextureForShader & tex
 			SpaceEngineWindow->GetD3DDevice()->CreateShaderResourceView(texbuff, &desc, &m_pContent);
 			m_pContent->GetResource(&dst);
 			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
-
-			D3D11_MAPPED_SUBRESOURCE mappeddata;
-			HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(dst, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappeddata));
-			SpaceEngineWindow->GetD3DDeviceContext()->Unmap(dst, 0);
 		}
 	}
 }
@@ -84,10 +76,6 @@ SpaceGameEngine::TextureForShader& SpaceGameEngine::TextureForShader::operator=(
 			m_pContent->GetResource(&dst);
 			texture.m_pContent->GetResource(&src);
 			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
-
-			D3D11_MAPPED_SUBRESOURCE mappeddata;
-			HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(dst, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappeddata));
-			SpaceEngineWindow->GetD3DDeviceContext()->Unmap(dst, 0);
 		}
 		else
 		{
@@ -105,10 +93,6 @@ SpaceGameEngine::TextureForShader& SpaceGameEngine::TextureForShader::operator=(
 			SpaceEngineWindow->GetD3DDevice()->CreateShaderResourceView(texbuff, &desc, &m_pContent);
 			m_pContent->GetResource(&dst);
 			SpaceEngineWindow->GetD3DDeviceContext()->CopyResource(dst, src);
-		
-			D3D11_MAPPED_SUBRESOURCE mappeddata;
-			HR(SpaceEngineWindow->GetD3DDeviceContext()->Map(dst, 0, D3D11_MAP_WRITE_NO_OVERWRITE,0,&mappeddata));
-			SpaceEngineWindow->GetD3DDeviceContext()->Unmap(dst, 0);
 		}
 	}
 	return *this;
