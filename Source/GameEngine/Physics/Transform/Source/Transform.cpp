@@ -75,7 +75,6 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
 		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
-		m_pFatherObject->GetRenderObject()->m_IfRender = m_pFatherObject->IfRender();
 	}
 }
 

@@ -14,7 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "../Include/Object.h" 
+#include "../Include/Object.h"
+
 using namespace SpaceGameEngine;
 
 Vector<std::pair<std::string, std::pair<std::string, int>>> SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
@@ -37,7 +38,6 @@ SpaceGameEngine::Object::Object()
 	m_pRootComponent = nullptr;
 	m_IfUse = true;
 	m_IfRun = true;
-	m_IfRender = true;
 	m_IfChild = false;
 	m_pFather = nullptr;
 	m_pRenderObject = nullptr;
@@ -202,16 +202,6 @@ void SpaceGameEngine::Object::ChangeIfRun(bool b)
 void SpaceGameEngine::Object::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
-}
-
-bool SpaceGameEngine::Object::IfRender()
-{
-	return m_IfRender;
-}
-
-void SpaceGameEngine::Object::ChangeIfRender(bool b)
-{
-	m_IfRender = b;
 }
 
 void SpaceGameEngine::Object::ProduceMessage(Component * from, unsigned int message)

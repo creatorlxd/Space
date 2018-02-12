@@ -32,11 +32,12 @@ namespace SpaceGameEngine
 		void Init(const AxisAlignedBoundingBox& space, int deepth = 1);
 		GlobalOctreeNode* InsertObject(const GlobalOctreeData& data);
 		void Run();
-		void SetObjectRenderState(bool state);
+		void SetRenderState(bool state);						//设置此节点及子节点的渲染状态
 		GlobalOctreeNode* UpdateObjectData(const GlobalOctreeData& data);
 		void UpdateObjectRenderState(const GlobalOctreeData& data);
 		void Release();
 		bool DeleteObjectData(GlobalOctreeData::second_type pointer);
+		inline void SetObjectRenderState(Object* po, bool b);
 
 		ForwardList<GlobalOctreeData> m_Content;
 		AxisAlignedBoundingBox m_Space;

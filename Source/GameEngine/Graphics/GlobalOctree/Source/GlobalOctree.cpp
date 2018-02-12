@@ -15,6 +15,7 @@ limitations under the License.
 */
 #include "stdafx.h"
 #include "../Include/GlobalOctree.h"
+#include "Graphics/RenderSystem/Include/RenderObject.h"
 
 SpaceGameEngine::GlobalOctreeNode::GlobalOctreeNode()
 {
@@ -144,9 +145,9 @@ void SpaceGameEngine::GlobalOctreeNode::Run()
 	for (const auto& i : m_Content)
 	{
 		if (IfIntersectWithFrustum(i.first) >= 0)
-			i.second->ChangeIfRender(true);
+			SetObjectRenderState(i.second, true);
 		else
-			i.second->ChangeIfRender(false);
+			SetObjectRenderState(i.second, false);
 	}
 	if (!m_IfLeafNode)
 	{
@@ -155,7 +156,7 @@ void SpaceGameEngine::GlobalOctreeNode::Run()
 			int buff = IfIntersectWithFrustum(m_ChildrenNode[i]->m_Space);
 			if (buff==8)
 			{
-				m_ChildrenNode[i]->SetObjectRenderState(true);
+				m_ChildrenNode[i]->SetRenderState(true);
 			}
 			else if (buff >= 0)
 			{
@@ -163,23 +164,23 @@ void SpaceGameEngine::GlobalOctreeNode::Run()
 			}
 			else
 			{
-				m_ChildrenNode[i]->SetObjectRenderState(false);
+				m_ChildrenNode[i]->SetRenderState(false);
 			}
 		}
 	}
 }
 
-void SpaceGameEngine::GlobalOctreeNode::SetObjectRenderState(bool state)
+void SpaceGameEngine::GlobalOctreeNode::SetRenderState(bool state)
 {
 	for (const auto& i : m_Content)
 	{
-		i.second->ChangeIfRender(state);
+		SetObjectRenderState(i.second, state);
 	}
 	if (!m_IfLeafNode)
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			m_ChildrenNode[i]->SetObjectRenderState(state);
+			m_ChildrenNode[i]->SetRenderState(state);
 		}
 	}
 }
@@ -227,9 +228,9 @@ SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctreeNode::UpdateObje
 void SpaceGameEngine::GlobalOctreeNode::UpdateObjectRenderState(const GlobalOctreeData & data)
 {
 	if (IfIntersectWithFrustum(data.first))
-		data.second->ChangeIfRender(true);
+		SetObjectRenderState(data.second, true);
 	else
-		data.second->ChangeIfRender(false);
+		SetObjectRenderState(data.second, false);
 }
 
 void SpaceGameEngine::GlobalOctreeNode::Release()
@@ -274,6 +275,19 @@ bool SpaceGameEngine::GlobalOctreeNode::DeleteObjectData(GlobalOctreeData::secon
 		}
 	}
 	return false;
+}
+
+inline void SpaceGameEngine::GlobalOctreeNode::SetObjectRenderState(Object * po, bool b)
+{
+	if (po)
+	{
+		if (po->GetRenderObject())
+		{
+			po->GetRenderObject()->m_IfRender = b;
+		}
+	}
+	else
+		ThrowError("can not set render state for nullptr");
 }
 
 SpaceGameEngine::GlobalOctree::~GlobalOctree()

@@ -48,9 +48,6 @@ namespace SpaceGameEngine
 		bool IfUse();						//是否使用
 		void ChangeIfRun(bool b);			//更改每帧是否运行
 		void ChangeIfUse(bool b);			//更改是否使用
-		
-		bool IfRender();					//是否渲染
-		void ChangeIfRender(bool b);		//更改是否渲染
 
 		void ProduceMessage(Component* from, unsigned int message);
 		Component* GetComponentByMessage(unsigned int message);
@@ -84,7 +81,6 @@ namespace SpaceGameEngine
 
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行
-		bool m_IfRender;										//是否渲染
 		bool m_IfChild;											//是否是子对象
 	};
 
