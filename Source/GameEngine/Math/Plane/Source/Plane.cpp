@@ -39,7 +39,8 @@ bool SpaceGameEngine::IfBehindPlane(const Plane & plane, const XMFLOAT3 & positi
 	XMVECTOR vbuff2 = XMLoadFloat3(&position);
 	vbuff1 = XMVector3Dot(vbuff1, vbuff2);
 	float dt = XMVectorGetX(vbuff1);
-	if (dt + plane.m_Distance < 0)
+	//if (dt + plane.m_Distance < 0)
+	if(FloatLess(dt+plane.m_Distance,0.00f))
 		return true;
 	else
 		return false;

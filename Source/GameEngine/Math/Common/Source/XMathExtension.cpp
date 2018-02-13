@@ -41,6 +41,16 @@ bool SpaceGameEngine::FloatMoreOrEqual(float f1, float f2)
 	return FloatEqual(f1, f2) ? true : f1 >= f2;
 }
 
+float SpaceGameEngine::FloatMin(float f1, float f2)
+{
+	return FloatLess(f1, f2) ? f1 : f2;
+}
+
+float SpaceGameEngine::FloatMax(float f1, float f2)
+{
+	return FloatMore(f1, f2) ? f1 : f2;
+}
+
 bool SpaceGameEngine::operator < (const XMFLOAT3& v1, const XMFLOAT3& v2)
 {
 	/*if (v1.x < v2.x&&v1.y < v2.y&&v1.z < v2.z)

@@ -30,7 +30,12 @@ SpaceGameEngine::Triangle::Triangle(XMFLOAT3 v1, XMFLOAT3 v2, XMFLOAT3 v3)
 
 bool SpaceGameEngine::operator==(const Triangle & t1, const Triangle & t2)
 {
-	return (memcmp(t1.m_Positions, t2.m_Positions, 3 * sizeof(XMFLOAT3)) == 0);
+	if (t1.m_Positions[0] == t2.m_Positions[0] &&
+		t1.m_Positions[1] == t2.m_Positions[1] &&
+		t1.m_Positions[2] == t2.m_Positions[2])
+		return true;
+	else
+		return false;
 }
 
 int SpaceGameEngine::IfIntersect(const Frustum & frustum, const Triangle & triangle)

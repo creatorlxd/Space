@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Math/Common/Include/MathDefinition.h"
+#include "Math/Common/Include/XMathExtension.h"
 
 namespace SpaceGameEngine
 {

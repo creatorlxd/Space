@@ -30,6 +30,10 @@ namespace SpaceGameEngine
 
 	bool FloatMoreOrEqual(float f1, float f2);
 
+	float FloatMin(float f1, float f2);
+
+	float FloatMax(float f1, float f2);
+
 	bool operator < (const XMFLOAT3& v1, const XMFLOAT3& v2);
 
 	bool operator > (const XMFLOAT3& v1, const XMFLOAT3& v2);
