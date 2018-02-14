@@ -51,7 +51,7 @@ SpaceGameEngine::Plane SpaceGameEngine::NormalizePlane(const Plane & plane)
 	Plane re;
 	XMVECTOR vbuff1 = XMLoadFloat3(&plane.m_Direction);
 	XMVECTOR len = XMVector3Length(vbuff1);
-	XMVectorSetW(vbuff1,plane.m_Distance);
+	vbuff1 = XMVectorSetW(vbuff1, plane.m_Distance);
 	vbuff1 = XMVectorDivide(vbuff1, len);
 	re.m_Direction.x = XMVectorGetX(vbuff1);
 	re.m_Direction.y = XMVectorGetY(vbuff1);
