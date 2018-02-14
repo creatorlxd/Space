@@ -32,5 +32,5 @@ namespace SpaceGameEngine
 
 	bool IfBehindPlane(const Plane& plane, const XMFLOAT3& position);
 
-	Plane NormalizePlace(const Plane& plane);
+	Plane NormalizePlane(const Plane& plane);
 }

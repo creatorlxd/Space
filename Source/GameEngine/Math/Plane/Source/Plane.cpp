@@ -46,7 +46,7 @@ bool SpaceGameEngine::IfBehindPlane(const Plane & plane, const XMFLOAT3 & positi
 		return false;
 }
 
-SpaceGameEngine::Plane SpaceGameEngine::NormalizePlace(const Plane & plane)
+SpaceGameEngine::Plane SpaceGameEngine::NormalizePlane(const Plane & plane)
 {
 	Plane re;
 	XMVECTOR vbuff1 = XMLoadFloat3(&plane.m_Direction);
