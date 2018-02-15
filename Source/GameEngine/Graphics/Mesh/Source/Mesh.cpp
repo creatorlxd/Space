@@ -134,7 +134,7 @@ void SpaceGameEngine::MeshComponent::SetMesh(const MeshForModelFileAsset & mmfa)
 		{
 			if (m_pFatherObject->GetRenderObject())
 			{
-				if (m_pFatherObject->GetRenderObject()->m_IfHaveTexture)
+				if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh)
 					m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
 			}
 		}
