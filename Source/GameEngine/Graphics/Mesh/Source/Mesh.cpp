@@ -36,6 +36,8 @@ void SpaceGameEngine::MeshComponent::CleanUp()
 				SafeRelease(m_pFatherObject->GetRenderObject()->m_pIndexBuffer);
 				m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset = MeshForModelFileAsset();
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = false;
+
+				m_pFatherObject->GetRenderObject()->m_pGlobalOctree->DeleteObject(m_pFatherObject);
 			}
 		}
 	}
@@ -85,6 +87,17 @@ void SpaceGameEngine::MeshComponent::Start()
 				m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
 			}
+			if ((m_Mode&RenderObject::DynamicMode) == 0)
+			{
+				Vector<XMFLOAT3> points;
+				for (const auto& i : m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Vertices)
+				{
+					points.push_back(i.m_Position);
+				}
+				m_pFatherObject->GetRenderObject()->m_BaseSpace = GetAxisAlignedBoundingBox(points);
+				m_pFatherObject->GetRenderObject()->m_Space = TransformByWorldMatrix(m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position, m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation, m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale, m_pFatherObject->GetRenderObject()->m_BaseSpace);
+				m_pFatherObject->GetRenderObject()->m_pGlobalOctreeNode = m_pFatherObject->GetRenderObject()->m_pGlobalOctree->AddObject(GlobalOctreeData(m_pFatherObject->GetRenderObject()->m_Space, m_pFatherObject));
+			}
 		}
 		else
 			ThrowError("物体对象不能没有RenderObject");
@@ -93,7 +106,48 @@ void SpaceGameEngine::MeshComponent::Start()
 
 void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
-	
+	if (m_pFatherObject->GetRenderObject())
+	{
+		if ((m_Mode&RenderObject::DynamicMode) == 0)
+		{
+			if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+				m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+				m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
+			{
+				bool if_recompute = true;
+
+				if (m_pFatherObject->GetComponentByMessage(Event::RotationChange) &&
+					(m_pFatherObject->GetComponentByMessage(Event::PositionChange) == nullptr) &&
+					(m_pFatherObject->GetComponentByMessage(Event::ScaleChange) == nullptr))
+				{
+					static XMFLOAT3 rotation = m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation;
+					if (rotation != m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation)
+					{
+						auto ro_now = m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation;
+						if ((rotation.x == ro_now.x && (m_Mode&RenderObject::XAxisAlignedMode)) ||
+							(rotation.y == ro_now.y && (m_Mode&RenderObject::YAxisAlignedMode)) ||
+							(rotation.z == ro_now.z && (m_Mode&RenderObject::ZAxisAlignedMode)))
+						{
+							rotation = ro_now;
+							if_recompute = false;
+						}
+					}
+				}
+
+				if (if_recompute)
+				{
+					m_pFatherObject->GetRenderObject()->m_Space = TransformByWorldMatrix(m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position, m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation, m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale, m_pFatherObject->GetRenderObject()->m_BaseSpace);
+					if (m_pFatherObject->GetRenderObject()->m_pGlobalOctreeNode)
+					{
+						m_pFatherObject->GetRenderObject()->m_pGlobalOctreeNode->DeleteObjectData(m_pFatherObject);
+						m_pFatherObject->GetRenderObject()->m_pGlobalOctreeNode = m_pFatherObject->GetRenderObject()->m_pGlobalOctree->AddObject(GlobalOctreeData(m_pFatherObject->GetRenderObject()->m_Space, m_pFatherObject));
+					}
+					else
+						m_pFatherObject->GetRenderObject()->m_pGlobalOctreeNode = m_pFatherObject->GetRenderObject()->m_pGlobalOctree->UpdateObject(GlobalOctreeData(m_pFatherObject->GetRenderObject()->m_Space, m_pFatherObject));
+				}
+			}
+		}
+	}
 }
 
 void SpaceGameEngine::MeshComponent::Copy(Component * pc)

@@ -162,13 +162,6 @@ bool SpaceGameEngine::Scene::DeleteObject(Object * po)
 {
 	if (po)
 	{
-		if (po->GetRenderObject())
-		{
-			m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
-			po->SetRenderObject(nullptr);
-			m_GlobalOctree.DeleteObject(po);
-		}
-		
 		auto iter = m_Content.end();
 		for (auto i=m_Content.begin();i!=m_Content.end();i++)
 		{
@@ -181,6 +174,11 @@ bool SpaceGameEngine::Scene::DeleteObject(Object * po)
 		if (iter != m_Content.end())
 		{
 			iter->second->ReleaseComponentWhenRuntime();
+			if (po->GetRenderObject())
+			{
+				m_RenderSystem.DeleteRenderObject(po->GetRenderObject());
+				po->SetRenderObject(nullptr);
+			}
 			if (iter->second->GetFatherObject()&& iter->second->IfChild())
 			{
 				iter->second->GetFatherObject()->DeleteChildObject(iter->second);

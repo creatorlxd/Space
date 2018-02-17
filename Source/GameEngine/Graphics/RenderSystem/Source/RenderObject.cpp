@@ -62,17 +62,6 @@ void SpaceGameEngine::RenderObject::Init()
 				{
 					m_ObjectOctree.BuildTree(m_MeshForModelFileAsset.m_Indices);
 				}
-				if ((m_Mode&RenderObject::DynamicMode) == 0)
-				{
-					Vector<XMFLOAT3> points;
-					for (const auto& i : m_MeshForModelFileAsset.m_Vertices)
-					{
-						points.push_back(i.m_Position);
-					}
-					m_BaseSpace = GetAxisAlignedBoundingBox(points);
-					m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
-					m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
-				}
 			}
 		}
 		m_IfInit = true;
@@ -135,45 +124,6 @@ void SpaceGameEngine::RenderObject::Render()
 			//mesh
 			if (m_IfHaveMesh)
 			{
-				if ((m_Mode&RenderObject::DynamicMode) == 0)
-				{
-					if (m_pObject->GetComponentByMessage(Event::PositionChange) ||
-						m_pObject->GetComponentByMessage(Event::RotationChange) ||
-						m_pObject->GetComponentByMessage(Event::ScaleChange))
-					{
-						bool if_recompute = true;
-
-						if (m_pObject->GetComponentByMessage(Event::RotationChange) &&
-							(m_pObject->GetComponentByMessage(Event::PositionChange) == nullptr) &&
-							(m_pObject->GetComponentByMessage(Event::ScaleChange) == nullptr))
-						{
-							static XMFLOAT3 rotation = m_TransformAsset.m_Rotation;
-							if (rotation != m_TransformAsset.m_Rotation)
-							{
-								auto ro_now = m_TransformAsset.m_Rotation;
-								if ((rotation.x == ro_now.x && (m_Mode&RenderObject::XAxisAlignedMode)) ||
-									(rotation.y == ro_now.y && (m_Mode&RenderObject::YAxisAlignedMode)) ||
-									(rotation.z == ro_now.z && (m_Mode&RenderObject::ZAxisAlignedMode)))
-								{
-									rotation = ro_now;
-									if_recompute = false;
-								}
-							}
-						}
-
-						if (if_recompute)
-						{
-							m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
-							if (m_pGlobalOctreeNode)
-							{
-								m_pGlobalOctreeNode->DeleteObjectData(m_pObject);
-								m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_Space, m_pObject));
-							}
-							else
-								m_pGlobalOctreeNode = m_pGlobalOctree->UpdateObject(GlobalOctreeData(m_Space, m_pObject));
-						}
-					}
-				}
 				if (m_pVertexBuffer&&m_pIndexBuffer)
 				{
 					if ((m_Mode&RenderObject::WholeMode) == 0)
