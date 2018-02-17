@@ -21,7 +21,6 @@ SpaceGameEngine::RenderSystem* SpaceGameEngine::RenderSystem::sm_pThis = nullptr
 SpaceGameEngine::RenderSystem::RenderSystem()
 {
 	sm_pThis = this;
-	m_pGlobalOctree = nullptr;
 }
 
 SpaceGameEngine::RenderSystem::~RenderSystem()
@@ -77,19 +76,12 @@ void SpaceGameEngine::RenderSystem::DeleteRenderObject(RenderObject * pro)
 		ThrowError("can not delete nullptr");
 }
 
-void SpaceGameEngine::RenderSystem::Init(GlobalOctree* pgo)
+void SpaceGameEngine::RenderSystem::Init()
 {
-	if (pgo == nullptr)
-	{
-		ThrowError("pointer to GlobalOctree can not be nullptr");
-		return;
-	}
-	m_pGlobalOctree = pgo;
 	for (auto i : m_Content)
 	{
 		if (i != nullptr)
 		{
-			i->m_pGlobalOctree = m_pGlobalOctree;
 			i->Init();
 		}
 	}

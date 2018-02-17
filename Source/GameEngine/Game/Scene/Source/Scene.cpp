@@ -71,7 +71,7 @@ void SpaceGameEngine::Scene::Start()
 				i.second->Start();
 	}
 
-	m_RenderSystem.Init(&m_GlobalOctree);
+	m_RenderSystem.Init();
 	m_GlobalOctree.BuildTree();
 }
 
