@@ -108,7 +108,7 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		{
 			string_buff.push_back(str_buff);
 		}
-		cf.Prase(string_buff);
+		cf.Parse(string_buff);
 		cout << cf.GetConfigTable("test").GetConfigValue("a").AsInt()<<endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("b").AsInt() << endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("str").AsString() << endl;
@@ -116,6 +116,7 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		cout << cf.GetConfigTable("test").GetConfigValue("double").AsDouble() << endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
 		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
+		file.close();
 	}
 	TEST_METHOD_END
 }

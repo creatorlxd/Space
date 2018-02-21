@@ -56,9 +56,9 @@ namespace SpaceGameEngine
 		ConfigTable & GetConfigTable(const std::string& name);
 
 		/*
-		接受由getline获取的一组字符串
+		接受由getline获取的一组字符串进行解析
 		*/
-		void Prase(const Vector<std::string>& strs);
+		void Parse(const Vector<std::string>& strs);
 	private:
 		Map<std::string, ConfigTable> m_Content;
 	};

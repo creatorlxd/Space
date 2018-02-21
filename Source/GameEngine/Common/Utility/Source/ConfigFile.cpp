@@ -109,7 +109,7 @@ SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const
 	}
 }
 
-void SpaceGameEngine::ConfigFile::Prase(const Vector<std::string>& strs)
+void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 {
 	/*
 	prase state:
