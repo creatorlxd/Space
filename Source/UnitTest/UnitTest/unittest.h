@@ -97,6 +97,26 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		if (test != except)
 			return UnitTestResult::Fail;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestConfigFile)
+	{
+		ConfigFile cf;
+		fstream file("../TestData/test.configfile", ios::in);
+		Vector<string> string_buff;
+		string str_buff;
+		while (getline(file, str_buff))
+		{
+			string_buff.push_back(str_buff);
+		}
+		cf.Prase(string_buff);
+		cout << cf.GetConfigTable("test").GetConfigValue("a").AsInt()<<endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("b").AsInt() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("str").AsString() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("float").AsFloat() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("double").AsDouble() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
+		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

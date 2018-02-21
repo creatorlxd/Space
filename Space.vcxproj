@@ -380,6 +380,7 @@
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\AllocatorForSTL.hpp" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Memory.hpp" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\MemoryManager.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\ConfigFile.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\File.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\StringConverter.h" />
@@ -447,6 +448,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnitTestForRelease|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='BuildLibrary|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\ConfigFile.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\File.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\StringConverter.cpp" />

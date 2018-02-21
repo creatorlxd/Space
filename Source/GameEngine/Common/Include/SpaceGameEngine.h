@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once
 #include "stdafx.h"
 #include "Space.h"
+#include "Common/Utility/Include/ConfigFile.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Game/Object/Include/Object.h"
 #include "Game/Object/Include/ObjectConnection.h"
