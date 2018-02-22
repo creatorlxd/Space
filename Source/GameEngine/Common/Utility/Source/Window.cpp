@@ -57,7 +57,7 @@ LRESULT CALLBACK SpaceGameEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam
 	case WM_SIZE:
 		SpaceEngineWindow->SetWindowWidth(LOWORD(lParam));
 		SpaceEngineWindow->SetWindowHeight(HIWORD(lParam));
-		if (SpaceEngineWindow->GetWindowWidth() != 0 | SpaceEngineWindow->GetWindowHeight() != 0)
+		if (SpaceEngineWindow->GetWindowWidth() != 0 || SpaceEngineWindow->GetWindowHeight() != 0)
 			SpaceEngineWindow->Resize();
 		break;
 	default:										//若上述case条件都不符合，则执行该default语句
@@ -278,7 +278,11 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
-	InitDefaultEffectShaderFromFile("./Source/GameEngine/Shader/Common/DefaultShader.fx", m_EffectShader);
+	auto ShaderDirectory = GetDefaultConfigFile().GetConfigTable("Shader").GetConfigValue("ShaderDirectory").AsString();
+
+	SetRenderQuality((RenderQuality)((unsigned char)(GetDefaultConfigFile().GetConfigTable("Shader").GetConfigValue("RenderQuality").AsInt())));
+
+	InitDefaultEffectShaderFromFile(ShaderDirectory + "Common/DefaultShader.fx", m_EffectShader);
 
 	SetDefaultResterizerState(m_pD3DDevice, &m_pRasterizerState);
 

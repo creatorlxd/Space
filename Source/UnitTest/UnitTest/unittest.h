@@ -124,6 +124,18 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		/*p.End();
 		auto time = p.GetContent();*/
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestWindow)
+	{
+		Game g_Game;
+		Scene g_Scene;
+		g_Game.Init(GetModuleHandle(0), NULL,NULL, 1);
+		//write your init code here
+		g_Game.m_Window.SetWindow();
+		g_Game.SetScene(&g_Scene);
+		//-------------------------
+		g_Game.StartRunGame();
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

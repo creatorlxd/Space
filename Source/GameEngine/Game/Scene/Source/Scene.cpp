@@ -22,6 +22,7 @@ Scene* SpaceGameEngine::Scene::sm_pThis = nullptr;
 SpaceGameEngine::Scene::Scene()
 {
 	sm_pThis = this;
+	m_IfInit = false;
 }
 
 SpaceGameEngine::Scene::~Scene()
@@ -47,8 +48,7 @@ Scene * SpaceGameEngine::Scene::GetMainScene()
 
 void SpaceGameEngine::Scene::Start()
 {
-	static bool ifinit = false;
-	if (!ifinit)
+	if (!m_IfInit)
 	{	
 		//Ìí¼ÓÄ¬ÈÏÉãÏñ»ú
 		Object* DefaultCamera = NewObject("DefaultCamera");
@@ -57,7 +57,7 @@ void SpaceGameEngine::Scene::Start()
 		DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
 		DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
 		//--------------
-		ifinit = true;
+		m_IfInit = true;
 	}
 	else
 	{

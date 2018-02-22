@@ -97,7 +97,7 @@ namespace SpaceGameEngine
 		File& operator << (const double& d);
 		File& operator << (const long double& ld);
 
-		std::string GetLine();
+		bool GetLine(std::string& str);
 	private:
 		FILE* m_pFile;
 		std::string m_FileName;

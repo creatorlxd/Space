@@ -1,0 +1,8 @@
+[Shader]
+ShaderDirectory="../../GameEngine/Shader/"
+
+;RenderQuality:
+;LowQuality 1
+;MediumQuality 2
+;HighQuality 3
+RenderQuality=2

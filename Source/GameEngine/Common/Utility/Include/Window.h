@@ -20,6 +20,8 @@ limitations under the License.
 #include "ShaderFarmework/VertexShader/Include/VertexShader.h"
 #include "ShaderFarmework/PixelShader/Include/PixelShader.h"
 #include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "ConfigFile.h"
+
 namespace SpaceGameEngine
 {
 	enum class RenderQuality :unsigned char

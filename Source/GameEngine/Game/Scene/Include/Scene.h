@@ -49,6 +49,7 @@ namespace SpaceGameEngine
 	private:
 		static Scene* sm_pThis;
 		HashMap<std::string, Object*> m_Content;//¥¢¥ÊObject
+		bool m_IfInit;
 	};
 
 	/*

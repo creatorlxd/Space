@@ -3,9 +3,7 @@
 
 * 加入自定义shader组件。
 
-* 检测窗口是否被隐藏，如果被隐藏则不运行渲染系统。
-
-* 加入配置文件系统，使得可以用配置文件初始化`Window`类。
+* 检测窗口是否被隐藏，如果被隐藏则不运行渲染系统。(find the reason of the com error when window is hiding)
 
 * 利用配置文件系统，为`Window`加入帧数控制。
 

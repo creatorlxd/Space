@@ -53,6 +53,9 @@ namespace SpaceGameEngine
 	class ConfigFile
 	{
 	public:
+		ConfigFile();
+		ConfigFile(const std::string& filename);
+
 		ConfigTable & GetConfigTable(const std::string& name);
 
 		/*
@@ -63,4 +66,6 @@ namespace SpaceGameEngine
 	private:
 		Map<std::string, ConfigTable> m_Content;
 	};
+
+	ConfigFile& GetDefaultConfigFile();
 }

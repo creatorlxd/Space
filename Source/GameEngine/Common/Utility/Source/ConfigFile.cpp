@@ -95,6 +95,16 @@ SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(
 	}
 }
 
+SpaceGameEngine::ConfigFile::ConfigFile()
+{
+
+}
+
+SpaceGameEngine::ConfigFile::ConfigFile(const std::string & filename)
+{
+	InitFromFile(filename);
+}
+
 SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const std::string & name)
 {
 	auto iter = m_Content.find(name);
@@ -130,6 +140,10 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 		{
 			if (_char == '\n' || _char == '\r' || _char == '\r\n')
 				continue;
+
+			//comment
+			if (_char == ';')
+				break;
 
 			//table name
 			if (state <= 1)
@@ -307,15 +321,20 @@ void SpaceGameEngine::ConfigFile::InitFromFile(const std::string & filename)
 {
 	Vector<std::string> buffer;
 	File file(filename, FileMode::Read);
-	std::string str_buff = file.GetLine();
+	std::string str_buff;
 
-	while (!str_buff.empty())
+	while (file.GetLine(str_buff))
 	{
 		buffer.push_back(str_buff);
-		str_buff = file.GetLine();
 	}
 
 	file.Close();
 
 	Parse(buffer);
+}
+
+SpaceGameEngine::ConfigFile & SpaceGameEngine::GetDefaultConfigFile()
+{
+	static ConfigFile DefaultConfigFile("SystemConfig.configfile");
+	return DefaultConfigFile;
 }

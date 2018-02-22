@@ -528,26 +528,31 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long double & ld
 	return *this;
 }
 
-std::string SpaceGameEngine::File::GetLine()
+bool SpaceGameEngine::File::GetLine(std::string& str)
 {
-	std::string re;
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
+		str.clear();
 		char _char = std::fgetc(m_pFile);
 		while (_char != EOF)
 		{
 			if (_char == '\r' || _char == '\n' || _char == '\r\n')
 				break;
-			re += _char;
+			str += _char;
 			_char = std::fgetc(m_pFile);
 		}
 
 		if (_char == EOF)
 		{
 			m_IfFileReadOver = true;
+
+			if (str.empty())
+				return false;
 		}
+		return true;
 	}
-	return re;
+	else
+		return false;
 }
 
 SpaceGameEngine::Vector<std::string> SpaceGameEngine::GetDirectoryName(const std::string & filepath)
