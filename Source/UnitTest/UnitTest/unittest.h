@@ -100,15 +100,18 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 	TEST_METHOD_END,
 	TEST_METHOD_BEGIN(TestConfigFile)
 	{
+	/*	Period p;
+		p.Begin();*/
 		ConfigFile cf;
-		fstream file("../TestData/test.configfile", ios::in);
+		/*fstream file("../TestData/test.configfile", ios::in);
 		Vector<string> string_buff;
 		string str_buff;
 		while (getline(file, str_buff))
 		{
 			string_buff.push_back(str_buff);
 		}
-		cf.Parse(string_buff);
+		cf.Parse(string_buff);*/
+		cf.InitFromFile("../TestData/test.configfile");
 		cout << cf.GetConfigTable("test").GetConfigValue("a").AsInt()<<endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("b").AsInt() << endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("str").AsString() << endl;
@@ -116,7 +119,10 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		cout << cf.GetConfigTable("test").GetConfigValue("double").AsDouble() << endl;
 		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
 		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
-		file.close();
+		cout << cf.GetConfigTable("test2").GetConfigValue("str").AsString() << endl;
+		/*file.close();*/
+		/*p.End();
+		auto time = p.GetContent();*/
 	}
 	TEST_METHOD_END
 }

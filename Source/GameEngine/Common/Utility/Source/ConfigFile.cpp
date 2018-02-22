@@ -141,7 +141,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 				}
 				if (_char == ']'&&if_table_name)
 				{
-					if (str_buffer.size() > 0)
+					if (!str_buffer.empty())
 					{
 						state = 1;
 						m_Content.insert(std::make_pair(str_buffer, ConfigTable()));
@@ -152,7 +152,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 					}
 					else
 					{
-						ThrowError("can have null table name");
+						ThrowError("can not have null table name");
 						return;
 					}
 				}
@@ -251,6 +251,13 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 
 		if (state == 2)
 		{
+			//string check
+			if (str_buffer.empty() && type_buffer != ConfigFileValueType::String)
+			{
+				ThrowError("config value can not be null");
+				return;
+			}
+
 			//number check
 			if (type_buffer != ConfigFileValueType::Char&&type_buffer != ConfigFileValueType::String)
 			{
@@ -282,6 +289,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 			{
 				pvalue->m_Type = type_buffer;
 				pvalue->m_Content = str_buffer;
+				
 				type_buffer = ConfigFileValueType::Int;
 				str_buffer.clear();
 				state = 1;
@@ -293,4 +301,21 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 			}
 		}
 	}
+}
+
+void SpaceGameEngine::ConfigFile::InitFromFile(const std::string & filename)
+{
+	Vector<std::string> buffer;
+	File file(filename, FileMode::Read);
+	std::string str_buff = file.GetLine();
+
+	while (!str_buff.empty())
+	{
+		buffer.push_back(str_buff);
+		str_buff = file.GetLine();
+	}
+
+	file.Close();
+
+	Parse(buffer);
 }

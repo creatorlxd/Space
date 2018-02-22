@@ -7,3 +7,4 @@ double = 3.1415926
 char = 'c'
 [test2]
 a=2.3
+str=""

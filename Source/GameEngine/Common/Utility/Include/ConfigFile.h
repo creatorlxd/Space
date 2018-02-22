@@ -59,6 +59,7 @@ namespace SpaceGameEngine
 		接受由getline获取的一组字符串进行解析
 		*/
 		void Parse(const Vector<std::string>& strs);
+		void InitFromFile(const std::string& filename);
 	private:
 		Map<std::string, ConfigTable> m_Content;
 	};

@@ -57,7 +57,7 @@ namespace SpaceGameEngine
 		{
 			new (p) T(ref);
 		}
-		void destory(pointer p)
+		void destroy(pointer p)
 		{
 			p->~T();
 		}
