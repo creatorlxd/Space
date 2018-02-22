@@ -120,6 +120,8 @@ namespace SpaceGameEngine
 		bool m_IfBegin;							//游戏是否已开始
 
 		RenderQuality m_RenderQuality;
+
+		unsigned int m_FPSLimit;
 	};
 
 	Window* GetWindow();

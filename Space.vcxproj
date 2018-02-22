@@ -370,6 +370,7 @@
     <None Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.licenseheader" />
     <None Include="Source\GameEngine\dxerr\dxerr.licenseheader" />
     <None Include="Space.licenseheader" />
+    <None Include="SystemConfig.configfile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Error\Include\Error.h" />

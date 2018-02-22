@@ -343,6 +343,7 @@
     <None Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.licenseheader">
       <Filter>DDSTextureLoader</Filter>
     </None>
+    <None Include="SystemConfig.configfile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">

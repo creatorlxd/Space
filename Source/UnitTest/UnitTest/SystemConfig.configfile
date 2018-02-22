@@ -6,3 +6,6 @@ ShaderDirectory="../../GameEngine/Shader/"
 ;MediumQuality 2
 ;HighQuality 3
 RenderQuality=2
+
+[Window]
+FPSLimit=120

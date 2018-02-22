@@ -100,6 +100,7 @@ SpaceGameEngine::Window::Window()
 	m_pRasterizerState = nullptr;
 	m_IfBegin = false;
 	m_RenderQuality = RenderQuality::MediumQuality;
+	m_FPSLimit = 120;
 	SetAsMainWindow();
 }
 
@@ -166,7 +167,20 @@ HRESULT SpaceGameEngine::Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrev
 		}
 		else
 		{
-			m_pWindowLoop();   //进行渲染
+			static auto time = std::chrono::steady_clock::now();
+			static double time_limit = 1 / m_FPSLimit;
+			auto time_now = std::chrono::steady_clock::now();
+			std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(time_now - time);
+
+			if (time_span.count() >= time_limit)
+			{
+				m_pWindowLoop();   //进行渲染
+				time = time_now;
+			}
+			else
+			{
+				Sleep(1000 * (time_limit - time_span.count()));
+			}
 		}
 	}
 	//【6】窗口类的注销
@@ -278,6 +292,7 @@ HRESULT SpaceGameEngine::Window::Direct3DInit(HWND hwnd)
 
 HRESULT SpaceGameEngine::Window::EnvironmentInit(HWND hwnd)
 {
+	m_FPSLimit = GetDefaultConfigFile().GetConfigTable("Window").GetConfigValue("FPSLimit").AsInt();
 	auto ShaderDirectory = GetDefaultConfigFile().GetConfigTable("Shader").GetConfigValue("ShaderDirectory").AsString();
 
 	SetRenderQuality((RenderQuality)((unsigned char)(GetDefaultConfigFile().GetConfigTable("Shader").GetConfigValue("RenderQuality").AsInt())));
