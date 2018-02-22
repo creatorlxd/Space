@@ -37,8 +37,6 @@ namespace SpaceGameEngine
 	static const uint32_t g_Alignment = 4;
 	static const uint32_t g_NumBlockSizes = sizeof(g_BlockSizes) / sizeof(g_BlockSizes[0]);
 	static const uint32_t g_MaxBlockSize = g_BlockSizes[g_NumBlockSizes - 1];
-
-	SpaceGameEngine::MemoryManager g_MemoryManager;
 }
 
 SpaceGameEngine::MemoryManager::MemoryManager()
@@ -78,6 +76,7 @@ void SpaceGameEngine::MemoryManager::Init()
 
 void SpaceGameEngine::MemoryManager::Clear()
 {
+	GetMemoryManager();
 	delete[] m_pAllocators;
 	delete[] m_pBlockSizeContent;
 }
@@ -92,6 +91,7 @@ SpaceGameEngine::Allocator* SpaceGameEngine::MemoryManager::FindAllocator(size_t
 
 void* SpaceGameEngine::MemoryManager::Allocate(size_t size)
 {
+	GetMemoryManager();
 	Allocator* pAlloc = FindAllocator(size);
 	if (pAlloc)
 		return pAlloc->Allocate();
@@ -101,9 +101,16 @@ void* SpaceGameEngine::MemoryManager::Allocate(size_t size)
 
 void SpaceGameEngine::MemoryManager::Free(void* p, size_t size)
 {
+	GetMemoryManager();
 	Allocator* pAlloc = FindAllocator(size);
 	if (pAlloc)
 		pAlloc->Free(p);
 	else
 		free(p);
+}
+
+SpaceGameEngine::MemoryManager & SpaceGameEngine::GetMemoryManager()
+{
+	static MemoryManager g_MemoryManager;
+	return g_MemoryManager;
 }

@@ -59,5 +59,5 @@ namespace SpaceGameEngine
 		static Allocator* FindAllocator(size_t size);
 	};
 
-	extern MemoryManager g_MemoryManager;
+	MemoryManager& GetMemoryManager();
 }
