@@ -168,7 +168,7 @@ HRESULT SpaceGameEngine::Window::InitWindow(HINSTANCE hInstance, HINSTANCE hPrev
 		else
 		{
 			static auto time = std::chrono::steady_clock::now();
-			static double time_limit = 1 / m_FPSLimit;
+			static double time_limit = 1.0 / (double)m_FPSLimit;
 			auto time_now = std::chrono::steady_clock::now();
 			std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(time_now - time);
 
