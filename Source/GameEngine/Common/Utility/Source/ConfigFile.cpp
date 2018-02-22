@@ -81,6 +81,66 @@ std::string SpaceGameEngine::ConfigFileValue::AsString()
 	}
 }
 
+void SpaceGameEngine::ConfigFileValue::Set(int i)
+{
+	if (m_Type == ConfigFileValueType::Int)
+	{
+		m_Content = std::to_string(i);
+	}
+	else
+	{
+		ThrowError("this value's type is not int");
+	}
+}
+
+void SpaceGameEngine::ConfigFileValue::Set(float f)
+{
+	if (m_Type == ConfigFileValueType::Float)
+	{
+		m_Content = std::to_string(f);
+	}
+	else
+	{
+		ThrowError("this value's type is not float");
+	}
+}
+
+void SpaceGameEngine::ConfigFileValue::Set(double d)
+{
+	if (m_Type == ConfigFileValueType::Double)
+	{
+		m_Content = std::to_string(d);
+	}
+	else
+	{
+		ThrowError("this value's type is not double");
+	}
+}
+
+void SpaceGameEngine::ConfigFileValue::Set(char c)
+{
+	if (m_Type == ConfigFileValueType::Char)
+	{
+		m_Content = c;
+	}
+	else
+	{
+		ThrowError("this value's type is not char");
+	}
+}
+
+void SpaceGameEngine::ConfigFileValue::Set(const std::string & str)
+{
+	if (m_Type == ConfigFileValueType::String)
+	{
+		m_Content = str;
+	}
+	else
+	{
+		ThrowError("this value's type is not string");
+	}
+}
+
 SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(const std::string& name)
 {
 	auto iter = m_Content.find(name);
@@ -331,6 +391,30 @@ void SpaceGameEngine::ConfigFile::InitFromFile(const std::string & filename)
 	file.Close();
 
 	Parse(buffer);
+}
+
+void SpaceGameEngine::ConfigFile::SaveToFile(const std::string & filename)
+{
+	File file(filename, FileMode::Write);
+
+	for (auto table : m_Content)
+	{
+		file << "[" << table.first << "]" << PrintMode::EndLine;
+		for (auto key : table.second.m_Content)
+		{
+			auto str = key.second.m_Content;
+			if (key.second.m_Type == ConfigFileValueType::Char)
+				str = "\'" + str + "\'";
+			if (key.second.m_Type == ConfigFileValueType::String)
+				str = "\"" + str + "\"";
+			if (key.second.m_Type == ConfigFileValueType::Float && (*str.rbegin()) != 'f')
+				str += 'f';
+			file << key.first << "=" << str << PrintMode::EndLine;
+		}
+
+	}
+
+	file.Close();
 }
 
 SpaceGameEngine::ConfigFile & SpaceGameEngine::GetDefaultConfigFile()

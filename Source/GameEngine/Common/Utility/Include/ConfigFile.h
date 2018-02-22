@@ -38,6 +38,12 @@ namespace SpaceGameEngine
 		double AsDouble();
 		char AsChar();
 		std::string AsString();
+
+		void Set(int i);
+		void Set(float f);
+		void Set(double d);
+		void Set(char c);
+		void Set(const std::string& str);
 	};
 
 	class ConfigTable
@@ -63,6 +69,10 @@ namespace SpaceGameEngine
 		*/
 		void Parse(const Vector<std::string>& strs);
 		void InitFromFile(const std::string& filename);
+		/*
+		保存配置表到某个文件，但不保留注释
+		*/
+		void SaveToFile(const std::string& filename);
 	private:
 		Map<std::string, ConfigTable> m_Content;
 	};

@@ -120,6 +120,9 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
 		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
 		cout << cf.GetConfigTable("test2").GetConfigValue("str").AsString() << endl;
+
+		cf.GetConfigTable("test").GetConfigValue("float").Set(1.23f);
+		cf.SaveToFile("../TestDate/test2.configfile");
 		/*file.close();*/
 		/*p.End();
 		auto time = p.GetContent();*/
