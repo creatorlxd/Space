@@ -19,6 +19,23 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	const uint32_t g_BlockSizes[] = {
+		// 4-increments
+		4,  8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,
+		52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96,
+
+		// 32-increments
+		128, 160, 192, 224, 256, 288, 320, 352, 384,
+		416, 448, 480, 512, 544, 576, 608, 640,
+
+		// 64-increments
+		704, 768, 832, 896, 960, 1024
+	};
+	const uint32_t g_PageSize = 8192;
+	const uint32_t g_Alignment = 4;
+	const uint32_t g_NumBlockSizes = sizeof(g_BlockSizes) / sizeof(g_BlockSizes[0]);
+	const uint32_t g_MaxBlockSize = 1024;			//g_BlockSizes[g_NumBlockSizes - 1]
+
 	class MemoryManager
 	{
 	public:
