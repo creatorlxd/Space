@@ -42,22 +42,19 @@ namespace SpaceGameEngine
 		}
 
 	public:
-		MemoryManager();
+		friend MemoryManager& GetMemoryManager();
+		
 		~MemoryManager();
-
-		static void Init();
-		static void Clear();
 
 		static void* Allocate(size_t size);
 		static void Free(void* p, size_t size);
 
 	private:
-		static size_t* m_pBlockSizeContent;	//the information of the size of block to find the Allcotor
-		static Allocator* m_pAllocators;
+		MemoryManager();
+		size_t* m_pBlockSizeContent;	//the information of the size of block to find the Allcotor
+		Allocator* m_pAllocators;
 
 	private:
-		static Allocator* FindAllocator(size_t size);
+		Allocator* FindAllocator(size_t size);
 	};
-
-	MemoryManager& GetMemoryManager();
 }

@@ -18,9 +18,6 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	size_t* MemoryManager::m_pBlockSizeContent = nullptr;
-	Allocator* MemoryManager::m_pAllocators = nullptr;
-
 	static const uint32_t g_BlockSizes[] = {
 		// 4-increments
 		4,  8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,
@@ -41,42 +38,24 @@ namespace SpaceGameEngine
 
 SpaceGameEngine::MemoryManager::MemoryManager()
 {
-	Init();
+	m_pBlockSizeContent = new size_t[g_MaxBlockSize + 1];
+
+	size_t j = 0;
+	for (size_t i = 0; i <= g_MaxBlockSize; i++)
+	{
+		if (i > g_BlockSizes[j]) j += 1;
+		m_pBlockSizeContent[i] = j;
+	}
+
+	m_pAllocators = new Allocator[g_NumBlockSizes];
+	for (size_t i = 0; i<g_NumBlockSizes; i++)
+	{
+		m_pAllocators[i].Reset(g_BlockSizes[i], g_PageSize, g_Alignment);
+	}
 }
 
 SpaceGameEngine::MemoryManager::~MemoryManager()
 {
-	delete[] m_pAllocators;
-	delete[] m_pBlockSizeContent;
-}
-
-void SpaceGameEngine::MemoryManager::Init()
-{
-	static bool ifinitialized = false;
-	if (!ifinitialized)
-	{
-		m_pBlockSizeContent = new size_t[g_MaxBlockSize + 1];
-
-		size_t j = 0;
-		for (size_t i = 0; i <= g_MaxBlockSize; i++)
-		{
-			if (i > g_BlockSizes[j]) j += 1;
-			m_pBlockSizeContent[i] = j;
-		}
-
-		m_pAllocators = new Allocator[g_NumBlockSizes];
-		for (size_t i = 0; i<g_NumBlockSizes; i++)
-		{
-			m_pAllocators[i].Reset(g_BlockSizes[i], g_PageSize, g_Alignment);
-		}
-
-		ifinitialized = true;
-	}
-}
-
-void SpaceGameEngine::MemoryManager::Clear()
-{
-	GetMemoryManager();
 	delete[] m_pAllocators;
 	delete[] m_pBlockSizeContent;
 }
@@ -91,8 +70,7 @@ SpaceGameEngine::Allocator* SpaceGameEngine::MemoryManager::FindAllocator(size_t
 
 void* SpaceGameEngine::MemoryManager::Allocate(size_t size)
 {
-	GetMemoryManager();
-	Allocator* pAlloc = FindAllocator(size);
+	Allocator* pAlloc = GetMemoryManager().FindAllocator(size);
 	if (pAlloc)
 		return pAlloc->Allocate();
 	else
@@ -101,8 +79,7 @@ void* SpaceGameEngine::MemoryManager::Allocate(size_t size)
 
 void SpaceGameEngine::MemoryManager::Free(void* p, size_t size)
 {
-	GetMemoryManager();
-	Allocator* pAlloc = FindAllocator(size);
+	Allocator* pAlloc = GetMemoryManager().FindAllocator(size);
 	if (pAlloc)
 		pAlloc->Free(p);
 	else
