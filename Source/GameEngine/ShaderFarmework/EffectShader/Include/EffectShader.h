@@ -15,6 +15,9 @@ limitations under the License.
 */
 #pragma once 
 #include "Space.h"
+#include "ThirdParty/FX11/inc/d3dx11effect.h"
+
+using namespace DirectX;
 
 namespace SpaceGameEngine
 {

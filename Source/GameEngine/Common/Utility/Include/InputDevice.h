@@ -15,6 +15,8 @@ limitations under the License.
 */
 #pragma once
 #include "Space.h"
+#include <Windows.h>
+#include <dinput.h>
 
 namespace SpaceGameEngine
 {

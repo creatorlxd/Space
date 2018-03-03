@@ -15,6 +15,11 @@ limitations under the License.
 */
 #pragma once 
 #include "Space.h"
+#include <DirectXMath.h>
+#include <d3d11.h>
+#include <d3d11shader.h>
+
+using namespace DirectX;
 
 namespace SpaceGameEngine
 {

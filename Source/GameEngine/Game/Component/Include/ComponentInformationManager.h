@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once
 #include "Space.h"
 #include "Component.h"
+#include <functional>
 
 namespace SpaceGameEngine
 {
