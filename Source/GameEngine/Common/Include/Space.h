@@ -14,11 +14,51 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
+// Windows
+#include <Windows.h>
+// DirectX
+#include <dinput.h>
+#include <DirectXMath.h>
+#include <d3d11.h>
+#include <dxerr/dxerr.h>
+#include <dxgi.h>
+#include <D3Dcompiler.h>
+// Standard Library
+#include <vector>
+#include <string>
+#include <fstream>
+#include <ctime>
+#include <memory>
+#include <xutility>
+#include <cstring>
+#include <type_traits>
+#include <map>
+#include <algorithm>
+#include <new>
+#include <codecvt>
+#include <queue>
+#include <stack>
+#include <functional>
+#include <cstdint>
+#include <cstddef>
+#include <direct.h>
+#include <io.h>
+#include <forward_list>
+#include <set>
+#include <chrono>
+#include <unordered_map>
+
+#include "ThirdParty/FX11/inc/d3dx11effect.h"
+#include "ThirdParty/tinyxml2/include/tinyxml2.h"
+#include "ThirdParty/DirectXTex/include/DirectXTex.h"
+
 #include "../MemoryManager/Include/AllocatorForSTL.hpp"
 #include "../Utility/Include/StringConverter.h"
 #include "../Utility/Include/InputDevice.h"
 #include "../Utility/Include/TimeTool.h"
 #include "DDSTextureLoader/DDSTextureLoader.h"
+
+using namespace DirectX;
 
 namespace SpaceGameEngine
 {

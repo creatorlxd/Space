@@ -15,6 +15,14 @@ limitations under the License.
 */
 #pragma once
 #include "MemoryManager.h"
+#include <vector>
+#include <map>
+#include <queue>
+#include <stack>
+#include <unordered_map>
+#include <list>
+#include <forward_list>
+#include <set>
 
 namespace SpaceGameEngine
 {
