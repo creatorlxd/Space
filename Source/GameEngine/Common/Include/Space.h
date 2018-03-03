@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "../MemoryManager/Include/AllocatorForSTL.hpp"
 #include "../Utility/Include/StringConverter.h"
 #include "../Utility/Include/InputDevice.h"

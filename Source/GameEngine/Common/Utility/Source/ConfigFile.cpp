@@ -419,6 +419,6 @@ void SpaceGameEngine::ConfigFile::SaveToFile(const std::string & filename)
 
 SpaceGameEngine::ConfigFile & SpaceGameEngine::GetDefaultConfigFile()
 {
-	static ConfigFile DefaultConfigFile("SystemConfig.configfile");
-	return DefaultConfigFile;
+	static GlobalVariable<ConfigFile> DefaultConfigFile("SystemConfig.configfile");
+	return DefaultConfigFile.Get();
 }

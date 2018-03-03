@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once 
-#include "stdafx.h"
 #include "Common/MemoryManager/Include/AllocatorForSTL.hpp"
 #include "Game/Scene/Include/SceneData.h"
 #include "Math/Common/Include/MathDefinition.h"

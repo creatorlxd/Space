@@ -62,6 +62,6 @@ const SpaceGameEngine::ComponentInformation & SpaceGameEngine::ComponentInformat
 
 SpaceGameEngine::ComponentInformationManager & SpaceGameEngine::GetComponentInformationManager()
 {
-	static ComponentInformationManager g_ComponentInformationManager;
-	return g_ComponentInformationManager;
+	static GlobalVariable<ComponentInformationManager> g_ComponentInformationManager;
+	return g_ComponentInformationManager.Get();
 }

@@ -16,15 +16,15 @@ limitations under the License.
 #include "stdafx.h"
 #include "SpaceGameEngine.h"
 
-Game g_Game;
-Scene g_Scene;
+GlobalVariable<Game> g_Game;
+GlobalVariable<Scene> g_Scene;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-	g_Game.Init(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
+	g_Game.Get().Init(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
 	//write your init code here
-	g_Game.m_Window.SetWindow();
-	g_Game.SetScene(&g_Scene);
+	g_Game.Get().m_Window.SetWindow();
+	g_Game.Get().SetScene(&g_Scene.Get());
 	//-------------------------
-	g_Game.StartRunGame();
+	g_Game.Get().StartRunGame();
 	return 0;
 }

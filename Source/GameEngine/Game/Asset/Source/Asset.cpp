@@ -72,6 +72,6 @@ const SpaceGameEngine::Asset * SpaceGameEngine::AssetManager::GetAsset(const std
 
 SpaceGameEngine::AssetManager & SpaceGameEngine::GetAssetManager()
 {
-	static AssetManager g_AssetManager;
-	return g_AssetManager;
+	static GlobalVariable<AssetManager> g_AssetManager;
+	return g_AssetManager.Get();
 }

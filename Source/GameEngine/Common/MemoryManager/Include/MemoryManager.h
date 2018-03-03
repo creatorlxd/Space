@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "Allocator.h"
 
 namespace SpaceGameEngine
@@ -60,8 +59,6 @@ namespace SpaceGameEngine
 
 	public:
 		friend MemoryManager& GetMemoryManager();
-		template<typename T,typename AllocatorInterface>
-		friend class GlobalVariable;
 		friend struct StdAllocatorInterface;
 		friend struct MemoryManagerAllocatorInterface;
 		

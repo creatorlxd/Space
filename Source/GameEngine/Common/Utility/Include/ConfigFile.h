@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "File.h"
+#include "GlobalVariable.h"
 
 namespace SpaceGameEngine
 {
@@ -73,6 +73,9 @@ namespace SpaceGameEngine
 		保存配置表到某个文件，但不保留注释
 		*/
 		void SaveToFile(const std::string& filename);
+	public:
+		friend struct StdAllocatorInterface;
+		friend struct MemoryManagerAllocatorInterface;
 	private:
 		Map<std::string, ConfigTable> m_Content;
 	};

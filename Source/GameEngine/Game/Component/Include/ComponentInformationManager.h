@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "Space.h"
 #include "Component.h"
 
@@ -36,6 +35,9 @@ namespace SpaceGameEngine
 	public:
 		bool AddInformation(const ComponentInformation& info);
 		const ComponentInformation& GetInformation(const std::string& name);
+	public:
+		friend struct StdAllocatorInterface;
+		friend struct MemoryManagerAllocatorInterface;
 	private:
 		Map<std::string, ComponentInformation> m_Content;
 	};

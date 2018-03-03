@@ -14,7 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
+#include <map>
+#include <typeinfo>
+#include <vector>
+
 namespace SpaceGameEngine
 {
 	static std::map<std::string, void*> s_InitializationMap;		//≥ı º÷µ±Ì

@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "Math/Common/Include/MathDefinition.h"
 #include "Math/Plane/Include/Plane.h"
 

@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
+#include <DirectXMath.h>
 
 namespace SpaceGameEngine
 {

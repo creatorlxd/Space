@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "Space.h"
 #include "Common/Utility/Include/File.h"
+#include "Common/Utility/Include/GlobalVariable.h"
 
 namespace SpaceGameEngine
 {
@@ -36,6 +36,9 @@ namespace SpaceGameEngine
 		const T* NewAssetFromFile(const std::string& filename);
 		bool AddAsset(Asset* pa);
 		const Asset* GetAsset(const std::string& name);
+	public:
+		friend struct StdAllocatorInterface;
+		friend struct MemoryManagerAllocatorInterface;
 	private:
 		HashMap<std::string, Asset*> m_Content;
 	};

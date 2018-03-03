@@ -15,7 +15,6 @@ limitations under the License.
 */
 #pragma once
 #include"Space.h"
-#include"stdafx.h"
 #include"InputDevice.h"
 #include "ShaderFarmework/VertexShader/Include/VertexShader.h"
 #include "ShaderFarmework/PixelShader/Include/PixelShader.h"

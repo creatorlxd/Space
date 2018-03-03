@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once 
-#include "stdafx.h"
 #include "Game/Object/Include/Object.h"
 #include "Common/Utility/Include/Window.h"
 #include "Game/Scene/Include/SceneData.h"

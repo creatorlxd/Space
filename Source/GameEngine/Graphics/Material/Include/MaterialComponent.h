@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "Game/Component/Include/ComponentFactory.h"
 #include "Game/Asset/Include/MaterialAsset.h"
 #include "Game/Game/Include/Game.h"

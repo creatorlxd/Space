@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "stdafx.h"
 #include "LightManager.h"
 #include "Game/Scene/Include/Scene.h"
 #include "Game/Asset/Include/LightAsset.h"
