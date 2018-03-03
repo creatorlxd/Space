@@ -79,7 +79,7 @@ void search_copy(string path, string add, vector<string> filetype, string target
 
 int main(int argc, char const *argv[])
 {
-	string src, des, x86_lib, x64_lib;
+	string src, des, x86_debug_lib, x64_debug_lib,x86_release_lib,x64_release_lib;
 
 	if (argc > 1)
 		src = argv[1];
@@ -92,17 +92,29 @@ int main(int argc, char const *argv[])
 		des = ".//Build";
 
 	if (argc > 3)
-		x86_lib = argv[3];
+		x86_debug_lib = argv[3];
 	else
-		x86_lib = src;
+		x86_debug_lib = src;
 	
 	if (argc > 4)
-		x64_lib = argv[4];
+		x64_debug_lib = argv[4];
 	else
-		x64_lib = src;
+		x64_debug_lib = src;
+
+	if (argc > 5)
+		x86_release_lib = argv[5];
+	else
+		x86_release_lib = src;
+
+	if (argc > 6)
+		x64_release_lib = argv[6];
+	else
+		x64_release_lib = src;
 	//------------
 	search_copy(src, "Source\\GameEngine", {"h","hpp","inl","hlsl","fx","lib"}, path_format(des) + "include");
-	search_copy(x86_lib, "", {"lib"}, path_format(des) + "lib\\x86");
-	search_copy(x64_lib, "", {"lib"}, path_format(des) + "lib\\x64");
+	search_copy(x86_debug_lib, "", {"lib"}, path_format(des) + "lib\\x86\\debug");
+	search_copy(x64_debug_lib, "", {"lib"}, path_format(des) + "lib\\x64\\debug");
+	search_copy(x86_release_lib, "", {"lib"}, path_format(des) + "lib\\x86\\release");
+	search_copy(x64_release_lib, "", {"lib"}, path_format(des) + "lib\\x64\\release");
 	return 0;
 }

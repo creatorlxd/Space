@@ -1,2 +1,2 @@
-build.exe . .\build .\BuildLibrary .\x64\BuildLibrary
+build.exe . .\build .\BuildDebug .\x64\BuildDebug .\BuildRelease .\x64\BuildRelease
 copy .\SystemConfig.configfile .\build\SystemConfig.configfile

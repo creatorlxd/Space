@@ -260,3 +260,5 @@ paket-files/
 /**/vc141.idb
 /build/
 /BuildLibrary
+/BuildDebug
+/BuildRelease

@@ -10,7 +10,7 @@
 
 1. git clone
 2. 打开`Space.sln`文件
-3. 选择解决方案配置为`BuildLibrary`，生成x86&x64的静态库(Rlease)
+3. 选择解决方案配置为`BuildDebug`&`BuildRelease`（建议使用VS的解决方案批生成），生成x86&x64的静态库(Rlease)
 4. 运行`build_lib.bat`脚本
 5. 将生成的`build`文件夹中的所有内容复制到你的项目中。
 6. 配置头文件包含和静态库链接(注意要把`ThirdParty`文件夹加入链接附加目录)
