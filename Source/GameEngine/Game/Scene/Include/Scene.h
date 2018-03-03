@@ -35,7 +35,7 @@ namespace SpaceGameEngine
 		void Start();					//开始
 		void Run(float DeltaTime);		//每帧的运行
 
-		Object* NewObject(const std::string name);
+		Object* NewObject(const std::string name, ObjectMode mode = ObjectMode::Common);
 		Object* GetObjectByName(const std::string name);
 		bool DeleteObject(Object* po);
 		bool DeleteObject(const std::string name);
@@ -53,7 +53,7 @@ namespace SpaceGameEngine
 
 	/*
 	复制Object对象
-	注意：dst必须指向空的Object对象
+	注意：dst必须指向空的新创建的Object对象，且两者的mode必须相同
 	*/
 	void CopyObject(Object* dst, Object* src);
 }

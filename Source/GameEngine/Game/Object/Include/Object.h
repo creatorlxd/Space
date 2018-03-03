@@ -23,6 +23,12 @@ namespace SpaceGameEngine
 
 	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
 
+	enum ObjectMode :uint32_t
+	{
+		Common = 0,
+		Render = 1
+	};
+
 	class Object			//基本物体对象
 	{
 	public:
@@ -66,6 +72,9 @@ namespace SpaceGameEngine
 		RenderObject* GetRenderObject();
 
 		void ReleaseComponentWhenRuntime();
+
+		void SetMode(ObjectMode mode);
+		ObjectMode GetMode();
 	private:
 		void Attach(Object* po);
 		void Discon();						//断开
@@ -81,6 +90,7 @@ namespace SpaceGameEngine
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行
 		bool m_IfChild;											//是否是子对象
+		ObjectMode m_Mode;
 	};
 
 	void RunComponentOnTree(Component* node, float DeltaTime);	//在树上运行组件(DFS)

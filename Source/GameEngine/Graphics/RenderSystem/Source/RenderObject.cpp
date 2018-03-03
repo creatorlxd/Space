@@ -24,7 +24,7 @@ SpaceGameEngine::RenderObject::RenderObject() :m_ObjectOctree(&m_MeshForModelFil
 	m_Type = RenderObjectType::Unkown;
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
-	m_pGlobalOctreeNode = nullptr;
+	m_pGlobalOctree = nullptr;
 	m_pGlobalOctreeNode = nullptr;
 	m_IfInit = false;
 	m_IfHaveTransform = false;

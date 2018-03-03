@@ -130,7 +130,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	}
 }
 
-Object * SpaceGameEngine::Scene::NewObject(const std::string name)
+Object * SpaceGameEngine::Scene::NewObject(const std::string name, ObjectMode mode)
 {
 	if (GetObjectByName(name) != nullptr)
 	{
@@ -140,7 +140,13 @@ Object * SpaceGameEngine::Scene::NewObject(const std::string name)
 	else
 	{
 		auto re = MemoryManager::New<Object>();
+		re->SetMode(mode);
 		m_Content.insert(std::make_pair(name, re));
+		if ((re->GetMode()&ObjectMode::Render) != 0)
+		{
+			re->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
+			re->GetRenderObject()->m_pObject = re;
+		}
 		return re;
 	}
 }
@@ -219,12 +225,6 @@ void SpaceGameEngine::CopyObject(Object * dst, Object * src)
 		if (src->GetRootComponent())
 		{
 			Queue<std::pair<Component*, Component*>> que;		//pair<dst's component,src's component>
-			if (src->GetRenderObject())
-			{
-				dst->SetRenderObject(RenderSystem::GetMainRenderSystem()->NewRenderObject());
-				dst->GetRenderObject()->m_Type = src->GetRenderObject()->m_Type;
-				dst->GetRenderObject()->m_pObject = dst;
-			}
 			if (src->IfChild() && src->GetRootComponent()->GetTypeName() == STRING(ConnectComponent))
 			{
 				dst->AddComponent(MemoryManager::New<Component>());

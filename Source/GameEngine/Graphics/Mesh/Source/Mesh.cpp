@@ -81,6 +81,7 @@ void SpaceGameEngine::MeshComponent::Start()
 	{
 		if (m_pFatherObject->GetRenderObject())
 		{
+			m_pFatherObject->GetRenderObject()->m_Type = RenderObjectType::Model;
 			m_pFatherObject->GetRenderObject()->m_Mode = m_Mode;
 			if (m_pFatherObject->GetRenderObject()->m_IfHaveMesh == false)
 			{

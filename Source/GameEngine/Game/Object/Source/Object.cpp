@@ -41,6 +41,7 @@ SpaceGameEngine::Object::Object()
 	m_IfChild = false;
 	m_pFather = nullptr;
 	m_pRenderObject = nullptr;
+	m_Mode = ObjectMode::Common;
 }
 
 SpaceGameEngine::Object::~Object()
@@ -304,6 +305,16 @@ void SpaceGameEngine::Object::ReleaseComponentWhenRuntime()
 {
 	for (auto i : m_Components)
 		i.second->CleanUp();
+}
+
+void SpaceGameEngine::Object::SetMode(ObjectMode mode)
+{
+	m_Mode = mode;
+}
+
+ObjectMode SpaceGameEngine::Object::GetMode()
+{
+	return m_Mode;
 }
 
 void SpaceGameEngine::RunComponentOnTree(Component * node, float DeltaTime)
