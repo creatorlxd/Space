@@ -40,9 +40,9 @@ namespace SpaceGameEngine
 	{
 	public:
 		template<typename T, typename... Arguments>
-		static T* New(Arguments... parameters)
+		static T* New(Arguments&&... parameters)
 		{
-			return new (Allocate(sizeof(T))) T(parameters...);
+			return new (Allocate(sizeof(T))) T(std::forward<Arguments>(parameters)...);
 		}
 
 		template<typename T>
@@ -60,6 +60,10 @@ namespace SpaceGameEngine
 
 	public:
 		friend MemoryManager& GetMemoryManager();
+		template<typename T,typename AllocatorInterface>
+		friend class GlobalVariable;
+		friend struct StdAllocatorInterface;
+		friend struct MemoryManagerAllocatorInterface;
 		
 		~MemoryManager();
 
@@ -73,5 +77,35 @@ namespace SpaceGameEngine
 
 	private:
 		Allocator* FindAllocator(size_t size);
+	};
+
+	struct StdAllocatorInterface
+	{
+		template<typename T, typename... Arg>
+		static T* New(Arg&&... arg)
+		{
+			return new T(std::forward<Arg>(arg)...);
+		}
+
+		template<typename T>
+		static void Delete(T* ptr)
+		{
+			delete ptr;
+		}
+	};
+
+	struct MemoryManagerAllocatorInterface
+	{
+		template<typename T, typename... Arg>
+		static T* New(Arg&&... arg)
+		{
+			return MemoryManager::New<T>(std::forward<Arg>(arg)...);
+		}
+
+		template<typename T>
+		static void Delete(T* ptr)
+		{
+			MemoryManager::Delete(ptr);
+		}
 	};
 }

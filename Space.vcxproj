@@ -383,6 +383,7 @@
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\MemoryManager.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\ConfigFile.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\File.h" />
+    <ClInclude Include="Source\GameEngine\Common\Utility\Include\GlobalVariable.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\StringConverter.h" />
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\TimeTool.h" />
@@ -451,6 +452,7 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\ConfigFile.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\File.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Utility\Source\GlobalVariable.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\StringConverter.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\TimeTool.cpp" />

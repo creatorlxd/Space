@@ -15,6 +15,7 @@ limitations under the License.
 */
 #include "stdafx.h"
 #include "../Include/MemoryManager.h"
+#include "Common/Utility/Include/GlobalVariable.h"
 
 SpaceGameEngine::MemoryManager::MemoryManager()
 {
@@ -68,6 +69,6 @@ void SpaceGameEngine::MemoryManager::Free(void* p, size_t size)
 
 SpaceGameEngine::MemoryManager & SpaceGameEngine::GetMemoryManager()
 {
-	static MemoryManager g_MemoryManager;
-	return g_MemoryManager;
+	static GlobalVariable<MemoryManager,StdAllocatorInterface> g_MemoryManager;
+	return g_MemoryManager.Get();
 }
