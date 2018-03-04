@@ -35,6 +35,10 @@ namespace SpaceGameEngine
 		void Start();					//开始
 		void Run(float DeltaTime);		//每帧的运行
 
+		/*
+		创建对象。
+		注意：如果是在Scene运行过程中创建的，应手动调用其Start方法
+		*/
 		Object* NewObject(const std::string name, ObjectMode mode = ObjectMode::Common);
 		Object* GetObjectByName(const std::string name);
 		bool DeleteObject(Object* po);
