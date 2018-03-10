@@ -75,6 +75,7 @@ float4 PS(DefaultVertexOutput input) : SV_TARGET
 	float4 specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	float4 litcolor = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	float4 texcolor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	input.m_Normal = normalize(input.m_Normal);
 	GetColorByLightsEx(g_Material, g_Lights, g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal, ambient, diffuse, specular);
 	texcolor = g_Texture.Sample(g_SamplerState, input.m_TextureCoord);
 	litcolor = texcolor * (ambient + diffuse) + specular;

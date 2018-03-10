@@ -62,9 +62,14 @@ void SpaceGameEngine::TransformComponent::Run(float DeltaTime)
 {
 	if (m_Mode&ForRenderingMode)
 	{
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
-		m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+		if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
+			m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
+			m_pFatherObject->GetComponentByMessage(Event::ScaleChange))
+		{
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Position = m_Position;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation = m_Rotation;
+			m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Scale = m_Scale;
+		}
 	}
 }
 

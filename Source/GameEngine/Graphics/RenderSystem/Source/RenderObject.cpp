@@ -200,7 +200,7 @@ void SpaceGameEngine::RenderObject::SetMesh(const MeshForModelFileAsset & mmfa)
 					}
 					m_BaseSpace = GetAxisAlignedBoundingBox(points);
 					m_Space = TransformByWorldMatrix(m_TransformAsset.m_Position, m_TransformAsset.m_Rotation, m_TransformAsset.m_Scale, m_BaseSpace);
-					m_pGlobalOctreeNode = m_pGlobalOctree->AddObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
+					m_pGlobalOctreeNode = m_pGlobalOctree->UpdateObject(GlobalOctreeData(m_pObject->GetRenderObject()->m_Space, m_pObject));
 				}
 			}
 		}

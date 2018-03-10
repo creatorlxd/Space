@@ -1,4 +1,4 @@
-# Space Game Engine Helper
+# Space Game Engine Document
 ---
 ## Space基本组件Component类
 
@@ -13,9 +13,9 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 
 ### 2.如何使用
 在接下来的***如何编写自己的组件***中我们将提到：在每个继承Component的类中都应当有这样的一个公共对象：
-`static ComponentManager::NewComponent<子类名> NewComponent;`  
+`static ComponentFactory<子类名> NewComponent;`  
 
-所以我们只需使用这个`NewComponent`伪函数即可获得一个该类型的Component对象指针。当然，你不需要去释放它。
+所以我们只需使用这个`NewComponent`仿函数即可获得一个该类型的Component对象指针。当然，你不需要去释放它。
 
 例如：
 
