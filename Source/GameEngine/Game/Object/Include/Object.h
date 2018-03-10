@@ -19,6 +19,42 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	template<typename T, typename AllocatorInterface = MemoryManagerAllocatorInterface>
+	class DoubleBuffer
+	{
+	public:
+		template<typename... Arg>
+		DoubleBuffer(Arg&&... arg)
+		{
+			m_pNow = AllocatorInterface::New<T>(std::forward<Arg>(arg)...);
+			m_pLast = AllocatorInterface::NewSize<T>(sizeof(T));
+			memcpy(m_pLast, m_pNow, sizeof(T));
+		}
+		~DoubleBuffer()
+		{
+			AllocatorInterface::Delete(m_pNow);
+			AllocatorInterface::Delete(reinterpret_cast<uint8_t*>(m_pLast));
+		}
+
+		void Swap()
+		{
+			memcpy(m_pLast, m_pNow, sizeof(T));
+		}
+
+		T& GetNow()
+		{
+			return *m_pNow;
+		}
+
+		T& GetLast()
+		{
+			return *m_pLast;
+		}
+	private:
+		T * m_pLast;
+		T * m_pNow;
+	};
+
 	class RenderObject;
 
 	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表

@@ -139,6 +139,17 @@ TEST_GROUP_BEGIN(SpaceGameEngineTest)
 		//-------------------------
 		g_Game.StartRunGame();
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestDoubleBuffer)
+	{
+		DoubleBuffer<int,StdAllocatorInterface> db;
+		db.GetNow() = 1;
+		cout << db.GetNow() << endl;
+		cout << db.GetLast() << endl;
+		db.Swap();
+		cout << db.GetNow() << endl;
+		cout << db.GetLast() << endl;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
