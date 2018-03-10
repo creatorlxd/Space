@@ -57,6 +57,9 @@ namespace SpaceGameEngine
 		bool IfUse();						//是否使用
 		void ChangeIfRun(bool b);			//更改每帧是否运行
 		void ChangeIfUse(bool b);			//更改是否使用
+		
+		void ClearRunState();				//将m_IfRun设为false
+		bool GetIfHaveRun();
 
 		void ProduceMessage(Component* from, unsigned int message);
 		Component* GetComponentByMessage(unsigned int message);
@@ -77,6 +80,10 @@ namespace SpaceGameEngine
 
 		void ReleaseComponentWhenRuntime();
 
+		void RequireObject(Object* po);
+		void UnrequireObject(Object* po);
+		const Vector<Object*>& GetRequiredObject();
+
 		void SetMode(ObjectMode mode);
 		ObjectMode GetMode();
 	private:
@@ -90,7 +97,9 @@ namespace SpaceGameEngine
 		Object* m_pFather;									//父对象
 		Vector<Object*> m_Children;							//子对象
 		RenderObject* m_pRenderObject;						//渲染对象
+		Vector<Object*> m_RequiredObject;
 
+		bool m_IfHaveRun;										//是否已经Run过了
 		bool m_IfUse;											//是否使用
 		bool m_IfRun;											//是否每帧运行
 		bool m_IfChild;											//是否是子对象

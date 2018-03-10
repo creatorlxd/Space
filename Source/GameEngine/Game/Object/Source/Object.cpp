@@ -38,6 +38,7 @@ SpaceGameEngine::Object::Object()
 	m_pRootComponent = nullptr;
 	m_IfUse = true;
 	m_IfRun = true;
+	m_IfHaveRun = false;
 	m_IfChild = false;
 	m_pFather = nullptr;
 	m_pRenderObject = nullptr;
@@ -150,7 +151,16 @@ void SpaceGameEngine::Object::Run(float DeltaTime)
 		ThrowError(L"根组件不能为空");
 		return;
 	}
+	for (auto i : m_RequiredObject)
+	{
+		if (i)
+		{
+			if (!i->m_IfHaveRun)
+				i->Run(DeltaTime);
+		}
+	}
 	RunComponentOnTree(m_pRootComponent, DeltaTime);
+	m_IfHaveRun = true;
 	if (!m_Children.empty())
 	{
 		for (auto i : m_Children)
@@ -203,6 +213,16 @@ void SpaceGameEngine::Object::ChangeIfRun(bool b)
 void SpaceGameEngine::Object::ChangeIfUse(bool b)
 {
 	m_IfUse = b;
+}
+
+void SpaceGameEngine::Object::ClearRunState()
+{
+	m_IfHaveRun = false;
+}
+
+bool SpaceGameEngine::Object::GetIfHaveRun()
+{
+	return m_IfHaveRun;
 }
 
 void SpaceGameEngine::Object::ProduceMessage(Component * from, unsigned int message)
@@ -305,6 +325,51 @@ void SpaceGameEngine::Object::ReleaseComponentWhenRuntime()
 {
 	for (auto i : m_Components)
 		i.second->CleanUp();
+}
+
+void SpaceGameEngine::Object::RequireObject(Object * po)
+{
+	if (po)
+	{
+		while (po->m_IfChild&&po->m_pFather)
+			po = po->m_pFather;
+		auto iter = std::find(m_RequiredObject.begin(), m_RequiredObject.end(), po);
+		if (iter != m_RequiredObject.end())
+		{
+			ThrowError("can not require a object which have already be required");
+		}
+		else
+		{
+			m_RequiredObject.push_back(po);
+		}
+	}
+	else
+		ThrowError("object can not be nullptr");
+}
+
+void SpaceGameEngine::Object::UnrequireObject(Object * po)
+{
+	if (po)
+	{
+		while (po->m_IfChild&&po->m_pFather)
+			po = po->m_pFather;
+		auto iter = std::find(m_RequiredObject.begin(), m_RequiredObject.end(), po);
+		if (iter != m_RequiredObject.end())
+		{
+			m_RequiredObject.erase(iter);
+		}
+		else
+		{
+			ThrowError("can not find this required object");
+		}
+	}
+	else
+		ThrowError("object can not be nullptr");
+}
+
+const Vector<Object*>& SpaceGameEngine::Object::GetRequiredObject()
+{
+	return m_RequiredObject;
 }
 
 void SpaceGameEngine::Object::SetMode(ObjectMode mode)

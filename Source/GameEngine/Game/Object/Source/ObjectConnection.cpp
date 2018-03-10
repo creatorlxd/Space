@@ -81,8 +81,13 @@ void SpaceGameEngine::ConnectComponent::SetObject(Object* father, Object* child)
 {
 	if (father&&child)
 	{
-		ConnectComponent::_m_pFatherObject = father;
+		if (_m_pFatherObject)
+		{
+			m_pFatherObject->UnrequireObject(_m_pFatherObject);
+		}
+		_m_pFatherObject = father;
 		m_pChildObject = child;
+		m_pFatherObject->RequireObject(_m_pFatherObject);
 		m_pFatherTransform = father->GetComponent<TransformComponent>();
 		m_pChildTransform = child->GetComponent<TransformComponent>();
 		if (father)
