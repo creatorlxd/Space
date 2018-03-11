@@ -336,7 +336,7 @@ void SpaceGameEngine::Object::RequireObject(Object * po)
 		auto iter = std::find(m_RequiredObject.begin(), m_RequiredObject.end(), po);
 		if (iter != m_RequiredObject.end())
 		{
-			ThrowError("can not require a object which have already be required");
+			//ThrowError("can not require a object which have already be required");
 		}
 		else
 		{
@@ -360,7 +360,7 @@ void SpaceGameEngine::Object::UnrequireObject(Object * po)
 		}
 		else
 		{
-			ThrowError("can not find this required object");
+			//ThrowError("can not find this required object");
 		}
 	}
 	else

@@ -344,6 +344,9 @@
       <Filter>DDSTextureLoader</Filter>
     </None>
     <None Include="SystemConfig.configfile" />
+    <None Include="Document\Document\GameFarmework\Component子类编写规则.md">
+      <Filter>Document\Document\GameFarmework</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">

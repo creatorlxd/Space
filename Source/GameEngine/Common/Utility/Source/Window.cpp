@@ -559,6 +559,11 @@ bool SpaceGameEngine::Window::IfBegin()
 	return m_IfBegin;
 }
 
+bool SpaceGameEngine::Window::IfHide()
+{
+	return (m_WindowWidth == 0 && m_WindowHeight == 0);
+}
+
 RenderQuality SpaceGameEngine::Window::GetRenderQuality()
 {
 	return m_RenderQuality;

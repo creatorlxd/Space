@@ -82,6 +82,8 @@ namespace SpaceGameEngine
 		void BeginRun();								//游戏开始
 		bool IfBegin();								//获取游戏是否开始了
 
+		bool IfHide();								//窗口是否隐藏
+
 		RenderQuality GetRenderQuality();
 		void SetRenderQuality(const RenderQuality& rq);
 	private:
