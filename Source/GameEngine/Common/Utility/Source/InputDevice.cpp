@@ -132,10 +132,10 @@ bool SpaceGameEngine::MouseDevice::IfLeftButtonPressDown()
 
 bool SpaceGameEngine::MouseDevice::IfMiddleButtonPressDown()
 {
-	return GetMouseState().rgbButtons[1] & 0x80;
+	return GetMouseState().rgbButtons[2] & 0x80;
 }
 
 bool SpaceGameEngine::MouseDevice::IfRightButtonPressDown()
 {
-	return GetMouseState().rgbButtons[2] & 0x80;
+	return GetMouseState().rgbButtons[1] & 0x80;
 }
