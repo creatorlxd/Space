@@ -68,6 +68,21 @@ namespace SpaceGameEngine
 		bool Init(HWND hwnd, InputInterface& inputinterface);			//初始化
 		bool DeviceRead();												//读取设备
 		DIMOUSESTATE GetMouseState();									//获取鼠标内容
+		/*
+		获取鼠标X轴的位移
+		大于0为右
+		小于0为左
+		*/
+		LONG GetMouseAnxisXMovement();
+		/*
+		获取鼠标Y轴的位移
+		大于0为下
+		小于0为上
+		*/
+		LONG GetMouseAnxisYMovement();
+		bool IfLeftButtonPressDown();
+		bool IfMiddleButtonPressDown();
+		bool IfRightButtonPressDown();
 	private:
 		InputDevice m_InputDevice;
 		DIMOUSESTATE m_Content;										//鼠标内容

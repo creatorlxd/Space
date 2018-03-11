@@ -114,3 +114,28 @@ DIMOUSESTATE SpaceGameEngine::MouseDevice::GetMouseState()
 {
 	return m_Content;
 }
+
+LONG SpaceGameEngine::MouseDevice::GetMouseAnxisXMovement()
+{
+	return GetMouseState().lX;
+}
+
+LONG SpaceGameEngine::MouseDevice::GetMouseAnxisYMovement()
+{
+	return GetMouseState().lY;
+}
+
+bool SpaceGameEngine::MouseDevice::IfLeftButtonPressDown()
+{
+	return GetMouseState().rgbButtons[0] & 0x80;
+}
+
+bool SpaceGameEngine::MouseDevice::IfMiddleButtonPressDown()
+{
+	return GetMouseState().rgbButtons[1] & 0x80;
+}
+
+bool SpaceGameEngine::MouseDevice::IfRightButtonPressDown()
+{
+	return GetMouseState().rgbButtons[2] & 0x80;
+}
