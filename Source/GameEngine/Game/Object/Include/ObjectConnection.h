@@ -19,31 +19,6 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	/*
-	链接组件，用于对象间的链接
-	*/
-	class ConnectComponent :public Component
-	{
-	public:
-		static ComponentFactory<ConnectComponent> NewComponent;
-
-		ConnectComponent();
-		
-		void Run(float DeltaTime);
-
-		void SetObject(Object* father, Object* child);
-	private:
-		Object * _m_pFatherObject;
-		Object * m_pChildObject;
-		TransformComponent * m_pFatherTransform;
-		TransformComponent * m_pChildTransform;
-		bool m_IfInit;
-
-		XMFLOAT3 m_PositionBuffer;
-		XMFLOAT3 m_RotationBuffer;
-		XMFLOAT3 m_ScaleBuffer;
-	};
-
 	void ConnectObject(Object* father, Object* child);
 	void DisconObject(Object* child);
 }

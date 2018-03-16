@@ -160,6 +160,7 @@ void SpaceGameEngine::Object::Run(float DeltaTime)
 				i->Run(DeltaTime);
 		}
 	}
+	ChildObjectUpdate(1);
 	RunComponentOnTree(m_pRootComponent, DeltaTime);
 	m_IfHaveRun = true;
 	if (!m_Children.empty())
@@ -330,42 +331,45 @@ void SpaceGameEngine::Object::ChildObjectUpdate(int state)
 	static TransformComponent* pfathertransform;
 	static TransformComponent* ptransform;
 	static bool if_have_transform = false;
-	if (state == 0)//connect state
+	if (m_IfChild)
 	{
-		pfathertransform = m_pFather->GetComponent<TransformComponent>();
-		ptransform = GetComponent<TransformComponent>();
-		if (pfathertransform&&ptransform)
+		if (state == 0)//connect state
 		{
-			if_have_transform = true;
-			position = pfathertransform->GetPosition();
-			rotation = pfathertransform->GetRotation();
-			scale = pfathertransform->GetScale();
+			pfathertransform = m_pFather->GetComponent<TransformComponent>();
+			ptransform = GetComponent<TransformComponent>();
+			if (pfathertransform&&ptransform)
+			{
+				if_have_transform = true;
+				position = pfathertransform->GetPosition();
+				rotation = pfathertransform->GetRotation();
+				scale = pfathertransform->GetScale();
+			}
+			else
+				if_have_transform = false;
+		}
+		else if (state == 1)//update state
+		{
+			if (if_have_transform)
+			{
+				ptransform->SetPosition(Add(ptransform->GetPosition(), Substract(pfathertransform->GetPosition(), position)));
+				ptransform->SetScale(Add(ptransform->GetScale(), Substract(pfathertransform->GetScale(), scale)));
+				if (pfathertransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
+				{
+					auto dis = Substract(ptransform->GetPosition(), pfathertransform->GetPosition());
+					auto angle = Substract(pfathertransform->GetRotation(), rotation);
+					dis = RotationVector(angle, dis);
+					ptransform->SetPosition(Add(dis, pfathertransform->GetPosition()));
+					ptransform->SetRotation(Add(ptransform->GetRotation(), angle));
+				}
+				position = pfathertransform->GetPosition();
+				rotation = pfathertransform->GetRotation();
+				scale = pfathertransform->GetScale();
+			}
 		}
 		else
-			if_have_transform = false;
-	}
-	else if (state == 1)//update state
-	{
-		if (if_have_transform)
 		{
-			ptransform->SetPosition(Add(ptransform->GetPosition(), Substract(pfathertransform->GetPosition(), position)));
-			ptransform->SetScale(Add(ptransform->GetScale(), Substract(pfathertransform->GetScale(), scale)));
-			if (pfathertransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
-			{
-				auto dis = Substract(ptransform->GetPosition(), pfathertransform->GetPosition());
-				auto angle = Substract(pfathertransform->GetRotation(), rotation);
-				dis = RotationVector(angle, dis);
-				ptransform->SetPosition(Add(dis, pfathertransform->GetPosition()));
-				ptransform->SetRotation(Add(ptransform->GetRotation(), angle));
-			}
-			position = pfathertransform->GetPosition();
-			rotation = pfathertransform->GetRotation();
-			scale = pfathertransform->GetScale();
+			ThrowError("child object update error");
 		}
-	}
-	else
-	{
-		ThrowError("child object update error");
 	}
 }
 
