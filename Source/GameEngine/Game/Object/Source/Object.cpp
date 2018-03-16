@@ -44,6 +44,9 @@ SpaceGameEngine::Object::Object()
 	m_pFather = nullptr;
 	m_pRenderObject = nullptr;
 	m_Mode = ObjectMode::Common;
+	m_pTransformBuffer = nullptr;
+	m_pFatherTransformBuffer = nullptr;
+	m_IfSyncTransform = false;
 }
 
 SpaceGameEngine::Object::~Object()
@@ -325,45 +328,39 @@ void SpaceGameEngine::Object::Discon()
 
 void SpaceGameEngine::Object::ChildObjectUpdate(int state)
 {
-	static XMFLOAT3 position;
-	static XMFLOAT3 rotation;
-	static XMFLOAT3 scale;
-	static TransformComponent* pfathertransform;
-	static TransformComponent* ptransform;
-	static bool if_have_transform = false;
 	if (m_IfChild)
 	{
 		if (state == 0)//connect state
 		{
-			pfathertransform = m_pFather->GetComponent<TransformComponent>();
-			ptransform = GetComponent<TransformComponent>();
-			if (pfathertransform&&ptransform)
+			m_pFatherTransformBuffer = m_pFather->GetComponent<TransformComponent>();
+			m_pTransformBuffer = GetComponent<TransformComponent>();
+			if (m_pFatherTransformBuffer&&m_pTransformBuffer)
 			{
-				if_have_transform = true;
-				position = pfathertransform->GetPosition();
-				rotation = pfathertransform->GetRotation();
-				scale = pfathertransform->GetScale();
+				m_IfSyncTransform = true;
+				m_PositionBuffer = m_pFatherTransformBuffer->GetPosition();
+				m_RotationBuffer = m_pFatherTransformBuffer->GetRotation();
+				m_ScaleBuffer = m_pFatherTransformBuffer->GetScale();
 			}
 			else
-				if_have_transform = false;
+				m_IfSyncTransform = false;
 		}
 		else if (state == 1)//update state
 		{
-			if (if_have_transform)
+			if (m_IfSyncTransform)
 			{
-				ptransform->SetPosition(Add(ptransform->GetPosition(), Substract(pfathertransform->GetPosition(), position)));
-				ptransform->SetScale(Add(ptransform->GetScale(), Substract(pfathertransform->GetScale(), scale)));
-				if (pfathertransform->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
+				m_pTransformBuffer->SetPosition(Add(m_pTransformBuffer->GetPosition(), Substract(m_pFatherTransformBuffer->GetPosition(), m_PositionBuffer)));
+				m_pTransformBuffer->SetScale(Add(m_pTransformBuffer->GetScale(), Substract(m_pFatherTransformBuffer->GetScale(), m_ScaleBuffer)));
+				if (m_pFatherTransformBuffer->GetFatherObject()->GetComponentByMessage(Event::RotationChange))
 				{
-					auto dis = Substract(ptransform->GetPosition(), pfathertransform->GetPosition());
-					auto angle = Substract(pfathertransform->GetRotation(), rotation);
+					auto dis = Substract(m_pTransformBuffer->GetPosition(), m_pFatherTransformBuffer->GetPosition());
+					auto angle = Substract(m_pFatherTransformBuffer->GetRotation(), m_RotationBuffer);
 					dis = RotationVector(angle, dis);
-					ptransform->SetPosition(Add(dis, pfathertransform->GetPosition()));
-					ptransform->SetRotation(Add(ptransform->GetRotation(), angle));
+					m_pTransformBuffer->SetPosition(Add(dis, m_pFatherTransformBuffer->GetPosition()));
+					m_pTransformBuffer->SetRotation(Add(m_pTransformBuffer->GetRotation(), angle));
 				}
-				position = pfathertransform->GetPosition();
-				rotation = pfathertransform->GetRotation();
-				scale = pfathertransform->GetScale();
+				m_PositionBuffer = m_pFatherTransformBuffer->GetPosition();
+				m_RotationBuffer = m_pFatherTransformBuffer->GetRotation();
+				m_ScaleBuffer = m_pFatherTransformBuffer->GetScale();
 			}
 		}
 		else

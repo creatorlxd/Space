@@ -19,6 +19,8 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	class TransformComponent;
+
 	template<typename T, typename AllocatorInterface = MemoryManagerAllocatorInterface>
 	class DoubleBuffer
 	{
@@ -146,6 +148,13 @@ namespace SpaceGameEngine
 		bool m_IfRun;											//是否每帧运行
 		bool m_IfChild;											//是否是子对象
 		ObjectMode m_Mode;
+
+		XMFLOAT3 m_PositionBuffer;
+		XMFLOAT3 m_RotationBuffer;
+		XMFLOAT3 m_ScaleBuffer;
+		TransformComponent* m_pFatherTransformBuffer;
+		TransformComponent* m_pTransformBuffer;
+		bool m_IfSyncTransform;
 	};
 
 	void RunComponentOnTree(Component* node, float DeltaTime);	//在树上运行组件(DFS)
