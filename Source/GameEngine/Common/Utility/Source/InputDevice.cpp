@@ -110,7 +110,7 @@ bool SpaceGameEngine::MouseDevice::DeviceRead()
 	return m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content));
 }
 
-DIMOUSESTATE SpaceGameEngine::MouseDevice::GetMouseState()
+const DIMOUSESTATE& SpaceGameEngine::MouseDevice::GetMouseState()
 {
 	return m_Content;
 }

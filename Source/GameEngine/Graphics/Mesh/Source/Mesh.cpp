@@ -161,9 +161,9 @@ void SpaceGameEngine::MeshComponent::Copy(Component * pc)
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
 			auto src = dynamic_cast<MeshComponent*>(pc);
+			m_Content = src->m_Content;
 			if (m_Mode&ModelFileMode)
 			{
-				m_Content = src->m_Content;
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
 					m_pFatherObject->GetRenderObject()->SetMesh(m_Content);

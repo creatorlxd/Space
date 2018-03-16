@@ -67,7 +67,7 @@ namespace SpaceGameEngine
 		~MouseDevice();
 		bool Init(HWND hwnd, InputInterface& inputinterface);			//初始化
 		bool DeviceRead();												//读取设备
-		DIMOUSESTATE GetMouseState();									//获取鼠标内容
+		const DIMOUSESTATE& GetMouseState();									//获取鼠标内容
 		/*
 		获取鼠标X轴的位移
 		大于0为右

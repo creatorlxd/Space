@@ -89,9 +89,9 @@ void SpaceGameEngine::MaterialComponent::Copy(Component * pc)
 			m_Mode = pc->GetMode();
 			m_pAsset = pc->GetAsset();
 			auto src = dynamic_cast<MaterialComponent*>(pc);
+			m_Content = src->m_Content;
 			if (m_Mode == SingleMode)
 			{
-				m_Content = src->m_Content;
 				if (m_pFatherObject->GetRenderObject() && pc->GetFatherObject()->GetRenderObject())
 				{
 					if (m_pFatherObject->GetRenderObject()->m_MaterialAsset.empty())

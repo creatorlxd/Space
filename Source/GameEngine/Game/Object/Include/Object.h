@@ -125,7 +125,13 @@ namespace SpaceGameEngine
 	private:
 		void Attach(Object* po);
 		void Discon();						//断开
-
+		/*
+		作为子组件所要进行的更新方法。
+		state:
+			0:connect state
+			1:update state
+		*/
+		void ChildObjectUpdate(int state);
 	protected:
 		Map<std::string, Component*> m_Components;			//组件们...
 		Component* m_pRootComponent;							//根组件
