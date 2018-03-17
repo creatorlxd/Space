@@ -234,17 +234,11 @@ void SpaceGameEngine::CopyObject(Object * dst, Object * src)
 		if (src->GetRootComponent())
 		{
 			Queue<std::pair<Component*, Component*>> que;		//pair<dst's component,src's component>
-			if (src->IfChild() && src->GetRootComponent()->GetTypeName() == STRING(ConnectComponent))
-			{
-				dst->AddComponent(MemoryManager::New<Component>());
-				dst->SetRootComponent(STRING(Component));
-			}
-			else
-			{
-				dst->AddComponent(NewComponentByTypeName(src->GetRootComponent()->GetTypeName()));
-				dst->SetRootComponent(src->GetRootComponent()->GetTypeName());
-				dst->GetRootComponent()->Copy(src->GetRootComponent());
-			}
+
+			dst->AddComponent(NewComponentByTypeName(src->GetRootComponent()->GetTypeName()));
+			dst->SetRootComponent(src->GetRootComponent()->GetTypeName());
+			dst->GetRootComponent()->Copy(src->GetRootComponent());
+
 			que.push(std::make_pair(dst->GetRootComponent(), src->GetRootComponent()));
 
 			while (!que.empty())
@@ -273,7 +267,6 @@ void SpaceGameEngine::CopyObject(Object * dst, Object * src)
 			if (SpaceEngineWindow->IfBegin())
 			{
 				dst->Start();
-				dst->GetRenderObject()->m_pGlobalOctree = &Scene::GetMainScene()->m_GlobalOctree;
 				dst->GetRenderObject()->Init();
 			}
 		}
