@@ -88,7 +88,7 @@ void SpaceGameEngine::MeshComponent::Start()
 				m_pFatherObject->GetRenderObject()->SetMesh(m_Content);
 				m_pFatherObject->GetRenderObject()->m_IfHaveMesh = true;
 			}
-			if ((m_Mode&RenderObject::DynamicMode) == 0)
+			if ((m_Mode&DynamicMode) == 0)
 			{
 				Vector<XMFLOAT3> points;
 				for (const auto& i : m_pFatherObject->GetRenderObject()->m_MeshForModelFileAsset.m_Vertices)
@@ -102,7 +102,7 @@ void SpaceGameEngine::MeshComponent::Start()
 			}
 		}
 		else
-			ThrowError("物体对象不能没有RenderObject");
+			ThrowError("用于渲染的物体对象不能没有RenderObject");
 	}
 }
 
@@ -110,7 +110,7 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 {
 	if (m_pFatherObject->GetRenderObject())
 	{
-		if ((m_Mode&RenderObject::DynamicMode) == 0)
+		if ((m_Mode&DynamicMode) == 0)
 		{
 			if (m_pFatherObject->GetComponentByMessage(Event::PositionChange) ||
 				m_pFatherObject->GetComponentByMessage(Event::RotationChange) ||
@@ -126,9 +126,9 @@ void SpaceGameEngine::MeshComponent::Run(float DeltaTime)
 					if (rotation != m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation)
 					{
 						auto ro_now = m_pFatherObject->GetRenderObject()->m_TransformAsset.m_Rotation;
-						if ((rotation.x == ro_now.x && (m_Mode&RenderObject::XAxisAlignedMode)) ||
-							(rotation.y == ro_now.y && (m_Mode&RenderObject::YAxisAlignedMode)) ||
-							(rotation.z == ro_now.z && (m_Mode&RenderObject::ZAxisAlignedMode)))
+						if ((rotation.x == ro_now.x && (m_Mode&XAxisAlignedMode)) ||
+							(rotation.y == ro_now.y && (m_Mode&YAxisAlignedMode)) ||
+							(rotation.z == ro_now.z && (m_Mode&ZAxisAlignedMode)))
 						{
 							rotation = ro_now;
 							if_recompute = false;
