@@ -428,6 +428,7 @@
     <None Include="Document\Document\GameFarmework\Asset.md" />
     <None Include="Document\Document\GameFarmework\Component子类编写规则.md" />
     <None Include="Document\Document\GameFarmework\Space基本组件Component类.md" />
+    <None Include="Document\Document\Others\Notice.md" />
     <None Include="Document\Document\Others\Space文件类型.md" />
     <None Include="Document\Document\Others\ToDoList.md" />
     <None Include="README.md" />

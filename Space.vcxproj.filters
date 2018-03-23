@@ -350,6 +350,9 @@
     <None Include="Document\Document\GameFarmework\Asset.md">
       <Filter>Document\Document\GameFarmework</Filter>
     </None>
+    <None Include="Document\Document\Others\Notice.md">
+      <Filter>Document\Document\Others</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">
