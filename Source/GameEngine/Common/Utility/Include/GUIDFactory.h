@@ -13,11 +13,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#include "stdafx.h"
-#include "../Include/Event.h"
+#pragma once
+#include "Space.h"
 
-SpaceGameEngine::GUIDFactory & SpaceGameEngine::Event::GetEventGUIDFactory()
+namespace SpaceGameEngine
 {
-	static GlobalVariable<GUIDFactory> g_EventGUIDFactory;
-	return g_EventGUIDFactory.Get();
+	typedef unsigned int GUIDType;
+
+	class GUIDFactory
+	{
+	public:
+		friend struct STLAllocatorInterface;
+		friend struct MemoryManagerAllocatorInterface;
+		
+		bool IfGUIDHasBeenUsed(GUIDType c);
+		GUIDType GetGUIDByString(const std::string& str);
+	private:
+		Map<GUIDType, bool> m_Content;
+	};
 }

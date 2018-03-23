@@ -15,16 +15,20 @@ limitations under the License.
 */
 #pragma once
 #include "Space.h"
+#include "Common/Utility/Include/GlobalVariable.h"
+#include "Common/Utility/Include/GUIDFactory.h"
 
 namespace SpaceGameEngine
 {
 	namespace Event
 	{
+		GUIDFactory& GetEventGUIDFactory();
+
 		//transform event
-		const unsigned int PositionChange = HashString("PositionChange");
-		const unsigned int RotationChange = HashString("RotationChange");
-		const unsigned int ScaleChange = HashString("ScaleChange");
-		const unsigned int TransformAdd = HashString("TransformAdd");
-		const unsigned int TransformDelete = HashString("TransformDelete");
+		const unsigned int PositionChange = GetEventGUIDFactory().GetGUIDByString("PositionChange");
+		const unsigned int RotationChange = GetEventGUIDFactory().GetGUIDByString("RotationChange");
+		const unsigned int ScaleChange = GetEventGUIDFactory().GetGUIDByString("ScaleChange");
+		const unsigned int TransformAdd = GetEventGUIDFactory().GetGUIDByString("TransformAdd");
+		const unsigned int TransformDelete = GetEventGUIDFactory().GetGUIDByString("TransformDelete");
 	}
 }

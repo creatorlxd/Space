@@ -14,10 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "../Include/Event.h"
+#include "../Include/GUIDFactory.h"
 
-SpaceGameEngine::GUIDFactory & SpaceGameEngine::Event::GetEventGUIDFactory()
+bool SpaceGameEngine::GUIDFactory::IfGUIDHasBeenUsed(GUIDType c)
 {
-	static GlobalVariable<GUIDFactory> g_EventGUIDFactory;
-	return g_EventGUIDFactory.Get();
+	auto iter = m_Content.find(c);
+	if (iter == m_Content.end())
+		return false;
+	else
+		return true;
+}
+
+SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const std::string & str)
+{
+	GUIDType c = HashString(str);
+	while (IfGUIDHasBeenUsed(c))
+	{
+		c += 1;
+	}
+	m_Content.insert(std::make_pair(c, true));
+	return c;
 }
