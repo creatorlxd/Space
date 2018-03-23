@@ -25,10 +25,10 @@ namespace SpaceGameEngine
 		GUIDFactory& GetEventGUIDFactory();
 
 		//transform event
-		const unsigned int PositionChange = GetEventGUIDFactory().GetGUIDByString("PositionChange");
-		const unsigned int RotationChange = GetEventGUIDFactory().GetGUIDByString("RotationChange");
-		const unsigned int ScaleChange = GetEventGUIDFactory().GetGUIDByString("ScaleChange");
-		const unsigned int TransformAdd = GetEventGUIDFactory().GetGUIDByString("TransformAdd");
-		const unsigned int TransformDelete = GetEventGUIDFactory().GetGUIDByString("TransformDelete");
+		GLOBALCONST unsigned int PositionChange = GetEventGUIDFactory().GetGUIDByString("PositionChange");
+		GLOBALCONST unsigned int RotationChange = GetEventGUIDFactory().GetGUIDByString("RotationChange");
+		GLOBALCONST unsigned int ScaleChange = GetEventGUIDFactory().GetGUIDByString("ScaleChange");
+		GLOBALCONST unsigned int TransformAdd = GetEventGUIDFactory().GetGUIDByString("TransformAdd");
+		GLOBALCONST unsigned int TransformDelete = GetEventGUIDFactory().GetGUIDByString("TransformDelete");
 	}
 }

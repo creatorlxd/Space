@@ -27,6 +27,9 @@ using namespace DirectX;
 
 namespace SpaceGameEngine
 {
+#ifndef GLOBALCONST
+#define GLOBALCONST extern const __declspec(selectany)
+#endif
 
 #define STRING(str) #str
 

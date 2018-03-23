@@ -17,5 +17,8 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	const int MaxIntValue = (long long)((1 << 31) - 1);
+#ifndef GLOBALCONST
+#define GLOBALCONST extern const __declspec(selectany)
+#endif
+	GLOBALCONST int MaxIntValue = (long long)((1 << 31) - 1);
 }
