@@ -162,10 +162,10 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 	Stack<std::pair<XMLElement*, Component*>> stack;
 	Component* pcomponent;
 	XMLElement* pelement = proot;
-	if (std::string(pelement->Name()) == "Object")
+	if (strcmp(pelement->Name(), "Object") == 0)
 	{
 		pelement = pelement->FirstChildElement();
-		if (std::string(pelement->Name()) != "Component")
+		if(strcmp(pelement->Name(),"Component"))
 		{
 			ThrowError("object in xml must have a root component");
 			return;
@@ -175,7 +175,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 			ThrowError("object in xml only have one root component");
 			return;
 		}
-		while (std::string(pelement->Name()) == "Component")
+		while (strcmp(pelement->Name(), "Component") == 0)
 		{
 			std::string componenttype = pelement->Attribute("Type");
 			if (!componenttype.empty())
