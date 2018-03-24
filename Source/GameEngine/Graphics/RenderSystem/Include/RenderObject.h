@@ -19,7 +19,7 @@ limitations under the License.
 #include "Game/Asset/Include/TextureAsset.h"
 #include "Game/Asset/Include/LightAsset.h"
 #include "Game/Asset/Include/MeshAsset.h"
-#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "ShaderFramework/EffectShader/Include/EffectShader.h"
 #include "Game/Object/Include/Object.h"
 #include "Math/Common/Include/XMathExtension.h"
 #include "Game/Scene/Include/SceneData.h"
