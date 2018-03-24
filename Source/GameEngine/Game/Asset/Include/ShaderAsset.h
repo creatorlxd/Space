@@ -15,7 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "Asset.h"
-#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "ShaderFramework/EffectShader/Include/EffectShader.h"
 #include "Common/Utility/Include/Window.h"
 
 namespace SpaceGameEngine

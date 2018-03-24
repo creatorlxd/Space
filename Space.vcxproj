@@ -425,9 +425,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="Document\Document\GameFarmework\Asset.md" />
-    <None Include="Document\Document\GameFarmework\Component子类编写规则.md" />
-    <None Include="Document\Document\GameFarmework\Space基本组件Component类.md" />
+    <None Include="Document\Document\GameFramework\Asset.md" />
+    <None Include="Document\Document\GameFramework\Component子类编写规则.md" />
+    <None Include="Document\Document\GameFramework\Space光源及光源组件.md" />
+    <None Include="Document\Document\GameFramework\Space基本组件Component类.md" />
     <None Include="Document\Document\Others\Notice.md" />
     <None Include="Document\Document\Others\Space文件类型.md" />
     <None Include="Document\Document\Others\ToDoList.md" />
@@ -496,9 +497,9 @@
     <ClInclude Include="Source\GameEngine\Math\Plane\Include\Plane.h" />
     <ClInclude Include="Source\GameEngine\Math\Triangle\Include\Triangle.h" />
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h" />
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h" />
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFramework\EffectShader\Include\EffectShader.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFramework\PixelShader\Include\PixelShader.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFramework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Common\Error\Source\Error.cpp" />
@@ -578,9 +579,9 @@
     <ClCompile Include="Source\GameEngine\Math\Plane\Source\Plane.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Triangle\Source\Triangle.cpp" />
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp" />
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp" />
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFramework\EffectShader\Source\EffectShader.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFramework\PixelShader\Source\PixelShader.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFramework\VertexShader\Source\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">

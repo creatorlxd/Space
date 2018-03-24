@@ -1,0 +1,12 @@
+<Object>
+	<Component Type="TransformComponent">
+		<InitFromFile Mode="1">
+			test.model
+		</InitFromFile>
+		<Component Type="MaterialComponent">
+			<InitFromFile Mode="1">
+				test.material
+			</InitFromFile>
+		</Component>
+	</Component>
+</Object>

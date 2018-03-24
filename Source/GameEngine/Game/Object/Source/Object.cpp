@@ -16,8 +16,10 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/Object.h"
 #include "Physics/Transform/Include/Transform.h"
+#include "ThirdParty/tinyxml2/include/tinyxml2.h"
 
 using namespace SpaceGameEngine;
+using namespace tinyxml2;
 
 Vector<std::pair<std::string, std::pair<std::string, int>>> SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
 {
@@ -146,6 +148,94 @@ void SpaceGameEngine::Object::InitFromFile(const Vector<std::pair<std::string, s
 void SpaceGameEngine::Object::InitFromFile(const std::string& filename)
 {
 	InitFromFile(ReadAssetListFromFile(filename));
+}
+
+void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
+{
+	tinyxml2::XMLDocument doc;
+	if (doc.LoadFile(filename.c_str()))
+	{
+		ThrowError("can not open this xml file");
+		return;
+	}
+	XMLElement* proot = doc.RootElement();
+	Stack<std::pair<XMLElement*, Component*>> stack;
+	Component* pcomponent;
+	XMLElement* pelement = proot->FirstChildElement();
+	if (pelement->GetText() == "Object")
+	{
+		pelement = pelement->FirstChildElement();
+		if (pelement->GetText() != "Component")
+		{
+			ThrowError("object in xml must have a root component");
+			return;
+		}
+		if (pelement->NextSiblingElement("Component"))
+		{
+			ThrowError("object in xml only have one root component");
+			return;
+		}
+		while (pelement->GetText() == "Component")
+		{
+			std::string componenttype = pelement->Attribute("Type");
+			if (!componenttype.empty())
+			{
+				pcomponent = NewComponentByTypeName(componenttype);
+				AddComponent(pcomponent);
+				if (stack.empty())
+					SetRootComponent(componenttype);
+				if (!stack.empty())
+				{
+					pcomponent->Attach(stack.top().second);
+				}
+				auto pinitfromfile = pelement->FirstChildElement("InitFromFile");
+				if (pinitfromfile)
+				{
+					auto mode = pinitfromfile->UnsignedAttribute("Mode");
+					pcomponent->InitFromFile(pinitfromfile->GetText(),mode);
+				}
+				auto nextcomponent = pelement->FirstChildElement("Component");
+				if (nextcomponent)
+				{
+					stack.push(std::make_pair(pelement,pcomponent));
+					pelement = nextcomponent;
+					continue;
+				}
+				nextcomponent = pelement->NextSiblingElement("Component");
+				if (nextcomponent)
+				{
+					pelement = nextcomponent;
+					continue;
+				}
+				if (!stack.empty())
+				{
+					do
+					{
+						nextcomponent = stack.top().first->NextSiblingElement("Component");
+						stack.pop();
+					} while (!nextcomponent&&!stack.empty());
+					if (nextcomponent)
+						pelement = nextcomponent;
+					else
+						break;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				ThrowError("object in xml's component must have Type");
+				return;
+			}
+		}
+	}
+	else
+	{
+		ThrowError("the xml file for object must have Object element");
+		return;
+	}
 }
 
 void SpaceGameEngine::Object::Run(float DeltaTime)

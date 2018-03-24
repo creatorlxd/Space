@@ -16,9 +16,9 @@ limitations under the License.
 #pragma once
 #include"Space.h"
 #include"InputDevice.h"
-#include "ShaderFarmework/VertexShader/Include/VertexShader.h"
-#include "ShaderFarmework/PixelShader/Include/PixelShader.h"
-#include "ShaderFarmework/EffectShader/Include/EffectShader.h"
+#include "ShaderFramework/VertexShader/Include/VertexShader.h"
+#include "ShaderFramework/PixelShader/Include/PixelShader.h"
+#include "ShaderFramework/EffectShader/Include/EffectShader.h"
 #include "ConfigFile.h"
 
 namespace SpaceGameEngine

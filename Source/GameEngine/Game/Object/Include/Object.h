@@ -85,6 +85,7 @@ namespace SpaceGameEngine
 		void Start();											//开始时运行
 		void InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames);	//从文件初始化
 		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
+		void InitFromXMLFile(const std::string& filename);
 		void Run(float DeltaTime);								//每帧运行时的操作
 		void EveryFrameCleanUp();
 

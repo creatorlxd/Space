@@ -82,9 +82,6 @@
     <Filter Include="Game\Object\Source">
       <UniqueIdentifier>{7992344c-92d5-4b9a-b45b-de12f7af54eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Document\Document\GameFarmework">
-      <UniqueIdentifier>{1a8667e2-f534-4c65-bab3-ac743f090b5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Document\Document\Others">
       <UniqueIdentifier>{b61ae010-e7d4-41fb-96c2-ea3e5ae9fa5a}</UniqueIdentifier>
     </Filter>
@@ -118,27 +115,6 @@
     <Filter Include="dxerr">
       <UniqueIdentifier>{ec7b4770-eb04-4a4e-8504-00a9bb50bafc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShaderFarmework">
-      <UniqueIdentifier>{04d38d97-7740-4440-bd14-344d3e599c17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\VertexShader">
-      <UniqueIdentifier>{b52bdf6f-d8bc-4225-8527-d8546063b7fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\VertexShader\Include">
-      <UniqueIdentifier>{e70d74b8-11c9-4a06-b7a6-0a492556f589}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\VertexShader\Source">
-      <UniqueIdentifier>{c3d1b3e2-8b2d-4014-9501-eb9a344b8ccf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\PixelShader">
-      <UniqueIdentifier>{f90ccd76-e53e-44bf-9149-445a427e4220}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\PixelShader\Include">
-      <UniqueIdentifier>{4389aa04-011b-494f-9ec1-928c3654bf62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\PixelShader\Source">
-      <UniqueIdentifier>{7de0ef7b-2490-4f01-95dc-50dcd0db4efc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\Camera">
       <UniqueIdentifier>{0953e999-0b46-4d30-a62c-b9fc52b8a14f}</UniqueIdentifier>
     </Filter>
@@ -147,15 +123,6 @@
     </Filter>
     <Filter Include="Graphics\Camera\Source">
       <UniqueIdentifier>{f7e196f7-e381-4670-a907-65c2c5451d08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\EffectShader">
-      <UniqueIdentifier>{e2c97c2e-d27a-4a3e-8b21-c61d1d11c091}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\EffectShader\Include">
-      <UniqueIdentifier>{9dc6e681-9fa1-41f3-bfd0-32757bff1c1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFarmework\EffectShader\Source">
-      <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{7fd3f078-668d-42ab-9a84-ed202683bd69}</UniqueIdentifier>
@@ -319,6 +286,39 @@
     <Filter Include="Game\Event\Source">
       <UniqueIdentifier>{85f23c2b-16e1-405e-a5fc-0fd2e89372ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document\Document\GameFramework">
+      <UniqueIdentifier>{1a8667e2-f534-4c65-bab3-ac743f090b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework">
+      <UniqueIdentifier>{04d38d97-7740-4440-bd14-344d3e599c17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\VertexShader">
+      <UniqueIdentifier>{b52bdf6f-d8bc-4225-8527-d8546063b7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\VertexShader\Include">
+      <UniqueIdentifier>{e70d74b8-11c9-4a06-b7a6-0a492556f589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\VertexShader\Source">
+      <UniqueIdentifier>{c3d1b3e2-8b2d-4014-9501-eb9a344b8ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\PixelShader">
+      <UniqueIdentifier>{f90ccd76-e53e-44bf-9149-445a427e4220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\PixelShader\Include">
+      <UniqueIdentifier>{4389aa04-011b-494f-9ec1-928c3654bf62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\PixelShader\Source">
+      <UniqueIdentifier>{7de0ef7b-2490-4f01-95dc-50dcd0db4efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\EffectShader">
+      <UniqueIdentifier>{e2c97c2e-d27a-4a3e-8b21-c61d1d11c091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\EffectShader\Include">
+      <UniqueIdentifier>{9dc6e681-9fa1-41f3-bfd0-32757bff1c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\EffectShader\Source">
+      <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -326,9 +326,6 @@
     </None>
     <None Include="README.md">
       <Filter>Document</Filter>
-    </None>
-    <None Include="Document\Document\GameFarmework\Space基本组件Component类.md">
-      <Filter>Document\Document\GameFarmework</Filter>
     </None>
     <None Include="Document\Document\Others\Space文件类型.md">
       <Filter>Document\Document\Others</Filter>
@@ -344,14 +341,20 @@
       <Filter>DDSTextureLoader</Filter>
     </None>
     <None Include="SystemConfig.configfile" />
-    <None Include="Document\Document\GameFarmework\Component子类编写规则.md">
-      <Filter>Document\Document\GameFarmework</Filter>
-    </None>
-    <None Include="Document\Document\GameFarmework\Asset.md">
-      <Filter>Document\Document\GameFarmework</Filter>
-    </None>
     <None Include="Document\Document\Others\Notice.md">
       <Filter>Document\Document\Others</Filter>
+    </None>
+    <None Include="Document\Document\GameFramework\Asset.md">
+      <Filter>Document\Document\GameFramework</Filter>
+    </None>
+    <None Include="Document\Document\GameFramework\Component子类编写规则.md">
+      <Filter>Document\Document\GameFramework</Filter>
+    </None>
+    <None Include="Document\Document\GameFramework\Space光源及光源组件.md">
+      <Filter>Document\Document\GameFramework</Filter>
+    </None>
+    <None Include="Document\Document\GameFramework\Space基本组件Component类.md">
+      <Filter>Document\Document\GameFramework</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -391,17 +394,8 @@
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
       <Filter>dxerr</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\VertexShader\Include\VertexShader.h">
-      <Filter>ShaderFarmework\VertexShader\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\PixelShader\Include\PixelShader.h">
-      <Filter>ShaderFarmework\PixelShader\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h">
       <Filter>Graphics\Camera\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFarmework\EffectShader\Include\EffectShader.h">
-      <Filter>ShaderFarmework\EffectShader\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h">
       <Filter>Game\Scene\Include</Filter>
@@ -538,6 +532,15 @@
     <ClInclude Include="Source\GameEngine\Common\Include\Def.h">
       <Filter>Common\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFramework\EffectShader\Include\EffectShader.h">
+      <Filter>ShaderFramework\EffectShader\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFramework\PixelShader\Include\PixelShader.h">
+      <Filter>ShaderFramework\PixelShader\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFramework\VertexShader\Include\VertexShader.h">
+      <Filter>ShaderFramework\VertexShader\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -576,17 +579,8 @@
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp">
       <Filter>dxerr</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\VertexShader\Source\VertexShader.cpp">
-      <Filter>ShaderFarmework\VertexShader\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\PixelShader\Source\PixelShader.cpp">
-      <Filter>ShaderFarmework\PixelShader\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp">
       <Filter>Graphics\Camera\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFarmework\EffectShader\Source\EffectShader.cpp">
-      <Filter>ShaderFarmework\EffectShader\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp">
       <Filter>Game\Scene\Source</Filter>
@@ -713,6 +707,15 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Source\Def.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFramework\EffectShader\Source\EffectShader.cpp">
+      <Filter>ShaderFramework\EffectShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFramework\PixelShader\Source\PixelShader.cpp">
+      <Filter>ShaderFramework\PixelShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFramework\VertexShader\Source\VertexShader.cpp">
+      <Filter>ShaderFramework\VertexShader\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
