@@ -162,7 +162,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 	Stack<std::pair<XMLElement*, Component*>> stack;
 	Component* pcomponent;
 	XMLElement* pelement = proot;
-	if (pelement->GetText() == "Object")
+	if (pelement->Name() == "Object")
 	{
 		pelement = pelement->FirstChildElement();
 		if (pelement->GetText() != "Component")
