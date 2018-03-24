@@ -24,7 +24,7 @@ using namespace tinyxml2;
 Vector<std::pair<std::string, std::pair<std::string, int>>> SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
 {
 	Vector<std::pair<std::string, std::pair<std::string, int>>> re;
-	File file(filename,FileMode::Read);
+	File file(filename, FileMode::Read);
 	std::string componentname, assetname;
 	int mode;
 	while ((file >> componentname >> assetname >> mode).IfFileReadOver() == false)
@@ -61,7 +61,7 @@ SpaceGameEngine::Object::~Object()
 Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
 {
 	auto result = m_Components.end();
-	result=m_Components.find(name);
+	result = m_Components.find(name);
 	if (result != m_Components.end())
 	{
 		return (*result).second;
@@ -162,10 +162,10 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 	Stack<std::pair<XMLElement*, Component*>> stack;
 	Component* pcomponent;
 	XMLElement* pelement = proot;
-	if (pelement->Name() == "Object")
+	if (std::string(pelement->Name()) == "Object")
 	{
 		pelement = pelement->FirstChildElement();
-		if (pelement->Name() != "Component")
+		if (std::string(pelement->Name()) != "Component")
 		{
 			ThrowError("object in xml must have a root component");
 			return;
@@ -175,7 +175,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 			ThrowError("object in xml only have one root component");
 			return;
 		}
-		while (pelement->Name() == "Component")
+		while (std::string(pelement->Name()) == "Component")
 		{
 			std::string componenttype = pelement->Attribute("Type");
 			if (!componenttype.empty())
@@ -192,12 +192,12 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 				if (pinitfromfile)
 				{
 					auto mode = pinitfromfile->UnsignedAttribute("Mode");
-					pcomponent->InitFromFile(pinitfromfile->GetText(),mode);
+					pcomponent->InitFromFile(pinitfromfile->GetText(), mode);
 				}
 				auto nextcomponent = pelement->FirstChildElement("Component");
 				if (nextcomponent)
 				{
-					stack.push(std::make_pair(pelement,pcomponent));
+					stack.push(std::make_pair(pelement, pcomponent));
 					pelement = nextcomponent;
 					continue;
 				}
@@ -213,7 +213,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 					{
 						nextcomponent = stack.top().first->NextSiblingElement("Component");
 						stack.pop();
-					} while (!nextcomponent&&!stack.empty());
+					} while (!nextcomponent && !stack.empty());
 					if (nextcomponent)
 						pelement = nextcomponent;
 					else
