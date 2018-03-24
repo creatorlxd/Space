@@ -439,6 +439,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Error\Include\Error.h" />
+    <ClInclude Include="Source\GameEngine\Common\Include\Def.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h" />
     <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h" />
@@ -503,6 +504,7 @@
     <ClCompile Include="Source\GameEngine\Common\Error\Source\Error.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\Allocator.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\MemoryManager.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Source\Def.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

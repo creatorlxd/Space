@@ -13,10 +13,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
+#include "stdafx.h"
 #include "Def.h"
-
-namespace SpaceGameEngine
-{
-	GLOBALCONST int MaxIntValue = (long long)((1 << 31) - 1);
-}

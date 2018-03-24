@@ -17,6 +17,7 @@ limitations under the License.
 
 #include <DirectXMath.h>
 
+#include "Def.h"
 #include "../MemoryManager/Include/AllocatorForSTL.hpp"
 #include "../Utility/Include/StringConverter.h"
 #include "../Utility/Include/InputDevice.h"
@@ -27,32 +28,6 @@ using namespace DirectX;
 
 namespace SpaceGameEngine
 {
-#ifndef GLOBALCONST
-#define GLOBALCONST extern const __declspec(selectany)
-#endif
-
-#define STRING(str) #str
-
-#if defined(DEBUG) | defined(_DEBUG)
-#ifndef HR
-#define HR(x)                                              \
-	{                                                          \
-		HRESULT hr = (x);                                      \
-		if(FAILED(hr))                                         \
-		{                                                      \
-			DXTrace(__FILEW__, (DWORD)__LINE__, hr, L#x, true); \
-		}                                                      \
-	}
-#endif
-
-#else
-#ifndef HR
-#define HR(x) (x)
-#endif
-#endif 
-
-	template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
-
 	//-----------------------------------【FVF顶点格式】---------------------------------------------
 
 	struct DefaultVertex //顶点结构体

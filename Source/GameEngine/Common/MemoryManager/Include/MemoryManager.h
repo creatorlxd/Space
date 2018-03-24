@@ -15,13 +15,10 @@ limitations under the License.
 */
 #pragma once
 #include "Allocator.h"
+#include "Def.h"
 
 namespace SpaceGameEngine
 {
-#ifndef GLOBALCONST
-#define GLOBALCONST extern const __declspec(selectany)
-#endif
-
 	GLOBALCONST uint32_t g_BlockSizes[] = {
 		// 4-increments
 		4,  8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,

@@ -535,6 +535,9 @@
     <ClInclude Include="Source\GameEngine\Common\Utility\Include\GUIDFactory.h">
       <Filter>Common\Utility\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Include\Def.h">
+      <Filter>Common\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -707,6 +710,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Utility\Source\GUIDFactory.cpp">
       <Filter>Common\Utility\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Source\Def.cpp">
+      <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
