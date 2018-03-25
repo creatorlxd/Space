@@ -68,7 +68,7 @@ bool SpaceGameEngine::InputDevice::DeviceRead(void * pBuffer, long lSize)
 
 SpaceGameEngine::KeyboardDevice::KeyboardDevice()
 {
-	ZeroMemory(m_Content, sizeof(m_Content));
+	memset(m_Content, false, sizeof(m_Content));
 }
 
 SpaceGameEngine::KeyboardDevice::~KeyboardDevice()
@@ -82,18 +82,35 @@ bool SpaceGameEngine::KeyboardDevice::Init(HWND hwnd, InputInterface& inputinter
 
 bool SpaceGameEngine::KeyboardDevice::DeviceRead()
 {
+	memcpy(m_LastContent, m_Content, sizeof(m_Content));
 	return m_InputDevice.DeviceRead((void*)(m_Content), sizeof(m_Content));
+}
+
+bool SpaceGameEngine::KeyboardDevice::IfPress(int b)
+{
+	return static_cast<bool>(m_Content[b] & 0x80);
 }
 
 bool SpaceGameEngine::KeyboardDevice::IfPressDown(int b)
 {
-	return static_cast<bool>(m_Content[b] & 0x80);
+	return (!IfLastPress(b)&&IfPress(b));
+}
+
+bool SpaceGameEngine::KeyboardDevice::IfPressUp(int b)
+{
+	return (IfLastPress(b) && !IfPress(b));
+}
+
+bool SpaceGameEngine::KeyboardDevice::IfLastPress(int b)
+{
+	return static_cast<bool>(m_LastContent[b] & 0x80);
 }
 
 SpaceGameEngine::MouseDevice::MouseDevice()
 {
 	m_Content = { 0 };
 	ZeroMemory(&m_Content, sizeof(m_Content));
+	memset(m_Content.rgbButtons, false, sizeof(m_Content.rgbButtons));
 }
 
 SpaceGameEngine::MouseDevice::~MouseDevice()
@@ -107,6 +124,7 @@ bool SpaceGameEngine::MouseDevice::Init(HWND hwnd, InputInterface& inputinterfac
 
 bool SpaceGameEngine::MouseDevice::DeviceRead()
 {
+	memcpy(m_LastState, m_Content.rgbButtons, sizeof(m_Content.rgbButtons));
 	return m_InputDevice.DeviceRead((void*)(&m_Content), sizeof(m_Content));
 }
 
@@ -125,17 +143,62 @@ LONG SpaceGameEngine::MouseDevice::GetMouseAnxisYMovement()
 	return GetMouseState().lY;
 }
 
-bool SpaceGameEngine::MouseDevice::IfLeftButtonPressDown()
+bool SpaceGameEngine::MouseDevice::IfLeftButtonPress()
 {
 	return GetMouseState().rgbButtons[0] & 0x80;
 }
 
-bool SpaceGameEngine::MouseDevice::IfMiddleButtonPressDown()
+bool SpaceGameEngine::MouseDevice::IfMiddleButtonPress()
 {
 	return GetMouseState().rgbButtons[2] & 0x80;
 }
 
-bool SpaceGameEngine::MouseDevice::IfRightButtonPressDown()
+bool SpaceGameEngine::MouseDevice::IfRightButtonPress()
 {
 	return GetMouseState().rgbButtons[1] & 0x80;
+}
+
+bool SpaceGameEngine::MouseDevice::IfLeftButtonPressDown()
+{
+	return (!IfLastLeftButtonPress() && IfLeftButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfMiddleButtonPressDown()
+{
+	return (!IfLastMiddleButtonPress() && IfMiddleButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfRightButtonPressDown()
+{
+	return (!IfLastRightButtonPress() && IfRightButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfLeftButtonPressUp()
+{
+	return (IfLastLeftButtonPress() && !IfLeftButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfMiddleButtonPressUp()
+{
+	return (IfLastMiddleButtonPress() && !IfMiddleButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfRightButtonPressUp()
+{
+	return (IfLastRightButtonPress() && !IfRightButtonPress());
+}
+
+bool SpaceGameEngine::MouseDevice::IfLastLeftButtonPress()
+{
+	return m_LastState[0] & 0x80;
+}
+
+bool SpaceGameEngine::MouseDevice::IfLastMiddleButtonPress()
+{
+	return m_LastState[2] & 0x80;
+}
+
+bool SpaceGameEngine::MouseDevice::IfLastRightButtonPress()
+{
+	return m_LastState[1] & 0x80;
 }

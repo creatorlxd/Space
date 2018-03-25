@@ -54,10 +54,15 @@ namespace SpaceGameEngine
 		~KeyboardDevice();
 		bool Init(HWND hwnd, InputInterface& inputinterface);			//初始化
 		bool DeviceRead();											//读取设备
-		bool IfPressDown(int b);									//判断是否按下某个键
+		bool IfPress(int b);									//判断某个键是否处于按压状态
+		bool IfPressDown(int b);
+		bool IfPressUp(int b);
 	private:
 		InputDevice m_InputDevice;
+		char m_LastContent[256];
 		char m_Content[256];										//键盘内容
+
+		bool IfLastPress(int b);
 	};
 
 	class MouseDevice		//鼠标设备
@@ -80,12 +85,23 @@ namespace SpaceGameEngine
 		小于0为上
 		*/
 		LONG GetMouseAnxisYMovement();
+		bool IfLeftButtonPress();
+		bool IfMiddleButtonPress();
+		bool IfRightButtonPress();
 		bool IfLeftButtonPressDown();
 		bool IfMiddleButtonPressDown();
 		bool IfRightButtonPressDown();
+		bool IfLeftButtonPressUp();
+		bool IfMiddleButtonPressUp();
+		bool IfRightButtonPressUp();
 	private:
 		InputDevice m_InputDevice;
 		DIMOUSESTATE m_Content;										//鼠标内容
+		BYTE m_LastState[3];
+
+		bool IfLastLeftButtonPress();
+		bool IfLastMiddleButtonPress();
+		bool IfLastRightButtonPress();
 	};
 
 }
