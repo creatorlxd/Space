@@ -59,11 +59,11 @@ DefaultVertexOutput VS(DefaultVertexInput input)
 {
 	DefaultVertexOutput output;
 
-	output.m_Position = mul(float4(input.m_Position,1.0f), g_WorldViewProjMatrix);
+	output.m_Position = mul(float4(input.m_Position, 1.0f), g_WorldViewProjMatrix);
 	output.m_WorldPosition = mul(float4(input.m_Position, 1.0f), g_WorldMatrix).xyz;
 
-	output.m_Normal = mul(input.m_Normal,(float3x3)g_InverseTransposeMatrix);
-	output.m_TextureCoord = mul(float4(input.m_TextureCoord,0.0f,1.0f),g_TextureTransformMatrix).xy;
+	output.m_Normal = mul(input.m_Normal, (float3x3)g_InverseTransposeMatrix);
+	output.m_TextureCoord = mul(float4(input.m_TextureCoord, 0.0f, 1.0f), g_TextureTransformMatrix).xy;
 
 	return output;
 }
@@ -78,7 +78,7 @@ float4 PS(DefaultVertexOutput input) : SV_TARGET
 	input.m_Normal = normalize(input.m_Normal);
 	GetColorByLightsEx(g_Material, g_Lights, g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal, ambient, diffuse, specular);
 	texcolor = g_Texture.Sample(g_SamplerState, input.m_TextureCoord);
-	litcolor = texcolor * (ambient + diffuse+ g_Material.m_Emissive) + specular;
+	litcolor = texcolor * (ambient + diffuse + g_Material.m_Emissive) + specular;
 	litcolor.a = g_Material.m_Diffuse.a*texcolor.a;
 	return litcolor;
 }
