@@ -26,5 +26,6 @@ namespace SpaceGameEngine
 		XMFLOAT4 m_Diffuse;
 		XMFLOAT4 m_Specular;	// Specular.w = SpecularPower
 		XMFLOAT4 m_Reflect;		//TODO:do not use now
+		XMFLOAT4 m_Emissive;
 	};
 };

@@ -32,6 +32,7 @@ void SpaceGameEngine::MaterialAsset::InitFromFile(const String & filename)
 	file >> m_Content.m_Specular.x >> m_Content.m_Specular.y >> m_Content.m_Specular.z >> m_Content.m_Specular.w;
 	//TODO:now do not need reflect
 	//file >> m_Content.m_Reflect.x >> m_Content.m_Reflect.y >> m_Content.m_Reflect.z >> m_Content.m_Reflect.w;
+	file >> m_Content.m_Emissive.x >> m_Content.m_Emissive.y >> m_Content.m_Emissive.z >> m_Content.m_Emissive.w;
 
 	file.Close();
 }

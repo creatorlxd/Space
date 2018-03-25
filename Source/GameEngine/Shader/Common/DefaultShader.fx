@@ -78,7 +78,7 @@ float4 PS(DefaultVertexOutput input) : SV_TARGET
 	input.m_Normal = normalize(input.m_Normal);
 	GetColorByLightsEx(g_Material, g_Lights, g_CameraPosition.xyz, input.m_WorldPosition, input.m_Normal, ambient, diffuse, specular);
 	texcolor = g_Texture.Sample(g_SamplerState, input.m_TextureCoord);
-	litcolor = texcolor * (ambient + diffuse) + specular;
+	litcolor = texcolor * (ambient + diffuse) + specular + g_Material.m_Emissive;
 	litcolor.a = g_Material.m_Diffuse.a*texcolor.a;
 	return litcolor;
 }

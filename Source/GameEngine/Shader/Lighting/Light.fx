@@ -20,6 +20,7 @@ struct Material
 	float4 m_Diffuse;
 	float4 m_Specular; // Specular.w = SpecularPower
 	float4 m_Reflect;
+	float4 m_Emissive;
 };
 
 struct Light
