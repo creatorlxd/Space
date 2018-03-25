@@ -21,7 +21,7 @@ SpaceGameEngine::LightAsset::LightAsset()
 	m_TypeName = "LightAsset";
 }
 
-void SpaceGameEngine::LightAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::LightAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 

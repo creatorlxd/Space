@@ -59,7 +59,7 @@ namespace SpaceGameEngine
 
 	class RenderObject;
 
-	Vector<std::pair<std::string, std::pair<std::string, int>>> ReadAssetListFromFile(const std::string& filename);	//从文件中读取资产文件列表
+	Vector<std::pair<String, std::pair<String, int>>> ReadAssetListFromFile(const String& filename);	//从文件中读取资产文件列表
 
 	enum ObjectMode :uint32_t
 	{
@@ -72,7 +72,7 @@ namespace SpaceGameEngine
 	public:
 		Object();
 		~Object();
-		Component* GetComponent(const std::string& name);		//获取组件的指针
+		Component* GetComponent(const String& name);		//获取组件的指针
 		template<typename T>
 		T* GetComponent();
 		/*
@@ -80,16 +80,16 @@ namespace SpaceGameEngine
 		*注意：如果是在Scene运行过程中添加的，并且该Object是在Scene开始运行之前就已经创建好的，则应手动调用该Componentd的Start方法
 		*/
 		bool AddComponent(Component* pc);						
-		bool DeleteComponent(const std::string& name);			//删除组件，并去除连接
+		bool DeleteComponent(const String& name);			//删除组件，并去除连接
 
 		void Start();											//开始时运行
-		void InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames);	//从文件初始化
-		void InitFromFile(const std::string& filename);										//通过资产文件列表来初始化
-		void InitFromXMLFile(const std::string& filename);
+		void InitFromFile(const Vector<std::pair<String, std::pair<String, int>>>& filenames);	//从文件初始化
+		void InitFromFile(const String& filename);										//通过资产文件列表来初始化
+		void InitFromXMLFile(const String& filename);
 		void Run(float DeltaTime);								//每帧运行时的操作
 		void EveryFrameCleanUp();
 
-		bool SetRootComponent(const std::string& name);			//设置根组件
+		bool SetRootComponent(const String& name);			//设置根组件
 		Component* GetRootComponent();							//获取根组件
 
 		bool IfRun();						//是否每帧运行
@@ -136,7 +136,7 @@ namespace SpaceGameEngine
 		*/
 		void ChildObjectUpdate(int state);
 	protected:
-		Map<std::string, Component*> m_Components;			//组件们...
+		Map<String, Component*> m_Components;			//组件们...
 		Component* m_pRootComponent;							//根组件
 		Map<unsigned int, Component*> m_Message;
 		Object* m_pFather;									//父对象
@@ -163,7 +163,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline T * Object::GetComponent()
 	{
-		return dynamic_cast<T*>(GetComponent(T::NewComponent.m_Name));
+		return dynamic_cast<T*>(GetComponent(T::GetComponentFactory().m_Name));
 	}
 	
 }

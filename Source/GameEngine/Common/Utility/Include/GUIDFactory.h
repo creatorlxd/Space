@@ -27,9 +27,9 @@ namespace SpaceGameEngine
 		friend struct MemoryManagerAllocatorInterface;
 		
 		bool IfGUIDHasBeenUsed(GUIDType c);
-		GUIDType GetGUIDByString(const std::string& str);
-		std::string GetStringByGUID(GUIDType c);
+		GUIDType GetGUIDByString(const String& str);
+		String GetStringByGUID(GUIDType c);
 	private:
-		Map<GUIDType, std::string> m_Content;
+		Map<GUIDType, String> m_Content;
 	};
 }

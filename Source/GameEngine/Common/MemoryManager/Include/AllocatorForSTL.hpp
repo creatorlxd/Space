@@ -118,4 +118,8 @@ namespace SpaceGameEngine
 
 	template<typename T, typename _Pr = std::less<T> >
 	using Set = std::set<T, _Pr, AllocatorForSTL<T> >;
+
+	using String = std::basic_string<char, std::char_traits<char>, AllocatorForSTL<char>>;
+
+	using WString = std::basic_string<wchar_t, std::char_traits<wchar_t>, AllocatorForSTL<wchar_t>>;
 }

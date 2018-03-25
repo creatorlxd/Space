@@ -33,7 +33,7 @@ SpaceGameEngine::Component::~Component()
 	
 }
 
-std::string SpaceGameEngine::Component::GetTypeName()
+String SpaceGameEngine::Component::GetTypeName()
 {
 	return m_TypeName;
 }
@@ -65,7 +65,7 @@ bool SpaceGameEngine::Component::DeleteChildComponent(Component * pc)
 	return true;
 }
 
-Component * SpaceGameEngine::Component::FindChildComponent(const std::string & name)
+Component * SpaceGameEngine::Component::FindChildComponent(const String & name)
 {
 	std::queue<Component*> q;
 	for (auto i : m_Children)
@@ -91,7 +91,7 @@ Component * SpaceGameEngine::Component::FindChildComponent(const std::string & n
 	return nullptr;
 }
 
-Component * SpaceGameEngine::Component::FindFatherComponent(const std::string & name)
+Component * SpaceGameEngine::Component::FindFatherComponent(const String & name)
 {
 	auto cb = this;
 	while (cb != nullptr&&cb->GetTypeName() != name)
@@ -106,7 +106,7 @@ Vector<Component*>& SpaceGameEngine::Component::GetChildrenComponent()
 	return m_Children;
 }
 
-void SpaceGameEngine::Component::InitFromFile(const std::string& filename, int mode)
+void SpaceGameEngine::Component::InitFromFile(const String& filename, int mode)
 {
 
 }

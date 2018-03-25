@@ -18,8 +18,6 @@ limitations under the License.
 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(LightComponent);
-
 SpaceGameEngine::LightComponent::LightComponent()
 {
 	m_TypeName = "LightComponent";
@@ -31,7 +29,7 @@ SpaceGameEngine::LightComponent::~LightComponent()
 	
 }
 
-void SpaceGameEngine::LightComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::LightComponent::InitFromFile(const String & filename, int mode)
 {
 	m_Mode = mode;
 	auto lightasset = ReadAssetFromFile<LightAsset>(filename);

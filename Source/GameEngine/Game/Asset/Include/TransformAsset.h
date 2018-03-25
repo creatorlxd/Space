@@ -21,7 +21,7 @@ namespace SpaceGameEngine
 	struct TransformAsset :public Asset
 	{
 		TransformAsset();
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 		
 		XMFLOAT3 m_Position, m_Rotation, m_Scale;
 	};

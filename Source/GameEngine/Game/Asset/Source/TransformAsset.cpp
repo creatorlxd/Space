@@ -21,7 +21,7 @@ SpaceGameEngine::TransformAsset::TransformAsset()
 	m_TypeName = "TransformAsset";
 }
 
-void SpaceGameEngine::TransformAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::TransformAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 

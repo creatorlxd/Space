@@ -18,8 +18,6 @@ limitations under the License.
 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(MaterialComponent);
-
 SpaceGameEngine::MaterialComponent::MaterialComponent()
 {
 	m_TypeName = "MaterialComponent";
@@ -30,7 +28,7 @@ SpaceGameEngine::MaterialComponent::~MaterialComponent()
 	
 }
 
-void SpaceGameEngine::MaterialComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::MaterialComponent::InitFromFile(const String & filename, int mode)
 {
 	m_Mode = mode;
 	if (m_Mode == SingleMode)

@@ -29,7 +29,7 @@ SpaceGameEngine::File::~File()
 		Close();
 }
 
-SpaceGameEngine::File::File(const std::string & filename, unsigned char mode)
+SpaceGameEngine::File::File(const String & filename, unsigned char mode)
 {
 	m_pFile = nullptr;
 	m_FileMode = FileMode::None;
@@ -37,11 +37,11 @@ SpaceGameEngine::File::File(const std::string & filename, unsigned char mode)
 	Open(filename, mode);
 }
 
-void SpaceGameEngine::File::Open(const std::string & filename, unsigned char mode)
+void SpaceGameEngine::File::Open(const String & filename, unsigned char mode)
 {
 	m_FileName = filename;
 	m_FileMode = mode;
-	std::string opt;
+	String opt;
 	if ((mode&FileMode::Append) != 0 && (mode&FileMode::Write) != 0)
 	{
 		opt = "a";
@@ -149,13 +149,13 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t * cwstr)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
-		std::wstring wstr;
+		WString wstr;
 		*this >> wstr;
 		memcpy(cwstr, wstr.c_str(), sizeof(wchar_t)*wstr.size());
 	}
 	return *this;
 }
-SpaceGameEngine::File & SpaceGameEngine::File::operator>>(std::wstring & wstr)
+SpaceGameEngine::File & SpaceGameEngine::File::operator>>(WString & wstr)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
@@ -192,14 +192,14 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
-		std::string str;
+		String str;
 		*this >> str;
 		memcpy(cstr, str.c_str(), sizeof(char)*str.size());
 	}
 	return *this;
 }
 
-SpaceGameEngine::File& SpaceGameEngine::File::operator>>(std::string & str)
+SpaceGameEngine::File& SpaceGameEngine::File::operator>>(String & str)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
@@ -387,7 +387,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t * wcstr)
 	return *this;
 }
 
-SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const std::wstring & wstr)
+SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const WString & wstr)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
 	{
@@ -430,7 +430,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const char * cstr)
 	return *this;
 }
 
-SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const std::string & str)
+SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const String & str)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%s", str.c_str());
@@ -528,7 +528,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long double & ld
 	return *this;
 }
 
-bool SpaceGameEngine::File::GetLine(std::string& str)
+bool SpaceGameEngine::File::GetLine(String& str)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
@@ -555,13 +555,13 @@ bool SpaceGameEngine::File::GetLine(std::string& str)
 		return false;
 }
 
-SpaceGameEngine::Vector<std::string> SpaceGameEngine::GetDirectoryName(const std::string & filepath)
+SpaceGameEngine::Vector<SpaceGameEngine::String> SpaceGameEngine::GetDirectoryName(const String & filepath)
 {
 	if (filepath.empty())
-		return Vector<std::string>();
+		return Vector<String>();
 
-	Vector<std::string> re;
-	std::string buffer;
+	Vector<String> re;
+	String buffer;
 	int index = 0;
 
 	char c = ' ';
@@ -583,10 +583,10 @@ SpaceGameEngine::Vector<std::string> SpaceGameEngine::GetDirectoryName(const std
 	return re;
 }
 
-void SpaceGameEngine::CheckAndCreateDirectory(const std::string & str)
+void SpaceGameEngine::CheckAndCreateDirectory(const String & str)
 {
 	auto folder = GetDirectoryName(str);
-	std::string buffer;
+	String buffer;
 	for (int i = 0; i<folder.size(); i++)
 	{
 		if (folder[i] == "." || folder[i] == "..")

@@ -41,7 +41,7 @@ void SpaceGameEngine::VertexShader::Clear()
 	m_pReflection = nullptr;
 }
 
-void SpaceGameEngine::VertexShader::InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, const std::string& includefilename, const std::string& entryname, D3D_SHADER_MACRO* macros)
+void SpaceGameEngine::VertexShader::InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, const String& includefilename, const String& entryname, D3D_SHADER_MACRO* macros)
 {
 	if (pDevice == nullptr)
 	{

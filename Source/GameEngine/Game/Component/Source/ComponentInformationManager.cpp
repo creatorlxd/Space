@@ -21,13 +21,13 @@ SpaceGameEngine::ComponentInformation::ComponentInformation()
 	ZeroMemory(this, sizeof(ComponentInformation));
 }
 
-SpaceGameEngine::ComponentInformation::ComponentInformation(const std::string & name, size_t size)
+SpaceGameEngine::ComponentInformation::ComponentInformation(const String & name, size_t size)
 {
 	m_Name = name;
 	m_MemorySize = size;
 }
 
-SpaceGameEngine::ComponentInformation::ComponentInformation(const std::string & name, size_t size, std::function<Component*(void)> func)
+SpaceGameEngine::ComponentInformation::ComponentInformation(const String & name, size_t size, std::function<Component*(void)> func)
 {
 	m_Name = name;
 	m_MemorySize = size;
@@ -49,7 +49,7 @@ bool SpaceGameEngine::ComponentInformationManager::AddInformation(const Componen
 	}
 }
 
-const SpaceGameEngine::ComponentInformation & SpaceGameEngine::ComponentInformationManager::GetInformation(const std::string & name)
+const SpaceGameEngine::ComponentInformation & SpaceGameEngine::ComponentInformationManager::GetInformation(const String & name)
 {
 	auto iter = m_Content.find(name);
 	if (iter == m_Content.end())

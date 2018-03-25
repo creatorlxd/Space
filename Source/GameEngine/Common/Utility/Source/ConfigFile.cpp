@@ -20,7 +20,7 @@ int SpaceGameEngine::ConfigFileValue::AsInt()
 {
 	if (m_Type == ConfigFileValueType::Int)
 	{
-		return std::stoi(m_Content);
+		return std::stoi(StringToStdString(m_Content));
 	}
 	else
 	{
@@ -33,7 +33,7 @@ float SpaceGameEngine::ConfigFileValue::AsFloat()
 {
 	if (m_Type == ConfigFileValueType::Float)
 	{
-		return std::stof(m_Content);
+		return std::stof(StringToStdString(m_Content));
 	}
 	else
 	{
@@ -46,7 +46,7 @@ double SpaceGameEngine::ConfigFileValue::AsDouble()
 {
 	if (m_Type == ConfigFileValueType::Double)
 	{
-		return std::stod(m_Content);
+		return std::stod(StringToStdString(m_Content));
 	}
 	else
 	{
@@ -68,7 +68,7 @@ char SpaceGameEngine::ConfigFileValue::AsChar()
 	}
 }
 
-std::string SpaceGameEngine::ConfigFileValue::AsString()
+SpaceGameEngine::String SpaceGameEngine::ConfigFileValue::AsString()
 {
 	if (m_Type == ConfigFileValueType::String)
 	{
@@ -129,7 +129,7 @@ void SpaceGameEngine::ConfigFileValue::Set(char c)
 	}
 }
 
-void SpaceGameEngine::ConfigFileValue::Set(const std::string & str)
+void SpaceGameEngine::ConfigFileValue::Set(const String & str)
 {
 	if (m_Type == ConfigFileValueType::String)
 	{
@@ -141,7 +141,7 @@ void SpaceGameEngine::ConfigFileValue::Set(const std::string & str)
 	}
 }
 
-SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(const std::string& name)
+SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(const String& name)
 {
 	auto iter = m_Content.find(name);
 	if (iter != m_Content.end())
@@ -160,12 +160,12 @@ SpaceGameEngine::ConfigFile::ConfigFile()
 
 }
 
-SpaceGameEngine::ConfigFile::ConfigFile(const std::string & filename)
+SpaceGameEngine::ConfigFile::ConfigFile(const String & filename)
 {
 	InitFromFile(filename);
 }
 
-SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const std::string & name)
+SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const String & name)
 {
 	auto iter = m_Content.find(name);
 	if (iter != m_Content.end())
@@ -179,7 +179,7 @@ SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const
 	}
 }
 
-void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
+void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 {
 	/*
 	prase state:
@@ -192,7 +192,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 	ConfigTable* ptable = nullptr;
 	ConfigFileValue* pvalue = nullptr;
 	ConfigFileValueType type_buffer = ConfigFileValueType::Int;
-	std::string str_buffer;
+	String str_buffer;
 
 	for (auto str : strs)
 	{
@@ -377,11 +377,11 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<std::string>& strs)
 	}
 }
 
-void SpaceGameEngine::ConfigFile::InitFromFile(const std::string & filename)
+void SpaceGameEngine::ConfigFile::InitFromFile(const String & filename)
 {
-	Vector<std::string> buffer;
+	Vector<String> buffer;
 	File file(filename, FileMode::Read);
-	std::string str_buff;
+	String str_buff;
 
 	while (file.GetLine(str_buff))
 	{
@@ -393,7 +393,7 @@ void SpaceGameEngine::ConfigFile::InitFromFile(const std::string & filename)
 	Parse(buffer);
 }
 
-void SpaceGameEngine::ConfigFile::SaveToFile(const std::string & filename)
+void SpaceGameEngine::ConfigFile::SaveToFile(const String & filename)
 {
 	File file(filename, FileMode::Write);
 

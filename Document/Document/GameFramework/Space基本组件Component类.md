@@ -6,16 +6,13 @@
 
 >貌似图的字很小......没办法
 ### 1.概述
-Component组件类是Space游戏引擎中执行动作的基本类。  
-目前已有的大部分功能（比如：网格，材质，纹理，坐标...）都是由通过继承Component类来实现的。
+`Component`组件类是Space游戏引擎中执行动作的基本类。  
+目前已有的大部分功能（比如：网格，材质，纹理，坐标...）都是由通过继承`Component`类来实现的。
 
-![Component类](../../Picture/ComponentView.png "Component类")
+[Component类](../../../Source/GameEngine/Game/Component/Include/Component.h "Component类")
 
 ### 2.如何使用
-在接下来的***如何编写自己的组件***中我们将提到：在每个继承Component的类中都应当有这样的一个公共对象：
-`static ComponentFactory<子类名> NewComponent;`  
-
-所以我们只需使用这个`NewComponent`仿函数即可获得一个该类型的Component对象指针。当然，你不需要去释放它。
+我们只需使用每个`Component`子类的`NewComponent`方法即可获得一个`Component*`指针。当然，你不需要去释放它。
 
 例如：
 
@@ -39,7 +36,7 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 * `构造函数`:  
 重新初始化m_TypeName为你的组件类的名称，必须重写!!!
 	
-* `void InitFromFile(const std::string& filename,int mode)`:  
+* `void InitFromFile(const String& filename,int mode)`:  
 用来从文件中初始化组件，如果你不需要也可以不写。
 	
 * `void Start()`:  
@@ -59,22 +56,13 @@ Component组件类是Space游戏引擎中执行动作的基本类。
 
 除此之外，你还要在你的组件类中**加入**以下成员变量。
 
-* 公有的`static ComponentManager::NewComponent<子类名> NewComponent`:  
-用来创建一个组件类，并将其加入管理器，返回其指针。这是必须写的。
-
 * 公有的`static const int`类型的各种`mode`:  
 用来判断组件的内部具体模式（比如网格组件中分为model文件和XMesh文件两种mode）。对应`InitFromFile(const string& filename,int mode)`的`mode`形参。
 
-最后，你要在与带有该组件类声明的头文件对应的源文件中，加入以下的代码。
-
-* 组件类的 `注册`:  
-使用 `REGISTERCOMPONENTCLASS`宏来注册组件类，之后你便可以使用其的`NewComponent`和**反射创建组件**的功能了。 
+**最后，你还要在public声明中加入一行`REGISTER_COMPONENT(你的component的类名)`以构造这个子类的工厂方法(`NewComponent()`)，和一个用于动态创建的包含类名的仿函数(`GetComponentFactory()`)。**
 
 这样你就可以构建自己的组件类了。
 
-### 4.实例：（使用DX9的MeshComponent）
+### 4.实例：（MeshComponent）
 
-![使用DX9的MeshComponent](../../Picture/DX9MeshComponentView.png "使用DX9的MeshComponent")
-
-在图中你可以看到我上文所提到的那些方法和成员变量。
-> 注：现在已不需要在组件类中定义`m_Mode`！！！
+[MeshComponent](../../../Source/GameEngine/Graphics/Mesh/Include/Mesh.h "MeshComponent")

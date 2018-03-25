@@ -17,8 +17,6 @@ limitations under the License.
 #include "../Include/Mesh.h" 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(MeshComponent);
-
 SpaceGameEngine::MeshComponent::MeshComponent()
 {
 	m_TypeName = "MeshComponent";
@@ -48,7 +46,7 @@ SpaceGameEngine::MeshComponent::~MeshComponent()
 	
 }
 
-void SpaceGameEngine::MeshComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::MeshComponent::InitFromFile(const String & filename, int mode)
 {
 	m_Mode = mode;
 

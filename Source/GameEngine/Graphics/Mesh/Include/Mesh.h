@@ -26,6 +26,8 @@ namespace SpaceGameEngine
 	class MeshComponent :public Component
 	{
 	public:
+		REGISTER_COMPONENT(MeshComponent);
+
 		static const int ModelFileMode = 1;				//Model文件模式
 		static const int DynamicMode = 2;				//Dynamic mode do not use global octree
 		static const int WholeMode = 4;					//Whole mode do not use object octree
@@ -33,12 +35,11 @@ namespace SpaceGameEngine
 		static const int YAxisAlignedMode = 16;
 		static const int ZAxisAlignedMode = 32;
 
-		static ComponentFactory<MeshComponent> NewComponent;		//创建组件
 		MeshComponent();
 		void CleanUp();
 		~MeshComponent();
 
-		void InitFromFile(const std::string& filename, int mode = 1);			//从文件读取Mesh
+		void InitFromFile(const String& filename, int mode = 1);			//从文件读取Mesh
 		void InitFromMemory(int VertexSize, int IndexSize, DefaultVertex* pVertices, unsigned int* pIndices);	//创建顶点缓存和索引缓存,VertexSize为顶点数,IndexSize为索引数（索引的多少）
 		void Start();
 		void Run(float DeltaTime);												//渲染网格

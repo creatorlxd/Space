@@ -24,7 +24,7 @@ namespace SpaceGameEngine
 	{
 		DefaultEffectShaderAsset();
 		~DefaultEffectShaderAsset();
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 
 		DefaultEffectShader m_Content;
 	};

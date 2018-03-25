@@ -24,7 +24,7 @@ namespace SpaceGameEngine
 	{
 		TextureAsset();
 		TextureAsset(const TextureAsset& ta);
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 
 		TextureForShader m_Content;
 

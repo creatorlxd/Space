@@ -16,15 +16,15 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/StringConverter.h"
 
-std::wstring SpaceGameEngine::StringToWString(const std::string& str)
+SpaceGameEngine::WString SpaceGameEngine::StringToWString(const String& str)
 {
-	/*std::wstring wstr;
+	/*WString wstr;
 	size_t size;
 	wstr.resize(str.length());
 	mbstowcs_s(&size, &wstr[0], wstr.size() + 1, str.c_str(), str.size());
 	return wstr;*/
 
-	std::wstring wstr;
+	WString wstr;
 	size_t size = MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
 	wstr.resize(size);
 	MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, &wstr[0], size);
@@ -32,15 +32,15 @@ std::wstring SpaceGameEngine::StringToWString(const std::string& str)
 	return wstr;
 }
 
-std::string SpaceGameEngine::WStringToString(const std::wstring & wstr)
+SpaceGameEngine::String SpaceGameEngine::WStringToString(const WString & wstr)
 {
-	/*std::string str;
+	/*String str;
 	size_t size;
 	str.resize(wstr.length());
 	wcstombs_s(&size, &str[0], str.size() + 1, wstr.c_str(), wstr.size());
 	return str;*/
 
-	std::string str;
+	String str;
 	size_t size = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
 	str.resize(size);
 	WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, &str[0], size, NULL, NULL);
@@ -48,7 +48,7 @@ std::string SpaceGameEngine::WStringToString(const std::wstring & wstr)
 	return str;
 }
 
-SpaceGameEngine::TString SpaceGameEngine::StringToTString(const std::string& str)
+SpaceGameEngine::TString SpaceGameEngine::StringToTString(const String& str)
 {
 #ifdef _UNICODE
 	return StringToWString(str);
@@ -57,7 +57,7 @@ SpaceGameEngine::TString SpaceGameEngine::StringToTString(const std::string& str
 #endif
 }
 
-SpaceGameEngine::TString SpaceGameEngine::WStringToTString(const std::wstring& wstr)
+SpaceGameEngine::TString SpaceGameEngine::WStringToTString(const WString& wstr)
 {
 #ifdef _UNICODE
 	return wstr;
@@ -66,7 +66,7 @@ SpaceGameEngine::TString SpaceGameEngine::WStringToTString(const std::wstring& w
 #endif
 }
 
-std::string SpaceGameEngine::TStringToString(const SpaceGameEngine::TString & tstr)
+SpaceGameEngine::String SpaceGameEngine::TStringToString(const SpaceGameEngine::TString & tstr)
 {
 #ifdef _UNICODE
 	return WStringToString(tstr);
@@ -75,11 +75,21 @@ std::string SpaceGameEngine::TStringToString(const SpaceGameEngine::TString & ts
 #endif
 }
 
-std::wstring SpaceGameEngine::TStringToWString(const SpaceGameEngine::TString & tstr)
+SpaceGameEngine::WString SpaceGameEngine::TStringToWString(const SpaceGameEngine::TString & tstr)
 {
 #ifdef _UNICODE
 	return tstr;
 #else
 	return StringToWString(tstr);
 #endif
+}
+
+std::string SpaceGameEngine::StringToStdString(const String & str)
+{
+	return std::string(str.c_str());
+}
+
+std::wstring SpaceGameEngine::WStringToStdWString(const WString & wstr)
+{
+	return std::wstring(wstr.c_str());
 }

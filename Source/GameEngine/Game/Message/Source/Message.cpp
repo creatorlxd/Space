@@ -148,7 +148,7 @@ void SpaceGameEngine::MessageManager::Run()
 	}
 }
 
-bool SpaceGameEngine::MessageManager::DeleteReceiver(const std::string & name)
+bool SpaceGameEngine::MessageManager::DeleteReceiver(const String & name)
 {
 	auto i = m_Receivers.find(name);
 	if (i != m_Receivers.end())
@@ -187,7 +187,7 @@ bool SpaceGameEngine::MessageManager::DeleteReceiver(Receiver * pr)
 	}
 }
 
-bool SpaceGameEngine::MessageManager::AddReceiver(const std::string & name, Receiver * pr)
+bool SpaceGameEngine::MessageManager::AddReceiver(const String & name, Receiver * pr)
 {
 	if (m_Receivers.find(name) != m_Receivers.end())
 	{
@@ -201,7 +201,7 @@ bool SpaceGameEngine::MessageManager::AddReceiver(const std::string & name, Rece
 	}
 }
 
-Receiver * SpaceGameEngine::MessageManager::FindReceiver(const std::string & name)
+Receiver * SpaceGameEngine::MessageManager::FindReceiver(const String & name)
 {
 	auto iter = m_Receivers.find(name);
 	if (iter == m_Receivers.end())
@@ -211,7 +211,7 @@ Receiver * SpaceGameEngine::MessageManager::FindReceiver(const std::string & nam
 	return (*iter).second;
 }
 
-std::string SpaceGameEngine::MessageManager::FindReceiverName(Receiver * pr)
+String SpaceGameEngine::MessageManager::FindReceiverName(Receiver * pr)
 {
 	for (auto i = m_Receivers.begin(); i != m_Receivers.end(); i++)
 	{
@@ -220,7 +220,7 @@ std::string SpaceGameEngine::MessageManager::FindReceiverName(Receiver * pr)
 			return i->first;
 		}
 	}
-	return std::string();
+	return String();
 }
 
 void SpaceGameEngine::MessageManager::SetMaxSize(int i)
@@ -233,7 +233,7 @@ SpaceGameEngine::Sender::Sender()
 	m_Name = "Unkown";
 }
 
-SpaceGameEngine::Sender::Sender(const std::string & name)
+SpaceGameEngine::Sender::Sender(const String & name)
 {
 	m_Name = name;
 }
@@ -254,7 +254,7 @@ void SpaceGameEngine::Sender::ProduceMessage(const Message & message)
 	MessageManager::GetMainManager()->PushMessage(message);
 }
 
-void SpaceGameEngine::Sender::ProduceMessage(const std::string & name, unsigned int c)
+void SpaceGameEngine::Sender::ProduceMessage(const String & name, unsigned int c)
 {
 	if (!MessageManager::GetMainManager())
 	{
@@ -271,7 +271,7 @@ void SpaceGameEngine::Sender::ProduceMessage(MessageManager & manager, const Mes
 	manager.PushMessage(message);
 }
 
-void SpaceGameEngine::Sender::ProduceMessages(const std::vector<std::string>& names, unsigned int c)
+void SpaceGameEngine::Sender::ProduceMessages(const std::vector<String>& names, unsigned int c)
 {
 	if (!MessageManager::GetMainManager())
 	{
@@ -285,7 +285,7 @@ void SpaceGameEngine::Sender::ProduceMessages(const std::vector<std::string>& na
 	}
 }
 
-void SpaceGameEngine::Sender::ProduceMessages(MessageManager & manager, const std::vector<std::string>& names, unsigned int c)
+void SpaceGameEngine::Sender::ProduceMessages(MessageManager & manager, const std::vector<String>& names, unsigned int c)
 {
 	for (auto i : names)
 	{
@@ -307,12 +307,12 @@ void SpaceGameEngine::Sender::DebugLog(const Message & message)
 #endif
 }
 
-void SpaceGameEngine::Sender::SetName(const std::string & name)
+void SpaceGameEngine::Sender::SetName(const String & name)
 {
 	m_Name = name;
 }
 
-std::string SpaceGameEngine::Sender::GetName()
+String SpaceGameEngine::Sender::GetName()
 {
 	return m_Name;
 }

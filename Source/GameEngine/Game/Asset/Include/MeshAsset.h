@@ -21,7 +21,7 @@ namespace SpaceGameEngine
 	struct MeshForModelFileAsset :public Asset
 	{
 		MeshForModelFileAsset();
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 
 		Vector<DefaultVertex> m_Vertices;
 		Vector<unsigned int> m_Indices;

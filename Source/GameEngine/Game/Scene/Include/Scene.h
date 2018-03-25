@@ -39,10 +39,10 @@ namespace SpaceGameEngine
 		创建对象。
 		注意：如果是在Scene运行过程中创建的，应手动调用其Start方法
 		*/
-		Object* NewObject(const std::string name, ObjectMode mode = ObjectMode::Common);
-		Object* GetObjectByName(const std::string name);
+		Object* NewObject(const String name, ObjectMode mode = ObjectMode::Common);
+		Object* GetObjectByName(const String name);
 		bool DeleteObject(Object* po);
-		bool DeleteObject(const std::string name);
+		bool DeleteObject(const String name);
 
 	public:
 		GlobalOctree m_GlobalOctree;		//全局八叉树
@@ -51,7 +51,7 @@ namespace SpaceGameEngine
 		MessageManager m_MessageManager;	//消息管理器
 	private:
 		static Scene* sm_pThis;
-		HashMap<std::string, Object*> m_Content;//储存Object
+		HashMap<String, Object*> m_Content;//储存Object
 		bool m_IfInit;
 	};
 

@@ -21,11 +21,11 @@ limitations under the License.
 using namespace SpaceGameEngine;
 using namespace tinyxml2;
 
-Vector<std::pair<std::string, std::pair<std::string, int>>> SpaceGameEngine::ReadAssetListFromFile(const std::string & filename)
+Vector<std::pair<String, std::pair<String, int>>> SpaceGameEngine::ReadAssetListFromFile(const String & filename)
 {
-	Vector<std::pair<std::string, std::pair<std::string, int>>> re;
+	Vector<std::pair<String, std::pair<String, int>>> re;
 	File file(filename, FileMode::Read);
-	std::string componentname, assetname;
+	String componentname, assetname;
 	int mode;
 	while ((file >> componentname >> assetname >> mode).IfFileReadOver() == false)
 	{
@@ -58,7 +58,7 @@ SpaceGameEngine::Object::~Object()
 			MemoryManager::Delete(i.second);
 }
 
-Component * SpaceGameEngine::Object::GetComponent(const std::string & name)
+Component * SpaceGameEngine::Object::GetComponent(const String & name)
 {
 	auto result = m_Components.end();
 	result = m_Components.find(name);
@@ -94,7 +94,7 @@ bool SpaceGameEngine::Object::AddComponent(Component * pc)
 	}
 }
 
-bool SpaceGameEngine::Object::DeleteComponent(const std::string & name)
+bool SpaceGameEngine::Object::DeleteComponent(const String & name)
 {
 	auto component = m_Components.find(name);
 	if (component == m_Components.end())
@@ -133,7 +133,7 @@ void SpaceGameEngine::Object::Start()
 	}
 }
 
-void SpaceGameEngine::Object::InitFromFile(const Vector<std::pair<std::string, std::pair<std::string, int>>>& filenames)
+void SpaceGameEngine::Object::InitFromFile(const Vector<std::pair<String, std::pair<String, int>>>& filenames)
 {
 	for (const auto& i : filenames)
 	{
@@ -145,12 +145,12 @@ void SpaceGameEngine::Object::InitFromFile(const Vector<std::pair<std::string, s
 	}
 }
 
-void SpaceGameEngine::Object::InitFromFile(const std::string& filename)
+void SpaceGameEngine::Object::InitFromFile(const String& filename)
 {
 	InitFromFile(ReadAssetListFromFile(filename));
 }
 
-void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
+void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 {
 	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(filename.c_str()))
@@ -177,7 +177,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const std::string & filename)
 		}
 		while (strcmp(pelement->Name(), "Component") == 0)
 		{
-			std::string componenttype = pelement->Attribute("Type");
+			String componenttype = pelement->Attribute("Type");
 			if (!componenttype.empty())
 			{
 				pcomponent = NewComponentByTypeName(componenttype);
@@ -273,7 +273,7 @@ void SpaceGameEngine::Object::EveryFrameCleanUp()
 			i.second->EveryFrameCleanUp();
 }
 
-bool SpaceGameEngine::Object::SetRootComponent(const std::string & name)
+bool SpaceGameEngine::Object::SetRootComponent(const String & name)
 {
 	auto component = GetComponent(name);
 	if (component == nullptr)

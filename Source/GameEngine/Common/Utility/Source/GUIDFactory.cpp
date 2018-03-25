@@ -25,7 +25,7 @@ bool SpaceGameEngine::GUIDFactory::IfGUIDHasBeenUsed(GUIDType c)
 		return true;
 }
 
-SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const std::string & str)
+SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const String & str)
 {
 	GUIDType c = HashString(str);
 	while (IfGUIDHasBeenUsed(c))
@@ -36,7 +36,7 @@ SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const st
 	return c;
 }
 
-std::string SpaceGameEngine::GUIDFactory::GetStringByGUID(GUIDType c)
+SpaceGameEngine::String SpaceGameEngine::GUIDFactory::GetStringByGUID(GUIDType c)
 {
 	auto iter = m_Content.find(c);
 	if (iter != m_Content.end())

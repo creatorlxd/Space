@@ -24,12 +24,12 @@ void SpaceGameEngine::ThrowError(const TString & errormessage)
 #endif
 }
 #ifndef _UNICODE
-void SpaceGameEngine::ThrowError(const std::wstring& errormessage)
+void SpaceGameEngine::ThrowError(const WString& errormessage)
 {
 	ThrowError(WStringToTString(errormessage));
 }
 #else
-void SpaceGameEngine::ThrowError(const std::string& errormessage)
+void SpaceGameEngine::ThrowError(const String& errormessage)
 {
 	ThrowError(StringToTString(errormessage));
 }

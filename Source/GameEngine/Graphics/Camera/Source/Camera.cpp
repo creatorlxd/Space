@@ -17,8 +17,6 @@ limitations under the License.
 #include "../Include/Camera.h" 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(CameraComponent);
-
 SpaceGameEngine::CameraComponent* SpaceGameEngine::CameraComponent::sm_pThis = nullptr;
 
 SpaceGameEngine::CameraComponent::CameraComponent()

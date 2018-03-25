@@ -29,15 +29,15 @@ namespace SpaceGameEngine
 	public:
 		Component();
 		virtual ~Component();
-		std::string GetTypeName();			//获取类型名
+		String GetTypeName();			//获取类型名
 		Component* GetFatherComponent();	//获取父组件
 		void SetFatherComponent(Component* pc);//设置父组件
 		void AddChildComponent(Component* pc);	//添加子组件
 		bool DeleteChildComponent(Component* pc);	//删除子组件
-		Component* FindChildComponent(const std::string& name);	//在所有子组件中寻找类型为name的组件(BFS)
-		Component* FindFatherComponent(const std::string& name);//在所有父组件中寻找类型为name的组件
+		Component* FindChildComponent(const String& name);	//在所有子组件中寻找类型为name的组件(BFS)
+		Component* FindFatherComponent(const String& name);//在所有父组件中寻找类型为name的组件
 		Vector<Component*>& GetChildrenComponent();	//获得子组件数组的引用
-		virtual void InitFromFile(const std::string& filename, int mode = 0);
+		virtual void InitFromFile(const String& filename, int mode = 0);
 		virtual void Start();			//在开始时执行
 		virtual void Run(float DeltaTime);//每帧运行时的操作
 		virtual void EveryFrameCleanUp();
@@ -53,10 +53,10 @@ namespace SpaceGameEngine
 		void SetMode(int m);				//获得组件内部具体模式
 		int GetMode();						//设置组件内部具体模式
 		template<typename T>
-		const T* ReadAssetFromFile(const std::string& filename);
+		const T* ReadAssetFromFile(const String& filename);
 		const Asset* GetAsset();
 	protected:
-		std::string m_TypeName;				//组件的类型名
+		String m_TypeName;				//组件的类型名
 		int m_Mode;							//组件内部具体模式
 		bool m_IfRun;						//是否每帧运行
 		bool m_IfUse;						//是否使用
@@ -67,7 +67,7 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	inline const T * Component::ReadAssetFromFile(const std::string & filename)
+	inline const T * Component::ReadAssetFromFile(const String & filename)
 	{
 		auto re = GetAssetByFileName<T>(filename);
 		m_pAsset = (const Asset*)re;

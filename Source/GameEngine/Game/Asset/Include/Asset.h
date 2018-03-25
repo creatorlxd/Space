@@ -24,8 +24,8 @@ namespace SpaceGameEngine
 	{
 		Asset();
 		virtual ~Asset();
-		std::string m_FileName, m_TypeName;
-		virtual void InitFromFile(const std::string& filename);
+		String m_FileName, m_TypeName;
+		virtual void InitFromFile(const String& filename);
 	};
 
 	class AssetManager
@@ -33,20 +33,20 @@ namespace SpaceGameEngine
 	public:
 		~AssetManager();
 		template<typename T>
-		const T* NewAssetFromFile(const std::string& filename);
+		const T* NewAssetFromFile(const String& filename);
 		bool AddAsset(Asset* pa);
-		const Asset* GetAsset(const std::string& name);
+		const Asset* GetAsset(const String& name);
 	public:
 		friend struct StdAllocatorInterface;
 		friend struct MemoryManagerAllocatorInterface;
 	private:
-		HashMap<std::string, Asset*> m_Content;
+		HashMap<String, Asset*> m_Content;
 	};
 
 	AssetManager& GetAssetManager();
 
 	template<typename T>
-	inline const T * AssetManager::NewAssetFromFile(const std::string & filename)
+	inline const T * AssetManager::NewAssetFromFile(const String & filename)
 	{
 		T* re = MemoryManager::New<T>();
 		re->InitFromFile(filename);
@@ -55,7 +55,7 @@ namespace SpaceGameEngine
 	}
 
 	template<typename T>
-	const T* GetAssetByFileName(const std::string& filename)
+	const T* GetAssetByFileName(const String& filename)
 	{
 		auto rebuff = GetAssetManager().GetAsset(filename);
 		if (rebuff)

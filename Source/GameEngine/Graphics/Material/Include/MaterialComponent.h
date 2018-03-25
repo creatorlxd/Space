@@ -23,14 +23,14 @@ namespace SpaceGameEngine
 	class MaterialComponent :public Component
 	{
 	public:
+		REGISTER_COMPONENT(MaterialComponent);
+
 		MaterialComponent();
 		~MaterialComponent();
 
 		static const int SingleMode = 1;
 
-		static ComponentFactory<MaterialComponent> NewComponent;
-
-		void InitFromFile(const std::string& filename, int mode = 0);
+		void InitFromFile(const String& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();

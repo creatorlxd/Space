@@ -22,7 +22,7 @@ namespace SpaceGameEngine
 	struct LightAsset :public Asset
 	{
 		LightAsset();
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 
 		Light m_Content;
 	};

@@ -17,8 +17,6 @@ limitations under the License.
 #include "../Include/Transform.h" 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(TransformComponent);
-
 SpaceGameEngine::TransformComponent::TransformComponent()
 {
 	m_TypeName = "TransformComponent";
@@ -32,7 +30,7 @@ SpaceGameEngine::TransformComponent::~TransformComponent()
 	
 }
 
-void SpaceGameEngine::TransformComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::TransformComponent::InitFromFile(const String & filename, int mode)
 {
 	m_Mode = mode;
 	

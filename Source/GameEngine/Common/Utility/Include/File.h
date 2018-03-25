@@ -34,18 +34,18 @@ namespace SpaceGameEngine
 		EndLine = 1
 	};
 
-	Vector<std::string> GetDirectoryName(const std::string& filepath);
+	Vector<String> GetDirectoryName(const String& filepath);
 
-	void CheckAndCreateDirectory(const std::string& str);					//如果没找到文件所在的目录，则创建目录
+	void CheckAndCreateDirectory(const String& str);					//如果没找到文件所在的目录，则创建目录
 
 	class File
 	{
 	public:
 		File();
 		~File();
-		File(const std::string& filename, unsigned char mode);
+		File(const String& filename, unsigned char mode);
 
-		void Open(const std::string& filename, unsigned char mode);
+		void Open(const String& filename, unsigned char mode);
 		void Close();
 		FilePosition GetBeginPosition();
 		FilePosition GetEndPosition();
@@ -58,10 +58,10 @@ namespace SpaceGameEngine
 		bool IfFileReadOver();				//文件是否读取完了
 
 		File& operator >> (wchar_t* cwstr);
-		File& operator >> (std::wstring& wstr);
+		File& operator >> (WString& wstr);
 		File& operator >> (wchar_t& wc);
 		File& operator >> (char* cstr);
-		File& operator >> (std::string& str);
+		File& operator >> (String& str);
 		File& operator >> (int& i);
 		File& operator >> (unsigned int& ui);
 		File& operator >> (short& s);
@@ -77,11 +77,11 @@ namespace SpaceGameEngine
 		File& operator >> (long double& ld);
 
 		File& operator << (const wchar_t* wcstr);
-		File& operator << (const std::wstring& wstr);
+		File& operator << (const WString& wstr);
 		File& operator << (const wchar_t& wc);
 		File& operator << (const PrintMode& pm);
 		File& operator << (const char* cstr);
-		File& operator << (const std::string& str);
+		File& operator << (const String& str);
 		File& operator << (const int& i);
 		File& operator << (const unsigned int& ui);
 		File& operator << (const short& s);
@@ -96,10 +96,10 @@ namespace SpaceGameEngine
 		File& operator << (const double& d);
 		File& operator << (const long double& ld);
 
-		bool GetLine(std::string& str);
+		bool GetLine(String& str);
 	private:
 		FILE* m_pFile;
-		std::string m_FileName;
+		String m_FileName;
 		unsigned int m_FileMode;
 		bool m_IfFileReadOver;
 	};

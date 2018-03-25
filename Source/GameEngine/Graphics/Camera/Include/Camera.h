@@ -23,6 +23,8 @@ namespace SpaceGameEngine
 	class CameraComponent :public Component
 	{
 	public:
+		REGISTER_COMPONENT(CameraComponent)
+
 		CameraComponent();
 		~CameraComponent();
 
@@ -62,7 +64,5 @@ namespace SpaceGameEngine
 		void UpdatePosition();
 
 		static CameraComponent* sm_pThis;
-	public:
-		static ComponentFactory<CameraComponent> NewComponent;
 	};
 }

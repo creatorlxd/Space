@@ -20,7 +20,7 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	static std::map<std::string, void*> s_InitializationMap;		//初始值表
+	static std::map<String, void*> s_InitializationMap;		//初始值表
 
 	inline void InitInitializationMap()			//初始化初始值表
 	{

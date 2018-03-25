@@ -29,7 +29,7 @@ namespace SpaceGameEngine
 		PixelShader();
 		~PixelShader();
 		void Clear();
-		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, const std::string& includefilename, const std::string& entryname, D3D_SHADER_MACRO* macros);
+		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, const String& includefilename, const String& entryname, D3D_SHADER_MACRO* macros);
 		void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);			//简化版:includefilename = "",entryname = "main"
 		void SetAsMainShader(ID3D11DeviceContext* pDeviceContext);							//设置为当前使用的shader
 		ID3DBlob* GetBuffer();

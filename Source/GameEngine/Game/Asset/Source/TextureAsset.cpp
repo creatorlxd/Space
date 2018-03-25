@@ -27,7 +27,7 @@ SpaceGameEngine::TextureAsset::TextureAsset(const TextureAsset & ta)
 		m_Content = ta.m_Content;
 }
 
-void SpaceGameEngine::TextureAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::TextureAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 

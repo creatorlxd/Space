@@ -25,6 +25,7 @@ namespace SpaceGameEngine
 	class LightComponent :public Component
 	{
 	public:
+		REGISTER_COMPONENT(LightComponent);
 
 		static const int StaticMode = 1;
 		static const int DynamicMode = 2;
@@ -32,7 +33,7 @@ namespace SpaceGameEngine
 		LightComponent();
 		~LightComponent();
 
-		void InitFromFile(const std::string& filename, int mode = 0);
+		void InitFromFile(const String& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();
@@ -40,8 +41,6 @@ namespace SpaceGameEngine
 
 		bool IfOn();
 		void ChangeIfOn(bool b);
-
-		static ComponentFactory<LightComponent> NewComponent;
 	private:
 		LightEx m_Content;
 		TransformComponent* m_pTransform;

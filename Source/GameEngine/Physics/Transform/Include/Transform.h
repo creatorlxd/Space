@@ -28,7 +28,7 @@ namespace SpaceGameEngine
 	class TransformComponent :public Component				//物体的基本物理信息
 	{
 	public:
-		static ComponentFactory<TransformComponent> NewComponent;		//创建组件
+		REGISTER_COMPONENT(TransformComponent);
 
 		static const int ForRenderingMode = 1 << 0;
 		static const int InformationMode = 1 << 1;
@@ -37,7 +37,7 @@ namespace SpaceGameEngine
 		TransformComponent();
 		~TransformComponent();
 
-		void InitFromFile(const std::string& filename, int mode = 0);
+		void InitFromFile(const String& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
 		void CleanUp();

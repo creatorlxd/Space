@@ -17,9 +17,9 @@ limitations under the License.
 #include "Space.h"
 using namespace SpaceGameEngine;
 
-unsigned int SpaceGameEngine::HashString(const std::string & str)
+unsigned int SpaceGameEngine::HashString(const String & str)
 {
-	std::hash<std::string> sh;
+	std::hash<String> sh;
 	return static_cast<unsigned int>(sh(str));
 }
 
@@ -57,7 +57,7 @@ void SpaceGameEngine::SetDefaultResterizerState(ID3D11Device * device, ID3D11Ras
 	HR(device->CreateRasterizerState(&desc, rasterizerstate));
 }
 
-void SpaceGameEngine::CompileShaderFromFile(LPCWSTR filename,const std::string& includefilename, const std::string & entryname, const std::string & target, D3D_SHADER_MACRO* macros,ID3DBlob ** ShaderByteCode)
+void SpaceGameEngine::CompileShaderFromFile(LPCWSTR filename,const String& includefilename, const String & entryname, const String & target, D3D_SHADER_MACRO* macros,ID3DBlob ** ShaderByteCode)
 {
 	ID3DBlob* errormsg;
 	LPCSTR sourcefile = includefilename.empty() == true ? NULL : includefilename.c_str();

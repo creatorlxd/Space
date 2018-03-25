@@ -31,19 +31,19 @@ namespace SpaceGameEngine
 	struct ConfigFileValue
 	{
 		ConfigFileValueType m_Type;
-		std::string m_Content;
+		String m_Content;
 
 		int AsInt();
 		float AsFloat();
 		double AsDouble();
 		char AsChar();
-		std::string AsString();
+		String AsString();
 
 		void Set(int i);
 		void Set(float f);
 		void Set(double d);
 		void Set(char c);
-		void Set(const std::string& str);
+		void Set(const String& str);
 	};
 
 	class ConfigTable
@@ -51,33 +51,33 @@ namespace SpaceGameEngine
 	public:
 		friend class ConfigFile;
 
-		ConfigFileValue& GetConfigValue(const std::string& name);
+		ConfigFileValue& GetConfigValue(const String& name);
 	private:
-		Map<std::string, ConfigFileValue> m_Content;
+		Map<String, ConfigFileValue> m_Content;
 	};
 
 	class ConfigFile
 	{
 	public:
 		ConfigFile();
-		ConfigFile(const std::string& filename);
+		ConfigFile(const String& filename);
 
-		ConfigTable & GetConfigTable(const std::string& name);
+		ConfigTable & GetConfigTable(const String& name);
 
 		/*
 		接受由getline获取的一组字符串进行解析
 		*/
-		void Parse(const Vector<std::string>& strs);
-		void InitFromFile(const std::string& filename);
+		void Parse(const Vector<String>& strs);
+		void InitFromFile(const String& filename);
 		/*
 		保存配置表到某个文件，但不保留注释
 		*/
-		void SaveToFile(const std::string& filename);
+		void SaveToFile(const String& filename);
 	public:
 		friend struct StdAllocatorInterface;
 		friend struct MemoryManagerAllocatorInterface;
 	private:
-		Map<std::string, ConfigTable> m_Content;
+		Map<String, ConfigTable> m_Content;
 	};
 
 	ConfigFile& GetDefaultConfigFile();

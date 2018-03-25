@@ -21,7 +21,7 @@ SpaceGameEngine::MaterialAsset::MaterialAsset()
 	m_TypeName = "MaterialAsset";
 }
 
-void SpaceGameEngine::MaterialAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::MaterialAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 

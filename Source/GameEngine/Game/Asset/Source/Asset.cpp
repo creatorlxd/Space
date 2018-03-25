@@ -27,7 +27,7 @@ SpaceGameEngine::Asset::~Asset()
 
 }
 
-void SpaceGameEngine::Asset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::Asset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 }
@@ -57,7 +57,7 @@ bool SpaceGameEngine::AssetManager::AddAsset(Asset * pa)
 	return true;
 }
 
-const SpaceGameEngine::Asset * SpaceGameEngine::AssetManager::GetAsset(const std::string & name)
+const SpaceGameEngine::Asset * SpaceGameEngine::AssetManager::GetAsset(const String & name)
 {
 	auto iter = m_Content.find(name);
 	if (iter != m_Content.end())

@@ -16,7 +16,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "../Include/ComponentFactory.h"
 
-SpaceGameEngine::Component * SpaceGameEngine::NewComponentByTypeName(const std::string type_name)
+SpaceGameEngine::Component * SpaceGameEngine::NewComponentByTypeName(const String type_name)
 {
 	return GetComponentInformationManager().GetInformation(type_name).m_FactoryFunction();
 }

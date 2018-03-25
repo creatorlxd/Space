@@ -15,24 +15,28 @@ limitations under the License.
 */
 #pragma once
 #include <string>
+#include "Common/MemoryManager/Include/AllocatorForSTL.hpp"
 
 namespace SpaceGameEngine
 {
 #ifdef _UNICODE
 #define tcin std::wcin
 #define tfstream std::wfstream
-using TString = std::wstring;
+using TString = WString;
 #else
 #define tcin std::cin
 #define tfstream std::fstream
-using TString = std::string;
+using TString = String;
 #endif
 
-	std::wstring StringToWString(const std::string& str);
-	std::string WStringToString(const std::wstring& wstr);
+	WString StringToWString(const String& str);
+	String WStringToString(const WString& wstr);
 
-	TString StringToTString(const std::string& str);
-	TString WStringToTString(const std::wstring& wstr);
-	std::string TStringToString(const TString& tstr);
-	std::wstring TStringToWString(const TString& tstr);
+	TString StringToTString(const String& str);
+	TString WStringToTString(const WString& wstr);
+	String TStringToString(const TString& tstr);
+	WString TStringToWString(const TString& tstr);
+
+	std::string StringToStdString(const String& str);
+	std::wstring WStringToStdWString(const WString& wstr);
 }

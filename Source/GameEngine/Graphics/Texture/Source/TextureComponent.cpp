@@ -18,8 +18,6 @@ limitations under the License.
 
 using namespace SpaceGameEngine;
 
-REGISTERCOMPONENTCLASS(TextureComponent);
-
 SpaceGameEngine::TextureComponent::TextureComponent()
 {
 	m_TypeName = STRING(TextureComponent);
@@ -52,7 +50,7 @@ void SpaceGameEngine::TextureComponent::CleanUp()
 	}
 }
 
-void SpaceGameEngine::TextureComponent::InitFromFile(const std::string & filename, int mode)
+void SpaceGameEngine::TextureComponent::InitFromFile(const String & filename, int mode)
 {
 	m_Mode = mode;
 	if (m_Mode&SingleMode)
@@ -163,7 +161,7 @@ void SpaceGameEngine::TextureComponent::SetTransformMatrix(const XMMATRIX & mat)
 	}
 }
 
-void SpaceGameEngine::TextureComponent::AddTexture(const std::string& filename, XMMATRIX mat)
+void SpaceGameEngine::TextureComponent::AddTexture(const String& filename, XMMATRIX mat)
 {
 	if (m_Mode != SingleMode)
 	{

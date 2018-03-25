@@ -21,7 +21,7 @@ SpaceGameEngine::MeshForModelFileAsset::MeshForModelFileAsset()
 	m_TypeName = "MeshForModelFileAsset";
 }
 
-void SpaceGameEngine::MeshForModelFileAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::MeshForModelFileAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 

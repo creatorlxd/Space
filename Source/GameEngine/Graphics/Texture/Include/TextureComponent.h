@@ -24,27 +24,28 @@ namespace SpaceGameEngine
 	class TextureComponent:public Component		//纹理组件，目前还不支持多纹理
 	{
 	public:
+		REGISTER_COMPONENT(TextureComponent);
+
 		static const int SingleMode = 1;
 		static const int MultipleMode = 2;
 
 		TextureComponent();
 		~TextureComponent();
 		void CleanUp();
-		static ComponentFactory<TextureComponent> NewComponent;
 
-		void InitFromFile(const std::string& filename, int mode = 0);
+		void InitFromFile(const String& filename, int mode = 0);
 		void Start();
 		void Run(float DeltaTime);
 		void Copy(Component* pc);
 
 		void SetTexture(TextureAsset& ta);
 		void SetTransformMatrix(const XMMATRIX& mat);
-		void AddTexture(const std::string& filename, XMMATRIX mat);
+		void AddTexture(const String& filename, XMMATRIX mat);
 		TextureAsset GetTexture();
 	private:
 		XMMATRIX m_TextureTransformMatrix;
 		
-		std::string m_FileName;					//用于延迟初始化
+		String m_FileName;					//用于延迟初始化
 		TextureAsset m_Content;
 	};
 }

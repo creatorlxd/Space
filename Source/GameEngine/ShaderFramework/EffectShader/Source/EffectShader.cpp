@@ -52,7 +52,7 @@ void SpaceGameEngine::EffectShader::InitFromFile(ID3D11Device * pDevice, LPCWSTR
 	InitFromFile(pDevice, filename, NULL);
 }
 
-void SpaceGameEngine::EffectShader::SetTechnique(const std::string & filename)
+void SpaceGameEngine::EffectShader::SetTechnique(const String & filename)
 {
 	m_pTechnique=m_pContent->GetTechniqueByName(filename.c_str());
 }

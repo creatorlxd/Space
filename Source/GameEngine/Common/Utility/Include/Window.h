@@ -73,7 +73,7 @@ namespace SpaceGameEngine
 
 		void ChangeIfUse4xMsaa(bool b);					//设置是否使用4X MASS多重采样
 
-		void InitDefaultEffectShaderFromFile(const std::string& filename,DefaultEffectShader& shader);
+		void InitDefaultEffectShaderFromFile(const String& filename,DefaultEffectShader& shader);
 		DefaultEffectShader& GetEffectShader();
 		Vector<DefaultEffectShader*>& GetDefaultEffectShader();
 
@@ -87,7 +87,7 @@ namespace SpaceGameEngine
 		RenderQuality GetRenderQuality();
 		void SetRenderQuality(const RenderQuality& rq);
 	private:
-		Vector<std::pair<DefaultEffectShader*, std::string>> m_InitializationDefaultEffectShaderList;
+		Vector<std::pair<DefaultEffectShader*, String>> m_InitializationDefaultEffectShaderList;
 	protected:
 		virtual void Release();							//释放窗口
 		bool m_IfReleased;

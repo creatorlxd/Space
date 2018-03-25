@@ -54,14 +54,14 @@ void SpaceGameEngine::Scene::Start()
 		Object* DefaultCamera = NewObject("DefaultCamera");
 		DefaultCamera->AddComponent(CameraComponent::NewComponent());
 		DefaultCamera->AddComponent(TransformComponent::NewComponent());
-		DefaultCamera->SetRootComponent(TransformComponent::NewComponent.m_Name);
-		DefaultCamera->GetComponent(CameraComponent::NewComponent.m_Name)->Attach(DefaultCamera->GetRootComponent());
+		DefaultCamera->SetRootComponent(TransformComponent::GetComponentFactory().m_Name);
+		DefaultCamera->GetComponent(CameraComponent::GetComponentFactory().m_Name)->Attach(DefaultCamera->GetRootComponent());
 		//--------------
 		m_IfInit = true;
 	}
 	else
 	{
-		GetObjectByName("DefaultCamera")->GetComponent(CameraComponent::NewComponent.m_Name)->Run(0.0f);
+		GetObjectByName("DefaultCamera")->GetComponent(CameraComponent::GetComponentFactory().m_Name)->Run(0.0f);
 	}
 	
 	for (auto i : m_Content)
@@ -139,7 +139,7 @@ void SpaceGameEngine::Scene::Run(float DeltaTime)
 	}
 }
 
-Object * SpaceGameEngine::Scene::NewObject(const std::string name, ObjectMode mode)
+Object * SpaceGameEngine::Scene::NewObject(const String name, ObjectMode mode)
 {
 	if (GetObjectByName(name) != nullptr)
 	{
@@ -160,7 +160,7 @@ Object * SpaceGameEngine::Scene::NewObject(const std::string name, ObjectMode mo
 	}
 }
 
-Object * SpaceGameEngine::Scene::GetObjectByName(const std::string name)
+Object * SpaceGameEngine::Scene::GetObjectByName(const String name)
 {
 	auto iter = m_Content.find(name);
 	if (iter != m_Content.end())
@@ -222,7 +222,7 @@ bool SpaceGameEngine::Scene::DeleteObject(Object * po)
 	}
 }
 
-bool SpaceGameEngine::Scene::DeleteObject(const std::string name)
+bool SpaceGameEngine::Scene::DeleteObject(const String name)
 {
 	return DeleteObject(GetObjectByName(name));
 }

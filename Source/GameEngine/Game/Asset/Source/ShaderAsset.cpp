@@ -26,7 +26,7 @@ SpaceGameEngine::DefaultEffectShaderAsset::~DefaultEffectShaderAsset()
 	
 }
 
-void SpaceGameEngine::DefaultEffectShaderAsset::InitFromFile(const std::string & filename)
+void SpaceGameEngine::DefaultEffectShaderAsset::InitFromFile(const String & filename)
 {
 	m_FileName = filename;
 	SpaceEngineWindow->InitDefaultEffectShaderFromFile(filename, m_Content);

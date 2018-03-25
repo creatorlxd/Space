@@ -500,7 +500,7 @@ void SpaceGameEngine::Window::ChangeIfUse4xMsaa(bool b)
 	m_IfUse4xMsaa = b;
 }
 
-void SpaceGameEngine::Window::InitDefaultEffectShaderFromFile(const std::string & filename, DefaultEffectShader & shader)
+void SpaceGameEngine::Window::InitDefaultEffectShaderFromFile(const String & filename, DefaultEffectShader & shader)
 {
 	if (m_IfBegin)
 	{

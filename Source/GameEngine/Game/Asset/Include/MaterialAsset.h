@@ -22,7 +22,7 @@ namespace SpaceGameEngine
 	struct MaterialAsset :public Asset
 	{
 		MaterialAsset();
-		void InitFromFile(const std::string& filename);
+		void InitFromFile(const String& filename);
 
 		Material m_Content;
 	};

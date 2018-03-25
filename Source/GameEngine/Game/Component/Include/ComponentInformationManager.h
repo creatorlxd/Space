@@ -22,25 +22,25 @@ namespace SpaceGameEngine
 {
 	struct ComponentInformation
 	{
-		std::string m_Name;
+		String m_Name;
 		size_t m_MemorySize;
 		std::function<Component*(void)> m_FactoryFunction;
 
 		ComponentInformation();
-		ComponentInformation(const std::string& name, size_t size);
-		ComponentInformation(const std::string& name, size_t size, std::function<Component*(void)> func);
+		ComponentInformation(const String& name, size_t size);
+		ComponentInformation(const String& name, size_t size, std::function<Component*(void)> func);
 	};
 
 	class ComponentInformationManager
 	{
 	public:
 		bool AddInformation(const ComponentInformation& info);
-		const ComponentInformation& GetInformation(const std::string& name);
+		const ComponentInformation& GetInformation(const String& name);
 	public:
 		friend struct StdAllocatorInterface;
 		friend struct MemoryManagerAllocatorInterface;
 	private:
-		Map<std::string, ComponentInformation> m_Content;
+		Map<String, ComponentInformation> m_Content;
 	};
 
 	ComponentInformationManager& GetComponentInformationManager();

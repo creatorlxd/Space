@@ -20,11 +20,11 @@ namespace SpaceGameEngine
 {
 	struct Message					//消息
 	{
-		std::string m_ReceiverName;		//接受器的名称
+		String m_ReceiverName;		//接受器的名称
 		unsigned int m_Content;					//消息的内容		
 		Message();
 		Message(unsigned int c);
-		Message(const std::string& name, unsigned int c) :
+		Message(const String& name, unsigned int c) :
 			m_ReceiverName(name), m_Content(c)
 		{}
 	};
@@ -60,7 +60,7 @@ namespace SpaceGameEngine
 		template<typename T>
 		struct NewReceiver
 		{
-			Receiver* operator () (const std::string& name)
+			Receiver* operator () (const String& name)
 			{
 				if (sm_pThis == nullptr)
 				{
@@ -78,15 +78,15 @@ namespace SpaceGameEngine
 			}
 		};
 		NewReceiver<Receiver> NewBaseReceiver;
-		bool DeleteReceiver(const std::string& name);
+		bool DeleteReceiver(const String& name);
 		bool DeleteReceiver(Receiver* pr);
-		bool AddReceiver(const std::string& name, Receiver* pr);
-		Receiver* FindReceiver(const std::string& name);
-		std::string FindReceiverName(Receiver* pr);
+		bool AddReceiver(const String& name, Receiver* pr);
+		Receiver* FindReceiver(const String& name);
+		String FindReceiverName(Receiver* pr);
 		void SetMaxSize(int i);
 	private:
 		static MessageManager* sm_pThis;
-		Map<std::string, Receiver*> m_Receivers;
+		Map<String, Receiver*> m_Receivers;
 		Queue<Message> m_GlobalMessageQueue;
 		int m_MaxSize;
 	};
@@ -95,21 +95,21 @@ namespace SpaceGameEngine
 	{
 	public:
 		Sender();
-		Sender(const std::string& name);
+		Sender(const String& name);
 		~Sender();
 
 		void ProduceMessage(const Message& message);			//产生并发送消息
-		void ProduceMessage(const std::string& name, unsigned int c);	//产生并发送消息
+		void ProduceMessage(const String& name, unsigned int c);	//产生并发送消息
 		void ProduceMessage(MessageManager& manager, const Message& message);	//产生并发送消息
-		void ProduceMessages(const std::vector<std::string>& names, unsigned int c);		//发送同一消息给多个对象
-		void ProduceMessages(MessageManager& manager, const std::vector<std::string>& names, unsigned int c);	//发送同一消息给多个对象
+		void ProduceMessages(const std::vector<String>& names, unsigned int c);		//发送同一消息给多个对象
+		void ProduceMessages(MessageManager& manager, const std::vector<String>& names, unsigned int c);	//发送同一消息给多个对象
 		void FastProduceMessage(Receiver& r, const Message& message);			//快速发送消息（不经过管理器队列）：不推荐使用
 
 		void DebugLog(const Message& message);
 
-		void SetName(const std::string& name);
-		std::string GetName();
+		void SetName(const String& name);
+		String GetName();
 	private:
-		std::string m_Name;
+		String m_Name;
 	};
 }

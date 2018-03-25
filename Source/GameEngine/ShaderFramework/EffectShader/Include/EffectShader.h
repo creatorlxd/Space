@@ -30,7 +30,7 @@ namespace SpaceGameEngine
 		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename, D3D_SHADER_MACRO* macros);
 		virtual void InitFromFile(ID3D11Device* pDevice, LPCWSTR filename);
 
-		void SetTechnique(const std::string& filename);
+		void SetTechnique(const String& filename);
 
 		EffectShader(const EffectShader&) = delete;
 		void operator = (const EffectShader& shader) = delete;
