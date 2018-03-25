@@ -16,13 +16,19 @@ limitations under the License.
 #pragma once
 #include "ComponentInformationManager.h"
 
+/*
+REGISTER_COMPONENT必须要被使用在Component子类的public域中
+*/
 #define REGISTER_COMPONENT(classname)	\
 static SpaceGameEngine::ComponentFactory<classname>& GetComponentFactory()\
 {\
 	static GlobalVariable<ComponentFactory<classname>> g_ComponentFactory(STRING(classname));\
 	return g_ComponentFactory.Get();\
 }\
-static SpaceGameEngine::Component* NewComponent(){return GetComponentFactory()();}
+static SpaceGameEngine::Component* NewComponent(){return GetComponentFactory()();}\
+private:\
+inline static ComponentFactory<classname>& sm_ComponentFactory=GetComponentFactory();\
+public:
 
 namespace SpaceGameEngine
 {
