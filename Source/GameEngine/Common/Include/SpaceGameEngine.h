@@ -30,5 +30,6 @@ limitations under the License.
 #include "Graphics/Light/Include/LightComponent.h"
 #include "Graphics/Material/Include/Material.h"
 #include "Graphics/Material/Include/MaterialComponent.h"
+#include "Graphics/Texture/Include/TextureComponent.h"
 
 using namespace SpaceGameEngine;
