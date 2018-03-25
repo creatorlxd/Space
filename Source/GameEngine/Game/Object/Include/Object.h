@@ -76,8 +76,8 @@ namespace SpaceGameEngine
 		template<typename T>
 		T* GetComponent();
 		/*
-		*添加组件，并不连接
-		*注意：如果是在Scene运行过程中添加的，并且该Object是在Scene开始运行之前就已经创建好的，则应手动调用该Componentd的Start方法
+		添加组件，并不连接
+		注意：如果是在Scene运行过程中添加的，并且该Object是在Scene开始运行之前就已经创建好的，则应手动调用该Componentd的Start方法
 		*/
 		bool AddComponent(Component* pc);						
 		bool DeleteComponent(const String& name);			//删除组件，并去除连接

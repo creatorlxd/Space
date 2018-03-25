@@ -164,8 +164,8 @@ void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 	XMLElement* pelement = proot;
 	if (strcmp(pelement->Name(), "Object") == 0)
 	{
-		pelement = pelement->FirstChildElement();
-		if(strcmp(pelement->Name(),"Component"))
+		pelement = pelement->FirstChildElement("Component");
+		if(pelement)
 		{
 			ThrowError("object in xml must have a root component");
 			return;
@@ -191,8 +191,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 				auto pinitfromfile = pelement->FirstChildElement("InitFromFile");
 				if (pinitfromfile)
 				{
-					auto mode = pinitfromfile->UnsignedAttribute("Mode");
-					pcomponent->InitFromFile(pinitfromfile->GetText(), mode);
+					pcomponent->InitFromFile(pinitfromfile->GetText(), pinitfromfile->UnsignedAttribute("Mode"));
 				}
 				auto nextcomponent = pelement->FirstChildElement("Component");
 				if (nextcomponent)
@@ -218,6 +217,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 						pelement = nextcomponent;
 					else
 						break;
+					continue;
 				}
 				else
 				{
@@ -230,6 +230,9 @@ void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 				return;
 			}
 		}
+		auto initfromassetlist = proot->FirstChildElement("InitFromFile");
+		if (initfromassetlist)
+			InitFromFile(initfromassetlist->GetText());
 	}
 	else
 	{
