@@ -165,7 +165,7 @@ void SpaceGameEngine::Object::InitFromXMLFile(const String & filename)
 	if (strcmp(pelement->Name(), "Object") == 0)
 	{
 		pelement = pelement->FirstChildElement("Component");
-		if(pelement)
+		if(!pelement)
 		{
 			ThrowError("object in xml must have a root component");
 			return;
