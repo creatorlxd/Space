@@ -28,7 +28,8 @@ namespace SpaceGameEngine
 		
 		bool IfGUIDHasBeenUsed(GUIDType c);
 		GUIDType GetGUIDByString(const std::string& str);
+		std::string GetStringByGUID(GUIDType c);
 	private:
-		Map<GUIDType, bool> m_Content;
+		Map<GUIDType, std::string> m_Content;
 	};
 }

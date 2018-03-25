@@ -32,6 +32,15 @@ SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const st
 	{
 		c += 1;
 	}
-	m_Content.insert(std::make_pair(c, true));
+	m_Content.insert(std::make_pair(c, str));
 	return c;
+}
+
+std::string SpaceGameEngine::GUIDFactory::GetStringByGUID(GUIDType c)
+{
+	auto iter = m_Content.find(c);
+	if (iter != m_Content.end())
+		return iter->second;
+	else
+		return "";
 }
