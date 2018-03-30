@@ -511,6 +511,7 @@
     <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h" />
     <ClInclude Include="Source\GameEngine\ShaderFramework\EffectShader\Include\EffectShader.h" />
     <ClInclude Include="Source\GameEngine\ShaderFramework\PixelShader\Include\PixelShader.h" />
+    <ClInclude Include="Source\GameEngine\ShaderFramework\ShaderComponent\Include\ShaderComponent.h" />
     <ClInclude Include="Source\GameEngine\ShaderFramework\VertexShader\Include\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -593,6 +594,7 @@
     <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFramework\EffectShader\Source\EffectShader.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFramework\PixelShader\Source\PixelShader.cpp" />
+    <ClCompile Include="Source\GameEngine\ShaderFramework\ShaderComponent\Source\ShaderComponent.cpp" />
     <ClCompile Include="Source\GameEngine\ShaderFramework\VertexShader\Source\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>

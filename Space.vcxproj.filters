@@ -319,6 +319,15 @@
     <Filter Include="ShaderFramework\EffectShader\Source">
       <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderFramework\ShaderComponent">
+      <UniqueIdentifier>{597f3546-b321-4fb4-8f64-ae820a9f085b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\ShaderComponent\Include">
+      <UniqueIdentifier>{8dc19552-5683-4e8f-98d5-252774c0083a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFramework\ShaderComponent\Source">
+      <UniqueIdentifier>{11100702-96cf-4113-8e9d-c520fe64c344}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -541,6 +550,9 @@
     <ClInclude Include="Source\GameEngine\ShaderFramework\VertexShader\Include\VertexShader.h">
       <Filter>ShaderFramework\VertexShader\Include</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\ShaderFramework\ShaderComponent\Include\ShaderComponent.h">
+      <Filter>ShaderFramework\ShaderComponent\Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
@@ -716,6 +728,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\ShaderFramework\VertexShader\Source\VertexShader.cpp">
       <Filter>ShaderFramework\VertexShader\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\ShaderFramework\ShaderComponent\Source\ShaderComponent.cpp">
+      <Filter>ShaderFramework\ShaderComponent\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -52,6 +52,7 @@ namespace SpaceGameEngine
 		friend class ConfigFile;
 
 		ConfigFileValue& GetConfigValue(const String& name);
+		bool IfHaveConfigValue(const String& name);
 	private:
 		Map<String, ConfigFileValue> m_Content;
 	};
@@ -63,6 +64,7 @@ namespace SpaceGameEngine
 		ConfigFile(const String& filename);
 
 		ConfigTable & GetConfigTable(const String& name);
+		bool IfHaveConfigTable(const String& name);
 
 		/*
 		接受由getline获取的一组字符串进行解析

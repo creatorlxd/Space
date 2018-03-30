@@ -155,6 +155,19 @@ SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(
 	}
 }
 
+bool SpaceGameEngine::ConfigTable::IfHaveConfigValue(const String & name)
+{
+	auto iter = m_Content.find(name);
+	if (iter != m_Content.end())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 SpaceGameEngine::ConfigFile::ConfigFile()
 {
 
@@ -176,6 +189,19 @@ SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const
 	{
 		ThrowError("can not find this config table");
 		return ConfigTable();
+	}
+}
+
+bool SpaceGameEngine::ConfigFile::IfHaveConfigTable(const String & name)
+{
+	auto iter = m_Content.find(name);
+	if (iter != m_Content.end())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

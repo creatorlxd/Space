@@ -1,7 +1,4 @@
 # To Do List
-* 为`CameraComponent`加上`InitFromFile`
-
-* 加入自定义shader组件。
 
 * 检测窗口是否被隐藏，如果被隐藏则不运行渲染系统。(find the reason of the com error when window is hiding)
 
