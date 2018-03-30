@@ -28,9 +28,12 @@ void SpaceGameEngine::ShaderComponent::InitFromFile(const String & filename, int
 
 void SpaceGameEngine::ShaderComponent::Start()
 {
-	if (!m_pAsset->m_FileName.empty())
+	if (m_pAsset)
 	{
-		m_pFatherObject->GetRenderObject()->m_Shader.push_back(&dynamic_cast<DefaultEffectShaderAsset*>(const_cast<Asset*>(m_pAsset))->m_Content);
+		if (!m_pAsset->m_FileName.empty())
+		{
+			m_pFatherObject->GetRenderObject()->m_Shader.push_back(&dynamic_cast<DefaultEffectShaderAsset*>(const_cast<Asset*>(m_pAsset))->m_Content);
+		}
 	}
 }
 
