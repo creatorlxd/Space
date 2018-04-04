@@ -1,4 +1,4 @@
-[Shader]
+﻿[Shader]
 ShaderDirectory="./Source/GameEngine/Shader/"
 
 ;RenderQuality:

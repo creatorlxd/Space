@@ -1,4 +1,4 @@
-# Space Game Engine Document
+﻿# Space Game Engine Document
 ## `Component`子类编写规则
 
 > 本文档不是讲如何写`Component`子类的，欲了解`Component`子类编写的一些基本要求，请查看[Space基本组件Component类](./Space基本组件Component类.md)

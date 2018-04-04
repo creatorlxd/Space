@@ -16,54 +16,6 @@
     <Filter Include="Common">
       <UniqueIdentifier>{72e74f24-c532-4185-a017-1ca856d22de0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Include">
-      <UniqueIdentifier>{0a2c57a3-9b65-4a26-bb1d-837628ff865f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Source">
-      <UniqueIdentifier>{2e91197d-ad36-4986-a41a-7ab9f31b2d81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{e8d5e1a2-818e-4be3-bd2d-0a36c078f58b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Game">
-      <UniqueIdentifier>{82ef329d-2665-49fc-bbc6-480b66782d0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene">
-      <UniqueIdentifier>{c6417263-ca5a-4ac8-910e-4dc77de4b62b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Component">
-      <UniqueIdentifier>{2b516517-8ee5-439f-a88f-41baf8ea7a69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Component\Include">
-      <UniqueIdentifier>{0b507e4e-5d4b-4dd9-8b3b-a6e0d7405a4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Component\Source">
-      <UniqueIdentifier>{0ca2712a-4fb3-4247-9f1e-a4aecf0fea1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Game\Include">
-      <UniqueIdentifier>{5aef1e3f-e9ec-4065-9391-d887c68857ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Game\Source">
-      <UniqueIdentifier>{2878083c-dc9e-46d9-be0b-87dc035df1f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\Include">
-      <UniqueIdentifier>{87e11ac2-8c34-4b96-87d9-943a219c51a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\Source">
-      <UniqueIdentifier>{792aeb99-c7ce-4b96-bbd2-f98fd8119105}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics">
-      <UniqueIdentifier>{b4fa96be-d5f3-4b2b-a7b7-0fe81743ed19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Mesh">
-      <UniqueIdentifier>{62c6dc96-078b-4b1a-acf3-f36ad77ca0f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Mesh\Include">
-      <UniqueIdentifier>{49867c1b-ed13-4b43-8a80-7f236df17f5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Mesh\Source">
-      <UniqueIdentifier>{a31d6213-4770-44d8-9587-5fc99e7c4937}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Document">
       <UniqueIdentifier>{60fa9161-959c-401e-917b-b3178df7a994}</UniqueIdentifier>
     </Filter>
@@ -73,38 +25,8 @@
     <Filter Include="Document\Tutorial">
       <UniqueIdentifier>{172b2f02-bd6f-4ef5-b71b-31d662b9de31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object">
-      <UniqueIdentifier>{891a62f1-ecb9-4dda-a4f7-fd19d3802383}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Include">
-      <UniqueIdentifier>{cfb09179-5358-4fcb-b6e6-33dd79eca12d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Source">
-      <UniqueIdentifier>{7992344c-92d5-4b9a-b45b-de12f7af54eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Document\Document\Others">
       <UniqueIdentifier>{b61ae010-e7d4-41fb-96c2-ea3e5ae9fa5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics">
-      <UniqueIdentifier>{6cd9d7b4-f925-4a37-b03f-9ee0ca23c585}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Transform">
-      <UniqueIdentifier>{d6a7c46a-3d3c-44eb-bec3-172bc7054212}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Transform\Include">
-      <UniqueIdentifier>{9b83914b-0ccd-4f33-832b-0eece0b63131}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Transform\Source">
-      <UniqueIdentifier>{406f481f-78e0-43f2-8b62-dd061d681849}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Message">
-      <UniqueIdentifier>{7ff2a509-82a6-48dd-8385-7ec265e723af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Message\Include">
-      <UniqueIdentifier>{3b7599df-7046-4790-87f3-272ab0792e14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Message\Source">
-      <UniqueIdentifier>{750c2f91-cd7e-471d-9515-61fa0efdc1d6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{3a5cc722-df50-42ea-8c04-898fdc782918}</UniqueIdentifier>
@@ -115,218 +37,14 @@
     <Filter Include="dxerr">
       <UniqueIdentifier>{ec7b4770-eb04-4a4e-8504-00a9bb50bafc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Camera">
-      <UniqueIdentifier>{0953e999-0b46-4d30-a62c-b9fc52b8a14f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Camera\Include">
-      <UniqueIdentifier>{a5b4d2f7-c3f2-4a57-9e0b-3d9335f5fa66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Camera\Source">
-      <UniqueIdentifier>{f7e196f7-e381-4670-a907-65c2c5451d08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{7fd3f078-668d-42ab-9a84-ed202683bd69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\BoundingBox">
-      <UniqueIdentifier>{87252653-2212-4d03-88c5-1276ff1c17f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\BoundingBox\Include">
-      <UniqueIdentifier>{3d2606f6-42a5-4e32-99ef-b30d4fbb77b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\BoundingBox\Source">
-      <UniqueIdentifier>{2d3b452a-1cf6-4cc3-9165-963c30a45965}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Common">
-      <UniqueIdentifier>{1cdd77a7-c466-4d29-af2b-f842baaf7f3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Common\Include">
-      <UniqueIdentifier>{810efe66-0f61-43ea-bd8d-d9b36c829bf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Common\Source">
-      <UniqueIdentifier>{911d78d1-fdd9-4802-aae7-e4fc641bcb0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\GlobalOctree">
-      <UniqueIdentifier>{34898192-eaee-4790-973e-166204ef67c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\GlobalOctree\Include">
-      <UniqueIdentifier>{3eb06260-6f3f-4588-9bbb-2f3ffe1ebdde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\GlobalOctree\Source">
-      <UniqueIdentifier>{7c5932c6-f2f2-4b50-ae2e-77c8224c7eec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Plane">
-      <UniqueIdentifier>{232eb870-32cd-49c5-9437-ba2364068104}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Frustum">
-      <UniqueIdentifier>{373d5deb-22ed-4075-a95c-7883851eeeb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Frustum\Include">
-      <UniqueIdentifier>{00e1a1e3-3336-46ac-b37d-a4be878d6107}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Frustum\Source">
-      <UniqueIdentifier>{59202b13-f728-4791-b26a-3863352b9f34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Plane\Include">
-      <UniqueIdentifier>{8be6c8a9-27d8-44fd-87d4-5520fae431a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Plane\Source">
-      <UniqueIdentifier>{bebc0586-325a-4824-89a2-e81aa2497962}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ObjectOctree">
-      <UniqueIdentifier>{1b6823c5-3fe8-4b06-80da-d89313a968d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ObjectOctree\Include">
-      <UniqueIdentifier>{17650b0d-b451-4e28-b1b8-f2ce502a40ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ObjectOctree\Source">
-      <UniqueIdentifier>{9a3df364-7abe-4c65-b2c7-4a9756a94d91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Triangle">
-      <UniqueIdentifier>{495c02ef-c2fd-406d-b9ba-93c57e457983}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Triangle\Include">
-      <UniqueIdentifier>{8664f206-aa37-4ae0-9418-fa0887f97c51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Triangle\Source">
-      <UniqueIdentifier>{8f29b68f-376d-408d-8689-83f2ede8baa6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Material">
-      <UniqueIdentifier>{0c2464fb-196e-4710-825d-4be0db13b53a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Material\Include">
-      <UniqueIdentifier>{2afba7d9-e7f1-4f80-a51b-d7b40b5e952d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Material\Source">
-      <UniqueIdentifier>{dfbd1844-733f-40fc-94f1-b468825895c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Light">
-      <UniqueIdentifier>{bdc4e69f-a3ea-4aef-bd06-3372abb2e31f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Light\Include">
-      <UniqueIdentifier>{0ce705b7-00bd-4a42-8c64-2b33aacd557e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Light\Source">
-      <UniqueIdentifier>{5d6d1741-29f5-4698-b522-895666a9d63f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader\Lighting">
       <UniqueIdentifier>{339048cc-9aa7-44e6-a665-b62b38b887dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Asset">
-      <UniqueIdentifier>{07ef822e-4b23-4836-802c-12292f3e29dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Asset\Include">
-      <UniqueIdentifier>{86c09375-00e7-4a2a-a4ce-1bd25485739a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Asset\Source">
-      <UniqueIdentifier>{9b11897a-4d37-4889-9529-1ecdd30c6066}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\MemoryManager">
-      <UniqueIdentifier>{4e6e36f3-0168-4c54-b956-4ff3c52caf25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\MemoryManager\Include">
-      <UniqueIdentifier>{41a9b3a2-459b-42a3-8e9b-adb1b9e26d8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\MemoryManager\Source">
-      <UniqueIdentifier>{552f9fe9-b1b7-4e97-ba40-97966331dbaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Utility">
-      <UniqueIdentifier>{6ed3c927-261e-414f-a9aa-4c8d17674d32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Utility\Include">
-      <UniqueIdentifier>{4be5d3ec-d944-4aba-8399-684fa338025c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Utility\Source">
-      <UniqueIdentifier>{0d8db31b-a51a-4b87-a517-1552b19eabdf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Octree">
-      <UniqueIdentifier>{7ab69f4a-8062-47ec-9845-c7418c266413}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Octree\Include">
-      <UniqueIdentifier>{9bea09b9-49eb-4203-b029-ab449a4be58e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Octree\Source">
-      <UniqueIdentifier>{4474b145-10c8-4a69-9230-9fb536f61b43}</UniqueIdentifier>
     </Filter>
     <Filter Include="DDSTextureLoader">
       <UniqueIdentifier>{827f611b-fe2a-40b3-abd4-a9afb216d39c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Texture">
-      <UniqueIdentifier>{a8e1af1d-6838-4ff9-84ea-3bd201445325}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Texture\Include">
-      <UniqueIdentifier>{4e470e81-dd60-4905-9416-eaad67a86984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Texture\Source">
-      <UniqueIdentifier>{1227c23f-f1c2-4949-9af7-0878b9621bf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\RenderSystem">
-      <UniqueIdentifier>{42714294-5220-46a7-9a3e-ba4e7c1df780}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\RenderSystem\Include">
-      <UniqueIdentifier>{9e09fd67-e19b-4e4e-a545-8dabba616938}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\RenderSystem\Source">
-      <UniqueIdentifier>{c967c89c-52c9-4a8d-a2b7-1a5a8141614d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Error">
-      <UniqueIdentifier>{56bd697b-0fad-4e09-a7b5-90931971f7c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Error\Include">
-      <UniqueIdentifier>{42ee98fe-7380-4e9e-b3a6-e6c4734c2700}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Error\Source">
-      <UniqueIdentifier>{0425187d-1b86-4d83-94fb-d0db33beddc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Event">
-      <UniqueIdentifier>{0718a9f4-a00e-421c-95ee-63fcec0b1c98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Event\Include">
-      <UniqueIdentifier>{e886c07d-5316-4aa8-ad38-624ab215b3ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Event\Source">
-      <UniqueIdentifier>{85f23c2b-16e1-405e-a5fc-0fd2e89372ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Document\Document\GameFramework">
       <UniqueIdentifier>{1a8667e2-f534-4c65-bab3-ac743f090b5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework">
-      <UniqueIdentifier>{04d38d97-7740-4440-bd14-344d3e599c17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\VertexShader">
-      <UniqueIdentifier>{b52bdf6f-d8bc-4225-8527-d8546063b7fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\VertexShader\Include">
-      <UniqueIdentifier>{e70d74b8-11c9-4a06-b7a6-0a492556f589}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\VertexShader\Source">
-      <UniqueIdentifier>{c3d1b3e2-8b2d-4014-9501-eb9a344b8ccf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\PixelShader">
-      <UniqueIdentifier>{f90ccd76-e53e-44bf-9149-445a427e4220}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\PixelShader\Include">
-      <UniqueIdentifier>{4389aa04-011b-494f-9ec1-928c3654bf62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\PixelShader\Source">
-      <UniqueIdentifier>{7de0ef7b-2490-4f01-95dc-50dcd0db4efc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\EffectShader">
-      <UniqueIdentifier>{e2c97c2e-d27a-4a3e-8b21-c61d1d11c091}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\EffectShader\Include">
-      <UniqueIdentifier>{9dc6e681-9fa1-41f3-bfd0-32757bff1c1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\EffectShader\Source">
-      <UniqueIdentifier>{740feadf-c88a-42a6-944f-3d8c7f4c31cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\ShaderComponent">
-      <UniqueIdentifier>{597f3546-b321-4fb4-8f64-ae820a9f085b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\ShaderComponent\Include">
-      <UniqueIdentifier>{8dc19552-5683-4e8f-98d5-252774c0083a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFramework\ShaderComponent\Source">
-      <UniqueIdentifier>{11100702-96cf-4113-8e9d-c520fe64c344}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -367,370 +85,43 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameEngine\Graphics\Mesh\Include\Mesh.h">
-      <Filter>Graphics\Mesh\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\Component.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Game\Include\Game.h">
-      <Filter>Game\Game\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Scene\Include\Scene.h">
-      <Filter>Game\Scene\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Space.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\stdafx.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\Object.h">
-      <Filter>Game\Object\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Physics\Transform\Include\Transform.h">
-      <Filter>Physics\Transform\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Message\Include\Message.h">
-      <Filter>Game\Message\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\SpaceGameEngine.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Game\Include\SafeGet.h">
-      <Filter>Game\Game\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
       <Filter>dxerr</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Camera\Include\Camera.h">
-      <Filter>Graphics\Camera\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Scene\Include\SceneData.h">
-      <Filter>Game\Scene\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\BoundingBox\Include\BoundingBox.h">
-      <Filter>Math\BoundingBox\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Common\Include\MathDefinition.h">
-      <Filter>Math\Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Common\Include\XMathExtension.h">
-      <Filter>Math\Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\GlobalOctree\Include\GlobalOctree.h">
-      <Filter>Graphics\GlobalOctree\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Frustum\Include\Frustum.h">
-      <Filter>Math\Frustum\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Plane\Include\Plane.h">
-      <Filter>Math\Plane\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\ObjectOctree\Include\ObjectOctree.h">
-      <Filter>Graphics\ObjectOctree\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Triangle\Include\Triangle.h">
-      <Filter>Math\Triangle\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Material\Include\Material.h">
-      <Filter>Graphics\Material\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\Light.h">
-      <Filter>Graphics\Light\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentInformationManager.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\Asset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\TransformAsset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\MeshAsset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\MaterialAsset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Material\Include\MaterialComponent.h">
-      <Filter>Graphics\Material\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightComponent.h">
-      <Filter>Graphics\Light\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Light\Include\LightManager.h">
-      <Filter>Graphics\Light\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\LightAsset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Allocator.h">
-      <Filter>Common\MemoryManager\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\AllocatorForSTL.hpp">
-      <Filter>Common\MemoryManager\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\Memory.hpp">
-      <Filter>Common\MemoryManager\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Include\MemoryManager.h">
-      <Filter>Common\MemoryManager\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Error\Include\Error.h">
-      <Filter>Common\Error\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\File.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\InputDevice.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\StringConverter.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\TimeTool.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\Window.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Math\Octree\Include\Octree.h">
-      <Filter>Math\Octree\Include</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h">
       <Filter>DDSTextureLoader</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\Texture.h">
-      <Filter>Graphics\Texture\Include</Filter>
+    <ClInclude Include="Source\GameEngine\SpaceGameEngine.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\TextureAsset.h">
-      <Filter>Game\Asset\Include</Filter>
+    <ClInclude Include="Source\GameEngine\Common\stdafx.h">
+      <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\Texture\Include\TextureComponent.h">
-      <Filter>Graphics\Texture\Include</Filter>
+    <ClInclude Include="Source\GameEngine\Common\Def.h">
+      <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Object\Include\ObjectConnection.h">
-      <Filter>Game\Object\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\RenderSystem\Include\RenderSystem.h">
-      <Filter>Graphics\RenderSystem\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Graphics\RenderSystem\Include\RenderObject.h">
-      <Filter>Graphics\RenderSystem\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Asset\Include\ShaderAsset.h">
-      <Filter>Game\Asset\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Event\Include\Event.h">
-      <Filter>Game\Event\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Game\Component\Include\ComponentFactory.h">
-      <Filter>Game\Component\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\ConfigFile.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\GlobalVariable.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Utility\Include\GUIDFactory.h">
-      <Filter>Common\Utility\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Include\Def.h">
-      <Filter>Common\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFramework\EffectShader\Include\EffectShader.h">
-      <Filter>ShaderFramework\EffectShader\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFramework\PixelShader\Include\PixelShader.h">
-      <Filter>ShaderFramework\PixelShader\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFramework\VertexShader\Include\VertexShader.h">
-      <Filter>ShaderFramework\VertexShader\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\ShaderFramework\ShaderComponent\Include\ShaderComponent.h">
-      <Filter>ShaderFramework\ShaderComponent\Include</Filter>
+    <ClInclude Include="Source\GameEngine\Common\Space.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\GameEngine\Graphics\Mesh\Source\Mesh.cpp">
-      <Filter>Graphics\Mesh\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\Component.cpp">
-      <Filter>Game\Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Game\Source\Game.cpp">
-      <Filter>Game\Game\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Scene\Source\Scene.cpp">
-      <Filter>Game\Scene\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\Space.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\stdafx.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\main.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\Object.cpp">
-      <Filter>Game\Object\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Physics\Transform\Source\Transform.cpp">
-      <Filter>Physics\Transform\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Message\Source\Message.cpp">
-      <Filter>Game\Message\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Game\Source\SafeGet.cpp">
-      <Filter>Game\Game\Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp">
       <Filter>dxerr</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Camera\Source\Camera.cpp">
-      <Filter>Graphics\Camera\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Scene\Source\SceneData.cpp">
-      <Filter>Game\Scene\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\BoundingBox\Source\BoundingBox.cpp">
-      <Filter>Math\BoundingBox\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\Common\Source\MathDefinition.cpp">
-      <Filter>Math\Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\Common\Source\XMathExtension.cpp">
-      <Filter>Math\Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\GlobalOctree\Source\GlobalOctree.cpp">
-      <Filter>Graphics\GlobalOctree\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\Frustum\Source\Frustum.cpp">
-      <Filter>Math\Frustum\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\Plane\Source\Plane.cpp">
-      <Filter>Math\Plane\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\ObjectOctree\Source\ObjectOctree.cpp">
-      <Filter>Graphics\ObjectOctree\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Math\Triangle\Source\Triangle.cpp">
-      <Filter>Math\Triangle\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Material\Source\Material.cpp">
-      <Filter>Graphics\Material\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\Light.cpp">
-      <Filter>Graphics\Light\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentInformationManager.cpp">
-      <Filter>Game\Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\Asset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\TransformAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\MeshAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\MaterialAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Material\Source\MaterialComponent.cpp">
-      <Filter>Graphics\Material\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightComponent.cpp">
-      <Filter>Graphics\Light\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Light\Source\LightManager.cpp">
-      <Filter>Graphics\Light\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\LightAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\Allocator.cpp">
-      <Filter>Common\MemoryManager\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Source\MemoryManager.cpp">
-      <Filter>Common\MemoryManager\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Error\Source\Error.cpp">
-      <Filter>Common\Error\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\File.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\InputDevice.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\StringConverter.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\TimeTool.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\Window.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.cpp">
       <Filter>DDSTextureLoader</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\Texture.cpp">
-      <Filter>Graphics\Texture\Source</Filter>
+    <ClCompile Include="Source\GameEngine\Common\stdafx.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\TextureAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
+    <ClCompile Include="Source\GameEngine\Common\Def.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\Texture\Source\TextureComponent.cpp">
-      <Filter>Graphics\Texture\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Object\Source\ObjectConnection.cpp">
-      <Filter>Game\Object\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\RenderSystem\Source\RenderObject.cpp">
-      <Filter>Graphics\RenderSystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Graphics\RenderSystem\Source\RenderSystem.cpp">
-      <Filter>Graphics\RenderSystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Asset\Source\ShaderAsset.cpp">
-      <Filter>Game\Asset\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Event\Source\Event.cpp">
-      <Filter>Game\Event\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Game\Component\Source\ComponentFactory.cpp">
-      <Filter>Game\Component\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\ConfigFile.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\GlobalVariable.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Utility\Source\GUIDFactory.cpp">
-      <Filter>Common\Utility\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\Common\Source\Def.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFramework\EffectShader\Source\EffectShader.cpp">
-      <Filter>ShaderFramework\EffectShader\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFramework\PixelShader\Source\PixelShader.cpp">
-      <Filter>ShaderFramework\PixelShader\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFramework\VertexShader\Source\VertexShader.cpp">
-      <Filter>ShaderFramework\VertexShader\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameEngine\ShaderFramework\ShaderComponent\Source\ShaderComponent.cpp">
-      <Filter>ShaderFramework\ShaderComponent\Source</Filter>
+    <ClCompile Include="Source\GameEngine\Common\Space.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

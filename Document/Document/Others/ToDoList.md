@@ -1,13 +1,13 @@
-# To Do List
+﻿# To Do List
 
-* ��ⴰ���Ƿ����أ������������������Ⱦϵͳ��(find the reason of the com error when window is hiding)
+* 检测窗口是否被隐藏，如果被隐藏则不运行渲染系统。(find the reason of the com error when window is hiding)
 
-* �Ĺ���ģ��Ϊ`Forward Plus`��
+* 改光照模型为`Forward Plus`。
 
-* ����`SubMesh`���ܡ�
+* 加入`SubMesh`功能。
 
-* �����`FBX`�ļ���֧�֡�
+* 加入对`FBX`文件的支持。
 
-* ��Ϸ�����ָ��Ϊ`float`�Ĵ�С�;��ȣ���Ϊ�Ǹ��㣩���ƣ������ò����õ�һ�ֲ��þֲ�����ϵ��ʾ��������ķ�����
+* 游戏场景分割：因为`float`的大小和精度（因为是浮点）限制，而不得不采用的一种采用局部坐标系表示物体坐标的方法。
 
-* ��������֧��
+* 多纹理的支持
