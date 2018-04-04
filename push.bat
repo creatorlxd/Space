@@ -1,3 +1,3 @@
-git push origin
-git push githubzuzhi
-git push gitee
+git push origin --tags
+git push githubzuzhi --tags
+git push gitee --tags
