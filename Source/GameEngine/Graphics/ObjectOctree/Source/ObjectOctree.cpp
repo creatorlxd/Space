@@ -48,7 +48,7 @@ void SpaceGameEngine::ObjectOctreeNode::Init(const AxisAlignedBoundingBox & spac
 
 void SpaceGameEngine::ObjectOctreeNode::InsertTriangle(const IndexTriangle & data)
 {
-	Triangle triangle((*m_VertexData)[data.m_Content[0]].m_Position, (*m_VertexData)[data.m_Content[1]].m_Position, (*m_VertexData)[data.m_Content[2]].m_Position);
+	Triangle triangle((*m_pVertexData)[data.m_Content[0]].m_Position, (*m_pVertexData)[data.m_Content[1]].m_Position, (*m_pVertexData)[data.m_Content[2]].m_Position);
 	if (!IfIntersect(m_Space, triangle))
 		return;
 	if (m_Deepth == ObjectOctreeMaxDeepth)
@@ -119,7 +119,7 @@ void SpaceGameEngine::ObjectOctreeNode::InsertTriangle(const IndexTriangle & dat
 			m_IfLeafNode = false;
 			for (int i = 0; i < 8; i++)
 			{
-				m_ChildrenNode[i] = MemoryManager::New<ObjectOctreeNode>(m_VertexData);
+				m_ChildrenNode[i] = MemoryManager::New<ObjectOctreeNode>(m_pVertexData);
 				m_ChildrenNode[i]->Init(space[i], m_Deepth + 1);
 			}
 			m_ChildrenNode[index]->InsertTriangle(data);
@@ -211,10 +211,6 @@ void SpaceGameEngine::ObjectOctreeNode::Release()
 		}
 		m_IfLeafNode = true;
 	}
-	m_Content.clear();
-	m_VertexData = nullptr;
-	m_Space = AxisAlignedBoundingBox();
-	m_Deepth = 1;
 }
 
 void SpaceGameEngine::ObjectOctreeNode::GetIndices(Vector<unsigned int>& indices, unsigned int& index)
@@ -234,6 +230,11 @@ void SpaceGameEngine::ObjectOctreeNode::GetIndices(Vector<unsigned int>& indices
 	}
 }
 
+void SpaceGameEngine::ObjectOctree::ResetVertexData(Vector<DefaultVertex>* data)
+{
+	m_RootNode.m_pVertexData = data;
+}
+
 void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indices)
 {
 	if (indices.size() < 2)
@@ -243,10 +244,10 @@ void SpaceGameEngine::ObjectOctree::BuildTree(const Vector<unsigned int>& indice
 	}
 	m_MaxIndicesSize = indices.size();
 	Vector<XMFLOAT3> points;
-	points.resize(m_RootNode.m_VertexData->size());
-	for (int i = 0; i<m_RootNode.m_VertexData->size(); i++)
+	points.resize(m_RootNode.m_pVertexData->size());
+	for (int i = 0; i<m_RootNode.m_pVertexData->size(); i++)
 	{
-		points[i] = (*m_RootNode.m_VertexData)[i].m_Position;
+		points[i] = (*m_RootNode.m_pVertexData)[i].m_Position;
 	}
 	auto space = GetAxisAlignedBoundingBox(points);
 	m_RootNode.Init(space);
@@ -267,4 +268,13 @@ SpaceGameEngine::Vector<unsigned int> SpaceGameEngine::ObjectOctree::Run(XMFLOAT
 	unsigned int index = 0;
 	m_RootNode.Run(position, rotation, scale,vecbuff,index);
 	return Vector<unsigned int>(vecbuff.begin(), vecbuff.begin() + index);
+}
+
+void SpaceGameEngine::ObjectOctree::CleanUp()
+{
+	m_RootNode.Release();
+	m_RootNode.m_Content.clear();
+	m_RootNode.m_pVertexData = nullptr;
+	m_RootNode.m_Space = AxisAlignedBoundingBox();
+	m_RootNode.m_Deepth = 1;
 }

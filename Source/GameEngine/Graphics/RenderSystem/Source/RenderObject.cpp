@@ -179,8 +179,8 @@ void SpaceGameEngine::RenderObject::SetMesh(const MeshForModelFileAsset & mmfa)
 	{
 		SafeRelease(m_pVertexBuffer);
 		SafeRelease(m_pIndexBuffer);
-		m_ObjectOctree.~ObjectOctree();
-		m_ObjectOctree = ObjectOctree(&m_MeshForModelFileAsset.m_Vertices);
+		m_ObjectOctree.CleanUp();
+		m_ObjectOctree.ResetVertexData(&m_MeshForModelFileAsset.m_Vertices);
 		if (m_Type == RenderObjectType::Model)
 		{
 			if (m_Mode&ModelFileMode)

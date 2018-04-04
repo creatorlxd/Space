@@ -249,10 +249,6 @@ void SpaceGameEngine::GlobalOctreeNode::Release()
 		}
 		m_IfLeafNode = true;
 	}
-	m_pFather = nullptr;
-	m_Content.clear();
-	m_Space = AxisAlignedBoundingBox();
-	m_Deepth = 1;
 }
 
 bool SpaceGameEngine::GlobalOctreeNode::DeleteObjectData(GlobalOctreeData::second_type pointer)
@@ -375,4 +371,17 @@ SpaceGameEngine::GlobalOctreeNode* SpaceGameEngine::GlobalOctree::UpdateObject(c
 	GlobalOctreeNode* re=m_RootNode.UpdateObjectData(data);
 	m_RootNode.UpdateObjectRenderState(data);
 	return re;
+}
+
+void SpaceGameEngine::GlobalOctree::CleanUp()
+{
+	if (m_IfInit)
+	{
+		m_RootNode.Release();
+		m_RootNode.m_pFather = nullptr;
+		m_RootNode.m_Content.clear();
+		m_RootNode.m_Space = AxisAlignedBoundingBox();
+		m_RootNode.m_Deepth = 1;
+		m_IfInit = false;
+	}
 }

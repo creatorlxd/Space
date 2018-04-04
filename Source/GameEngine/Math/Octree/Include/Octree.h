@@ -198,10 +198,6 @@ namespace SpaceGameEngine
 				}
 				m_IfLeafNode = true;
 			}
-			m_pFather = nullptr;
-			m_Content.clear();
-			m_Deepth = 1;
-			m_Space = AxisAlignedBoundingBox();
 		}
 		bool DeleteData(const T& content)
 		{
@@ -420,6 +416,18 @@ namespace SpaceGameEngine
 		OctreeNode<Key, T, MaxDeepth>* FindOctreeNode(const XMFLOAT3& position)
 		{
 			return m_RootNode.FindOctreeNode(position);
+		}
+		void CleanUp()
+		{
+			if (m_IfInit)
+			{
+				m_RootNode.Release();
+				m_RootNode.m_pFather = nullptr;
+				m_RootNode.m_Content.clear();
+				m_RootNode.m_Deepth = 1;
+				m_RootNode.m_Space = AxisAlignedBoundingBox();
+				m_IfInit = false;
+			}
 		}
 		bool IfInit()
 		{

@@ -56,6 +56,7 @@ namespace SpaceGameEngine
 		void BuildTreeWithSpaceLimit(const AxisAlignedBoundingBox& space);
 		void Run();
 		GlobalOctreeNode* UpdateObject(const GlobalOctreeData& data);
+		void CleanUp();
 	private:
 		GlobalOctreeNode m_RootNode;
 		Vector<GlobalOctreeData> m_IntializaionData;
