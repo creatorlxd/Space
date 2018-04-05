@@ -46,6 +46,9 @@
     <Filter Include="Document\Document\GameFramework">
       <UniqueIdentifier>{1a8667e2-f534-4c65-bab3-ac743f090b5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\MemoryManager">
+      <UniqueIdentifier>{6c62c8ce-9d14-41b1-83d2-ee0aa53a1a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -103,6 +106,27 @@
     <ClInclude Include="Source\GameEngine\Common\Space.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Allocator.h">
+      <Filter>Common\MemoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\MemoryManager.h">
+      <Filter>Common\MemoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\GlobalVariable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\AllocatorForSTL.hpp">
+      <Filter>Common\MemoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Error.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\StringConverter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Timer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -121,6 +145,24 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Space.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Allocator.cpp">
+      <Filter>Common\MemoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\MemoryManager.cpp">
+      <Filter>Common\MemoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\GlobalVariable.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Error.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\StringConverter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Timer.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>

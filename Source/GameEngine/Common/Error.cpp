@@ -13,9 +13,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
-#include "Common/Def.h"
-#include "Common/MemoryManager/AllocatorForSTL.hpp"
-#include "Common/Timer.h"
-#include "Common/Error.h"
-#include "Common/GlobalVariable.h"
+#include "stdafx.h"
+#include "Error.h"
+
+void SpaceGameEngine::ThrowError(const TString & errormessage)
+{
+	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
+#if defined(_DEBUG)|defined(DEBUG)	
+	DebugBreak();
+#endif
+}
+#ifndef _UNICODE
+void SpaceGameEngine::ThrowError(const WString& errormessage)
+{
+	ThrowError(WStringToTString(errormessage));
+}
+#else
+void SpaceGameEngine::ThrowError(const String& errormessage)
+{
+	ThrowError(StringToTString(errormessage));
+}
+#endif

@@ -14,8 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "Common/Def.h"
-#include "Common/MemoryManager/AllocatorForSTL.hpp"
-#include "Common/Timer.h"
-#include "Common/Error.h"
-#include "Common/GlobalVariable.h"
+#include "StringConverter.h"
+
+namespace SpaceGameEngine
+{
+	//TODO:报错后的处理
+	void ThrowError(const TString& errormessage);		//报错
+#ifndef _UNICODE
+	void ThrowError(const WString& errormessage);
+#else
+	void ThrowError(const String& errormessage);
+#endif
+}

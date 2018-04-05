@@ -452,14 +452,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\Def.h" />
+    <ClInclude Include="Source\GameEngine\Common\Error.h" />
+    <ClInclude Include="Source\GameEngine\Common\GlobalVariable.h" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\Allocator.h" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\AllocatorForSTL.hpp" />
+    <ClInclude Include="Source\GameEngine\Common\MemoryManager\MemoryManager.h" />
     <ClInclude Include="Source\GameEngine\Common\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\stdafx.h" />
+    <ClInclude Include="Source\GameEngine\Common\StringConverter.h" />
+    <ClInclude Include="Source\GameEngine\Common\Timer.h" />
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\Common\Def.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Error.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\GlobalVariable.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\Allocator.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MemoryManager\MemoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Space.cpp" />
     <ClCompile Include="Source\GameEngine\Common\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -475,6 +486,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='BuildRelease|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\StringConverter.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Timer.cpp" />
     <ClCompile Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.cpp" />
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp">
