@@ -19,10 +19,15 @@ limitations under the License.
 namespace SpaceGameEngine
 {
 	//TODO:报错后的处理
-	void ThrowError(const TString& errormessage);		//报错
+	void ThrowError(const TString& errormessage, const TString& filename, const TString& funcname, int line);		//报错
 #ifndef _UNICODE
-	void ThrowError(const WString& errormessage);
+	void ThrowError(const WString& errormessage, const WString& filename, const WString& funcname, int line);
 #else
-	void ThrowError(const String& errormessage);
+	void ThrowError(const String& errormessage, const String& filename, const String& funcname, int line);
 #endif
+
+#define THROWERROR(str)\
+SpaceGameEngine::ThrowError((str),__FILE__,__FUNCTION__,__LINE__)
+#define THROWERRORW(wstr)\
+SpaceGameEngine::ThrowError((wstr),__FILEW__,__FUNCTIONW__,__LINE__)
 }

@@ -16,21 +16,26 @@ limitations under the License.
 #include "stdafx.h"
 #include "Error.h"
 
-void SpaceGameEngine::ThrowError(const TString & errormessage)
+void SpaceGameEngine::ThrowError(const TString & errormessage, const TString& filename, const TString& funcname, int line)
 {
-	MessageBox(NULL, errormessage.c_str(), L"Space Game Engine", NULL);
+#ifdef _UNICODE
+	auto line_str = StdWStringToWString(std::to_wstring(line));
+#else
+	auto line_str = StdStringToString(std::to_string(line));
+#endif
+	MessageBox(NULL, (_T("在") + filename + _T(":") + funcname + _T(":") + line_str + _T("中\n\t") + errormessage).c_str(), _T("Space Game Engine Error"), NULL);
 #if defined(_DEBUG)|defined(DEBUG)	
 	DebugBreak();
 #endif
 }
 #ifndef _UNICODE
-void SpaceGameEngine::ThrowError(const WString& errormessage)
+void SpaceGameEngine::ThrowError(const WString& errormessage, const WString& filename, const WString& funcname, int line)
 {
-	ThrowError(WStringToTString(errormessage));
+	ThrowError(WStringToTString(errormessage), WStringToTString(filename), WStringToTString(funcname), line);
 }
 #else
-void SpaceGameEngine::ThrowError(const String& errormessage)
+void SpaceGameEngine::ThrowError(const String& errormessage, const String& filename, const String& funcname, int line)
 {
-	ThrowError(StringToTString(errormessage));
+	ThrowError(StringToTString(errormessage), StringToTString(filename), StringToTString(funcname), line);
 }
 #endif

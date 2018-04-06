@@ -47,6 +47,7 @@ limitations under the License.
 #include <set>
 #include <chrono>
 #include <unordered_map>
+#include <tchar.h>
 
 #include "ThirdParty/FX11/inc/d3dx11effect.h"
 #include "ThirdParty/tinyxml2/include/tinyxml2.h"

@@ -93,3 +93,13 @@ std::wstring SpaceGameEngine::WStringToStdWString(const WString & wstr)
 {
 	return std::wstring(wstr.c_str());
 }
+
+SpaceGameEngine::String SpaceGameEngine::StdStringToString(const std::string & str)
+{
+	return String(str.c_str());
+}
+
+SpaceGameEngine::WString SpaceGameEngine::StdWStringToWString(const std::wstring & str)
+{
+	return WString(str.c_str());
+}

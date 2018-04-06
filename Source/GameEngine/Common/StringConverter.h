@@ -38,4 +38,6 @@ namespace SpaceGameEngine
 
 	std::string StringToStdString(const String& str);
 	std::wstring WStringToStdWString(const WString& wstr);
+	String StdStringToString(const std::string& str);
+	WString StdWStringToWString(const std::wstring& str);
 }
