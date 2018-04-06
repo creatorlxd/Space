@@ -451,9 +451,13 @@
     <None Include="SystemConfig.configfile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameEngine\Common\ConfigFile.h" />
     <ClInclude Include="Source\GameEngine\Common\Def.h" />
     <ClInclude Include="Source\GameEngine\Common\Error.h" />
+    <ClInclude Include="Source\GameEngine\Common\File.h" />
     <ClInclude Include="Source\GameEngine\Common\GlobalVariable.h" />
+    <ClInclude Include="Source\GameEngine\Common\GUIDFactory.h" />
+    <ClInclude Include="Source\GameEngine\Common\InputDevice.h" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\Allocator.h" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\AllocatorForSTL.hpp" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\MemoryManager.h" />
@@ -466,9 +470,13 @@
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameEngine\Common\ConfigFile.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Def.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Error.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\File.cpp" />
     <ClCompile Include="Source\GameEngine\Common\GlobalVariable.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\GUIDFactory.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\InputDevice.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\Allocator.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\MemoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Space.cpp" />

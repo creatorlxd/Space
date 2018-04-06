@@ -127,6 +127,18 @@
     <ClInclude Include="Source\GameEngine\Common\Timer.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\File.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\ConfigFile.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\GUIDFactory.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\InputDevice.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -163,6 +175,18 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Timer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\File.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\ConfigFile.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\GUIDFactory.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\InputDevice.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
