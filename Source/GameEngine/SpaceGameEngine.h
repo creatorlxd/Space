@@ -19,3 +19,8 @@ limitations under the License.
 #include "Common/Timer.h"
 #include "Common/Error.h"
 #include "Common/GlobalVariable.h"
+#include "Common/File.h"
+#include "Common/ConfigFile.h"
+#include "Common/GUIDFactory.h"
+#include "Common/CurrentObject.hpp"
+#include "Common/Window.h"

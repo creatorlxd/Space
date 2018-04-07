@@ -18,5 +18,6 @@ limitations under the License.
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	SpaceGameEngine::Window g_Window;
 	return 0;
 }

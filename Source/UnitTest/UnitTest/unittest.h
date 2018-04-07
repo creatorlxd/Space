@@ -25,6 +25,22 @@ TEST_GROUP_BEGIN(CommonTest)
 		test_timer.Start();
 		std::cout << test_timer.GetPausedTime() << std::endl;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestCurrent)
+	{
+		class TestClass:public CurrentObject<TestClass>
+		{
+		public:
+			TestClass() :CurrentObject<TestClass>(this) {}
+			int test;
+		};
+		TestClass tc;
+		auto pcurrent = TestClass::GetCurrentObject();
+		if (&tc == pcurrent)
+			return UnitTestResult::Pass;
+		else
+			return UnitTestResult::Fail;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

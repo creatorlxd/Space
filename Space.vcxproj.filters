@@ -139,6 +139,12 @@
     <ClInclude Include="Source\GameEngine\Common\InputDevice.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Window.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\CurrentObject.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -187,6 +193,9 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\InputDevice.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\Window.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>

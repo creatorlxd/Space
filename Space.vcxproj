@@ -452,6 +452,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\ConfigFile.h" />
+    <ClInclude Include="Source\GameEngine\Common\CurrentObject.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Def.h" />
     <ClInclude Include="Source\GameEngine\Common\Error.h" />
     <ClInclude Include="Source\GameEngine\Common\File.h" />
@@ -465,6 +466,7 @@
     <ClInclude Include="Source\GameEngine\Common\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\StringConverter.h" />
     <ClInclude Include="Source\GameEngine\Common\Timer.h" />
+    <ClInclude Include="Source\GameEngine\Common\Window.h" />
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
@@ -496,6 +498,7 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\StringConverter.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Timer.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\Window.cpp" />
     <ClCompile Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.cpp" />
     <ClCompile Include="Source\GameEngine\dxerr\dxerr.cpp" />
     <ClCompile Include="Source\GameEngine\main.cpp">

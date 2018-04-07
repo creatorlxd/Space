@@ -1,11 +1,17 @@
 ﻿[Shader]
 ShaderDirectory="./Source/GameEngine/Shader/"
 
-;RenderQuality:
+;RenderQuality For Shader Use:
 ;LowQuality 1
 ;MediumQuality 2
 ;HighQuality 3
 RenderQuality=2
 
 [Window]
+WindowWidth=800
+WindowHeight=600
+WindowTitle="SpaceGameEngine"
+WindowPositionX=250
+WindowPositionY=100
+IfShowCursor=true
 FPSLimit=120

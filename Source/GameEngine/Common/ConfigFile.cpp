@@ -81,6 +81,19 @@ SpaceGameEngine::String SpaceGameEngine::ConfigFileValue::AsString()
 	}
 }
 
+bool SpaceGameEngine::ConfigFileValue::AsBool()
+{
+	if (m_Type == ConfigFileValueType::Bool)
+	{
+		return m_Content == "true" ? true : (m_Content == "false" ? false : (THROWERROR("bool config value error"), false));
+	}
+	else
+	{
+		THROWERROR("this value's type is not bool");
+		return false;
+	}
+}
+
 void SpaceGameEngine::ConfigFileValue::Set(int i)
 {
 	if (m_Type == ConfigFileValueType::Int)
@@ -138,6 +151,18 @@ void SpaceGameEngine::ConfigFileValue::Set(const String & str)
 	else
 	{
 		THROWERROR("this value's type is not string");
+	}
+}
+
+void SpaceGameEngine::ConfigFileValue::Set(bool b)
+{
+	if (m_Type == ConfigFileValueType::Bool)
+	{
+		m_Content = b ? "true" : "false";
+	}
+	else
+	{
+		THROWERROR("this value's type is not bool");
 	}
 }
 
@@ -341,8 +366,23 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 				{
 					break;
 				}
+				
+				//bool
+				if ((_char == 't' || _char == 'f') && type_buffer == ConfigFileValueType::Int)
+				{
+					type_buffer = ConfigFileValueType::Bool;
+					str_buffer += _char;
+					continue;
+				}
+				if (_char == 'e'&& type_buffer == ConfigFileValueType::Bool)
+				{
+					str_buffer += 'e';
+					if (str_buffer != "true"&&str_buffer != "false")
+						THROWERROR("bool config value error");
+					break;
+				}
 
-				if (type_buffer == ConfigFileValueType::Char || type_buffer == ConfigFileValueType::String)
+				if (type_buffer == ConfigFileValueType::Char || type_buffer == ConfigFileValueType::String || type_buffer == ConfigFileValueType::Bool)
 					str_buffer += _char;
 				else if (_char != ' ')
 					str_buffer += _char;
@@ -359,7 +399,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 			}
 
 			//number check
-			if (type_buffer != ConfigFileValueType::Char&&type_buffer != ConfigFileValueType::String)
+			if (type_buffer != ConfigFileValueType::Char&&type_buffer != ConfigFileValueType::String&&type_buffer != ConfigFileValueType::Bool)
 			{
 				bool if_point = false;
 				for (auto iter = str_buffer.begin(); iter != str_buffer.end(); iter += 1)

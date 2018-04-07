@@ -27,7 +27,8 @@ namespace SpaceGameEngine
 		Float,
 		Double,
 		Char,
-		String
+		String,
+		Bool
 	};
 
 	struct ConfigFileValue
@@ -40,12 +41,14 @@ namespace SpaceGameEngine
 		double AsDouble();
 		char AsChar();
 		String AsString();
+		bool AsBool();
 
 		void Set(int i);
 		void Set(float f);
 		void Set(double d);
 		void Set(char c);
 		void Set(const String& str);
+		void Set(bool b);
 	};
 
 	class ConfigTable
