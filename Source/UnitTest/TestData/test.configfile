@@ -8,3 +8,4 @@ char = 'c'
 [test2]
 a=2.3
 str=""
+testbool=true

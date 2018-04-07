@@ -41,6 +41,25 @@ TEST_GROUP_BEGIN(CommonTest)
 		else
 			return UnitTestResult::Fail;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestConfigFile)
+	{
+		ConfigFile cf;
+		cf.InitFromFile("../TestData/test.configfile");
+		cout << cf.GetConfigTable("test").GetConfigValue("a").AsInt() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("b").AsInt() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("str").AsString() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("float").AsFloat() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("double").AsDouble() << endl;
+		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
+		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
+		cout << cf.GetConfigTable("test2").GetConfigValue("str").AsString() << endl;
+		cout << boolalpha << cf.GetConfigTable("test2").GetConfigValue("testbool").AsBool() << endl;
+		cf.GetConfigTable("test2").GetConfigValue("testbool").Set(false);
+
+		cf.GetConfigTable("test").GetConfigValue("float").Set(1.23f);
+		cf.SaveToFile("../TestData/test2.configfile");
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
