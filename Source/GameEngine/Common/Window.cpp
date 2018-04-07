@@ -37,13 +37,17 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 		if (WindowConfig.IfHaveConfigValue("FPSLimit"))
 			m_FPSLimit = WindowConfig.GetConfigValue("FPSLimit").AsInt();
 	}
-	m_WindowWidth = 0;
-	m_WindowHeight = 0;
-	m_WindowTitle = "";
-	m_WindowPosition = m_DefaultWindowPosition;		//default value
-	m_IfShowCursor = true;
+	else
+	{
+		m_WindowWidth = 0;
+		m_WindowHeight = 0;
+		m_WindowTitle = "";
+		m_WindowPosition = m_DefaultWindowPosition;		//default value
+		m_IfShowCursor = true;
+		m_FPSLimit = 360;		//default value
+	}
+
 	m_IfBegin = false;
-	m_FPSLimit = 360;		//default value
 
 	m_InitAction = [&]()->void {};
 	m_RunAction = [&]()->void {};
