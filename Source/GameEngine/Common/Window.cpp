@@ -19,6 +19,12 @@ limitations under the License.
 SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 {
 	m_Hwnd = NULL;
+	m_WindowWidth = 0;
+	m_WindowHeight = 0;
+	m_WindowTitle = "";
+	m_WindowPosition = m_DefaultWindowPosition;		//default value
+	m_IfShowCursor = true;
+	m_FPSLimit = 360;		//default value
 	if (GetDefaultConfigFile().IfHaveConfigTable("Window"))
 	{
 		auto WindowConfig = GetDefaultConfigFile().GetConfigTable("Window");
@@ -37,15 +43,8 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 		if (WindowConfig.IfHaveConfigValue("FPSLimit"))
 			m_FPSLimit = WindowConfig.GetConfigValue("FPSLimit").AsInt();
 	}
-	else
-	{
-		m_WindowWidth = 0;
-		m_WindowHeight = 0;
-		m_WindowTitle = "";
-		m_WindowPosition = m_DefaultWindowPosition;		//default value
-		m_IfShowCursor = true;
-		m_FPSLimit = 360;		//default value
-	}
+
+	ShowCursor(m_IfShowCursor);
 
 	m_IfBegin = false;
 
@@ -58,4 +57,86 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 SpaceGameEngine::Window::~Window()
 {
 	m_ReleaseAction();
+}
+
+void SpaceGameEngine::Window::Resize()
+{
+	m_ResizeAction();
+}
+
+DWORD SpaceGameEngine::Window::GetWindowWidth()
+{
+	return m_WindowWidth;
+}
+
+DWORD SpaceGameEngine::Window::GetWindowHeight()
+{
+	return m_WindowHeight;
+}
+
+void SpaceGameEngine::Window::ChangeIfShowCursor(bool b)
+{
+	if (m_IfShowCursor == b)
+	{
+		return;
+	}
+	else
+	{
+		m_IfShowCursor = b;
+		ShowCursor(b);
+	}
+}
+
+void SpaceGameEngine::Window::SetCursorPosition(int x, int y)
+{
+	auto pos = GetWindowPosition();
+	SetCursorPos(pos.first + x, pos.second + y);
+}
+
+std::pair<int, int> SpaceGameEngine::Window::GetCursorPosition()
+{
+	POINT p;
+	GetCursorPos(&p);
+	GetWindowPosition();
+	return std::pair<int, int>(p.x - m_WindowPosition.first, p.y - m_WindowPosition.second);
+}
+
+void SpaceGameEngine::Window::UpdateWindowSize()
+{
+	RECT r;
+	GetWindowRect(m_Hwnd, &r);
+	m_WindowWidth = abs(r.right - r.left);
+	m_WindowHeight = abs(r.bottom - r.top);
+}
+
+std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
+{
+	if (m_IfBegin)
+	{
+		RECT r;
+		GetWindowRect(m_Hwnd, &r);
+		m_WindowPosition = std::pair<int, int>(r.left, r.top);
+	}
+	return m_WindowPosition;
+}
+
+void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
+{
+	if (m_IfBegin)
+		SetWindowPos(m_Hwnd, HWND_TOPMOST, x, y, m_WindowWidth, m_WindowHeight, SWP_SHOWWINDOW);
+	m_WindowPosition = std::make_pair(x, y);
+}
+
+void SpaceGameEngine::Window::SetWindowSize(int x, int y)
+{
+	if (m_IfBegin)
+	{
+		SetWindowPos(m_Hwnd, HWND_TOPMOST, m_WindowPosition.first, m_WindowPosition.second, x, y, SWP_SHOWWINDOW);
+	}
+	m_WindowWidth = x;
+	m_WindowHeight = y;
+	if (m_IfBegin)
+	{
+		Resize();
+	}
 }

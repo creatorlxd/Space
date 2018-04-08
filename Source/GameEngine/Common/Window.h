@@ -25,6 +25,26 @@ namespace SpaceGameEngine
 		Window();
 		~Window();
 
+		void Resize();
+
+		DWORD GetWindowWidth();							//获取窗口宽度
+		DWORD GetWindowHeight();						//获取窗口高度
+		void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
+		/*
+		设置鼠标位置
+		接受相对位置
+		*/
+		void SetCursorPosition(int x, int y);
+		/*
+		获取鼠标位置
+		返回相对位置
+		*/
+		std::pair<int, int> GetCursorPosition();
+		void UpdateWindowSize();						//重新获取窗口大小(StartRun后)
+		std::pair<int, int> GetWindowPosition();		//获取窗口位置
+
+		void SetWindowPosition(int x, int y);			//设置窗口位置
+		void SetWindowSize(int x, int y);				//设置窗口大小
 	private:
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

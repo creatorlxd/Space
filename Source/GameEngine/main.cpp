@@ -16,8 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "SpaceGameEngine.h"
 
+using namespace SpaceGameEngine;
+
+GlobalVariable<Window> g_Window;
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-	SpaceGameEngine::Window g_Window;
 	return 0;
 }
