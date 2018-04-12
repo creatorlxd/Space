@@ -87,6 +87,11 @@ void SpaceGameEngine::Window::ChangeIfShowCursor(bool b)
 	}
 }
 
+bool SpaceGameEngine::Window::GetIfShowCursor()
+{
+	return m_IfShowCursor;
+}
+
 void SpaceGameEngine::Window::SetCursorPosition(int x, int y)
 {
 	auto pos = GetWindowPosition();
@@ -139,4 +144,24 @@ void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 	{
 		Resize();
 	}
+}
+
+void SpaceGameEngine::Window::SetWindowTitle(const String & title)
+{
+	m_WindowTitle = title;
+}
+
+SpaceGameEngine::String SpaceGameEngine::Window::GetWindowTitle()
+{
+	return m_WindowTitle;
+}
+
+void SpaceGameEngine::Window::SetFPSLimit(unsigned int limit)
+{
+	m_FPSLimit = limit;
+}
+
+unsigned int SpaceGameEngine::Window::GetFPSLimit()
+{
+	return m_FPSLimit;
 }

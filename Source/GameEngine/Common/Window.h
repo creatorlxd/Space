@@ -30,6 +30,7 @@ namespace SpaceGameEngine
 		DWORD GetWindowWidth();							//获取窗口宽度
 		DWORD GetWindowHeight();						//获取窗口高度
 		void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
+		bool GetIfShowCursor();
 		/*
 		设置鼠标位置
 		接受相对位置
@@ -45,6 +46,10 @@ namespace SpaceGameEngine
 
 		void SetWindowPosition(int x, int y);			//设置窗口位置
 		void SetWindowSize(int x, int y);				//设置窗口大小
+		void SetWindowTitle(const String& title);
+		String GetWindowTitle();
+		void SetFPSLimit(unsigned int limit);
+		unsigned int GetFPSLimit();
 	private:
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度
