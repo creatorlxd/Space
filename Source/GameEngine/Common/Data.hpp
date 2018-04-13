@@ -39,7 +39,7 @@ namespace SpaceGameEngine
 		}
 
 		/*
-		通知各个链接开始运行积攒的惰性NotifyAction
+		通知各个链接开始运行积攒的惰性OnNotifyAction
 		*/
 		void NotifyConnection()
 		{
@@ -68,7 +68,7 @@ namespace SpaceGameEngine
 /*
 这种notify是惰性的
 可以避免多余的重复的notify
-需要调用connection的Notify()或Data<T>的NotifyConnection来执行上次Notify()之后的积攒的惰性的NotifyAction
+需要调用connection的Notify()或Data<T>的NotifyConnection来执行上次Notify()之后的积攒的惰性的OnNotifyAction
 */
 #define DATA_NOTIFY(method,arg)\
 for(auto& i:m_Connection)\
