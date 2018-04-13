@@ -59,11 +59,6 @@ SpaceGameEngine::Window::~Window()
 	m_ReleaseAction();
 }
 
-void SpaceGameEngine::Window::Resize()
-{
-	m_ResizeAction();
-}
-
 DWORD SpaceGameEngine::Window::GetWindowWidth()
 {
 	return m_WindowWidth;
@@ -164,4 +159,39 @@ void SpaceGameEngine::Window::SetFPSLimit(unsigned int limit)
 unsigned int SpaceGameEngine::Window::GetFPSLimit()
 {
 	return m_FPSLimit;
+}
+
+bool SpaceGameEngine::Window::GetIfBegin()
+{
+	return m_IfBegin;
+}
+
+void SpaceGameEngine::Window::SetInitAction(const std::function<void()>& func)
+{
+	m_InitAction = func;
+}
+
+void SpaceGameEngine::Window::SetRunAction(const std::function<void()>& func)
+{
+	m_RunAction = func;
+}
+
+void SpaceGameEngine::Window::SetResizeAction(const std::function<void()>& func)
+{
+	m_ResizeAction = func;
+}
+
+void SpaceGameEngine::Window::SetReleaseAction(const std::function<void()>& func)
+{
+	m_ReleaseAction = func;
+}
+
+void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
+{
+	m_InitAction();
+}
+
+void SpaceGameEngine::Window::Resize()
+{
+	m_ResizeAction();
 }

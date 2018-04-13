@@ -25,8 +25,6 @@ namespace SpaceGameEngine
 		Window();
 		~Window();
 
-		void Resize();
-
 		DWORD GetWindowWidth();							//获取窗口宽度
 		DWORD GetWindowHeight();						//获取窗口高度
 		void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
@@ -50,6 +48,16 @@ namespace SpaceGameEngine
 		String GetWindowTitle();
 		void SetFPSLimit(unsigned int limit);
 		unsigned int GetFPSLimit();
+
+		bool GetIfBegin();
+
+		void SetInitAction(const std::function<void()>& func);
+		void SetRunAction(const std::function<void()>& func);
+		void SetResizeAction(const std::function<void()>& func);
+		void SetReleaseAction(const std::function<void()>& func);
+
+		void StartRun(HINSTANCE hInstance);
+		void Resize();
 	private:
 		HWND m_Hwnd;									//窗口句柄
 		DWORD m_WindowWidth;								//窗口宽度

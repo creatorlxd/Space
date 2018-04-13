@@ -145,6 +145,12 @@
     <ClInclude Include="Source\GameEngine\Common\CurrentObject.hpp">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Data.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Connection.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">

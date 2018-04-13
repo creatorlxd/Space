@@ -82,4 +82,21 @@ namespace SpaceGameEngine
 
 	template <typename _T> void SafeRelease(_T& p) { if (p) { p->Release(); p = nullptr; } }
 
+	template<bool b,typename T,typename U>
+	struct TypeIf
+	{
+
+	};
+
+	template<typename T,typename U>
+	struct TypeIf<true, T, U>
+	{
+		using Result = T;
+	};
+
+	template<typename T, typename U>
+	struct TypeIf<false, T, U>
+	{
+		using Result = U;
+	};
 }
