@@ -37,21 +37,10 @@ namespace SpaceGameEngine
 			for (auto i : m_Connection)
 				i->m_pContent = nullptr;
 		}
-
-		/*
-		通知各个链接开始运行积攒的惰性OnNotifyAction
-		*/
-		void NotifyConnection()
-		{
-			for (auto& i : m_Connection)
-			{
-				i->Notify();
-			}
-		}
 	private:
 		void AddConnection(Connection<T>& connect)
 		{
-			m_Connection.push_back(&connect);
+			m_Connection.insert(m_Connection.end(), &connect);
 		}
 		void DeleteConnection(Connection<T>& connect)
 		{
@@ -62,26 +51,12 @@ namespace SpaceGameEngine
 				THROWERROR("do not have this connection");
 		}
 	protected:
-		Vector<Connection<T>*> m_Connection;
+		List<Connection<T>*> m_Connection;
 	};
 
-/*
-这种notify是惰性的
-可以避免多余的重复的notify
-需要调用connection的Notify()或Data<T>的NotifyConnection来执行上次Notify()之后的积攒的惰性的OnNotifyAction
-*/
-#define DATA_NOTIFY(method,arg)\
-for(auto& i:m_Connection)\
+#define DATA_NOTIFY(scope,method,...)\
+for(auto i:scope::m_Connection)\
 {\
-	i->method##arg;\
-}
-/*
-这种notify是及时的
-*/
-#define DATA_NOTIFY_AT_ONCE(method,arg)\
-for(auto& i:m_Connection)\
-{\
-	i->method##arg;\
-	i->Notify();\
+	i->method##(__VA_ARGS__);\
 }
 }

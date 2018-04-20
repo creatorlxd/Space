@@ -48,10 +48,10 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 
 	m_IfBegin = false;
 
-	m_InitAction = [&]()->void {};
-	m_RunAction = [&]()->void {};
-	m_ResizeAction = [&]()->void {};
-	m_ReleaseAction = [&]()->void {};
+	m_InitAction = []()->void {};
+	m_RunAction = []()->void {};
+	m_ResizeAction = []()->void {};
+	m_ReleaseAction = []()->void {};
 }
 
 SpaceGameEngine::Window::~Window()

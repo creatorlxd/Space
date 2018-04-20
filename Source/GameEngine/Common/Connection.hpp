@@ -23,7 +23,7 @@ namespace SpaceGameEngine
 	{
 	public:
 		friend class Data<T>;
-
+	private:
 		void Clear()
 		{
 			if (m_pContent)
@@ -42,7 +42,7 @@ namespace SpaceGameEngine
 			else
 				Clear();
 		}
-
+	public:
 		ConnectionCore() = delete;
 		ConnectionCore(Connection<T>& connect) :m_Connection(connect)
 		{
@@ -63,7 +63,9 @@ namespace SpaceGameEngine
 		}
 		ConnectionCore& operator = (T* ptr)
 		{
-			Reset(ptr);
+			if (ptr != m_pContent)
+				Reset(ptr);
+			return *this;
 		}
 		T& operator *()
 		{
@@ -73,28 +75,28 @@ namespace SpaceGameEngine
 		{
 			return m_pContent;
 		}
-		void Notify()
+		T* Get()
 		{
-			while (!m_NotifyActionQueue.empty())
-			{
-				m_NotifyActionQueue.front()();
-				m_NotifyActionQueue.pop();
-			}
+			return m_pContent;
 		}
 	public:
-		template<typename FuncType = void()>
-		class OnNotifyAction
+		template<typename>
+		class OnNotifyAction;		//do not use
+
+		template<typename R, typename... Arg>
+		class OnNotifyAction<R(Arg...)>
 		{
 		public:
-			OnNotifyAction() = delete;
-			OnNotifyAction(ConnectionCore<T>& connect) :m_Connection(connect)
+			using FuncType = R(Arg...);
+
+			OnNotifyAction()
 			{
-				m_Action = [&]() {};
+				m_Action = [](Arg... arg)->R {return R(); };	//default
 			}
 			template<typename... Arg>
 			void operator () (Arg&&... arg)
 			{
-				m_Connection.m_NotifyActionQueue.push(std::bind(m_Action, std::forward<Arg>(arg)...));
+				m_Action(std::forward<Arg>(arg)...);
 			}
 			OnNotifyAction & operator = (const std::function<FuncType>& func)
 			{
@@ -103,31 +105,38 @@ namespace SpaceGameEngine
 			}
 		private:
 			std::function<FuncType> m_Action;
-			ConnectionCore<T>& m_Connection;
 		};
 	private:
 		T * m_pContent;
 		Connection<T>& m_Connection;
-		Queue < std::function<void()>> m_NotifyActionQueue;
 	};
 
 	template<typename T>
 	class Connection :public ConnectionCore<T>
 	{
 	public:
-		Connection() :ConnectionCore(*this)
+		Connection() :ConnectionCore<T>(*this)
 		{}
-		Connection(T* ptr) :ConnectionCore(*this, ptr)
+		Connection(T* ptr) :ConnectionCore<T>(*this, ptr)
 		{}
+		Connection& operator = (T* ptr)
+		{
+			ConnectionCore<T>::operator = (ptr);
+			return *this;
+		}
 	};
 
-/*
-Connection<T>的构造函数
-用来初始化自定义的OnNotifyAction
-example:
-CONNECTION_CONSTRUCTOR(test_type,OnNotifyTest(*this));
-*/
-#define CONNECTION_CONSTRUCTOR(type,...) \
-Connection<type>():ConnectionCore<type>(*this),__VA_ARGS__{}\
-Connection<type>(type* ptr):ConnectionCore<type>(*this,ptr),__VA_ARGS__{}
+#define CONNECTION(type) \
+template<> \
+class SpaceGameEngine::Connection<type>:public SpaceGameEngine::ConnectionCore<type> \
+{ \
+public: \
+Connection<type>():ConnectionCore<type>(*this){} \
+Connection<type>(type* ptr):ConnectionCore<type>(*this,ptr){} \
+Connection<type>& operator = (type* ptr) \
+{ \
+ConnectionCore<type>::operator = (ptr); \
+return *this; \
+}
+
 }

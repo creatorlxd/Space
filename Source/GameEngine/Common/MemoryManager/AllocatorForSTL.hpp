@@ -106,6 +106,9 @@ namespace SpaceGameEngine
 	using Stack = std::stack<T, Deque<T> >;
 
 	template<typename T>
+	using List = std::list<T, AllocatorForSTL<T>>;
+
+	template<typename T>
 	using ForwardList = std::forward_list<T, AllocatorForSTL<T> >;
 
 	template<typename T, typename _Pr = std::less<T> >
