@@ -33,23 +33,28 @@ namespace SpaceGameEngine
 			if (pthis == nullptr)
 				THROWERROR("pthis can not be nullptr");
 			m_pThis = pthis;
-			sm_pCurrentObject = m_pThis;
+			GetCurrentObjectPtr() = m_pThis;
 		}
 		virtual ~CurrentObject()
 		{
-			if (sm_pCurrentObject == m_pThis)
-				sm_pCurrentObject = nullptr;
+			if (GetCurrentObjectPtr() == m_pThis)
+				GetCurrentObjectPtr() = nullptr;
 		}
 		static T* GetCurrentObject()
 		{
-			return sm_pCurrentObject;
+			return GetCurrentObjectPtr();
 		}
 		void SetAsCurrentObject()
 		{
-			sm_pCurrentObject = m_pThis;
+			GetCurrentObjectPtr() = m_pThis;
+		}
+	private:
+		static T*& GetCurrentObjectPtr()
+		{
+			static T * sm_pCurrentObject = nullptr;
+			return sm_pCurrentObject;
 		}
 	private:
 		T * m_pThis;
-		inline static T * sm_pCurrentObject = nullptr;
 	};
 }

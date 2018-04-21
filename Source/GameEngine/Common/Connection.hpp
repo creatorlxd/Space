@@ -56,6 +56,10 @@ namespace SpaceGameEngine
 				ptr->AddConnection(m_Connection);
 			}
 		}
+		ConnectionCore(ConnectionCore& other) = delete;
+		ConnectionCore(ConnectionCore&& other) = delete;
+		ConnectionCore& operator =(ConnectionCore& other) = delete;
+		ConnectionCore& operator =(ConnectionCore&& other) = delete;
 		virtual ~ConnectionCore()
 		{
 			if (m_pContent)
@@ -124,6 +128,10 @@ namespace SpaceGameEngine
 			ConnectionCore<T>::operator = (ptr);
 			return *this;
 		}
+		Connection(Connection& other) = delete;
+		Connection(Connection&& other) = delete;
+		Connection& operator =(Connection& other) = delete;
+		Connection& operator =(Connection&& other) = delete;
 	};
 
 #define CONNECTION(type) \
@@ -133,6 +141,10 @@ class SpaceGameEngine::Connection<type>:public SpaceGameEngine::ConnectionCore<t
 public: \
 Connection<type>():ConnectionCore<type>(*this){} \
 Connection<type>(type* ptr):ConnectionCore<type>(*this,ptr){} \
+Connection<type>(Connection<type>& other) = delete;\
+Connection<type>(Connection<type>&& other) = delete;\
+Connection<type>& operator =(Connection<type>& other) = delete;\
+Connection<type>& operator =(Connection<type>&& other) = delete;\
 Connection<type>& operator = (type* ptr) \
 { \
 ConnectionCore<type>::operator = (ptr); \
