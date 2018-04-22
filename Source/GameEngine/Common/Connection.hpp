@@ -27,7 +27,7 @@ namespace SpaceGameEngine
 		void Clear()
 		{
 			if (m_pContent)
-				m_pContent->DeleteConnection(m_Connection);
+				m_pContent->Data<T>::DeleteConnection(m_Connection);
 			m_pContent = nullptr;
 		}
 
@@ -37,7 +37,7 @@ namespace SpaceGameEngine
 			{
 				Clear();
 				m_pContent = ptr;
-				ptr->AddConnection(m_Connection);
+				ptr->Data<T>::AddConnection(m_Connection);
 			}
 			else
 				Clear();
@@ -53,7 +53,7 @@ namespace SpaceGameEngine
 			m_pContent = ptr;
 			if (ptr)
 			{
-				ptr->AddConnection(m_Connection);
+				ptr->Data<T>::AddConnection(m_Connection);
 			}
 		}
 		ConnectionCore(ConnectionCore& other) = delete;
@@ -63,7 +63,7 @@ namespace SpaceGameEngine
 		virtual ~ConnectionCore()
 		{
 			if (m_pContent)
-				m_pContent->DeleteConnection(m_Connection);
+				m_pContent->Data<T>::DeleteConnection(m_Connection);
 		}
 		ConnectionCore& operator = (T* ptr)
 		{
@@ -134,7 +134,7 @@ namespace SpaceGameEngine
 		Connection& operator =(Connection&& other) = delete;
 	};
 
-#define CONNECTION(type) \
+#define CONNECTION_BEGIN(type) \
 template<> \
 class SpaceGameEngine::Connection<type>:public SpaceGameEngine::ConnectionCore<type> \
 { \
@@ -150,5 +150,6 @@ Connection<type>& operator = (type* ptr) \
 ConnectionCore<type>::operator = (ptr); \
 return *this; \
 }
+#define CONNECTION_END }
 
 }

@@ -10,9 +10,9 @@ using namespace SpaceGameEngine;
 
 class TestData;
 
-CONNECTION(TestData)
-OnNotifyAction<void()> m_OnNotifyTest;
-};
+CONNECTION_BEGIN(TestData)
+	OnNotifyAction<void()> m_OnNotifyTest;
+CONNECTION_END;
 
 class TestData :public Data<TestData>
 {
@@ -20,7 +20,23 @@ public:
 	int a;
 	void run()
 	{
-		DATA_NOTIFY(TestData, m_OnNotifyTest);
+		DATA_NOTIFY(Data<TestData>, m_OnNotifyTest);
+	}
+};
+
+class TestData2;
+
+CONNECTION_BEGIN(TestData2)
+	OnNotifyAction<void(int, float)> m_OnNotifyTest2;
+CONNECTION_END;
+
+class TestData2 :public TestData, public Data<TestData2>
+{
+public:
+	void run()
+	{
+		DATA_NOTIFY(Data<TestData>, m_OnNotifyTest);
+		DATA_NOTIFY(Data<TestData2>, m_OnNotifyTest2,0,0.0f);
 	}
 };
 
@@ -83,6 +99,12 @@ TEST_GROUP_BEGIN(CommonTest)
 		Connection<TestData> pc(&test);
 		pc.m_OnNotifyTest = []() {cout << "test on notify" << endl; };
 		test.run();
+		TestData2 test2;
+		Connection<TestData> pc2_1(&test2);
+		Connection<TestData2> pc2_2(&test2);
+		pc2_1.m_OnNotifyTest = []() {cout << "test on notify ---pc2_1" << endl; };
+		pc2_2.m_OnNotifyTest2 = [](int i, float f) {cout << i << " " << f << endl; };
+		test2.run();
 	}
 	TEST_METHOD_END
 }
