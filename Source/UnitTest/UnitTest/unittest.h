@@ -8,6 +8,20 @@
 using namespace MyUnitTest;
 using namespace SpaceGameEngine;
 
+//struct test_gb
+//{
+//public:
+//	test_gb(int _a, int _b, int _c) :
+//		a(_a), b(_b), c(_c) {}
+//	int a, b, c;
+//};
+//
+//test_gb& GetTestGB()
+//{
+//	static GlobalVariable<test_gb> g_Test_gb(1, 2, 3);
+//	return g_Test_gb.Get();
+//}
+
 class TestData;
 
 CONNECTION_BEGIN(TestData)
@@ -105,6 +119,11 @@ TEST_GROUP_BEGIN(CommonTest)
 		pc2_1.m_OnNotifyTest = []() {cout << "test on notify ---pc2_1" << endl; };
 		pc2_2.m_OnNotifyTest2 = [](int i, float f) {cout << i << " " << f << endl; };
 		test2.run();
+	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestMetaData)
+	{
+		auto meta = GetMetaData<int>();
 	}
 	TEST_METHOD_END
 }

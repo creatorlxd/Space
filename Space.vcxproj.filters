@@ -49,6 +49,9 @@
     <Filter Include="Common\MemoryManager">
       <UniqueIdentifier>{6c62c8ce-9d14-41b1-83d2-ee0aa53a1a4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\MetaData">
+      <UniqueIdentifier>{a55a1926-c2ea-495d-b4be-ff120f193fdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -151,6 +154,9 @@
     <ClInclude Include="Source\GameEngine\Common\Connection.hpp">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MetaData\MetaData.h">
+      <Filter>Common\MetaData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -203,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\Window.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MetaData\MetaData.cpp">
+      <Filter>Common\MetaData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
