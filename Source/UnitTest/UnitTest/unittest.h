@@ -8,19 +8,19 @@
 using namespace MyUnitTest;
 using namespace SpaceGameEngine;
 
-//struct test_gb
-//{
-//public:
-//	test_gb(int _a, int _b, int _c) :
-//		a(_a), b(_b), c(_c) {}
-//	int a, b, c;
-//};
-//
-//test_gb& GetTestGB()
-//{
-//	static GlobalVariable<test_gb> g_Test_gb(1, 2, 3);
-//	return g_Test_gb.Get();
-//}
+struct test_gb
+{
+public:
+	test_gb(int _a, int _b, int _c) :
+		a(_a), b(_b), c(_c) {}
+	int a, b, c;
+};
+
+test_gb& GetTestGB()
+{
+	static GlobalVariable<test_gb> g_Test_gb(1, 2, 3);
+	return g_Test_gb.Get();
+}
 
 class TestData;
 
@@ -123,7 +123,13 @@ TEST_GROUP_BEGIN(CommonTest)
 	TEST_METHOD_END,
 	TEST_METHOD_BEGIN(TestMetaData)
 	{
-		auto meta = GetMetaData<int>();
+		auto meta = GetMetaData<string>();
+		auto ptr1 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
+		auto ptr2 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
+		*ptr1 = "test";
+		meta.m_CopyAction(GetMetaObject(ptr2), GetMetaObject(ptr1));
+		MemoryManager::Delete(ptr1);
+		MemoryManager::Delete(ptr2);
 	}
 	TEST_METHOD_END
 }

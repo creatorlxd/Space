@@ -47,13 +47,24 @@ namespace SpaceGameEngine
 
 	struct MetaObject
 	{
-		String m_TypeName = "";
-		void* m_pContent = nullptr;
+	private:
+		String m_TypeName;
+		void* m_pContent;
+		MetaDataPtr m_pMetaData;
+	private:
+		MetaObject(const String& type_name, void* ptr, MetaDataPtr pmetadata);
+	public:
+		template<typename T>
+		friend MetaObject GetMetaObject(T* ptr);
+
+		template<typename T>
+		T* Cast() const;
+
+		String GetTypeName() const;
 	};
 
 	using ConstructorType = std::function<MetaObject()>;
 	using CopyActionType = std::function<void(const MetaObject&, const MetaObject&)>;
-	using ToStringActionType = std::function<String(const MetaObject&)>;
 
 	template<typename T>
 	inline const MetaData& GetMetaData();
@@ -65,19 +76,20 @@ namespace SpaceGameEngine
 		String m_VariableName = "";
 		size_t m_Size = 0;
 		size_t m_Offset = 0;
+		bool m_IfPointer = false;
 	};
 
 	struct MetaData
 	{
-		String m_TypeName = "";
+		String m_TypeName;
+		size_t m_Size;
 		Map<String, MemberVariableMetaData> m_MemberVariable;
-		ConstructorType m_Constructor = []() {return MetaObject{ "",nullptr }; };
-		CopyActionType m_CopyAction = [](const MetaObject&, const MetaObject&) {};
-		ToStringActionType m_ToStringAction = [](const MetaObject&) {return ""; };
+		ConstructorType m_Constructor;
+		CopyActionType m_CopyAction;
 		Map<String, MetaDataPtr> m_DirectInheritanceRelation;
 		Map<String, MetaDataPtr> m_AllInheritanceRelation;
 
-		MetaData(const String& type_name, const Map<String, MemberVariableMetaData>& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const ToStringActionType& to_string_action, const Map<String, MetaDataPtr>& inheritance_relation);
+		MetaData(const String& type_name, size_t size, const Map<String, MemberVariableMetaData>& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const Map<String, MetaDataPtr>& inheritance_relation);
 	};
 
 	template<typename T>
@@ -85,9 +97,9 @@ namespace SpaceGameEngine
 	{
 		return [func](const MetaObject& dis, const MetaObject& src)
 		{
-			if (dis.m_TypeName == GetMetaData<T>().m_TypeName&&src.m_TypeName == GetMetaData<T>().m_TypeName)
+			if (dis.GetTypeName() == GetMetaData<T>().m_TypeName&&src.GetTypeName() == GetMetaData<T>().m_TypeName)
 			{
-				func(*(T*)dis.m_pContent, *(T*)src.m_pContent);
+				func(*dis.Cast<T>(), *src.Cast<T>());
 			}
 			else
 				THROWERROR("can not copy between two different type metaobject");
@@ -97,33 +109,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline CopyActionType GetDefaultCopyAction()
 	{
-		return GetCopyAction([](T& dis, T& src) {dis = src; });
-	}
-
-	template<typename T>
-	inline String ToString(const T& obj)
-	{
-		return std::to_string(obj);
-	}
-
-	template<typename T>
-	inline ToStringActionType GetToStringAction(const std::function<String(T&)>& func)
-	{
-		return [func](const MetaObject& obj)->String
-		{
-			if (obj.m_TypeName == GetMetaData<T>.m_TypeName)
-			{
-				return func(*(T*)obj.m_pContent);
-			}
-			else
-				THROWERROR("this function can not be call by this type of metaobject");
-		};
-	}
-
-	template<typename T>
-	inline ToStringActionType GetDefaultToStringAction()
-	{
-		return GetToStringAction(ToString<T>);
+		return GetCopyAction<T>([](T& dis, T& src) {dis = src; });
 	}
 
 	class MetaDataManager
@@ -186,7 +172,7 @@ namespace SpaceGameEngine
 	{
 		static const MetaData& Get()
 		{
-			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), {}, [] {return MemoryManager::New<T>(); }, GetDefaultCopyAction<T>(), GetDefaultToStringAction<T>(), {});
+			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), sizeof(T), Map<String, MemberVariableMetaData>(), [] {return GetMetaObject(MemoryManager::New<T>()); }, GetDefaultCopyAction<T>(), Map<String, MetaDataPtr>());
 			return g_MetaDataFactory.Get();
 		}
 	};
@@ -195,5 +181,66 @@ namespace SpaceGameEngine
 	inline const MetaData& GetMetaData()
 	{
 		return GetMetaDataCore<T, IfTypeHaveGetMetaDataMethod<T>::Result>::Get();
+	}
+
+	template<typename T>
+	inline T * SpaceGameEngine::MetaObject::Cast() const
+	{
+		static const MetaData& metadata = GetMetaData<T>();
+		if (m_pContent)
+		{
+			if (m_TypeName == metadata.m_TypeName)
+			{
+				return (T*)m_pContent;
+			}
+			else
+			{
+				//if t is the base of metaobject's type
+				auto iter = m_pMetaData->m_AllInheritanceRelation.find(metadata.m_TypeName);
+				if (iter != m_pMetaData->m_AllInheritanceRelation.cend())
+				{
+					return (T*)m_pContent;
+				}
+				else
+				{
+					THROWERROR("can't do this cast");
+					return nullptr;
+				}
+			}
+		}
+		else
+		{
+			THROWERROR("meta object can not be nullptr");
+			return nullptr;
+		}
+	}
+
+	template<typename T>
+	inline MetaObject GetMetaObject(T* ptr)
+	{
+		if (ptr)
+		{
+			return MetaObject(typeid(T).name(), ptr, &GetMetaData<T>());
+		}
+		else
+		{
+			THROWERROR("Can not get meta object by nullptr");
+			return MetaObject(typeid(T).name(), ptr, &GetMetaData<T>());
+		}
+	}
+
+	/*
+	type_name must be typeof(type).name() or GetMetaData<type>.m_TypeName
+	*/
+	MetaObject ConstructByTypeName(const String& type_name);
+	/*
+	type_name must be typeof(type).name() or GetMetaData<type>.m_TypeName
+	*/
+	void CopyByTypeName(const String& type_name,MetaObject& dis,MetaObject& src);
+
+	template<typename T>
+	inline String GetTypeName()
+	{
+		return typeid(T).name();
 	}
 }

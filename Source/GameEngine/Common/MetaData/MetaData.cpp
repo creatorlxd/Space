@@ -16,9 +16,9 @@ limitations under the License.
 #include "stdafx.h"
 #include "MetaData.h"
 
-SpaceGameEngine::MetaData::MetaData(const String & type_name, const Map<String, MemberVariableMetaData>& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const ToStringActionType& to_string_action, const Map<String, MetaDataPtr>& inheritance_relation)
+SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const Map<String, MemberVariableMetaData>& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const Map<String, MetaDataPtr>& inheritance_relation)
 	:
-	m_TypeName(type_name), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_ToStringAction(to_string_action), m_DirectInheritanceRelation(inheritance_relation)
+	m_TypeName(type_name), m_Size(size), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_DirectInheritanceRelation(inheritance_relation), m_AllInheritanceRelation(inheritance_relation)
 {
 	for (auto i : m_DirectInheritanceRelation)
 	{
@@ -49,4 +49,34 @@ SpaceGameEngine::MetaDataManager::MetaDataManager()
 void SpaceGameEngine::MetaDataManager::InsertMetaData(const MetaData & metadata)
 {
 	m_Content.insert(std::make_pair(metadata.m_TypeName, &metadata));
+}
+
+SpaceGameEngine::MetaObject::MetaObject(const String & type_name, void * ptr, MetaDataPtr pmetadata)
+{
+	if (ptr == nullptr)
+	{
+		THROWERROR("meta object can not be nullptr");
+	}
+	if (m_pMetaData == nullptr)
+	{
+		THROWERROR("meta object's metatype can not be nullptr");
+	}
+	m_pContent = ptr;
+	m_TypeName = type_name;
+	m_pMetaData = pmetadata;
+}
+
+SpaceGameEngine::String SpaceGameEngine::MetaObject::GetTypeName() const
+{
+	return m_TypeName;
+}
+
+SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & type_name)
+{
+	return GetMetaDataManager().GetMetaData(type_name)->m_Constructor();
+}
+
+void SpaceGameEngine::CopyByTypeName(const String & type_name, MetaObject & dis, MetaObject & src)
+{
+	GetMetaDataManager().GetMetaData(type_name)->m_CopyAction(dis, src);
 }
