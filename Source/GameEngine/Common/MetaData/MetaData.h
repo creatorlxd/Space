@@ -100,7 +100,7 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	inline CopyActionType GetCopyAction(const std::function<void(T&, const T&)>& func)
+	inline CopyActionType GetCopyAction(const std::function<void(T&, T&)>& func)
 	{
 		return [func](const MetaObject& dst, const MetaObject& src)
 		{
@@ -116,7 +116,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline CopyActionType GetDefaultCopyAction()
 	{
-		return GetCopyAction<T>([](T& dst, const T& src) {dst = src; });
+		return GetCopyAction<T>([](T& dst,T& src) {dst = src; });
 	}
 
 	class MetaDataManager
@@ -258,7 +258,7 @@ namespace SpaceGameEngine
 	void CopyByMetaObject(const MetaObject& dst, const MetaObject& src);
 
 	template<typename T>
-	inline void CopyByMetaData(T& dst,const T& src)
+	inline void CopyByMetaData(T& dst,T& src)
 	{
 		static const MetaData& metadata = T::GetMetaDataCore();
 		for (auto& i : metadata.m_MemberVariable)
