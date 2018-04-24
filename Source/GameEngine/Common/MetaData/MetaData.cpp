@@ -16,7 +16,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "MetaData.h"
 
-SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const Map<String, MemberVariableMetaData>& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const Map<String, MetaDataPtr>& inheritance_relation)
+SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const MemberVaiableContainer& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const InheritanceRelationContainer& inheritance_relation)
 	:
 	m_TypeName(type_name), m_Size(size), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_DirectInheritanceRelation(inheritance_relation), m_AllInheritanceRelation(inheritance_relation)
 {
@@ -51,7 +51,7 @@ void SpaceGameEngine::MetaDataManager::InsertMetaData(const MetaData & metadata)
 	m_Content.insert(std::make_pair(metadata.m_TypeName, &metadata));
 }
 
-SpaceGameEngine::MetaObject::MetaObject(const String & type_name, void * ptr, MetaDataPtr pmetadata)
+SpaceGameEngine::MetaObject::MetaObject(void * ptr, MetaDataPtr pmetadata)
 {
 	if (ptr == nullptr)
 	{
@@ -62,21 +62,67 @@ SpaceGameEngine::MetaObject::MetaObject(const String & type_name, void * ptr, Me
 		THROWERROR("meta object's metatype can not be nullptr");
 	}
 	m_pContent = ptr;
-	m_TypeName = type_name;
 	m_pMetaData = pmetadata;
 }
 
 SpaceGameEngine::String SpaceGameEngine::MetaObject::GetTypeName() const
 {
-	return m_TypeName;
+	return m_pMetaData->m_TypeName;
+}
+
+const SpaceGameEngine::MetaData & SpaceGameEngine::MetaObject::GetMetaData() const
+{
+	return *m_pMetaData;
+}
+
+SpaceGameEngine::MetaObject SpaceGameEngine::CastToMetaObject(const String & type_name, void * ptr)
+{
+	auto metadata = GetMetaDataManager().GetMetaData(type_name);
+	if (metadata)
+		return MetaObject(ptr, metadata);
+	else
+	{
+		THROWERROR("do not have this type");
+	}
 }
 
 SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & type_name)
 {
-	return GetMetaDataManager().GetMetaData(type_name)->m_Constructor();
+	auto meta = GetMetaDataManager().GetMetaData(type_name);
+	if (meta)
+		return meta->m_Constructor();
+	else
+	{
+		THROWERROR("do not have this type");
+	}
 }
 
-void SpaceGameEngine::CopyByTypeName(const String & type_name, MetaObject & dis, MetaObject & src)
+void SpaceGameEngine::CopyByTypeName(const String & type_name, const MetaObject & dst, const MetaObject & src)
 {
-	GetMetaDataManager().GetMetaData(type_name)->m_CopyAction(dis, src);
+	auto meta = GetMetaDataManager().GetMetaData(type_name);
+	if (meta)
+		return meta->m_CopyAction(dst, src);
+	else
+	{
+		THROWERROR("do not have this type");
+	}
+}
+
+void SpaceGameEngine::CopyByMetaObject(const MetaObject & dst, const MetaObject & src)
+{
+	if (dst.GetTypeName() == src.GetTypeName())
+	{
+		CopyByTypeName(src.GetTypeName(), dst, src);
+	}
+	else
+	{
+		THROWERROR("can not copy between different type's metaobject");
+	}
+}
+
+SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMetaObject(void * ptr)const
+{
+	if (ptr == nullptr)
+		THROWERROR("ptr can not be nullptr");
+	return MetaObject((void*)((size_t)ptr + m_Offset), m_pMetaData);
 }

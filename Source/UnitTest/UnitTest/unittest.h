@@ -8,19 +8,40 @@
 using namespace MyUnitTest;
 using namespace SpaceGameEngine;
 
-struct test_gb
+struct test_md
 {
 public:
-	test_gb(int _a, int _b, int _c) :
+	test_md(int _a, int _b, int _c) :
 		a(_a), b(_b), c(_c) {}
+	test_md() :test_md(0, 0, 0) {}
 	int a, b, c;
+	METADATA_BEGIN(test_md)
+		MEMBER_VAR_BEGIN
+			MEMBER_VAR(test_md, int, a, false),
+			MEMBER_VAR(test_md, int, b),
+			MEMBER_VAR(test_md, int, c)
+		MEMBER_VAR_END
+		METADATA_FUNCTION(test_md)
+		INHERITANCE_BEGIN
+		INHERITANCE_END
+	METADATA_END(test_md); 
+	test_md& operator = (const test_md& tg)
+	{
+		COPY_BY_METADATA(test_md, *this, tg);
+		/*auto& re = const_cast<test_md&>(*this);
+		CopyByMetaData(re, tg);*/
+		return *this;
+	}
 };
 
-test_gb& GetTestGB()
+class test_md2:public test_md
 {
-	static GlobalVariable<test_gb> g_Test_gb(1, 2, 3);
-	return g_Test_gb.Get();
-}
+	test_md2& operator = (const test_md2& tm)
+	{
+		test_md::operator=(tm);
+		return *this;
+	}
+};
 
 class TestData;
 
@@ -127,9 +148,13 @@ TEST_GROUP_BEGIN(CommonTest)
 		auto ptr1 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
 		auto ptr2 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
 		*ptr1 = "test";
-		meta.m_CopyAction(GetMetaObject(ptr2), GetMetaObject(ptr1));
+		CopyByTypeName(GetTypeName<string>(),CastToMetaObject(ptr2), CastToMetaObject(ptr1));
 		MemoryManager::Delete(ptr1);
 		MemoryManager::Delete(ptr2);
+		auto meta2 = test_md::GetMetaDataCore();
+		test_md t1, t2(1,2,3);
+		auto meta3 = t1.sm_MetaData;
+		CopyByMetaObject(t1.CastToMetaObject(), t2.CastToMetaObject());
 	}
 	TEST_METHOD_END
 }
