@@ -65,6 +65,22 @@ SpaceGameEngine::MetaObject::MetaObject(void * ptr, MetaDataPtr pmetadata)
 	m_pMetaData = pmetadata;
 }
 
+SpaceGameEngine::MetaObject::MetaObject(const String & type_name, void * ptr)
+{
+	auto metadata = GetMetaDataManager().GetMetaData(type_name);
+	if (metadata)
+	{
+		m_pMetaData = metadata;
+		m_pContent = ptr;
+	}
+	else
+	{
+		THROWERROR("do not have this type");
+		m_pContent = nullptr;
+		m_pMetaData = nullptr;
+	}
+}
+
 SpaceGameEngine::String SpaceGameEngine::MetaObject::GetTypeName() const
 {
 	return m_pMetaData->m_TypeName;
@@ -73,17 +89,6 @@ SpaceGameEngine::String SpaceGameEngine::MetaObject::GetTypeName() const
 const SpaceGameEngine::MetaData & SpaceGameEngine::MetaObject::GetMetaData() const
 {
 	return *m_pMetaData;
-}
-
-SpaceGameEngine::MetaObject SpaceGameEngine::CastToMetaObject(const String & type_name, void * ptr)
-{
-	auto metadata = GetMetaDataManager().GetMetaData(type_name);
-	if (metadata)
-		return MetaObject(ptr, metadata);
-	else
-	{
-		THROWERROR("do not have this type");
-	}
 }
 
 SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & type_name)
@@ -120,9 +125,13 @@ void SpaceGameEngine::CopyByMetaObject(const MetaObject & dst, const MetaObject 
 	}
 }
 
-SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMetaObject(void * ptr)const
+SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMemberVariable(const MetaObject& obj)const
 {
-	if (ptr == nullptr)
-		THROWERROR("ptr can not be nullptr");
-	return MetaObject((void*)((size_t)ptr + m_Offset), m_pMetaData);
+	if (obj.GetTypeName() == m_ClassTypeName)
+		return MetaObject((void*)((size_t)obj.m_pContent + m_Offset), m_pMetaData);
+	else
+	{
+		THROWERROR("can not get this membervariablemetadata");
+		return MetaObject(nullptr, nullptr);
+	}
 }

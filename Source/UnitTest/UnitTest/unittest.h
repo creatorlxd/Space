@@ -27,20 +27,42 @@ public:
 	METADATA_END(test_md); 
 	test_md& operator = (const test_md& tg)
 	{
-		COPY_BY_METADATA(test_md, *this, tg);
-		/*auto& re = const_cast<test_md&>(*this);
-		CopyByMetaData(re, tg);*/
+		CopyByMetaData(*this, tg);
 		return *this;
 	}
 };
 
 class test_md2:public test_md
 {
+public:
 	test_md2& operator = (const test_md2& tm)
 	{
 		test_md::operator=(tm);
 		return *this;
 	}
+	int* pa;
+	METADATA_BEGIN(test_md2)
+		MEMBER_VAR_BEGIN
+		MEMBER_VAR(test_md2,int*,pa)
+		MEMBER_VAR_END
+		METADATA_FUNCTION(test_md2)
+		INHERITANCE_BEGIN
+		INHERITANCE(test_md)
+		INHERITANCE_END
+	METADATA_END(test_md2);
+};
+
+struct test_md3 :public test_md2
+{
+public:
+	METADATA_BEGIN(test_md3)
+		MEMBER_VAR_BEGIN
+		MEMBER_VAR_END
+		METADATA_FUNCTION(test_md3)
+		INHERITANCE_BEGIN
+		INHERITANCE(test_md2)
+		INHERITANCE_END
+	METADATA_END(test_md3);
 };
 
 class TestData;
@@ -153,7 +175,8 @@ TEST_GROUP_BEGIN(CommonTest)
 		MemoryManager::Delete(ptr2);
 		auto meta2 = test_md::GetMetaDataCore();
 		test_md t1, t2(1,2,3);
-		auto meta3 = t1.sm_MetaData;
+		auto meta3 = GetMetaData<test_md2>();
+		auto meta4 = GetMetaData<test_md3>();
 		CopyByMetaObject(t1.CastToMetaObject(), t2.CastToMetaObject());
 	}
 	TEST_METHOD_END

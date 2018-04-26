@@ -22,7 +22,7 @@ limitations under the License.
 namespace SpaceGameEngine
 {
 	struct MetaData;
-
+	struct MemberVariableMetaData;
 	using MetaDataPtr = const MetaData*;
 
 	/*
@@ -52,6 +52,9 @@ namespace SpaceGameEngine
 		MetaDataPtr m_pMetaData;
 	public:
 		MetaObject(void* ptr, MetaDataPtr pmetadata);
+		MetaObject(const String& type_name, void* ptr);
+
+		friend struct MemberVariableMetaData;
 
 		template<typename T>
 		T* Cast() const;
@@ -69,6 +72,7 @@ namespace SpaceGameEngine
 
 	struct MemberVariableMetaData
 	{
+		String m_ClassTypeName = "";
 		MetaDataPtr m_pMetaData = nullptr;
 		String m_VariableName = "";
 		size_t m_Size = 0;
@@ -80,7 +84,7 @@ namespace SpaceGameEngine
 		ptr is the pointer of type which this member variable belong to
 		ptr can not be nullptr
 		*/
-		MetaObject CastToMetaObject(void* ptr)const;
+		MetaObject CastToMemberVariable(const MetaObject& obj)const;
 	};
 
 	using MemberVaiableContainer = Map<String, MemberVariableMetaData>;
@@ -100,7 +104,7 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	inline CopyActionType GetCopyAction(const std::function<void(T&, T&)>& func)
+	inline CopyActionType GetCopyAction(const std::function<void(T&, const T&)>& func)
 	{
 		return [func](const MetaObject& dst, const MetaObject& src)
 		{
@@ -116,7 +120,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline CopyActionType GetDefaultCopyAction()
 	{
-		return GetCopyAction<T>([](T& dst,T& src) {dst = src; });
+		return GetCopyAction<T>([](T& dst, const T& src) {dst = src; });
 	}
 
 	class MetaDataManager
@@ -241,8 +245,6 @@ namespace SpaceGameEngine
 		}
 	}
 
-	MetaObject CastToMetaObject(const String& type_name, void* ptr);
-
 	/*
 	type_name must be typeof(type).name() or GetMetaData<type>.m_TypeName
 	*/
@@ -257,20 +259,22 @@ namespace SpaceGameEngine
 	*/
 	void CopyByMetaObject(const MetaObject& dst, const MetaObject& src);
 
+	/*
+	供有MetaData的类使用，应直接在operator =中调用
+	*/
 	template<typename T>
-	inline void CopyByMetaData(T& dst,T& src)
+	inline void CopyByMetaData(T& dst, const T& src)
 	{
 		static const MetaData& metadata = T::GetMetaDataCore();
 		for (auto& i : metadata.m_MemberVariable)
 		{
 			if (i.second.m_IfCopy)
 			{
-				CopyByMetaObject(i.second.CastToMetaObject(&dst), i.second.CastToMetaObject(&src));
+				CopyByMetaObject(i.second.CastToMemberVariable(dst.CastToMetaObject()), i.second.CastToMemberVariable(src.CastToMetaObject()));
 			}
 		}
 	}
 
-#define COPY_BY_METADATA(type,dst,src) CopyByMetaData<type>(const_cast<type&>(dst), const_cast<type&>(src));
 #define METADATA_BEGIN(type) \
 static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 {\
@@ -284,10 +288,12 @@ static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 #define METADATA_END(type) );\
 return g_##type##MetaData.Get();\
 }\
-virtual inline const SpaceGameEngine::MetaData& GetMetaData(){return type::GetMetaDataCore();}\
-virtual inline SpaceGameEngine::MetaObject CastToMetaObject(){return SpaceGameEngine::MetaObject((void*)this,&type::GetMetaData());}\
+virtual inline const SpaceGameEngine::MetaData& GetMetaData()const{return type::GetMetaDataCore();}\
+virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceGameEngine::MetaObject((void*)this,&type::GetMetaDataCore());}\
 inline static const SpaceGameEngine::MetaData& sm_MetaData=type::GetMetaDataCore();
 
 #define MEMBER_VAR(belong_type,mem_type,mem_name,...) \
-std::make_pair(#mem_name,MemberVariableMetaData{&SpaceGameEngine::GetMetaData<typename std::decay<mem_type>::type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
+std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<typename std::decay<mem_type>::type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
+#define INHERITANCE(father_type)\
+std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),&SpaceGameEngine::GetMetaData<father_type>())
 }
