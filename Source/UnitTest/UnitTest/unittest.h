@@ -32,12 +32,12 @@ public:
 	}
 };
 
-class test_md2:public test_md
+class test_md2
 {
 public:
 	test_md2& operator = (const test_md2& tm)
 	{
-		test_md::operator=(tm);
+		CopyByMetaData(*this, tm);
 		return *this;
 	}
 	int* pa;
@@ -47,12 +47,11 @@ public:
 		MEMBER_VAR_END
 		METADATA_FUNCTION(test_md2)
 		INHERITANCE_BEGIN
-		INHERITANCE(test_md)
 		INHERITANCE_END
 	METADATA_END(test_md2);
 };
 
-struct test_md3 :public test_md2
+struct test_md3 :public test_md2, public test_md
 {
 public:
 	METADATA_BEGIN(test_md3)
@@ -60,7 +59,8 @@ public:
 		MEMBER_VAR_END
 		METADATA_FUNCTION(test_md3)
 		INHERITANCE_BEGIN
-		INHERITANCE(test_md2)
+		INHERITANCE(test_md3,test_md2),
+		INHERITANCE(test_md3,test_md)
 		INHERITANCE_END
 	METADATA_END(test_md3);
 };
@@ -170,14 +170,17 @@ TEST_GROUP_BEGIN(CommonTest)
 		auto ptr1 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
 		auto ptr2 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
 		*ptr1 = "test";
-		CopyByTypeName(GetTypeName<string>(),CastToMetaObject(ptr2), CastToMetaObject(ptr1));
-		MemoryManager::Delete(ptr1);
-		MemoryManager::Delete(ptr2);
+		CopyByMetaObject(MetaObject(ptr2), MetaObject(ptr1));
 		auto meta2 = test_md::GetMetaDataCore();
 		test_md t1, t2(1,2,3);
 		auto meta3 = GetMetaData<test_md2>();
 		auto meta4 = GetMetaData<test_md3>();
 		CopyByMetaObject(t1.CastToMetaObject(), t2.CastToMetaObject());
+		auto ptr3 = ConstructByTypeName(GetTypeName<test_md3>()).Cast<test_md3>();
+		auto ptr4 = (test_md*)ptr3;
+		auto ptr5 = GetMetaData<test_md3>().m_DirectInheritanceRelation.find(GetTypeName<test_md>())->second.CastToMetaObject(ptr3->CastToMetaObject());
+		MemoryManager::Delete(ptr1);
+		MemoryManager::Delete(ptr2);
 	}
 	TEST_METHOD_END
 }

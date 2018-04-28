@@ -24,7 +24,7 @@ namespace SpaceGameEngine
 	struct MetaData;
 	struct MemberVariableMetaData;
 	using MetaDataPtr = const MetaData*;
-
+	
 	/*
 	use SFINAE to check if a type have static GetMetaDataCore() and non-static GetMetaData() method
 	*/
@@ -50,11 +50,27 @@ namespace SpaceGameEngine
 	private:
 		void* m_pContent;
 		MetaDataPtr m_pMetaData;
-	public:
+	private:
 		MetaObject(void* ptr, MetaDataPtr pmetadata);
-		MetaObject(const String& type_name, void* ptr);
-
+	public:
 		friend struct MemberVariableMetaData;
+		friend struct FatherTypeMetaData;
+
+		template<typename T>
+		MetaObject(T* ptr)
+		{
+			if (ptr)
+			{
+				m_pContent = ptr;
+				m_pMetaData = &SpaceGameEngine::GetMetaData<T>();
+			}
+			else
+			{
+				THROWERROR("Can not get meta object by nullptr");
+				m_pContent = nullptr;
+				m_pMetaData = nullptr;
+			}
+		}
 
 		template<typename T>
 		T* Cast() const;
@@ -81,14 +97,26 @@ namespace SpaceGameEngine
 		bool m_IfCopy = true;
 
 		/*
-		ptr is the pointer of type which this member variable belong to
-		ptr can not be nullptr
+		obj is the metaobject of the type which this member variable belong
 		*/
-		MetaObject CastToMemberVariable(const MetaObject& obj)const;
+		MetaObject CastToMetaObject(const MetaObject& obj)const;
+	};
+
+	struct FatherTypeMetaData
+	{
+		String m_TypeName = "";
+		String m_ChildTypeName = "";
+		MetaDataPtr m_pMetaData = nullptr;
+		size_t m_Offset = 0;
+
+		/*
+		obj is the metaobject of the type which is this type's child type
+		*/
+		MetaObject CastToMetaObject(const MetaObject& obj)const;
 	};
 
 	using MemberVaiableContainer = Map<String, MemberVariableMetaData>;
-	using InheritanceRelationContainer = Map<String, MetaDataPtr>;
+	using InheritanceRelationContainer = Map<String, FatherTypeMetaData>;
 
 	struct MetaData
 	{
@@ -183,7 +211,7 @@ namespace SpaceGameEngine
 	{
 		static const MetaData& Get()
 		{
-			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), sizeof(T), MemberVaiableContainer(), [] {return CastToMetaObject(MemoryManager::New<T>()); }, GetDefaultCopyAction<T>(), InheritanceRelationContainer());
+			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), sizeof(T), MemberVaiableContainer(), [] {return MetaObject(MemoryManager::New<T>()); }, GetDefaultCopyAction<T>(), InheritanceRelationContainer());
 			return g_MetaDataFactory.Get();
 		}
 	};
@@ -231,28 +259,10 @@ namespace SpaceGameEngine
 		}
 	}
 
-	template<typename T>
-	inline MetaObject CastToMetaObject(T* ptr)
-	{
-		if (ptr)
-		{
-			return MetaObject(ptr, &GetMetaData<T>());
-		}
-		else
-		{
-			THROWERROR("Can not get meta object by nullptr");
-			return MetaObject(ptr, &GetMetaData<T>());
-		}
-	}
-
 	/*
 	type_name must be typeof(type).name() or GetMetaData<type>.m_TypeName
 	*/
 	MetaObject ConstructByTypeName(const String& type_name);
-	/*
-	type_name must be typeof(type).name() or GetMetaData<type>.m_TypeName
-	*/
-	void CopyByTypeName(const String& type_name, const MetaObject& dst, const MetaObject& src);
 
 	/*
 	two meta object must be the same type
@@ -270,9 +280,23 @@ namespace SpaceGameEngine
 		{
 			if (i.second.m_IfCopy)
 			{
-				CopyByMetaObject(i.second.CastToMemberVariable(dst.CastToMetaObject()), i.second.CastToMemberVariable(src.CastToMetaObject()));
+				CopyByMetaObject(i.second.CastToMetaObject(dst.CastToMetaObject()), i.second.CastToMetaObject(src.CastToMetaObject()));
 			}
 		}
+	}
+
+	/*
+	T is the child type
+	U is the father type
+	return the offset of father type in child type
+	*/
+	template<typename T,typename U>
+	size_t GetTypeOffset()
+	{
+		static_assert(std::is_base_of<U, T>::value,"T is not the father of U");
+		T* pt = reinterpret_cast<T*>(1);	//can not equal 0
+		U* pu = pt;
+		return (size_t)pu - (size_t)pt;
 	}
 
 #define METADATA_BEGIN(type) \
@@ -282,18 +306,18 @@ static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 
 #define MEMBER_VAR_BEGIN SpaceGameEngine::MemberVaiableContainer({
 #define MEMBER_VAR_END }),
-#define METADATA_FUNCTION(type) [] {return SpaceGameEngine::CastToMetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),
+#define METADATA_FUNCTION(type) [] {return SpaceGameEngine::MetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),
 #define INHERITANCE_BEGIN SpaceGameEngine::InheritanceRelationContainer({
 #define INHERITANCE_END })
 #define METADATA_END(type) );\
 return g_##type##MetaData.Get();\
 }\
 virtual inline const SpaceGameEngine::MetaData& GetMetaData()const{return type::GetMetaDataCore();}\
-virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceGameEngine::MetaObject((void*)this,&type::GetMetaDataCore());}\
+virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceGameEngine::MetaObject(const_cast<type*>(this));}\
 inline static const SpaceGameEngine::MetaData& sm_MetaData=type::GetMetaDataCore();
 
 #define MEMBER_VAR(belong_type,mem_type,mem_name,...) \
 std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<typename std::decay<mem_type>::type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
-#define INHERITANCE(father_type)\
-std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),&SpaceGameEngine::GetMetaData<father_type>())
+#define INHERITANCE(type,father_type)\
+std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),SpaceGameEngine::FatherTypeMetaData{SpaceGameEngine::GetTypeName<father_type>(),typeid(type).name(),&SpaceGameEngine::GetMetaData<father_type>(),SpaceGameEngine::GetTypeOffset<type,father_type>()})
 }

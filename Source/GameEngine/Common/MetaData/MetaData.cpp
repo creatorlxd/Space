@@ -22,7 +22,7 @@ SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const
 {
 	for (auto i : m_DirectInheritanceRelation)
 	{
-		m_AllInheritanceRelation.insert(i.second->m_AllInheritanceRelation.begin(), i.second->m_AllInheritanceRelation.end());
+		m_AllInheritanceRelation.insert(i.second.m_pMetaData->m_AllInheritanceRelation.begin(), i.second.m_pMetaData->m_AllInheritanceRelation.end());
 	}
 }
 
@@ -65,22 +65,6 @@ SpaceGameEngine::MetaObject::MetaObject(void * ptr, MetaDataPtr pmetadata)
 	m_pMetaData = pmetadata;
 }
 
-SpaceGameEngine::MetaObject::MetaObject(const String & type_name, void * ptr)
-{
-	auto metadata = GetMetaDataManager().GetMetaData(type_name);
-	if (metadata)
-	{
-		m_pMetaData = metadata;
-		m_pContent = ptr;
-	}
-	else
-	{
-		THROWERROR("do not have this type");
-		m_pContent = nullptr;
-		m_pMetaData = nullptr;
-	}
-}
-
 SpaceGameEngine::String SpaceGameEngine::MetaObject::GetTypeName() const
 {
 	return m_pMetaData->m_TypeName;
@@ -102,22 +86,17 @@ SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & 
 	}
 }
 
-void SpaceGameEngine::CopyByTypeName(const String & type_name, const MetaObject & dst, const MetaObject & src)
-{
-	auto meta = GetMetaDataManager().GetMetaData(type_name);
-	if (meta)
-		return meta->m_CopyAction(dst, src);
-	else
-	{
-		THROWERROR("do not have this type");
-	}
-}
-
 void SpaceGameEngine::CopyByMetaObject(const MetaObject & dst, const MetaObject & src)
 {
 	if (dst.GetTypeName() == src.GetTypeName())
 	{
-		CopyByTypeName(src.GetTypeName(), dst, src);
+		auto meta = GetMetaDataManager().GetMetaData(src.GetTypeName());
+		if (meta)
+			return meta->m_CopyAction(dst, src);
+		else
+		{
+			THROWERROR("do not have this type");
+		}
 	}
 	else
 	{
@@ -125,13 +104,24 @@ void SpaceGameEngine::CopyByMetaObject(const MetaObject & dst, const MetaObject 
 	}
 }
 
-SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMemberVariable(const MetaObject& obj)const
+SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMetaObject(const MetaObject& obj)const
 {
 	if (obj.GetTypeName() == m_ClassTypeName)
 		return MetaObject((void*)((size_t)obj.m_pContent + m_Offset), m_pMetaData);
 	else
 	{
-		THROWERROR("can not get this membervariablemetadata");
+		THROWERROR("can not get this metaobject");
+		return MetaObject(nullptr, nullptr);
+	}
+}
+
+SpaceGameEngine::MetaObject SpaceGameEngine::FatherTypeMetaData::CastToMetaObject(const MetaObject & obj) const
+{
+	if (obj.GetTypeName() == m_ChildTypeName)
+		return MetaObject((void*)((size_t)obj.m_pContent + m_Offset), m_pMetaData);
+	else
+	{
+		THROWERROR("can not get this metaobject");
 		return MetaObject(nullptr, nullptr);
 	}
 }
