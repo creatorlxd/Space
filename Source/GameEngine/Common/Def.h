@@ -99,4 +99,31 @@ namespace SpaceGameEngine
 	{
 		using Result = U;
 	};
+
+	/*
+	删除类型的修饰符
+	不适用于函数类型
+	*/
+	template<typename T,bool ifsame=std::is_pointer<typename std::decay<T>::type>::value>
+	struct Decay {};
+
+	/*
+	删除类型的修饰符
+	不适用于函数类型
+	*/
+	template<typename T>
+	struct Decay<T,true>
+	{
+		using Result = typename Decay<typename std::remove_pointer<typename std::decay<T>::type>::type>::Result;
+	};
+
+	/*
+	删除类型的修饰符
+	不适用于函数类型
+	*/
+	template<typename T>
+	struct Decay<T, false>
+	{
+		using Result = typename std::decay<T>::type;
+	};
 }

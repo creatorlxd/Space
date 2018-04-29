@@ -293,7 +293,7 @@ namespace SpaceGameEngine
 	template<typename T,typename U>
 	size_t GetTypeOffset()
 	{
-		static_assert(std::is_base_of<U, T>::value,"T is not the father of U");
+		static_assert(std::is_base_of<U, T>::value,"U is not the father of T");
 		T* pt = reinterpret_cast<T*>(1);	//can not equal 0
 		U* pu = pt;
 		return (size_t)pu - (size_t)pt;
@@ -317,7 +317,7 @@ virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceG
 inline static const SpaceGameEngine::MetaData& sm_MetaData=type::GetMetaDataCore();
 
 #define MEMBER_VAR(belong_type,mem_type,mem_name,...) \
-std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<typename std::decay<mem_type>::type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
+std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<typename SpaceGameEngine::Decay<mem_type>::Result>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
 #define INHERITANCE(type,father_type)\
 std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),SpaceGameEngine::FatherTypeMetaData{SpaceGameEngine::GetTypeName<father_type>(),typeid(type).name(),&SpaceGameEngine::GetMetaData<father_type>(),SpaceGameEngine::GetTypeOffset<type,father_type>()})
 }
