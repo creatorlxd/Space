@@ -14,18 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
-#include "Common/Def.h"
-#include "Common/MemoryManager/AllocatorForSTL.hpp"
-#include "Common/Timer.h"
-#include "Common/Error.h"
-#include "Common/GlobalVariable.h"
+#include "Serialize.h"
 #include "Common/File.h"
-#include "Common/ConfigFile.h"
-#include "Common/GUIDFactory.h"
-#include "Common/CurrentObject.hpp"
-#include "Common/Window.h"
-#include "Common/Data.hpp"
-#include "Common/Connection.hpp"
-#include "Common/MetaData/MetaData.h"
-#include "Common/MetaData/Serialize.h"
-#include "Common/MetaData/TextFileSerializeInterface.h"
+
+namespace SpaceGameEngine
+{
+	class TextFileSerializeInterface :public SerializeInterface
+	{
+	public:
+		TextFileSerializeInterface(const String& filename, IOFlag ioflag);
+		~TextFileSerializeInterface();
+	private:
+		String Read()override;
+		void Write(const String& str)override;
+	private:
+		File m_File;
+	};
+}

@@ -157,6 +157,12 @@
     <ClInclude Include="Source\GameEngine\Common\MetaData\MetaData.h">
       <Filter>Common\MetaData</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MetaData\Serialize.h">
+      <Filter>Common\MetaData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\MetaData\TextFileSerializeInterface.h">
+      <Filter>Common\MetaData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -211,6 +217,12 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Common\MetaData\MetaData.cpp">
+      <Filter>Common\MetaData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MetaData\Serialize.cpp">
+      <Filter>Common\MetaData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\MetaData\TextFileSerializeInterface.cpp">
       <Filter>Common\MetaData</Filter>
     </ClCompile>
   </ItemGroup>

@@ -24,12 +24,13 @@ namespace SpaceGameEngine
 	struct MetaData;
 	struct MemberVariableMetaData;
 	using MetaDataPtr = const MetaData*;
+	class SerializeInterface;
 	
 	/*
 	use SFINAE to check if a type have static GetMetaDataCore() and non-static GetMetaData() method
 	*/
 	template<typename T>
-	struct IfTypeHaveGetMetaDataMethod
+	struct IfHaveGetMetaDataMethod
 	{
 		template<typename U>
 		static constexpr decltype(U::GetMetaDataCore(), std::declval<U>().GetMetaData(), bool()) Match(int)
@@ -82,6 +83,10 @@ namespace SpaceGameEngine
 
 	using ConstructorType = std::function<MetaObject()>;
 	using CopyActionType = std::function<void(const MetaObject&, const MetaObject&)>;
+	using SerializeActionType = std::function<void(const MetaObject&, SerializeInterface&)>;
+
+	template<typename T>
+	inline SerializeActionType GetDefaultSerializeAction();
 
 	template<typename T>
 	inline const MetaData& GetMetaData();
@@ -125,10 +130,11 @@ namespace SpaceGameEngine
 		MemberVaiableContainer m_MemberVariable;
 		ConstructorType m_Constructor;
 		CopyActionType m_CopyAction;
+		SerializeActionType m_SerializeAction;
 		InheritanceRelationContainer m_DirectInheritanceRelation;
 		InheritanceRelationContainer m_AllInheritanceRelation;
 
-		MetaData(const String& type_name, size_t size, const MemberVaiableContainer& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const InheritanceRelationContainer& inheritance_relation);
+		MetaData(const String& type_name, size_t size, const MemberVaiableContainer& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const SerializeActionType& serialize_action, const InheritanceRelationContainer& inheritance_relation);
 	};
 
 	template<typename T>
@@ -211,7 +217,7 @@ namespace SpaceGameEngine
 	{
 		static const MetaData& Get()
 		{
-			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), sizeof(T), MemberVaiableContainer(), [] {return MetaObject(MemoryManager::New<T>()); }, GetDefaultCopyAction<T>(), InheritanceRelationContainer());
+			static GlobalVariable<MetaDataFactory<T>> g_MetaDataFactory(typeid(T).name(), sizeof(T), MemberVaiableContainer(), [] {return MetaObject(MemoryManager::New<T>()); }, GetDefaultCopyAction<T>(), GetDefaultSerializeAction<T>(), InheritanceRelationContainer());
 			return g_MetaDataFactory.Get();
 		}
 	};
@@ -219,7 +225,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline const MetaData& GetMetaData()
 	{
-		return GetMetaDataCore<T, IfTypeHaveGetMetaDataMethod<T>::Result>::Get();
+		return GetMetaDataCore<T, IfHaveGetMetaDataMethod<T>::Result>::Get();
 	}
 
 	template<typename T>
@@ -306,7 +312,7 @@ static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 
 #define MEMBER_VAR_BEGIN SpaceGameEngine::MemberVaiableContainer({
 #define MEMBER_VAR_END }),
-#define METADATA_FUNCTION(type) [] {return SpaceGameEngine::MetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),
+#define METADATA_FUNCTION(type) [] {return SpaceGameEngine::MetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),SpaceGameEngine::GetDefaultSerializeAction<type>(),
 #define INHERITANCE_BEGIN SpaceGameEngine::InheritanceRelationContainer({
 #define INHERITANCE_END })
 #define METADATA_END(type) );\
@@ -314,10 +320,11 @@ return g_##type##MetaData.Get();\
 }\
 virtual inline const SpaceGameEngine::MetaData& GetMetaData()const{return type::GetMetaDataCore();}\
 virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceGameEngine::MetaObject(const_cast<type*>(this));}\
+virtual inline void Serialize(SpaceGameEngine::SerializeInterface& si){SpaceGameEngine::Serialize(const_cast<type&>(*this),si);}\
 inline static const SpaceGameEngine::MetaData& sm_MetaData=type::GetMetaDataCore();
 
 #define MEMBER_VAR(belong_type,mem_type,mem_name,...) \
-std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<typename SpaceGameEngine::Decay<mem_type>::Result>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
+std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<mem_type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
 #define INHERITANCE(type,father_type)\
 std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),SpaceGameEngine::FatherTypeMetaData{SpaceGameEngine::GetTypeName<father_type>(),typeid(type).name(),&SpaceGameEngine::GetMetaData<father_type>(),SpaceGameEngine::GetTypeOffset<type,father_type>()})
 }

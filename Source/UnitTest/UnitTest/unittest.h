@@ -40,6 +40,10 @@ public:
 		CopyByMetaData(*this, tm);
 		return *this;
 	}
+	test_md2()
+	{
+		pa = nullptr;
+	}
 	int* pa;
 	METADATA_BEGIN(test_md2)
 		MEMBER_VAR_BEGIN
@@ -166,9 +170,9 @@ TEST_GROUP_BEGIN(CommonTest)
 	TEST_METHOD_END,
 	TEST_METHOD_BEGIN(TestMetaData)
 	{
-		auto meta = GetMetaData<string>();
-		auto ptr1 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
-		auto ptr2 = ConstructByTypeName(GetTypeName<string>()).Cast<string>();
+		auto meta = GetMetaData<String>();
+		auto ptr1 = ConstructByTypeName(GetTypeName<String>()).Cast<String>();
+		auto ptr2 = ConstructByTypeName(GetTypeName<String>()).Cast<String>();
 		*ptr1 = "test";
 		CopyByMetaObject(MetaObject(ptr2), MetaObject(ptr1));
 		auto meta2 = test_md::GetMetaDataCore();
@@ -181,6 +185,28 @@ TEST_GROUP_BEGIN(CommonTest)
 		auto ptr5 = GetMetaData<test_md3>().m_DirectInheritanceRelation.find(GetTypeName<test_md>())->second.CastToMetaObject(ptr3->CastToMetaObject());
 		MemoryManager::Delete(ptr1);
 		MemoryManager::Delete(ptr2);
+	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestSerialize)
+	{
+		{
+			test_md3 tmd3_n1;
+			tmd3_n1.a = 3;
+			tmd3_n1.b = 2;
+			tmd3_n1.c = 1;
+			test_md3 tmd3;
+			tmd3.a = 1;
+			tmd3.b = 2;
+			tmd3.c = 3;
+			tmd3.pa = &tmd3_n1.a;
+			TextFileSerializeInterface tfsi_o("test_serialize.txt", SerializeInterface::IOFlag::Output);
+			Serialize(tmd3, tfsi_o);
+		}
+		{
+			test_md3 tmd3_1;
+			TextFileSerializeInterface tfsi_i("test_serialize.txt", SerializeInterface::IOFlag::Input);
+			Serialize(tmd3_1, tfsi_i);
+		}
 	}
 	TEST_METHOD_END
 }

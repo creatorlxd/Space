@@ -465,6 +465,8 @@
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\AllocatorForSTL.hpp" />
     <ClInclude Include="Source\GameEngine\Common\MemoryManager\MemoryManager.h" />
     <ClInclude Include="Source\GameEngine\Common\MetaData\MetaData.h" />
+    <ClInclude Include="Source\GameEngine\Common\MetaData\Serialize.h" />
+    <ClInclude Include="Source\GameEngine\Common\MetaData\TextFileSerializeInterface.h" />
     <ClInclude Include="Source\GameEngine\Common\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\StringConverter.h" />
@@ -485,6 +487,8 @@
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\Allocator.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MemoryManager\MemoryManager.cpp" />
     <ClCompile Include="Source\GameEngine\Common\MetaData\MetaData.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MetaData\Serialize.cpp" />
+    <ClCompile Include="Source\GameEngine\Common\MetaData\TextFileSerializeInterface.cpp" />
     <ClCompile Include="Source\GameEngine\Common\Space.cpp" />
     <ClCompile Include="Source\GameEngine\Common\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

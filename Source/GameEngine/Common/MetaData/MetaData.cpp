@@ -16,9 +16,9 @@ limitations under the License.
 #include "stdafx.h"
 #include "MetaData.h"
 
-SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const MemberVaiableContainer& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const InheritanceRelationContainer& inheritance_relation)
+SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const MemberVaiableContainer& member_var, const ConstructorType& constructor, const CopyActionType& copy_action, const SerializeActionType& serialize_action, const InheritanceRelationContainer& inheritance_relation)
 	:
-	m_TypeName(type_name), m_Size(size), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_DirectInheritanceRelation(inheritance_relation), m_AllInheritanceRelation(inheritance_relation)
+	m_TypeName(type_name), m_Size(size), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_SerializeAction(serialize_action), m_DirectInheritanceRelation(inheritance_relation), m_AllInheritanceRelation(inheritance_relation)
 {
 	for (auto i : m_DirectInheritanceRelation)
 	{

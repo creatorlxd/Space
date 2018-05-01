@@ -13,19 +13,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
-#include "Common/Def.h"
-#include "Common/MemoryManager/AllocatorForSTL.hpp"
-#include "Common/Timer.h"
-#include "Common/Error.h"
-#include "Common/GlobalVariable.h"
-#include "Common/File.h"
-#include "Common/ConfigFile.h"
-#include "Common/GUIDFactory.h"
-#include "Common/CurrentObject.hpp"
-#include "Common/Window.h"
-#include "Common/Data.hpp"
-#include "Common/Connection.hpp"
-#include "Common/MetaData/MetaData.h"
-#include "Common/MetaData/Serialize.h"
-#include "Common/MetaData/TextFileSerializeInterface.h"
+#include "stdafx.h"
+#include "Serialize.h"
+
+SpaceGameEngine::SerializeInterface::SerializeInterface(IOFlag ioflag)
+{
+	m_IOFlag = ioflag;
+}
+
+SpaceGameEngine::SerializeInterface::~SerializeInterface()
+{
+}
