@@ -19,7 +19,7 @@ public:
 		MEMBER_VAR_BEGIN
 			MEMBER_VAR(test_md, int, a, false),
 			MEMBER_VAR(test_md, int, b),
-			MEMBER_VAR(test_md, int, c)
+			MEMBER_VAR(test_md, int, c, true, false)
 		MEMBER_VAR_END
 		METADATA_FUNCTION(test_md)
 		INHERITANCE_BEGIN
@@ -201,11 +201,15 @@ TEST_GROUP_BEGIN(CommonTest)
 			tmd3.pa = &tmd3_n1.a;
 			TextFileSerializeInterface tfsi_o("test_serialize.txt", SerializeInterface::IOFlag::Output);
 			Serialize(tmd3, tfsi_o);
+			tmd3.Serialize(tfsi_o);
+			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3.CastToMetaObject(), tfsi_o);
 		}
 		{
-			test_md3 tmd3_1;
+			test_md3 tmd3_1, tmd3_2, tmd3_3;
 			TextFileSerializeInterface tfsi_i("test_serialize.txt", SerializeInterface::IOFlag::Input);
 			Serialize(tmd3_1, tfsi_i);
+			tmd3_2.Serialize(tfsi_i);
+			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3_3.CastToMetaObject(), tfsi_i);
 		}
 	}
 	TEST_METHOD_END

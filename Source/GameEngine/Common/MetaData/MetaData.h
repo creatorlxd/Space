@@ -96,10 +96,10 @@ namespace SpaceGameEngine
 		String m_ClassTypeName = "";
 		MetaDataPtr m_pMetaData = nullptr;
 		String m_VariableName = "";
-		size_t m_Size = 0;
 		size_t m_Offset = 0;
 		bool m_IfPointer = false;
 		bool m_IfCopy = true;
+		bool m_IfSerialize = true;
 
 		/*
 		obj is the metaobject of the type which this member variable belong
@@ -324,7 +324,7 @@ virtual inline void Serialize(SpaceGameEngine::SerializeInterface& si){SpaceGame
 inline static const SpaceGameEngine::MetaData& sm_MetaData=type::GetMetaDataCore();
 
 #define MEMBER_VAR(belong_type,mem_type,mem_name,...) \
-std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<mem_type>(),#mem_name,sizeof(mem_type),offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
+std::make_pair(#mem_name,SpaceGameEngine::MemberVariableMetaData{typeid(belong_type).name(),&SpaceGameEngine::GetMetaData<mem_type>(),#mem_name,offsetof(belong_type,mem_name),std::is_pointer<mem_type>::value,##__VA_ARGS__})
 #define INHERITANCE(type,father_type)\
 std::make_pair(SpaceGameEngine::GetTypeName<father_type>(),SpaceGameEngine::FatherTypeMetaData{SpaceGameEngine::GetTypeName<father_type>(),typeid(type).name(),&SpaceGameEngine::GetMetaData<father_type>(),SpaceGameEngine::GetTypeOffset<type,father_type>()})
 }

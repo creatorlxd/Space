@@ -83,35 +83,6 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	struct SerializeCore<T*, true>	//pointer serialize:use pointer pool
-	{
-		static void Run(T*& obj, SerializeInterface& si)
-		{
-			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
-			{
-				SerializeMethod<T*>::In(obj, si.Read());
-				if (obj&&si.m_PointerPool.find((void*)obj) == si.m_PointerPool.end())
-				{
-					T* pt = MemoryManager::New<T>();
-					SerializeMethod<T>::In(*pt, si.Read());
-					si.m_PointerPool[obj] = pt;
-				}
-				if(obj)
-					obj = (T*)si.m_PointerPool[obj];
-			}
-			else
-			{
-				si.Write(SerializeMethod<T*>::Out(obj));
-				if (obj&&si.m_PointerPool.find((void*)obj) == si.m_PointerPool.end())
-				{
-					si.Write(SerializeMethod<T>::Out(*obj));
-					si.m_PointerPool[obj] = obj;
-				}
-			}
-		}
-	};
-
-	template<typename T>
 	struct SerializeCore<T, true>
 	{
 		static void Run(T& obj, SerializeInterface& si)
@@ -122,7 +93,8 @@ namespace SpaceGameEngine
 			}
 			for (auto& i : T::GetMetaDataCore().m_MemberVariable)
 			{
-				i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
+				if (i.second.m_IfSerialize)
+					i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
 			}
 		}
 	};
