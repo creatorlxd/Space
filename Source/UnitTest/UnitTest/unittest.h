@@ -203,6 +203,8 @@ TEST_GROUP_BEGIN(CommonTest)
 			Serialize(tmd3, tfsi_o);
 			tmd3.Serialize(tfsi_o);
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3.CastToMetaObject(), tfsi_o);
+			String str = "test\ntest";
+			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_o);
 		}
 		{
 			test_md3 tmd3_1, tmd3_2, tmd3_3;
@@ -210,6 +212,8 @@ TEST_GROUP_BEGIN(CommonTest)
 			Serialize(tmd3_1, tfsi_i);
 			tmd3_2.Serialize(tfsi_i);
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3_3.CastToMetaObject(), tfsi_i);
+			String str;
+			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_i);
 		}
 	}
 	TEST_METHOD_END

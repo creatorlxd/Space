@@ -29,13 +29,31 @@ SpaceGameEngine::TextFileSerializeInterface::~TextFileSerializeInterface()
 
 SpaceGameEngine::String SpaceGameEngine::TextFileSerializeInterface::Read()
 {
+	/*
+	format like:
+	size:content
+	*/
 	String re = "";
-	if (m_File.IfFileReadOver() == false)
-		m_File.GetLine(re);
+	size_t str_size = 0;
+	char cbuf=' ';
+	while (cbuf != ':')
+	{
+		cbuf = m_File.GetChar();
+		if (cbuf == EOF)
+			break;
+		else if (cbuf >= '0'&&cbuf <= '9')
+		{
+			str_size = str_size * 10 + (cbuf - '0');
+		}
+	}
+	for (size_t i = 0; i < str_size; i++)
+	{
+		re.push_back(m_File.GetChar());
+	}
 	return re;
 }
 
 void SpaceGameEngine::TextFileSerializeInterface::Write(const String & str)
 {
-	m_File << str << PrintMode::EndLine;
+	m_File << str.size() << ':' << str << PrintMode::EndLine;
 }

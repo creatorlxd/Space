@@ -239,7 +239,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned int & ui)
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
-		if (fscanf_s(m_pFile, "%ud", &ui) == EOF)
+		if (fscanf_s(m_pFile, "%u", &ui) == EOF)
 			m_IfFileReadOver = true;
 		else
 			m_IfFileReadOver = false;
@@ -311,7 +311,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long long & u
 {
 	if ((m_FileMode&FileMode::Read) != 0)
 	{
-		if (fscanf_s(m_pFile, "%I64ud", &ull) == EOF)
+		if (fscanf_s(m_pFile, "%I64u", &ull) == EOF)
 			m_IfFileReadOver = true;
 		else
 			m_IfFileReadOver = false;
@@ -448,7 +448,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const int & i)
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned int & ui)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFile, "%ud", ui);
+		fprintf_s(m_pFile, "%u", ui);
 	return *this;
 }
 
@@ -490,7 +490,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long long & ll)
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned long long & ull)
 {
 	if ((m_FileMode&FileMode::Write) != 0)
-		fprintf_s(m_pFile, "%I64ud", ull);
+		fprintf_s(m_pFile, "%I64u", ull);
 	return *this;
 }
 
@@ -554,6 +554,20 @@ bool SpaceGameEngine::File::GetLine(String& str)
 	}
 	else
 		return false;
+}
+
+char SpaceGameEngine::File::GetChar()
+{
+	int buff = fgetc(m_pFile);
+	if (buff == EOF)
+	{
+		m_IfFileReadOver = true;
+		return EOF;
+	}
+	else
+	{
+		return (char)buff;
+	}
 }
 
 SpaceGameEngine::Vector<SpaceGameEngine::String> SpaceGameEngine::GetDirectoryName(const String & filepath)

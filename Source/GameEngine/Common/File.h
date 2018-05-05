@@ -98,6 +98,7 @@ namespace SpaceGameEngine
 		File& operator << (const long double& ld);
 
 		bool GetLine(String& str);
+		char GetChar();
 	private:
 		FILE * m_pFile;
 		String m_FileName;
