@@ -209,6 +209,8 @@ TEST_GROUP_BEGIN(CommonTest)
 			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_o);
 			Map<String, int> test_map{ {"1",1},{"2",2} };
 			Serialize(test_map, tfsi_o);
+			HashMap<String, int> test_hashmap{ { "3",3 },{ "4",4 } };
+			Serialize(test_hashmap, tfsi_o);
 		}
 		{
 			test_md3 tmd3_1, tmd3_2, tmd3_3;
@@ -222,6 +224,8 @@ TEST_GROUP_BEGIN(CommonTest)
 			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_i);
 			Map<String, int> test_map;
 			Serialize(test_map, tfsi_i);
+			HashMap<String, int> test_hashmap;
+			Serialize(test_hashmap, tfsi_i);
 		}
 	}
 	TEST_METHOD_END

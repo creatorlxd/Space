@@ -183,6 +183,36 @@ namespace SpaceGameEngine
 		}
 	};
 
+	template<typename Key, typename Value>
+	struct SerializeCore<HashMap<Key, Value>, false>
+	{
+		static void Run(HashMap<Key, Value>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				std::pair<Key, Value> buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff.first, si);
+					Serialize(buff.second, si);
+					obj.emplace(std::move(buff));
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i.first, si);
+					Serialize(i.second, si);
+				}
+			}
+		}
+	};
+
 	template<typename T>
 	inline void Serialize(T& obj, SerializeInterface& si)
 	{
