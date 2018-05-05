@@ -205,6 +205,10 @@ TEST_GROUP_BEGIN(CommonTest)
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3.CastToMetaObject(), tfsi_o);
 			String str = "test\ntest";
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_o);
+			Vector<int> test_vec{ 4,5,6 };
+			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_o);
+			Map<String, int> test_map{ {"1",1},{"2",2} };
+			Serialize(test_map, tfsi_o);
 		}
 		{
 			test_md3 tmd3_1, tmd3_2, tmd3_3;
@@ -214,6 +218,10 @@ TEST_GROUP_BEGIN(CommonTest)
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3_3.CastToMetaObject(), tfsi_i);
 			String str;
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_i);
+			Vector<int> test_vec;
+			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_i);
+			Map<String, int> test_map;
+			Serialize(test_map, tfsi_i);
 		}
 	}
 	TEST_METHOD_END

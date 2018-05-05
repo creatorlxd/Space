@@ -44,13 +44,56 @@ namespace SpaceGameEngine
 	struct SerializeMethod
 	{
 		static void In(T& obj, const String& str) = 0;
-		static String Out(T& obj) = 0;
+		static String Out(const T& obj) = 0;
 	};
 
 	template<typename T, bool b>
 	struct SerializeCore
 	{
 
+	};
+
+	template<typename T>
+	struct SerializeCore<T, true>
+	{
+		static void Run(T& obj, SerializeInterface& si)
+		{
+			for (auto& i : T::GetMetaDataCore().m_DirectInheritanceRelation)
+			{
+				i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
+			}
+			for (auto& i : T::GetMetaDataCore().m_MemberVariable)
+			{
+				if (i.second.m_IfSerialize)
+					i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
+			}
+		}
+
+		static void Run(const T& obj, SerializeInterface& si)
+		{
+			SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(const_cast<typename std::decay<T>::type&>(obj), si);
+		}
+	};
+
+	template<typename T>
+	struct SerializeCore<T, false>
+	{
+		static void Run(T& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				SerializeMethod<T>::In(obj, si.Read());
+			}
+			else
+			{
+				si.Write(SerializeMethod<T>::Out(obj));
+			}
+		}
+
+		static void Run(const T& obj, SerializeInterface& si)
+		{
+			SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(const_cast<typename std::decay<T>::type&>(obj), si);
+		}
 	};
 
 	template<typename T>
@@ -82,35 +125,60 @@ namespace SpaceGameEngine
 		}
 	};
 
+	/*
+	serialize container
+	*/
 	template<typename T>
-	struct SerializeCore<T, true>
+	struct SerializeCore<Vector<T>, false>
 	{
-		static void Run(T& obj, SerializeInterface& si)
+		static void Run(Vector<T>& obj, SerializeInterface& si)
 		{
-			for (auto& i : T::GetMetaDataCore().m_DirectInheritanceRelation)
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
-				i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
+				size_t size;
+				Serialize(size, si);
+				obj.resize(size);
+				for (size_t i = 0; i < size; i++)
+					Serialize(obj[i], si);
 			}
-			for (auto& i : T::GetMetaDataCore().m_MemberVariable)
+			else
 			{
-				if (i.second.m_IfSerialize)
-					i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
+				size_t size = obj.size();
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
+				}
 			}
 		}
 	};
 
-	template<typename T>
-	struct SerializeCore<T, false>
+	template<typename Key, typename Value>
+	struct SerializeCore<Map<Key, Value>, false>
 	{
-		static void Run(T& obj, SerializeInterface& si)
+		static void Run(Map<Key, Value>& obj, SerializeInterface& si)
 		{
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
-				SerializeMethod<T>::In(obj, si.Read());
+				size_t size;
+				Serialize(size, si);
+				std::pair<Key, Value> buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff.first, si);
+					Serialize(buff.second, si);
+					obj.emplace(std::move(buff));
+				}
 			}
 			else
 			{
-				si.Write(SerializeMethod<T>::Out(obj));
+				size_t size = obj.size();
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i.first, si);
+					Serialize(i.second, si);
+				}
 			}
 		}
 	};
@@ -118,7 +186,7 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline void Serialize(T& obj, SerializeInterface& si)
 	{
-		SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(obj, si);
+		SerializeCore<std::decay<T>::type, IfHaveGetMetaDataMethod<T>::Result>::Run(obj, si);
 	}
 
 	template<typename T>
@@ -136,12 +204,12 @@ namespace SpaceGameEngine
 	{
 		static void In(T*& ptr, const String& str)
 		{
-			unsigned long number = std::stoul(StringToStdString(str));
+			unsigned long long number = std::stoull(StringToStdString(str));
 			ptr = (T*)number;
 		}
-		static String Out(T*& ptr)
+		static String Out(T*const& ptr)
 		{
-			unsigned long number = (unsigned long)ptr;
+			unsigned long long number = (unsigned long long)ptr;
 			return StdStringToString(std::to_string(number));
 		}
 	};
@@ -154,9 +222,37 @@ namespace SpaceGameEngine
 		{
 			i = std::stoi(StringToStdString(str));
 		}
-		static String Out(int& i)
+		static String Out(const int& i)
 		{
 			return StdStringToString(std::to_string(i));
+		}
+	};
+
+	//unsigned int serialize method
+	template<>
+	struct SerializeMethod<unsigned int>
+	{
+		static void In(unsigned int& ui, const String& str)
+		{
+			ui = std::stoul(StringToStdString(str));
+		}
+		static String Out(const unsigned int& ui)
+		{
+			return StdStringToString(std::to_string(ui));
+		}
+	};
+
+	//unsigned long long serialize method
+	template<>
+	struct SerializeMethod<unsigned long long>
+	{
+		static void In(unsigned long long& ull, const String& str)
+		{
+			ull = std::stoull(StringToStdString(str));
+		}
+		static String Out(const unsigned long long& ull)
+		{
+			return StdStringToString(std::to_string(ull));
 		}
 	};
 
@@ -168,7 +264,7 @@ namespace SpaceGameEngine
 		{
 			s = str;
 		}
-		static String Out(String& s)
+		static String Out(const String& s)
 		{
 			return s;
 		}
