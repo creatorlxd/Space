@@ -68,11 +68,6 @@ namespace SpaceGameEngine
 					i.second.m_pMetaData->m_SerializeAction(i.second.CastToMetaObject(obj.T::CastToMetaObject()), si);
 			}
 		}
-
-		static void Run(const T& obj, SerializeInterface& si)
-		{
-			SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(const_cast<typename std::decay<T>::type&>(obj), si);
-		}
 	};
 
 	template<typename T>
@@ -88,11 +83,6 @@ namespace SpaceGameEngine
 			{
 				si.Write(SerializeMethod<T>::Out(obj));
 			}
-		}
-
-		static void Run(const T& obj, SerializeInterface& si)
-		{
-			SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(const_cast<typename std::decay<T>::type&>(obj), si);
 		}
 	};
 
@@ -216,7 +206,13 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline void Serialize(T& obj, SerializeInterface& si)
 	{
-		SerializeCore<std::decay<T>::type, IfHaveGetMetaDataMethod<T>::Result>::Run(obj, si);
+		SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(obj, si);
+	}
+
+	template<typename T>
+	inline void Serialize(const T& obj, SerializeInterface& si)
+	{
+		Serialize(const_cast<T&>(obj), si);
 	}
 
 	template<typename T>

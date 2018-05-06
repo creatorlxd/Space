@@ -58,6 +58,11 @@ namespace SpaceGameEngine
 		friend struct FatherTypeMetaData;
 
 		template<typename T>
+		MetaObject(const T* ptr):MetaObject(const_cast<T*>(ptr))
+		{
+
+		}
+		template<typename T>
 		MetaObject(T* ptr)
 		{
 			if (ptr)
