@@ -143,7 +143,14 @@ void SpaceGameEngine::File::Write(const void * adr, size_t size)
 
 bool SpaceGameEngine::File::IfFileReadOver()
 {
-	return m_IfFileReadOver;
+	if (m_IfFileReadOver)
+		return m_IfFileReadOver;
+	else
+	{
+		if (GetCurrentPosition() == GetEndPosition())
+			m_IfFileReadOver = true;
+		return m_IfFileReadOver;
+	}
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t * cwstr)
