@@ -116,7 +116,7 @@ namespace SpaceGameEngine
 	};
 
 	/*
-	serialize container
+	serialize vector
 	*/
 	template<typename T>
 	struct SerializeCore<Vector<T>, false>
@@ -143,6 +143,10 @@ namespace SpaceGameEngine
 		}
 	};
 
+	/*
+	serialize map
+	copy no safe
+	*/
 	template<typename Key, typename Value>
 	struct SerializeCore<Map<Key, Value>, false>
 	{
@@ -173,6 +177,10 @@ namespace SpaceGameEngine
 		}
 	};
 
+	/*
+	serialize hashmap
+	copy no safe
+	*/
 	template<typename Key, typename Value>
 	struct SerializeCore<HashMap<Key, Value>, false>
 	{
@@ -198,6 +206,205 @@ namespace SpaceGameEngine
 				{
 					Serialize(i.first, si);
 					Serialize(i.second, si);
+				}
+			}
+		}
+	};
+
+	/*
+	serialize deque
+	copy no safe
+	*/
+	template<typename T>
+	struct SerializeCore<Deque<T>, false>
+	{
+		static void Run(Deque<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				T buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff, si);
+					obj.emplace_back(std::move(buff));
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				auto buffer = obj;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buffer.front(), si);
+					buffer.pop_front();
+				}
+			}
+		}
+	};
+
+	/*
+	serialize queue
+	copy no safe
+	*/
+	template<typename T>
+	struct SerializeCore<Queue<T>, false>
+	{
+		static void Run(Queue<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				T buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff, si);
+					obj.emplace(std::move(buff));
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				auto buffer = obj;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buffer.front(), si);
+					buffer.pop();
+				}
+			}
+		}
+	};
+
+	/*
+	serialize stack
+	copy no safe
+	*/
+	template<typename T>
+	struct SerializeCore<Stack<T>, false>
+	{
+		static void Run(Stack<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				T buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff, si);
+					obj.emplace(std::move(buff));
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				auto buffer = obj;
+				Vector<T> vec_buffer;
+				while (!buffer.empty())
+				{
+					vec_buffer.emplace_back(std::move(buffer.top()));
+					buffer.pop();
+				}
+				for (auto i = vec_buffer.rbegin(); i != vec_buffer.rend(); i++)
+				{
+					Serialize(*i, si);
+				}
+			}
+		}
+	};
+
+	/*
+	serialize list
+	*/
+	template<typename T>
+	struct SerializeCore<List<T>, false>
+	{
+		static void Run(List<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				obj.resize(size);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
+				}
+			}
+		}
+	};
+
+	/*
+	serialize forward_list
+	*/
+	template<typename T>
+	struct SerializeCore<ForwardList<T>, false>
+	{
+		static void Run(ForwardList<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				obj.resize(size);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
+				}
+			}
+			else
+			{
+				size_t size = std::distance(obj.begin(), obj.end());
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
+				}
+			}
+		}
+	};
+
+	/*
+	serialize set
+	copy no safe
+	*/
+	template<typename T>
+	struct SerializeCore<Set<T>, false>
+	{
+		static void Run(Set<T>& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				size_t size;
+				Serialize(size, si);
+				T buff;
+				for (size_t i = 0; i < size; i++)
+				{
+					Serialize(buff, si);
+					obj.emplace(std::move(buff));
+				}
+			}
+			else
+			{
+				size_t size = obj.size();
+				Serialize(size, si);
+				for (auto& i : obj)
+				{
+					Serialize(i, si);
 				}
 			}
 		}
@@ -268,6 +475,20 @@ namespace SpaceGameEngine
 		}
 	};
 
+	//long long serialize method
+	template<>
+	struct SerializeMethod<long long>
+	{
+		static void In(long long& ll, const String& str)
+		{
+			ll = std::stoll(StringToStdString(str));
+		}
+		static String Out(const long long& ll)
+		{
+			return StdStringToString(std::to_string(ll));
+		}
+	};
+
 	//unsigned long long serialize method
 	template<>
 	struct SerializeMethod<unsigned long long>
@@ -279,6 +500,59 @@ namespace SpaceGameEngine
 		static String Out(const unsigned long long& ull)
 		{
 			return StdStringToString(std::to_string(ull));
+		}
+	};
+
+	template<>
+	struct SerializeMethod<float>
+	{
+		static void In(float& f, const String& str)
+		{
+			f = std::stof(StringToStdString(str));
+		}
+		static String Out(const float& f)
+		{
+			return StdStringToString(std::to_string(f));
+		}
+	};
+
+	template<>
+	struct SerializeMethod<double>
+	{
+		static void In(double& d, const String& str)
+		{
+			d = std::stod(StringToStdString(str));
+		}
+		static String Out(const double& d)
+		{
+			return StdStringToString(std::to_string(d));
+		}
+	};
+
+	template<>
+	struct SerializeMethod<bool>
+	{
+		static void In(bool& b, const String& str)
+		{
+			b = (str == "true" ? true : (str == "false" ? false : (THROWERROR("bool serialize error"), false)));
+		}
+		static String Out(const bool& b)
+		{
+			return (b ? "true" : "false");
+		}
+	};
+
+	//char serialize method
+	template<>
+	struct SerializeMethod<char>
+	{
+		static void In(char& c, const String& str)
+		{
+			c = str[0];
+		}
+		static String Out(const char& c)
+		{
+			return String(1,c);
 		}
 	};
 

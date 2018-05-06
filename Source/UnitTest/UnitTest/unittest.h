@@ -211,6 +211,26 @@ TEST_GROUP_BEGIN(CommonTest)
 			Serialize(test_map, tfsi_o);
 			HashMap<String, int> test_hashmap{ { "3",3 },{ "4",4 } };
 			Serialize(test_hashmap, tfsi_o);
+			Deque<int> test_deque{ 1,2,3,4,5,6 };
+			Serialize(test_deque, tfsi_o);
+			Queue<int> test_queue;
+			test_queue.push(5);
+			test_queue.push(4);
+			test_queue.push(3);
+			test_queue.push(2);
+			test_queue.push(1);
+			GetMetaDataManager().GetMetaData(GetTypeName<Queue<int>>())->m_SerializeAction(MetaObject(&test_queue), tfsi_o);
+			Stack<char> test_stack;
+			test_stack.push('a');
+			test_stack.push('b');
+			test_stack.push('c');
+			Serialize(test_stack, tfsi_o);
+			List<float> test_list{ 1.0f,2.0f,3.0f };
+			Serialize(test_list, tfsi_o);
+			ForwardList<bool> test_forward_list{ true,false,true };
+			Serialize(test_forward_list, tfsi_o);
+			Set<double> test_set{ 11,12,13 };
+			Serialize(test_set, tfsi_o);
 		}
 		{
 			test_md3 tmd3_1, tmd3_2, tmd3_3;
@@ -226,6 +246,19 @@ TEST_GROUP_BEGIN(CommonTest)
 			Serialize(test_map, tfsi_i);
 			HashMap<String, int> test_hashmap;
 			Serialize(test_hashmap, tfsi_i);
+			Deque<int> test_deque;
+			Serialize(test_deque, tfsi_i);
+			Queue<int> test_queue;
+			GetMetaDataManager().GetMetaData(GetTypeName<Queue<int>>())->m_SerializeAction(MetaObject(&test_queue), tfsi_i);
+			Stack<char> test_stack;
+			Serialize(test_stack, tfsi_i);
+			auto test_stack_top = test_stack.top();
+			List<float> test_list;
+			Serialize(test_list, tfsi_i);
+			ForwardList<bool> test_forward_list;
+			Serialize(test_forward_list, tfsi_i);
+			Set<double> test_set;
+			Serialize(test_set, tfsi_i);
 		}
 	}
 	TEST_METHOD_END
