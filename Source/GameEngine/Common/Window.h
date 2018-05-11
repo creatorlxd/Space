@@ -16,10 +16,12 @@ limitations under the License.
 #pragma once
 #include "ConfigFile.h"
 #include "CurrentObject.hpp"
+#include "Timer.h"
+#include "Connection.hpp"
 
 namespace SpaceGameEngine
 {
-	class Window :public CurrentObject<Window>
+	class Window :public CurrentObject<Window>, public Data<Window>
 	{
 	public:
 		Window();
@@ -51,11 +53,6 @@ namespace SpaceGameEngine
 
 		bool GetIfBegin();
 
-		void SetInitAction(const std::function<void()>& func);
-		void SetRunAction(const std::function<void()>& func);
-		void SetResizeAction(const std::function<void()>& func);
-		void SetReleaseAction(const std::function<void()>& func);
-
 		void StartRun(HINSTANCE hInstance);
 		void Resize();
 	private:
@@ -69,9 +66,13 @@ namespace SpaceGameEngine
 		bool m_IfBegin;							//游戏是否已开始
 		unsigned int m_FPSLimit;
 
-		std::function<void()> m_InitAction;
-		std::function<void()> m_RunAction;
-		std::function<void()> m_ResizeAction;
-		std::function<void()> m_ReleaseAction;
+		Timer m_Timer;
 	};
+
+	CONNECTION_BEGIN(Window)
+		OnNotifyAction<void()> m_OnInitAction;
+		OnNotifyAction<void()> m_OnRunAction;
+		OnNotifyAction<void()> m_OnResizeAction;
+		OnNotifyAction<void()> m_OnReleaseAction;
+	CONNECTION_END;
 }

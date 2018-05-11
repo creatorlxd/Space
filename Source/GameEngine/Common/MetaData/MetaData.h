@@ -25,6 +25,8 @@ namespace SpaceGameEngine
 	struct MemberVariableMetaData;
 	using MetaDataPtr = const MetaData*;
 	class SerializeInterface;
+	template<typename T>
+	inline const MetaData& GetMetaData();
 	
 	/*
 	use SFINAE to check if a type have static GetMetaDataCore() and non-static GetMetaData() method
@@ -202,10 +204,7 @@ namespace SpaceGameEngine
 	template<typename T, bool b>
 	struct GetMetaDataCore
 	{
-		static const MetaData& Get()
-		{
-			return MetaData();
-		}
+		
 	};
 
 	template<typename T>
@@ -313,7 +312,7 @@ namespace SpaceGameEngine
 #define METADATA_BEGIN(type) \
 static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 {\
-	static SpaceGameEngine::GlobalVariable<SpaceGameEngine::MetaDataFactory<type>> g_##type##MetaData(typeid(type).name(),sizeof(type),\
+	static SpaceGameEngine::GlobalVariable<SpaceGameEngine::MetaDataFactory<type>> g_MetaData(typeid(type).name(),sizeof(type),\
 
 #define MEMBER_VAR_BEGIN SpaceGameEngine::MemberVaiableContainer({
 #define MEMBER_VAR_END }),
@@ -321,7 +320,7 @@ static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 #define INHERITANCE_BEGIN SpaceGameEngine::InheritanceRelationContainer({
 #define INHERITANCE_END })
 #define METADATA_END(type) );\
-return g_##type##MetaData.Get();\
+return g_MetaData.Get();\
 }\
 virtual inline const SpaceGameEngine::MetaData& GetMetaData()const{return type::GetMetaDataCore();}\
 virtual inline SpaceGameEngine::MetaObject CastToMetaObject()const{return SpaceGameEngine::MetaObject(const_cast<type*>(this));}\

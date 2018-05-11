@@ -80,9 +80,6 @@ namespace SpaceGameEngine
 		保存配置表到某个文件，但不保留注释
 		*/
 		void SaveToFile(const String& filename);
-	public:
-		friend struct StdAllocatorInterface;
-		friend struct MemoryManagerAllocatorInterface;
 	private:
 		Map<String, ConfigTable> m_Content;
 	};

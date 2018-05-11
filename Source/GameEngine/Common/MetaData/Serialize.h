@@ -41,6 +41,9 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
+	inline void Serialize(T& obj, SerializeInterface& si);
+
+	template<typename T>
 	struct SerializeMethod
 	{
 		static void In(T& obj, const String& str) = 0;

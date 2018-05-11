@@ -47,16 +47,11 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 	ShowCursor(m_IfShowCursor);
 
 	m_IfBegin = false;
-
-	m_InitAction = []()->void {};
-	m_RunAction = []()->void {};
-	m_ResizeAction = []()->void {};
-	m_ReleaseAction = []()->void {};
 }
 
 SpaceGameEngine::Window::~Window()
 {
-	m_ReleaseAction();
+	DATA_NOTIFY(Window, m_OnReleaseAction);
 }
 
 DWORD SpaceGameEngine::Window::GetWindowWidth()
@@ -166,32 +161,13 @@ bool SpaceGameEngine::Window::GetIfBegin()
 	return m_IfBegin;
 }
 
-void SpaceGameEngine::Window::SetInitAction(const std::function<void()>& func)
-{
-	m_InitAction = func;
-}
-
-void SpaceGameEngine::Window::SetRunAction(const std::function<void()>& func)
-{
-	m_RunAction = func;
-}
-
-void SpaceGameEngine::Window::SetResizeAction(const std::function<void()>& func)
-{
-	m_ResizeAction = func;
-}
-
-void SpaceGameEngine::Window::SetReleaseAction(const std::function<void()>& func)
-{
-	m_ReleaseAction = func;
-}
-
 void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 {
-	m_InitAction();
+	m_Timer.Init();
+	DATA_NOTIFY(Window, m_OnInitAction);
 }
 
 void SpaceGameEngine::Window::Resize()
 {
-	m_ResizeAction();
+	DATA_NOTIFY(Window, m_OnResizeAction);
 }
