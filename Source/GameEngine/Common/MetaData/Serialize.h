@@ -118,7 +118,7 @@ namespace SpaceGameEngine
 		{
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
-				T* ptr;
+				T* ptr = nullptr;
 				SerializeMethod<T*>::In(ptr, si.Read());
 				if (ptr)
 					GetSerializeObjectManager().QueryObject(ptr, (void**)&obj);
@@ -133,7 +133,7 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	struct SerializeCore<T*, true>	//pointer serialize:just read ptr directly
+	struct SerializeCore<T*, true>	//pointer serialize:just serialize ptr directly
 	{
 		static void Run(T*& obj, SerializeInterface& si)
 		{
