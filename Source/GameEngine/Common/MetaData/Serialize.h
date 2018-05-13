@@ -159,7 +159,7 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t,false>::Run(size, si);
 				obj.resize(size);
 				for (size_t i = 0; i < size; i++)
 					Serialize(obj[i], si);
@@ -167,7 +167,7 @@ namespace SpaceGameEngine
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i, si);
@@ -188,19 +188,25 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				std::pair<Key, Value> buff;
+				Key* buffptr1;
+				Value* buffptr2;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff.first, si);
-					Serialize(buff.second, si);
-					obj.emplace(std::move(buff));
+					SerializeCore<Key*, true>::Run(buffptr1, si);
+					SerializeCore<Key,IfHaveGetMetaDataMethod<Key>::Result>::Run(buff.first, si);
+					SerializeCore<Value*, true>::Run(buffptr2, si);
+					SerializeCore<Value,IfHaveGetMetaDataMethod<Value>::Result>::Run(buff.second, si);
+					auto iterpair = obj.emplace(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr1, const_cast<String*>(&iterpair.first->first));
+					GetSerializeObjectManager().AddObject(buffptr2, &iterpair.first->second);
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i.first, si);
@@ -222,19 +228,25 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				std::pair<Key, Value> buff;
+				Key* buffptr1;
+				Value* buffptr2;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff.first, si);
-					Serialize(buff.second, si);
-					obj.emplace(std::move(buff));
+					SerializeCore<Key*, true>::Run(buffptr1, si);
+					SerializeCore<Key, IfHaveGetMetaDataMethod<Key>::Result>::Run(buff.first, si);
+					SerializeCore<Value*, true>::Run(buffptr2, si);
+					SerializeCore<Value, IfHaveGetMetaDataMethod<Value>::Result>::Run(buff.second, si);
+					auto iterpair = obj.emplace(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr1, const_cast<String*>(&iterpair.first->first));
+					GetSerializeObjectManager().AddObject(buffptr2, &iterpair.first->second);
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i.first, si);
@@ -256,23 +268,25 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				T buff;
+				T* buffptr;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff, si);
+					SerializeCore<T*, true>::Run(buffptr, si);
+					SerializeCore<T,IfHaveGetMetaDataMethod<T>::Result>::Run(buff, si);
 					obj.emplace_back(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr, &obj.back());
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
-				auto buffer = obj;
+				SerializeCore<size_t, false>::Run(size, si);
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buffer.front(), si);
-					buffer.pop_front();
+					Serialize(obj.front(), si);
+					obj.pop_front();
 				}
 			}
 		}
@@ -290,23 +304,25 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				T buff;
+				T* buffptr;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff, si);
+					SerializeCore<T*, true>::Run(buffptr, si);
+					SerializeCore<T,IfHaveGetMetaDataMethod<T>::Result>::Run(buff, si);
 					obj.emplace(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr, &obj.back());
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
-				auto buffer = obj;
+				SerializeCore<size_t, false>::Run(size, si);
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buffer.front(), si);
-					buffer.pop();
+					Serialize(obj.front(), si);
+					obj.pop();
 				}
 			}
 		}
@@ -324,28 +340,31 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				T buff;
+				T* buffptr;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff, si);
+					SerializeCore<T*, true>::Run(buffptr, si);
+					SerializeCore<T,IfHaveGetMetaDataMethod<T>::Result>::Run(buff, si);
 					obj.emplace(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr, &obj.top());
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
-				auto buffer = obj;
-				Vector<T> vec_buffer;
-				while (!buffer.empty())
+				SerializeCore<size_t, false>::Run(size, si);
+				Vector<std::pair<T,T*>> vec_buffer;
+				while (!obj.empty())
 				{
-					vec_buffer.emplace_back(std::move(buffer.top()));
-					buffer.pop();
+					vec_buffer.emplace_back(std::move(std::make_pair(std::move(obj.top()),&obj.top())));
+					obj.pop();
 				}
 				for (auto i = vec_buffer.rbegin(); i != vec_buffer.rend(); i++)
 				{
-					Serialize(*i, si);
+					SerializeCore<T*, true>::Run(i->second, si);
+					SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(i->first, si);
 				}
 			}
 		}
@@ -362,7 +381,7 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				obj.resize(size);
 				for (auto& i : obj)
 				{
@@ -372,7 +391,7 @@ namespace SpaceGameEngine
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i, si);
@@ -392,7 +411,7 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				obj.resize(size);
 				for (auto& i : obj)
 				{
@@ -402,7 +421,7 @@ namespace SpaceGameEngine
 			else
 			{
 				size_t size = std::distance(obj.begin(), obj.end());
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i, si);
@@ -423,18 +442,21 @@ namespace SpaceGameEngine
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				size_t size;
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				T buff;
+				T* buffptr;
 				for (size_t i = 0; i < size; i++)
 				{
-					Serialize(buff, si);
-					obj.emplace(std::move(buff));
+					SerializeCore<T*, true>::Run(buffptr, si);
+					SerializeCore<T,IfHaveGetMetaDataMethod<T>::Result>::Run(buff, si);
+					auto iterpair = obj.emplace(std::move(buff));
+					GetSerializeObjectManager().AddObject(buffptr, const_cast<double*>(&(*iterpair.first)));
 				}
 			}
 			else
 			{
 				size_t size = obj.size();
-				Serialize(size, si);
+				SerializeCore<size_t, false>::Run(size, si);
 				for (auto& i : obj)
 				{
 					Serialize(i, si);

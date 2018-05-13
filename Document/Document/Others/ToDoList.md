@@ -1,5 +1,11 @@
 ﻿# To Do List
 
+* 如果需要，为`MetaData`加上`MemberFunction`的支持。
+
+* 为序列化加上对指向外部（不进行序列化的）对象的指针的支持。
+
+* 保证所有容器在序列化时的拷贝安全；
+
 * 检测窗口是否被隐藏，如果被隐藏则不运行渲染系统。(find the reason of the com error when window is hiding)
 
 * 改光照模型为`Forward Plus`。
