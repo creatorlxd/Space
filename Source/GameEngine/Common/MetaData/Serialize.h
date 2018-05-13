@@ -19,6 +19,28 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	class SerializeObjectManager
+	{
+	public:
+		template<typename T, bool b>
+		friend struct SerializeCore;
+		template<typename T>
+		friend inline void Serialize(T& obj, SerializeInterface& si);
+		friend class MemoryManager;
+
+		~SerializeObjectManager();
+	private:
+		SerializeObjectManager();
+
+		void AddObject(void* ptr, void* now_ptr);
+		void QueryObject(void* query_ptr, void ** ptr);
+	private:
+		Map<void*, void*> m_ObjectMap;
+		Map<void*, Vector<void**>> m_QueryList;
+	};
+
+	SerializeObjectManager& GetSerializeObjectManager();
+
 	class SerializeInterface
 	{
 	public:
@@ -29,6 +51,7 @@ namespace SpaceGameEngine
 		};
 		SerializeInterface(IOFlag ioflag);
 		virtual ~SerializeInterface();
+		IOFlag GetIOFlag();
 
 		template<typename T, bool b>
 		friend struct SerializeCore;
@@ -37,7 +60,6 @@ namespace SpaceGameEngine
 		virtual void Write(const String& str) = 0;
 	private:
 		IOFlag m_IOFlag;
-		Map<void*, void*> m_PointerPool;
 	};
 
 	template<typename T>
@@ -90,30 +112,38 @@ namespace SpaceGameEngine
 	};
 
 	template<typename T>
-	struct SerializeCore<T*, false>	//pointer serialize:use pointer pool
+	struct SerializeCore<T*, false>	//pointer serialize
+	{
+		static void Run(T*& obj, SerializeInterface& si)
+		{
+			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
+			{
+				T* ptr;
+				SerializeMethod<T*>::In(ptr, si.Read());
+				if (ptr)
+					GetSerializeObjectManager().QueryObject(ptr, (void**)&obj);
+				else
+					obj = ptr;
+			}
+			else
+			{
+				si.Write(SerializeMethod<T*>::Out(obj));
+			}
+		}
+	};
+
+	template<typename T>
+	struct SerializeCore<T*, true>	//pointer serialize:just read ptr directly
 	{
 		static void Run(T*& obj, SerializeInterface& si)
 		{
 			if (si.m_IOFlag == SerializeInterface::IOFlag::Input)
 			{
 				SerializeMethod<T*>::In(obj, si.Read());
-				if (obj&&si.m_PointerPool.find((void*)obj) == si.m_PointerPool.end())
-				{
-					T* pt = MemoryManager::New<T>();
-					SerializeMethod<T>::In(*pt, si.Read());
-					si.m_PointerPool[obj] = pt;
-				}
-				if (obj)
-					obj = (T*)si.m_PointerPool[obj];
 			}
 			else
 			{
 				si.Write(SerializeMethod<T*>::Out(obj));
-				if (obj&&si.m_PointerPool.find((void*)obj) == si.m_PointerPool.end())
-				{
-					si.Write(SerializeMethod<T>::Out(*obj));
-					si.m_PointerPool[obj] = obj;
-				}
 			}
 		}
 	};
@@ -416,6 +446,10 @@ namespace SpaceGameEngine
 	template<typename T>
 	inline void Serialize(T& obj, SerializeInterface& si)
 	{
+		T* ptr = &obj;
+		SerializeCore<T*, true>::Run(ptr, si);
+		if (si.GetIOFlag() == SerializeInterface::IOFlag::Input)
+			GetSerializeObjectManager().AddObject(ptr, &obj);
 		SerializeCore<T, IfHaveGetMetaDataMethod<T>::Result>::Run(obj, si);
 	}
 
@@ -555,7 +589,7 @@ namespace SpaceGameEngine
 		}
 		static String Out(const char& c)
 		{
-			return String(1,c);
+			return String(1, c);
 		}
 	};
 

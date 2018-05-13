@@ -199,13 +199,15 @@ TEST_GROUP_BEGIN(CommonTest)
 			tmd3.b = 2;
 			tmd3.c = 3;
 			tmd3.pa = &tmd3_n1.a;
-			TextFileSerializeInterface tfsi_o("test_serialize.txt", SerializeInterface::IOFlag::Output);
+			TextFileSerializeInterface tfsi_o("../TestData/test_serialize.txt", SerializeInterface::IOFlag::Output);
+			TextFileSerializeInterface tfsi_o2("../TestData/test_serialize2.txt", SerializeInterface::IOFlag::Output);
+			Serialize(tmd3_n1, tfsi_o2);
 			Serialize(tmd3, tfsi_o);
 			tmd3.Serialize(tfsi_o);
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3.CastToMetaObject(), tfsi_o);
 			String str = "test\ntest";
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_o);
-			const Vector<int> test_vec{ 4,5,6 };
+			/*const Vector<int> test_vec{ 4,5,6 };
 			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_o);
 			Map<String, int> test_map{ {"1",1},{"2",2} };
 			Serialize(test_map, tfsi_o);
@@ -230,17 +232,20 @@ TEST_GROUP_BEGIN(CommonTest)
 			ForwardList<bool> test_forward_list{ true,false,true };
 			Serialize(test_forward_list, tfsi_o);
 			Set<double> test_set{ 11,12,13 };
-			Serialize(test_set, tfsi_o);
+			Serialize(test_set, tfsi_o);*/
 		}
 		{
-			test_md3 tmd3_1, tmd3_2, tmd3_3;
-			TextFileSerializeInterface tfsi_i("test_serialize.txt", SerializeInterface::IOFlag::Input);
+			test_md3 tmd3_n1, tmd3_1, tmd3_2, tmd3_3;
+			TextFileSerializeInterface tfsi_i("../TestData/test_serialize.txt", SerializeInterface::IOFlag::Input);
+			TextFileSerializeInterface tfsi_i2("../TestData/test_serialize2.txt", SerializeInterface::IOFlag::Input);
 			Serialize(tmd3_1, tfsi_i);
+			Serialize(tmd3_n1, tfsi_i2);
+			int* ptra = &tmd3_n1.a;
 			tmd3_2.Serialize(tfsi_i);
 			GetMetaDataManager().GetMetaData(GetTypeName<test_md3>())->m_SerializeAction(tmd3_3.CastToMetaObject(), tfsi_i);
 			String str;
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_i);
-			Vector<int> test_vec;
+			/*Vector<int> test_vec;
 			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), tfsi_i);
 			Map<String, int> test_map;
 			Serialize(test_map, tfsi_i);
@@ -258,7 +263,8 @@ TEST_GROUP_BEGIN(CommonTest)
 			ForwardList<bool> test_forward_list;
 			Serialize(test_forward_list, tfsi_i);
 			Set<double> test_set;
-			Serialize(test_set, tfsi_i);
+			Serialize(test_set, tfsi_i);*/
+
 		}
 	}
 	TEST_METHOD_END

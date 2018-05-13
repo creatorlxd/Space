@@ -16,6 +16,56 @@ limitations under the License.
 #include "stdafx.h"
 #include "Serialize.h"
 
+SpaceGameEngine::SerializeObjectManager::~SerializeObjectManager()
+{
+	for (auto i : m_QueryList)
+	{
+		THROWERROR("all objects which were referred by the serialized pointer must also be serialized");
+	}
+}
+
+SpaceGameEngine::SerializeObjectManager::SerializeObjectManager()
+{
+
+}
+
+void SpaceGameEngine::SerializeObjectManager::AddObject(void * ptr, void* now_ptr)
+{
+	m_ObjectMap[ptr] = now_ptr;
+
+	//deal with the query of this ptr
+	auto iter = m_QueryList.find(ptr);
+	if (iter != m_QueryList.end())
+	{
+		for (auto& i : iter->second)
+		{
+			if(i)
+				*i = now_ptr;
+		}
+		m_QueryList.erase(iter);
+	}
+}
+
+void SpaceGameEngine::SerializeObjectManager::QueryObject(void * query_ptr, void ** ptr)
+{
+	auto iter1 = m_ObjectMap.find(query_ptr);
+	if (iter1 != m_ObjectMap.end())
+	{
+		if (ptr)
+			*ptr = iter1->second;
+	}
+	else
+	{
+		m_QueryList[query_ptr].push_back(ptr);
+	}
+}
+
+SpaceGameEngine::SerializeObjectManager & SpaceGameEngine::GetSerializeObjectManager()
+{
+	static GlobalVariable<SerializeObjectManager> g_SerializeObjectManager;
+	return g_SerializeObjectManager.Get();
+}
+
 SpaceGameEngine::SerializeInterface::SerializeInterface(IOFlag ioflag)
 {
 	m_IOFlag = ioflag;
@@ -23,4 +73,10 @@ SpaceGameEngine::SerializeInterface::SerializeInterface(IOFlag ioflag)
 
 SpaceGameEngine::SerializeInterface::~SerializeInterface()
 {
+
+}
+
+SpaceGameEngine::SerializeInterface::IOFlag SpaceGameEngine::SerializeInterface::GetIOFlag()
+{
+	return m_IOFlag;
 }
