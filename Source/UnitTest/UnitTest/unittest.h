@@ -265,6 +265,82 @@ TEST_GROUP_BEGIN(CommonTest)
 			int** ppa_2 = &tmd3_1.pa;
 			Serialize(ppa, tfsi_i2);
 		}
+		{
+			test_md3 tmd3_n1;
+			tmd3_n1.a = 3;
+			tmd3_n1.b = 2;
+			tmd3_n1.c = 1;
+			test_md3 tmd3;
+			tmd3.a = 1;
+			tmd3.b = 2;
+			tmd3.c = 3;
+			tmd3.pa = &tmd3_n1.a;
+			BinaryFileSerializeInterface bfsi_o("../TestData/test_serialize.bin", SerializeInterface::IOFlag::Output);
+			BinaryFileSerializeInterface bfsi_o2("../TestData/test_serialize2.bin", SerializeInterface::IOFlag::Output);
+			Serialize(tmd3_n1, bfsi_o2);
+			Serialize(tmd3, bfsi_o);
+			String str = "test\ntest";
+			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), bfsi_o);
+			const Vector<int> test_vec{ 4,5,6 };
+			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), bfsi_o);
+			Map<String, int> test_map{ { "1",1 },{ "2",2 } };
+			Serialize(test_map, bfsi_o);
+			HashMap<String, int> test_hashmap{ { "3",3 },{ "4",4 } };
+			Serialize(test_hashmap, bfsi_o);
+			Deque<int> test_deque{ 1,2,3,4,5,6 };
+			Serialize(test_deque, bfsi_o);
+			Queue<int> test_queue;
+			test_queue.push(5);
+			test_queue.push(4);
+			test_queue.push(3);
+			test_queue.push(2);
+			test_queue.push(1);
+			GetMetaDataManager().GetMetaData(GetTypeName<Queue<int>>())->m_SerializeAction(MetaObject(&test_queue), bfsi_o);
+			Stack<char> test_stack;
+			test_stack.push('a');
+			test_stack.push('b');
+			test_stack.push('c');
+			Serialize(test_stack, bfsi_o);
+			List<float> test_list{ 1.0f,2.0f,3.0f };
+			Serialize(test_list, bfsi_o);
+			ForwardList<bool> test_forward_list{ true,false,true };
+			Serialize(test_forward_list, bfsi_o);
+			Set<double> test_set{ 11,12,13 };
+			Serialize(test_set, bfsi_o);
+			int** ppa = &tmd3.pa;
+			Serialize(ppa, bfsi_o2);
+		}
+		{
+			test_md3 tmd3_n1, tmd3_1;
+			BinaryFileSerializeInterface bfsi_i("../TestData/test_serialize.bin", SerializeInterface::IOFlag::Input);
+			BinaryFileSerializeInterface bfsi_i2("../TestData/test_serialize2.bin", SerializeInterface::IOFlag::Input);
+			Serialize(tmd3_1, bfsi_i);
+			Serialize(tmd3_n1, bfsi_i2);
+			String str;
+			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), bfsi_i);
+			Vector<int> test_vec;
+			GetMetaDataManager().GetMetaData(GetTypeName<Vector<int>>())->m_SerializeAction(MetaObject(&test_vec), bfsi_i);
+			Map<String, int> test_map;
+			Serialize(test_map, bfsi_i);
+			HashMap<String, int> test_hashmap;
+			Serialize(test_hashmap, bfsi_i);
+			Deque<int> test_deque;
+			Serialize(test_deque, bfsi_i);
+			Queue<int> test_queue;
+			GetMetaDataManager().GetMetaData(GetTypeName<Queue<int>>())->m_SerializeAction(MetaObject(&test_queue), bfsi_i);
+			Stack<char> test_stack;
+			Serialize(test_stack, bfsi_i);
+			auto test_stack_top = test_stack.top();
+			List<float> test_list;
+			Serialize(test_list, bfsi_i);
+			ForwardList<bool> test_forward_list;
+			Serialize(test_forward_list, bfsi_i);
+			Set<double> test_set;
+			Serialize(test_set, bfsi_i);
+			int** ppa;
+			int** ppa_2 = &tmd3_1.pa;
+			Serialize(ppa, bfsi_i2);
+		}
 	}
 	TEST_METHOD_END
 }
