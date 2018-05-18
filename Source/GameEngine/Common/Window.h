@@ -71,6 +71,7 @@ namespace SpaceGameEngine
 
 	CONNECTION_BEGIN(Window)
 		OnNotifyAction<void()> m_OnInitAction;
+		OnNotifyAction<void()> m_OnStartAction;
 		OnNotifyAction<void()> m_OnRunAction;
 		OnNotifyAction<void()> m_OnResizeAction;
 		OnNotifyAction<void()> m_OnReleaseAction;

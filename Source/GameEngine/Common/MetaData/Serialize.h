@@ -199,7 +199,7 @@ namespace SpaceGameEngine
 					SerializeCore<Value*, true>::Run(buffptr2, si);
 					SerializeCore<Value,IfHaveGetMetaDataMethod<Value>::Result>::Run(buff.second, si);
 					auto iterpair = obj.emplace(std::move(buff));
-					GetSerializeObjectManager().AddObject(buffptr1, const_cast<String*>(&iterpair.first->first));
+					GetSerializeObjectManager().AddObject(buffptr1, const_cast<Key*>(&iterpair.first->first));
 					GetSerializeObjectManager().AddObject(buffptr2, &iterpair.first->second);
 				}
 			}
@@ -239,7 +239,7 @@ namespace SpaceGameEngine
 					SerializeCore<Value*, true>::Run(buffptr2, si);
 					SerializeCore<Value, IfHaveGetMetaDataMethod<Value>::Result>::Run(buff.second, si);
 					auto iterpair = obj.emplace(std::move(buff));
-					GetSerializeObjectManager().AddObject(buffptr1, const_cast<String*>(&iterpair.first->first));
+					GetSerializeObjectManager().AddObject(buffptr1, const_cast<Key*>(&iterpair.first->first));
 					GetSerializeObjectManager().AddObject(buffptr2, &iterpair.first->second);
 				}
 			}
@@ -259,6 +259,7 @@ namespace SpaceGameEngine
 	/*
 	serialize deque
 	copy no safe
+	data would be broken when serialize out
 	*/
 	template<typename T>
 	struct SerializeCore<Deque<T>, false>
@@ -295,6 +296,7 @@ namespace SpaceGameEngine
 	/*
 	serialize queue
 	copy no safe
+	data would be broken when serialize out
 	*/
 	template<typename T>
 	struct SerializeCore<Queue<T>, false>
@@ -331,6 +333,7 @@ namespace SpaceGameEngine
 	/*
 	serialize stack
 	copy no safe
+	data would be broken when serialize out
 	*/
 	template<typename T>
 	struct SerializeCore<Stack<T>, false>
@@ -450,7 +453,7 @@ namespace SpaceGameEngine
 					SerializeCore<T*, true>::Run(buffptr, si);
 					SerializeCore<T,IfHaveGetMetaDataMethod<T>::Result>::Run(buff, si);
 					auto iterpair = obj.emplace(std::move(buff));
-					GetSerializeObjectManager().AddObject(buffptr, const_cast<double*>(&(*iterpair.first)));
+					GetSerializeObjectManager().AddObject(buffptr, const_cast<T*>(&(*iterpair.first)));
 				}
 			}
 			else

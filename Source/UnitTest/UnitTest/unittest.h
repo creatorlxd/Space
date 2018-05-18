@@ -240,6 +240,7 @@ TEST_GROUP_BEGIN(CommonTest)
 			TextFileSerializeInterface tfsi_i2("../TestData/test_serialize2.txt", SerializeInterface::IOFlag::Input);
 			Serialize(tmd3_1, tfsi_i);
 			Serialize(tmd3_n1, tfsi_i2);
+			auto ptmd_int = &tmd3_n1.a;
 			String str;
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), tfsi_i);
 			Vector<int> test_vec;
@@ -316,6 +317,7 @@ TEST_GROUP_BEGIN(CommonTest)
 			BinaryFileSerializeInterface bfsi_i2("../TestData/test_serialize2.bin", SerializeInterface::IOFlag::Input);
 			Serialize(tmd3_1, bfsi_i);
 			Serialize(tmd3_n1, bfsi_i2);
+			auto ptmd_int = &tmd3_n1.a;
 			String str;
 			GetMetaDataManager().GetMetaData(GetTypeName<String>())->m_SerializeAction(MetaObject(&str), bfsi_i);
 			Vector<int> test_vec;

@@ -165,6 +165,8 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 {
 	m_Timer.Init();
 	DATA_NOTIFY(Window, m_OnInitAction);
+	m_IfBegin = true;
+	DATA_NOTIFY(Window, m_OnStartAction);
 }
 
 void SpaceGameEngine::Window::Resize()
