@@ -8,6 +8,7 @@ ShaderDirectory="./Source/GameEngine/Shader/"
 RenderQuality=2
 
 [Window]
+IconFileName=""
 WindowWidth=800
 WindowHeight=600
 WindowTitle="SpaceGameEngine"

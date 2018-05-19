@@ -56,7 +56,10 @@ namespace SpaceGameEngine
 		void StartRun(HINSTANCE hInstance);
 		void Resize();
 	private:
+		static LRESULT CALLBACK WindowProcess(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+	private:
 		HWND m_Hwnd;									//窗口句柄
+		String m_IconFileName;
 		DWORD m_WindowWidth;								//窗口宽度
 		DWORD m_WindowHeight;								//窗口高度
 		String m_WindowTitle;							//窗口标题

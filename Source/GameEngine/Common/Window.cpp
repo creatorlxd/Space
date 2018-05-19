@@ -19,6 +19,7 @@ limitations under the License.
 SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 {
 	m_Hwnd = NULL;
+	m_IconFileName = "";
 	m_WindowWidth = 0;
 	m_WindowHeight = 0;
 	m_WindowTitle = "";
@@ -28,6 +29,8 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 	if (GetDefaultConfigFile().IfHaveConfigTable("Window"))
 	{
 		auto WindowConfig = GetDefaultConfigFile().GetConfigTable("Window");
+		if (WindowConfig.IfHaveConfigValue("IconFileName"))
+			m_IconFileName = WindowConfig.GetConfigValue("IconFileName").AsString();
 		if (WindowConfig.IfHaveConfigValue("WindowWidth"))
 			m_WindowWidth = WindowConfig.GetConfigValue("WindowWidth").AsInt();
 		if (WindowConfig.IfHaveConfigValue("WindowHeight"))
@@ -164,12 +167,88 @@ bool SpaceGameEngine::Window::GetIfBegin()
 void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 {
 	m_Timer.Init();
+
+	//init window
+	WNDCLASSEX WndClass = { 0 };
+	WndClass.cbSize = sizeof(WNDCLASSEX);
+	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WndClass.lpfnWndProc = WindowProcess;
+	WndClass.cbClsExtra = 0;
+	WndClass.cbWndExtra = 0;
+	WndClass.hInstance = hInstance;
+	WndClass.hIcon = (HICON)LoadImage(NULL, StringToWString(m_IconFileName).c_str(), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_LOADFROMFILE);
+	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	WndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+	WndClass.lpszMenuName = NULL;
+	WndClass.lpszClassName = L"SpaceGameEngineWindow";
+	if (!RegisterClassEx(&WndClass))
+	{
+		THROWERROR("can not register window");
+		return;
+	}
+	m_Hwnd = CreateWindow(L"SpaceGameEngineWindow", StringToWString(m_WindowTitle).c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_WindowWidth, m_WindowHeight, NULL, NULL, hInstance, NULL);
+	MoveWindow(m_Hwnd, m_WindowPosition.first, m_WindowPosition.second, m_WindowWidth, m_WindowHeight, true);
+	ShowWindow(m_Hwnd, SW_SHOWNORMAL);
+	UpdateWindow(m_Hwnd);
+
 	DATA_NOTIFY(Window, m_OnInitAction);
 	m_IfBegin = true;
 	DATA_NOTIFY(Window, m_OnStartAction);
+
+	MSG msg = { 0 };
+	while (msg.message != WM_QUIT)
+	{
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			static auto time = std::chrono::steady_clock::now();
+			static double time_limit = 1.0 / (double)m_FPSLimit;
+			auto time_now = std::chrono::steady_clock::now();
+			std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(time_now - time);
+
+			if (time_span.count() >= time_limit)
+			{
+				m_Timer.Tick();
+				DATA_NOTIFY(Window, m_OnRunAction);
+				time = time_now;
+			}
+			else
+			{
+				Sleep(1000 * (time_limit - time_span.count()));
+			}
+		}
+	}
 }
 
 void SpaceGameEngine::Window::Resize()
 {
 	DATA_NOTIFY(Window, m_OnResizeAction);
+}
+
+LRESULT SpaceGameEngine::Window::WindowProcess(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (Window::GetCurrentObject() == nullptr)
+		return DefWindowProc(hwnd, message, wParam, lParam);
+	switch (message)
+	{
+	case WM_PAINT:
+		ValidateRect(Window::GetCurrentObject()->m_Hwnd, NULL);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	case WM_SIZE:
+		Window::GetCurrentObject()->m_WindowWidth = LOWORD(lParam);
+		Window::GetCurrentObject()->m_WindowHeight = HIWORD(lParam);
+		if (LOWORD(lParam) != 0 && HIWORD(lParam) != 0)
+			Window::GetCurrentObject()->Resize();
+		break;
+	default:
+		return DefWindowProc(hwnd, message, wParam, lParam);
+		break;
+	}
 }

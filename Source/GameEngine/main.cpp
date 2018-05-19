@@ -22,5 +22,6 @@ GlobalVariable<Window> g_Window;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	g_Window.Get().StartRun(hInstance);
 	return 0;
 }
