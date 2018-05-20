@@ -27,6 +27,7 @@ namespace SpaceGameEngine
 		Window();
 		~Window();
 
+		HWND GetHwnd();
 		DWORD GetWindowWidth();							//获取窗口宽度
 		DWORD GetWindowHeight();						//获取窗口高度
 		void ChangeIfShowCursor(bool b);				//改变是否显示鼠标
@@ -60,10 +61,10 @@ namespace SpaceGameEngine
 	private:
 		HWND m_Hwnd;									//窗口句柄
 		String m_IconFileName;
-		DWORD m_WindowWidth;								//窗口宽度
-		DWORD m_WindowHeight;								//窗口高度
+		DWORD m_WindowWidth;								//窗口客户区宽度
+		DWORD m_WindowHeight;								//窗口客户区高度
 		String m_WindowTitle;							//窗口标题
-		std::pair<int, int> m_WindowPosition;			//窗口位置
+		std::pair<int, int> m_WindowPosition;			//窗口客户区位置
 		inline static const std::pair<int, int> m_DefaultWindowPosition = { 250 ,80 };
 		bool m_IfShowCursor;						//是否显示鼠标
 		bool m_IfBegin;							//游戏是否已开始

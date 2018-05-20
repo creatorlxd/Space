@@ -57,6 +57,11 @@ SpaceGameEngine::Window::~Window()
 	DATA_NOTIFY(Window, m_OnReleaseAction);
 }
 
+HWND SpaceGameEngine::Window::GetHwnd()
+{
+	return m_Hwnd;
+}
+
 DWORD SpaceGameEngine::Window::GetWindowWidth()
 {
 	return m_WindowWidth;
@@ -102,7 +107,7 @@ std::pair<int, int> SpaceGameEngine::Window::GetCursorPosition()
 void SpaceGameEngine::Window::UpdateWindowSize()
 {
 	RECT r;
-	GetWindowRect(m_Hwnd, &r);
+	GetClientRect(m_Hwnd, &r);
 	m_WindowWidth = abs(r.right - r.left);
 	m_WindowHeight = abs(r.bottom - r.top);
 }
@@ -112,7 +117,7 @@ std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 	if (m_IfBegin)
 	{
 		RECT r;
-		GetWindowRect(m_Hwnd, &r);
+		GetClientRect(m_Hwnd, &r);
 		m_WindowPosition = std::pair<int, int>(r.left, r.top);
 	}
 	return m_WindowPosition;
@@ -121,7 +126,11 @@ std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
 {
 	if (m_IfBegin)
-		SetWindowPos(m_Hwnd, HWND_TOPMOST, x, y, m_WindowWidth, m_WindowHeight, SWP_SHOWWINDOW);
+	{
+		RECT r;
+		GetWindowRect(m_Hwnd, &r);
+		SetWindowPos(m_Hwnd, HWND_TOPMOST, r.left + x - m_WindowPosition.first, r.top + y - m_WindowPosition.second, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE);
+	}
 	m_WindowPosition = std::make_pair(x, y);
 }
 
@@ -129,7 +138,10 @@ void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 {
 	if (m_IfBegin)
 	{
-		SetWindowPos(m_Hwnd, HWND_TOPMOST, m_WindowPosition.first, m_WindowPosition.second, x, y, SWP_SHOWWINDOW);
+		RECT r;
+		SetRect(&r, 0, 0, x, y);
+		AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
+		SetWindowPos(m_Hwnd, HWND_TOPMOST, 0, 0, r.right - r.left, r.bottom - r.top, SWP_SHOWWINDOW | SWP_NOMOVE);
 	}
 	m_WindowWidth = x;
 	m_WindowHeight = y;
@@ -186,8 +198,11 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 		THROWERROR("can not register window");
 		return;
 	}
-	m_Hwnd = CreateWindow(L"SpaceGameEngineWindow", StringToWString(m_WindowTitle).c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_WindowWidth, m_WindowHeight, NULL, NULL, hInstance, NULL);
-	MoveWindow(m_Hwnd, m_WindowPosition.first, m_WindowPosition.second, m_WindowWidth, m_WindowHeight, true);
+	RECT r;
+	SetRect(&r, m_WindowPosition.first, m_WindowPosition.second, m_WindowPosition.first + m_WindowWidth, m_WindowPosition.second + m_WindowHeight);
+	AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
+	m_Hwnd = CreateWindow(L"SpaceGameEngineWindow", StringToWString(m_WindowTitle).c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, r.right - r.left, r.bottom - r.top, NULL, NULL, hInstance, NULL);
+	MoveWindow(m_Hwnd, r.left, r.top, r.right - r.left, r.bottom - r.top, true);
 	ShowWindow(m_Hwnd, SW_SHOWNORMAL);
 	UpdateWindow(m_Hwnd);
 
