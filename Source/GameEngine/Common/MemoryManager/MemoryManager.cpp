@@ -17,6 +17,8 @@ limitations under the License.
 #include "MemoryManager.h"
 #include "GlobalVariable.h"
 
+using namespace SpaceGameEngine::MemoryManagerConstValue;
+
 SpaceGameEngine::MemoryManager::MemoryManager()
 {
 	m_pBlockSizeContent = new size_t[g_MaxBlockSize + 1];

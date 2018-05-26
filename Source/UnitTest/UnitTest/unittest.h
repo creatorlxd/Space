@@ -344,6 +344,14 @@ TEST_GROUP_BEGIN(CommonTest)
 			Serialize(ppa, bfsi_i2);
 		}
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestWindow)
+	{
+		Window test_window;
+		test_window.SetWindowTitle("TestWindow");
+		test_window.SetWindowSize(800, 600);
+		test_window.StartRun(GetModuleHandle(0));
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
