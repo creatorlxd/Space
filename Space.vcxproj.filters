@@ -175,6 +175,9 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Vector2D.h">
       <Filter>Math\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">

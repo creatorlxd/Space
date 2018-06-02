@@ -176,7 +176,6 @@ SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(
 	else
 	{
 		THROWERROR("can not find this config value");
-		return ConfigFileValue();
 	}
 }
 
@@ -213,7 +212,6 @@ SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const
 	else
 	{
 		THROWERROR("can not find this config table");
-		return ConfigTable();
 	}
 }
 
@@ -245,7 +243,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 	ConfigFileValueType type_buffer = ConfigFileValueType::Int;
 	String str_buffer;
 
-	for (auto str : strs)
+	for (const auto& str : strs)
 	{
 		for (auto _char : str)
 		{

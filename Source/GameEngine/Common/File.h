@@ -16,6 +16,8 @@ limitations under the License.
 #pragma once
 #include "Def.h"
 #include "MemoryManager/AllocatorForSTL.hpp"
+#include <io.h>
+#include <direct.h>
 
 namespace SpaceGameEngine
 {

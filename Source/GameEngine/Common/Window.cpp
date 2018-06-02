@@ -266,4 +266,5 @@ LRESULT SpaceGameEngine::Window::WindowProcess(HWND hwnd, UINT message, WPARAM w
 		return DefWindowProc(hwnd, message, wParam, lParam);
 		break;
 	}
+	return DefWindowProc(hwnd, message, wParam, lParam);
 }

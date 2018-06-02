@@ -45,7 +45,7 @@ void SpaceGameEngine::Allocator::Reset(size_t data_size, size_t page_size, size_
 	m_DataSize = data_size;
 	m_PageSize = page_size;
 
-	size_t minmal_size = max(m_DataSize, sizeof(BlockHeader));
+	size_t minmal_size = std::max(m_DataSize, sizeof(BlockHeader));
 
 #if defined(_DEBUG) | defined (DEBUG)
 	assert(alignment > 0 && ((alignment & (alignment - 1))) == 0);

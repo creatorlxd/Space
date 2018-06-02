@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
+
+//Common
 #include "Common/Def.h"
 #include "Common/MemoryManager/AllocatorForSTL.hpp"
 #include "Common/Timer.h"
@@ -30,3 +32,6 @@ limitations under the License.
 #include "Common/MetaData/Serialize.h"
 #include "Common/MetaData/TextFileSerializeInterface.h"
 #include "Common/MetaData/BinaryFileSerializeInterface.h"
+
+//Math
+#include "Math/Common/ConstantValue.hpp"
