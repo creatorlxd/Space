@@ -17,17 +17,17 @@ limitations under the License.
 #include "Vector2D.h"
 
 SpaceGameEngine::Vector2D::Vector2D(float x, float y)
-	:XMFLOAT2(x,y)
+	:XMFLOAT2(x, y)
 {
 }
 
 SpaceGameEngine::Vector2D::Vector2D(const XMFLOAT2 & c)
-	:XMFLOAT2(c)
+	: XMFLOAT2(c)
 {
 }
 
 SpaceGameEngine::Vector2D::Vector2D(const Vector2D & v)
-	:XMFLOAT2(v.x,v.y)
+	: XMFLOAT2(v.x, v.y)
 {
 }
 
@@ -59,4 +59,13 @@ bool SpaceGameEngine::Vector2D::operator=(FXMVECTOR v)
 SpaceGameEngine::Vector2D::operator XMVECTOR()
 {
 	return XMLoadFloat2(this);
+}
+
+bool SpaceGameEngine::operator==(const Vector2D & v1, const Vector2D & v2)
+{
+	if (!FloatEqual(v1.x, v2.x))
+		return false;
+	if (!FloatEqual(v1.y, v2.y))
+		return false;
+	return true;
 }

@@ -15,26 +15,21 @@ limitations under the License.
 */
 #pragma once
 #include "Def.h"
-#include <DirectXMath.h>
-#include "Float.h"
-
-using namespace DirectX;
 
 namespace SpaceGameEngine
 {
-	struct Vector2D :public XMFLOAT2
-	{
-		Vector2D(float x, float y);
-		Vector2D(const XMFLOAT2& c);
-		Vector2D(const Vector2D& v);
-		Vector2D(FXMVECTOR v);
+	GLOBALCONST float FloatEpsilon = 0.000001f;
+	bool FloatEqual(float f1, float f2);
 
-		bool operator = (const XMFLOAT2& c);
-		bool operator = (const Vector2D& v);
-		bool operator = (FXMVECTOR v);
+	bool FloatLess(float f1, float f2);
 
-		operator XMVECTOR();
-	};
+	bool FloatMore(float f1, float f2);
 
-	bool operator == (const Vector2D& v1, const Vector2D& v2);
+	bool FloatLessOrEqual(float f1, float f2);
+
+	bool FloatMoreOrEqual(float f1, float f2);
+
+	float FloatMin(float f1, float f2);
+
+	float FloatMax(float f1, float f2);
 }

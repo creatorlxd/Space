@@ -476,6 +476,7 @@
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Float.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector2D.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
@@ -523,6 +524,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='UnitTestForRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='BuildRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Float.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>

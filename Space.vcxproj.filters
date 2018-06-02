@@ -178,6 +178,9 @@
     <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp">
       <Filter>Math\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Float.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -244,6 +247,9 @@
       <Filter>Common\MetaData</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Vector2D.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Float.cpp">
       <Filter>Math\Common</Filter>
     </ClCompile>
   </ItemGroup>

@@ -354,4 +354,15 @@ TEST_GROUP_BEGIN(CommonTest)
 	}
 	TEST_METHOD_END
 }
+TEST_GROUP_END;
+TEST_GROUP_BEGIN(MathTest)
+{
+	TEST_METHOD_BEGIN(TestVector2D)
+	{
+		Vector2D v2d1(1.0f, 1.0f), v2d2(1.0f, 2.0f);
+		Vector2D v2d3 = v2d1 + v2d2;
+		return UnitTestResult::Pass;
+	}
+	TEST_METHOD_END
+}
 TEST_GROUP_END
