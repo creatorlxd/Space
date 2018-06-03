@@ -477,7 +477,12 @@
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp" />
     <ClInclude Include="Source\GameEngine\Math\Common\Float.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix2D.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix3D.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix4D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector2D.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Vector3D.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Vector4D.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -525,7 +530,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='BuildRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Float.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix2D.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix3D.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix4D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector2D.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Vector3D.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Vector4D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">

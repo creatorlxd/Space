@@ -181,6 +181,21 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Float.h">
       <Filter>Math\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Vector3D.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Vector4D.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix2D.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix3D.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Matrix4D.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -250,6 +265,21 @@
       <Filter>Math\Common</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Float.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Vector3D.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Vector4D.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix2D.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix3D.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Matrix4D.cpp">
       <Filter>Math\Common</Filter>
     </ClCompile>
   </ItemGroup>

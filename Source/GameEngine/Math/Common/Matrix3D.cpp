@@ -13,27 +13,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#pragma once
-#include <DirectXMath.h>
-#include "Float.h"
-
-using namespace DirectX;
-
-namespace SpaceGameEngine
-{
-	struct Vector2D :public XMFLOAT2
-	{
-		Vector2D(float _x, float _y);
-		Vector2D(const XMFLOAT2& c);
-		Vector2D(const Vector2D& v);
-		Vector2D(FXMVECTOR v);
-
-		bool operator = (const XMFLOAT2& c);
-		bool operator = (const Vector2D& v);
-		bool operator = (FXMVECTOR v);
-
-		operator XMVECTOR();
-	};
-
-	bool operator == (const Vector2D& v1, const Vector2D& v2);
-}
+#include "stdafx.h"
+#include "Matrix3D.h"

@@ -36,3 +36,5 @@ limitations under the License.
 //Math
 #include "Math/Common/ConstantValue.hpp"
 #include "Math/Common/Vector2D.h"
+#include "Math/Common/Vector3D.h"
+#include "Math/Common/Vector4D.h"

@@ -21,19 +21,19 @@ using namespace DirectX;
 
 namespace SpaceGameEngine
 {
-	struct Vector2D :public XMFLOAT2
+	struct Vector3D :public XMFLOAT3
 	{
-		Vector2D(float _x, float _y);
-		Vector2D(const XMFLOAT2& c);
-		Vector2D(const Vector2D& v);
-		Vector2D(FXMVECTOR v);
+		Vector3D(float _x, float _y, float _z);
+		Vector3D(const XMFLOAT3& c);
+		Vector3D(const Vector3D& v);
+		Vector3D(FXMVECTOR v);
 
-		bool operator = (const XMFLOAT2& c);
-		bool operator = (const Vector2D& v);
+		bool operator = (const XMFLOAT3& c);
+		bool operator = (const Vector3D& v);
 		bool operator = (FXMVECTOR v);
 
 		operator XMVECTOR();
 	};
 
-	bool operator == (const Vector2D& v1, const Vector2D& v2);
+	bool operator == (const Vector3D& v1, const Vector3D& v2);
 }

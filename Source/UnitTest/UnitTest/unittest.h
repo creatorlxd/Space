@@ -363,6 +363,20 @@ TEST_GROUP_BEGIN(MathTest)
 		Vector2D v2d3 = v2d1 + v2d2;
 		return UnitTestResult::Pass;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestVector3D)
+	{
+		Vector3D v3d1(1.0f, 1.0f, 1.0f), v3d2(1.0f, 2.0f, 3.0f);
+		Vector3D v3d3 = XMVectorAdd(v3d1, v3d2);
+		return UnitTestResult::Pass;
+	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestVector4D)
+	{
+		Vector4D v4d1(1.0f, 1.0f, 1.0f, 1.0f), v4d2(1.0f, 2.0f, 3.0f, 0.f);
+		Vector4D v4d3 = XMVectorAdd(v4d1, v4d2);
+		return UnitTestResult::Pass;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
