@@ -16,6 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "Vector2D.h"
 
+SpaceGameEngine::Vector2D::Vector2D()
+	:XMFLOAT2(0, 0)
+{
+}
+
 SpaceGameEngine::Vector2D::Vector2D(float _x, float _y)
 	:XMFLOAT2(_x, _y)
 {

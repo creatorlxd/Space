@@ -23,6 +23,7 @@ namespace SpaceGameEngine
 {
 	struct Vector4D :public XMFLOAT4
 	{
+		Vector4D();
 		Vector4D(float _x, float _y, float _z, float _w);
 		Vector4D(const XMFLOAT4& c);
 		Vector4D(const Vector4D& v);

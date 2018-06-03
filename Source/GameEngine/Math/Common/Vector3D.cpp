@@ -16,6 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "Vector3D.h"
 
+SpaceGameEngine::Vector3D::Vector3D()
+	:XMFLOAT3(0, 0, 0)
+{
+}
+
 SpaceGameEngine::Vector3D::Vector3D(float _x, float _y, float _z)
 	:XMFLOAT3(_x, _y, _z)
 {

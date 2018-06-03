@@ -23,6 +23,7 @@ namespace SpaceGameEngine
 {
 	struct Vector3D :public XMFLOAT3
 	{
+		Vector3D();
 		Vector3D(float _x, float _y, float _z);
 		Vector3D(const XMFLOAT3& c);
 		Vector3D(const Vector3D& v);

@@ -16,6 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "Vector4D.h"
 
+SpaceGameEngine::Vector4D::Vector4D()
+	:XMFLOAT4(0, 0, 0, 0)
+{
+}
+
 SpaceGameEngine::Vector4D::Vector4D(float _x, float _y, float _z, float _w)
 	:XMFLOAT4(_x, _y, _z, _w)
 {

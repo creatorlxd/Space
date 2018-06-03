@@ -23,6 +23,7 @@ namespace SpaceGameEngine
 {
 	struct Vector2D :public XMFLOAT2
 	{
+		Vector2D();
 		Vector2D(float _x, float _y);
 		Vector2D(const XMFLOAT2& c);
 		Vector2D(const Vector2D& v);

@@ -377,6 +377,18 @@ TEST_GROUP_BEGIN(MathTest)
 		Vector4D v4d3 = XMVectorAdd(v4d1, v4d2);
 		return UnitTestResult::Pass;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestMatrix3D)
+	{
+		Matrix3D m1(XMMatrixIdentity());
+		Matrix3D m2(XMMatrixIdentity());
+		m2._31 = 1;
+		m2._32 = 1;
+		Matrix3D m3 = XMMatrixMultiply(m1, m2);
+		Vector3D v1(1, 2, 1);
+		Vector2D ans = XMVector3TransformCoord(v1, m3);
+		return UnitTestResult::Pass;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END
