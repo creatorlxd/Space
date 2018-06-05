@@ -361,6 +361,7 @@ TEST_GROUP_BEGIN(MathTest)
 	{
 		Vector2D v2d1(1.0f, 1.0f), v2d2(1.0f, 2.0f);
 		Vector2D v2d3 = v2d1 + v2d2;
+		bool if_different = (v2d1 != v2d2);
 		return UnitTestResult::Pass;
 	}
 	TEST_METHOD_END,
@@ -368,6 +369,7 @@ TEST_GROUP_BEGIN(MathTest)
 	{
 		Vector3D v3d1(1.0f, 1.0f, 1.0f), v3d2(1.0f, 2.0f, 3.0f);
 		Vector3D v3d3 = XMVectorAdd(v3d1, v3d2);
+		bool if_different = (v3d1 != v3d2);
 		return UnitTestResult::Pass;
 	}
 	TEST_METHOD_END,
@@ -375,6 +377,7 @@ TEST_GROUP_BEGIN(MathTest)
 	{
 		Vector4D v4d1(1.0f, 1.0f, 1.0f, 1.0f), v4d2(1.0f, 2.0f, 3.0f, 0.f);
 		Vector4D v4d3 = XMVectorAdd(v4d1, v4d2);
+		bool if_different = (v4d1 != v4d2);
 		return UnitTestResult::Pass;
 	}
 	TEST_METHOD_END,
@@ -384,9 +387,20 @@ TEST_GROUP_BEGIN(MathTest)
 		Matrix3D m2(XMMatrixIdentity());
 		m2._31 = 1;
 		m2._32 = 1;
-		Matrix3D m3 = XMMatrixMultiply(m1, m2);
+		Matrix3D m3 = (XMMATRIX)m1 * m2;
 		Vector3D v1(1, 2, 1);
 		Vector2D ans = XMVector3TransformCoord(v1, m3);
+		return UnitTestResult::Pass;
+	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestMatrix4D)
+	{
+		Matrix4D m1(XMMatrixIdentity()), m2(XMMatrixIdentity());
+		m2._41 = 1;
+		m2._42 = 1;
+		Matrix4D m3 = (XMMATRIX)m1 * m2;
+		Vector2D v1(1, 2);
+		Vector2D ans = XMVector2TransformCoord(v1, m3);
 		return UnitTestResult::Pass;
 	}
 	TEST_METHOD_END

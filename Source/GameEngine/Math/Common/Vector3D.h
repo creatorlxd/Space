@@ -37,4 +37,5 @@ namespace SpaceGameEngine
 	};
 
 	bool operator == (const Vector3D& v1, const Vector3D& v2);
+	bool operator != (const Vector3D& v1, const Vector3D& v2);
 }

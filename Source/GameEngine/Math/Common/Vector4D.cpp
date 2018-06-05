@@ -82,3 +82,8 @@ bool SpaceGameEngine::operator==(const Vector4D & v1, const Vector4D & v2)
 		return false;
 	return true;
 }
+
+bool SpaceGameEngine::operator!=(const Vector4D & v1, const Vector4D & v2)
+{
+	return !(v1 == v2);
+}
