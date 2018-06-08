@@ -40,3 +40,4 @@ limitations under the License.
 #include "Math/Common/Vector4D.h"
 #include "Math/Common/Matrix3D.h"
 #include "Math/Common/Matrix4D.h"
+#include "Math/BoundingBox/AxisAlignedBoundingBox.h"

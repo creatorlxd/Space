@@ -403,6 +403,14 @@ TEST_GROUP_BEGIN(MathTest)
 		Vector2D ans = XMVector2TransformCoord(v1, m3);
 		return UnitTestResult::Pass;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestAABB)
+	{
+		AABB aabb1({ 0,0,0 }, { 1,1,1 }), aabb2({ -1,-1,-1 }, { 0,0,0 });
+		bool b1 = (aabb1 == aabb2);
+		bool b2 = (aabb1 != aabb2);
+		return UnitTestResult::Pass;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

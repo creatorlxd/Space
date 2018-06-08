@@ -58,6 +58,9 @@
     <Filter Include="Math\Common">
       <UniqueIdentifier>{d81e2a74-1f34-45ac-bd89-2810e57a79e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\BoundingBox">
+      <UniqueIdentifier>{e2f6f005-ab54-465d-ad48-6132d0b4ab06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -193,6 +196,9 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Matrix4D.h">
       <Filter>Math\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.h">
+      <Filter>Math\BoundingBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -275,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Matrix4D.cpp">
       <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.cpp">
+      <Filter>Math\BoundingBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
