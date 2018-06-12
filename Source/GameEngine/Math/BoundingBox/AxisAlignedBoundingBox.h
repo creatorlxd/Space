@@ -18,6 +18,7 @@ limitations under the License.
 #include "Math/Common/Matrix4D.h"
 #include "Math/Common/ConstantValue.hpp"
 #include "Common/MemoryManager/AllocatorForSTL.hpp"
+#include "Math/Common/Frustum.h"
 
 namespace SpaceGameEngine
 {
@@ -26,6 +27,7 @@ namespace SpaceGameEngine
 	*/
 	struct AxisAlignedBoundingBox
 	{
+		AxisAlignedBoundingBox() = default;
 		AxisAlignedBoundingBox(const Vector3D& minl, const Vector3D& maxl);
 
 		Vector3D m_MinPosition;
@@ -38,15 +40,21 @@ namespace SpaceGameEngine
 
 	bool operator != (const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);
 
-	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const Vector3D& position);	//是否相交
+	/*
+	点是否在AABB中(包括边框)
+	*/
+	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const Vector3D& position);	
 
-	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否相交
+	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	
 
-	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Vector3D& position);				//是否包含
+	/*
+	点是否在AABB中(不包括边框)
+	*/
+	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Vector3D& position);
 
 	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
 
-	//int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
+	int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
 
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<Vector3D>& points);
 

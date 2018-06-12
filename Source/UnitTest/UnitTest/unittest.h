@@ -411,6 +411,13 @@ TEST_GROUP_BEGIN(MathTest)
 		bool b2 = (aabb1 != aabb2);
 		return UnitTestResult::Pass;
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestPlane)
+	{
+		Plane plane({ 0,1,0 }, { 0,1,5 }, { 5,1,5 });
+		plane = NormalizePlane(plane);
+		return UnitTestResult::Pass;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END

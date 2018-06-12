@@ -199,6 +199,15 @@
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.h">
       <Filter>Math\BoundingBox</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Triangle.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Plane.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Math\Common\Frustum.h">
+      <Filter>Math\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -284,6 +293,15 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.cpp">
       <Filter>Math\BoundingBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Triangle.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Plane.cpp">
+      <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Math\Common\Frustum.cpp">
+      <Filter>Math\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

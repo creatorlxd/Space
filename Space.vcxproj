@@ -478,8 +478,11 @@
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp" />
     <ClInclude Include="Source\GameEngine\Math\Common\Float.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Frustum.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Matrix3D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Matrix4D.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Plane.h" />
+    <ClInclude Include="Source\GameEngine\Math\Common\Triangle.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector2D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector3D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector4D.h" />
@@ -530,9 +533,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='BuildRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Frustum.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Plane.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Float.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Matrix3D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Matrix4D.cpp" />
+    <ClCompile Include="Source\GameEngine\Math\Common\Triangle.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector2D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector3D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector4D.cpp" />

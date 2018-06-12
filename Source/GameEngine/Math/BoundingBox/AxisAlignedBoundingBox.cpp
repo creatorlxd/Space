@@ -75,6 +75,44 @@ bool SpaceGameEngine::IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisA
 		return false;
 }
 
+int SpaceGameEngine::IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb)
+{
+	Vector3D point[8];
+	point[0] = Vector3D(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+	point[1] = Vector3D(aabb.m_MaxPosition.x, aabb.m_MaxPosition.y, aabb.m_MinPosition.z);
+	point[2] = Vector3D(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MinPosition.z);
+	point[3] = Vector3D(aabb.m_MinPosition);
+	point[4] = Vector3D(aabb.m_MinPosition.x, aabb.m_MaxPosition.y, aabb.m_MaxPosition.z);
+	point[5] = Vector3D(aabb.m_MaxPosition);
+	point[6] = Vector3D(aabb.m_MaxPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+	point[7] = Vector3D(aabb.m_MinPosition.x, aabb.m_MinPosition.y, aabb.m_MaxPosition.z);
+
+	Plane planes[6] = { frustum.m_NearPlane,frustum.m_FarPlane,
+		frustum.m_LeftPlane,frustum.m_RightPlane,
+		frustum.m_TopPlane,frustum.m_BottomPlane };
+	bool flag[8];
+	memset(flag, true, sizeof(flag));
+	for (int i = 0; i < 6; i++)
+	{
+		int fa_cot = 0;
+		for (int j = 0; j < 8; j++)
+			if (IfBehindPlane(planes[i], point[j]))
+			{
+				flag[j] = false;
+				fa_cot += 1;
+			}
+		if (fa_cot == 8)
+			return -1;
+	}
+	int re = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		if (flag[i])
+			re += 1;
+	}
+	return re;
+}
+
 SpaceGameEngine::AxisAlignedBoundingBox SpaceGameEngine::GetAxisAlignedBoundingBox(const Vector<Vector3D>& points)
 {
 	Vector3D minl((float)MaxValue::g_MaxIntValue, (float)MaxValue::g_MaxIntValue, (float)MaxValue::g_MaxIntValue), maxl(-(float)MaxValue::g_MaxIntValue, -(float)MaxValue::g_MaxIntValue, -(float)MaxValue::g_MaxIntValue);
