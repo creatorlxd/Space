@@ -62,7 +62,7 @@ bool SpaceGameEngine::Matrix3D::operator=(CXMMATRIX m)
 	return true;
 }
 
-SpaceGameEngine::Matrix3D::operator XMMATRIX()
+SpaceGameEngine::Matrix3D::operator XMMATRIX() const
 {
 	return XMLoadFloat3x3(this);
 }

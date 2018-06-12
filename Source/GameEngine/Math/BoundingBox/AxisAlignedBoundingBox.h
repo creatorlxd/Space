@@ -15,6 +15,8 @@ limitations under the License.
 */
 #pragma once
 #include "Math/Common/Vector3D.h"
+#include "Math/Common/Matrix4D.h"
+#include "Math/Common/ConstantValue.hpp"
 #include "Common/MemoryManager/AllocatorForSTL.hpp"
 
 namespace SpaceGameEngine
@@ -38,17 +40,17 @@ namespace SpaceGameEngine
 
 	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const Vector3D& position);	//是否相交
 
-	//bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否相交
+	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否相交
 
-	//bool IfInclude(const AxisAlignedBoundingBox& aabb, const XMFLOAT3& position);				//是否包含
+	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Vector3D& position);				//是否包含
 
-	//bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
+	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
 
 	//int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);					//是否包含 返回所包含的顶点数 不包含返回-1 否者返回0~8
 
-	//AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
+	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<Vector3D>& points);
 
-	//AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs);
+	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs);
 
-	//AxisAlignedBoundingBox TransformAxisAlignedBoundingBox(const AxisAlignedBoundingBox& aabb, const Matrix4D& mat);
+	AxisAlignedBoundingBox TransformAxisAlignedBoundingBox(const AxisAlignedBoundingBox& aabb, const Matrix4D& mat);
 }

@@ -34,6 +34,6 @@ namespace SpaceGameEngine
 		bool operator = (const Matrix3D& m);
 		bool operator = (CXMMATRIX m);
 
-		operator XMMATRIX();
+		operator XMMATRIX() const;
 	};
 }

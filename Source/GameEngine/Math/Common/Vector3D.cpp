@@ -63,7 +63,7 @@ bool SpaceGameEngine::Vector3D::operator=(FXMVECTOR v)
 	return true;
 }
 
-SpaceGameEngine::Vector3D::operator XMVECTOR()
+SpaceGameEngine::Vector3D::operator XMVECTOR() const
 {
 	return XMLoadFloat3(this);
 }

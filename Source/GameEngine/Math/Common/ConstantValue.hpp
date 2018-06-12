@@ -21,6 +21,6 @@ namespace SpaceGameEngine
 {
 	namespace MaxValue
 	{
-		GLOBALCONST int g_MaxIntValue = MAXINT;
+		GLOBALCONST int g_MaxIntValue = INT_MAX;
 	}
 }

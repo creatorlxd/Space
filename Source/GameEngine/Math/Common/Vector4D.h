@@ -33,7 +33,7 @@ namespace SpaceGameEngine
 		bool operator = (const Vector4D& v);
 		bool operator = (FXMVECTOR v);
 
-		operator XMVECTOR();
+		operator XMVECTOR() const;
 	};
 
 	bool operator == (const Vector4D& v1, const Vector4D& v2);
