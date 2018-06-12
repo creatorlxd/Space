@@ -46,11 +46,13 @@ namespace SpaceGameEngine
 		must call Tick() every frame
 		*/
 		void Tick();
+
+		bool IfStop();
 	private:
 		TimePoint m_CurrentTimePoint;
 		TimePoint m_PreviousTimePoint;
 
-		SecondsType	m_DeltaTime;
+		SecondsType m_DeltaTime;
 		SecondsType m_PausedTime;
 
 		TimePoint m_InitTimePoint;

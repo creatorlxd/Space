@@ -49,4 +49,6 @@ namespace SpaceGameEngine
 	//AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<XMFLOAT3>& points);
 
 	//AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<AxisAlignedBoundingBox>& aabbs);
+
+	//AxisAlignedBoundingBox TransformAxisAlignedBoundingBox(const AxisAlignedBoundingBox& aabb, const Matrix4D& mat);
 }

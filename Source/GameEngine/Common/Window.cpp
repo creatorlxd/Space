@@ -171,9 +171,14 @@ unsigned int SpaceGameEngine::Window::GetFPSLimit()
 	return m_FPSLimit;
 }
 
-bool SpaceGameEngine::Window::GetIfBegin()
+bool SpaceGameEngine::Window::IfBegin()
 {
 	return m_IfBegin;
+}
+
+SpaceGameEngine::Timer & SpaceGameEngine::Window::GetTimer()
+{
+	return m_Timer;
 }
 
 void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)

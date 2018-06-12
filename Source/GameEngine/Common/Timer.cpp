@@ -87,3 +87,8 @@ void SpaceGameEngine::Timer::Tick()
 	m_DeltaTime = m_CurrentTimePoint - m_PreviousTimePoint;
 	m_PreviousTimePoint = m_CurrentTimePoint;
 }
+
+bool SpaceGameEngine::Timer::IfStop()
+{
+	return m_IfStop;
+}
