@@ -1,4 +1,4 @@
-vesion:'0.0.2.{build}'
+vesion: '0.0.2.{build}'
 
 image: Visual Studio 2017
 
