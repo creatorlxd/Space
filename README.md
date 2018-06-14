@@ -1,4 +1,4 @@
-﻿# Space Game Engine
+﻿# Space Game Engine[![Build State](https://ci.appveyor.com/api/projects/status/wgm69qg9437how6q?svg=true)](https://ci.appveyor.com/project/creatorlxd/space)
 
 ## Space 是一个3D的游戏引擎
 
