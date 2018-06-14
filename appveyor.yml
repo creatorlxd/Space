@@ -13,4 +13,4 @@ configuration:
   - Release
 
 build:
-  project: Space.sln
+  project: Space.vcxproj
