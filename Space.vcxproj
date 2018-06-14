@@ -436,6 +436,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="appveyor.yml" />
     <None Include="ClassDiagram.cd" />
     <None Include="Document\Document\GameFramework\Asset.md" />
     <None Include="Document\Document\GameFramework\Component子类编写规则.md" />
@@ -486,6 +487,7 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Vector2D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector3D.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\Vector4D.h" />
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderInterface.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +544,7 @@
     <ClCompile Include="Source\GameEngine\Math\Common\Vector2D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector3D.cpp" />
     <ClCompile Include="Source\GameEngine\Math\Common\Vector4D.cpp" />
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">

@@ -93,7 +93,7 @@ bool SpaceGameEngine::IfIntersect(const AxisAlignedBoundingBox & aabb, const Tri
 	for (int i = 0; i < 6; i++)
 	{
 		int fa_cot = 0;
-		for (int j = 0; j < 3; i++)
+		for (int j = 0; j < 3; j++)
 		{
 			if (IfBeFrontOfPlane(plane[i], triangle.m_Positions[j]))
 				fa_cot += 1;

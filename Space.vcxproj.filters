@@ -61,6 +61,12 @@
     <Filter Include="Math\BoundingBox">
       <UniqueIdentifier>{e2f6f005-ab54-465d-ad48-6132d0b4ab06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{d357af24-5448-4b33-98da-9a35f0daf6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\RenderInterface">
+      <UniqueIdentifier>{c7c8e99c-f6c4-4aad-936c-98a8269c9b31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -98,6 +104,7 @@
     <None Include="Document\Document\GameFramework\Space基本组件Component类.md">
       <Filter>Document\Document\GameFramework</Filter>
     </None>
+    <None Include="appveyor.yml" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
@@ -208,6 +215,9 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Frustum.h">
       <Filter>Math\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderInterface.h">
+      <Filter>Render\RenderInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -302,6 +312,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Math\Common\Frustum.cpp">
       <Filter>Math\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderInterface.cpp">
+      <Filter>Render\RenderInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

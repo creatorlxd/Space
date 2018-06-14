@@ -1,0 +1,14 @@
+vesion:'0.0.2.{build}'
+
+image: Visual Studio 2017
+
+platform:
+  - x86
+  - x64
+
+configuration:
+  - Debug
+  - Release
+
+build:
+  project: Space.sln
