@@ -67,6 +67,9 @@
     <Filter Include="Render\RenderInterface">
       <UniqueIdentifier>{c7c8e99c-f6c4-4aad-936c-98a8269c9b31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\RenderInterface\DX11">
+      <UniqueIdentifier>{8be1783a-e652-40c5-9e46-418f83f864dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -218,6 +221,9 @@
     <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderInterface.h">
       <Filter>Render\RenderInterface</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.h">
+      <Filter>Render\RenderInterface\DX11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -315,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderInterface.cpp">
       <Filter>Render\RenderInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.cpp">
+      <Filter>Render\RenderInterface\DX11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

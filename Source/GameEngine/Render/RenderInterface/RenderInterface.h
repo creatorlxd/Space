@@ -14,11 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
+#include "Common/Error.h"
 
 namespace SpaceGameEngine
 {
 	class RenderInterface
 	{
-
+	public:
+		virtual void Init(unsigned int width,unsigned int height) = 0;
+		virtual void BeginRender() = 0;
+		virtual void EndRender() = 0;
+		virtual ~RenderInterface();
+	private:
+		
 	};
 }
