@@ -224,6 +224,12 @@
     <ClInclude Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.h">
       <Filter>Render\RenderInterface\DX11</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderTarget.h">
+      <Filter>Render\RenderInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\ViewPort.h">
+      <Filter>Render\RenderInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -324,6 +330,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.cpp">
       <Filter>Render\RenderInterface\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderTarget.cpp">
+      <Filter>Render\RenderInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\ViewPort.cpp">
+      <Filter>Render\RenderInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

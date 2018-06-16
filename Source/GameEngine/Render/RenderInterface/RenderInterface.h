@@ -15,17 +15,36 @@ limitations under the License.
 */
 #pragma once
 #include "Common/Error.h"
+#include "Common/Connection.hpp"
+#include "RenderTarget.h"
 
 namespace SpaceGameEngine
 {
-	class RenderInterface
+	class RenderInterface :public Data<RenderInterface>
 	{
 	public:
-		virtual void Init(unsigned int width,unsigned int height) = 0;
-		virtual void BeginRender() = 0;
-		virtual void EndRender() = 0;
+		RenderInterface();
+		virtual void Init() = 0;
+		virtual void BeginRender(const RenderTarget& rendertarget) = 0;
+		virtual void EndRender(const RenderTarget& rendertarget) = 0;
 		virtual ~RenderInterface();
-	private:
-		
+
+		//RenderTarget
+		/*
+		初始化RenderTarget,但是RenderInterface必须已经初始化。
+		*/
+		virtual void InitRenderTarget(RenderTarget & rendertarget, HWND hwnd) = 0;
+		/*
+		释放一个已被初始化的RenderTarget,但是RenderInterface必须已经初始化。
+		*/
+		virtual void ReleaseRenderTarget(RenderTarget & rendertarget) = 0;
+		virtual void ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort& viewport) = 0;
+	protected:
+		bool m_IfUse4xMsaa;
+		bool m_IfInitialized;
 	};
+
+	CONNECTION_BEGIN(RenderInterface)
+		OnNotifyAction<void()> m_OnStartAction;
+	CONNECTION_END;
 }

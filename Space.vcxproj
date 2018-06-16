@@ -489,6 +489,8 @@
     <ClInclude Include="Source\GameEngine\Math\Common\Vector4D.h" />
     <ClInclude Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.h" />
     <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderInterface.h" />
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\RenderTarget.h" />
+    <ClInclude Include="Source\GameEngine\Render\RenderInterface\ViewPort.h" />
     <ClInclude Include="Source\GameEngine\SpaceGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +549,8 @@
     <ClCompile Include="Source\GameEngine\Math\Common\Vector4D.cpp" />
     <ClCompile Include="Source\GameEngine\Render\RenderInterface\DX11\DX11RenderInterface.cpp" />
     <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderInterface.cpp" />
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\RenderTarget.cpp" />
+    <ClCompile Include="Source\GameEngine\Render\RenderInterface\ViewPort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\GameEngine\Shader\Common\DefaultPS.hlsl">

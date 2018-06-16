@@ -13,14 +13,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#include "stdafx.h"
-#include "RenderInterface.h"
+#pragma once
+#include "ViewPort.h"
 
-SpaceGameEngine::RenderInterface::RenderInterface()
-	:m_IfUse4xMsaa(true), m_IfInitialized(false)
+namespace SpaceGameEngine
 {
-}
+	struct RenderTarget
+	{
+		RenderTarget();
+		RenderTarget(const ViewPort& vp);
 
-SpaceGameEngine::RenderInterface::~RenderInterface()
-{
+		void* m_pSwapChain;
+		void* m_pRenderTargetView;
+		void* m_pDepthStencilBuffer;
+		void* m_pDepthStencilView;
+		ViewPort m_ViewPort;
+		bool m_IfInitialized;
+	};
 }

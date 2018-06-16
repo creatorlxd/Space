@@ -14,13 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "RenderInterface.h"
+#include "RenderTarget.h"
 
-SpaceGameEngine::RenderInterface::RenderInterface()
-	:m_IfUse4xMsaa(true), m_IfInitialized(false)
+SpaceGameEngine::RenderTarget::RenderTarget()
+	:m_pSwapChain(nullptr), m_pRenderTargetView(nullptr), m_pDepthStencilBuffer(nullptr), m_pDepthStencilView(nullptr), m_IfInitialized(false)
 {
 }
 
-SpaceGameEngine::RenderInterface::~RenderInterface()
+SpaceGameEngine::RenderTarget::RenderTarget(const ViewPort & vp)
+	: m_pSwapChain(nullptr), m_pRenderTargetView(nullptr), m_pDepthStencilBuffer(nullptr), m_pDepthStencilView(nullptr), m_ViewPort(vp), m_IfInitialized(false)
 {
 }

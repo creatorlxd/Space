@@ -22,6 +22,10 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
+	/*
+	窗口类
+	注：该窗口类的一切关于size和position的操作都是针对客户区的。
+	*/
 	class Window :public CurrentObject<Window>, public Data<Window>
 	{
 	public:

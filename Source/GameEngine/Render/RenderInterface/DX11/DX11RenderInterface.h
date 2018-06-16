@@ -26,8 +26,16 @@ namespace SpaceGameEngine
 	{
 	public:
 		DX11RenderInterface();
+		~DX11RenderInterface();
 
-		void Init(unsigned int width, unsigned int height)override;
+		void Init()override;
+		void BeginRender(const RenderTarget& rendertarget)override;
+		void EndRender(const RenderTarget& rendertarget)override;
+		
+		//RenderTarget
+		void InitRenderTarget(RenderTarget & rendertarget, HWND hwnd)override;
+		void ReleaseRenderTarget(RenderTarget & rendertarget)override;
+		void ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort& viewport)override;
 	private:
 		ID3D11Device * m_pDevice;
 		ID3D11DeviceContext* m_pImmdiateDeviceContext;

@@ -13,14 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-#include "stdafx.h"
-#include "RenderInterface.h"
+#pragma once
 
-SpaceGameEngine::RenderInterface::RenderInterface()
-	:m_IfUse4xMsaa(true), m_IfInitialized(false)
+namespace SpaceGameEngine
 {
-}
-
-SpaceGameEngine::RenderInterface::~RenderInterface()
-{
+	struct ViewPort
+	{
+		ViewPort();
+		ViewPort(unsigned int posx, unsigned int posy, unsigned int width, unsigned int height);
+		unsigned int m_PositionX;
+		unsigned int m_PositionY;
+		unsigned int m_Width;
+		unsigned int m_Height;
+	};
 }

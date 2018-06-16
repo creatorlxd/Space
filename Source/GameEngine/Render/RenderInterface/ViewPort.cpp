@@ -14,13 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #include "stdafx.h"
-#include "RenderInterface.h"
+#include "ViewPort.h"
 
-SpaceGameEngine::RenderInterface::RenderInterface()
-	:m_IfUse4xMsaa(true), m_IfInitialized(false)
+SpaceGameEngine::ViewPort::ViewPort()
+	:m_PositionX(0), m_PositionY(0), m_Width(0), m_Height(0)
 {
 }
 
-SpaceGameEngine::RenderInterface::~RenderInterface()
+SpaceGameEngine::ViewPort::ViewPort(unsigned int posx, unsigned int posy, unsigned int width, unsigned int height)
+	: m_PositionX(posx), m_PositionY(posy), m_Width(width), m_Height(height)
 {
 }

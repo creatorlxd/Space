@@ -21,7 +21,13 @@ SpaceGameEngine::DX11RenderInterface::DX11RenderInterface()
 {
 }
 
-void SpaceGameEngine::DX11RenderInterface::Init(unsigned int width, unsigned int height)
+SpaceGameEngine::DX11RenderInterface::~DX11RenderInterface()
+{
+	SafeRelease(m_pDevice);
+	SafeRelease(m_pImmdiateDeviceContext);
+}
+
+void SpaceGameEngine::DX11RenderInterface::Init()
 {
 	UINT CreateDeviceFlags = 0;
 
@@ -30,7 +36,7 @@ void SpaceGameEngine::DX11RenderInterface::Init(unsigned int width, unsigned int
 #endif
 
 	D3D_FEATURE_LEVEL featureLevel;
-	HRESULT  hr = D3D11CreateDevice(0, D3D_DRIVER_TYPE_HARDWARE, 0, CreateDeviceFlags, 0, 0, D3D11_SDK_VERSION, &m_pDevice, &featureLevel, &m_pImmdiateDeviceContext);
+	HRESULT hr = D3D11CreateDevice(0, D3D_DRIVER_TYPE_HARDWARE, 0, CreateDeviceFlags, 0, 0, D3D11_SDK_VERSION, &m_pDevice, &featureLevel, &m_pImmdiateDeviceContext);
 	if (FAILED(hr))
 	{
 		THROWERROR("can not create D3D11Device");
@@ -42,4 +48,48 @@ void SpaceGameEngine::DX11RenderInterface::Init(unsigned int width, unsigned int
 	HR(m_pDevice->CheckMultisampleQualityLevels(
 		DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m_4xMsaaQuality));
 	assert(m_4xMsaaQuality > 0);
+
+	m_IfInitialized = true;
+	DATA_NOTIFY(RenderInterface, m_OnStartAction);
+}
+
+void SpaceGameEngine::DX11RenderInterface::BeginRender(const RenderTarget & rendertarget)
+{
+	assert(m_IfInitialized);
+	assert(rendertarget.m_IfInitialized);
+	//TODO
+}
+
+void SpaceGameEngine::DX11RenderInterface::EndRender(const RenderTarget & rendertarget)
+{
+	assert(m_IfInitialized);
+	assert(rendertarget.m_IfInitialized);
+	//TODO
+}
+
+void SpaceGameEngine::DX11RenderInterface::InitRenderTarget(RenderTarget & rendertarget, HWND hwnd)
+{
+	assert(m_IfInitialized);
+	assert(hwnd);
+	//TODO
+}
+
+void SpaceGameEngine::DX11RenderInterface::ReleaseRenderTarget(RenderTarget & rendertarget)
+{
+	assert(m_IfInitialized);
+	assert(rendertarget.m_IfInitialized);
+	//TODO
+}
+
+void SpaceGameEngine::DX11RenderInterface::ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort & viewport)
+{
+	if (rendertarget.m_IfInitialized)
+	{
+		assert(m_IfInitialized);
+		//TODO
+	}
+	else
+	{
+		rendertarget.m_ViewPort = viewport;
+	}
 }
