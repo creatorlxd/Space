@@ -31,7 +31,7 @@ namespace SpaceGameEngine
 		CurrentObject(T* pthis)
 		{
 			if (pthis == nullptr)
-				THROWERROR("pthis can not be nullptr");
+				THROW_ERROR("pthis can not be nullptr");
 			m_pThis = pthis;
 			GetCurrentObjectPtr() = m_pThis;
 		}

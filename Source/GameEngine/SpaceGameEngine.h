@@ -42,3 +42,7 @@ limitations under the License.
 #include "Math/Common/Matrix4D.h"
 #include "Math/BoundingBox/AxisAlignedBoundingBox.h"
 #include "Math/Common/Triangle.h"
+
+//Render
+#include "Render/RenderInterface/RenderInterface.h"
+#include "Render/RenderInterface/DX11/DX11RenderInterface.h"

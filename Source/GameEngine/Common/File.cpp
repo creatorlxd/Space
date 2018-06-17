@@ -56,7 +56,7 @@ void SpaceGameEngine::File::Open(const String & filename, unsigned char mode)
 		}
 		CheckAndCreateDirectory(filename);
 		if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
-			THROWERROR("can not open file:" + filename);
+			THROW_ERROR("can not open file:" + filename);
 	}
 	else
 	{
@@ -82,14 +82,14 @@ void SpaceGameEngine::File::Open(const String & filename, unsigned char mode)
 		}
 		CheckAndCreateDirectory(filename);
 		if (fopen_s(&m_pFile, filename.c_str(), opt.c_str()) != 0)
-			THROWERROR("can not open file:" + filename);
+			THROW_ERROR("can not open file:" + filename);
 	}
 }
 
 void SpaceGameEngine::File::Close()
 {
 	if (m_FileMode == FileMode::None)
-		THROWERROR("can not Close a File without Open or has been closed");
+		THROW_ERROR("can not Close a File without Open or has been closed");
 
 	fclose(m_pFile);
 	m_FileMode = FileMode::None;

@@ -20,7 +20,7 @@ SpaceGameEngine::SerializeObjectManager::~SerializeObjectManager()
 {
 	for (auto i : m_QueryList)
 	{
-		THROWERROR("all objects which were referred by the serialized pointer must also be serialized");
+		THROW_ERROR("all objects which were referred by the serialized pointer must also be serialized");
 	}
 }
 

@@ -18,10 +18,30 @@ limitations under the License.
 
 using namespace SpaceGameEngine;
 
-GlobalVariable<Window> g_Window;
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-	g_Window.Get().StartRun(hInstance);
+	Window* pWindow = MemoryManager::New<Window>();
+	RenderInterface* pRenderInterface = MemoryManager::New<DX11RenderInterface>();
+	//test
+	RenderTarget render_target(ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
+	Connection<Window> RenderInterfaceConnectionToWindow = pWindow;
+	RenderInterfaceConnectionToWindow.m_OnStartAction = [&]() {
+		pRenderInterface->Init();
+		pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
+	};
+	RenderInterfaceConnectionToWindow.m_OnRunAction = [&]() {
+		pRenderInterface->BeginRender(render_target);
+		pRenderInterface->EndRender(render_target);
+	};
+	RenderInterfaceConnectionToWindow.m_OnResizeAction = [&]() {
+		pRenderInterface->ResizeRenderTarget(render_target, ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
+	};
+	RenderInterfaceConnectionToWindow.m_OnReleaseAction = [&]() {
+		pRenderInterface->ReleaseRenderTarget(render_target);
+	};
+	//----
+	pWindow->StartRun(hInstance);
+	MemoryManager::Delete(pWindow);
+	MemoryManager::Delete(pRenderInterface);
 	return 0;
 }

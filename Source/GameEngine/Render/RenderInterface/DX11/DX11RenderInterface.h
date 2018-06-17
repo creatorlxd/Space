@@ -19,6 +19,7 @@ limitations under the License.
 #include <dxgi.h>
 #include "dxerr/dxerr.h"
 #include "Def.h"
+#include "Math/Common/ConstantValue.hpp"
 
 namespace SpaceGameEngine
 {
@@ -37,8 +38,10 @@ namespace SpaceGameEngine
 		void ReleaseRenderTarget(RenderTarget & rendertarget)override;
 		void ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort& viewport)override;
 	private:
+		static D3D11_VIEWPORT GetDX11ViewPort(const ViewPort& viewport);
+	private:
 		ID3D11Device * m_pDevice;
-		ID3D11DeviceContext* m_pImmdiateDeviceContext;
+		ID3D11DeviceContext* m_pImmediateDeviceContext;
 		UINT m_4xMsaaQuality;
 	};
 }

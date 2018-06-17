@@ -27,8 +27,10 @@ namespace SpaceGameEngine
 	void ThrowError(const String& errormessage, const String& filename, const String& funcname, int line);
 #endif
 
-#define THROWERROR(str)\
+#define THROW_ERROR(str)\
 SpaceGameEngine::ThrowError((str),__FILE__,__FUNCTION__,__LINE__)
-#define THROWERRORW(wstr)\
+#define THROW_ERRORW(wstr)\
 SpaceGameEngine::ThrowError((wstr),__FILEW__,__FUNCTIONW__,__LINE__)
+#define ASSERT(expr,str)\
+if(!(expr))THROW_ERROR(str);
 }

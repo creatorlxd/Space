@@ -200,7 +200,7 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 	WndClass.lpszClassName = L"SpaceGameEngineWindow";
 	if (!RegisterClassEx(&WndClass))
 	{
-		THROWERROR("can not register window");
+		THROW_ERROR("can not register window");
 		return;
 	}
 	RECT r;

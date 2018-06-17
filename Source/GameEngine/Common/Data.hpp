@@ -48,7 +48,7 @@ namespace SpaceGameEngine
 			if (iter != m_Connection.end())
 				m_Connection.erase(iter);
 			else
-				THROWERROR("do not have this connection");
+				THROW_ERROR("do not have this connection");
 		}
 	protected:
 		List<Connection<T>*> m_Connection;

@@ -24,7 +24,7 @@ int SpaceGameEngine::ConfigFileValue::AsInt()
 	}
 	else
 	{
-		THROWERROR("this value's type is not int");
+		THROW_ERROR("this value's type is not int");
 		return 0;
 	}
 }
@@ -37,7 +37,7 @@ float SpaceGameEngine::ConfigFileValue::AsFloat()
 	}
 	else
 	{
-		THROWERROR("this value's type is not float");
+		THROW_ERROR("this value's type is not float");
 		return 0.00f;
 	}
 }
@@ -50,7 +50,7 @@ double SpaceGameEngine::ConfigFileValue::AsDouble()
 	}
 	else
 	{
-		THROWERROR("this value's type is not double");
+		THROW_ERROR("this value's type is not double");
 		return 0.00;
 	}
 }
@@ -63,7 +63,7 @@ char SpaceGameEngine::ConfigFileValue::AsChar()
 	}
 	else
 	{
-		THROWERROR("this value's type is not char");
+		THROW_ERROR("this value's type is not char");
 		return ' ';
 	}
 }
@@ -76,7 +76,7 @@ SpaceGameEngine::String SpaceGameEngine::ConfigFileValue::AsString()
 	}
 	else
 	{
-		THROWERROR("this value's type is not string");
+		THROW_ERROR("this value's type is not string");
 		return "";
 	}
 }
@@ -85,11 +85,11 @@ bool SpaceGameEngine::ConfigFileValue::AsBool()
 {
 	if (m_Type == ConfigFileValueType::Bool)
 	{
-		return m_Content == "true" ? true : (m_Content == "false" ? false : (THROWERROR("bool config value error"), false));
+		return m_Content == "true" ? true : (m_Content == "false" ? false : (THROW_ERROR("bool config value error"), false));
 	}
 	else
 	{
-		THROWERROR("this value's type is not bool");
+		THROW_ERROR("this value's type is not bool");
 		return false;
 	}
 }
@@ -102,7 +102,7 @@ void SpaceGameEngine::ConfigFileValue::Set(int i)
 	}
 	else
 	{
-		THROWERROR("this value's type is not int");
+		THROW_ERROR("this value's type is not int");
 	}
 }
 
@@ -114,7 +114,7 @@ void SpaceGameEngine::ConfigFileValue::Set(float f)
 	}
 	else
 	{
-		THROWERROR("this value's type is not float");
+		THROW_ERROR("this value's type is not float");
 	}
 }
 
@@ -126,7 +126,7 @@ void SpaceGameEngine::ConfigFileValue::Set(double d)
 	}
 	else
 	{
-		THROWERROR("this value's type is not double");
+		THROW_ERROR("this value's type is not double");
 	}
 }
 
@@ -138,7 +138,7 @@ void SpaceGameEngine::ConfigFileValue::Set(char c)
 	}
 	else
 	{
-		THROWERROR("this value's type is not char");
+		THROW_ERROR("this value's type is not char");
 	}
 }
 
@@ -150,7 +150,7 @@ void SpaceGameEngine::ConfigFileValue::Set(const String & str)
 	}
 	else
 	{
-		THROWERROR("this value's type is not string");
+		THROW_ERROR("this value's type is not string");
 	}
 }
 
@@ -162,7 +162,7 @@ void SpaceGameEngine::ConfigFileValue::Set(bool b)
 	}
 	else
 	{
-		THROWERROR("this value's type is not bool");
+		THROW_ERROR("this value's type is not bool");
 	}
 }
 
@@ -175,7 +175,7 @@ SpaceGameEngine::ConfigFileValue & SpaceGameEngine::ConfigTable::GetConfigValue(
 	}
 	else
 	{
-		THROWERROR("can not find this config value");
+		THROW_ERROR("can not find this config value");
 	}
 }
 
@@ -211,7 +211,7 @@ SpaceGameEngine::ConfigTable & SpaceGameEngine::ConfigFile::GetConfigTable(const
 	}
 	else
 	{
-		THROWERROR("can not find this config table");
+		THROW_ERROR("can not find this config table");
 	}
 }
 
@@ -275,7 +275,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 					}
 					else
 					{
-						THROWERROR("can not have null table name");
+						THROW_ERROR("can not have null table name");
 						return;
 					}
 				}
@@ -294,7 +294,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 				{
 					if (str_buffer.empty())
 					{
-						THROWERROR("config value need key name");
+						THROW_ERROR("config value need key name");
 						return;
 					}
 					else
@@ -309,7 +309,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 						}
 						else
 						{
-							THROWERROR("can not find config table");
+							THROW_ERROR("can not find config table");
 							return;
 						}
 					}
@@ -348,7 +348,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 				{
 					if (str_buffer.size() > 1)
 					{
-						THROWERROR("char type value can only have single char");
+						THROW_ERROR("char type value can only have single char");
 						return;
 					}
 					break;
@@ -376,7 +376,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 				{
 					str_buffer += 'e';
 					if (str_buffer != "true"&&str_buffer != "false")
-						THROWERROR("bool config value error");
+						THROW_ERROR("bool config value error");
 					break;
 				}
 
@@ -392,7 +392,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 			//string check
 			if (str_buffer.empty() && type_buffer != ConfigFileValueType::String)
 			{
-				THROWERROR("config value can not be null");
+				THROW_ERROR("config value can not be null");
 				return;
 			}
 
@@ -407,7 +407,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 					{
 						if (if_point || (type_buffer != ConfigFileValueType::Float && type_buffer != ConfigFileValueType::Double) || iter == str_buffer.end() - 1)
 						{
-							THROWERROR("config value number error");
+							THROW_ERROR("config value number error");
 							return;
 						}
 						else
@@ -416,7 +416,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 					}
 					if (i<'0' || i>'9')
 					{
-						THROWERROR("config value number error");
+						THROW_ERROR("config value number error");
 						return;
 					}
 				}
@@ -434,7 +434,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 			}
 			else
 			{
-				THROWERROR("can not find config value");
+				THROW_ERROR("can not find config value");
 				return;
 			}
 		}

@@ -74,7 +74,7 @@ namespace SpaceGameEngine
 			}
 			else
 			{
-				THROWERROR("Can not get meta object by nullptr");
+				THROW_ERROR("Can not get meta object by nullptr");
 				m_pContent = nullptr;
 				m_pMetaData = nullptr;
 			}
@@ -154,7 +154,7 @@ namespace SpaceGameEngine
 				func(*dst.Cast<T>(), *src.Cast<T>());
 			}
 			else
-				THROWERROR("can not copy between two different type metaobject");
+				THROW_ERROR("can not copy between two different type metaobject");
 		};
 	}
 
@@ -257,14 +257,14 @@ namespace SpaceGameEngine
 				}
 				else
 				{
-					THROWERROR("can't do this cast");
+					THROW_ERROR("can't do this cast");
 					return nullptr;
 				}
 			}
 		}
 		else
 		{
-			THROWERROR("meta object can not be nullptr");
+			THROW_ERROR("meta object can not be nullptr");
 			return nullptr;
 		}
 	}

@@ -55,11 +55,11 @@ SpaceGameEngine::MetaObject::MetaObject(void * ptr, MetaDataPtr pmetadata)
 {
 	if (ptr == nullptr)
 	{
-		THROWERROR("meta object can not be nullptr");
+		THROW_ERROR("meta object can not be nullptr");
 	}
 	if (m_pMetaData == nullptr)
 	{
-		THROWERROR("meta object's metatype can not be nullptr");
+		THROW_ERROR("meta object's metatype can not be nullptr");
 	}
 	m_pContent = ptr;
 	m_pMetaData = pmetadata;
@@ -82,7 +82,7 @@ SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & 
 		return meta->m_Constructor();
 	else
 	{
-		THROWERROR("do not have this type");
+		THROW_ERROR("do not have this type");
 	}
 }
 
@@ -95,12 +95,12 @@ void SpaceGameEngine::CopyByMetaObject(const MetaObject & dst, const MetaObject 
 			return meta->m_CopyAction(dst, src);
 		else
 		{
-			THROWERROR("do not have this type");
+			THROW_ERROR("do not have this type");
 		}
 	}
 	else
 	{
-		THROWERROR("can not copy between different type's metaobject");
+		THROW_ERROR("can not copy between different type's metaobject");
 	}
 }
 
@@ -110,7 +110,7 @@ SpaceGameEngine::MetaObject SpaceGameEngine::MemberVariableMetaData::CastToMetaO
 		return MetaObject((void*)((size_t)obj.m_pContent + m_Offset), m_pMetaData);
 	else
 	{
-		THROWERROR("can not get this metaobject");
+		THROW_ERROR("can not get this metaobject");
 		return MetaObject(nullptr, nullptr);
 	}
 }
@@ -121,7 +121,7 @@ SpaceGameEngine::MetaObject SpaceGameEngine::FatherTypeMetaData::CastToMetaObjec
 		return MetaObject((void*)((size_t)obj.m_pContent + m_Offset), m_pMetaData);
 	else
 	{
-		THROWERROR("can not get this metaobject");
+		THROW_ERROR("can not get this metaobject");
 		return MetaObject(nullptr, nullptr);
 	}
 }

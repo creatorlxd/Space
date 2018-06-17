@@ -596,7 +596,7 @@ namespace SpaceGameEngine
 	{
 		static void In(bool& b, const String& str)
 		{
-			b = (str == "true" ? true : (str == "false" ? false : (THROWERROR("bool serialize error"), false)));
+			b = (str == "true" ? true : (str == "false" ? false : (THROW_ERROR("bool serialize error"), false)));
 		}
 		static String Out(const bool& b)
 		{
