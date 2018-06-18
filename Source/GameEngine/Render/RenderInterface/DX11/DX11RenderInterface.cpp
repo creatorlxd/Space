@@ -111,13 +111,11 @@ void SpaceGameEngine::DX11RenderInterface::InitRenderTarget(RenderTarget & rende
 	SafeRelease(dxgiDevice);
 	SafeRelease(dxgiAdapter);
 	SafeRelease(dxgiFactory);
-
 	//render target view
 	ID3D11Texture2D* backBuffer;
 	HR(((IDXGISwapChain*)rendertarget.m_pSwapChain)->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer)));
 	HR(m_pDevice->CreateRenderTargetView(backBuffer, 0, (ID3D11RenderTargetView**)&rendertarget.m_pRenderTargetView));
 	SafeRelease(backBuffer);
-
 	//depth&stencil buffer&view
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
 	depthStencilDesc.Width = rendertarget.m_ViewPort.m_Width;
