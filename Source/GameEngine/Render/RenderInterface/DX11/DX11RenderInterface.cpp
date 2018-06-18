@@ -160,6 +160,8 @@ void SpaceGameEngine::DX11RenderInterface::ResizeRenderTarget(RenderTarget & ren
 	if (rendertarget.m_IfInitialized)
 	{
 		ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
+		//set the viewport
+		rendertarget.m_ViewPort = viewport;
 		//release old rendertargetview;depth&stencilview/buffer
 		SafeRelease((ID3D11RenderTargetView*&)rendertarget.m_pRenderTargetView);
 		SafeRelease((ID3D11DepthStencilView*&)rendertarget.m_pDepthStencilView);
