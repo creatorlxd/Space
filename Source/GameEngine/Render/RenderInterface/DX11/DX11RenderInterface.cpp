@@ -55,8 +55,8 @@ void SpaceGameEngine::DX11RenderInterface::Init()
 
 void SpaceGameEngine::DX11RenderInterface::BeginRender(const RenderTarget & rendertarget)
 {
-	ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
-	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must has been initialized");
+	ASSERT(m_IfInitialized, "RenderInterface must have been initialized");
+	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must have been initialized");
 	m_pImmediateDeviceContext->ClearRenderTargetView((ID3D11RenderTargetView*)rendertarget.m_pRenderTargetView, reinterpret_cast<const float*>(&Colors::Black));
 	m_pImmediateDeviceContext->ClearDepthStencilView((ID3D11DepthStencilView*)rendertarget.m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_pImmediateDeviceContext->OMSetRenderTargets(1, (ID3D11RenderTargetView**)&rendertarget.m_pRenderTargetView, (ID3D11DepthStencilView*)rendertarget.m_pDepthStencilView);
@@ -66,14 +66,14 @@ void SpaceGameEngine::DX11RenderInterface::BeginRender(const RenderTarget & rend
 
 void SpaceGameEngine::DX11RenderInterface::EndRender(const RenderTarget & rendertarget)
 {
-	ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
-	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must has been initialized");
+	ASSERT(m_IfInitialized, "RenderInterface must have been initialized");
+	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must have been initialized");
 	HR(((IDXGISwapChain*)rendertarget.m_pSwapChain)->Present(0, 0));
 }
 
 void SpaceGameEngine::DX11RenderInterface::InitRenderTarget(RenderTarget & rendertarget, HWND hwnd)
 {
-	ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
+	ASSERT(m_IfInitialized, "RenderInterface must have been initialized");
 	ASSERT(!rendertarget.m_IfInitialized, "Can not initialize the RenderTarget which has been initialized");
 	ASSERT(hwnd, "HWND can not be NULL");
 	//swap chain
@@ -145,8 +145,8 @@ void SpaceGameEngine::DX11RenderInterface::InitRenderTarget(RenderTarget & rende
 
 void SpaceGameEngine::DX11RenderInterface::ReleaseRenderTarget(RenderTarget & rendertarget)
 {
-	ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
-	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must has been initialized");
+	ASSERT(m_IfInitialized, "RenderInterface must have been initialized");
+	ASSERT(rendertarget.m_IfInitialized, "RenderTarget must have been initialized");
 	SafeRelease((IDXGISwapChain*&)rendertarget.m_pSwapChain);
 	SafeRelease((ID3D11RenderTargetView*&)rendertarget.m_pRenderTargetView);
 	SafeRelease((ID3D11DepthStencilView*&)rendertarget.m_pDepthStencilView);
@@ -157,7 +157,7 @@ void SpaceGameEngine::DX11RenderInterface::ResizeRenderTarget(RenderTarget & ren
 {
 	if (rendertarget.m_IfInitialized)
 	{
-		ASSERT(m_IfInitialized, "RenderInterface must has been initialized");
+		ASSERT(m_IfInitialized, "RenderInterface must have been initialized");
 		//set the viewport
 		rendertarget.m_ViewPort = viewport;
 		//release old rendertargetview;depth&stencilview/buffer
