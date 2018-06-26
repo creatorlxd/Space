@@ -46,5 +46,6 @@ namespace SpaceGameEngine
 
 	CONNECTION_BEGIN(RenderInterface)
 		OnNotifyAction<void()> m_OnStartAction;
+		OnNotifyAction<void()> m_OnReleaseAction;
 	CONNECTION_END;
 }

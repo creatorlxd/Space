@@ -15,16 +15,16 @@ public:
 		a(_a), b(_b), c(_c) {}
 	test_md() :test_md(0, 0, 0) {}
 	int a, b, c;
-	METADATA_BEGIN(test_md)
+	META_DATA_BEGIN(test_md)
 		MEMBER_VAR_BEGIN
 			MEMBER_VAR(test_md, int, a, false),
 			MEMBER_VAR(test_md, int, b),
 			MEMBER_VAR(test_md, int, c, true, false)
 		MEMBER_VAR_END
-		METADATA_FUNCTION(test_md)
+		META_DATA_FUNCTION(test_md)
 		INHERITANCE_BEGIN
 		INHERITANCE_END
-	METADATA_END(test_md); 
+	META_DATA_END(test_md); 
 	test_md& operator = (const test_md& tg)
 	{
 		CopyByMetaData(*this, tg);
@@ -45,28 +45,28 @@ public:
 		pa = nullptr;
 	}
 	int* pa;
-	METADATA_BEGIN(test_md2)
+	META_DATA_BEGIN(test_md2)
 		MEMBER_VAR_BEGIN
 		MEMBER_VAR(test_md2,int*,pa)
 		MEMBER_VAR_END
-		METADATA_FUNCTION(test_md2)
+		META_DATA_FUNCTION(test_md2)
 		INHERITANCE_BEGIN
 		INHERITANCE_END
-	METADATA_END(test_md2);
+	META_DATA_END(test_md2);
 };
 
 struct test_md3 :public test_md2, public test_md
 {
 public:
-	METADATA_BEGIN(test_md3)
+	META_DATA_BEGIN(test_md3)
 		MEMBER_VAR_BEGIN
 		MEMBER_VAR_END
-		METADATA_FUNCTION(test_md3)
+		META_DATA_FUNCTION(test_md3)
 		INHERITANCE_BEGIN
 		INHERITANCE(test_md3,test_md2),
 		INHERITANCE(test_md3,test_md)
 		INHERITANCE_END
-	METADATA_END(test_md3);
+	META_DATA_END(test_md3);
 };
 
 class TestData;
@@ -420,4 +420,43 @@ TEST_GROUP_BEGIN(MathTest)
 	}
 	TEST_METHOD_END
 }
-TEST_GROUP_END
+TEST_GROUP_END;
+TEST_GROUP_BEGIN(TestRender)
+{
+	TEST_METHOD_BEGIN(TestRenderTarget)
+	{
+		Window* pWindow = MemoryManager::New<Window>();
+		RenderInterface* pRenderInterface = MemoryManager::New<DX11RenderInterface>();
+		//test
+		pWindow->SetWindowTitle("TestWindow");
+		pWindow->SetWindowSize(800, 600);
+		RenderTarget render_target(ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
+		Connection<Window> WindowConnection = pWindow;
+		Connection<RenderInterface> RenderInterfaceConnection = pRenderInterface;
+		WindowConnection.m_OnStartAction = [&]() {
+			pRenderInterface->Init();
+		};
+		WindowConnection.m_OnRunAction = [&]() {
+			pRenderInterface->BeginRender(render_target);
+			pRenderInterface->EndRender(render_target);
+		};
+		WindowConnection.m_OnResizeAction = [&]() {
+			pRenderInterface->ResizeRenderTarget(render_target, ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
+		};
+		WindowConnection.m_OnReleaseAction = [&]() {
+
+		};
+		RenderInterfaceConnection.m_OnStartAction = [&]() {
+			pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
+		};
+		RenderInterfaceConnection.m_OnReleaseAction = [&]() {
+			pRenderInterface->ReleaseRenderTarget(render_target);
+		};
+		//----
+		pWindow->StartRun(GetModuleHandle(0));
+		MemoryManager::Delete(pWindow);
+		MemoryManager::Delete(pRenderInterface);
+	}
+	TEST_METHOD_END
+}
+TEST_GROUP_END;

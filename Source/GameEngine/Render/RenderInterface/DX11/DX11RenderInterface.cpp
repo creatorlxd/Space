@@ -23,6 +23,7 @@ SpaceGameEngine::DX11RenderInterface::DX11RenderInterface()
 
 SpaceGameEngine::DX11RenderInterface::~DX11RenderInterface()
 {
+	DATA_NOTIFY(RenderInterface, m_OnReleaseAction);
 	SafeRelease(m_pDevice);
 	SafeRelease(m_pImmediateDeviceContext);
 }

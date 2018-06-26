@@ -281,6 +281,7 @@ namespace SpaceGameEngine
 
 	/*
 	供有MetaData的类使用，应直接在operator =中调用
+	只会复制类T的成员变量，而不会复制其父类的。
 	*/
 	template<typename T>
 	inline void CopyByMetaData(T& dst, const T& src)
@@ -309,17 +310,17 @@ namespace SpaceGameEngine
 		return (size_t)pu - (size_t)pt;
 	}
 
-#define METADATA_BEGIN(type) \
+#define META_DATA_BEGIN(type) \
 static const SpaceGameEngine::MetaData& GetMetaDataCore() \
 {\
 	static SpaceGameEngine::GlobalVariable<SpaceGameEngine::MetaDataFactory<type>> g_MetaData(typeid(type).name(),sizeof(type),\
 
 #define MEMBER_VAR_BEGIN SpaceGameEngine::MemberVaiableContainer({
 #define MEMBER_VAR_END }),
-#define METADATA_FUNCTION(type) [] {return SpaceGameEngine::MetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),SpaceGameEngine::GetDefaultSerializeAction<type>(),
+#define META_DATA_FUNCTION(type) [] {return SpaceGameEngine::MetaObject(SpaceGameEngine::MemoryManager::New<type>()); },SpaceGameEngine::GetDefaultCopyAction<type>(),SpaceGameEngine::GetDefaultSerializeAction<type>(),
 #define INHERITANCE_BEGIN SpaceGameEngine::InheritanceRelationContainer({
 #define INHERITANCE_END })
-#define METADATA_END(type) );\
+#define META_DATA_END(type) );\
 return g_MetaData.Get();\
 }\
 virtual inline const SpaceGameEngine::MetaData& GetMetaData()const{return type::GetMetaDataCore();}\

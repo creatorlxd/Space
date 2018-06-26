@@ -24,19 +24,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	RenderInterface* pRenderInterface = MemoryManager::New<DX11RenderInterface>();
 	//test
 	RenderTarget render_target(ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
-	Connection<Window> RenderInterfaceConnectionToWindow = pWindow;
-	RenderInterfaceConnectionToWindow.m_OnStartAction = [&]() {
+	Connection<Window> WindowConnection = pWindow;
+	Connection<RenderInterface> RenderInterfaceConnection = pRenderInterface;
+	WindowConnection.m_OnStartAction = [&]() {
 		pRenderInterface->Init();
-		pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
 	};
-	RenderInterfaceConnectionToWindow.m_OnRunAction = [&]() {
+	WindowConnection.m_OnRunAction = [&]() {
 		pRenderInterface->BeginRender(render_target);
 		pRenderInterface->EndRender(render_target);
 	};
-	RenderInterfaceConnectionToWindow.m_OnResizeAction = [&]() {
+	WindowConnection.m_OnResizeAction = [&]() {
 		pRenderInterface->ResizeRenderTarget(render_target, ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
 	};
-	RenderInterfaceConnectionToWindow.m_OnReleaseAction = [&]() {
+	WindowConnection.m_OnReleaseAction = [&]() {
+
+	};
+	RenderInterfaceConnection.m_OnStartAction = [&]() {
+		pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
+	};
+	RenderInterfaceConnection.m_OnReleaseAction = [&]() {
 		pRenderInterface->ReleaseRenderTarget(render_target);
 	};
 	//----
