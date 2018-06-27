@@ -17,6 +17,7 @@ limitations under the License.
 #include "Def.h"
 #include "MemoryManager/AllocatorForSTL.hpp"
 #include "Error.h"
+#include <mutex>
 
 namespace SpaceGameEngine
 {
@@ -34,16 +35,19 @@ namespace SpaceGameEngine
 
 		virtual ~Data()
 		{
+			std::lock_guard<std::mutex> locker(m_Mutex);
 			for (auto i : m_Connection)
 				i->m_pContent = nullptr;
 		}
 	private:
 		void AddConnection(Connection<T>& connect)
 		{
+			std::lock_guard<std::mutex> locker(m_Mutex);
 			m_Connection.insert(m_Connection.end(), &connect);
 		}
 		void DeleteConnection(Connection<T>& connect)
 		{
+			std::lock_guard<std::mutex> locker(m_Mutex);
 			auto iter = std::find(m_Connection.begin(), m_Connection.end(), &connect);
 			if (iter != m_Connection.end())
 				m_Connection.erase(iter);
@@ -52,11 +56,14 @@ namespace SpaceGameEngine
 		}
 	protected:
 		List<Connection<T>*> m_Connection;
+		std::mutex m_Mutex;
 	};
 
 #define DATA_NOTIFY(scope,method,...)\
+scope::m_Mutex.lock();\
 for(auto i:scope::m_Connection)\
 {\
 	i->method##(__VA_ARGS__);\
-}
+}\
+scope::m_Mutex.unlock();
 }
