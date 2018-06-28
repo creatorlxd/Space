@@ -251,8 +251,7 @@ void SpaceGameEngine::Window::Resize()
 
 LRESULT SpaceGameEngine::Window::WindowProcess(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if (Window::GetCurrentObject() == nullptr)
-		return DefWindowProc(hwnd, message, wParam, lParam);
+	ASSERT(Window::GetCurrentObject(), "Must have a current window object");
 	switch (message)
 	{
 	case WM_PAINT:
