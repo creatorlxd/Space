@@ -63,12 +63,12 @@ namespace SpaceGameEngine
 			return *m_pContent;
 		}
 
-		~GlobalVariable()
+		virtual ~GlobalVariable()
 		{
 			GetGlobalVariableManager().Release();
 		}
 	private:
-		void Release() override
+		virtual void Release()override
 		{
 			AllocatorInterface::Delete(m_pContent);
 		}

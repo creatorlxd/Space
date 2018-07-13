@@ -23,10 +23,10 @@ namespace SpaceGameEngine
 	{
 	public:
 		TextFileSerializeInterface(const String& filename, IOFlag ioflag);
-		~TextFileSerializeInterface();
+		virtual ~TextFileSerializeInterface();
 	private:
-		String Read()override;
-		void Write(const String& str)override;
+		virtual String Read()override;
+		virtual void Write(const String& str)override;
 	private:
 		File m_File;
 	};

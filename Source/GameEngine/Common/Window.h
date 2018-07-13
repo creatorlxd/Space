@@ -30,7 +30,7 @@ namespace SpaceGameEngine
 	{
 	public:
 		Window();
-		~Window();
+		virtual ~Window();
 
 		HWND GetHwnd();
 		DWORD GetWindowWidth();							//获取窗口宽度

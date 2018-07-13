@@ -27,16 +27,16 @@ namespace SpaceGameEngine
 	{
 	public:
 		DX11RenderInterface();
-		~DX11RenderInterface();
+		virtual ~DX11RenderInterface();
 
-		void Init()override;
-		void BeginRender(const RenderTarget& rendertarget)override;
-		void EndRender(const RenderTarget& rendertarget)override;
+		virtual void Init()override;
+		virtual void BeginRender(const RenderTarget& rendertarget)override;
+		virtual void EndRender(const RenderTarget& rendertarget)override;
 		
 		//RenderTarget
-		void InitRenderTarget(RenderTarget & rendertarget, HWND hwnd)override;
-		void ReleaseRenderTarget(RenderTarget & rendertarget)override;
-		void ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort& viewport)override;
+		virtual void InitRenderTarget(RenderTarget & rendertarget, HWND hwnd)override;
+		virtual void ReleaseRenderTarget(RenderTarget & rendertarget)override;
+		virtual void ResizeRenderTarget(RenderTarget & rendertarget, const ViewPort& viewport)override;
 	private:
 		static D3D11_VIEWPORT GetDX11ViewPort(const ViewPort& viewport);
 	private:
