@@ -58,7 +58,8 @@ namespace SpaceGameEngine
 		void Read(void* adr, size_t size);
 		void Write(const void* adr, size_t size);
 
-		bool IfFileReadOver();				//文件是否读取完了
+		bool IfReadOver();				//文件是否读取完了
+		size_t GetSize();
 
 		File& operator >> (wchar_t* cwstr);
 		File& operator >> (WString& wstr);
@@ -101,10 +102,12 @@ namespace SpaceGameEngine
 
 		bool GetLine(String& str);
 		char GetChar();
+		String GetAllContentAsText();
+		void GetAllContentAsBinary(void* dst);
 	private:
 		FILE * m_pFile;
-		String m_FileName;
-		unsigned int m_FileMode;
-		bool m_IfFileReadOver;
+		String m_Name;
+		unsigned int m_Mode;
+		bool m_IfReadOver;
 	};
 }

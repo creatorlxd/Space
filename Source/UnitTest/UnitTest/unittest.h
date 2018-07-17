@@ -352,6 +352,34 @@ TEST_GROUP_BEGIN(CommonTest)
 		test_window.SetWindowSize(800, 600);
 		test_window.StartRun(GetModuleHandle(0));
 	}
+	TEST_METHOD_END,
+	TEST_METHOD_BEGIN(TestFile)
+	{
+		File file;
+		file.Open("../TestData/testfile.txt", FileMode::Read);
+		char c;
+		file >> c;
+		FilePosition fp = file.GetBeginPosition();
+		size_t size = file.GetSize();
+		auto string = file.GetAllContentAsText();
+		char* buffer = new char[30];
+		file.GetAllContentAsBinary(buffer);
+		file.Close();
+
+		c = ' ';
+		memset(buffer, 0, sizeof(char) * 30);
+
+		file.Open("../TestData/testfile.txt", FileMode::Read | FileMode::Binary);
+		file >> c;
+		char c2;
+		file >> c2;
+		size = file.GetSize();
+		file.GetAllContentAsBinary(buffer);
+		string = file.GetAllContentAsText();
+		file.Close();
+
+		delete[] buffer;
+	}
 	TEST_METHOD_END
 }
 TEST_GROUP_END;

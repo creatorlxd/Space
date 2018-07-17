@@ -20,28 +20,28 @@ limitations under the License.
 SpaceGameEngine::File::File()
 {
 	m_pFile = nullptr;
-	m_FileMode = FileMode::None;
-	m_IfFileReadOver = false;
+	m_Mode = FileMode::None;
+	m_IfReadOver = false;
 }
 
 SpaceGameEngine::File::~File()
 {
-	if (m_FileMode != FileMode::None)
+	if (m_Mode != FileMode::None)
 		Close();
 }
 
 SpaceGameEngine::File::File(const String & filename, unsigned char mode)
 {
 	m_pFile = nullptr;
-	m_FileMode = FileMode::None;
-	m_IfFileReadOver = false;
+	m_Mode = FileMode::None;
+	m_IfReadOver = false;
 	Open(filename, mode);
 }
 
 void SpaceGameEngine::File::Open(const String & filename, unsigned char mode)
 {
-	m_FileName = filename;
-	m_FileMode = mode;
+	m_Name = filename;
+	m_Mode = mode;
 	String opt;
 	if ((mode&FileMode::Append) != 0 && (mode&FileMode::Write) != 0)
 	{
@@ -88,19 +88,19 @@ void SpaceGameEngine::File::Open(const String & filename, unsigned char mode)
 
 void SpaceGameEngine::File::Close()
 {
-	if (m_FileMode == FileMode::None)
+	if (m_Mode == FileMode::None)
 		THROW_ERROR("can not Close a File without Open or has been closed");
 
 	fclose(m_pFile);
-	m_FileMode = FileMode::None;
-	m_FileName.clear();
+	m_Mode = FileMode::None;
+	m_Name.clear();
 }
 
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetBeginPosition()
 {
 	FilePosition buff, re;
 	fgetpos(m_pFile, &buff);
-	fseek(m_pFile, 0, SEEK_SET);
+	fseek(m_pFile, 0L, SEEK_SET);
 	fgetpos(m_pFile, &re);
 	fsetpos(m_pFile, &buff);
 	return re;
@@ -125,15 +125,17 @@ SpaceGameEngine::FilePosition SpaceGameEngine::File::GetCurrentPosition()
 
 void SpaceGameEngine::File::SetFilePosition(FilePosition pos)
 {
+	if (pos != GetEndPosition())
+		m_IfReadOver = false;
 	fsetpos(m_pFile, &pos);
 }
 
 void SpaceGameEngine::File::Read(void * adr, size_t size)
 {
 	if (fread_s(adr, size, size, 1, m_pFile) == 0)
-		m_IfFileReadOver = true;
+		m_IfReadOver = true;
 	else
-		m_IfFileReadOver = false;
+		m_IfReadOver = false;
 }
 
 void SpaceGameEngine::File::Write(const void * adr, size_t size)
@@ -141,21 +143,26 @@ void SpaceGameEngine::File::Write(const void * adr, size_t size)
 	fwrite(adr, size, 1, m_pFile);
 }
 
-bool SpaceGameEngine::File::IfFileReadOver()
+bool SpaceGameEngine::File::IfReadOver()
 {
-	if (m_IfFileReadOver)
-		return m_IfFileReadOver;
+	if (m_IfReadOver)
+		return m_IfReadOver;
 	else
 	{
 		if (GetCurrentPosition() == GetEndPosition())
-			m_IfFileReadOver = true;
-		return m_IfFileReadOver;
+			m_IfReadOver = true;
+		return m_IfReadOver;
 	}
+}
+
+size_t SpaceGameEngine::File::GetSize()
+{
+	return GetEndPosition() - GetBeginPosition();
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t * cwstr)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		WString wstr;
 		*this >> wstr;
@@ -165,7 +172,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t * cwstr)
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(WString & wstr)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		wstr.clear();
 		wchar_t c = L' ';
@@ -179,26 +186,26 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(WString & wstr)
 			c = fgetwc(m_pFile);
 		}
 		if (wstr.empty())
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(wchar_t & wc)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, " \r\n\t%C", &wc, (unsigned int)sizeof(wchar_t)) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		String str;
 		*this >> str;
@@ -209,7 +216,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char * cstr)
 
 SpaceGameEngine::File& SpaceGameEngine::File::operator>>(String & str)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		str.clear();
 		char c = ' ';
@@ -223,172 +230,172 @@ SpaceGameEngine::File& SpaceGameEngine::File::operator>>(String & str)
 			c = fgetc(m_pFile);
 		}
 		if (str.empty())
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(int & i)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%d", &i) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned int & ui)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%u", &ui) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(short & s)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%hd", &s) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned short & us)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%hud", &us) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long & l)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%ld", &l) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long & ul)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%uld", &ul) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long long & ll)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%I64d", &ll) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned long long & ull)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%I64u", &ull) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(char & c)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, " \r\n\t%c", &c, (unsigned int)sizeof(char)) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(unsigned char & uc)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%hhu", &uc) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(float & f)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%f", &f) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(double & d)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%lf", &d) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator>>(long double & ld)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		if (fscanf_s(m_pFile, "%Lf", &ld) == EOF)
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 		else
-			m_IfFileReadOver = false;
+			m_IfReadOver = false;
 	}
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t * wcstr)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 	{
 		fprintf_s(m_pFile, "%S", wcstr);
 	}
@@ -397,7 +404,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t * wcstr)
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const WString & wstr)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 	{
 		fprintf_s(m_pFile, "%S", wstr.c_str());
 	}
@@ -406,7 +413,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const WString & wstr)
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t & wc)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 	{
 		fprintf_s(m_pFile, "%C", wc);
 	}
@@ -415,7 +422,7 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const wchar_t & wc)
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine::PrintMode & pm)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 	{
 		switch (pm)
 		{
@@ -433,112 +440,112 @@ SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const SpaceGameEngine:
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const char * cstr)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%s", cstr);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const String & str)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%s", str.c_str());
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const int & i)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%d", i);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned int & ui)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%u", ui);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const short & s)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%hd", s);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned short & us)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%hud", us);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long & l)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%ld", l);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned long & ul)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%lud", ul);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long long & ll)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%I64d", ll);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned long long & ull)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%I64u", ull);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const char & c)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%c", c);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const unsigned char & uc)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%hhu", uc);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const float & f)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%f", f);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const double & d)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%lf", d);
 	return *this;
 }
 
 SpaceGameEngine::File & SpaceGameEngine::File::operator<<(const long double & ld)
 {
-	if ((m_FileMode&FileMode::Write) != 0)
+	if ((m_Mode&FileMode::Write) != 0)
 		fprintf_s(m_pFile, "%Lf", ld);
 	return *this;
 }
 
 bool SpaceGameEngine::File::GetLine(String& str)
 {
-	if ((m_FileMode&FileMode::Read) != 0)
+	if ((m_Mode&FileMode::Read) != 0)
 	{
 		str.clear();
 		char _char = std::fgetc(m_pFile);
@@ -552,7 +559,7 @@ bool SpaceGameEngine::File::GetLine(String& str)
 
 		if (_char == EOF)
 		{
-			m_IfFileReadOver = true;
+			m_IfReadOver = true;
 
 			if (str.empty())
 				return false;
@@ -568,13 +575,32 @@ char SpaceGameEngine::File::GetChar()
 	int buff = fgetc(m_pFile);
 	if (buff == EOF)
 	{
-		m_IfFileReadOver = true;
+		m_IfReadOver = true;
 		return EOF;
 	}
 	else
 	{
 		return (char)buff;
 	}
+}
+
+SpaceGameEngine::String SpaceGameEngine::File::GetAllContentAsText()
+{
+	FilePosition buff = GetCurrentPosition();
+	SetFilePosition(GetBeginPosition());
+	String re(GetSize(), ' ');
+	Read(re.data(), GetSize());
+	SetFilePosition(buff);
+	return re;
+}
+
+void SpaceGameEngine::File::GetAllContentAsBinary(void * dst)
+{
+	ASSERT(dst, "dst can not be nullptr");
+	FilePosition buff = GetCurrentPosition();
+	SetFilePosition(GetBeginPosition());
+	Read(dst, GetSize());
+	SetFilePosition(buff);
 }
 
 SpaceGameEngine::Vector<SpaceGameEngine::String> SpaceGameEngine::GetDirectoryName(const String & filepath)
@@ -609,7 +635,7 @@ void SpaceGameEngine::CheckAndCreateDirectory(const String & str)
 {
 	auto folder = GetDirectoryName(str);
 	String buffer;
-	for (int i = 0; i<folder.size(); i++)
+	for (int i = 0; i < folder.size(); i++)
 	{
 		if (folder[i] == "." || folder[i] == "..")
 		{
