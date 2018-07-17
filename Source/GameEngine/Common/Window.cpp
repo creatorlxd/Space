@@ -206,7 +206,7 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 	RECT r;
 	SetRect(&r, m_WindowPosition.first, m_WindowPosition.second, m_WindowPosition.first + m_WindowWidth, m_WindowPosition.second + m_WindowHeight);
 	AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
-	m_Hwnd = CreateWindow(L"SpaceGameEngineWindow", StringToWString(m_WindowTitle).c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, r.right - r.left, r.bottom - r.top, NULL, NULL, hInstance, NULL);
+	m_Hwnd = CreateWindow(WndClass.lpszClassName, StringToWString(m_WindowTitle).c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, r.right - r.left, r.bottom - r.top, NULL, NULL, hInstance, NULL);
 	MoveWindow(m_Hwnd, r.left, r.top, r.right - r.left, r.bottom - r.top, true);
 	ShowWindow(m_Hwnd, SW_SHOWNORMAL);
 	UpdateWindow(m_Hwnd);
@@ -242,6 +242,7 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 			}
 		}
 	}
+	UnregisterClass(WndClass.lpszClassName, hInstance);
 }
 
 void SpaceGameEngine::Window::Resize()
