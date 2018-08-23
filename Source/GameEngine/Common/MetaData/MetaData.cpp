@@ -83,7 +83,6 @@ SpaceGameEngine::MetaObject SpaceGameEngine::ConstructByTypeName(const String & 
 	else
 	{
 		THROW_ERROR("do not have this type");
-		return MetaObject<void>(nullptr);
 	}
 }
 
