@@ -610,7 +610,7 @@ SpaceGameEngine::Vector<SpaceGameEngine::String> SpaceGameEngine::GetDirectoryNa
 
 	Vector<String> re;
 	String buffer;
-	int index = 0;
+	size_t index = 0;
 
 	char c = ' ';
 	while (c == ' ')
