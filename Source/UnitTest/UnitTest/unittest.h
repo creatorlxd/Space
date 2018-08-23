@@ -2,6 +2,13 @@
 #include "ThirdParty\MyUnitTest\include\MyUnitTest.h"
 #include "SpaceGameEngine.h"
 
+#define REQUIRE(x) \
+if(!(x)) \
+{ \
+	std::cout<<"in file:"<<__FILE__<<" in function:"<<__FUNCTION__<<" in line: "<<__LINE__<<" unit test require error"<<std::endl;\
+	return UnitTestResult::Fail;\
+}
+
 #pragma comment(lib,"MyUnitTest.lib")
 #pragma comment(lib,"Space.lib")
 
@@ -139,17 +146,19 @@ TEST_GROUP_BEGIN(CommonTest)
 	{
 		ConfigFile cf;
 		cf.InitFromFile("../TestData/test.configfile");
-		cout << cf.GetConfigTable("test").GetConfigValue("a").AsInt() << endl;
-		cout << cf.GetConfigTable("test").GetConfigValue("b").AsInt() << endl;
-		cout << cf.GetConfigTable("test").GetConfigValue("str").AsString() << endl;
-		cout << cf.GetConfigTable("test").GetConfigValue("float").AsFloat() << endl;
-		cout << cf.GetConfigTable("test").GetConfigValue("double").AsDouble() << endl;
-		cout << cf.GetConfigTable("test").GetConfigValue("char").AsChar() << endl;
-		cout << cf.GetConfigTable("test2").GetConfigValue("a").AsDouble() << endl;
-		cout << cf.GetConfigTable("test2").GetConfigValue("str").AsString() << endl;
-		cout << boolalpha << cf.GetConfigTable("test2").GetConfigValue("testbool").AsBool() << endl;
-		cf.GetConfigTable("test2").GetConfigValue("testbool").Set(false);
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("a").AsInt()==2);
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("b").AsInt()==3);
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("str").AsString()=="test str");
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("float").AsFloat()==1.3f);
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("double").AsDouble()==3.1415926);
+		REQUIRE(cf.GetConfigTable("test").GetConfigValue("char").AsChar()=='c');
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("a").AsDouble()==2.3);
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("str").AsString()=="");
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("testbool").AsBool()==true);
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("str2")=="test;");
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("char")==';');
 
+		cf.GetConfigTable("test2").GetConfigValue("testbool").Set(false);
 		cf.GetConfigTable("test").GetConfigValue("float").Set(1.23f);
 		cf.SaveToFile("../TestData/test2.configfile");
 	}

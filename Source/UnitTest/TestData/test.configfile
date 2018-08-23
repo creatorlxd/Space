@@ -9,3 +9,5 @@ char = 'c'
 a=2.3
 str=""
 testbool=true
+str2="test;"
+char=';'

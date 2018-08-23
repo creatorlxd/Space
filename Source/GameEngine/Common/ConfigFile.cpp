@@ -251,7 +251,7 @@ void SpaceGameEngine::ConfigFile::Parse(const Vector<String>& strs)
 				continue;
 
 			//comment
-			if (_char == ';')
+			if (_char == ';' && type_buffer != ConfigFileValueType::Char && type_buffer != ConfigFileValueType::String)
 				break;
 
 			//table name
