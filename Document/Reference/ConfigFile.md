@@ -1,4 +1,0 @@
-# SpaceGameEngineReference
-## Config File
-
-### `ConfigFileValueType`
