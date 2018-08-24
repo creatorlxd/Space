@@ -73,7 +73,7 @@ namespace SpaceGameEngine
 		std::pair<int, int> m_WindowPosition;			//窗口客户区位置
 		inline static const std::pair<int, int> m_DefaultWindowPosition = { 250 ,80 };
 		bool m_IfShowCursor;						//是否显示鼠标
-		bool m_IfBegin;							//游戏是否已开始
+		bool m_IfHaveBegun;							//游戏是否已开始
 		unsigned int m_FPSLimit;
 
 		Timer m_Timer;

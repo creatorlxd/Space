@@ -49,7 +49,7 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 
 	ShowCursor(m_IfShowCursor);
 
-	m_IfBegin = false;
+	m_IfHaveBegun = false;
 }
 
 SpaceGameEngine::Window::~Window()
@@ -114,7 +114,7 @@ void SpaceGameEngine::Window::UpdateWindowSize()
 
 std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 {
-	if (m_IfBegin)
+	if (m_IfHaveBegun)
 	{
 		RECT r;
 		GetClientRect(m_Hwnd, &r);
@@ -125,7 +125,7 @@ std::pair<int, int> SpaceGameEngine::Window::GetWindowPosition()
 
 void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
 {
-	if (m_IfBegin)
+	if (m_IfHaveBegun)
 	{
 		RECT r;
 		GetWindowRect(m_Hwnd, &r);
@@ -136,7 +136,7 @@ void SpaceGameEngine::Window::SetWindowPosition(int x, int y)
 
 void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 {
-	if (m_IfBegin)
+	if (m_IfHaveBegun)
 	{
 		RECT r;
 		SetRect(&r, 0, 0, x, y);
@@ -145,7 +145,7 @@ void SpaceGameEngine::Window::SetWindowSize(int x, int y)
 	}
 	m_WindowWidth = x;
 	m_WindowHeight = y;
-	if (m_IfBegin)
+	if (m_IfHaveBegun)
 	{
 		Resize();
 	}
@@ -173,7 +173,7 @@ unsigned int SpaceGameEngine::Window::GetFPSLimit()
 
 bool SpaceGameEngine::Window::IfBegin()
 {
-	return m_IfBegin;
+	return m_IfHaveBegun;
 }
 
 SpaceGameEngine::Timer & SpaceGameEngine::Window::GetTimer()
@@ -212,10 +212,13 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 	UpdateWindow(m_Hwnd);
 
 	DATA_NOTIFY(Window, m_OnInitAction);
-	m_IfBegin = true;
+	m_IfHaveBegun = true;
 	DATA_NOTIFY(Window, m_OnStartAction);
 
 	MSG msg = { 0 };
+	double time_limit = 1.0 / (double)m_FPSLimit;
+	TimePoint time_pre = std::chrono::steady_clock::now();
+	TimePoint time_now;
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -225,16 +228,14 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 		}
 		else
 		{
-			static auto time = std::chrono::steady_clock::now();
-			static double time_limit = 1.0 / (double)m_FPSLimit;
-			auto time_now = std::chrono::steady_clock::now();
-			std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(time_now - time);
+			time_now = std::chrono::steady_clock::now();
+			std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(time_now - time_pre);
 
 			if (time_span.count() >= time_limit)
 			{
 				m_Timer.Tick();
 				DATA_NOTIFY(Window, m_OnRunAction);
-				time = time_now;
+				time_pre = time_now;
 			}
 			else
 			{
