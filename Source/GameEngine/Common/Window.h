@@ -57,7 +57,7 @@ namespace SpaceGameEngine
 		void SetFPSLimit(unsigned int limit);
 		unsigned int GetFPSLimit();
 
-		bool IfBegin();
+		bool IfHaveBegun();
 		Timer& GetTimer();
 
 		void StartRun(HINSTANCE hInstance);
