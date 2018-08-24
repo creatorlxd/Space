@@ -54,7 +54,7 @@ namespace SpaceGameEngine
 		template<typename... Arg>
 		GlobalVariable(Arg&&... arg)
 		{
-			m_pContent = AllocatorInterface::New<T>(std::forward<Arg>(arg)...);
+			m_pContent = AllocatorInterface::template New<T>(std::forward<Arg>(arg)...);
 			GetGlobalVariableManager().Insert(this);
 		}
 

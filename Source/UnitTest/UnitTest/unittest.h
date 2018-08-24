@@ -155,8 +155,8 @@ TEST_GROUP_BEGIN(CommonTest)
 		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("a").AsDouble()==2.3);
 		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("str").AsString()=="");
 		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("testbool").AsBool()==true);
-		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("str2")=="test;");
-		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("char")==';');
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("str2").AsString()=="test;");
+		REQUIRE(cf.GetConfigTable("test2").GetConfigValue("char").AsChar()==';');
 
 		cf.GetConfigTable("test2").GetConfigValue("testbool").Set(false);
 		cf.GetConfigTable("test").GetConfigValue("float").Set(1.23f);

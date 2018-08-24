@@ -7,5 +7,7 @@ float=1.230000f
 str="test str"
 [test2]
 a=2.3
+char=';'
 str=""
+str2="test;"
 testbool=false
