@@ -15,6 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include <Windows.h>
+#include <iostream>
 #include "StringConverter.h"
 
 namespace SpaceGameEngine

@@ -230,6 +230,9 @@
     <ClInclude Include="Source\GameEngine\Render\RenderInterface\ViewPort.h">
       <Filter>Render\RenderInterface</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\UnitTestFramework.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
