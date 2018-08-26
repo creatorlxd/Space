@@ -1,7 +1,8 @@
 ﻿#include "unittest.h"
 
-int main()
+UNIT_TEST_METHOD(TestUnitTest, "Common")
 {
-	RunUnitTestManager();
-	return 0;
+	REQUIRE(1 == 1);
 }
+
+UNIT_TEST_MAIN;

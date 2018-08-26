@@ -32,10 +32,13 @@ namespace SpaceGameEngine
 		return (result == UnitTestResult::Success ? "Success" : (result == UnitTestResult::Fail ? "Fail" : "Unkown"));
 	}
 
+	class UnitTestManager;
+
 	class UnitTestMethod
 	{
 	public:
-		inline UnitTestMethod(const String& name, UnitTestResult(*func)(), const Vector<String>& group_name) : m_Name(name), m_Result(UnitTestResult::Unkown), m_Content(func), m_GroupName(group_name)
+		friend class UnitTestManager;
+		inline UnitTestMethod(const String& name, const std::function<UnitTestResult()>& func, const Vector<String>& group_name) : m_Name(name), m_Result(UnitTestResult::Unkown), m_Content(func), m_GroupName(group_name)
 		{}
 		inline void Run()
 		{
@@ -53,8 +56,6 @@ namespace SpaceGameEngine
 		UnitTestResult m_Result;
 		Vector<String> m_GroupName;
 	};
-
-	class UnitTestManager;
 
 	class UnitTestGroup
 	{
@@ -142,19 +143,19 @@ namespace SpaceGameEngine
 				{
 					if (i.second->GetResult() != UnitTestResult::Unkown)
 					{
-						m_TotalTest += 1;
+						m_TotalTestSize += 1;
 					}
 					if (i.second->GetResult() == UnitTestResult::Fail)
 					{
-						m_FailTest += 1;
+						m_FailTestSize += 1;
 					}
 				}
 				else
 					THROW_ERROR("Unit Test Method can not be nullptr");
 			}
-			std::cout << "total run unit test method: " << m_TotalTest << std::endl;
-			std::cout << "failed unit test method: " << m_FailTest << std::endl;
-			if (m_FailTest == 0)
+			std::cout << "total run unit test method size: " << m_TotalTestSize << std::endl;
+			std::cout << "failed unit test method size: " << m_FailTestSize << std::endl;
+			if (m_FailTestSize == 0)
 				return 0;
 			else
 				return -1;
@@ -201,6 +202,11 @@ namespace SpaceGameEngine
 					PrintResult();
 					continue;
 				}
+				if (cmd == "clear")
+				{
+					system("cls");
+					continue;
+				}
 			}
 			return PrintResult();
 		}
@@ -240,7 +246,7 @@ namespace SpaceGameEngine
 	private:
 		Map<String,UnitTestMethod*> m_Content;
 		Map<String, UnitTestGroup*> m_Group;
-		uint64_t m_TotalTest = 0, m_FailTest = 0;
+		uint64_t m_TotalTestSize = 0, m_FailTestSize = 0;
 	};
 
 	inline UnitTestManager& GetUnitTestManager()
@@ -254,6 +260,19 @@ namespace SpaceGameEngine
 		if (argc == 1)
 		{
 			return GetUnitTestManager().InteractionModel();
+		}
+		if (argc == 2)
+		{
+			if (String(argv[1]) == "-all")
+			{
+				GetUnitTestManager().RunAllUnitTestMethod();
+				return GetUnitTestManager().PrintResult();
+			}
+			else
+			{
+				THROW_ERROR("unkown argument");
+				return -1;
+			}
 		}
 		if (argc == 3)
 		{
@@ -278,6 +297,12 @@ namespace SpaceGameEngine
 		return -1;
 	}
 
-#define UNIT_TEST_METHOD(name,...) SpaceGameEngine::UnitTestResult UnitTestMethod##name();inline SpaceGameEngine::UnitTestManager::DefineUnitTestMethod name(SpaceGameEngine::GetUnitTestManager(),#name,UnitTestMethod##name,SpaceGameEngine::Vector<SpaceGameEngine::String>{__VA_ARGS__});SpaceGameEngine::UnitTestResult UnitTestMethod##name()
+#define UNIT_TEST_METHOD(name,...) SpaceGameEngine::UnitTestResult UnitTestMethod##name();inline SpaceGameEngine::UnitTestManager::DefineUnitTestMethod name(SpaceGameEngine::GetUnitTestManager(),#name,[]()->SpaceGameEngine::UnitTestResult{auto re=UnitTestMethod##name();return (re==SpaceGameEngine::UnitTestResult::Unkown?SpaceGameEngine::UnitTestResult::Success:re);},SpaceGameEngine::Vector<SpaceGameEngine::String>{__VA_ARGS__});SpaceGameEngine::UnitTestResult UnitTestMethod##name()
 #define UNIT_TEST_MAIN int main(int argc,char** argv){return SpaceGameEngine::UnitTestMain(argc,argv);}
+#define REQUIRE(x) \
+if(!(x)) \
+{ \
+	std::cout<<"in file:"<<__FILE__<<" in function:"<<__FUNCTION__<<" in line: "<<__LINE__<<" unit test method require error"<<std::endl;\
+	return SpaceGameEngine::UnitTestResult::Fail;\
+}
 }
