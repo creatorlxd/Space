@@ -23,12 +23,13 @@ void SpaceGameEngine::ThrowError(const TString & errormessage, const TString& fi
 #else
 	auto line_str = StdStringToString(std::to_string(line));
 #endif
+	auto str = _T("在") + filename + _T(":") + funcname + _T(":") + line_str + _T("中\n\t") + errormessage;
 #ifdef _UNICODE
-	std::wcout << (_T("在") + filename + _T(":") + funcname + _T(":") + line_str + _T("中\n\t") + errormessage) << std::endl;
+	std::wcout << str << std::endl;
 #else
-	std::cout << (_T("在") + filename + _T(":") + funcname + _T(":") + line_str + _T("中\n\t") + errormessage);
+	std::cout << str << std::endl;
 #endif
-	MessageBox(NULL, (_T("在") + filename + _T(":") + funcname + _T(":") + line_str + _T("中\n\t") + errormessage).c_str(), _T("Space Game Engine Error"), NULL);
+	MessageBox(NULL, str.c_str(), _T("Space Game Engine Error"), NULL);
 #if defined(_DEBUG)|defined(DEBUG)	
 	DebugBreak();
 #endif

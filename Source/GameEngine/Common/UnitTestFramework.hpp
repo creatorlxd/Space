@@ -124,9 +124,9 @@ namespace SpaceGameEngine
 		};
 
 		/*
-		return if have failed unit test method
+		return -1 if have failed unit test method
 		*/
-		inline bool PrintResult()
+		inline int PrintResult()
 		{
 			m_TotalTestSize = 0;
 			m_FailTestSize = 0;
@@ -279,7 +279,7 @@ namespace SpaceGameEngine
 		return -1;
 	}
 
-#define UNIT_TEST_METHOD(name,...) SpaceGameEngine::UnitTestResult UnitTestMethod##name();inline SpaceGameEngine::UnitTestManager::DefineUnitTestMethod name(SpaceGameEngine::GetUnitTestManager(),#name,[]()->SpaceGameEngine::UnitTestResult{auto re=UnitTestMethod##name();return (re==SpaceGameEngine::UnitTestResult::Unkown?SpaceGameEngine::UnitTestResult::Success:re);},SpaceGameEngine::Vector<SpaceGameEngine::String>{__VA_ARGS__});SpaceGameEngine::UnitTestResult UnitTestMethod##name()
+#define UNIT_TEST_METHOD(name,...) SpaceGameEngine::UnitTestResult UnitTestMethod##name();inline SpaceGameEngine::UnitTestManager::DefineUnitTestMethod name(SpaceGameEngine::GetUnitTestManager(),#name,UnitTestMethod##name,SpaceGameEngine::Vector<SpaceGameEngine::String>{__VA_ARGS__});SpaceGameEngine::UnitTestResult UnitTestMethod##name()
 #define UNIT_TEST_MAIN int main(int argc,char** argv){return SpaceGameEngine::UnitTestMain(argc,argv);}
 #define REQUIRE(x) \
 if(!(x)) \
@@ -287,4 +287,6 @@ if(!(x)) \
 	std::cout<<"in file:"<<__FILE__<<" in function:"<<__FUNCTION__<<" in line: "<<__LINE__<<" unit test method require error"<<std::endl;\
 	return SpaceGameEngine::UnitTestResult::Fail;\
 }
+#define UNIT_TEST_SUCCESS return SpaceGameEngine::UnitTestResult::Success;
+#define UNIT_TEST_FAIL return SpaceGameEngine::UnitTestResult::Fail;
 }
