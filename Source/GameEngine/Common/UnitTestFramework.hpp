@@ -65,10 +65,7 @@ namespace SpaceGameEngine
 		{
 			for (auto i : m_Content)
 			{
-				if (i)
-					i->Run();
-				else
-					THROW_ERROR("Unit Test Method can not be nullptr");
+				i->Run();
 			}
 		}
 	private:
@@ -82,10 +79,7 @@ namespace SpaceGameEngine
 		{
 			for (auto i : m_Content)
 			{
-				if (i.second)
-					i.second->Run();
-				else
-					THROW_ERROR("Unit Test Method can not be nullptr");
+				i.second->Run();
 			}
 		}
 
@@ -104,10 +98,7 @@ namespace SpaceGameEngine
 			}
 			else
 			{
-				if (iter->second)
-					iter->second->Run();
-				else
-					THROW_ERROR("Unit Test Method can not be nullptr");
+				iter->second->Run();
 			}
 		}
 
@@ -137,6 +128,8 @@ namespace SpaceGameEngine
 		*/
 		inline bool PrintResult()
 		{
+			m_TotalTestSize = 0;
+			m_FailTestSize = 0;
 			for (auto i : m_Content)
 			{
 				if (i.second)
@@ -171,12 +164,7 @@ namespace SpaceGameEngine
 				{
 					for (auto i : m_Content)
 					{
-						if (i.second)
-						{
-							std::cout << i.first << '\t' << UnitTestResultToString(i.second->GetResult()) << std::endl;
-						}
-						else
-							THROW_ERROR("Unit Test Method can not be nullptr");
+						std::cout << i.first << '\t' << UnitTestResultToString(i.second->GetResult()) << std::endl;
 					}
 					continue;
 				}
@@ -215,17 +203,11 @@ namespace SpaceGameEngine
 		{
 			for (auto i : m_Content)
 			{
-				if (i.second)
-					MemoryManager::Delete(i.second);
-				else
-					THROW_ERROR("unit test method can not be nullptr");
+				MemoryManager::Delete(i.second);
 			}
 			for (auto i : m_Group)
 			{
-				if (i.second)
-					MemoryManager::Delete(i.second);
-				else
-					THROW_ERROR("unit test group can not be nullptr");
+				MemoryManager::Delete(i.second);
 			}
 		}
 	private:
