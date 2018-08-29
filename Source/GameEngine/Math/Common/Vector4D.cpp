@@ -41,28 +41,28 @@ SpaceGameEngine::Vector4D::Vector4D(FXMVECTOR v)
 	XMStoreFloat4(this, v);
 }
 
-bool SpaceGameEngine::Vector4D::operator=(const XMFLOAT4 & c)
+SpaceGameEngine::Vector4D& SpaceGameEngine::Vector4D::operator=(const XMFLOAT4 & c)
 {
 	x = c.x;
 	y = c.y;
 	z = c.z;
 	w = c.w;
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Vector4D::operator=(const Vector4D & v)
+SpaceGameEngine::Vector4D& SpaceGameEngine::Vector4D::operator=(const Vector4D & v)
 {
 	x = v.x;
 	y = v.y;
 	z = v.z;
 	w = v.w;
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Vector4D::operator=(FXMVECTOR v)
+SpaceGameEngine::Vector4D& SpaceGameEngine::Vector4D::operator=(FXMVECTOR v)
 {
 	XMStoreFloat4(this, v);
-	return true;
+	return *this;
 }
 
 SpaceGameEngine::Vector4D::operator XMVECTOR() const

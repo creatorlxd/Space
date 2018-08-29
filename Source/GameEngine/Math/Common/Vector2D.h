@@ -29,9 +29,9 @@ namespace SpaceGameEngine
 		Vector2D(const Vector2D& v);
 		Vector2D(FXMVECTOR v);
 
-		bool operator = (const XMFLOAT2& c);
-		bool operator = (const Vector2D& v);
-		bool operator = (FXMVECTOR v);
+		Vector2D& operator = (const XMFLOAT2& c);
+		Vector2D& operator = (const Vector2D& v);
+		Vector2D& operator = (FXMVECTOR v);
 
 		operator XMVECTOR() const;
 	};

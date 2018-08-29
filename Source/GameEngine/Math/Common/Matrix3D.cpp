@@ -44,22 +44,22 @@ SpaceGameEngine::Matrix3D::Matrix3D(CXMMATRIX m)
 	XMStoreFloat3x3(this, m);
 }
 
-bool SpaceGameEngine::Matrix3D::operator=(const XMFLOAT3X3 & c)
+SpaceGameEngine::Matrix3D& SpaceGameEngine::Matrix3D::operator=(const XMFLOAT3X3 & c)
 {
 	XMFLOAT3X3::operator=(c);
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Matrix3D::operator=(const Matrix3D & m)
+SpaceGameEngine::Matrix3D& SpaceGameEngine::Matrix3D::operator=(const Matrix3D & m)
 {
 	memcpy(this->m, m.m, sizeof(float) * 9);
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Matrix3D::operator=(CXMMATRIX m)
+SpaceGameEngine::Matrix3D& SpaceGameEngine::Matrix3D::operator=(CXMMATRIX m)
 {
 	XMStoreFloat3x3(this, m);
-	return true;
+	return *this;
 }
 
 SpaceGameEngine::Matrix3D::operator XMMATRIX() const

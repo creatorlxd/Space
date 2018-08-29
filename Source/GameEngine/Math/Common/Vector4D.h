@@ -29,9 +29,9 @@ namespace SpaceGameEngine
 		Vector4D(const Vector4D& v);
 		Vector4D(FXMVECTOR v);
 
-		bool operator = (const XMFLOAT4& c);
-		bool operator = (const Vector4D& v);
-		bool operator = (FXMVECTOR v);
+		Vector4D& operator = (const XMFLOAT4& c);
+		Vector4D& operator = (const Vector4D& v);
+		Vector4D& operator = (FXMVECTOR v);
 
 		operator XMVECTOR() const;
 	};

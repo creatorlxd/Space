@@ -31,9 +31,9 @@ namespace SpaceGameEngine
 		Matrix4D(const Matrix4D& m);
 		Matrix4D(CXMMATRIX m);
 
-		bool operator = (const XMFLOAT4X4& c);
-		bool operator = (const Matrix4D& m);
-		bool operator = (CXMMATRIX m);
+		Matrix4D& operator = (const XMFLOAT4X4& c);
+		Matrix4D& operator = (const Matrix4D& m);
+		Matrix4D& operator = (CXMMATRIX m);
 
 		operator XMMATRIX() const;
 	};

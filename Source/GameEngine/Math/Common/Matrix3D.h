@@ -30,9 +30,9 @@ namespace SpaceGameEngine
 		Matrix3D(const Matrix3D& m);
 		Matrix3D(CXMMATRIX m);
 
-		bool operator = (const XMFLOAT3X3& c);
-		bool operator = (const Matrix3D& m);
-		bool operator = (CXMMATRIX m);
+		Matrix3D& operator = (const XMFLOAT3X3& c);
+		Matrix3D& operator = (const Matrix3D& m);
+		Matrix3D& operator = (CXMMATRIX m);
 
 		operator XMMATRIX() const;
 	};

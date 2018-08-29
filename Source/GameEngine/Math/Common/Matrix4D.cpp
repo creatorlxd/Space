@@ -45,22 +45,22 @@ SpaceGameEngine::Matrix4D::Matrix4D(CXMMATRIX m)
 	XMStoreFloat4x4(this, m);
 }
 
-bool SpaceGameEngine::Matrix4D::operator=(const XMFLOAT4X4 & c)
+SpaceGameEngine::Matrix4D& SpaceGameEngine::Matrix4D::operator=(const XMFLOAT4X4 & c)
 {
 	XMFLOAT4X4::operator=(c);
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Matrix4D::operator=(const Matrix4D & m)
+SpaceGameEngine::Matrix4D& SpaceGameEngine::Matrix4D::operator=(const Matrix4D & m)
 {
 	memcpy(this->m, m.m, sizeof(float) * 16);
-	return true;
+	return *this;
 }
 
-bool SpaceGameEngine::Matrix4D::operator=(CXMMATRIX m)
+SpaceGameEngine::Matrix4D& SpaceGameEngine::Matrix4D::operator=(CXMMATRIX m)
 {
 	XMStoreFloat4x4(this, m);
-	return true;
+	return *this;
 }
 
 SpaceGameEngine::Matrix4D::operator XMMATRIX() const
