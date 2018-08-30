@@ -21,6 +21,4 @@ cache:
   - $(APPVEYOR_BUILD_FOLDER)\x64\UnitTestForRelease
 
 build:
-  project:
-    - Space.vcxproj
-    - Source/UnitTest/UnitTest/UnitTest.vcxproj
+  project: Space.vcxproj Source/UnitTest/UnitTest/UnitTest.vcxproj
