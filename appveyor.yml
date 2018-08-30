@@ -7,12 +7,12 @@ platform:
   - x64
 
 configuration:
+  - UnitTestForDebug
+  - UnitTestForRelease
   - BuildDebug
   - BuildRelease
   - Debug
   - Release
-  - UnitTestForDebug
-  - UnitTestForRelease
 
 cache:
   - $(APPVEYOR_BUILD_FOLDER)\UnitTestForDebug
