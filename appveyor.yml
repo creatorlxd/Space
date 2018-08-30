@@ -11,6 +11,15 @@ configuration:
   - BuildRelease
   - Debug
   - Release
+  - UnitTestForDebug
+  - UnitTestForRelease
+
+cache:
+  - $(APPVEYOR_BUILD_FOLDER)\UnitTestForDebug
+  - $(APPVEYOR_BUILD_FOLDER)\UnitTestForRelease
+  - $(APPVEYOR_BUILD_FOLDER)\x64\UnitTestForDebug
+  - $(APPVEYOR_BUILD_FOLDER)\x64\UnitTestForRelease
 
 build:
   project: Space.vcxproj
+  project: Source/UnitTest/UnitTest/UnitTest.vcxproj
