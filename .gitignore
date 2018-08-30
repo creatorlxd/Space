@@ -259,7 +259,6 @@ paket-files/
 /**/UnitTest.tlog
 /**/vc141.idb
 /build/
-/BuildLibrary/
 /BuildDebug/
 /BuildRelease/
 .vscode/

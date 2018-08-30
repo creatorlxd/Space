@@ -7,18 +7,19 @@ platform:
   - x64
 
 configuration:
-  - UnitTestForDebug
-  - UnitTestForRelease
   - BuildDebug
   - BuildRelease
   - Debug
   - Release
 
 cache:
-  - $(APPVEYOR_BUILD_FOLDER)\UnitTestForDebug
-  - $(APPVEYOR_BUILD_FOLDER)\UnitTestForRelease
-  - $(APPVEYOR_BUILD_FOLDER)\x64\UnitTestForDebug
-  - $(APPVEYOR_BUILD_FOLDER)\x64\UnitTestForRelease
+  - $(APPVEYOR_BUILD_FOLDER)\BuildDebug
+  - $(APPVEYOR_BUILD_FOLDER)\BuildRelease
+  - $(APPVEYOR_BUILD_FOLDER)\x64\BuildDebug
+  - $(APPVEYOR_BUILD_FOLDER)\x64\BuildRelease
 
 build:
   project: Space.sln
+
+test_script:
+  - .\run_unit_test.bat
