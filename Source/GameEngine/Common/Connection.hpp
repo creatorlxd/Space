@@ -33,6 +33,8 @@ namespace SpaceGameEngine
 
 		void Reset(T* ptr)
 		{
+			if (ptr == m_pContent)
+				return;
 			if (ptr)
 			{
 				Clear();

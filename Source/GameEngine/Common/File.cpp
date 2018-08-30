@@ -98,12 +98,15 @@ void SpaceGameEngine::File::Close()
 
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetBeginPosition()
 {
+	/*
 	FilePosition buff, re;
 	fgetpos(m_pFile, &buff);
 	fseek(m_pFile, 0L, SEEK_SET);
 	fgetpos(m_pFile, &re);
 	fsetpos(m_pFile, &buff);
 	return re;
+	*/
+	return FilePosition(0);
 }
 
 SpaceGameEngine::FilePosition SpaceGameEngine::File::GetEndPosition()
