@@ -6,11 +6,11 @@ UNIT_TEST_METHOD(TestUnitTest, "Common")
 	UNIT_TEST_SUCCESS;
 }
 
-UNIT_TEST_METHOD(TestUnitTestFail, "Common")
-{
-	REQUIRE(0 == 1);
-	UNIT_TEST_SUCCESS;
-}
+//UNIT_TEST_METHOD(TestUnitTestFail, "Common")
+//{
+//	REQUIRE(0 == 1);
+//	UNIT_TEST_SUCCESS;
+//}
 
 //UNIT_TEST_METHOD(TestThrowError, "Common")
 //{
