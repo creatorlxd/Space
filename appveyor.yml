@@ -16,4 +16,4 @@ build:
   project: Space.sln
 
 test_script:
-  - copy .\%CONFIGURATION%\UnitTest.exe .\Source\UnitTest\UnitTest\UnitTest%CONFIGURATION%.exe && .\Source\UnitTest\UnitTest\UnitTest%CONFIGURATION%.exe -all
+  - .\test.ps1
