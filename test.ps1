@@ -1,4 +1,4 @@
-if ($PLATFORM == "x64") {
+if ($PLATFORM -eq "x64") {
 	cmd /c copy .\x64\%CONFIGURATION%\UnitTest.exe .\Source\UnitTest\UnitTest\UnitTest%CONFIGURATION%x64.exe 
 	cmd /c .\Source\UnitTest\UnitTest\UnitTest%CONFIGURATION%x64.exe -all
 }
