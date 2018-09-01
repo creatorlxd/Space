@@ -256,24 +256,26 @@ namespace SpaceGameEngine
 				return -1;
 			}
 		}
-		if (argc == 3)
+		if (argc >= 3)
 		{
-			String option(argv[1]);
-			if (option == "-group")
+			for (int i = 1; i < argc; i += 2)
 			{
-				GetUnitTestManager().RunUnitTestGroup(String(argv[2]));
-				return GetUnitTestManager().PrintResult();
+				String option(argv[i]);
+				if (option == "-group")
+				{
+					GetUnitTestManager().RunUnitTestGroup(String(argv[i + 1]));
+				}
+				else if (option == "-method")
+				{
+					GetUnitTestManager().RunUnitTestMethod(String(argv[i + 1]));
+				}
+				else
+				{
+					THROW_ERROR("unkown argument");
+					return -1;
+				}
 			}
-			else if (option == "-method")
-			{
-				GetUnitTestManager().RunUnitTestMethod(String(argv[2]));
-				return GetUnitTestManager().PrintResult();
-			}
-			else
-			{
-				THROW_ERROR("unkown argument");
-				return -1;
-			}
+			return GetUnitTestManager().PrintResult();
 		}
 		THROW_ERROR("unkown argument");
 		return -1;
