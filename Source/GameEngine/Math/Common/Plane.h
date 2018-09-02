@@ -24,7 +24,7 @@ namespace SpaceGameEngine
 		Vector3D m_Direction;
 		float m_Distance;
 
-		Plane() = default;
+		Plane();
 		Plane(Vector3D dir, float d);
 		Plane(Vector4D c);
 		/*

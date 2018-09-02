@@ -18,10 +18,10 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	class GlobalVariableTagClass
+	class GlobalVariableCore
 	{
 	public:
-		virtual ~GlobalVariableTagClass();
+		virtual ~GlobalVariableCore();
 
 		friend class GlobalVariableManager;
 	private:
@@ -38,17 +38,17 @@ namespace SpaceGameEngine
 		friend class GlobalVariable;
 	private:
 		GlobalVariableManager();
-		void Insert(GlobalVariableTagClass* ptr);
+		void Insert(GlobalVariableCore* ptr);
 		void Release();
 	private:
-		std::stack<GlobalVariableTagClass*> m_Content;
+		std::stack<GlobalVariableCore*> m_Content;
 		bool m_IfReleased;
 	};
 
 	GlobalVariableManager& GetGlobalVariableManager();
 
 	template<typename T, typename AllocatorInterface = MemoryManagerAllocatorInterface>
-	class GlobalVariable :public GlobalVariableTagClass
+	class GlobalVariable :public GlobalVariableCore
 	{
 	public:
 		template<typename... Arg>

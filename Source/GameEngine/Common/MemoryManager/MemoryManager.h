@@ -94,6 +94,12 @@ namespace SpaceGameEngine
 		}
 
 		template<typename T>
+		static T* NewArray(size_t size)
+		{
+			return new T[size];
+		}
+
+		template<typename T>
 		static void Delete(T* ptr)
 		{
 			delete ptr;
@@ -112,6 +118,12 @@ namespace SpaceGameEngine
 		static T* NewSize(size_t size)
 		{
 			return reinterpret_cast<T*>(MemoryManager::NewArray<uint8_t>(size));
+		}
+
+		template<typename T>
+		static T* NewArray(size_t size)
+		{
+			return MemoryManager::NewArray<T>(size);
 		}
 
 		template<typename T>

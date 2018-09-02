@@ -18,7 +18,6 @@ limitations under the License.
 #include "Math/Common/Matrix4D.h"
 #include "Math/Common/ConstantValue.hpp"
 #include "Common/MemoryManager/AllocatorForSTL.hpp"
-#include "Math/Common/Frustum.h"
 
 namespace SpaceGameEngine
 {
@@ -43,18 +42,11 @@ namespace SpaceGameEngine
 	/*
 	点是否在AABB中(包括边框)
 	*/
-	bool IfIntersect(const AxisAlignedBoundingBox& aabb, const Vector3D& position);	
+	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Vector3D& position);	
 
 	bool IfIntersect(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	
 
-	/*
-	点是否在AABB中(不包括边框)
-	*/
-	bool IfInclude(const AxisAlignedBoundingBox& aabb, const Vector3D& position);
-
 	bool IfInclude(const AxisAlignedBoundingBox& aabb1, const AxisAlignedBoundingBox& aabb2);	//是否包含
-
-	int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);				//是否相交 返回所包含的顶点数 不相交返回-1 否者返回0~8
 
 	AxisAlignedBoundingBox GetAxisAlignedBoundingBox(const Vector<Vector3D>& points);
 

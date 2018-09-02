@@ -16,6 +16,7 @@ limitations under the License.
 #pragma once
 #include "Plane.h"
 #include "Matrix4D.h"
+#include "../BoundingBox/AxisAlignedBoundingBox.h"
 
 namespace SpaceGameEngine
 {
@@ -27,4 +28,6 @@ namespace SpaceGameEngine
 	};
 
 	Frustum GetFrustumFromMatrix(const Matrix4D& matrix);
+
+	int IfIntersect(const Frustum& frustum, const AxisAlignedBoundingBox& aabb);				//是否相交 返回所包含的顶点数 不相交返回-1 否者返回0~8
 }

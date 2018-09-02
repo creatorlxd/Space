@@ -16,12 +16,12 @@ limitations under the License.
 #include "stdafx.h"
 #include "GlobalVariable.h"
 
-SpaceGameEngine::GlobalVariableTagClass::~GlobalVariableTagClass()
+SpaceGameEngine::GlobalVariableCore::~GlobalVariableCore()
 {
 
 }
 
-void SpaceGameEngine::GlobalVariableTagClass::Release()
+void SpaceGameEngine::GlobalVariableCore::Release()
 {
 
 }
@@ -36,7 +36,7 @@ SpaceGameEngine::GlobalVariableManager::GlobalVariableManager()
 	m_IfReleased = false;
 }
 
-void SpaceGameEngine::GlobalVariableManager::Insert(GlobalVariableTagClass * ptr)
+void SpaceGameEngine::GlobalVariableManager::Insert(GlobalVariableCore * ptr)
 {
 	m_Content.push(ptr);
 }

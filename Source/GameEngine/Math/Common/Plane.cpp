@@ -16,6 +16,11 @@ limitations under the License.
 #include "stdafx.h"
 #include "Plane.h"
 
+SpaceGameEngine::Plane::Plane()
+	:m_Direction(0, 0, 0), m_Distance(0)
+{
+}
+
 SpaceGameEngine::Plane::Plane(Vector3D dir, float d)
 	:m_Direction(dir), m_Distance(d)
 {
