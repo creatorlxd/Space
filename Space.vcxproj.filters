@@ -233,6 +233,9 @@
     <ClInclude Include="Source\GameEngine\Common\UnitTestFramework.hpp">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\Observer.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">

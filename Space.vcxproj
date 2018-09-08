@@ -329,6 +329,7 @@
     <ClInclude Include="Source\GameEngine\Common\MetaData\MetaData.h" />
     <ClInclude Include="Source\GameEngine\Common\MetaData\Serialize.h" />
     <ClInclude Include="Source\GameEngine\Common\MetaData\TextFileSerializeInterface.h" />
+    <ClInclude Include="Source\GameEngine\Common\Observer.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Space.h" />
     <ClInclude Include="Source\GameEngine\Common\stdafx.h" />
     <ClInclude Include="Source\GameEngine\Common\StringConverter.h" />

@@ -33,6 +33,7 @@ limitations under the License.
 #include "Common/MetaData/TextFileSerializeInterface.h"
 #include "Common/MetaData/BinaryFileSerializeInterface.h"
 #include "Common/UnitTestFramework.hpp"
+#include "Common/Observer.hpp"
 
 //Math
 #include "Math/Common/ConstantValue.hpp"
