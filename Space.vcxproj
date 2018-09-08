@@ -337,6 +337,7 @@
     <ClInclude Include="Source\GameEngine\Common\UnitTestFramework.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Window.h" />
     <ClInclude Include="Source\GameEngine\DDSTextureLoader\DDSTextureLoader.h" />
+    <ClInclude Include="Source\GameEngine\DoxygenPage.h" />
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h" />
     <ClInclude Include="Source\GameEngine\Math\BoundingBox\AxisAlignedBoundingBox.h" />
     <ClInclude Include="Source\GameEngine\Math\Common\ConstantValue.hpp" />

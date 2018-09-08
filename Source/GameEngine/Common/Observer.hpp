@@ -25,7 +25,7 @@ namespace SpaceGameEngine
 
 	/*!
 	@brief 用于响应被观察者所发出的消息的函数
-	@param 函数的参数类型
+	@param T 函数的参数类型
 	*/
 	template<typename... T>
 	class RespondFunction :public std::function<void(T...)>
@@ -88,9 +88,9 @@ namespace SpaceGameEngine
 /*!
 @brief 向观察者发出用于触发的消息（即触发观察者的相应的响应函数）
 @attention 只能在观察者子类中调用
-@prama 当前的观察者子类的类型
-@prama 被触发的消息（即Observer中的对应的响应函数）
-@prama 被触发的消息的参数（即Observer中的对应的响应函数的参数）
+@prama type 当前的观察者子类的类型
+@prama func 被触发的消息（即Observer中的对应的响应函数）
+@prama ... 被触发的消息的参数（即Observer中的对应的响应函数的参数）
 @note 实际上就是直接调用观察者的响应函数。
 */
 #define SUBJECT_NOTIFY(type,func,...)\
@@ -101,7 +101,7 @@ i->##func(##__VA_ARGS__##);\
 }\
 SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 
-	/*！
+	/*!
 	@brief 观察者模式中的观察者对象
 	*/
 	template<typename T>
@@ -126,7 +126,7 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 		}
 		/*!
 		@brief 重设观察者的观察对象
-		@param 指向被观察者的指针（可为nullptr）
+		@param ptr 指向被观察者的指针（可为nullptr）
 		*/
 		void Reset(Subject<T>* ptr)
 		{
@@ -160,7 +160,7 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 	};
 /*!
 @brief 观察者可响应的消息列表的定义的开始
-@param 被观察者的类型
+@param type 被观察者的类型
 @note 实际上就是对Observer的特例化
 @attention 需与OBSERVER_RESPOND_LIST_END配合使用
 @see OBSERVER_RESPOND_LIST_END
