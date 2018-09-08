@@ -24,8 +24,8 @@ unsigned int SpaceGameEngine::HashString(const String & str)
 
 bool SpaceGameEngine::GUIDFactory::IfGUIDHasBeenUsed(GUIDType c)
 {
-	auto iter = m_Content.find(c);
-	if (iter == m_Content.end())
+	auto iter = m_GUIDMap.find(c);
+	if (iter == m_GUIDMap.end())
 		return false;
 	else
 		return true;
@@ -33,20 +33,32 @@ bool SpaceGameEngine::GUIDFactory::IfGUIDHasBeenUsed(GUIDType c)
 
 SpaceGameEngine::GUIDType SpaceGameEngine::GUIDFactory::GetGUIDByString(const String & str)
 {
-	GUIDType c = HashString(str);
-	while (IfGUIDHasBeenUsed(c))
+	auto iter = m_StringMap.find(str);
+	if (iter != m_StringMap.end())
 	{
-		c += 1;
+		return iter->second;
 	}
-	m_Content.insert(std::make_pair(c, str));
-	return c;
+	else
+	{
+		GUIDType c = HashString(str);
+		while (IfGUIDHasBeenUsed(c))
+		{
+			c += 1;
+		}
+		m_GUIDMap.insert(std::make_pair(c, str));
+		m_StringMap.insert(std::make_pair(str, c));
+		return c;
+	}
 }
 
 SpaceGameEngine::String SpaceGameEngine::GUIDFactory::GetStringByGUID(GUIDType c)
 {
-	auto iter = m_Content.find(c);
-	if (iter != m_Content.end())
+	auto iter = m_GUIDMap.find(c);
+	if (iter != m_GUIDMap.end())
 		return iter->second;
 	else
+	{
+		THROW_ERROR("the guid does not have its corresponding string");
 		return "";
+	}
 }

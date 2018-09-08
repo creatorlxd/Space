@@ -15,6 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include "MemoryManager/AllocatorForSTL.hpp"
+#include "Error.h"
 
 namespace SpaceGameEngine
 {
@@ -25,13 +26,14 @@ namespace SpaceGameEngine
 	class GUIDFactory
 	{
 	public:
-		friend struct STLAllocatorInterface;
-		friend struct MemoryManagerAllocatorInterface;
-
 		bool IfGUIDHasBeenUsed(GUIDType c);
+		/*
+		相同的String返回相同的GUID
+		*/
 		GUIDType GetGUIDByString(const String& str);
 		String GetStringByGUID(GUIDType c);
 	private:
-		Map<GUIDType, String> m_Content;
+		Map<GUIDType, String> m_GUIDMap;
+		Map<String, GUIDType> m_StringMap;
 	};
 }
