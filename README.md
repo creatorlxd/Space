@@ -16,3 +16,7 @@
 6. 配置头文件包含和静态库链接(注意要把`ThirdParty`文件夹加入链接附加目录)
 7. 将`SystemConfig.configfile`文件挪到你的项目（不是解决方案）的根目录中
 8. 修改`SystemConfig.configfile`文件中的某些文件目录（根据你复制的头文件的位置） 
+
+# 生成文档
+
+使用`doxygen`来生成在`./Document/Reference/`下的参考文档。
