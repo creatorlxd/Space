@@ -26,8 +26,6 @@ limitations under the License.
 #include "Common/GUIDFactory.h"
 #include "Common/CurrentObject.hpp"
 #include "Common/Window.h"
-#include "Common/Data.hpp"
-#include "Common/Connection.hpp"
 #include "Common/MetaData/MetaData.h"
 #include "Common/MetaData/Serialize.h"
 #include "Common/MetaData/TextFileSerializeInterface.h"

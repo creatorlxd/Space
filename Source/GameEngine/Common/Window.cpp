@@ -54,7 +54,7 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 
 SpaceGameEngine::Window::~Window()
 {
-	DATA_NOTIFY(Window, m_OnReleaseAction);
+	SUBJECT_NOTIFY(Window, m_RespondRelease);
 }
 
 HWND SpaceGameEngine::Window::GetHwnd()
@@ -211,9 +211,9 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 	ShowWindow(m_Hwnd, SW_SHOWNORMAL);
 	UpdateWindow(m_Hwnd);
 
-	DATA_NOTIFY(Window, m_OnInitAction);
+	SUBJECT_NOTIFY(Window, m_RespondInit);
 	m_IfHaveBegun = true;
-	DATA_NOTIFY(Window, m_OnStartAction);
+	SUBJECT_NOTIFY(Window, m_RespondStart);
 
 	MSG msg = { 0 };
 	double time_limit = 1.0 / (double)m_FPSLimit;
@@ -234,7 +234,7 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 			if (time_span.count() >= time_limit)
 			{
 				m_Timer.Tick();
-				DATA_NOTIFY(Window, m_OnRunAction);
+				SUBJECT_NOTIFY(Window, m_RespondRun);
 				time_pre = time_now;
 			}
 			else
@@ -248,7 +248,7 @@ void SpaceGameEngine::Window::StartRun(HINSTANCE hInstance)
 
 void SpaceGameEngine::Window::Resize()
 {
-	DATA_NOTIFY(Window, m_OnResizeAction);
+	SUBJECT_NOTIFY(Window, m_RespondResize);
 }
 
 LRESULT SpaceGameEngine::Window::WindowProcess(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

@@ -166,12 +166,11 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 @see OBSERVER_RESPOND_LIST_END
 */
 #define OBSERVER_RESPOND_LIST_BEGIN(type)\
-namespace SpaceGameEngine{\
 template<>\
-class Observer<type>\
+class SpaceGameEngine::Observer<type>\
 {\
 public:\
-	friend class Subject<type>;\
+	friend class SpaceGameEngine::Subject<type>;\
 	Observer<type>()\
 	{\
 		m_pSubject = nullptr;\
@@ -184,7 +183,7 @@ public:\
 			m_pSubject = nullptr;\
 		}\
 	}\
-	void Reset(Subject<type>* ptr)\
+	void Reset(SpaceGameEngine::Subject<type>* ptr)\
 	{\
 		if (ptr&&ptr != m_pSubject)\
 		{\
@@ -195,7 +194,7 @@ public:\
 		else if (ptr == nullptr)\
 			Clear();\
 	}\
-	Observer<type>(Subject<type>* ptr)\
+	Observer<type>(SpaceGameEngine::Subject<type>* ptr)\
 	{\
 		m_pSubject = ptr;\
 		if (m_pSubject)\
@@ -206,9 +205,9 @@ public:\
 		Clear();\
 	}\
 public:\
-	RespondFunction<> m_RespondSubjectRelease;\
+	SpaceGameEngine::RespondFunction<> m_RespondSubjectRelease;\
 private:\
-	Subject<type>* m_pSubject;\
+	SpaceGameEngine::Subject<type>* m_pSubject;\
 public:
 
 /*!
@@ -217,6 +216,6 @@ public:
 @see OBSERVER_RESPOND_LIST_BEGIN
 */
 #define OBSERVER_RESPOND_LIST_END \
-};}
+}
 
 }

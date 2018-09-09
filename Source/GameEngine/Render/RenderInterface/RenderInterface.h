@@ -15,12 +15,12 @@ limitations under the License.
 */
 #pragma once
 #include "Common/Error.h"
-#include "Common/Connection.hpp"
+#include "Common/Observer.hpp"
 #include "RenderTarget.h"
 
 namespace SpaceGameEngine
 {
-	class RenderInterface :public Data<RenderInterface>
+	class RenderInterface :public Subject<RenderInterface>
 	{
 	public:
 		RenderInterface();
@@ -44,8 +44,8 @@ namespace SpaceGameEngine
 		bool m_IfInitialized;
 	};
 
-	CONNECTION_BEGIN(RenderInterface)
-		OnNotifyAction<void()> m_OnStartAction;
-		OnNotifyAction<void()> m_OnReleaseAction;
-	CONNECTION_END;
+	OBSERVER_RESPOND_LIST_BEGIN(RenderInterface)
+		RespondFunction<> m_RespondStart;
+		RespondFunction<> m_RespondRelease;
+	OBSERVER_RESPOND_LIST_END;
 }

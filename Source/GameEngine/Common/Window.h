@@ -18,7 +18,7 @@ limitations under the License.
 #include "ConfigFile.h"
 #include "CurrentObject.hpp"
 #include "Timer.h"
-#include "Connection.hpp"
+#include "Observer.hpp"
 
 namespace SpaceGameEngine
 {
@@ -26,7 +26,7 @@ namespace SpaceGameEngine
 	窗口类
 	注：该窗口类的一切关于size和position的操作都是针对客户区的。
 	*/
-	class Window :public CurrentObject<Window>, public Data<Window>
+	class Window :public CurrentObject<Window>, public Subject<Window>
 	{
 	public:
 		Window();
@@ -79,11 +79,11 @@ namespace SpaceGameEngine
 		Timer m_Timer;
 	};
 
-	CONNECTION_BEGIN(Window)
-		OnNotifyAction<void()> m_OnInitAction;
-		OnNotifyAction<void()> m_OnStartAction;
-		OnNotifyAction<void()> m_OnRunAction;
-		OnNotifyAction<void()> m_OnResizeAction;
-		OnNotifyAction<void()> m_OnReleaseAction;
-	CONNECTION_END;
+	OBSERVER_RESPOND_LIST_BEGIN(Window)
+		RespondFunction<> m_RespondInit;
+		RespondFunction<> m_RespondStart;
+		RespondFunction<> m_RespondRun;
+		RespondFunction<> m_RespondResize;
+		RespondFunction<> m_RespondRelease;
+	OBSERVER_RESPOND_LIST_END;
 }

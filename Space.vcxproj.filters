@@ -167,12 +167,6 @@
     <ClInclude Include="Source\GameEngine\Common\CurrentObject.hpp">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Data.hpp">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameEngine\Common\Connection.hpp">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine\Common\MetaData\MetaData.h">
       <Filter>Common\MetaData</Filter>
     </ClInclude>

@@ -313,9 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\Common\ConfigFile.h" />
-    <ClInclude Include="Source\GameEngine\Common\Connection.hpp" />
     <ClInclude Include="Source\GameEngine\Common\CurrentObject.hpp" />
-    <ClInclude Include="Source\GameEngine\Common\Data.hpp" />
     <ClInclude Include="Source\GameEngine\Common\Def.h" />
     <ClInclude Include="Source\GameEngine\Common\Error.h" />
     <ClInclude Include="Source\GameEngine\Common\File.h" />
