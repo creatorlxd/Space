@@ -31,10 +31,10 @@ namespace SpaceGameEngine
 	class RespondFunction :public std::function<void(T...)>
 	{
 	public:
-		RespondFunction()
+		inline RespondFunction()
 			:std::function<void(T...)>([]()->void {})
 		{}
-		RespondFunction& operator = (const std::function<void(T...)>& func)
+		inline RespondFunction& operator = (const std::function<void(T...)>& func)
 		{
 			std::function<void(T...)>::operator = (func);
 			return *this;
@@ -50,11 +50,11 @@ namespace SpaceGameEngine
 	{
 	public:
 		friend class Observer<T>;
-		Subject()
+		inline Subject()
 		{
 
 		}
-		~Subject()
+		inline ~Subject()
 		{
 			std::lock_guard<std::mutex> locker(m_Mutex);
 			for (auto i : m_Content)
@@ -64,12 +64,12 @@ namespace SpaceGameEngine
 			}
 		}
 	private:
-		void AddObserver(Observer<T>& ob)
+		inline void AddObserver(Observer<T>& ob)
 		{
 			std::lock_guard<std::mutex> locker(m_Mutex);
 			m_Content.push_back(&ob);
 		}
-		void DeleteObserver(Observer<T>& ob)
+		inline void DeleteObserver(Observer<T>& ob)
 		{
 			std::lock_guard<std::mutex> locker(m_Mutex);
 			auto iter = std::find(m_Content.begin(), m_Content.end(), &ob);
@@ -109,14 +109,14 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 	{
 	public:
 		friend class Subject<T>;
-		Observer()
+		inline Observer()
 		{
 			m_pSubject = nullptr;
 		}
 		/*!
 		@brief 清空观察者的观察对象
 		*/
-		void Clear()
+		inline void Clear()
 		{
 			if (m_pSubject)
 			{
@@ -128,24 +128,26 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 		@brief 重设观察者的观察对象
 		@param ptr 指向被观察者的指针（可为nullptr）
 		*/
-		void Reset(Subject<T>* ptr)
+		inline void Reset(Subject<T>* ptr)
 		{
-			if (ptr&&ptr != m_pSubject)
+			if (ptr == m_pSubject)
+				return;
+			if(ptr)
 			{
 				Clear();
 				m_pSubject = ptr;
 				m_pSubject->AddObserver(*this);
 			}
-			else if (ptr == nullptr)
+			else
 				Clear();
 		}
-		Observer(Subject<T>* ptr)
+		inline Observer(Subject<T>* ptr)
 		{
 			m_pSubject = ptr;
 			if (m_pSubject)
 				m_pSubject->AddObserver(*this);
 		}
-		~Observer()
+		inline ~Observer()
 		{
 			Clear();
 		}
@@ -171,11 +173,11 @@ class SpaceGameEngine::Observer<type>\
 {\
 public:\
 	friend class SpaceGameEngine::Subject<type>;\
-	Observer<type>()\
+	inline Observer<type>()\
 	{\
 		m_pSubject = nullptr;\
 	}\
-	void Clear()\
+	inline void Clear()\
 	{\
 		if (m_pSubject)\
 		{\
@@ -183,24 +185,26 @@ public:\
 			m_pSubject = nullptr;\
 		}\
 	}\
-	void Reset(SpaceGameEngine::Subject<type>* ptr)\
+	inline void Reset(SpaceGameEngine::Subject<type>* ptr)\
 	{\
-		if (ptr&&ptr != m_pSubject)\
+		if (ptr == m_pSubject)\
+			return;\
+		if(ptr)\
 		{\
 			Clear();\
 			m_pSubject = ptr;\
 			m_pSubject->AddObserver(*this);\
 		}\
-		else if (ptr == nullptr)\
+		else\
 			Clear();\
 	}\
-	Observer<type>(SpaceGameEngine::Subject<type>* ptr)\
+	inline Observer<type>(SpaceGameEngine::Subject<type>* ptr)\
 	{\
 		m_pSubject = ptr;\
 		if (m_pSubject)\
 			m_pSubject->AddObserver(*this);\
 	}\
-	~Observer<type>()\
+	inline ~Observer<type>()\
 	{\
 		Clear();\
 	}\

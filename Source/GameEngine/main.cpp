@@ -24,16 +24,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	RenderInterface* pRenderInterface = MemoryManager::New<DX11RenderInterface>();
 	//test
 	RenderTarget render_target(ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
-	Observer<Window> WindowConnection(pWindow);
-	Observer<RenderInterface> RenderInterfaceConnection(pRenderInterface);
-	WindowConnection.m_RespondStart = [&]() {
+	Observer<Window> WindowObserver(pWindow);
+	Observer<RenderInterface> RenderInterfaceObserver(pRenderInterface);
+	WindowObserver.m_RespondStart = [&]() {
 		pRenderInterface->Init();
 	};
-	WindowConnection.m_RespondRun = [&]() {
+	WindowObserver.m_RespondRun = [&]() {
 		pRenderInterface->BeginRender(render_target);
 		pRenderInterface->EndRender(render_target);
 	};
-	WindowConnection.m_RespondResize = [&]() {
+	WindowObserver.m_RespondResize = [&]() {
 		if (render_target.m_IfInitialized)
 		{
 			pRenderInterface->ResizeRenderTarget(render_target, ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
@@ -41,13 +41,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			pRenderInterface->EndRender(render_target);
 		}
 	};
-	WindowConnection.m_RespondRelease = [&]() {
+	WindowObserver.m_RespondRelease = [&]() {
 
 	};
-	RenderInterfaceConnection.m_RespondStart = [&]() {
+	RenderInterfaceObserver.m_RespondStart = [&]() {
 		pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
 	};
-	RenderInterfaceConnection.m_RespondRelease = [&]() {
+	RenderInterfaceObserver.m_RespondRelease = [&]() {
 		pRenderInterface->ReleaseRenderTarget(render_target);
 	};
 	//----
