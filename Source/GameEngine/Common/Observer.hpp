@@ -88,9 +88,9 @@ namespace SpaceGameEngine
 /*!
 @brief 向观察者发出用于触发的消息（即触发观察者的相应的响应函数）
 @attention 只能在观察者子类中调用
-@prama type 当前的观察者子类的类型
-@prama func 被触发的消息（即Observer中的对应的响应函数）
-@prama ... 被触发的消息的参数（即Observer中的对应的响应函数的参数）
+@param type 当前的观察者子类的类型
+@param func 被触发的消息（即Observer中的对应的响应函数）
+@param ... 被触发的消息的参数（即Observer中的对应的响应函数的参数）
 @note 实际上就是直接调用观察者的响应函数。
 */
 #define SUBJECT_NOTIFY(type,func,...)\
