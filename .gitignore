@@ -263,3 +263,4 @@ paket-files/
 /BuildRelease/
 .vscode/
 /Document/Reference/*
+**/.DS_Store
