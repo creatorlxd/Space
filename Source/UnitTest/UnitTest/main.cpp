@@ -47,8 +47,10 @@ UNIT_TEST_METHOD(TestObserver, "Common")
 		test_b = 1;
 	};
 	ptestsubject->Test();
+	REQUIRE(testob.GetSubject());
 	delete ptestob;
 	delete ptestsubject;
+	REQUIRE(testob.GetSubject() == nullptr);
 	REQUIRE(test_a == 1);
 	REQUIRE(test_b == 1);
 	UNIT_TEST_SUCCESS;

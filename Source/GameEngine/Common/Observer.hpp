@@ -141,6 +141,14 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 			else
 				Clear();
 		}
+		/*!
+		@brief 获取被观察对象的指针
+		@return 被观察对象的指针
+		*/
+		inline Subject<T>* GetSubject()
+		{
+			return m_pSubject;
+		}
 		inline Observer(Subject<T>* ptr)
 		{
 			m_pSubject = ptr;
@@ -197,6 +205,10 @@ public:\
 		}\
 		else\
 			Clear();\
+	}\
+	inline SpaceGameEngine::Subject<type>* GetSubject()\
+	{\
+		return m_pSubject;\
 	}\
 	inline Observer<type>(SpaceGameEngine::Subject<type>* ptr)\
 	{\
