@@ -80,10 +80,10 @@ namespace SpaceGameEngine
 	};
 
 	OBSERVER_RESPOND_LIST_BEGIN(Window)
-		RespondFunction<> m_RespondInit;
-		RespondFunction<> m_RespondStart;
-		RespondFunction<> m_RespondRun;
-		RespondFunction<> m_RespondResize;
-		RespondFunction<> m_RespondRelease;
+		RespondFunction<Window&> m_RespondInit;
+		RespondFunction<Window&> m_RespondStart;
+		RespondFunction<Window&> m_RespondRun;
+		RespondFunction<Window&> m_RespondResize;
+		RespondFunction<Window&> m_RespondRelease;
 	OBSERVER_RESPOND_LIST_END;
 }

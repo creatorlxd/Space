@@ -45,7 +45,7 @@ namespace SpaceGameEngine
 	};
 
 	OBSERVER_RESPOND_LIST_BEGIN(RenderInterface)
-		RespondFunction<> m_RespondStart;
-		RespondFunction<> m_RespondRelease;
+		RespondFunction<RenderInterface&> m_RespondStart;
+		RespondFunction<RenderInterface&> m_RespondRelease;
 	OBSERVER_RESPOND_LIST_END;
 }

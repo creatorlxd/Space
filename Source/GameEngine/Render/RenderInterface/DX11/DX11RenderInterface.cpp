@@ -23,7 +23,7 @@ SpaceGameEngine::DX11RenderInterface::DX11RenderInterface()
 
 SpaceGameEngine::DX11RenderInterface::~DX11RenderInterface()
 {
-	SUBJECT_NOTIFY(RenderInterface, m_RespondRelease);
+	SUBJECT_NOTIFY(RenderInterface, m_RespondRelease, *this);
 	SafeRelease(m_pDevice);
 	SafeRelease(m_pImmediateDeviceContext);
 }
@@ -51,7 +51,7 @@ void SpaceGameEngine::DX11RenderInterface::Init()
 	ASSERT(m_4xMsaaQuality > 0, "Msaa Quality must more than zero");
 
 	m_IfInitialized = true;
-	SUBJECT_NOTIFY(RenderInterface, m_RespondStart);
+	SUBJECT_NOTIFY(RenderInterface, m_RespondStart, *this);
 }
 
 void SpaceGameEngine::DX11RenderInterface::BeginRender(const RenderTarget & rendertarget)

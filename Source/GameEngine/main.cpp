@@ -26,14 +26,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	RenderTarget render_target(ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
 	Observer<Window> WindowObserver(pWindow);
 	Observer<RenderInterface> RenderInterfaceObserver(pRenderInterface);
-	WindowObserver.m_RespondStart = [&]() {
+	WindowObserver.m_RespondStart = [&](Window&) {
 		pRenderInterface->Init();
 	};
-	WindowObserver.m_RespondRun = [&]() {
+	WindowObserver.m_RespondRun = [&](Window&) {
 		pRenderInterface->BeginRender(render_target);
 		pRenderInterface->EndRender(render_target);
 	};
-	WindowObserver.m_RespondResize = [&]() {
+	WindowObserver.m_RespondResize = [&](Window&) {
 		if (render_target.m_IfInitialized)
 		{
 			pRenderInterface->ResizeRenderTarget(render_target, ViewPort(0, 0, pWindow->GetWindowWidth(), pWindow->GetWindowHeight()));
@@ -41,13 +41,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			pRenderInterface->EndRender(render_target);
 		}
 	};
-	WindowObserver.m_RespondRelease = [&]() {
+	WindowObserver.m_RespondRelease = [&](Window&) {
 
 	};
-	RenderInterfaceObserver.m_RespondStart = [&]() {
+	RenderInterfaceObserver.m_RespondStart = [&](RenderInterface&) {
 		pRenderInterface->InitRenderTarget(render_target, pWindow->GetHwnd());
 	};
-	RenderInterfaceObserver.m_RespondRelease = [&]() {
+	RenderInterfaceObserver.m_RespondRelease = [&](RenderInterface&) {
 		pRenderInterface->ReleaseRenderTarget(render_target);
 	};
 	//----

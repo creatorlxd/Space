@@ -32,7 +32,7 @@ namespace SpaceGameEngine
 	{
 	public:
 		inline RespondFunction()
-			:std::function<void(T...)>([]()->void {})
+			:std::function<void(T...)>([](T...)->void {})
 		{}
 		inline RespondFunction& operator = (const std::function<void(T...)>& func)
 		{
