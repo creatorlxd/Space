@@ -42,7 +42,7 @@ namespace SpaceGameEngine
 	};
 
 	/*!
-	@brief 观察者模式中的被观察对象
+	@brief 观察者模式中的被观察对象（线程安全）
 	@warning 子类T必须继承于Subject<T>
 	*/
 	template<typename T>
