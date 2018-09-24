@@ -42,11 +42,11 @@ namespace SpaceGameEngine
 	};
 
 	/*!
-	@brief 观察者模式中的被观察对象
+	@brief 观察者模式中的被观察对象（禁用默认复制）
 	@warning 子类T必须继承于Subject<T>
 	*/
 	template<typename T>
-	class Subject
+	class Subject :public Uncopyable
 	{
 	public:
 		friend class Observer<T>;
@@ -102,10 +102,10 @@ i->##func(##__VA_ARGS__##);\
 SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 
 	/*!
-	@brief 观察者模式中的观察者对象
+	@brief 观察者模式中的观察者对象（禁用默认复制）
 	*/
 	template<typename T>
-	class Observer
+	class Observer:public Uncopyable
 	{
 	public:
 		friend class Subject<T>;
@@ -177,7 +177,7 @@ SpaceGameEngine::Subject<type>::m_Mutex.unlock();
 */
 #define OBSERVER_RESPOND_LIST_BEGIN(type)\
 template<>\
-class SpaceGameEngine::Observer<type>\
+class SpaceGameEngine::Observer<type>:public SpaceGameEngine::Uncopyable\
 {\
 public:\
 	friend class SpaceGameEngine::Subject<type>;\

@@ -56,4 +56,22 @@ UNIT_TEST_METHOD(TestObserver, "Common")
 	UNIT_TEST_SUCCESS;
 }
 
+/*
+//test uncopyable
+struct TestUncopyableType :public SpaceGameEngine::Uncopyable
+{
+	int m_Test;
+};
+
+UNIT_TEST_METHOD(TestUncopyable, "Common")
+{
+	TestUncopyableType t1, t2;
+	TestUncopyableType t3(t1);
+	TestUncopyableType t4(std::move(t2));
+	t1 = t2;
+	t1 = std::move(t2);
+	UNIT_TEST_SUCCESS;
+}
+*/
+
 UNIT_TEST_MAIN;

@@ -94,4 +94,16 @@ namespace SpaceGameEngine
 	{
 		using Result = typename std::decay<T>::type;
 	};
+
+	/*!
+	@brief 为类型禁用默认的拷贝操作
+	*/
+	struct Uncopyable
+	{
+		Uncopyable() = default;
+		Uncopyable(const Uncopyable&) = delete;
+		Uncopyable(Uncopyable&&) = delete;
+		Uncopyable& operator = (const Uncopyable&) = delete;
+		Uncopyable& operator = (Uncopyable&&) = delete;
+	};
 }
