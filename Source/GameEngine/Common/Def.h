@@ -26,7 +26,7 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-#define GLOBALCONST extern const __declspec(selectany)
+#define GLOBAL_CONST extern const __declspec(selectany)
 
 #define STRING(str) #str
 

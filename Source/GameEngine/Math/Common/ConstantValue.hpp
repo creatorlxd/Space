@@ -23,7 +23,7 @@ namespace SpaceGameEngine
 {
 	namespace MaxValue
 	{
-		GLOBALCONST int g_MaxIntValue = INT_MAX;
+		GLOBAL_CONST int g_MaxIntValue = INT_MAX;
 	}
 	namespace Colors
 	{

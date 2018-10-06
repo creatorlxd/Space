@@ -18,7 +18,7 @@ limitations under the License.
 
 namespace SpaceGameEngine
 {
-	GLOBALCONST float FloatEpsilon = 0.000001f;
+	GLOBAL_CONST float FloatEpsilon = 0.000001f;
 	bool FloatEqual(float f1, float f2);
 
 	bool FloatLess(float f1, float f2);
