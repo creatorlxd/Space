@@ -253,7 +253,7 @@ namespace SpaceGameEngine
 				auto iter = m_pMetaData->m_AllInheritanceRelation.find(SpaceGameEngine::GetTypeName<T>());
 				if (iter != m_pMetaData->m_AllInheritanceRelation.end())
 				{
-					return (T*)m_pContent;
+					return (T*)(m_pContent + iter->second.m_Offset);
 				}
 				else
 				{

@@ -20,9 +20,14 @@ SpaceGameEngine::MetaData::MetaData(const String & type_name, size_t size, const
 	:
 	m_TypeName(type_name), m_Size(size), m_MemberVariable(member_var), m_Constructor(constructor), m_CopyAction(copy_action), m_SerializeAction(serialize_action), m_DirectInheritanceRelation(inheritance_relation), m_AllInheritanceRelation(inheritance_relation)
 {
-	for (auto i : m_DirectInheritanceRelation)
+	for (auto& i : m_DirectInheritanceRelation)
 	{
-		m_AllInheritanceRelation.insert(i.second.m_pMetaData->m_AllInheritanceRelation.begin(), i.second.m_pMetaData->m_AllInheritanceRelation.end());
+		for (auto& j : i.second.m_pMetaData->m_AllInheritanceRelation)
+		{
+			auto iter = m_AllInheritanceRelation.insert(j).first;
+			iter->second.m_Offset += i.second.m_Offset;
+			iter->second.m_ChildTypeName = m_TypeName;
+		}
 	}
 }
 
