@@ -298,6 +298,7 @@
   <ItemGroup>
     <None Include="appveyor.yml" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Document\Document\Common\ConfigFile.md" />
     <None Include="Document\Document\GameFramework\Asset.md" />
     <None Include="Document\Document\GameFramework\Component子类编写规则.md" />
     <None Include="Document\Document\GameFramework\Space光源及光源组件.md" />

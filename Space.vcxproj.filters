@@ -70,6 +70,9 @@
     <Filter Include="Render\RenderInterface\DX11">
       <UniqueIdentifier>{8be1783a-e652-40c5-9e46-418f83f864dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document\Document\Common">
+      <UniqueIdentifier>{8ca00fd1-8848-4615-a50f-e73380964ba8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -108,6 +111,9 @@
       <Filter>Document\Document\GameFramework</Filter>
     </None>
     <None Include="appveyor.yml" />
+    <None Include="Document\Document\Common\ConfigFile.md">
+      <Filter>Document\Document\Common</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameEngine\dxerr\dxerr.h">
