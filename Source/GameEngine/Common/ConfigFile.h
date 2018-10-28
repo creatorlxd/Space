@@ -22,7 +22,7 @@ limitations under the License.
 namespace SpaceGameEngine
 {
 	/*!
-	@brief 配置文件键值的类型
+	@brief 配置文件中的值的类型
 	*/
 	enum class ConfigFileValueType :unsigned char
 	{
@@ -137,38 +137,82 @@ namespace SpaceGameEngine
 		void Set(bool b);
 	};
 
+	/*!
+	@brief 配置文件中的配置表
+	*/
 	class ConfigTable
 	{
 	public:
 		friend class ConfigFile;
 
+		/*!
+		@brief 获取配置表中的值
+		@param name 值的键名
+		*/
 		ConfigFileValue& GetConfigValue(const String& name);
+		/*!
+		@brief 查看配置表中是否有某个键值对
+		@param name 值的键名
+		*/
 		bool IfHaveConfigValue(const String& name);
 	private:
+		/*!
+		@brief 配置表的内容
+		*/
 		Map<String, ConfigFileValue> m_Content;
 	};
 
+	/*!
+	@brief 配置文件
+	*/
 	class ConfigFile
 	{
 	public:
+		/*!
+		@brief 配置文件的默认构造
+		*/
 		ConfigFile();
+		/*!
+		@brief 构造的同时读取一个配置文件的配置
+		@param filename 要读取的配置文件名
+		*/
 		ConfigFile(const String& filename);
 
+		/*!
+		@brief 获取一个配置表
+		@param name 配置表名
+		*/
 		ConfigTable & GetConfigTable(const String& name);
+		/*!
+		@brief 查看配置文件中是否有某个配置表
+		@param name 配置表名
+		*/
 		bool IfHaveConfigTable(const String& name);
 
-		/*
-		接受由getline获取的一组字符串进行解析
+		/*!
+		@brief 接受由`getline`获取的一组字符串进行解析
+		@param strs 一行行字符串
 		*/
 		void Parse(const Vector<String>& strs);
+		/*!
+		@brief 从配置文件中读取配置
+		@param filename 要读取的配置文件名
+		*/
 		void InitFromFile(const String& filename);
-		/*
-		保存配置表到某个文件，但不保留注释
+		/*!
+		@brief 保存配置文件内容到某个文件，但不保留注释
+		@param filename 要保存的文件名
 		*/
 		void SaveToFile(const String& filename);
 	private:
+		/*!
+		@brief 配置文件的内容
+		*/
 		Map<String, ConfigTable> m_Content;
 	};
 
+	/*!
+	@brief 获取游戏引擎默认的配置文件"./SystemConfig.configfile"
+	*/
 	ConfigFile& GetDefaultConfigFile();
 }
