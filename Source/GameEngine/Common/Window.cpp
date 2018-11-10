@@ -26,25 +26,40 @@ SpaceGameEngine::Window::Window() :CurrentObject<Window>(this)
 	m_WindowPosition = m_DefaultWindowPosition;		//default value
 	m_IfShowCursor = true;
 	m_FPSLimit = 360;		//default value
-	if (GetDefaultConfigFile().IfHaveConfigTable("Window"))
+	auto pConfigTable = GetDefaultConfigFile().QueryConfigTable("Window");
+	if (pConfigTable)
 	{
-		auto WindowConfig = GetDefaultConfigFile().GetConfigTable("Window");
-		if (WindowConfig.IfHaveConfigValue("IconFileName"))
-			m_IconFileName = WindowConfig.GetConfigValue("IconFileName").AsString();
-		if (WindowConfig.IfHaveConfigValue("WindowWidth"))
-			m_WindowWidth = WindowConfig.GetConfigValue("WindowWidth").AsInt();
-		if (WindowConfig.IfHaveConfigValue("WindowHeight"))
-			m_WindowHeight = WindowConfig.GetConfigValue("WindowHeight").AsInt();
-		if (WindowConfig.IfHaveConfigValue("WindowTitle"))
-			m_WindowTitle = WindowConfig.GetConfigValue("WindowTitle").AsString();
-		if (WindowConfig.IfHaveConfigValue("WindowPositionX"))
-			m_WindowPosition.first = WindowConfig.GetConfigValue("WindowPositionX").AsInt();
-		if (WindowConfig.IfHaveConfigValue("WindowPositionY"))
-			m_WindowPosition.second = WindowConfig.GetConfigValue("WindowPositionY").AsInt();
-		if (WindowConfig.IfHaveConfigValue("IfShowCursor"))
-			m_IfShowCursor = WindowConfig.GetConfigValue("IfShowCursor").AsBool();
-		if (WindowConfig.IfHaveConfigValue("FPSLimit"))
-			m_FPSLimit = WindowConfig.GetConfigValue("FPSLimit").AsInt();
+		auto pbuffer = pConfigTable->QueryConfigValue("IconFileName");
+		if (pbuffer)
+			m_IconFileName = pbuffer->AsString();
+		
+		pbuffer = pConfigTable->QueryConfigValue("WindowWidth");
+		if (pbuffer)
+			m_WindowWidth = pbuffer->AsInt();
+		
+		pbuffer = pConfigTable->QueryConfigValue("WindowHeight");
+		if (pbuffer)
+			m_WindowHeight = pbuffer->AsInt();
+		
+		pbuffer = pConfigTable->QueryConfigValue("WindowTitle");
+		if (pbuffer)
+			m_WindowTitle = pbuffer->AsString();
+
+		pbuffer = pConfigTable->QueryConfigValue("WindowPositionX");
+		if (pbuffer)
+			m_WindowPosition.first = pbuffer->AsInt();
+
+		pbuffer = pConfigTable->QueryConfigValue("WindowPositionY");
+		if (pbuffer)
+			m_WindowPosition.second = pbuffer->AsInt();
+
+		pbuffer = pConfigTable->QueryConfigValue("IfShowCursor");
+		if (pbuffer)
+			m_IfShowCursor = pbuffer->AsBool();
+
+		pbuffer = pConfigTable->QueryConfigValue("FPSLimit");
+		if (pbuffer)
+			m_FPSLimit = pbuffer->AsInt();
 	}
 
 	ShowCursor(m_IfShowCursor);

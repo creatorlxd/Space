@@ -155,6 +155,12 @@ namespace SpaceGameEngine
 		@param name 值的键名
 		*/
 		bool IfHaveConfigValue(const String& name);
+		/*!
+		@brief 查找配置表中的值
+		@param name 值的键名
+		@return 有该键值对则返回指向其的指针，否则返回空指针nullptr
+		*/
+		ConfigFileValue* QueryConfigValue(const String& name);
 	private:
 		/*!
 		@brief 配置表的内容
@@ -188,6 +194,12 @@ namespace SpaceGameEngine
 		@param name 配置表名
 		*/
 		bool IfHaveConfigTable(const String& name);
+		/*!
+		@brief 查找一个配置表
+		@param name 配置表名
+		@return 有该配置表则返回指向其的指针，否则返回空指针nullptr
+		*/
+		ConfigTable* QueryConfigTable(const String& name);
 
 		/*!
 		@brief 接受由`getline`获取的一组字符串进行解析

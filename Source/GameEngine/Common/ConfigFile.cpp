@@ -192,6 +192,19 @@ bool SpaceGameEngine::ConfigTable::IfHaveConfigValue(const String & name)
 	}
 }
 
+SpaceGameEngine::ConfigFileValue * SpaceGameEngine::ConfigTable::QueryConfigValue(const String & name)
+{
+	auto iter = m_Content.find(name);
+	if (iter != m_Content.end())
+	{
+		return &iter->second;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
 SpaceGameEngine::ConfigFile::ConfigFile()
 {
 
@@ -225,6 +238,19 @@ bool SpaceGameEngine::ConfigFile::IfHaveConfigTable(const String & name)
 	else
 	{
 		return false;
+	}
+}
+
+SpaceGameEngine::ConfigTable * SpaceGameEngine::ConfigFile::QueryConfigTable(const String & name)
+{
+	auto iter = m_Content.find(name);
+	if (iter != m_Content.end())
+	{
+		return &iter->second;
+	}
+	else
+	{
+		return nullptr;
 	}
 }
 
