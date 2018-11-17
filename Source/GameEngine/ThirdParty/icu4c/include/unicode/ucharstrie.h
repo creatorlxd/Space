@@ -23,10 +23,10 @@
  *                 to integer values.
  */
 
-#include "unicode/utypes.h"
-#include "unicode/unistr.h"
-#include "unicode/uobject.h"
-#include "unicode/ustringtrie.h"
+#include "utypes.h"
+#include "unistr.h"
+#include "uobject.h"
+#include "ustringtrie.h"
 
 U_NAMESPACE_BEGIN
 

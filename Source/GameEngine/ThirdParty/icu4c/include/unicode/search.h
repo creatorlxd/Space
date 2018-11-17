@@ -12,7 +12,7 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 
@@ -21,11 +21,11 @@
  
 #if !UCONFIG_NO_COLLATION && !UCONFIG_NO_BREAK_ITERATION
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
-#include "unicode/chariter.h"
-#include "unicode/brkiter.h"
-#include "unicode/usearch.h"
+#include "uobject.h"
+#include "unistr.h"
+#include "chariter.h"
+#include "brkiter.h"
+#include "usearch.h"
 
 /**
 * @stable ICU 2.0

@@ -12,8 +12,8 @@
 #ifndef UNIFUNCT_H
 #define UNIFUNCT_H
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 /**
  * \file 

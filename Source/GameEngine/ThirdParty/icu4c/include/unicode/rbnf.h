@@ -10,7 +10,7 @@
 #ifndef RBNF_H
 #define RBNF_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -29,14 +29,14 @@
 #else
 #define U_HAVE_RBNF 1
 
-#include "unicode/dcfmtsym.h"
-#include "unicode/fmtable.h"
-#include "unicode/locid.h"
-#include "unicode/numfmt.h"
-#include "unicode/unistr.h"
-#include "unicode/strenum.h"
-#include "unicode/brkiter.h"
-#include "unicode/upluralrules.h"
+#include "dcfmtsym.h"
+#include "fmtable.h"
+#include "locid.h"
+#include "numfmt.h"
+#include "unistr.h"
+#include "strenum.h"
+#include "brkiter.h"
+#include "upluralrules.h"
 
 U_NAMESPACE_BEGIN
 

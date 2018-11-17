@@ -13,15 +13,15 @@
 #ifndef UTRANS_H
 #define UTRANS_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_TRANSLITERATION
 
-#include "unicode/localpointer.h"
-#include "unicode/urep.h"
-#include "unicode/parseerr.h"
-#include "unicode/uenum.h"
-#include "unicode/uset.h"
+#include "localpointer.h"
+#include "urep.h"
+#include "parseerr.h"
+#include "uenum.h"
+#include "uset.h"
 
 /********************************************************************
  * General Notes

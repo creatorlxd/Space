@@ -27,11 +27,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "unicode/utypes.h"
-#include "unicode/ucnv.h"
-#include "unicode/utrans.h"
-#include "unicode/localpointer.h"
-#include "unicode/unum.h"
+#include "utypes.h"
+#include "ucnv.h"
+#include "utrans.h"
+#include "localpointer.h"
+#include "unum.h"
 
 #if !UCONFIG_NO_CONVERSION
 

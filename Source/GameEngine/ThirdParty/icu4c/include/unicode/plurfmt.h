@@ -14,7 +14,7 @@
 #ifndef PLURFMT
 #define PLURFMT
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -23,9 +23,9 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/messagepattern.h"
-#include "unicode/numfmt.h"
-#include "unicode/plurrule.h"
+#include "messagepattern.h"
+#include "numfmt.h"
+#include "plurrule.h"
 
 U_NAMESPACE_BEGIN
 

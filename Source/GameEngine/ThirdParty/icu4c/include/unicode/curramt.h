@@ -13,12 +13,12 @@
 #ifndef __CURRENCYAMOUNT_H__
 #define __CURRENCYAMOUNT_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/measure.h"
-#include "unicode/currunit.h"
+#include "measure.h"
+#include "currunit.h"
 
 /**
  * \file 

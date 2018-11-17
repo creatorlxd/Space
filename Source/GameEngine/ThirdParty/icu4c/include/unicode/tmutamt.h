@@ -16,8 +16,8 @@
  * \brief C++ API: time unit amount object.
  */
 
-#include "unicode/measure.h"
-#include "unicode/tmunit.h"
+#include "measure.h"
+#include "tmunit.h"
 
 #if !UCONFIG_NO_FORMATTING
 

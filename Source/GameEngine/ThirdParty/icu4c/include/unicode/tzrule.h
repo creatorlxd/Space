@@ -14,13 +14,13 @@
  * \brief C++ API: Time zone rule classes
  */
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
-#include "unicode/dtrule.h"
+#include "uobject.h"
+#include "unistr.h"
+#include "dtrule.h"
 
 U_NAMESPACE_BEGIN
 

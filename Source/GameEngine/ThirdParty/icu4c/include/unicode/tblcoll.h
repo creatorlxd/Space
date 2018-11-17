@@ -62,14 +62,14 @@
 #ifndef TBLCOLL_H
 #define TBLCOLL_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_COLLATION
 
-#include "unicode/coll.h"
-#include "unicode/locid.h"
-#include "unicode/uiter.h"
-#include "unicode/ucol.h"
+#include "coll.h"
+#include "locid.h"
+#include "uiter.h"
+#include "ucol.h"
 
 U_NAMESPACE_BEGIN
 

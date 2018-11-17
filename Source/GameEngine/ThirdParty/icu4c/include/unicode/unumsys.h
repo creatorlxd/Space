@@ -10,12 +10,12 @@
 #ifndef UNUMSYS_H
 #define UNUMSYS_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/uenum.h"
-#include "unicode/localpointer.h"
+#include "uenum.h"
+#include "localpointer.h"
 
 /**
  * \file

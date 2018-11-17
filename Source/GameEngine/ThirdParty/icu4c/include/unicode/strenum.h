@@ -12,8 +12,8 @@
 #ifndef STRENUM_H
 #define STRENUM_H
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
+#include "uobject.h"
+#include "unistr.h"
 
 /**
  * \file 

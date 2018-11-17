@@ -10,7 +10,7 @@
 #ifndef UDISPLAYCONTEXT_H
 #define UDISPLAYCONTEXT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 

@@ -11,7 +11,7 @@
 #ifndef NORMLZR_H
 #define NORMLZR_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 
@@ -20,11 +20,11 @@
  
 #if !UCONFIG_NO_NORMALIZATION
 
-#include "unicode/chariter.h"
-#include "unicode/normalizer2.h"
-#include "unicode/unistr.h"
-#include "unicode/unorm.h"
-#include "unicode/uobject.h"
+#include "chariter.h"
+#include "normalizer2.h"
+#include "unistr.h"
+#include "unorm.h"
+#include "uobject.h"
 
 U_NAMESPACE_BEGIN
 /**
@@ -35,7 +35,7 @@ U_NAMESPACE_BEGIN
  * There is one exception: The new API does not provide a replacement for Normalizer::compare().
  *
  * The Normalizer class supports the standard normalization forms described in
- * <a href="http://www.unicode.org/unicode/reports/tr15/" target="unicode">
+ * <a href="http://www.unicode.org/reports/tr15/" target="unicode">
  * Unicode Standard Annex #15: Unicode Normalization Forms</a>.
  *
  * The Normalizer class consists of two parts:

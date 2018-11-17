@@ -24,7 +24,7 @@
 #ifndef CHOICFMT_H
 #define CHOICFMT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -34,11 +34,11 @@
 #if !UCONFIG_NO_FORMATTING
 #ifndef U_HIDE_DEPRECATED_API
 
-#include "unicode/fieldpos.h"
-#include "unicode/format.h"
-#include "unicode/messagepattern.h"
-#include "unicode/numfmt.h"
-#include "unicode/unistr.h"
+#include "fieldpos.h"
+#include "format.h"
+#include "messagepattern.h"
+#include "numfmt.h"
+#include "unistr.h"
 
 U_NAMESPACE_BEGIN
 
@@ -141,8 +141,8 @@ class MessageFormat;
  * <p>Here is an example that shows formatting and parsing: </p>
  *
  * \code
- *   #include <unicode/choicfmt.h>
- *   #include <unicode/unistr.h>
+ *   #include <choicfmt.h>
+ *   #include <unistr.h>
  *   #include <iostream.h>
  *
  *   int main(int argc, char *argv[]) {

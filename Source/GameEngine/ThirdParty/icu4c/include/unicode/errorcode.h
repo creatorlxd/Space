@@ -25,8 +25,8 @@
  *                 ICU C and C++ APIs from C++ user code.
  */
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 U_NAMESPACE_BEGIN
 

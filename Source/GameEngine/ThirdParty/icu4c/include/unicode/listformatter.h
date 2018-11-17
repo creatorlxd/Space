@@ -19,10 +19,10 @@
 #ifndef __LISTFORMATTER_H__
 #define __LISTFORMATTER_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
-#include "unicode/unistr.h"
-#include "unicode/locid.h"
+#include "unistr.h"
+#include "locid.h"
 
 U_NAMESPACE_BEGIN
 

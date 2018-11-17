@@ -24,14 +24,14 @@
  * \brief C++ API: New API for Unicode Normalization.
  */
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
-#include "unicode/stringpiece.h"
-#include "unicode/uniset.h"
-#include "unicode/unistr.h"
-#include "unicode/unorm2.h"
+#include "stringpiece.h"
+#include "uniset.h"
+#include "unistr.h"
+#include "unorm2.h"
 
 U_NAMESPACE_BEGIN
 
@@ -47,7 +47,7 @@ class ByteSink;
  * The primary functions are to produce a normalized string and to detect whether
  * a string is already normalized.
  * The most commonly used normalization forms are those defined in
- * http://www.unicode.org/unicode/reports/tr15/
+ * http://www.unicode.org/reports/tr15/
  * However, this API supports additional normalization forms for specialized purposes.
  * For example, NFKC_Casefold is provided via getInstance("nfkc_cf", COMPOSE)
  * and can be used in implementations of UTS #46.

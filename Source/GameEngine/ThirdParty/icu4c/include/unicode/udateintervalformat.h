@@ -10,12 +10,12 @@
 #ifndef UDATEINTERVALFORMAT_H
 #define UDATEINTERVALFORMAT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/umisc.h"
-#include "unicode/localpointer.h"
+#include "umisc.h"
+#include "localpointer.h"
 
 /**
  * \file

@@ -22,12 +22,12 @@
  * \brief C++ API: MessagePattern class: Parses and represents ICU MessageFormat patterns.
  */
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/parseerr.h"
-#include "unicode/unistr.h"
+#include "parseerr.h"
+#include "unistr.h"
 
 /**
  * Mode for when an apostrophe starts quoted literal text for MessageFormat output.

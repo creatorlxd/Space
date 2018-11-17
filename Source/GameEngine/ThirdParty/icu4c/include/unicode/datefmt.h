@@ -21,17 +21,17 @@
 #ifndef DATEFMT_H
 #define DATEFMT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/udat.h"
-#include "unicode/calendar.h"
-#include "unicode/numfmt.h"
-#include "unicode/format.h"
-#include "unicode/locid.h"
-#include "unicode/enumset.h"
-#include "unicode/udisplaycontext.h"
+#include "udat.h"
+#include "calendar.h"
+#include "numfmt.h"
+#include "format.h"
+#include "locid.h"
+#include "enumset.h"
+#include "udisplaycontext.h"
 
 /**
  * \file

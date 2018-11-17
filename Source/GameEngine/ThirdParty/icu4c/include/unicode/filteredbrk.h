@@ -10,8 +10,8 @@
 #ifndef FILTEREDBRK_H
 #define FILTEREDBRK_H
 
-#include "unicode/utypes.h"
-#include "unicode/brkiter.h"
+#include "utypes.h"
+#include "brkiter.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION && !UCONFIG_NO_FILTERED_BREAK_ITERATION
 

@@ -23,7 +23,7 @@
 #ifndef SORTKEY_H
 #define SORTKEY_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 
@@ -32,9 +32,9 @@
  
 #if !UCONFIG_NO_COLLATION
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
-#include "unicode/coll.h"
+#include "uobject.h"
+#include "unistr.h"
+#include "coll.h"
 
 U_NAMESPACE_BEGIN
 

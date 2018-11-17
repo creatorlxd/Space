@@ -10,10 +10,10 @@
 #ifndef UBRK_H
 #define UBRK_H
 
-#include "unicode/utypes.h"
-#include "unicode/uloc.h"
-#include "unicode/utext.h"
-#include "unicode/localpointer.h"
+#include "utypes.h"
+#include "uloc.h"
+#include "utext.h"
+#include "localpointer.h"
 
 /**
  * A text-break iterator.
@@ -30,7 +30,7 @@
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
-#include "unicode/parseerr.h"
+#include "parseerr.h"
 
 /**
  * \file

@@ -10,8 +10,8 @@
 #ifndef UCHRITER_H
 #define UCHRITER_H
 
-#include "unicode/utypes.h"
-#include "unicode/chariter.h"
+#include "utypes.h"
+#include "chariter.h"
 
 /**
  * \file 

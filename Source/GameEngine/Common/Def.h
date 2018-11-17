@@ -106,4 +106,30 @@ namespace SpaceGameEngine
 		Uncopyable& operator = (const Uncopyable&) = delete;
 		Uncopyable& operator = (Uncopyable&&) = delete;
 	};
+
+	/*!
+	@brief 只在构造时调用一次函数
+	*/
+	template<typename>
+	struct OnceFunctionInvoker
+	{};
+
+	template<typename R,typename... Arg>
+	struct OnceFunctionInvoker<R(Arg...)>
+	{
+	private:
+		R m_ReturnValue;
+	public:
+		OnceFunctionInvoker<R(Arg...)>(const std::function<R(Arg...)>& func,Arg&&... arg)
+		{
+			m_ReturnValue = func(std::forward<Arg>(arg)...);
+		}
+		/*!
+		@brief 返回函数的返回值的引用
+		*/
+		R& GetReturnValue()
+		{
+			return m_ReturnValue;
+		}
+	};
 }

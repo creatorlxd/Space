@@ -13,11 +13,11 @@
 #ifndef __CURRENCYUNIT_H__
 #define __CURRENCYUNIT_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/measunit.h"
+#include "measunit.h"
 
 /**
  * \file 

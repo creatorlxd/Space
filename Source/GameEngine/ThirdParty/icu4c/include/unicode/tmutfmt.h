@@ -10,7 +10,7 @@
 #ifndef __TMUTFMT_H__
 #define __TMUTFMT_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -21,12 +21,12 @@
 #if !UCONFIG_NO_FORMATTING
 #ifndef U_HIDE_DEPRECATED_API
 
-#include "unicode/unistr.h"
-#include "unicode/tmunit.h"
-#include "unicode/tmutamt.h"
-#include "unicode/measfmt.h"
-#include "unicode/numfmt.h"
-#include "unicode/plurrule.h"
+#include "unistr.h"
+#include "tmunit.h"
+#include "tmutamt.h"
+#include "measfmt.h"
+#include "numfmt.h"
+#include "plurrule.h"
 
 
 /**

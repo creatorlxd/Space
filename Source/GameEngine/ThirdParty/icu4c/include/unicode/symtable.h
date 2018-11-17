@@ -12,8 +12,8 @@
 #ifndef SYMTABLE_H
 #define SYMTABLE_H
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 /**
  * \file 

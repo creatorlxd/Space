@@ -17,7 +17,7 @@
 #ifndef ENUMSET_H
 #define ENUMSET_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if U_SHOW_CPLUSPLUS_API
 

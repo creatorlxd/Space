@@ -12,8 +12,8 @@
 #ifndef UNIFILT_H
 #define UNIFILT_H
 
-#include "unicode/unifunct.h"
-#include "unicode/unimatch.h"
+#include "unifunct.h"
+#include "unimatch.h"
 
 /**
  * \file 

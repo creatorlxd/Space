@@ -18,9 +18,9 @@
 #ifndef SELFMT
 #define SELFMT
 
-#include "unicode/messagepattern.h"
-#include "unicode/numfmt.h"
-#include "unicode/utypes.h"
+#include "messagepattern.h"
+#include "numfmt.h"
+#include "utypes.h"
 
 /**
  * \file

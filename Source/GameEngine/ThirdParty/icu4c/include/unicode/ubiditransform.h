@@ -18,10 +18,10 @@
 #ifndef UBIDITRANSFORM_H
 #define UBIDITRANSFORM_H
 
-#include "unicode/utypes.h"
-#include "unicode/ubidi.h"
-#include "unicode/uchar.h"
-#include "unicode/localpointer.h"
+#include "utypes.h"
+#include "ubidi.h"
+#include "uchar.h"
+#include "localpointer.h"
 
 /**
  * \file

@@ -14,7 +14,7 @@
 #ifndef __DTITVINF_H__
 #define __DTITVINF_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -23,10 +23,10 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/udat.h"
-#include "unicode/locid.h"
-#include "unicode/ucal.h"
-#include "unicode/dtptngen.h"
+#include "udat.h"
+#include "locid.h"
+#include "ucal.h"
+#include "dtptngen.h"
 
 U_NAMESPACE_BEGIN
 

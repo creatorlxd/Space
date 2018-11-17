@@ -25,9 +25,9 @@
 #ifndef UCHAR_H
 #define UCHAR_H
 
-#include "unicode/utypes.h"
-#include "unicode/stringoptions.h"
-#include "unicode/ucpmap.h"
+#include "utypes.h"
+#include "stringoptions.h"
+#include "ucpmap.h"
 
 #if !defined(USET_DEFINED) && !defined(U_IN_DOXYGEN)
 
@@ -35,7 +35,7 @@
 
 /**
  * USet is the C API type corresponding to C++ class UnicodeSet.
- * It is forward-declared here to avoid including unicode/uset.h file if related
+ * It is forward-declared here to avoid including uset.h file if related
  * APIs are not used.
  *
  * @see ucnv_getUnicodeSet

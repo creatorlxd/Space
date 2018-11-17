@@ -10,15 +10,15 @@
 #ifndef UDAT_H
 #define UDAT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/localpointer.h"
-#include "unicode/ucal.h"
-#include "unicode/unum.h"
-#include "unicode/udisplaycontext.h"
-#include "unicode/ufieldpositer.h"
+#include "localpointer.h"
+#include "ucal.h"
+#include "unum.h"
+#include "udisplaycontext.h"
+#include "ufieldpositer.h"
 /**
  * \file
  * \brief C API: DateFormat

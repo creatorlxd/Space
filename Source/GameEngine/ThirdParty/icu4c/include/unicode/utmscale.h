@@ -10,7 +10,7 @@
 #ifndef UTMSCALE_H
 #define UTMSCALE_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 

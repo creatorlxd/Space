@@ -22,8 +22,8 @@
  * \brief C++ API: Appendable class: Sink for Unicode code points and 16-bit code units (char16_ts).
  */
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 U_NAMESPACE_BEGIN
 

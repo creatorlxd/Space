@@ -21,10 +21,10 @@
 #ifndef __UCASEMAP_H__
 #define __UCASEMAP_H__
 
-#include "unicode/utypes.h"
-#include "unicode/localpointer.h"
-#include "unicode/stringoptions.h"
-#include "unicode/ustring.h"
+#include "utypes.h"
+#include "localpointer.h"
+#include "stringoptions.h"
+#include "ustring.h"
 
 /**
  * \file

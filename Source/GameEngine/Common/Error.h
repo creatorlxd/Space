@@ -34,4 +34,7 @@ SpaceGameEngine::ThrowError((str),__FILE__,__FUNCTION__,__LINE__)
 SpaceGameEngine::ThrowError((wstr),__FILEW__,__FUNCTIONW__,__LINE__)
 #define ASSERT(expr,str)\
 if(!(expr))THROW_ERROR(str);
+#define BASE_THROW_ERROR(str)\
+MessageBox(NULL, _T(str), _T("Space Game Engine Error"), NULL);\
+DebugBreak();
 }

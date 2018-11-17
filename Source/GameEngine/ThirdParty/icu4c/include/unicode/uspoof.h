@@ -19,17 +19,17 @@
 #ifndef USPOOF_H
 #define USPOOF_H
 
-#include "unicode/utypes.h"
-#include "unicode/uset.h"
-#include "unicode/parseerr.h"
-#include "unicode/localpointer.h"
+#include "utypes.h"
+#include "uset.h"
+#include "parseerr.h"
+#include "localpointer.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
 
 #if U_SHOW_CPLUSPLUS_API
-#include "unicode/unistr.h"
-#include "unicode/uniset.h"
+#include "unistr.h"
+#include "uniset.h"
 #endif
 
 

@@ -18,8 +18,8 @@
 #ifndef FPOSITER_H
 #define FPOSITER_H
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 /**
  * \file
@@ -40,8 +40,8 @@ U_NAMESPACE_END
 
 #else
 
-#include "unicode/fieldpos.h"
-#include "unicode/umisc.h"
+#include "fieldpos.h"
+#include "umisc.h"
 
 U_NAMESPACE_BEGIN
 

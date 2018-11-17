@@ -14,11 +14,11 @@
 #ifndef __RELDATEFMT_H
 #define __RELDATEFMT_H
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
-#include "unicode/udisplaycontext.h"
-#include "unicode/ureldatefmt.h"
-#include "unicode/locid.h"
+#include "utypes.h"
+#include "uobject.h"
+#include "udisplaycontext.h"
+#include "ureldatefmt.h"
+#include "locid.h"
 
 /**
  * \file

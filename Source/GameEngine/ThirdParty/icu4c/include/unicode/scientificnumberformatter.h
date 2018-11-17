@@ -9,12 +9,12 @@
 #ifndef SCINUMBERFORMATTER_H
 #define SCINUMBERFORMATTER_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
 
-#include "unicode/unistr.h"
+#include "unistr.h"
 
 /**
  * \file 

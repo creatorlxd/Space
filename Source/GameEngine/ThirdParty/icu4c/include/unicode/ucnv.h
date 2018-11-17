@@ -49,9 +49,9 @@
 #ifndef UCNV_H
 #define UCNV_H
 
-#include "unicode/ucnv_err.h"
-#include "unicode/uenum.h"
-#include "unicode/localpointer.h"
+#include "ucnv_err.h"
+#include "uenum.h"
+#include "localpointer.h"
 
 #if !defined(USET_DEFINED) && !defined(U_IN_DOXYGEN)
 
@@ -59,7 +59,7 @@
 
 /**
  * USet is the C API type corresponding to C++ class UnicodeSet.
- * It is forward-declared here to avoid including unicode/uset.h file if related
+ * It is forward-declared here to avoid including uset.h file if related
  * conversion APIs are not used.
  *
  * @see ucnv_getUnicodeSet

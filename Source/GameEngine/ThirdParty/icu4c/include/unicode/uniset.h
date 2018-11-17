@@ -13,10 +13,10 @@
 #ifndef UNICODESET_H
 #define UNICODESET_H
 
-#include "unicode/ucpmap.h"
-#include "unicode/unifilt.h"
-#include "unicode/unistr.h"
-#include "unicode/uset.h"
+#include "ucpmap.h"
+#include "unifilt.h"
+#include "unistr.h"
+#include "uset.h"
 
 /**
  * \file

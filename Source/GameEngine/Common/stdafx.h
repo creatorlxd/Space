@@ -64,3 +64,25 @@ limitations under the License.
 #pragma comment(lib, "DirectXTex/lib/x86/Release/DirectXTex.lib")
 #endif
 #endif
+
+#ifdef _WIN64
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "icu4c/lib64/icuucd.lib")
+#pragma comment(lib, "icu4c/lib64/icuind.lib")
+#pragma comment(lib, "icu4c/lib64/icuiod.lib")
+#else
+#pragma comment(lib, "icu4c/lib64/icuuc.lib")
+#pragma comment(lib, "icu4c/lib64/icuin.lib")
+#pragma comment(lib, "icu4c/lib64/icuio.lib")
+#endif
+#else
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib, "icu4c/lib/icuucd.lib")
+#pragma comment(lib, "icu4c/lib/icuind.lib")
+#pragma comment(lib, "icu4c/lib/icuiod.lib")
+#else
+#pragma comment(lib, "icu4c/lib/icuuc.lib")
+#pragma comment(lib, "icu4c/lib/icuin.lib")
+#pragma comment(lib, "icu4c/lib/icuio.lib")
+#endif
+#endif

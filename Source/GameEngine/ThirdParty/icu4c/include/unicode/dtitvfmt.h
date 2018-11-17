@@ -14,7 +14,7 @@
 #define __DTITVFMT_H__
 
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -23,11 +23,11 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/ucal.h"
-#include "unicode/smpdtfmt.h"
-#include "unicode/dtintrv.h"
-#include "unicode/dtitvinf.h"
-#include "unicode/dtptngen.h"
+#include "ucal.h"
+#include "smpdtfmt.h"
+#include "dtintrv.h"
+#include "dtitvinf.h"
+#include "dtptngen.h"
 
 U_NAMESPACE_BEGIN
 

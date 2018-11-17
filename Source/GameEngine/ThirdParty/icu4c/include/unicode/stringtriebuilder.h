@@ -17,8 +17,8 @@
 #ifndef __STRINGTRIEBUILDER_H__
 #define __STRINGTRIEBUILDER_H__
 
-#include "unicode/utypes.h"
-#include "unicode/uobject.h"
+#include "utypes.h"
+#include "uobject.h"
 
 /**
  * \file

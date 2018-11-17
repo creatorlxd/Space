@@ -12,7 +12,7 @@
 #ifndef UNIREPL_H
 #define UNIREPL_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 

@@ -239,6 +239,12 @@
     <ClInclude Include="Source\GameEngine\DoxygenPage.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\InitDll.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine\Common\EngineConfig.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine\main.cpp">
@@ -345,6 +351,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameEngine\Render\RenderInterface\ViewPort.cpp">
       <Filter>Render\RenderInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\InitDll.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine\Common\EngineConfig.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

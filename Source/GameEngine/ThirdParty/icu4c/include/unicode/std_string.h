@@ -25,7 +25,7 @@
  *                 header and for related definitions.
  */
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 // Workaround for a libstdc++ bug before libstdc++4.6 (2011).
 // https://bugs.llvm.org/show_bug.cgi?id=13364

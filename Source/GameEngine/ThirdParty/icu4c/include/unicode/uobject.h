@@ -19,7 +19,7 @@
 #ifndef __UOBJECT_H__
 #define __UOBJECT_H__
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file

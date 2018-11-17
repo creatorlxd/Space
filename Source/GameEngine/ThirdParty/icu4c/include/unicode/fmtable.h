@@ -17,7 +17,7 @@
 #ifndef FMTABLE_H
 #define FMTABLE_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -26,9 +26,9 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/unistr.h"
-#include "unicode/stringpiece.h"
-#include "unicode/uformattable.h"
+#include "unistr.h"
+#include "stringpiece.h"
+#include "uformattable.h"
 
 U_NAMESPACE_BEGIN
 

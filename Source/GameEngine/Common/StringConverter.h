@@ -17,6 +17,7 @@ limitations under the License.
 #include "MemoryManager/AllocatorForSTL.hpp"
 #include <tchar.h>
 #include <Windows.h>
+#include "ThirdParty/icu4c/include/unicode/unistr.h"
 
 namespace SpaceGameEngine
 {

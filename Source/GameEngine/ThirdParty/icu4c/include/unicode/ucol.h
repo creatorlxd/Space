@@ -10,16 +10,16 @@
 #ifndef UCOL_H
 #define UCOL_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_COLLATION
 
-#include "unicode/unorm.h"
-#include "unicode/localpointer.h"
-#include "unicode/parseerr.h"
-#include "unicode/uloc.h"
-#include "unicode/uset.h"
-#include "unicode/uscript.h"
+#include "unorm.h"
+#include "localpointer.h"
+#include "parseerr.h"
+#include "uloc.h"
+#include "uset.h"
+#include "uscript.h"
 
 /**
  * \file

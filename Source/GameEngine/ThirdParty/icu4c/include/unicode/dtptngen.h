@@ -14,11 +14,11 @@
 #ifndef __DTPTNGEN_H__
 #define __DTPTNGEN_H__
 
-#include "unicode/datefmt.h"
-#include "unicode/locid.h"
-#include "unicode/udat.h"
-#include "unicode/udatpg.h"
-#include "unicode/unistr.h"
+#include "datefmt.h"
+#include "locid.h"
+#include "udat.h"
+#include "udatpg.h"
+#include "unistr.h"
 
 U_NAMESPACE_BEGIN
 

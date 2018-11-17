@@ -10,8 +10,8 @@
 #ifndef UREGION_H
 #define UREGION_H
 
-#include "unicode/utypes.h"
-#include "unicode/uenum.h"
+#include "utypes.h"
+#include "uenum.h"
 
 /**
  * \file

@@ -25,13 +25,13 @@
 #ifndef UREGEX_H
 #define UREGEX_H
 
-#include "unicode/utext.h"
-#include "unicode/utypes.h"
+#include "utext.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_REGULAR_EXPRESSIONS
 
-#include "unicode/localpointer.h"
-#include "unicode/parseerr.h"
+#include "localpointer.h"
+#include "parseerr.h"
 
 struct URegularExpression;
 /**

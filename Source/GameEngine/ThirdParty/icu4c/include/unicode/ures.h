@@ -25,9 +25,9 @@
 #ifndef URES_H
 #define URES_H
 
-#include "unicode/utypes.h"
-#include "unicode/uloc.h"
-#include "unicode/localpointer.h"
+#include "utypes.h"
+#include "uloc.h"
+#include "localpointer.h"
 
 /**
  * \file
@@ -791,7 +791,7 @@ ures_getUTF8StringByKey(const UResourceBundle *resB,
                         UErrorCode *status);
 
 #if U_SHOW_CPLUSPLUS_API
-#include "unicode/unistr.h"
+#include "unistr.h"
 
 U_NAMESPACE_BEGIN
 /**

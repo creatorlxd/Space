@@ -22,14 +22,14 @@
  * \brief C++ API: Internationalizing Domain Names in Applications (IDNA)
  */
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 #if !UCONFIG_NO_IDNA
 
-#include "unicode/bytestream.h"
-#include "unicode/stringpiece.h"
-#include "unicode/uidna.h"
-#include "unicode/unistr.h"
+#include "bytestream.h"
+#include "stringpiece.h"
+#include "uidna.h"
+#include "unistr.h"
 
 U_NAMESPACE_BEGIN
 

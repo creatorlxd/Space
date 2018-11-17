@@ -24,7 +24,7 @@
 #ifndef FIELDPOS_H
 #define FIELDPOS_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 
@@ -33,7 +33,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/uobject.h"
+#include "uobject.h"
 
 U_NAMESPACE_BEGIN
 

@@ -16,8 +16,8 @@
  * \brief C++ API: Simple formatter, minimal subset of MessageFormat.
  */
 
-#include "unicode/utypes.h"
-#include "unicode/unistr.h"
+#include "utypes.h"
+#include "unistr.h"
 
 U_NAMESPACE_BEGIN
 

@@ -17,10 +17,10 @@
 #ifndef __UCHARSTRIEBUILDER_H__
 #define __UCHARSTRIEBUILDER_H__
 
-#include "unicode/utypes.h"
-#include "unicode/stringtriebuilder.h"
-#include "unicode/ucharstrie.h"
-#include "unicode/unistr.h"
+#include "utypes.h"
+#include "stringtriebuilder.h"
+#include "ucharstrie.h"
+#include "unistr.h"
 
 /**
  * \file

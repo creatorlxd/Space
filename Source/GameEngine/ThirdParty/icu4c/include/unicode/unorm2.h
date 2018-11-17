@@ -30,16 +30,16 @@
  * For more details see the Normalizer2 C++ class.
  */
 
-#include "unicode/utypes.h"
-#include "unicode/localpointer.h"
-#include "unicode/stringoptions.h"
-#include "unicode/uset.h"
+#include "utypes.h"
+#include "localpointer.h"
+#include "stringoptions.h"
+#include "uset.h"
 
 /**
  * Constants for normalization modes.
  * For details about standard Unicode normalization forms
  * and about the algorithms which are also used with custom mapping tables
- * see http://www.unicode.org/unicode/reports/tr15/
+ * see http://www.unicode.org/reports/tr15/
  * @stable ICU 4.4
  */
 typedef enum {
@@ -48,7 +48,7 @@ typedef enum {
      * Same as standard NFC when using an "nfc" instance.
      * Same as standard NFKC when using an "nfkc" instance.
      * For details about standard Unicode normalization forms
-     * see http://www.unicode.org/unicode/reports/tr15/
+     * see http://www.unicode.org/reports/tr15/
      * @stable ICU 4.4
      */
     UNORM2_COMPOSE,
@@ -57,7 +57,7 @@ typedef enum {
      * Same as standard NFD when using an "nfc" instance.
      * Same as standard NFKD when using an "nfkc" instance.
      * For details about standard Unicode normalization forms
-     * see http://www.unicode.org/unicode/reports/tr15/
+     * see http://www.unicode.org/reports/tr15/
      * @stable ICU 4.4
      */
     UNORM2_DECOMPOSE,

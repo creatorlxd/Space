@@ -24,7 +24,7 @@
 #define FORMAT_H
 
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file 
@@ -33,13 +33,13 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/unistr.h"
-#include "unicode/fmtable.h"
-#include "unicode/fieldpos.h"
-#include "unicode/fpositer.h"
-#include "unicode/parsepos.h"
-#include "unicode/parseerr.h" 
-#include "unicode/locid.h"
+#include "unistr.h"
+#include "fmtable.h"
+#include "fieldpos.h"
+#include "fpositer.h"
+#include "parsepos.h"
+#include "parseerr.h" 
+#include "locid.h"
 
 U_NAMESPACE_BEGIN
 

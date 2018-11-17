@@ -22,7 +22,7 @@
 #ifndef BRKITER_H
 #define BRKITER_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -43,14 +43,14 @@ U_NAMESPACE_END
 
 #else
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
-#include "unicode/chariter.h"
-#include "unicode/locid.h"
-#include "unicode/ubrk.h"
-#include "unicode/strenum.h"
-#include "unicode/utext.h"
-#include "unicode/umisc.h"
+#include "uobject.h"
+#include "unistr.h"
+#include "chariter.h"
+#include "locid.h"
+#include "ubrk.h"
+#include "strenum.h"
+#include "utext.h"
+#include "umisc.h"
 
 U_NAMESPACE_BEGIN
 

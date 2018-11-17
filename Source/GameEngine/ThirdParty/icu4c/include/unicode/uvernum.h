@@ -26,7 +26,7 @@
 
  /*
   * IMPORTANT: When updating version, the following things need to be done:
-  * source/common/unicode/uvernum.h - this file: update major, minor,
+  * source/common/uvernum.h - this file: update major, minor,
   *        patchlevel, suffix, version, short version constants, namespace,
   *                    renaming macro, and copyright
   *

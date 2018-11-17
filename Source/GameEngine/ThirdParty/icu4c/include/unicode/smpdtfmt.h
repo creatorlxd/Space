@@ -26,7 +26,7 @@
 #ifndef SMPDTFMT_H
 #define SMPDTFMT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -35,10 +35,10 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/datefmt.h"
-#include "unicode/udisplaycontext.h"
-#include "unicode/tzfmt.h"  /* for UTimeZoneFormatTimeType */
-#include "unicode/brkiter.h"
+#include "datefmt.h"
+#include "udisplaycontext.h"
+#include "tzfmt.h"  /* for UTimeZoneFormatTimeType */
+#include "brkiter.h"
 
 U_NAMESPACE_BEGIN
 

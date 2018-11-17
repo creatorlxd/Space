@@ -8,7 +8,7 @@
 #define __CHAR16PTR_H__
 
 #include <cstddef>
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file

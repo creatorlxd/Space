@@ -12,7 +12,7 @@
 #ifndef TRANSLIT_H
 #define TRANSLIT_H
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -21,11 +21,11 @@
 
 #if !UCONFIG_NO_TRANSLITERATION
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
-#include "unicode/parseerr.h"
-#include "unicode/utrans.h" // UTransPosition, UTransDirection
-#include "unicode/strenum.h"
+#include "uobject.h"
+#include "unistr.h"
+#include "parseerr.h"
+#include "utrans.h" // UTransPosition, UTransDirection
+#include "strenum.h"
 
 U_NAMESPACE_BEGIN
 

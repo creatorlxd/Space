@@ -18,7 +18,7 @@
 #ifndef PLURRULE
 #define PLURRULE
 
-#include "unicode/utypes.h"
+#include "utypes.h"
 
 /**
  * \file
@@ -27,10 +27,10 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/format.h"
-#include "unicode/upluralrules.h"
+#include "format.h"
+#include "upluralrules.h"
 #ifndef U_HIDE_INTERNAL_API
-#include "unicode/numfmt.h"
+#include "numfmt.h"
 #endif  /* U_HIDE_INTERNAL_API */
 
 /**

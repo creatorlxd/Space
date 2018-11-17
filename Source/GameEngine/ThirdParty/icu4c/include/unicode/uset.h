@@ -29,9 +29,9 @@
 #ifndef __USET_H__
 #define __USET_H__
 
-#include "unicode/utypes.h"
-#include "unicode/uchar.h"
-#include "unicode/localpointer.h"
+#include "utypes.h"
+#include "uchar.h"
+#include "localpointer.h"
 
 #ifndef USET_DEFINED
 
