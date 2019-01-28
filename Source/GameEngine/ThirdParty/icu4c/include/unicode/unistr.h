@@ -29,14 +29,14 @@
  */
 
 #include <cstddef>
-#include "utypes.h"
-#include "char16ptr.h"
-#include "rep.h"
-#include "std_string.h"
-#include "stringpiece.h"
-#include "bytestream.h"
+#include "unicode/utypes.h"
+#include "unicode/char16ptr.h"
+#include "unicode/rep.h"
+#include "unicode/std_string.h"
+#include "unicode/stringpiece.h"
+#include "unicode/bytestream.h"
 
-struct UConverter;          // ucnv.h
+struct UConverter;          // unicode/ucnv.h
 
 #ifndef USTRING_H
 /**
@@ -49,7 +49,7 @@ u_strlen(const UChar *s);
 U_NAMESPACE_BEGIN
 
 #if !UCONFIG_NO_BREAK_ITERATION
-class BreakIterator;        // brkiter.h
+class BreakIterator;        // unicode/brkiter.h
 #endif
 class Edits;
 
@@ -74,11 +74,11 @@ UStringCaseMapper(int32_t caseLocale, uint32_t options,
 
 U_NAMESPACE_BEGIN
 
-class Locale;               // locid.h
+class Locale;               // unicode/locid.h
 class StringCharacterIterator;
-class UnicodeStringAppendable;  // appendable.h
+class UnicodeStringAppendable;  // unicode/appendable.h
 
-/* The <iostream> include has been moved to ustream.h */
+/* The <iostream> include has been moved to unicode/ustream.h */
 
 /**
  * Constant to be used in the UnicodeString(char *, int32_t, EInvariant) constructor

@@ -21,8 +21,8 @@
 #ifndef _PLATFORM_H
 #define _PLATFORM_H
 
-#include "uconfig.h"
-#include "uvernum.h"
+#include "unicode/uconfig.h"
+#include "unicode/uvernum.h"
 
 /**
  * \file
@@ -612,7 +612,7 @@ namespace std {
  * - ucnv_setDefaultName() is disabled and will not change the default charset
  * - static builds of ICU are smaller
  * - more functionality is available with the UCONFIG_NO_CONVERSION build-time
- *   configuration option (see uconfig.h)
+ *   configuration option (see unicode/uconfig.h)
  * - the UCONFIG_NO_CONVERSION build option in uconfig.h is more usable
  *
  * @stable ICU 4.2

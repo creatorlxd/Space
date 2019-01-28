@@ -23,8 +23,8 @@
 #ifndef ULOC_H
 #define ULOC_H
 
-#include "utypes.h"
-#include "uenum.h"
+#include "unicode/utypes.h"
+#include "unicode/uenum.h"
 
 /**    
  * \file

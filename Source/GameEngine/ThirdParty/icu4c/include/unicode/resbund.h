@@ -48,11 +48,11 @@
 #ifndef RESBUND_H
 #define RESBUND_H
 
-#include "utypes.h"
-#include "uobject.h"
-#include "ures.h"
-#include "unistr.h"
-#include "locid.h"
+#include "unicode/utypes.h"
+#include "unicode/uobject.h"
+#include "unicode/ures.h"
+#include "unicode/unistr.h"
+#include "unicode/locid.h"
 
 /**
  * \file 

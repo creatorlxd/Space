@@ -6,10 +6,10 @@
 #define __NUMBERRANGEFORMATTER_H__
 
 #include <atomic>
-#include "appendable.h"
-#include "fieldpos.h"
-#include "fpositer.h"
-#include "numberformatter.h"
+#include "unicode/appendable.h"
+#include "unicode/fieldpos.h"
+#include "unicode/fpositer.h"
+#include "unicode/numberformatter.h"
 
 #ifndef U_HIDE_DRAFT_API
 

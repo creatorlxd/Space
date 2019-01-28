@@ -7,7 +7,7 @@
 #ifndef __STRINGOPTIONS_H__
 #define __STRINGOPTIONS_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -177,7 +177,7 @@
 // can share the same bits.
 //
 // Public:
-// unorm.h #define UNORM_COMPARE_NORM_OPTIONS_SHIFT 20
+// unicode/unorm.h #define UNORM_COMPARE_NORM_OPTIONS_SHIFT 20
 //
 // Internal: (may change or be removed)
 // ucase.h #define _STRCASECMP_OPTIONS_MASK 0xffff

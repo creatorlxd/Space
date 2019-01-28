@@ -22,7 +22,7 @@
  * \brief C API: Helper definitions for dictionary trie APIs.
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 
 /**

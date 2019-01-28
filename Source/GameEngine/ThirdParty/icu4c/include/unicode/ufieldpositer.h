@@ -10,11 +10,11 @@
 #ifndef UFIELDPOSITER_H
 #define UFIELDPOSITER_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file

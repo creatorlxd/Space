@@ -10,10 +10,10 @@
 #ifndef UCAL_H
 #define UCAL_H
 
-#include "utypes.h"
-#include "uenum.h"
-#include "uloc.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/uenum.h"
+#include "unicode/uloc.h"
+#include "unicode/localpointer.h"
 
 #if !UCONFIG_NO_FORMATTING
 

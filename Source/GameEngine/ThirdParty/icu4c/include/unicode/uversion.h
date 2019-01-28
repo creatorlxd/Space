@@ -27,10 +27,10 @@
 #ifndef UVERSION_H
 #define UVERSION_H
 
-#include "umachine.h"
+#include "unicode/umachine.h"
 
 /* Actual version info lives in uvernum.h */
-#include "uvernum.h"
+#include "unicode/uvernum.h"
 
 /** Maximum length of the copyright string.
  *  @stable ICU 2.4

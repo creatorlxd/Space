@@ -20,13 +20,13 @@
 #ifndef UMSG_H
 #define UMSG_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
-#include "uloc.h"
-#include "parseerr.h"
+#include "unicode/localpointer.h"
+#include "unicode/uloc.h"
+#include "unicode/parseerr.h"
 #include <stdarg.h>
 
 /**

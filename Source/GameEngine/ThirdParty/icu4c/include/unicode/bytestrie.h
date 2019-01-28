@@ -22,10 +22,10 @@
  * \brief C++ API: Trie for mapping byte sequences to integer values.
  */
 
-#include "utypes.h"
-#include "stringpiece.h"
-#include "uobject.h"
-#include "ustringtrie.h"
+#include "unicode/utypes.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uobject.h"
+#include "unicode/ustringtrie.h"
 
 U_NAMESPACE_BEGIN
 

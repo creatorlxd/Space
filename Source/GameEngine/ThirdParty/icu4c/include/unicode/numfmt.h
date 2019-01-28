@@ -24,7 +24,7 @@
 #define NUMFMT_H
 
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -33,13 +33,13 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unistr.h"
-#include "format.h"
-#include "unum.h" // UNumberFormatStyle
-#include "locid.h"
-#include "stringpiece.h"
-#include "curramt.h"
-#include "udisplaycontext.h"
+#include "unicode/unistr.h"
+#include "unicode/format.h"
+#include "unicode/unum.h" // UNumberFormatStyle
+#include "unicode/locid.h"
+#include "unicode/stringpiece.h"
+#include "unicode/curramt.h"
+#include "unicode/udisplaycontext.h"
 
 class NumberFormatTest;
 
@@ -62,7 +62,7 @@ class StringEnumeration;
  * determining which locales have number formats, and what their names
  * are.
  *
- * \headerfile numfmt.h "numfmt.h"
+ * \headerfile unicode/numfmt.h "unicode/numfmt.h"
  * <P>
  * NumberFormat helps you to format and parse numbers for any locale.
  * Your code can be completely independent of the locale conventions
@@ -73,9 +73,9 @@ class StringEnumeration;
  * factory methods:
  * \code
  *    #include <iostream>
- *    #include "numfmt.h"
- *    #include "unistr.h"
- *    #include "ustream.h"
+ *    #include "unicode/numfmt.h"
+ *    #include "unicode/unistr.h"
+ *    #include "unicode/ustream.h"
  *    using namespace std;
  *    
  *    int main() {

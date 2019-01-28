@@ -18,7 +18,7 @@
 #ifndef __ICU_DATA_VER_H__
 #define __ICU_DATA_VER_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * @stable ICU 49

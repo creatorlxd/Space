@@ -14,13 +14,13 @@
  * \brief C++ API: ICU TimeZone base class
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "timezone.h"
-#include "tzrule.h"
-#include "tztrans.h"
+#include "unicode/timezone.h"
+#include "unicode/tzrule.h"
+#include "unicode/tztrans.h"
 
 U_NAMESPACE_BEGIN
 

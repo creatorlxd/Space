@@ -137,13 +137,13 @@
 
 
 
-#include "utypes.h"
-#include "uchar.h"
+#include "unicode/utypes.h"
+#include "unicode/uchar.h"
 #if U_SHOW_CPLUSPLUS_API
-#include "localpointer.h"
-#include "rep.h"
-#include "unistr.h"
-#include "chariter.h"
+#include "unicode/localpointer.h"
+#include "unicode/rep.h"
+#include "unicode/unistr.h"
+#include "unicode/chariter.h"
 #endif
 
 

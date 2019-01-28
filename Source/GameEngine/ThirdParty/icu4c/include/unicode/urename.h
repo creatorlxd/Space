@@ -29,25 +29,25 @@
  *   - by changing the default setting of U_DISABLE_RENAMING in uconfig.h
  */
 
-#include "uconfig.h"
+#include "unicode/uconfig.h"
 
 #if !U_DISABLE_RENAMING
 
 // Disable Renaming for Visual Studio's IntelliSense feature, so that 'Go-to-Definition' (F12) will work.
 #if !(defined(_MSC_VER) && defined(__INTELLISENSE__))
 
-/* We need the U_ICU_ENTRY_POINT_RENAME definition. There's a default one in uvernum.h we can use, but we will give
+/* We need the U_ICU_ENTRY_POINT_RENAME definition. There's a default one in unicode/uvernum.h we can use, but we will give
    the platform a chance to define it first.
    Normally (if utypes.h or umachine.h was included first) this will not be necessary as it will already be defined.
  */
 
 #ifndef U_ICU_ENTRY_POINT_RENAME
-#include "umachine.h"
+#include "unicode/umachine.h"
 #endif
 
 /* If we still don't have U_ICU_ENTRY_POINT_RENAME use the default. */
 #ifndef U_ICU_ENTRY_POINT_RENAME
-#include "uvernum.h"
+#include "unicode/uvernum.h"
 #endif
 
 /* Error out before the following defines cause very strange and unexpected code breakage */

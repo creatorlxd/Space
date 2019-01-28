@@ -7,13 +7,13 @@
 #ifndef __UCPTRIE_H__
 #define __UCPTRIE_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #ifndef U_HIDE_DRAFT_API
 
-#include "localpointer.h"
-#include "ucpmap.h"
-#include "utf8.h"
+#include "unicode/localpointer.h"
+#include "unicode/ucpmap.h"
+#include "unicode/utf8.h"
 
 U_CDECL_BEGIN
 

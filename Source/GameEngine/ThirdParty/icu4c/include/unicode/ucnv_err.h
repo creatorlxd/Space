@@ -85,7 +85,7 @@
 #ifndef UCNV_ERR_H
 #define UCNV_ERR_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_CONVERSION
 

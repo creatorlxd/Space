@@ -19,10 +19,10 @@
 #ifndef __ULOCDATA_H__
 #define __ULOCDATA_H__
 
-#include "ures.h"
-#include "uloc.h"
-#include "uset.h"
-#include "localpointer.h"
+#include "unicode/ures.h"
+#include "unicode/uloc.h"
+#include "unicode/uset.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file

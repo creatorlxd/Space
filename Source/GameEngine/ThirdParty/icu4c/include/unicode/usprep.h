@@ -24,8 +24,8 @@
  * \brief C API: Implements the StringPrep algorithm.
  */
 
-#include "utypes.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 
 /**
  *
@@ -61,7 +61,7 @@
  */
 #if !UCONFIG_NO_IDNA
 
-#include "parseerr.h"
+#include "unicode/parseerr.h"
 
 /**
  * The StringPrep profile

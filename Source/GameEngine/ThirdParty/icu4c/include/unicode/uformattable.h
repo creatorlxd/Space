@@ -30,11 +30,11 @@
 #ifndef UFORMATTABLE_H
 #define UFORMATTABLE_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
+#include "unicode/localpointer.h"
 
 /**
  * Enum designating the type of a UFormattable instance.

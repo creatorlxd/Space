@@ -16,7 +16,7 @@
 #ifndef REP_H
 #define REP_H
 
-#include "uobject.h"
+#include "unicode/uobject.h"
 
 /**
  * \file 

@@ -1,14 +1,14 @@
 // © 2018 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 #ifndef __UNUMBERFORMATTER_H__
 #define __UNUMBERFORMATTER_H__
 
-#include "ufieldpositer.h"
-#include "umisc.h"
+#include "unicode/ufieldpositer.h"
+#include "unicode/umisc.h"
 
 
 /**
@@ -16,11 +16,11 @@
  * \brief C-compatible API for localized number formatting; not recommended for C++.
  *
  * This is the C-compatible version of the NumberFormatter API introduced in ICU 60. C++ users should
- * include numberformatter.h and use the proper C++ APIs.
+ * include unicode/numberformatter.h and use the proper C++ APIs.
  *
  * The C API accepts a number skeleton string for specifying the settings for formatting, which covers a
  * very large subset of all possible number formatting features. For more information on number skeleton
- * strings, see numberformatter.h.
+ * strings, see unicode/numberformatter.h.
  *
  * When using UNumberFormatter, which is treated as immutable, the results are exported to a mutable
  * UFormattedNumber object, which you subsequently use for populating your string buffer or iterating over

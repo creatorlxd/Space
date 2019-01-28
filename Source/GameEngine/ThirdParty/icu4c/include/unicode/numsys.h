@@ -18,7 +18,7 @@
 #ifndef NUMSYS
 #define NUMSYS
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \def NUMSYS_NAME_CAPACITY
@@ -36,8 +36,8 @@
 #if !UCONFIG_NO_FORMATTING
 
 
-#include "format.h"
-#include "uobject.h"
+#include "unicode/format.h"
+#include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
 

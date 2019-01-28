@@ -16,6 +16,3 @@ WindowPositionX=250
 WindowPositionY=100
 IfShowCursor=true
 FPSLimit=120
-
-[Engine]
-RootDirectory="."

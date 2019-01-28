@@ -34,9 +34,9 @@
 #ifndef __UTF8_H__
 #define __UTF8_H__
 
-#include "umachine.h"
+#include "unicode/umachine.h"
 #ifndef __UTF_H__
-#   include "utf.h"
+#   include "unicode/utf.h"
 #endif
 
 /* internal definitions ----------------------------------------------------- */

@@ -10,12 +10,12 @@
 #ifndef CANITER_H
 #define CANITER_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
-#include "uobject.h"
-#include "unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/unistr.h"
 
 /**
  * \file

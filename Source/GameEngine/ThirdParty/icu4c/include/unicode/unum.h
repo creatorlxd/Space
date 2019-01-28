@@ -14,18 +14,18 @@
 #ifndef _UNUM
 #define _UNUM
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
-#include "uloc.h"
-#include "ucurr.h"
-#include "umisc.h"
-#include "parseerr.h"
-#include "uformattable.h"
-#include "udisplaycontext.h"
-#include "ufieldpositer.h"
+#include "unicode/localpointer.h"
+#include "unicode/uloc.h"
+#include "unicode/ucurr.h"
+#include "unicode/umisc.h"
+#include "unicode/parseerr.h"
+#include "unicode/uformattable.h"
+#include "unicode/udisplaycontext.h"
+#include "unicode/ufieldpositer.h"
 
 /**
  * \file

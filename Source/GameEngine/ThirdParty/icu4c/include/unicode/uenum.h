@@ -19,8 +19,8 @@
 #ifndef __UENUM_H
 #define __UENUM_H
 
-#include "utypes.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 
 #if U_SHOW_CPLUSPLUS_API
 U_NAMESPACE_BEGIN

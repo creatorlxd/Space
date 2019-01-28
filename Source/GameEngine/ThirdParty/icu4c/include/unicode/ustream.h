@@ -17,7 +17,7 @@
 #ifndef USTREAM_H
 #define USTREAM_H
 
-#include "unistr.h"
+#include "unicode/unistr.h"
 
 #if !UCONFIG_NO_CONVERSION  // not available without conversion
 

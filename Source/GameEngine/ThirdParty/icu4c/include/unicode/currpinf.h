@@ -9,7 +9,7 @@
 #ifndef CURRPINF_H
 #define CURRPINF_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -18,7 +18,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unistr.h"
+#include "unicode/unistr.h"
 
 U_NAMESPACE_BEGIN
 

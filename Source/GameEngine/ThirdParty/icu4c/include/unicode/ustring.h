@@ -18,9 +18,9 @@
 #ifndef USTRING_H
 #define USTRING_H
 
-#include "utypes.h"
-#include "putil.h"
-#include "uiter.h"
+#include "unicode/utypes.h"
+#include "unicode/putil.h"
+#include "unicode/uiter.h"
 
 /**
  * \def UBRK_TYPEDEF_UBREAK_ITERATOR
@@ -29,7 +29,7 @@
 
 #ifndef UBRK_TYPEDEF_UBREAK_ITERATOR
 #   define UBRK_TYPEDEF_UBREAK_ITERATOR
-/** Simple declaration for u_strToTitle() to avoid including ubrk.h. @stable ICU 2.1*/
+/** Simple declaration for u_strToTitle() to avoid including unicode/ubrk.h. @stable ICU 2.1*/
     typedef struct UBreakIterator UBreakIterator;
 #endif
 

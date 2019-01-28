@@ -20,9 +20,9 @@
 #ifndef SCHRITER_H
 #define SCHRITER_H
 
-#include "utypes.h"
-#include "chariter.h"
-#include "uchriter.h"
+#include "unicode/utypes.h"
+#include "unicode/chariter.h"
+#include "unicode/uchriter.h"
 
 /**
  * \file 

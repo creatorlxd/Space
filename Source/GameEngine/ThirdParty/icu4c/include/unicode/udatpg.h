@@ -19,13 +19,13 @@
 #ifndef __UDATPG_H__
 #define __UDATPG_H__
 
-#include "utypes.h"
-#include "uenum.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/uenum.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file
- * \brief C API: Wrapper for icu::DateTimePatternGenerator (dtptngen.h).
+ * \brief C API: Wrapper for icu::DateTimePatternGenerator (unicode/dtptngen.h).
  *
  * UDateTimePatternGenerator provides flexible generation of date format patterns, 
  * like "yy-MM-dd". The user can build up the generator by adding successive 

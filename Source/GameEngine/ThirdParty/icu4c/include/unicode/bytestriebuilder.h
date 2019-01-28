@@ -22,10 +22,10 @@
 #ifndef __BYTESTRIEBUILDER_H__
 #define __BYTESTRIEBUILDER_H__
 
-#include "utypes.h"
-#include "bytestrie.h"
-#include "stringpiece.h"
-#include "stringtriebuilder.h"
+#include "unicode/utypes.h"
+#include "unicode/bytestrie.h"
+#include "unicode/stringpiece.h"
+#include "unicode/stringtriebuilder.h"
 
 U_NAMESPACE_BEGIN
 

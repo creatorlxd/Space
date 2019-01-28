@@ -12,7 +12,7 @@
 #ifndef STSEARCH_H
 #define STSEARCH_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -21,9 +21,9 @@
  
 #if !UCONFIG_NO_COLLATION && !UCONFIG_NO_BREAK_ITERATION
 
-#include "tblcoll.h"
-#include "coleitr.h"
-#include "search.h"
+#include "unicode/tblcoll.h"
+#include "unicode/coleitr.h"
+#include "unicode/search.h"
 
 U_NAMESPACE_BEGIN
 

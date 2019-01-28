@@ -27,7 +27,7 @@
 #ifndef DECIMFMT_H
 #define DECIMFMT_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 /**
  * \file
  * \brief C++ API: Compatibility APIs for decimal formatting.
@@ -35,13 +35,13 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "dcfmtsym.h"
-#include "numfmt.h"
-#include "locid.h"
-#include "fpositer.h"
-#include "stringpiece.h"
-#include "curramt.h"
-#include "enumset.h"
+#include "unicode/dcfmtsym.h"
+#include "unicode/numfmt.h"
+#include "unicode/locid.h"
+#include "unicode/fpositer.h"
+#include "unicode/stringpiece.h"
+#include "unicode/curramt.h"
+#include "unicode/enumset.h"
 
 U_NAMESPACE_BEGIN
 

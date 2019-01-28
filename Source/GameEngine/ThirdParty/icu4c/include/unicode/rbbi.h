@@ -16,7 +16,7 @@
 #ifndef RBBI_H
 #define RBBI_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -25,10 +25,10 @@
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
-#include "brkiter.h"
-#include "udata.h"
-#include "parseerr.h"
-#include "schriter.h"
+#include "unicode/brkiter.h"
+#include "unicode/udata.h"
+#include "unicode/parseerr.h"
+#include "unicode/schriter.h"
 
 U_NAMESPACE_BEGIN
 

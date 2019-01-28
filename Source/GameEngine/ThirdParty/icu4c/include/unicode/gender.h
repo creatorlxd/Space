@@ -23,13 +23,13 @@
  * \brief C++ API: GenderInfo computes the gender of a list.
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "locid.h"
-#include "ugender.h"
-#include "uobject.h"
+#include "unicode/locid.h"
+#include "unicode/ugender.h"
+#include "unicode/uobject.h"
 
 class GenderInfoTest;
 

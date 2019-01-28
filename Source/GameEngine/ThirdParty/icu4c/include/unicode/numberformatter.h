@@ -1,24 +1,24 @@
 // © 2017 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 #ifndef __NUMBERFORMATTER_H__
 #define __NUMBERFORMATTER_H__
 
-#include "appendable.h"
-#include "dcfmtsym.h"
-#include "currunit.h"
-#include "fieldpos.h"
-#include "fpositer.h"
-#include "measunit.h"
-#include "nounit.h"
-#include "plurrule.h"
-#include "ucurr.h"
-#include "unum.h"
-#include "unumberformatter.h"
-#include "uobject.h"
+#include "unicode/appendable.h"
+#include "unicode/dcfmtsym.h"
+#include "unicode/currunit.h"
+#include "unicode/fieldpos.h"
+#include "unicode/fpositer.h"
+#include "unicode/measunit.h"
+#include "unicode/nounit.h"
+#include "unicode/plurrule.h"
+#include "unicode/ucurr.h"
+#include "unicode/unum.h"
+#include "unicode/unumberformatter.h"
+#include "unicode/uobject.h"
 
 #ifndef U_HIDE_DRAFT_API
 

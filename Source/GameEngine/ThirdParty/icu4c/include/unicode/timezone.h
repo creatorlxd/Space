@@ -29,7 +29,7 @@
 #ifndef TIMEZONE_H
 #define TIMEZONE_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -38,10 +38,10 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
-#include "unistr.h"
-#include "ures.h"
-#include "ucal.h"
+#include "unicode/uobject.h"
+#include "unicode/unistr.h"
+#include "unicode/ures.h"
+#include "unicode/ucal.h"
 
 U_NAMESPACE_BEGIN
 

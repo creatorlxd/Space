@@ -26,11 +26,11 @@
 #ifndef GREGOCAL_H
 #define GREGOCAL_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "calendar.h"
+#include "unicode/calendar.h"
 
 /**
  * \file 

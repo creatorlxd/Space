@@ -26,7 +26,7 @@
 #ifndef PUTIL_H
 #define PUTIL_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
  /**
   * \file
   * \brief C API: Platform Utilities

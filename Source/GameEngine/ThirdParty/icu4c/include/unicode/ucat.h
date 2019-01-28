@@ -13,8 +13,8 @@
 #ifndef UCAT_H
 #define UCAT_H
 
-#include "utypes.h"
-#include "ures.h"
+#include "unicode/utypes.h"
+#include "unicode/ures.h"
 
 /**
  * \file

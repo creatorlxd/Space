@@ -17,7 +17,7 @@
 #ifndef UMISC_H
 #define UMISC_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file

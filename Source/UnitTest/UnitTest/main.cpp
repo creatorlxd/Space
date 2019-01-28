@@ -56,12 +56,6 @@ UNIT_TEST_METHOD(TestObserver, "Common")
 	UNIT_TEST_SUCCESS;
 }
 
-UNIT_TEST_METHOD(TestICU4C, "Common")
-{
-	REQUIRE(SpaceGameEngine::InitICU4CDll());
-	icu::UnicodeString unicodestr;
-	UNIT_TEST_SUCCESS;
-}
 /*
 //test uncopyable
 struct TestUncopyableType :public SpaceGameEngine::Uncopyable

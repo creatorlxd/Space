@@ -10,14 +10,14 @@
 #ifndef UPLURALRULES_H
 #define UPLURALRULES_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
-#include "uenum.h"
+#include "unicode/localpointer.h"
+#include "unicode/uenum.h"
 #ifndef U_HIDE_INTERNAL_API
-#include "unum.h"
+#include "unicode/unum.h"
 #endif  /* U_HIDE_INTERNAL_API */
 
 /**

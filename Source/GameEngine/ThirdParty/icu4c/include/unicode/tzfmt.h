@@ -14,13 +14,13 @@
  * \brief C++ API: TimeZoneFormat
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "format.h"
-#include "timezone.h"
-#include "tznames.h"
+#include "unicode/format.h"
+#include "unicode/timezone.h"
+#include "unicode/tznames.h"
 
 U_CDECL_BEGIN
 /**

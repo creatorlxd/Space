@@ -12,9 +12,9 @@
 #ifndef CHARITER_H
 #define CHARITER_H
 
-#include "utypes.h"
-#include "uobject.h"
-#include "unistr.h"
+#include "unicode/utypes.h"
+#include "unicode/uobject.h"
+#include "unicode/unistr.h"
 /**
  * \file
  * \brief C++ API: Character Iterator

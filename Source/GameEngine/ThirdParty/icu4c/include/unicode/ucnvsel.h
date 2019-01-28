@@ -21,15 +21,15 @@
 #ifndef __ICU_UCNV_SEL_H__
 #define __ICU_UCNV_SEL_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_CONVERSION
 
-#include "uset.h"
-#include "utf16.h"
-#include "uenum.h"
-#include "ucnv.h"
-#include "localpointer.h"
+#include "unicode/uset.h"
+#include "unicode/utf16.h"
+#include "unicode/uenum.h"
+#include "unicode/ucnv.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file

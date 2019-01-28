@@ -15,10 +15,10 @@
  * \brief C API: Provides display names of Locale ids and their components.
  */
 
-#include "utypes.h"
-#include "localpointer.h"
-#include "uscript.h"
-#include "udisplaycontext.h"
+#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/uscript.h"
+#include "unicode/udisplaycontext.h"
 
 /**
  * Enum used in LocaleDisplayNames::createInstance.

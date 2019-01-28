@@ -9,9 +9,9 @@
 #ifndef USETITER_H
 #define USETITER_H
 
-#include "utypes.h"
-#include "uobject.h"
-#include "unistr.h"
+#include "unicode/utypes.h"
+#include "unicode/uobject.h"
+#include "unicode/unistr.h"
 
 /**
  * \file 

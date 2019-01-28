@@ -7,9 +7,9 @@
 #ifndef __CASEMAP_H__
 #define __CASEMAP_H__
 
-#include "utypes.h"
-#include "stringpiece.h"
-#include "uobject.h"
+#include "unicode/utypes.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uobject.h"
 
 /**
  * \file

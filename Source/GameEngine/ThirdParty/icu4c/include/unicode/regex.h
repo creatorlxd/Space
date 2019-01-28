@@ -44,16 +44,16 @@
  * </p>
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_REGULAR_EXPRESSIONS
 
-#include "uobject.h"
-#include "unistr.h"
-#include "utext.h"
-#include "parseerr.h"
+#include "unicode/uobject.h"
+#include "unicode/unistr.h"
+#include "unicode/utext.h"
+#include "unicode/parseerr.h"
 
-#include "uregex.h"
+#include "unicode/uregex.h"
 
 // Forward Declarations
 

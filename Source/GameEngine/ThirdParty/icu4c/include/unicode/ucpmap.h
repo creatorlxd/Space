@@ -7,7 +7,7 @@
 #ifndef __UCPMAP_H__
 #define __UCPMAP_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #ifndef U_HIDE_DRAFT_API
 

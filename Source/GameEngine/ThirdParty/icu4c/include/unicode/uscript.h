@@ -17,7 +17,7 @@
 
 #ifndef USCRIPT_H
 #define USCRIPT_H
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file

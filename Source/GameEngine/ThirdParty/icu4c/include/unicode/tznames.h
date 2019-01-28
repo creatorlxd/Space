@@ -13,12 +13,12 @@
  * \file
  * \brief C++ API: TimeZoneNames
  */
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uloc.h"
-#include "unistr.h"
+#include "unicode/uloc.h"
+#include "unicode/unistr.h"
 
 U_CDECL_BEGIN
 

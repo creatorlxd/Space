@@ -15,15 +15,15 @@
  * \brief C++ API: Region classes (territory containment)
  */
 
-#include "utypes.h"
-#include "uregion.h"
+#include "unicode/utypes.h"
+#include "unicode/uregion.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
-#include "uniset.h"
-#include "unistr.h"
-#include "strenum.h"
+#include "unicode/uobject.h"
+#include "unicode/uniset.h"
+#include "unicode/unistr.h"
+#include "unicode/strenum.h"
 
 U_NAMESPACE_BEGIN
 

@@ -33,12 +33,12 @@
 #ifndef COLEITR_H
 #define COLEITR_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_COLLATION
 
-#include "unistr.h"
-#include "uobject.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
 
 struct UCollationElements;
 struct UHashtable;

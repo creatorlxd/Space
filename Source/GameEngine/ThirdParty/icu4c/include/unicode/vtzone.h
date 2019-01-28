@@ -9,7 +9,7 @@
 #ifndef VTZONE_H
 #define VTZONE_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -18,7 +18,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "basictz.h"
+#include "unicode/basictz.h"
 
 U_NAMESPACE_BEGIN
 

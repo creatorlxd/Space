@@ -10,13 +10,13 @@
 #ifndef URELDATEFMT_H
 #define URELDATEFMT_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING && !UCONFIG_NO_BREAK_ITERATION
 
-#include "unum.h"
-#include "udisplaycontext.h"
-#include "localpointer.h"
+#include "unicode/unum.h"
+#include "unicode/udisplaycontext.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file

@@ -9,7 +9,7 @@
 #ifndef RBTZ_H
 #define RBTZ_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -18,8 +18,8 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "basictz.h"
-#include "unistr.h"
+#include "unicode/basictz.h"
+#include "unicode/unistr.h"
 
 U_NAMESPACE_BEGIN
 

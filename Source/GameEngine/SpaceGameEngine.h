@@ -32,7 +32,6 @@ limitations under the License.
 #include "Common/MetaData/BinaryFileSerializeInterface.h"
 #include "Common/UnitTestFramework.hpp"
 #include "Common/Observer.hpp"
-#include "Common/InitDll.h"
 
 //Math
 #include "Math/Common/ConstantValue.hpp"

@@ -27,7 +27,7 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -35,11 +35,11 @@
  */
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
-#include "locid.h"
-#include "timezone.h"
-#include "ucal.h"
-#include "umisc.h"
+#include "unicode/uobject.h"
+#include "unicode/locid.h"
+#include "unicode/timezone.h"
+#include "unicode/ucal.h"
+#include "unicode/umisc.h"
 
 U_NAMESPACE_BEGIN
 

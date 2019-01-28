@@ -13,12 +13,12 @@
 #ifndef MEASUREFORMAT_H
 #define MEASUREFORMAT_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "format.h"
-#include "udat.h"
+#include "unicode/format.h"
+#include "unicode/udat.h"
 
 /**
  * \file 

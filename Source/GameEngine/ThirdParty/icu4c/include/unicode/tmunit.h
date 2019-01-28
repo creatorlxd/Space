@@ -17,7 +17,7 @@
  */
 
 
-#include "measunit.h"
+#include "unicode/measunit.h"
 
 #if !UCONFIG_NO_FORMATTING
 

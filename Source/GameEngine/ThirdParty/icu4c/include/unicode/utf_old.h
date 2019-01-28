@@ -148,7 +148,7 @@
 /**
  * \def U_HIDE_OBSOLETE_UTF_OLD_H
  *
- * Hides the obsolete definitions in utf_old.h.
+ * Hides the obsolete definitions in unicode/utf_old.h.
  * Recommended to be set to 1 at compile time to make sure
  * the long-deprecated macros are no longer used.
  *
@@ -162,9 +162,9 @@
 
 #if !defined(U_HIDE_DEPRECATED_API) && !U_HIDE_OBSOLETE_UTF_OLD_H
 
-#include "utf.h"
-#include "utf8.h"
-#include "utf16.h"
+#include "unicode/utf.h"
+#include "unicode/utf8.h"
+#include "unicode/utf16.h"
 
 /* Formerly utf.h, part 1 --------------------------------------------------- */
 
@@ -783,7 +783,7 @@ U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];    /* U_IMPORT2? */ /*U_I
 *   This file defines macros to deal with UTF-32 code units and code points.
 *   Signatures and semantics are the same as for the similarly named macros
 *   in utf16.h.
-*   utf32.h is included by utf.h after umachine.h</p>
+*   utf32.h is included by utf.h after unicode/umachine.h</p>
 *   and some common definitions.
 *   <p><b>Usage:</b>  ICU coding guidelines for if() statements should be followed when using these macros.
 *                  Compound statements (curly braces {}) must be used  for if-else-while...

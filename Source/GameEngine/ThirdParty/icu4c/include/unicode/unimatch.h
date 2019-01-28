@@ -10,7 +10,7 @@
 #ifndef UNIMATCH_H
 #define UNIMATCH_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 

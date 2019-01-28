@@ -10,11 +10,11 @@
 #ifndef UGENDER_H
 #define UGENDER_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "localpointer.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file

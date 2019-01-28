@@ -9,7 +9,7 @@
 #ifndef DTRULE_H
 #define DTRULE_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -18,7 +18,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
+#include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
 /**

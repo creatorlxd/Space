@@ -14,11 +14,11 @@
  * \brief C++ API: Time zone transition
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
+#include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
 

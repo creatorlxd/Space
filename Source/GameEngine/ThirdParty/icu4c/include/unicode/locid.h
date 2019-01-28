@@ -31,14 +31,14 @@
 #ifndef LOCID_H
 #define LOCID_H
 
-#include "bytestream.h"
-#include "localpointer.h"
-#include "strenum.h"
-#include "stringpiece.h"
-#include "utypes.h"
-#include "uobject.h"
-#include "putil.h"
-#include "uloc.h"
+#include "unicode/bytestream.h"
+#include "unicode/localpointer.h"
+#include "unicode/strenum.h"
+#include "unicode/stringpiece.h"
+#include "unicode/utypes.h"
+#include "unicode/uobject.h"
+#include "unicode/putil.h"
+#include "unicode/uloc.h"
 
 /**
  * \file

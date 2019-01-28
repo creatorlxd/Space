@@ -18,7 +18,7 @@
 #ifndef UCOLEITR_H
 #define UCOLEITR_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_COLLATION
 
@@ -29,7 +29,7 @@
  */
 #define UCOL_NULLORDER        ((int32_t)0xFFFFFFFF)
 
-#include "ucol.h"
+#include "unicode/ucol.h"
 
 /** 
  * The UCollationElements struct.

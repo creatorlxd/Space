@@ -17,7 +17,7 @@
 #ifndef __UCLEAN_H__
 #define __UCLEAN_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 /**
  * \file
  * \brief C API: Initialize and clean up ICU

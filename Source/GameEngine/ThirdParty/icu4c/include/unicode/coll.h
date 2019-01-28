@@ -52,18 +52,18 @@
 #ifndef COLL_H
 #define COLL_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_COLLATION
 
-#include "uobject.h"
-#include "ucol.h"
-#include "unorm.h"
-#include "locid.h"
-#include "uniset.h"
-#include "umisc.h"
-#include "uiter.h"
-#include "stringpiece.h"
+#include "unicode/uobject.h"
+#include "unicode/ucol.h"
+#include "unicode/unorm.h"
+#include "unicode/locid.h"
+#include "unicode/uniset.h"
+#include "unicode/umisc.h"
+#include "unicode/uiter.h"
+#include "unicode/stringpiece.h"
 
 U_NAMESPACE_BEGIN
 

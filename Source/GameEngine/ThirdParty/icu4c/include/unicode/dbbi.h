@@ -13,7 +13,7 @@
 #ifndef DBBI_H
 #define DBBI_H
 
-#include "rbbi.h"
+#include "unicode/rbbi.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 

@@ -27,16 +27,16 @@
 #ifndef DCFMTSYM_H
 #define DCFMTSYM_H
 
-#include "utypes.h"
-#include "uchar.h"
+#include "unicode/utypes.h"
+#include "unicode/uchar.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "uobject.h"
-#include "locid.h"
-#include "numsys.h"
-#include "unum.h"
-#include "unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/locid.h"
+#include "unicode/numsys.h"
+#include "unicode/unum.h"
+#include "unicode/unistr.h"
 
 /**
  * \file

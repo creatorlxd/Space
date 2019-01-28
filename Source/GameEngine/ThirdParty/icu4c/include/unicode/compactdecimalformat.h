@@ -13,7 +13,7 @@
 #ifndef __COMPACT_DECIMAL_FORMAT_H__
 #define __COMPACT_DECIMAL_FORMAT_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 /**
  * \file
  * \brief C++ API: Compatibility APIs for compact decimal number formatting.
@@ -21,7 +21,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "decimfmt.h"
+#include "unicode/decimfmt.h"
 
 struct UHashtable;
 

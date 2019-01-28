@@ -20,16 +20,16 @@
 #ifndef DTFMTSYM_H
 #define DTFMTSYM_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "calendar.h"
-#include "strenum.h"
-#include "uobject.h"
-#include "locid.h"
-#include "udat.h"
-#include "ures.h"
+#include "unicode/calendar.h"
+#include "unicode/strenum.h"
+#include "unicode/uobject.h"
+#include "unicode/locid.h"
+#include "unicode/udat.h"
+#include "unicode/ures.h"
 
 /**
  * \file

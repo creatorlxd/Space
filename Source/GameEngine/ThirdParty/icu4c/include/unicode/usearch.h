@@ -11,14 +11,14 @@
 #ifndef USEARCH_H
 #define USEARCH_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_COLLATION && !UCONFIG_NO_BREAK_ITERATION
 
-#include "localpointer.h"
-#include "ucol.h"
-#include "ucoleitr.h"
-#include "ubrk.h"
+#include "unicode/localpointer.h"
+#include "unicode/ucol.h"
+#include "unicode/ucoleitr.h"
+#include "unicode/ubrk.h"
 
 /**
  * \file

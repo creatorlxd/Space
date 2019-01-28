@@ -19,12 +19,12 @@
 #ifndef __UIDNA_H__
 #define __UIDNA_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_IDNA
 
-#include "localpointer.h"
-#include "parseerr.h"
+#include "unicode/localpointer.h"
+#include "unicode/parseerr.h"
 
 /**
  * \file

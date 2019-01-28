@@ -13,7 +13,7 @@
 #ifndef __MEASURE_H__
 #define __MEASURE_H__
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file 
@@ -22,7 +22,7 @@
  
 #if !UCONFIG_NO_FORMATTING
 
-#include "fmtable.h"
+#include "unicode/fmtable.h"
 
 U_NAMESPACE_BEGIN
 

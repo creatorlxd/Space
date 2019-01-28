@@ -19,7 +19,7 @@
 #ifndef MSGFMT_H
 #define MSGFMT_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -28,12 +28,12 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "format.h"
-#include "locid.h"
-#include "messagepattern.h"
-#include "parseerr.h"
-#include "plurfmt.h"
-#include "plurrule.h"
+#include "unicode/format.h"
+#include "unicode/locid.h"
+#include "unicode/messagepattern.h"
+#include "unicode/parseerr.h"
+#include "unicode/plurfmt.h"
+#include "unicode/plurrule.h"
 
 U_CDECL_BEGIN
 // Forward declaration.

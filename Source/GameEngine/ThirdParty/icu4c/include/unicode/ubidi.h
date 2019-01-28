@@ -19,9 +19,9 @@
 #ifndef UBIDI_H
 #define UBIDI_H
 
-#include "utypes.h"
-#include "uchar.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/uchar.h"
+#include "unicode/localpointer.h"
 
 /**
  *\file
@@ -31,7 +31,7 @@
  *
  * This is an implementation of the Unicode Bidirectional Algorithm.
  * The algorithm is defined in the
- * <a href="http://www.unicode.org/reports/tr9/">Unicode Standard Annex #9</a>.<p>
+ * <a href="http://www.unicode.org/unicode/reports/tr9/">Unicode Standard Annex #9</a>.<p>
  *
  * Note: Libraries that perform a bidirectional algorithm and
  * reorder strings accordingly are sometimes called "Storage Layout Engines".
@@ -81,7 +81,7 @@
  *
  * <pre>
  * \code
- *#include "ubidi.h"
+ *#include "unicode/ubidi.h"
  *
  *typedef enum {
  *     styleNormal=0, styleSelected=1,
@@ -1148,7 +1148,7 @@ ubidi_setContext(UBiDi *pBiDi,
 
 /**
  * Perform the Unicode Bidi algorithm. It is defined in the
- * <a href="http://www.unicode.org/reports/tr9/">Unicode Standard Annex #9</a>,
+ * <a href="http://www.unicode.org/unicode/reports/tr9/">Unicode Standard Annex #9</a>,
  * version 13,
  * also described in The Unicode Standard, Version 4.0 .<p>
  *

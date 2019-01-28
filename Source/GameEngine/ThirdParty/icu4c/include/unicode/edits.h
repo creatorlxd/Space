@@ -7,8 +7,8 @@
 #ifndef __EDITS_H__
 #define __EDITS_H__
 
-#include "utypes.h"
-#include "uobject.h"
+#include "unicode/utypes.h"
+#include "unicode/uobject.h"
 
 /**
  * \file

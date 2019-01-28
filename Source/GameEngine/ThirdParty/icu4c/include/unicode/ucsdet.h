@@ -21,12 +21,12 @@
 #ifndef __UCSDET_H
 #define __UCSDET_H
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_CONVERSION
 
-#include "localpointer.h"
-#include "uenum.h"
+#include "unicode/localpointer.h"
+#include "unicode/uenum.h"
 
 /**
  * \file 

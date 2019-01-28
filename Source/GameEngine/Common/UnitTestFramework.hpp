@@ -102,10 +102,10 @@ namespace SpaceGameEngine
 			}
 		}
 
-		template<typename... Arg>
-		inline void AddUnitTestMethod(Arg&&... arg)
+		template<typename... Args>
+		inline void AddUnitTestMethod(Args&&... args)
 		{
-			UnitTestMethod* ptr = MemoryManager::New<UnitTestMethod>(std::forward<Arg>(arg)...);
+			UnitTestMethod* ptr = MemoryManager::New<UnitTestMethod>(std::forward<Args>(args)...);
 			m_Content.insert(std::make_pair(ptr->m_Name, ptr));
 			for (const auto& i : ptr->m_GroupName)
 			{
@@ -116,10 +116,10 @@ namespace SpaceGameEngine
 		//for macro to use
 		struct DefineUnitTestMethod
 		{
-			template<typename... Arg>
-			DefineUnitTestMethod(UnitTestManager& manager, Arg&&... args)
+			template<typename... Args>
+			DefineUnitTestMethod(UnitTestManager& manager, Args&&... args)
 			{
-				manager.AddUnitTestMethod(std::forward<Arg>(args)...);
+				manager.AddUnitTestMethod(std::forward<Args>(args)...);
 			}
 		};
 

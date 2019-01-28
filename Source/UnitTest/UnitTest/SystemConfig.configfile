@@ -8,14 +8,4 @@ ShaderDirectory="../../GameEngine/Shader/"
 RenderQuality=2
 
 [Window]
-IconFileName=""
-WindowWidth=800
-WindowHeight=600
-WindowTitle="SpaceGameEngineUnitTest"
-WindowPositionX=250
-WindowPositionY=100
-IfShowCursor=true
 FPSLimit=120
-
-[Engine]
-RootDirectory="../../../"

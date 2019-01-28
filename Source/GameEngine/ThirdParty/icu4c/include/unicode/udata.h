@@ -19,8 +19,8 @@
 #ifndef __UDATA_H__
 #define __UDATA_H__
 
-#include "utypes.h"
-#include "localpointer.h"
+#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 
 U_CDECL_BEGIN
 

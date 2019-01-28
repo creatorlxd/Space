@@ -38,7 +38,7 @@
  * For details see http://site.icu-project.org/design/cpp/scoped_ptr
  */
 
-#include "utypes.h"
+#include "unicode/utypes.h"
 
 #if U_SHOW_CPLUSPLUS_API
 
