@@ -23,4 +23,4 @@
 
 # 注意
 
-当前的所有分支的代码仍处于重构中，不可用。要获取可用的发布版本的代码请查看tag。
+目前的引擎只做了整体的重构，已移动到[新的位置](https://github.com/SpaceGameEngine/SpaceGameEngine)
