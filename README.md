@@ -1,4 +1,4 @@
-﻿# Space Game Engine[![Build State](https://ci.appveyor.com/api/projects/status/wgm69qg9437how6q?svg=true)](https://ci.appveyor.com/project/creatorlxd/space)
+# Space Game Engine[![Build State](https://ci.appveyor.com/api/projects/status/wgm69qg9437how6q?svg=true)](https://ci.appveyor.com/project/creatorlxd/space)
 
 ## Space 是一个3D的游戏引擎
 
@@ -23,4 +23,4 @@
 
 # 注意
 
-目前的引擎只做了整体的重构，已移动到[新的位置](https://github.com/SpaceGameEngine/SpaceGameEngine)
+目前的引擎已经做了整体的重构，已移动到[新的位置](https://github.com/SpaceGameEngine/SpaceGameEngine)
